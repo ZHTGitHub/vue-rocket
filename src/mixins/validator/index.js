@@ -1,21 +1,21 @@
 // import { mapState } from 'vuex'
-import FormMixins from './FormMixins'
+import FormMixins from '../form'
 
-const validator = new Map([
-	['required', ''],
-	['email', ''],
-	['min', ''],
-	['max', ''],
-	['min_value', ''],
-	['max_value', ''],
-	['length', ''],
-	['numeric', ''],
-	['excluded', ''],
-	['mimes', ''],
-	['size', ''],
-	['url', ''],
-	['regex', '']
-])
+// const validator = new Map([
+// 	['required', ''],
+// 	['email', ''],
+// 	['min', ''],
+// 	['max', ''],
+// 	['min_value', ''],
+// 	['max_value', ''],
+// 	['length', ''],
+// 	['numeric', ''],
+// 	['excluded', ''],
+// 	['mimes', ''],
+// 	['size', ''],
+// 	['url', ''],
+// 	['regex', '']
+// ])
 
 export default {
 	mixins: [FormMixins],

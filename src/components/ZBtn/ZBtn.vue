@@ -1,11 +1,11 @@
 <template>
 	<div class="z-btn">
-		<md-button 
-			:class="['md-raised', `md-${ color }`]"
+		<v-btn
+			:color="color"
 			@click="onClick"
 		>
 			<slot></slot>
-		</md-button>
+		</v-btn>
 	</div>
 </template>
 
@@ -14,11 +14,10 @@
 		name: 'ZBtn',
 		props: {
 			color: {
-				type: String,
 				validator(value) {
-					return ['primary', 'warning', 'accent', 'disabled'].indexOf(value) !== -1
+					return ['normal', 'primary', 'warning', 'error'].indexOf(value) !== -1
 				},
-				default: undefined
+				default: 'primary'
 			}
 		},
 

@@ -1,31 +1,25 @@
 <template>
-  <div id="app">
+  <z-app>
     <div class="form">
-      <!-- <md-field class="md-invalid">
-        <label>Required Field</label>
-        <md-input v-model="required" required></md-input>
-        <span class="md-error">There is an error</span>
-      </md-field> -->
-
-      <z-input
+      <z-text-field
         :formId="formId"
         formKey="name"
         label="姓名"
         :rules="[
           { required: true, message: '姓名为必填项!' }
         ]"
-      ></z-input>
+      ></z-text-field>
 
-      <z-input
+      <z-text-field
         :formId="formId"
         formKey="age"
         label="年龄"
         :rules="[
           { required: true, message: '姓名为必填项!' }
         ]"
-      ></z-input>
+      ></z-text-field>
 
-      <z-input
+      <z-text-field
         :formId="formId"
         formKey="password"
         label="密码"
@@ -33,14 +27,14 @@
           { required: true, message: '密码为必填项!' },
           { min: 8, message: '密码至少为8位!' },
         ]"
-      ></z-input>
+      ></z-text-field>
 
-      <z-button 
+      <z-btn 
         color="primary"
         @click="onSubmit"
-      >提交</z-button>
+      >提交</z-btn>
     </div>
-  </div>
+  </z-app>
 </template>
 
 <script>

@@ -1,9 +1,11 @@
 import Vue from 'vue'
-import ZBtn from './ZBtn/ZBtn.vue'
-import ZText from './ZInput/ZText.vue'
+import ZApp from './ZApp'
+import ZBtn from './ZBtn'
+import ZTextField from './ZTextField'
 
 export default () => {
-    Vue.component('z-button', ZBtn)
-    Vue.component('z-input', ZText)
+    Vue.component('z-app', ZApp)
+    Vue.component('z-btn', ZBtn)
+    Vue.component('z-text-field', ZTextField)
 }
 

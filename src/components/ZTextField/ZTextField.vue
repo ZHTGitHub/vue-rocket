@@ -3,18 +3,18 @@
     :class="['z-field z-theme-default', inputClass]"
     :style="{ width: `${ width }px` }"
   >
-    <input 
-      class="z-input"
-      type="text" 
+    <v-text-field
       v-model="value"
-    >
+      :label="label"
+    ></v-text-field>
+
     <span class="z-error" v-if="errorMessage">{{ errorMessage }}</span>
   </div>
 </template>
 
 <script>
-  import FormMixins from './FormMixins'
-  import FormValidatorMixins from './FormValidatorMixins'
+  import FormMixins from '../../mixins/form'
+  import FormValidatorMixins from '../../mixins/validator'
 
   export default {
     name: 'ZInput',
@@ -38,7 +38,3 @@
     }
   }
 </script>
-
-<style lang="css">
-  @import url('./style.css');
-</style>
