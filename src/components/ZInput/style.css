@@ -1,0 +1,70 @@
+.z-field {
+	position: relative;
+	display: flex;
+	padding-top: 16px;
+	margin: 4px 0 24px;
+	width: 100%;
+	min-height: 48px;
+	font-family: inherit;
+}
+
+.z-field:after, .z-field:before {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 1;
+	transition: border .3s cubic-bezier(.4,0,.2,1),opacity .3s cubic-bezier(.4,0,.2,1),transform 0s cubic-bezier(.4,0,.2,1) .3s;
+	will-change: border,opacity,transform;
+	content: " ";
+}
+
+.z-field:before {
+	height: 2px;
+	/* z-index: 2;
+	opacity: 0;
+	transform: scaleX(.12); */
+
+	opacity: 1;
+	transform: scaleX(1);
+	transition: .3s cubic-bezier(.4, 0, .2, 1);
+	transition-property: border, opacity, transform;
+}
+
+.z-field:after {
+	height: 1px;
+}
+
+.z-field.z-theme-default:after {
+	background-color: rgba(0,0,0,0.42);
+}
+
+.z-field .z-error {
+	position: absolute;
+	display: block !important;
+	left: 0;
+	bottom: -22px;
+	color: #ff1744;
+	font-size: 12px;
+	transition: .3s cubic-bezier(.4,0,.2,1);
+}
+
+.z-input {
+	height: 32px;
+	padding: 0;
+	display: block;
+	flex: 1;
+	border: none;
+	background: none;
+	transition: .4s cubic-bezier(.25,.8,.25,1);
+	transition-property: font-size,padding-top,color;
+	font-size: 16px;
+	font-family: inherit;
+	line-height: 32px;
+}
+
+.z-input:focus {
+	outline: none;
+}
+
+  
