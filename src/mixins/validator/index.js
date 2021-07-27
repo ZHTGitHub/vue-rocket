@@ -1,21 +1,6 @@
-// import { mapState } from 'vuex'
 import FormMixins from '../form'
 
-// const validator = new Map([
-// 	['required', ''],
-// 	['email', ''],
-// 	['min', ''],
-// 	['max', ''],
-// 	['min_value', ''],
-// 	['max_value', ''],
-// 	['length', ''],
-// 	['numeric', ''],
-// 	['excluded', ''],
-// 	['mimes', ''],
-// 	['size', ''],
-// 	['url', ''],
-// 	['regex', '']
-// ])
+import validator from './validator'
 
 export default {
 	mixins: [FormMixins],
@@ -29,35 +14,27 @@ export default {
 
 	data() {
 		return {
-			errorItem: {},
 			errorMessage: ''
 		}
 	},
 
-	// computed: {
-	// 	...mapState(['forms'])
-	// },
-
 	watch: {
 		value: {
 			handler(value) {
-
 				if(value !== undefined) {
-					console.log(value)
-					console.log(this.rules)
-
 					for(let item of this.rules) {
-						this.errorItem = item
-						
+						const rule = Object.keys(item)[0]
 
-						if(!value) {
-							this.errorMessage = this.errorItem.message
+						if(!validator[rule]) {
+							return
 						}
-						else {
+
+						if(!validator[rule](value)) {
+							this.errorMessage = item.message
+							return
+						}else {
 							this.errorMessage = ''
 						}
-
-						console.log(item)
 					}
 				}
 

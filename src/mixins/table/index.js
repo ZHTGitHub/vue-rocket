@@ -51,10 +51,13 @@ export default {
 
 		// 获取详情
 		async getDetail(item = {}, state) {
-			if(item) {
-
-			}else {
-
+			switch (state) {
+				case 'N':
+					
+					break;
+			
+				default:
+					break;
 			}
 		}
 	},

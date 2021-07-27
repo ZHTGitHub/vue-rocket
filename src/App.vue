@@ -6,7 +6,8 @@
         formKey="name"
         label="姓名"
         :rules="[
-          { required: true, message: '姓名为必填项!' }
+          { required: true, message: '姓名为必填项!' },
+          { email: true, message: '姓名格式不正确!' }
         ]"
       ></z-text-field>
 
@@ -15,7 +16,7 @@
         formKey="age"
         label="年龄"
         :rules="[
-          { required: true, message: '姓名为必填项!' }
+          { required: true, message: '年龄为必填项!' }
         ]"
       ></z-text-field>
 
@@ -31,8 +32,21 @@
 
       <z-btn 
         color="primary"
+        btnType="submit"
         @click="onSubmit"
       >提交</z-btn>
+
+      <z-btn 
+        color="success"
+        btnType="new"
+        @click="onNew"
+      >新增</z-btn>
+
+      <z-btn 
+        color="warning"
+        btnType="modify"
+        @click="onModify"
+      >修改</z-btn>
     </div>
   </z-app>
 </template>
@@ -48,8 +62,16 @@
       }
     },
     methods: {
-      onSubmit() {
-        console.log(this.forms)
+      onSubmit(event) {
+        console.log(event)
+      },
+
+      onNew(event) {
+        console.log(event)
+      },
+
+      onModify(event) {
+        console.log(event)
       }
     },
 
