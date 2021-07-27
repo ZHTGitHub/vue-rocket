@@ -49,9 +49,9 @@
 
 		methods: {
 			onClick(event) {
-				if(this.btnType === 'submit') {
+				// if(this.btnType === 'submit') {
 
-				}
+				// }
 				this.$emit('click', { btnEvent: event, btnType: this.btnType })
 			}
 		}
