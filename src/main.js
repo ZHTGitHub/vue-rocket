@@ -3,6 +3,9 @@ import App from './App.vue'
 
 import vuetify from '@/plugins/vuetify'
 
+import bus from './plugins/emiter'
+Vue.prototype.$bus = bus
+
 import ZComponents from './components'
 Vue.use(ZComponents)
 

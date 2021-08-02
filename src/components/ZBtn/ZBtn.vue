@@ -14,9 +14,16 @@
 </template>
 
 <script>
+	// import FormValidatorMixins from '../../mixins/validator' 
+
 	export default {
 		name: 'ZBtn',
+		// mixins: [FormValidatorMixins],
 		props: {
+			formId: {
+				type: String,
+				required: false
+			},
 			color: {
 				validator(value) {
 					return ['normal', 'primary', 'success', 'warning', 'error'].indexOf(value) !== -1
@@ -49,9 +56,15 @@
 
 		methods: {
 			onClick(event) {
-				// if(this.btnType === 'submit') {
-
-				// }
+				if(this.btnType === 'submit') {
+					this.$bus.emit('validate')
+				}
+				else if(this.btnType === 'reset') {
+					this.$store.commit('CLEAN_FORM', {
+						formId: this.formId
+					})
+					this.$bus.emit('reset')
+				}
 				this.$emit('click', { btnEvent: event, btnType: this.btnType })
 			}
 		}

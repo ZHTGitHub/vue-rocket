@@ -25,11 +25,7 @@ export default {
 		label: {
 			type: String,
 			required: false
-		},
-		// rules: {
-		// 	type: [String, Array],
-		// 	required: false
-		// }
+		}
 	},
 
 	computed: {
@@ -51,14 +47,5 @@ export default {
 				return ''
 			}
 		}
-	},
-
-	// watch: {
-	// 	value: {
-	// 		handler(value) {
-	// 			console.log(value)
-	// 			// console.log(this.rules)
-	// 		}
-	// 	}
-	// }
+	}
 }

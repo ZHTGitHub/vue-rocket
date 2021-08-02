@@ -31,10 +31,18 @@
       ></z-text-field>
 
       <z-btn 
+        :formId="formId"
         color="primary"
         btnType="submit"
         @click="onSubmit"
       >提交</z-btn>
+
+      <z-btn 
+        :formId="formId"
+        color="error"
+        btnType="reset"
+        @click="onReset"
+      >重置</z-btn>
 
       <z-btn 
         color="success"
@@ -64,6 +72,10 @@
     methods: {
       onSubmit(event) {
         console.log(event)
+      },
+
+      onReset() {
+
       },
 
       onNew(event) {
