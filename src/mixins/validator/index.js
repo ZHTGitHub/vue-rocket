@@ -15,14 +15,35 @@ export default {
 	},
 
 	created() {
-		this.$bus.on('validate', () => {
+		// 校验当前表单
+		this.$bus.on('VALIDATE_FORM', () => {
 			this.value = this.value === undefined ? '' : this.value
-			console.log(this.value)
-			this.validator()
+
+			this.$store.commit('SET_VALIDATE_VALUE_BY_KEY', { 
+				formId: this.formId,
+				formKey: this.formKey,
+				value: this.validator()
+			})
+
+			const results = Object.values(this.$store.getters.validates[this.formId])
+
+			if(!results.includes(false)) {
+				this.$bus.emit('ALL_VALUE_VALID')
+			}
+
+			// console.log(this.formId)
+			// console.log(this.formKey)
+			// console.log(this.validator())
 		})
 
-		this.$bus.on('reset', () => {
+		// 重置当前表单
+		this.$bus.on('RESET_FORM', () => {
 			this.reset()
+		})
+
+		// 清空当前表单
+		this.$bus.on('CLEAR_FORM', () => {
+			this.clear()
 		})
 	},
 
@@ -33,20 +54,31 @@ export default {
 					const rule = Object.keys(item)[0]
 
 					if(!validator[rule]) {
-						return
+						return true
 					}
-
-					if(!validator[rule](this.value)) {
-						this.errorMessage = item.message
-						return
-					}else {
-						this.errorMessage = ''
+					else {
+						if(!validator[rule](this.value)) {
+							this.errorMessage = item.message
+							return false
+						}else {
+							this.errorMessage = ''
+						}
 					}
 				}
 			}
 		},
 
 		reset() {
+			this.$store.commit('CLEAN_FORM', {
+				formId: this.formId
+			})
+			this.errorMessage = ''
+		},
+
+		clear() {
+			this.$store.commit('CLEAN_FORM', {
+				formId: this.formId
+			})
 			this.errorMessage = ''
 		}
 	},

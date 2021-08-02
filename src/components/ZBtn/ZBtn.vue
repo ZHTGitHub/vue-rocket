@@ -14,11 +14,8 @@
 </template>
 
 <script>
-	// import FormValidatorMixins from '../../mixins/validator' 
-
 	export default {
 		name: 'ZBtn',
-		// mixins: [FormValidatorMixins],
 		props: {
 			formId: {
 				type: String,
@@ -54,18 +51,43 @@
 			}
 		},
 
+		data() {
+			return {
+				btnEvent: null
+			}
+		},
+
+		created() {
+			this.$bus.on('ALL_VALUE_VALID', () => {
+				
+
+				console.log('当前表单所有值合法')
+				this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
+
+				this.$bus.off('VALIDATE_FORM')
+				this.$bus.off('RESET_FORM')
+				this.$bus.off('CLEAR_FORM')
+				this.$bus.off('ALL_VALUE_VALID')
+			})
+		},
+
 		methods: {
 			onClick(event) {
-				if(this.btnType === 'submit') {
-					this.$bus.emit('validate')
+				this.btnEvent = event
+				switch (this.btnType) {
+					case 'submit':
+						this.$bus.emit('VALIDATE_FORM')
+						break;
+					case 'reset':
+						this.$bus.emit('RESET_FORM')
+						break;
+					case 'clear':
+						this.$bus.emit('CLEAR_FORM')
+						break;
+					default:
+						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
+						break;
 				}
-				else if(this.btnType === 'reset') {
-					this.$store.commit('CLEAN_FORM', {
-						formId: this.formId
-					})
-					this.$bus.emit('reset')
-				}
-				this.$emit('click', { btnEvent: event, btnType: this.btnType })
 			}
 		}
 	}

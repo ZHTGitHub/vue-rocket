@@ -71,6 +71,7 @@
     },
     methods: {
       onSubmit(event) {
+        alert()
         console.log(event)
       },
 
