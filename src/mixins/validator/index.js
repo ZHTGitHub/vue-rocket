@@ -1,5 +1,7 @@
 import validator from './validator'
 
+let quantity = 0
+
 export default {
   props: {
 		rules: {
@@ -27,22 +29,38 @@ export default {
 
 			const results = Object.values(this.$store.getters.validates[this.formId])
 
+			++quantity
+
 			if(!results.includes(false)) {
-				this.$bus.emit('ALL_VALUE_VALID')
+				console.log('error1')
+				if(results.length === quantity) {
+					console.error('error2')
+					this.$bus.emit('ALL_VALUE_VALID')
+					quantity = 0
+				}
 			}
 
-			// console.log(this.formId)
-			// console.log(this.formKey)
-			// console.log(this.validator())
+			if(quantity >= results.length) {
+				quantity = 0
+			}
+
+			console.log(results.length)
+			console.log(quantity)
+			console.log(results)
+			console.log(this.formId)
+			console.log(this.formKey)
+			console.log(this.validator())
 		})
 
 		// 重置当前表单
 		this.$bus.on('RESET_FORM', () => {
+			quantity = 0
 			this.reset()
 		})
 
 		// 清空当前表单
 		this.$bus.on('CLEAR_FORM', () => {
+			quantity = 0
 			this.clear()
 		})
 	},

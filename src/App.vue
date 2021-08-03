@@ -70,9 +70,9 @@
       }
     },
     methods: {
-      onSubmit(event) {
+      onSubmit() {
         alert()
-        console.log(event)
+        // console.log(event)
       },
 
       onReset() {

@@ -59,15 +59,17 @@
 
 		created() {
 			this.$bus.on('ALL_VALUE_VALID', () => {
+
+				if(this.btnType === 'submit') {
+					console.log('当前表单所有值合法')
+					this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
+
+					this.$bus.off('VALIDATE_FORM')
+					this.$bus.off('RESET_FORM')
+					this.$bus.off('CLEAR_FORM')
+					this.$bus.off('ALL_VALUE_VALID')
+				}
 				
-
-				console.log('当前表单所有值合法')
-				this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
-
-				this.$bus.off('VALIDATE_FORM')
-				this.$bus.off('RESET_FORM')
-				this.$bus.off('CLEAR_FORM')
-				this.$bus.off('ALL_VALUE_VALID')
 			})
 		},
 
