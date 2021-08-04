@@ -78,6 +78,7 @@
 				this.btnEvent = event
 				switch (this.btnType) {
 					case 'submit':
+						console.log(this.formId)
 						this.$bus.emit('VALIDATE_FORM')
 						break;
 					case 'reset':

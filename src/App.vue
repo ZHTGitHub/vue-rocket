@@ -1,5 +1,17 @@
 <template>
   <z-app>
+
+    <div class="form">
+      <z-text-field
+        formId="login"
+        formKey="sex"
+        label="性别"
+        :rules="[
+          { required: true, message: '性别为必填项!' },
+        ]"
+      ></z-text-field>
+    </div>
+
     <div class="form">
       <z-text-field
         :formId="formId"
@@ -71,8 +83,8 @@
     },
     methods: {
       onSubmit() {
-        alert()
-        // console.log(event)
+        alert('click me')
+        // console.error('click me')
       },
 
       onReset() {

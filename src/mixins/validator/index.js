@@ -12,13 +12,16 @@ export default {
 
 	data() {
 		return {
-			errorMessage: ''
+			errorMessage: '',
+			checkValue: 'VALID_VALUE',
+			checkResults: []
 		}
 	},
 
 	created() {
 		// 校验当前表单
 		this.$bus.on('VALIDATE_FORM', () => {
+
 			this.value = this.value === undefined ? '' : this.value
 
 			this.$store.commit('SET_VALIDATE_VALUE_BY_KEY', { 
@@ -28,28 +31,23 @@ export default {
 			})
 
 			const results = Object.values(this.$store.getters.validates[this.formId])
-
-			++quantity
-
-			if(!results.includes(false)) {
-				console.log('error1')
-				if(results.length === quantity) {
-					console.error('error2')
-					this.$bus.emit('ALL_VALUE_VALID')
-					quantity = 0
-				}
-			}
+			this.checkResults = results
 
 			if(quantity >= results.length) {
 				quantity = 0
 			}
 
-			console.log(results.length)
-			console.log(quantity)
+			++quantity
+
+			if(!results.includes('INVALID_VALUE')) {
+				if(results.length === quantity) {
+					this.$bus.emit('ALL_VALUE_VALID')
+				}
+			}
+
+			console.log(results.length, quantity)
 			console.log(results)
-			console.log(this.formId)
-			console.log(this.formKey)
-			console.log(this.validator())
+			console.log(this.formId, this.formKey, this.validator(), this.checkValue)
 		})
 
 		// 重置当前表单
@@ -72,12 +70,14 @@ export default {
 					const rule = Object.keys(item)[0]
 
 					if(!validator[rule]) {
-						return true
+						// this.checkValue = 'VALID_VALUE'
+						return 'VALID_VALUE'
 					}
 					else {
 						if(!validator[rule](this.value)) {
 							this.errorMessage = item.message
-							return false
+							// this.checkValue = 'INVALID_VALUE'
+							return 'INVALID_VALUE'
 						}else {
 							this.errorMessage = ''
 						}
@@ -102,10 +102,16 @@ export default {
 	},
 
 	watch: {
-		value: {
-			handler() {
-				this.validator()
-			}
+		value() {
+			this.validator()
+		},
+
+		checkResults: {
+			handler(results) {
+				console.log(results)
+			},
+			immediate: true,
+			deep: true
 		}
 	}
 }
