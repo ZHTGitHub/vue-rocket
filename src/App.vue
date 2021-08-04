@@ -6,10 +6,14 @@
         formId="login"
         formKey="sex"
         label="性别"
-        :rules="[
-          { required: true, message: '性别为必填项!' },
-        ]"
       ></z-text-field>
+
+      <z-btn 
+        formId="login"
+        color="primary"
+        btnType="submit"
+        @click="onSave"
+      >提交</z-btn>
     </div>
 
     <div class="form">
@@ -18,8 +22,8 @@
         formKey="name"
         label="姓名"
         :rules="[
-          { required: true, message: '姓名为必填项!' },
-          { email: true, message: '姓名格式不正确!' }
+          { required: true, message: '姓名为必填项.' },
+          { email: true, message: '姓名格式不正确.' }
         ]"
       ></z-text-field>
 
@@ -28,7 +32,7 @@
         formKey="age"
         label="年龄"
         :rules="[
-          { required: true, message: '年龄为必填项!' }
+          { required: true, message: '年龄为必填项.' }
         ]"
       ></z-text-field>
 
@@ -37,8 +41,8 @@
         formKey="password"
         label="密码"
         :rules="[
-          { required: true, message: '密码为必填项!' },
-          { min: 8, message: '密码至少为8位!' },
+          { required: true, message: '密码为必填项.' },
+          { min: 8, message: '密码至少为8位.' },
         ]"
       ></z-text-field>
 
@@ -83,8 +87,12 @@
     },
     methods: {
       onSubmit() {
-        alert('click me')
+        alert('submit')
         // console.error('click me')
+      },
+
+      onSave() {
+        alert('save')
       },
 
       onReset() {

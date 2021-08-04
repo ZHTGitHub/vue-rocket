@@ -3,12 +3,12 @@ import _ from 'lodash'
 
 const state = {
   forms: {},
-  validates: {}
+  validator: {}
 }
 
 const getters = {
   forms: state => state.forms,
-  validates: state => state.validates
+  validator: state => state.validator
 }
 
 const mutations = {
@@ -26,10 +26,10 @@ const mutations = {
     Vue.set(state.forms, data.formId, { ...data.defaultForm })
   },
 
-  SET_VALIDATE_VALUE_BY_KEY(state, data) {
-    const updatedValidate = { ...state.validates }
-    _.set(updatedValidate, data.formId + '.' + data.formKey, data.value)
-    Vue.set(state, 'validates', updatedValidate) 
+  VALIDATE_FORM_VALUE_BY_KEY(state, data) {
+    const updatedValidator = { ...state.validator }
+    _.set(updatedValidator, data.formId + '.' + data.formKey, data.status)
+    Vue.set(state, 'validator', updatedValidator) 
   }
 }
 

@@ -6,9 +6,9 @@
     <v-text-field
       v-model="value"
       :label="label"
+      :hide-details="true"
     ></v-text-field>
-
-    <span class="z-error" v-if="errorMessage">{{ errorMessage }}</span>
+    <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 
@@ -38,3 +38,12 @@
     }
   }
 </script>
+
+<style lang="css">
+  p.z-error {
+    padding-top: 4px;
+    color: #ff5252;
+    text-align: left;
+    font-size: 12px;
+  }
+</style>

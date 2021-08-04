@@ -12,106 +12,118 @@ export default {
 
 	data() {
 		return {
-			errorMessage: '',
-			checkValue: 'VALID_VALUE',
-			checkResults: []
+			errorMessage: ''
 		}
 	},
 
 	created() {
+		// console.log(this.formId, this.formKey)
+
+		this.validateForm('INVALID_VALUE')
+
 		// 校验当前表单
-		this.$bus.on('VALIDATE_FORM', () => {
+		this.$bus.on('ZHT_VALIDATE_FORM', (formId) => {
 
-			this.value = this.value === undefined ? '' : this.value
+			if(this.formId === formId) {
+				++quantity
+				this.value = this.value === undefined ? '' : this.value
 
-			this.$store.commit('SET_VALIDATE_VALUE_BY_KEY', { 
-				formId: this.formId,
-				formKey: this.formKey,
-				value: this.validator()
-			})
+				this.validator()
 
-			const results = Object.values(this.$store.getters.validates[this.formId])
-			this.checkResults = results
+				const form = this.$store.state.validator[this.formId]
+				const results = Object.values(form)
+				const length = results.length
 
-			if(quantity >= results.length) {
-				quantity = 0
-			}
+				// console.log(this.value)
+				// console.log(quantity, length)
+				// console.log(results, results.includes('INVALID_VALUE'))
 
-			++quantity
-
-			if(!results.includes('INVALID_VALUE')) {
-				if(results.length === quantity) {
-					this.$bus.emit('ALL_VALUE_VALID')
+				if(quantity === length) {
+					if(!results.includes('INVALID_VALUE')) {
+						this.$bus.emit('ZHT_ALL_VALUE_VALID', formId)
+					}
+					quantity = 0
 				}
+				
+				// console.log(form)
 			}
 
-			console.log(results.length, quantity)
-			console.log(results)
-			console.log(this.formId, this.formKey, this.validator(), this.checkValue)
+			this.$bus.off('ZHT_VALIDATE_FORM')
 		})
 
-		// 重置当前表单
-		this.$bus.on('RESET_FORM', () => {
-			quantity = 0
-			this.reset()
-		})
+		this.reset()
 
-		// 清空当前表单
-		this.$bus.on('CLEAR_FORM', () => {
-			quantity = 0
-			this.clear()
-		})
+		this.clear()
 	},
 
 	methods: {
 		validator() {
 			if(this.value !== undefined) {
+
+				// 无校验规则合法
+				if(!this.rules || !this.rules.length) {
+					this.validateForm('VALID_VALUE')
+					return
+				}
+
 				for(let item of this.rules) {
 					const rule = Object.keys(item)[0]
 
 					if(!validator[rule]) {
-						// this.checkValue = 'VALID_VALUE'
-						return 'VALID_VALUE'
+						this.validateForm('VALID_VALUE')
 					}
 					else {
 						if(!validator[rule](this.value)) {
 							this.errorMessage = item.message
-							// this.checkValue = 'INVALID_VALUE'
-							return 'INVALID_VALUE'
+							this.validateForm('INVALID_VALUE')
+							return
 						}else {
 							this.errorMessage = ''
+							this.validateForm('VALID_VALUE')
 						}
 					}
 				}
 			}
 		},
 
+		// 重置当前表单
 		reset() {
-			this.$store.commit('CLEAN_FORM', {
-				formId: this.formId
+			this.$bus.on('ZHT_RESET_FORM', (formId) => {
+				if(this.formId === formId) {
+					this.$store.commit('CLEAN_FORM', {
+						formId: this.formId
+					})
+					this.errorMessage = ''
+				}
+				this.$bus.off('ZHT_RESET_FORM')
 			})
-			this.errorMessage = ''
 		},
 
+		// 清空当前表单
 		clear() {
-			this.$store.commit('CLEAN_FORM', {
-				formId: this.formId
+			this.$bus.on('ZHT_CLEAR_FORM', (formId) => {
+				if(this.formId === formId) {
+					this.$store.commit('CLEAN_FORM', {
+						formId: this.formId
+					})
+					this.errorMessage = ''
+				}
+				this.$bus.off('ZHT_CLEAR_FORM')
 			})
-			this.errorMessage = ''
+		},
+
+		validateForm(status) {
+			this.$store.commit('VALIDATE_FORM_VALUE_BY_KEY', {
+				formId: this.formId,
+				formKey: this.formKey,
+				status
+			})
 		}
 	},
 
 	watch: {
 		value() {
 			this.validator()
-		},
-
-		checkResults: {
-			handler(results) {
-				console.log(results)
-			},
-			immediate: true,
-			deep: true
 		}
 	}
 }

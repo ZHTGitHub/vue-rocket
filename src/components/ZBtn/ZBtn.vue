@@ -58,16 +58,15 @@
 		},
 
 		created() {
-			this.$bus.on('ALL_VALUE_VALID', () => {
-
+			this.$bus.on('ZHT_ALL_VALUE_VALID', (formId) => {
 				if(this.btnType === 'submit') {
-					console.log('当前表单所有值合法')
-					this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
 
-					this.$bus.off('VALIDATE_FORM')
-					this.$bus.off('RESET_FORM')
-					this.$bus.off('CLEAR_FORM')
-					this.$bus.off('ALL_VALUE_VALID')
+					if(this.formId === formId) {
+						console.log('当前表单所有值合法')
+						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
+					}
+					
+					this.$bus.off('ZHT_ALL_VALUE_VALID')
 				}
 				
 			})
@@ -78,14 +77,13 @@
 				this.btnEvent = event
 				switch (this.btnType) {
 					case 'submit':
-						console.log(this.formId)
-						this.$bus.emit('VALIDATE_FORM')
+						this.$bus.emit('ZHT_VALIDATE_FORM', this.formId)
 						break;
 					case 'reset':
-						this.$bus.emit('RESET_FORM')
+						this.$bus.emit('ZHT_RESET_FORM', this.formId)
 						break;
 					case 'clear':
-						this.$bus.emit('CLEAR_FORM')
+						this.$bus.emit('ZHT_CLEAR_FORM', this.formId)
 						break;
 					default:
 						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
