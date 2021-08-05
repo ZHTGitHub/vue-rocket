@@ -1,4 +1,4 @@
-import validator from './validator'
+import validation_rules from './validation_rules'
 
 let quantity = 0
 
@@ -67,13 +67,16 @@ export default {
 				}
 
 				for(let item of this.rules) {
-					const rule = Object.keys(item)[0]
+					const ruleName = Object.keys(item)[0]
+					const ruleValue = item[ruleName]
 
-					if(!validator[rule]) {
+					console.log(ruleName, ruleValue)
+
+					if(!validation_rules[ruleName]) {
 						this.validateForm('VALID_VALUE')
 					}
 					else {
-						if(!validator[rule](this.value)) {
+						if(!validation_rules[ruleName](this.value, ruleValue)) {
 							this.errorMessage = item.message
 							this.validateForm('INVALID_VALUE')
 							return
@@ -86,20 +89,21 @@ export default {
 			}
 		},
 
-		// 重置当前表单
+		// reset current form.
 		reset() {
 			this.$bus.on('ZHT_RESET_FORM', (formId) => {
 				if(this.formId === formId) {
-					this.$store.commit('CLEAN_FORM', {
-						formId: this.formId
+					this.$store.commit('RESET_FORM', {
+						formId: this.formId,
+						formKey: this.formKey,
+						defaultValue: this.defaultValue
 					})
-					this.errorMessage = ''
 				}
 				this.$bus.off('ZHT_RESET_FORM')
 			})
 		},
 
-		// 清空当前表单
+		// clean current form.
 		clear() {
 			this.$bus.on('ZHT_CLEAR_FORM', (formId) => {
 				if(this.formId === formId) {

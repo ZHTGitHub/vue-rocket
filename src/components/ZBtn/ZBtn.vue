@@ -62,7 +62,6 @@
 				if(this.btnType === 'submit') {
 
 					if(this.formId === formId) {
-						console.log('当前表单所有值合法')
 						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
 					}
 					

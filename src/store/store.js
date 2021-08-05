@@ -23,7 +23,9 @@ const mutations = {
   },
 
   RESET_FORM(state, data) {
-    Vue.set(state.forms, data.formId, { ...data.defaultForm })
+    const updatedForm = { ...state.forms }
+    _.set(updatedForm, data.formId + '.' + data.formKey, data.defaultValue)
+    Vue.set(state, 'forms', updatedForm) 
   },
 
   VALIDATE_FORM_VALUE_BY_KEY(state, data) {

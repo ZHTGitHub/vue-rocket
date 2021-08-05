@@ -19,12 +19,14 @@
     <div class="form">
       <z-text-field
         :formId="formId"
-        formKey="name"
-        label="姓名"
+        formKey="email"
+        label="邮箱"
         :rules="[
-          { required: true, message: '姓名为必填项.' },
-          { email: true, message: '姓名格式不正确.' }
+          { required: true, message: '邮箱为必填项.' },
+          { email: true, message: '邮箱格式不正确.' },
+          { min: 5, message: '邮箱至少为5位' }
         ]"
+        defaultValue="2"
       ></z-text-field>
 
       <z-text-field
@@ -39,10 +41,10 @@
       <z-text-field
         :formId="formId"
         formKey="password"
-        label="密码"
+        label="手机"
         :rules="[
-          { required: true, message: '密码为必填项.' },
-          { min: 8, message: '密码至少为8位.' },
+          { required: true, message: '手机为必填项.' },
+          { phone: true, message: '请输入正确的手机号码.' },
         ]"
       ></z-text-field>
 
@@ -57,8 +59,13 @@
         :formId="formId"
         color="error"
         btnType="reset"
-        @click="onReset"
       >重置</z-btn>
+
+      <z-btn 
+        :formId="formId"
+        color="error"
+        btnType="clear"
+      >清空</z-btn>
 
       <z-btn 
         color="success"
@@ -88,15 +95,10 @@
     methods: {
       onSubmit() {
         alert('submit')
-        // console.error('click me')
       },
 
       onSave() {
         alert('save')
-      },
-
-      onReset() {
-
       },
 
       onNew(event) {

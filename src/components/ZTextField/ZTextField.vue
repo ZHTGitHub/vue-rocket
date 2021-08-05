@@ -1,8 +1,5 @@
 <template>
-  <div 
-    :class="['z-field z-theme-default', inputClass]"
-    :style="{ width: `${ width }px` }"
-  >
+  <div :class="['z-field z-theme-default', inputClass]">
     <v-text-field
       v-model="value"
       :label="label"
@@ -24,22 +21,25 @@
         type: String,
         required: false
       },
-      width: {
-        type: [Number, String],
-        validator(value) {
-          let type = typeof value
-          switch (type) {
-            case 'number': return value;
-            case 'string': return value.replace(/px/, '');
-          }
+
+      defaultValue: {
+        type: [String, Number],
+        default: undefined
+      }
+    },
+
+    watch: {
+      defaultValue: {
+        handler(value) {
+          this.value = value
         },
-        default: 'auto'
+        immediate: true
       }
     }
   }
 </script>
 
-<style lang="css">
+<style scoped lang="css">
   p.z-error {
     padding-top: 4px;
     color: #ff5252;
