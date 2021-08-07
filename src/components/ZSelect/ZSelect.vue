@@ -1,10 +1,11 @@
 <template>
-  <div :class="['z-field z-theme-default']">
-    <v-text-field
+  <div :class="['z-select z-theme-default']">
+    <v-select
       v-model="value"
       :label="label"
+      :items="items"
       :hide-details="true"
-    ></v-text-field>
+    ></v-select>
     <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
@@ -14,8 +15,29 @@
   import FormValidatorMixins from '../../mixins/validator'
 
   export default {
-    name: 'ZInput',
+    name: 'ZSelect',
     mixins: [FormMixins, FormValidatorMixins],
+    props: {
+      options: {
+        type: Array,
+        required: true
+      }
+    },
+
+    data() {
+      return {
+        items: []
+      }
+    },
+
+    created() {
+      for(let item of this.options) {
+        this.items.push({
+          text: item.label,
+          value: item.value
+        })
+      }
+    },
 
     watch: {
       defaultValue: {

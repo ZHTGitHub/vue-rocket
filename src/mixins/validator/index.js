@@ -70,7 +70,7 @@ export default {
 					const ruleName = Object.keys(item)[0]
 					const ruleValue = item[ruleName]
 
-					console.log(ruleName, ruleValue)
+					// console.log(ruleName, ruleValue)
 
 					if(!validation_rules[ruleName]) {
 						this.validateForm('VALID_VALUE')

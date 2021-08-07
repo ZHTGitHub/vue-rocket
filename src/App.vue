@@ -17,7 +17,7 @@
     </div>
 
     <div class="form">
-      <z-text-field
+      <!-- <z-text-field
         :formId="formId"
         formKey="email"
         label="邮箱"
@@ -27,7 +27,7 @@
           { min: 5, message: '邮箱至少为5位' }
         ]"
         defaultValue="2"
-      ></z-text-field>
+      ></z-text-field> -->
 
       <z-text-field
         :formId="formId"
@@ -38,7 +38,7 @@
         ]"
       ></z-text-field>
 
-      <z-text-field
+      <!-- <z-text-field
         :formId="formId"
         formKey="password"
         label="手机"
@@ -46,7 +46,40 @@
           { required: true, message: '手机为必填项.' },
           { phone: true, message: '请输入正确的手机号码.' },
         ]"
-      ></z-text-field>
+      ></z-text-field> -->
+
+      <z-select 
+        :formId="formId"
+        formKey="area"
+        label="国家"
+        :options="areaOptions"
+        :rules="[
+          { required: true, message: '国家为必选项.' }
+        ]"
+      ></z-select>
+
+      <z-checkboxs
+        :formId="formId"
+        formKey="checkbox"
+        label="checkboxs"
+        :options="itemOptions"
+        :rules="[
+          { required: true, message: '请选择checkboxs.' }
+        ]"
+        :defaultValue="[1]"
+      >
+      </z-checkboxs>
+
+      <z-radios
+        :formId="formId"
+        formKey="radio"
+        label="radios"
+        :options="itemOptions"
+        :rules="[
+          { required: true, message: '请选择radios.' }
+        ]"
+      >
+      </z-radios>
 
       <z-btn 
         :formId="formId"
@@ -89,12 +122,20 @@
     name: 'App',
     data() {
       return {
-        formId: 'sign'
+        formId: 'sign',
+        areaOptions: [
+          { label: '中国', value: 1 },
+          { label: '美国', value: 2 }
+        ],
+        itemOptions: [
+          { label: '两天一夜', value: 1 },
+          { label: '三天一夜', value: 2 }
+        ]
       }
     },
     methods: {
       onSubmit() {
-        alert('submit')
+        console.log(this.forms[this.formId])
       },
 
       onSave() {
@@ -127,7 +168,7 @@
   }
 
   .form {
-    width: 200px;
+    width: 300px;
     margin: 100px auto;
   }
 </style>

@@ -25,6 +25,10 @@ export default {
 		label: {
 			type: String,
 			required: false
+		},
+		defaultValue: {
+			type: [String, Number],
+			required: false
 		}
 	},
 
