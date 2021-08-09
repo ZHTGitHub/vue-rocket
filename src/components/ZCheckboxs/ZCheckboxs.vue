@@ -1,7 +1,7 @@
 <template>
   <div :class="['z-checkboxs z-theme-default']">
-    <div class="checkboxs">
-      <span
+    <div :class="[row ? 'flex' : (column ? '' : 'flex')]">
+      <div
         v-for="(item, index) of items" 
         :key="`z_checkbox_${ index }`"
       >
@@ -10,8 +10,9 @@
           :label="item.label"
           :value="item.value"
           hide-details
+          class="mr-4"
         ></v-checkbox>
-      </span>
+      </div>
     </div>
     <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -29,7 +30,14 @@
         type: Array,
         required: true
       },
-
+      column: {
+        type: Boolean,
+        default: false
+      },
+      row: {
+        type: Boolean,
+        default: true
+      },
       defaultValue: {
         type: Array,
         default: () => { return [] }
@@ -72,11 +80,11 @@
 
 <style scoped lang="css">
   .z-checkboxs .checkboxs {
-    display: flex;
+    /* display: flex; */
   }
 
   .z-checkboxs .checkboxs span {
-    margin-right: 8px;
+    margin-right: 16px;
   }
 
   p.z-error {

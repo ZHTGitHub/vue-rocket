@@ -2,7 +2,8 @@
   <div :class="['z-radios z-theme-default']">
     <v-radio-group
       v-model="value"
-      column
+      :column="column"
+      :row="row"
     >
       <v-radio
         v-for="(item, index) of items" 
@@ -27,6 +28,14 @@
       options: {
         type: Array,
         required: true
+      },
+      column: {
+        type: Boolean,
+        default: false
+      },
+      row: {
+        type: Boolean,
+        default: true
       }
     },
 
