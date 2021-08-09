@@ -1,7 +1,24 @@
 <template>
-  <z-app>
+  <v-app>
 
-    <div class="form">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+    >
+      <!--  -->
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <!--  -->
+    </v-main>
+
+    <!-- <div class="form">
       <z-text-field
         formId="login"
         formKey="sex"
@@ -17,7 +34,7 @@
     </div>
 
     <div class="form">
-      <!-- <z-text-field
+      <z-text-field
         :formId="formId"
         formKey="email"
         label="邮箱"
@@ -27,7 +44,7 @@
           { min: 5, message: '邮箱至少为5位' }
         ]"
         defaultValue="2"
-      ></z-text-field> -->
+      ></z-text-field>
 
       <z-text-field
         :formId="formId"
@@ -38,7 +55,7 @@
         ]"
       ></z-text-field>
 
-      <!-- <z-text-field
+      <z-text-field
         :formId="formId"
         formKey="password"
         label="手机"
@@ -46,7 +63,7 @@
           { required: true, message: '手机为必填项.' },
           { phone: true, message: '请输入正确的手机号码.' },
         ]"
-      ></z-text-field> -->
+      ></z-text-field>
 
       <z-select 
         :formId="formId"
@@ -81,6 +98,13 @@
       >
       </z-radios>
 
+      <z-switch
+        :formId="formId"
+        formKey="switch"
+        label="switch"
+        :defaultValue="true"
+      ></z-switch>
+
       <z-btn 
         :formId="formId"
         color="primary"
@@ -111,8 +135,8 @@
         btnType="modify"
         @click="onModify"
       >修改</z-btn>
-    </div>
-  </z-app>
+    </div> -->
+  </v-app>
 </template>
 
 <script>
@@ -130,7 +154,8 @@
         itemOptions: [
           { label: '两天一夜', value: 1 },
           { label: '三天一夜', value: 2 }
-        ]
+        ],
+        drawer: null
       }
     },
     methods: {
