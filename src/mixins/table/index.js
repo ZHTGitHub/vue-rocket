@@ -11,6 +11,9 @@ export default {
 			searchId: 'Search',
 			searchFormId: '',
 
+			loading: true,
+			loadingText: 'Loading... Please wait',
+
 			dessertsParams: {},
 			desserts: [],
 			ids: [],
@@ -23,22 +26,27 @@ export default {
 	},
 
 	created() {
-		this.getDesserts()
+		this.getList()
 	},
 
 	methods: {
 		// 检索
-		onSearch: function() {
+		onSearch() {
 			this.dessertsParams = {
 				...this.dessertsParams,
 				...this.forms[this.searchFormId],
 				...defaultDessertsParams
 			}
-			this.getDesserts()
+			this.getList()
+		},
+
+		// 分页
+		handlePagination() {
+
 		},
 
 		// 获取列表
-		async getDesserts() {
+		async getList() {
 			if(this.getHandler) {
 				const result = await this.$store.dispatch(this.getHandler, this.dessertsParams)
 				if(result) {
@@ -50,19 +58,12 @@ export default {
 		},
 
 		// 获取详情
-		async getDetail(item = {}, state) {
-			switch (state) {
-				case 'N':
-					
-					break;
+		async getDetail() {
 			
-				default:
-					break;
-			}
 		}
 	},
 
 	computed: {
-		...mapState('forms')
+		...mapState(['forms'])
 	}
 }

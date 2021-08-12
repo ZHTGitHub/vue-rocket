@@ -7,8 +7,8 @@
       show-select
       item-key="name"
       hide-default-footer
-      loading
-      loading-text="Loading... Please wait"
+      :loading="loading"
+      :loading-text="loadingText"
     >
       <template v-slot:item.options="{ item }">
         <v-icon
@@ -30,8 +30,11 @@
 </template>
 
 <script>
+  import TableMixins from '@/mixins/table'
+
   export default {
     name: 'ZDemoTable',
+    mixins: [TableMixins],
     data() {
       return {
         selected: [],
@@ -44,7 +47,7 @@
           { text: '性别', value: 'gender', sortable: false },
           { text: '兴趣', value: 'hobby', sortable: false },
           { text: '激活', value: 'active', sortable: false },
-          { text: '操作', value: 'options', sortable: false },
+          { text: '操作', value: 'options', sortable: false }
         ],
         desserts: [
           {
@@ -69,6 +72,12 @@
           }
         ]
       }
+    },
+
+    created() {
+      this.util.storage.set('zht', 123)
+      this.util.storage.del('zht')
+      console.log(this.util.storage.get('zht'))
     },
 
     methods: {
