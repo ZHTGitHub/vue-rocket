@@ -70,7 +70,9 @@
 
       values: {
         handler(values) {
-          this.value = values
+          if(values.length > 0) {
+            this.value = values
+          }
         },
         immediate: true
       }

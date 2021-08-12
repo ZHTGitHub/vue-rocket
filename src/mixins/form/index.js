@@ -28,7 +28,7 @@ export default {
 		},
 		defaultValue: {
 			type: [String, Number, Boolean],
-			required: false
+			default: undefined
 		}
 	},
 

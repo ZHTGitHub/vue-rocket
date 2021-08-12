@@ -21,4 +21,5 @@ const router = new Router({
     routes
 })
 
+export { router }
 export default router

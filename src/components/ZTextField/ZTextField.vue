@@ -20,7 +20,11 @@
     watch: {
       defaultValue: {
         handler(value) {
-          this.value = value
+          if(value === undefined || value == null) {
+            this.value = undefined
+          }else {
+            this.value = value
+          }
         },
         immediate: true
       }

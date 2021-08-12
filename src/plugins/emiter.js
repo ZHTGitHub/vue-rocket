@@ -1,5 +1,5 @@
-class Event{
-  constructor(){
+class Event {
+  constructor() {
     this.events = {}
   }
 
