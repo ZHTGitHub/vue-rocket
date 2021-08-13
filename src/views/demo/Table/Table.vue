@@ -1,5 +1,22 @@
 <template>
   <div class="demo-table px-4">
+    <div class="filters flex">
+      <v-row>
+        <v-col cols="3">
+          <z-text-field
+            :formId="searchFormId"
+            formKey="keyword"
+          ></z-text-field>
+        </v-col>
+      </v-row>
+      <z-btn 
+        :formId="formId"
+        color="primary"
+        btnType="submit"
+        @click="onSubmit"
+      >提交</z-btn>
+    </div>
+
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -37,6 +54,7 @@
     mixins: [TableMixins],
     data() {
       return {
+        formId: 'Table',
         selected: [],
         headers: [
           { text: '邮箱', value: 'email', sortable: false },

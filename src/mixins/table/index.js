@@ -14,7 +14,7 @@ export default {
 			loading: true,
 			loadingText: 'Loading... Please wait',
 
-			dessertsParams: {},
+			params: {},
 			desserts: [],
 			ids: [],
 			detail: {},
@@ -26,14 +26,15 @@ export default {
 	},
 
 	created() {
+		this.stickFormId()
 		this.getList()
 	},
 
 	methods: {
 		// 检索
 		onSearch() {
-			this.dessertsParams = {
-				...this.dessertsParams,
+			this.params = {
+				...this.params,
 				...this.forms[this.searchFormId],
 				...defaultDessertsParams
 			}
@@ -48,7 +49,7 @@ export default {
 		// 获取列表
 		async getList() {
 			if(this.getHandler) {
-				const result = await this.$store.dispatch(this.getHandler, this.dessertsParams)
+				const result = await this.$store.dispatch(this.getHandler, this.params)
 				if(result) {
 					this.desserts = result.data
 					this.pagination.total = result.total
@@ -60,6 +61,10 @@ export default {
 		// 获取详情
 		async getDetail() {
 			
+		},
+
+		stickFormId() {
+			this.searchFormId = this.formId + this.searchId
 		}
 	},
 
