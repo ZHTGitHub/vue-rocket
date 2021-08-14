@@ -3,7 +3,7 @@ import Tools from './util.tools'
 
 const util = {
   storage: new Storage,
-  Tools: new Tools
+  tools: new Tools
 }
 
 export { util }

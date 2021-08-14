@@ -35,9 +35,12 @@
             <v-list-group
               :value="true"
               prepend-icon="mdi-account-circle"
+              no-action
             >
               <template v-slot:activator>
-                <v-list-item-title>{{ item.label }}</v-list-item-title>
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.label }}</v-list-item-title>
+                </v-list-item-content>
               </template>
 
                 <v-list-item
@@ -45,11 +48,13 @@
                   :key="`drawer_child_${ i }`"
                   link
                 >
-                  <v-list-item-icon>
-                    <v-icon>{{ record.icon }}</v-icon>
-                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-icon>
+                      <v-icon>{{ record.icon }}</v-icon>
+                    </v-list-item-icon>
 
-                  <v-list-item-title>{{ record.label }}</v-list-item-title>
+                    <v-list-item-title>{{ record.label }}</v-list-item-title>
+                  </v-list-item-content>
                 </v-list-item>
             </v-list-group>  
           </template>        

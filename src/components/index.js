@@ -5,6 +5,7 @@ import ZSelect from './ZSelect'
 import ZCheckboxs from './ZCheckboxs'
 import ZRadios from './ZRadios'
 import ZSwitch from './ZSwitch'
+import ZPagination from './ZPagination'
 
 export default () => {
 	Vue.component('z-btn', ZBtn)
@@ -13,4 +14,5 @@ export default () => {
 	Vue.component('z-checkboxs', ZCheckboxs)
 	Vue.component('z-radios', ZRadios)
 	Vue.component('z-switch', ZSwitch)
+	Vue.component('z-pagination', ZPagination)
 }

@@ -1,20 +1,13 @@
 <template>
   <div class="demo-table px-4">
     <div class="filters flex">
-      <v-row>
-        <v-col cols="3">
-          <z-text-field
-            :formId="searchFormId"
-            formKey="keyword"
-          ></z-text-field>
-        </v-col>
-      </v-row>
-      <z-btn 
-        :formId="formId"
-        color="primary"
-        btnType="submit"
-        @click="onSubmit"
-      >提交</z-btn>
+      <v-spacer></v-spacer>
+      <z-text-field
+        :formId="searchFormId"
+        formKey="keyword"
+        label="搜索"
+        append-icon="mdi-magnify"
+      ></z-text-field>
     </div>
 
     <v-data-table
@@ -43,6 +36,10 @@
         </v-icon>
       </template>
     </v-data-table>
+
+    <z-pagination
+      :total="2"
+    ></z-pagination>
   </div>
 </template>
 

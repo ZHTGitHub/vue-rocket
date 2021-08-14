@@ -1,6 +1,6 @@
 import { mapState } from 'vuex'
 
-const defaultDessertsParams = {
+const defaultParams = {
 	pageSize: 10,
 	pageNum: 1
 }
@@ -36,7 +36,7 @@ export default {
 			this.params = {
 				...this.params,
 				...this.forms[this.searchFormId],
-				...defaultDessertsParams
+				...defaultParams
 			}
 			this.getList()
 		},

@@ -3,7 +3,11 @@
     <v-text-field
       v-model="value"
       :label="label"
+      :append-icon="appendIcon"
       :hide-details="true"
+      @keydown="onKeydown"
+      @keyup="onKeyup"
+      @blur="onBlur"
     ></v-text-field>
     <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -16,6 +20,29 @@
   export default {
     name: 'ZInput',
     mixins: [FormMixins, FormValidatorMixins],
+
+    props: {
+      appendIcon: {
+        type: String,
+        required: false
+      }
+    },
+
+    methods: {
+      onKeydown() {
+        this.$emit('keydown')
+      },
+
+      onKeyup() {
+        this.debounce(() => {
+          console.log(this.value)
+        }, 300)
+        this.$emit('keyup')
+      },
+      onBlur() {
+        this.$emit('blur')
+      }
+    },
 
     watch: {
       defaultValue: {
