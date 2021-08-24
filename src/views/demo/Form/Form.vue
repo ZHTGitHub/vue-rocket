@@ -57,6 +57,7 @@
               :label="item.label"
               :rules="item.rules"
               :options="hobbyOptions"
+              :defaultValue="[2]"
             ></z-checkboxs>
           </v-col>
 
