@@ -34,9 +34,6 @@
       },
 
       onKeyup() {
-        this.debounce(() => {
-          console.log(this.value)
-        }, 300)
         this.$emit('keyup')
       },
       onBlur() {

@@ -75,6 +75,16 @@
           }
         },
         immediate: true
+      },
+
+      value: {
+        handler(value) {
+          console.log(value)
+          if(!value) {
+            this.values = []
+          }
+        },
+        immediate: true
       }
     }
   }

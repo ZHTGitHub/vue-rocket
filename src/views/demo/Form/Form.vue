@@ -1,99 +1,77 @@
 <template>
   <div class="demo-form">
-
     <v-container>
       <v-row>
-        <v-col cols="12">
-          <z-text-field
-            :formId="formId"
-            formKey="email"
-            label="邮箱"
-            :rules="[
-              { required: true, message: '邮箱为必填项.' },
-              { email: true, message: '邮箱格式不正确.' }
-            ]"
-          ></z-text-field>
-        </v-col>
 
-        <v-col cols="12">
-          <z-text-field
-            :formId="formId"
-            formKey="phone"
-            label="手机"
-            :rules="[
-              { required: true, message: '手机为必填项.' },
-              { phone: true, message: '手机格式不正确.' }
-            ]"
-          ></z-text-field>
-        </v-col>
-
-        <v-col cols="12">
-          <z-text-field
-            :formId="formId"
-            formKey="name"
-            label="姓名"
-            :rules="[
-              { required: true, message: '姓名为必填项.' }
-            ]"
-          ></z-text-field>
-        </v-col>
-
-        <v-col cols="12">
-          <z-text-field
-            :formId="formId"
-            formKey="age"
-            label="年龄"
-            :rules="[
-              { required: true, message: '年龄为必填项.' },
-              { numeric: true, message: '年龄为正整数.' },
-            ]"
-          ></z-text-field>
-        </v-col>
-
-        <v-col cols="12">
-          <z-select 
-            :formId="formId"
-            formKey="area"
-            label="居住城市"
-            :options="cityOptions"
-            :rules="[
-              { required: true, message: '居住城市为必选项.' }
-            ]"
-          ></z-select>
-        </v-col>
-
-        <v-col cols="12">
-          <z-radios
-            :formId="formId"
-            formKey="gender"
-            label="性别"
-            :options="genderOptions"
-            :rules="[
-              { required: true, message: '请选择性别.' }
-            ]"
+        <template v-for="(item, index) in InfoFormCells" >
+          <v-col 
+            v-if="item.inputType === 'text' || item.inputType === 'number'"
+            cols="12" 
+            :key="`InfoFormInput_${ index }`"
           >
-          </z-radios>
-        </v-col>
+            <z-text-field
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+              :rules="item.rules"
+            ></z-text-field>
+          </v-col>
 
-        <v-col cols="12">
-          <z-checkboxs
-            :formId="formId"
-            formKey="hobby"
-            label="兴趣"
-            :options="hobbyOptions"
-            :rules="[
-              { required: true, message: '请选择兴趣.' }
-            ]"
-          ></z-checkboxs>
-        </v-col>
+          <v-col 
+            v-if="item.inputType === 'select'"
+            cols="12" 
+            :key="`InfoFormInput_${ index }`"
+          >
+            <z-select 
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+              :rules="item.rules"
+              :options="cityOptions"
+            ></z-select>
+          </v-col>
 
-        <v-col cols="12"> 
-          <z-switch
-            :formId="formId"
-            formKey="active"
-            label="激活"
-          ></z-switch>
-        </v-col>
+          <v-col 
+            v-if="item.inputType === 'radios'"
+            cols="12" 
+            :key="`InfoFormInput_${ index }`"
+          >
+            <z-radios
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+              :rules="item.rules"
+              :options="genderOptions"
+            >
+            </z-radios>
+          </v-col>
+
+          <v-col 
+            v-if="item.inputType === 'checkboxs'"
+            cols="12" 
+            :key="`InfoFormInput_${ index }`"
+          >
+            <z-checkboxs
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+              :rules="item.rules"
+              :options="hobbyOptions"
+            ></z-checkboxs>
+          </v-col>
+
+          <v-col 
+            v-if="item.inputType === 'switch'"
+            cols="12" 
+            :key="`InfoFormInput_${ index }`"
+          > 
+            <z-switch
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+            ></z-switch>
+          </v-col>
+        </template>
 
         <v-col cols="12">
           <div class="btns flex jcc">
@@ -124,12 +102,14 @@
 
 <script>
   import { mapState } from 'vuex'
+  import { InfoFormCells } from './cells'
 
   export default {
     name: 'ZDemoForm',
     data() {
       return {
-        formId: 'info',
+        formId: 'Info',
+        InfoFormCells: InfoFormCells,
         cityOptions: [
           { label: '广州', value: 1 },
           { label: '深圳', value: 2 },

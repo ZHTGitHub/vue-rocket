@@ -21,8 +21,8 @@ Vue.prototype.util = util
 Vue.config.productionTip = false
 
 new Vue({
-  router,
   vuetify,
+  router,
   store,
   render: h => h(App),
 }).$mount('#app')

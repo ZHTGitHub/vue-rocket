@@ -93,11 +93,18 @@ export default {
 		reset() {
 			this.$bus.on('ZHT_RESET_FORM', (formId) => {
 				if(this.formId === formId) {
+
+					console.log(this.formKey, this.value)
+
+					const defaultValue = !this.util.tools.isEmpty(this.defaultValue) ? undefined : this.defaultValue
+
 					this.$store.commit('RESET_FORM', {
 						formId: this.formId,
 						formKey: this.formKey,
-						defaultValue: this.defaultValue
+						defaultValue
 					})
+
+					this.errorMessage = ''
 				}
 				this.$bus.off('ZHT_RESET_FORM')
 			})

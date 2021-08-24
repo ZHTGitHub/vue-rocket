@@ -20,7 +20,7 @@
       :loading="loading"
       :loading-text="loadingText"
     >
-      <template v-slot:item.options="{ item }">
+      <template #[`item.options`]="{ item }">
         <v-icon
           small
           class="mr-2"
