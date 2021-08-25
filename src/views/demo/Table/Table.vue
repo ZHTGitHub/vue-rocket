@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-table px-4">
+  <div class="demo-table">
     <div class="filters flex">
       <v-spacer></v-spacer>
       <z-text-field

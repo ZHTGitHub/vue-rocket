@@ -76,14 +76,14 @@
       return {
         drawer: null,
         menus: [
-          {
-            pId: '0',
-            id: '1',
-            index: 0,
-            icon: 'mdi-home',
-            title: '首页',
-            link: '/home'
-          },
+          // {
+          //   pId: '0',
+          //   id: '1',
+          //   index: 0,
+          //   icon: 'mdi-home',
+          //   title: '首页',
+          //   link: '/home'
+          // },
           {
             pId: '0',
             id: '2',
@@ -107,6 +107,14 @@
                 icon: 'mdi-view-dashboard',
                 title: '表格',
                 link: '/demo/table'
+              },
+              {
+                pId: '2',
+                id: '2-3',
+                index: 1,
+                icon: 'mdi-view-dashboard',
+                title: '样式',
+                link: '/demo/style'
               }
             ]
           }

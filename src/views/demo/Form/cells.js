@@ -7,7 +7,7 @@ export const InfoFormCells = [
       { required: true, message: '邮箱为必填项.' },
       { email: true, message: '邮箱格式不正确.' }
     ],
-    defaultValue: undefined
+    defaultValue: 'chat195@163.com'
   },
 
   {
@@ -69,13 +69,13 @@ export const InfoFormCells = [
     rules: [
       { required: true, message: '请选择兴趣.' }
     ],
-    defaultValue: undefined
+    defaultValue: [2]
   },
 
   {
     inputType: 'switch',
     formKey: 'active',
     label: '激活',
-    defaultValue: undefined
+    defaultValue: true
   }
 ]

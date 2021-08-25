@@ -16,6 +16,11 @@ const DemoRoutes = {
       path: 'table',
       name: 'ZDemoTable',
       component: () => import('@/views/demo/Table')
+    },
+    {
+      path: 'style',
+      name: 'ZDemoStyle',
+      component: () => import('@/views/demo/Style')
     }
   ]
 }

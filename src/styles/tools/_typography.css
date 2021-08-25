@@ -1,61 +1,121 @@
 .text-h1 {
-  font-size: 6rem!important;
+  font-size: 6rem !important;
   line-height: 6rem;
-  letter-spacing: -.015625em!important;
+  letter-spacing: -.015625em !important;
 }
+
 .text-h2 {
-  font-size: 3.75rem!important;
+  font-size: 3.75rem !important;
   line-height: 3.75rem;
-  letter-spacing: -.0083333333em!important;
+  letter-spacing: -.0083333333em !important;
 }
+
 .text-h3 {
-  font-size: 3rem!important;
+  font-size: 3rem !important;
   line-height: 3.125rem;
-  letter-spacing: normal!important;
+  letter-spacing: normal !important;
 }
+
 .text-h4 {
-  font-size: 2.125rem!important;
+  font-size: 2.125rem !important;
   line-height: 2.5rem;
-  letter-spacing: .0073529412em!important;
+  letter-spacing: .0073529412em !important;
 }
+
 .text-h5 {
-  font-size: 1.5rem!important;
+  font-size: 1.5rem !important;
   font-weight: 400;
-  letter-spacing: normal!important;
+  letter-spacing: normal !important;
 }
+
 .text-h6 {
-  font-size: 1.25rem!important;
+  font-size: 1.25rem !important;
   font-weight: 500;
-  letter-spacing: .0125em!important;
+  letter-spacing: .0125em !important;
 }
 
-.fw-black { font-weight: 900!important; }
-.fw-bold { font-weight: 700!important; }
-.fw-medium { font-weight: 500!important; }
-.fw-regular { font-weight: 400!important; }
-.fw-light { font-weight: 300!important; }
-.fw-thin { font-weight: 100!important; }
-.font-italic { font-style: italic!important; }
+.fw-black {
+  font-weight: 900 !important;
+}
 
-.text-left { text-align: left!important; }
-.text-center { text-align: center!important; }
-.text-right { text-align: right!important; }
+.fw-bold {
+  font-weight: 700 !important;
+}
 
-.td-none { text-decoration: none!important; }
-.td-line-through { text-decoration: line-through!important; }
-.td-overline { text-decoration: overline!important; }
-.td-underline { text-decoration: underline!important; }
+.fw-medium {
+  font-weight: 500 !important;
+}
 
-.text-primary { color: rgba(0,0,0,.87)!important; }
-.text-secondary { color: rgba(0,0,0,.6)!important; }
-.text-disabled { color: rgba(0,0,0,.38)!important; }
+.fw-regular {
+  font-weight: 400 !important;
+}
 
-.text-lowercase { text-transform: lowercase!important; }
-.text-uppercase { text-transform: uppercase!important; }
-.text-capitalize { text-transform: capitalize!important; }
+.fw-light {
+  font-weight: 300 !important;
+}
+
+.fw-thin {
+  font-weight: 100 !important;
+}
+
+.font-italic {
+  font-style: italic !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.td-none {
+  text-decoration: none !important;
+}
+
+.td-line-through {
+  text-decoration: line-through !important;
+}
+
+.td-overline {
+  text-decoration: overline !important;
+}
+
+.td-underline {
+  text-decoration: underline !important;
+}
+
+.text-primary {
+  color: rgba(0, 0, 0, .87) !important;
+}
+
+.text-secondary {
+  color: rgba(0, 0, 0, .6) !important;
+}
+
+.text-disabled {
+  color: rgba(0, 0, 0, .38) !important;
+}
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
 
 .text-truncate {
-  white-space: nowrap!important;
-  overflow: hidden!important;
-  text-overflow: ellipsis!important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
 }

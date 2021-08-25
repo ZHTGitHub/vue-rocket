@@ -14,6 +14,7 @@
               :formKey="item.formKey"
               :label="item.label"
               :rules="item.rules"
+              :defaultValue="item.defaultValue"
             ></z-text-field>
           </v-col>
 
@@ -28,6 +29,7 @@
               :label="item.label"
               :rules="item.rules"
               :options="cityOptions"
+              :defaultValue="item.defaultValue"
             ></z-select>
           </v-col>
 
@@ -42,6 +44,7 @@
               :label="item.label"
               :rules="item.rules"
               :options="genderOptions"
+              :defaultValue="item.defaultValue"
             >
             </z-radios>
           </v-col>
@@ -57,7 +60,7 @@
               :label="item.label"
               :rules="item.rules"
               :options="hobbyOptions"
-              :defaultValue="[2]"
+              :defaultValue="item.defaultValue"
             ></z-checkboxs>
           </v-col>
 
@@ -70,6 +73,7 @@
               :formId="formId"
               :formKey="item.formKey"
               :label="item.label"
+              :defaultValue="item.defaultValue"
             ></z-switch>
           </v-col>
         </template>
@@ -84,6 +88,7 @@
             >提交</z-btn>
 
             <z-btn 
+              class="mx-2"
               :formId="formId"
               color="warning"
               btnType="reset"
