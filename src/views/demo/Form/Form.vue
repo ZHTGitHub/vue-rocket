@@ -79,7 +79,7 @@
         </template>
 
         <v-col cols="12">
-          <div class="btns flex jcc">
+          <div class="btns z-flex justify-center">
             <z-btn 
               :formId="formId"
               color="primary"

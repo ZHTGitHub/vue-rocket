@@ -40,6 +40,7 @@
     width: 100px;
     height: 100px;
     background-color: #5cbbf6;
+    color: #fff;
     font-size: .875rem;
   }
 </style>

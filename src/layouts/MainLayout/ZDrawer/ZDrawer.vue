@@ -88,7 +88,7 @@
             pId: '0',
             id: '2',
             index: 1,
-            icon: 'mdi-view-dashboard',
+            icon: 'mdi-book-open-blank-variant',
             title: '示例',
             link: '',
             children: [
@@ -96,7 +96,7 @@
                 pId: '2',
                 id: '2-1',
                 index: 0,
-                icon: 'mdi-view-dashboard',
+                icon: 'mdi-form-select',
                 title: '表单',
                 link: '/demo/form'
               },
@@ -104,7 +104,7 @@
                 pId: '2',
                 id: '2-2',
                 index: 1,
-                icon: 'mdi-view-dashboard',
+                icon: 'mdi-table',
                 title: '表格',
                 link: '/demo/table'
               },
@@ -112,7 +112,7 @@
                 pId: '2',
                 id: '2-3',
                 index: 1,
-                icon: 'mdi-view-dashboard',
+                icon: 'mdi-language-css3',
                 title: '样式',
                 link: '/demo/style'
               }

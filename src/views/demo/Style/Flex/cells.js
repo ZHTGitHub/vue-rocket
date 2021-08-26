@@ -100,21 +100,6 @@ export const flex = [
 
   [
     {
-      class: 'flex-nowrap',
-      label: '不换行'
-    },
-    {
-      class: 'flex-wrap',
-      label: '换行，第一行在上方'
-    },
-    {
-      class: 'flex-wrap-reverse',
-      label: '换行，第一行在下方'
-    }
-  ],
-
-  [
-    {
       class: 'align-content-start',
       label: '交叉轴的起点对齐'
     },
@@ -133,6 +118,21 @@ export const flex = [
     {
       class: 'align-content-around',
       label: '每根轴线两侧的间隔都相等'
+    }
+  ],
+
+  [
+    {
+      class: 'flex-nowrap',
+      label: '不换行'
+    },
+    {
+      class: 'flex-wrap',
+      label: '换行，第一行在上方'
+    },
+    {
+      class: 'flex-wrap-reverse',
+      label: '换行，第一行在下方'
     }
   ]
 ]
