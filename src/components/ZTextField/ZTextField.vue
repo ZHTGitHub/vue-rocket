@@ -36,6 +36,7 @@
       onKeyup() {
         this.$emit('keyup')
       },
+      
       onBlur() {
         this.$emit('blur')
       }

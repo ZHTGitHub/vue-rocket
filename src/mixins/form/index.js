@@ -6,26 +6,32 @@ export default {
 			type: String,
 			required: true
 		},
+
 		formKey: {
 			type: String,
 			required: true
 		},
+
 		readonly: {
 			type: Boolean,
 			default: false
 		},
+
 		disabled: {
 			type: Boolean,
 			default: false
 		},
+
 		required: {
 			type: Boolean,
 			default: false
 		},
+
 		label: {
 			type: String,
 			required: false
 		},
+		
 		defaultValue: {
 			type: [String, Number, Boolean],
 			default: undefined

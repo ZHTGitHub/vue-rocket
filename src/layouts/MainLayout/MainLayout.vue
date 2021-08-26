@@ -4,11 +4,13 @@
 
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Vue Rocket</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <slot></slot>
+      <div class="z-main">
+        <slot></slot>
+      </div>
     </v-main>
   </div>
 </template>

@@ -5,7 +5,53 @@ const DemoRoutes = {
   children: [
     {
       path: '/demo',
-      redirect: () => 'form'
+      redirect: () => 'components'
+    },
+    {
+      path: 'components',
+      name: 'ZDemoComponents',
+      component: () => import('@/views/demo/Components'),
+      children: [
+        {
+          path: '/demo/components',
+          redirect: () => 'input'
+        },
+        {
+          path: 'input',
+          name: 'ZDemoInput',
+          component: () => import('@/views/demo/Components/Input')
+        },
+        {
+          path: 'select',
+          name: 'ZDemoSelect',
+          component: () => import('@/views/demo/Components/Select')
+        },
+        {
+          path: 'checkboxs',
+          name: 'ZDemoCheckboxs',
+          component: () => import('@/views/demo/Components/Checkboxs')
+        },
+        {
+          path: 'radios',
+          name: 'ZDemoRadios',
+          component: () => import('@/views/demo/Components/Radios')
+        },
+        {
+          path: 'switch',
+          name: 'ZDemoSwitch',
+          component: () => import('@/views/demo/Components/Switch')
+        },
+        {
+          path: 'button',
+          name: 'ZDemoButton',
+          component: () => import('@/views/demo/Components/Button')
+        },
+        {
+          path: 'pagination',
+          name: 'ZDemoPagination',
+          component: () => import('@/views/demo/Components/Pagination')
+        }
+      ]
     },
     {
       path: 'form',
