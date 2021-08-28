@@ -38,7 +38,7 @@
     </v-data-table>
 
     <z-pagination
-      :total="2"
+      :total="pagination.total"
     ></z-pagination>
   </div>
 </template>
@@ -64,29 +64,7 @@
           { text: '兴趣', value: 'hobby', sortable: false },
           { text: '激活', value: 'active', sortable: false },
           { text: '操作', value: 'options', sortable: false }
-        ],
-        // desserts: [
-        //   {
-        //     email: 'chat195@163.com',
-        //     phone: '175***6801',
-        //     name: 'Leslie',
-        //     age: 18,
-        //     area: '珠海',
-        //     gender: 1,
-        //     hobby: ['游泳', '乒乓球'],
-        //     active: false
-        //   },
-        //   {
-        //     email: 'chat687@163.com',
-        //     phone: '187***0597',
-        //     name: 'ZHT',
-        //     age: 16,
-        //     area: '广州',
-        //     gender: 1,
-        //     hobby: ['网球', '羽毛球'],
-        //     active: true
-        //   }
-        // ]
+        ]
       }
     },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="z-pagination" :class="className">
+  <div v-show="total > pageSize" class="z-pagination">
     <v-pagination
       v-model="page"
       :class="position"
@@ -42,11 +42,6 @@
         default: false
       },
 
-      className: {
-        type: String,
-        required: false
-      },
-
       position: {
         validator(value) {
           return ['start', 'center', 'end'].indexOf(value) !== -1
@@ -68,14 +63,17 @@
     methods: {
       onInput() {
         console.log(this.page)
+        this.$emit('input', this.page)
       },
 
       onNext() {
         console.log(this.page)
+        this.$emit('next', this.page)
       },
 
       onPrevious() {
         console.log(this.page)
+        this.$emit('previous', this.page)
       }
     }
   }

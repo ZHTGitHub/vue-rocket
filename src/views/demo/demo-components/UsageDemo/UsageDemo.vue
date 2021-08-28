@@ -59,6 +59,7 @@
   }
 
   .z-demo {
+    min-height: 76px;
     border-top: thin solid rgba(0,0,0,.12);
   }
 </style>
