@@ -1,7 +1,7 @@
 <template>
   <div class="demo-typography z-flex flex-wrap">
     <template v-for="(items, index) in typography">
-      <table class="api-table" :key="`typography_${ index }`">
+      <table class="mr-4 api-table" :key="`typography_${ index }`">
         <thead>
           <tr>
             <th>类名</th>

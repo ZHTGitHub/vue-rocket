@@ -1,7 +1,7 @@
 <template>
   <div class="demo-padding z-flex flex-wrap">
     <template v-for="(items, index) in padding">
-      <table class="api-table" :key="`padding_${ index }`">
+      <table class="mr-4 api-table" :key="`padding_${ index }`">
         <thead>
           <tr>
             <th>类名</th>

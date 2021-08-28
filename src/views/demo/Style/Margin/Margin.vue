@@ -1,7 +1,7 @@
 <template>
   <div class="demo-margin z-flex flex-wrap">
     <template v-for="(items, index) in margin">
-      <table class="api-table" :key="`margin_${ index }`">
+      <table class="mr-4 api-table" :key="`margin_${ index }`">
         <thead>
           <tr>
             <th>类名</th>
