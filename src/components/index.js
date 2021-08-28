@@ -7,6 +7,8 @@ import ZRadios from './ZRadios'
 import ZSwitch from './ZSwitch'
 import ZPagination from './ZPagination'
 
+import UsageDemo from '@/views/demo/demo-components/UsageDemo'
+
 export default () => {
 	Vue.component('z-btn', ZBtn)
 	Vue.component('z-text-field', ZTextField)
@@ -15,4 +17,5 @@ export default () => {
 	Vue.component('z-radios', ZRadios)
 	Vue.component('z-switch', ZSwitch)
 	Vue.component('z-pagination', ZPagination)
+	Vue.component('usage-demo', UsageDemo)
 }

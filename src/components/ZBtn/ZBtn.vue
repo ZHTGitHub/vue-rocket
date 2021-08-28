@@ -6,6 +6,8 @@
 			:small="small"
 			:large="large"
 			:disabled="disabled"
+			:icon="icon"
+			:fab="fab"
 			@click="onClick"
 		>
 			<slot></slot>
@@ -46,6 +48,14 @@
 				default: false
 			},
 			disabled: {
+				type: Boolean,
+				default: false
+			},
+			icon: {
+				type: Boolean,
+				default: false
+			},
+			fab: {
 				type: Boolean,
 				default: false
 			}
