@@ -5,6 +5,10 @@
       :label="label"
       :items="items"
       :hide-details="true"
+      @blur="onBlur"
+      @change="onChange"
+      @click="onClick"
+      @focus="onFocus"
     ></v-select>
     <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -36,6 +40,24 @@
           text: item.label,
           value: item.value
         })
+      }
+    },
+
+    methods: {
+      onBlur() {
+        this.$emit('blur')
+      },
+
+      onChange() {
+        this.$emit('change')
+      },
+
+      onClick() {
+        this.$emit('click')
+      },
+
+      onFocus() {
+        this.$emit('focus')
       }
     },
 

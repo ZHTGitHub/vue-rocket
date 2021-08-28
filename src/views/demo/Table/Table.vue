@@ -67,7 +67,7 @@
         desserts: [
           {
             email: 'chat195@163.com',
-            phone: 17520256801,
+            phone: '175***6801',
             name: 'Leslie',
             age: 18,
             area: '珠海',
@@ -77,7 +77,7 @@
           },
           {
             email: 'chat687@163.com',
-            phone: 18718120597,
+            phone: '187***0597',
             name: 'ZHT',
             age: 16,
             area: '广州',

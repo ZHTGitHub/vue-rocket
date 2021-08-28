@@ -5,17 +5,24 @@
       :label="label"
       hide-details
     ></v-switch>
-    <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
+    <!-- <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p> -->
   </div>
 </template>
 
 <script>
   import FormMixins from '../../mixins/form'
-  import FormValidatorMixins from '../../mixins/validator'
+  // import FormValidatorMixins from '../../mixins/validator'
 
   export default {
     name: 'ZSwitch',
-    mixins: [FormMixins, FormValidatorMixins],
+    mixins: [FormMixins],
+
+    props: {
+      defaultValue: {
+        type: Boolean,
+        default: false
+      }
+    },
 
     watch: {
       defaultValue: {

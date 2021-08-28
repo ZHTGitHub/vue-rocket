@@ -49,7 +49,7 @@
             &lt;/template>
 
             &lt;script>
-              import { ZTextField } from 'vue-rocket'
+              import { ZBtn } from 'vue-rocket'
 
               export default {
                 data() {

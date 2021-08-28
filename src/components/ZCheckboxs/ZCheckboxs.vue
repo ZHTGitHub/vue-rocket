@@ -1,6 +1,6 @@
 <template>
   <div :class="['z-checkboxs z-theme-default']">
-    <div :class="[row ? 'flex' : (column ? '' : 'flex')]">
+    <div :class="[row ? 'z-flex' : '']">
       <div
         v-for="(item, index) of items" 
         :key="`z_checkbox_${ index }`"
@@ -30,10 +30,10 @@
         type: Array,
         required: true
       },
-      column: {
-        type: Boolean,
-        default: false
-      },
+      // column: {
+      //   type: Boolean,
+      //   default: false
+      // },
       row: {
         type: Boolean,
         default: true
