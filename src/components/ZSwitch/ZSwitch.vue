@@ -3,6 +3,8 @@
     <v-switch
       v-model="value"
       :label="label"
+      :readonly="readonly"
+      :disabled="disabled"
       hide-details
     ></v-switch>
     <!-- <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p> -->

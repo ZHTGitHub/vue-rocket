@@ -8,7 +8,7 @@
           <code class="language-markup">
             &lt;template>
               &lt;z-switch
-                formId="formId"
+                :formId="formId"
                 formKey="active"
                 label="激活"
                 :defaultValue="true"
@@ -35,6 +35,7 @@
           formId="formId"
           formKey="active"
           label="激活"
+          :defaultValue="true"
         ></z-switch>
       </div>
     </usage-demo>

@@ -1,7 +1,7 @@
 <template>
   <div class="demo-round z-flex flex-wrap">
     <template v-for="(items, index) in round">
-      <table :key="`round_${ index }`">
+      <table class="api-table" :key="`round_${ index }`">
         <thead>
           <tr>
             <th>类名</th>

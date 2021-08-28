@@ -4,8 +4,8 @@ import axios from 'axios'
  * @description 基础路径
  */ 
 function arenaBaseUrl() {
-    const devUrl = `https://api.arenaplay.gg/`
-    const proUrl = `https://api.arenaplay.gg/`
+    const devUrl = `https://my-json-server.typicode.com/ZHTGitHub/vue-rocket-mockdata/`
+    const proUrl = `https://my-json-server.typicode.com/ZHTGitHub/vue-rocket-mockdata/`
 
     const env = process.env.NODE_ENV || 'development'
     
@@ -38,7 +38,7 @@ function createService() {
             const dataAxios = response.data
             const { success } = dataAxios
             const code = dataAxios.code || null
-            const message = dataAxios.message || null
+            // const message = dataAxios.message || null
 
             if(success) {
                 switch (code) {
@@ -84,9 +84,9 @@ function createService() {
  */ 
 function createRequest(service) {
     return function(config) {
-        const token = util.storage.get('token')
+        // const token = util.storage.get('token')
         const headers = {
-            Authorization: `Bearer ${ token }`,
+            // Authorization: `Bearer ${ token }`,
             'Content-Type': 'application/json;charset=UTF-8'
         }
         const defaultConfig = {

@@ -14,7 +14,7 @@
             </div>
           </div>
 
-          <div class="z-code" :style="{ height: expanded ? 'auto' : 0 }">
+          <div class="px-2 z-code" :style="{ height: expanded ? 'auto' : 0 }">
             <slot name="code"></slot>
           </div>
         </div>

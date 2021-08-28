@@ -3,6 +3,8 @@
     <v-select
       v-model="value"
       :label="label"
+      :readonly="readonly"
+      :disabled="disabled"
       :items="items"
       :hide-details="true"
       @blur="onBlur"

@@ -3,6 +3,8 @@
     <v-text-field
       v-model="value"
       :label="label"
+      :readonly="readonly"
+      :disabled="disabled"
       :append-icon="appendIcon"
       :hide-details="true"
       @keydown="onKeydown"

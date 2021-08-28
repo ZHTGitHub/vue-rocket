@@ -5,6 +5,15 @@ Vue.use(Vuex)
 
 import store from './store'
 
+// modules
+const files = require.context('./demo', false, /\.js$/)
+const modules = {}
+
+files.keys().map(key => {
+  modules[key.replace(/(\.\/|\.js)/g, '')] = files(key).default
+})
+
 export default new Vuex.Store({
-  ...store
+  ...store,
+  modules
 })

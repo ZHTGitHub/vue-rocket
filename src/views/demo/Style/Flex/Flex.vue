@@ -1,7 +1,7 @@
 <template>
   <div class="demo-flex z-flex flex-wrap">
     <template v-for="(items, index) in flex">
-      <table :key="`flex_${ index }`">
+      <table class="api-table" :key="`flex_${ index }`">
         <thead>
           <tr>
             <th>类名</th>
