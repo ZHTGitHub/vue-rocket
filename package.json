@@ -1,11 +1,30 @@
 {
-  "name": "admin",
+  "name": "vue-rocket",
   "version": "0.1.0",
-  "private": true,
+  "description": "",
+  "author": "ZHT",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "license": "MIT",
+  "keywords": [
+    "Component",
+    "UI",
+    "Vue"
+  ],
+  "homepage": "https://github.com/ZHTGitHub/vue-rocket",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZHTGitHub/vue-rocket"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "serve": "vue-cli-service serve --port 3000",
+    "serve": "vue-cli-service serve --port 8888",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "publish": "npm run build"
   },
   "dependencies": {
     "axios": "^0.21.1",
