@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import store from './store'
+import store from '../../packages/store'
 
 // modules
 const files = require.context('./demo', false, /\.js$/)

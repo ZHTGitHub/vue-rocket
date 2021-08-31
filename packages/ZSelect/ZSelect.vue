@@ -1,41 +1,32 @@
 <template>
-  <div :class="['z-radios z-theme-default']">
-    <v-radio-group
+  <div :class="['z-select z-theme-default']">
+    <v-select
       v-model="value"
-      :column="column"
-      :row="row"
-    >
-      <v-radio
-        v-for="(item, index) of items" 
-        :key="`z_radio_${ index }`"
-        :label="item.label"
-        :value="item.value"
-      ></v-radio>
-    </v-radio-group>
-
+      :label="label"
+      :readonly="readonly"
+      :disabled="disabled"
+      :items="items"
+      :hide-details="true"
+      @blur="onBlur"
+      @change="onChange"
+      @click="onClick"
+      @focus="onFocus"
+    ></v-select>
     <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script>
-  import FormMixins from '../../mixins/form'
-  import FormValidatorMixins from '../../mixins/validator'
+  import FormMixins from '../mixins/form'
+  import FormValidatorMixins from '../mixins/validator'
 
   export default {
-    name: 'ZRadios',
+    name: 'ZSelect',
     mixins: [FormMixins, FormValidatorMixins],
     props: {
       options: {
         type: Array,
         required: true
-      },
-      column: {
-        type: Boolean,
-        default: false
-      },
-      row: {
-        type: Boolean,
-        default: true
       }
     },
 
@@ -48,9 +39,27 @@
     created() {
       for(let item of this.options) {
         this.items.push({
-          label: item.label,
+          text: item.label,
           value: item.value
         })
+      }
+    },
+
+    methods: {
+      onBlur() {
+        this.$emit('blur')
+      },
+
+      onChange() {
+        this.$emit('change')
+      },
+
+      onClick() {
+        this.$emit('click')
+      },
+
+      onFocus() {
+        this.$emit('focus')
       }
     },
 

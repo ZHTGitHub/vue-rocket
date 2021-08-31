@@ -12,8 +12,11 @@ Vue.prototype.$request = request
 import bus from './plugins/emiter'
 Vue.prototype.$bus = bus
 
-import ZComponents from './components'
+import ZComponents from '../packages'
 Vue.use(ZComponents)
+
+import DemoComponents from './components'
+Vue.use(DemoComponents)
 
 import store from './store'
 

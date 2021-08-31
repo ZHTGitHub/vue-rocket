@@ -4,8 +4,7 @@
   "description": "",
   "author": "ZHT",
   "private": false,
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/vue-rocket.js",
   "license": "MIT",
   "keywords": [
     "Component",

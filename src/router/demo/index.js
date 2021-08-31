@@ -1,7 +1,7 @@
 const DemoRoutes = {
   path: '/demo',
   name: 'ZDemo',
-  component: () => import('@/views/demo'),
+  component: () => import('../../../examples'),
   children: [
     {
       path: '/demo',
@@ -10,7 +10,7 @@ const DemoRoutes = {
     {
       path: 'components',
       name: 'ZDemoComponents',
-      component: () => import('@/views/demo/Components'),
+      component: () => import('../../../examples/Components'),
       children: [
         {
           path: '/demo/components',
@@ -19,54 +19,54 @@ const DemoRoutes = {
         {
           path: 'input',
           name: 'ZDemoInput',
-          component: () => import('@/views/demo/Components/Input')
+          component: () => import('../../../examples/Components/Input')
         },
         {
           path: 'select',
           name: 'ZDemoSelect',
-          component: () => import('@/views/demo/Components/Select')
+          component: () => import('../../../examples/Components/Select')
         },
         {
           path: 'checkboxs',
           name: 'ZDemoCheckboxs',
-          component: () => import('@/views/demo/Components/Checkboxs')
+          component: () => import('../../../examples/Components/Checkboxs')
         },
         {
           path: 'radios',
           name: 'ZDemoRadios',
-          component: () => import('@/views/demo/Components/Radios')
+          component: () => import('../../../examples/Components/Radios')
         },
         {
           path: 'switch',
           name: 'ZDemoSwitch',
-          component: () => import('@/views/demo/Components/Switch')
+          component: () => import('../../../examples/Components/Switch')
         },
         {
           path: 'button',
           name: 'ZDemoButton',
-          component: () => import('@/views/demo/Components/Button')
+          component: () => import('../../../examples/Components/Button')
         },
         {
           path: 'pagination',
           name: 'ZDemoPagination',
-          component: () => import('@/views/demo/Components/Pagination')
+          component: () => import('../../../examples/Components/Pagination')
         }
       ]
     },
     {
       path: 'form',
       name: 'ZDemoForm',
-      component: () => import('@/views/demo/Form')
+      component: () => import('../../../examples/Form')
     },
     {
       path: 'table',
       name: 'ZDemoTable',
-      component: () => import('@/views/demo/Table')
+      component: () => import('../../../examples/Table')
     },
     {
       path: 'style',
       name: 'ZDemoStyle',
-      component: () => import('@/views/demo/Style')
+      component: () => import('../../../examples/Style')
     }
   ]
 }

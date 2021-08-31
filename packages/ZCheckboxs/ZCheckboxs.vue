@@ -19,8 +19,8 @@
 </template>
 
 <script>
-  import FormMixins from '../../mixins/form'
-  import FormValidatorMixins from '../../mixins/validator'
+  import FormMixins from '../mixins/form'
+  import FormValidatorMixins from '../mixins/validator'
 
   export default {
     name: 'ZCheckboxs',
