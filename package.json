@@ -16,9 +16,6 @@
     "type": "git",
     "url": "https://github.com/ZHTGitHub/vue-rocket"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "serve": "vue-cli-service serve --port 8888",
     "build": "vue-cli-service build",
