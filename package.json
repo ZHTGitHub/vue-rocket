@@ -23,9 +23,7 @@
     "lib": "vue-cli-service build --target lib --name vuerocket --dest lib packages/index.js",
     "publish": "npm run build"
   },
-  "dependencies": {
-    "core-js": "^3.6.5"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "lodash": ">=4.17.21",
     "vue": ">=2.6.11",
@@ -35,6 +33,7 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
+    "core-js": "^3.6.5",
     "@mdi/font": "^5.9.55",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
