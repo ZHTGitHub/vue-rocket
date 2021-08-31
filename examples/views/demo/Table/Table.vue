@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import TableMixins from '@/mixins/table'
+  import TableMixins from '../../../mixins/table'
 
   export default {
     name: 'ZDemoTable',

@@ -20,7 +20,7 @@
   import FormValidatorMixins from '../mixins/validator'
 
   export default {
-    name: 'ZInput',
+    name: 'ZTextField',
     mixins: [FormMixins, FormValidatorMixins],
 
     props: {

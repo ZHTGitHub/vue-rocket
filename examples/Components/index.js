@@ -1,4 +1,7 @@
-import DemoComponents from './Components'
+import Vue from 'vue'
 
-export { DemoComponents }
-export default DemoComponents
+import UsageDemo from './UsageDemo'
+
+export default () => {
+	Vue.component('usage-demo', UsageDemo)
+}
