@@ -16,9 +16,9 @@ export const button = [
         name: 'color',
         required: '否',
         type: 'String',
-        acceptedValues: 'normal/primary/success/warning/error',
-        default: 'primary',
-        description: '设置按钮主题'
+        acceptedValues: 'normal/primary/success/warning/error...',
+        default: '—',
+        description: 'material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))'
       },
 
       {

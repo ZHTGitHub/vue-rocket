@@ -25,10 +25,8 @@
 				required: false
 			},
 			color: {
-				validator(value) {
-					return ['normal', 'primary', 'success', 'warning', 'error'].indexOf(value) !== -1
-				},
-				default: 'primary'
+				type: String,
+				required: false
 			},
 			btnType: {
 				validator(value) {

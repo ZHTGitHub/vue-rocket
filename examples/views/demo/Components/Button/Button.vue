@@ -77,8 +77,32 @@
           <z-btn
             class="mr-4"
             formId="formId"
-            color="primary"
+            color="normal"
           >默认按钮</z-btn>
+
+          <z-btn
+            class="mr-4"
+            formId="formId"
+            color="primary"
+          >主要按钮</z-btn>
+
+          <z-btn
+            class="mr-4"
+            formId="formId"
+            color="error"
+          >报错按钮</z-btn>
+
+          <z-btn
+            class="mr-4"
+            formId="formId"
+            color="warning"
+          >警告按钮</z-btn>
+
+          <z-btn
+            class="mr-4"
+            formId="formId"
+            color="success"
+          >成功按钮</z-btn>
 
           <z-btn
             class="mr-4"
@@ -90,7 +114,7 @@
           <z-btn
             class="mr-4"
             formId="formId"
-            color="success"
+            color="cyan"
           >
             <v-icon left>
               mdi-pencil
