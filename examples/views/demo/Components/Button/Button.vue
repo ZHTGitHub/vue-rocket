@@ -63,6 +63,16 @@
         </pre>
       </div>
       <div slot="demo">
+
+        <div class="mb-4">
+          <z-btn
+            class="mr-4"
+            formId="formId"
+            color="primary"
+            block
+          >块级按钮</z-btn>
+        </div>
+
         <div class="z-flex">
           <z-btn
             class="mr-4"

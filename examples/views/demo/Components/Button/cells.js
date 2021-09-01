@@ -22,6 +22,15 @@ export const button = [
       },
 
       {
+        name: 'block',
+        required: '否',
+        type: 'Boolean',
+        acceptedValues: '-',
+        default: 'false',
+        description: '块级按钮可填满全部可以用宽度'
+      },
+
+      {
         name: 'btnType',
         required: '否',
         type: 'String',

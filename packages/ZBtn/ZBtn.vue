@@ -2,6 +2,7 @@
 	<div class="z-btn">
 		<v-btn
 			:color="color"
+			:block="block"
 			:plain="plain"
 			:small="small"
 			:large="large"
@@ -34,6 +35,10 @@
 					return ['normal', 'new', 'modify', 'detail', 'delete', 'reset', 'clear', 'submit'].indexOf(value) !== -1
 				},
 				default: 'normal'
+			},
+			block: {
+				type: Boolean,
+				default: false
 			},
 			plain: {
 				type: Boolean,
