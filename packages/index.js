@@ -5,6 +5,7 @@ import ZSelect from './ZSelect'
 import ZSwitch from './ZSwitch'
 import ZTextField from './ZTextField'
 import ZPagination from './ZPagination'
+import ZDrawer from './ZDrawer'
 
 const components = [
 	ZBtn,
@@ -13,7 +14,8 @@ const components = [
 	ZSelect,
 	ZSwitch,
 	ZTextField,
-	ZPagination
+	ZPagination,
+	ZDrawer
 ]
 
 const install = function (Vue) {
