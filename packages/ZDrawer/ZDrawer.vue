@@ -111,8 +111,6 @@
     name: 'ZDrawer',
 
     props: {
-      drawer: null,
-
       menus: {
         type: Array,
         required: true
@@ -121,7 +119,7 @@
 
     data() {
       return {
-
+        drawer: null,
       }
     },
 
