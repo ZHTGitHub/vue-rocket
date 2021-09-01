@@ -92,18 +92,5 @@
 </script>
 
 <style scoped lang="css">
-  .z-checkboxs .checkboxs {
-    /* display: flex; */
-  }
-
-  .z-checkboxs .checkboxs span {
-    margin-right: 16px;
-  }
-
-  p.z-error {
-    padding-top: 4px;
-    color: #ff5252;
-    text-align: left;
-    font-size: 12px;
-  }
+  @import url("../styles/styles.css");
 </style>

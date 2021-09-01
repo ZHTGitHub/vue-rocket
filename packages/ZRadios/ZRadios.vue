@@ -66,10 +66,5 @@
 </script>
 
 <style scoped lang="css">
-  p.z-error {
-    padding-top: 4px;
-    color: #ff5252;
-    text-align: left;
-    font-size: 12px;
-  }
+  @import url("../styles/styles.css");
 </style>

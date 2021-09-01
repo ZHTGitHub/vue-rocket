@@ -79,16 +79,6 @@
   }
 </script>
 
-<style>
-  .z-pagination nav.start {
-    float: left;
-  }
-
-  .z-pagination nav.center {
-    float: none;
-  }
-
-  .z-pagination nav.end {
-    float: right;
-  }
+<style scoped lang="css">
+  @import url("../styles/styles.css");
 </style>
