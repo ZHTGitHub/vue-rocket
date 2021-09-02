@@ -1,20 +1,19 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    temporary
-    absolute
-    width="256px"
+    :absolute="absolute"
+    :app="app"
+    :clipped="clipped"
+    :color="color"
+    :fixed="fixed"
+    :floating="floating"
+    :permanent="permanent"
+    :stateless="stateless"
+    :width="width"
   >
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title class="text-h6">
-          Vue Rocket
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          ZHT
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+    <div class="z-drawer-header" :style="{ height: headerHeight }">
+      <slot name="header"></slot>
+    </div>
 
     <v-divider></v-divider>
 
@@ -111,9 +110,59 @@
     name: 'ZDrawer',
 
     props: {
+      absolute: {
+        type: Boolean,
+        default: false
+      },
+
+      app: {
+        type: Boolean,
+        default: false
+      },
+
+      clipped: {
+        type: Boolean,
+        default: false
+      },
+
+      color: {
+        type: String,
+        required: false
+      },
+
+      fixed: {
+        type: Boolean,
+        default: false
+      },
+
+      floating: {
+        type: Boolean,
+        default: false
+      },
+
+      headerHeight: {
+        type: String,
+        default: '56px'
+      },
+
       menus: {
         type: Array,
         required: true
+      },
+
+      permanent: {
+        type: Boolean,
+        default: false
+      },
+
+      stateless: {
+        type: Boolean,
+        default: false
+      },
+
+      width: {
+        type: [Number, String],
+        default: 256
       }
     },
 
@@ -144,4 +193,10 @@
     }
   }
 </script>
+
+<style scoped lang="css">
+  .z-drawer-header {
+    min-height: 56px;
+  }
+</style>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="z-demo py-4 px-4">
+  <div class="z-demo">
     <main-layout>
       <router-view></router-view>
     </main-layout>

@@ -81,6 +81,14 @@ export const menus = [
             icon: '',
             title: 'Pagination 分页',
             link: '/demo/components/pagination'
+          },
+          {
+            pId: '2-1',
+            id: '2-1-8',
+            index: 7,
+            icon: '',
+            title: 'Drawer 导航抽屉',
+            link: '/demo/components/drawer'
           }
         ]
       },

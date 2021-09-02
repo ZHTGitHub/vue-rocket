@@ -1,19 +1,20 @@
 <template>
   <div class="main-layout">
-    <z-drawer 
-      ref="drawer"
-      :menus="menus"
-    ></z-drawer>
-
-    <v-app-bar app>
+    <v-app-bar app elevation="1" clipped-left style="z-index: 7">
       <v-app-bar-nav-icon @click="onToggle"></v-app-bar-nav-icon>
       <v-toolbar-title>Vue Rocket</v-toolbar-title>
     </v-app-bar>
 
+    <z-drawer 
+      ref="drawer"
+      :menus="menus"
+      app
+    ></z-drawer>
+
     <v-main>
-      <div class="z-main">
+      <v-container>
         <slot></slot>
-      </div>
+      </v-container>
     </v-main>
   </div>
 </template>

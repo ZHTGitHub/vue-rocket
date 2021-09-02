@@ -50,6 +50,11 @@ const DemoRoutes = {
           path: 'pagination',
           name: 'ZDemoPagination',
           component: () => import('../../views/demo/Components/Pagination')
+        },
+        {
+          path: 'drawer',
+          name: 'ZDemoDrawer',
+          component: () => import('../../views/demo/Components/Drawer')
         }
       ]
     },
