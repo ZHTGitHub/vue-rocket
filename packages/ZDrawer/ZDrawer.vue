@@ -185,9 +185,7 @@
         this.drawer = !this.drawer
       },
 
-      onSelect(item, event) {
-        console.log(event)
-        console.log(item)
+      onSelect(item) {
         this.$router.push({ path: item.link })
       }
     }
