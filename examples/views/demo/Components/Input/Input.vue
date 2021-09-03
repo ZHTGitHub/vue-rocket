@@ -36,6 +36,7 @@
           formKey="name"
           label="姓名"
           :rules="[{ required: true, message: '姓名为必填项.' }]"
+          @click:prepend="onClick"
         ></z-text-field>
       </div>
     </usage-demo>
@@ -88,6 +89,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      onClick() {
+        
+      }
     }
   }
 </script>

@@ -22,12 +22,21 @@ export const input = [
       },
 
       {
-        name: 'readonly',
+        name: 'append-icon',
         required: '否',
-        type: 'Boolean',
+        type: 'String',
         acceptedValues: '—',
-        default: 'false',
-        description: '是否只读状态'
+        default: '—',
+        description: '在组件上附加一个图标'
+      },
+
+      {
+        name: 'defaultValue',
+        required: '否',
+        type: 'Any',
+        acceptedValues: '—',
+        default: '—',
+        description: '输入框的默认值'
       },
 
       {
@@ -40,6 +49,60 @@ export const input = [
       },
 
       {
+        name: 'error',
+        required: '否',
+        type: 'Boolean',
+        acceptedValues: '—',
+        default: 'false',
+        description: '将输入框设置为手动错误状态'
+      },
+
+      {
+        name: 'hint',
+        required: '否',
+        type: 'String',
+        acceptedValues: '—',
+        default: '—',
+        description: '提示文本'
+      },
+
+      {
+        name: 'label',
+        required: '否',
+        type: 'String',
+        acceptedValues: '—',
+        default: '—',
+        description: '设置输入标签'
+      },
+
+      {
+        name: 'prepend-icon',
+        required: '否',
+        type: 'String',
+        acceptedValues: '—',
+        default: '—',
+        description: '在组件前添加一个图标'
+      },
+
+      {
+        name: 'readonly',
+        required: '否',
+        type: 'Boolean',
+        acceptedValues: '—',
+        default: 'false',
+        description: '是否只读状态'
+      },
+
+      {
+        name: 'reverse',
+        required: '否',
+        type: 'Boolean',
+        acceptedValues: '—',
+        default: 'false',
+        description: '反转输入方向'
+      },
+
+      {
         name: 'required',
         required: '否',
         type: 'Boolean',
@@ -49,21 +112,12 @@ export const input = [
       },
 
       {
-        name: 'label',
+        name: 'success',
         required: '否',
-        type: 'String',
+        type: 'Boolean',
         acceptedValues: '—',
-        default: '—',
-        description: '输入框关联的 label 文字'
-      },
-
-      {
-        name: 'defaultValue',
-        required: '否',
-        type: 'Any',
-        acceptedValues: '—',
-        default: '—',
-        description: '输入框的默认值'
+        default: 'false',
+        description: '将输入设置为手动成功状态'
       }
     ]
   },
@@ -73,21 +127,39 @@ export const input = [
     titles: ['名称', '参数', '说明'],
     apis: [
       {
+        name: 'blur',
+        parameters: '-',
+        description: '当失去焦点时发出'
+      },
+
+      {
+        name: 'click',
+        parameters: '-',
+        description: '在单击输入时发出'
+      },
+
+      {
+        name: 'change',
+        parameters: '-',
+        description: '当用户交互更改输入时发出'
+      },
+
+      {
+        name: 'focus',
+        parameters: '-',
+        description: '当得到焦点时发出'
+      },
+
+      {
         name: 'keydown',
         parameters: '-',
-        description: '键盘按下'
+        description: '按下任何键时发送'
       },
 
       {
         name: 'keyup',
         parameters: '-',
         description: '键盘抬起'
-      },
-
-      {
-        name: 'blur',
-        parameters: '-',
-        description: '失去焦点'
       }
     ]
   }

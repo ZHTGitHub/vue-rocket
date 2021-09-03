@@ -12,12 +12,57 @@ export default {
 			required: true
 		},
 
+		appendIcon: {
+			type: String,
+			required: false
+		},
+
+		appendOuterIcon: {
+			type: String,
+			required: false
+		},
+
+		defaultValue: {
+			type: [String, Number, Boolean],
+			default: undefined
+		},
+
+		disabled: {
+			type: Boolean,
+			default: false
+		},
+
+		error: {
+			type: Boolean,
+			default: false
+		},
+
+		hint: {
+			type: String,
+			required: false
+		},
+
+		label: {
+			type: String,
+			required: false
+		},
+
+		prependIcon: {
+			type: String,
+			required: false
+		},
+
+		prependOuterIcon: {
+			type: String,
+			required: false
+		},
+
 		readonly: {
 			type: Boolean,
 			default: false
 		},
 
-		disabled: {
+		reverse: {
 			type: Boolean,
 			default: false
 		},
@@ -27,14 +72,9 @@ export default {
 			default: false
 		},
 
-		label: {
-			type: String,
-			required: false
-		},
-		
-		defaultValue: {
-			type: [String, Number, Boolean],
-			default: undefined
+		success: {
+			type: Boolean,
+			default: false
 		}
 	},
 

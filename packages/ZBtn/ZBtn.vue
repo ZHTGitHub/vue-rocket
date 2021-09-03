@@ -1,14 +1,25 @@
 <template>
 	<div class="z-btn">
 		<v-btn
-			:color="color"
+			:absolute="absolute"
 			:block="block"
-			:plain="plain"
-			:small="small"
-			:large="large"
+			:bottom="bottom"
+			:color="color"
+			:depressed="depressed"
 			:disabled="disabled"
-			:icon="icon"
 			:fab="fab"
+			:fixed="fixed"
+			:icon="icon"
+			:large="large"
+			:left="left"
+			:outlined="outlined"
+			:plain="plain"
+			:right="right"
+			:small="small"
+			:tile="tile"
+			:top="top"
+			:x-large="larger"
+			:x-small="smaller"
 			@click="onClick"
 		>
 			<slot></slot>
@@ -24,49 +35,139 @@
 				type: String,
 				required: false
 			},
-			color: {
-				type: String,
-				required: false
-			},
+
 			btnType: {
 				validator(value) {
 					return ['normal', 'new', 'modify', 'detail', 'delete', 'reset', 'clear', 'submit'].indexOf(value) !== -1
 				},
 				default: 'normal'
 			},
+
+			lockedTime: {
+				type: [Number, String],
+				default: 2500
+			},
+
+			absolute: {
+				type: Boolean,
+				default: false
+			},
+
 			block: {
 				type: Boolean,
 				default: false
 			},
-			plain: {
+
+			bottom: {
 				type: Boolean,
 				default: false
 			},
-			small: {
+
+			color: {
+				type: String,
+				required: false
+			},
+
+			depressed: {
 				type: Boolean,
 				default: false
 			},
-			large: {
-				type: Boolean,
-				default: false
-			},
+
 			disabled: {
 				type: Boolean,
 				default: false
 			},
+
+			elevation: {
+				type: [Number, String],
+				required: false
+			},
+
+			fab: {
+				type: Boolean,
+				default: false
+			},
+
+			fixed: {
+				type: Boolean,
+				default: false
+			},
+
+			height: {
+				type: [Number, String],
+				required: false
+			},
+
 			icon: {
 				type: Boolean,
 				default: false
 			},
-			fab: {
+
+			large: {
 				type: Boolean,
 				default: false
+			},
+
+			larger: {
+				type: Boolean,
+				default: false
+			},
+
+			left: {
+				type: Boolean,
+				default: false
+			},
+
+			outlined: {
+				type: Boolean,
+				default: false
+			},
+
+			plain: {
+				type: Boolean,
+				default: false
+			},
+
+			right: {
+				type: Boolean,
+				default: false
+			},
+
+			rounded: {
+				type: Boolean,
+				default: false
+			},
+
+			small: {
+				type: Boolean,
+				default: false
+			},
+
+			smaller: {
+				type: Boolean,
+				default: false
+			},
+
+			tile: {
+				type: Boolean,
+				default: false
+			},
+
+			top: {
+				type: Boolean,
+				default: false
+			},
+
+			width: {
+				type: [Number, String],
+				required: false
 			}
 		},
 
 		data() {
 			return {
-				btnEvent: null
+				btnEvent: null,
+        oldTime: null
 			}
 		},
 
@@ -100,6 +201,21 @@
 					default:
 						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
 						break;
+				}
+			},
+
+			lockClick() {
+				if(this.oldTime == null) {
+					this.oldTime = new Date().getTime()
+					return true
+				}else {
+					let newTime = new Date().getTime()
+					if(newTime - this.oldTime > this.lockedTime) {
+						this.oldTime = new Date().getTime()
+						return true
+					}else {
+						return false
+					}
 				}
 			}
 		}

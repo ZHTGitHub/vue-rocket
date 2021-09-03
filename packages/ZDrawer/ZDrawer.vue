@@ -21,18 +21,24 @@
       <!-- 一级列表 BEGIN -->
       <template v-if="!item.leaf">
         <v-list dense>
-          <v-list-item 
-            link
-            @click="onSelect(item, $event)"
+          <v-list-item-group
+            v-model="activedIndex"
+            color="primary"
+            @change="onChange(item)"
           >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
+            <v-list-item 
+              link
+              @click="onSelect(item, $event)"
+            >
+              <v-list-item-icon>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
         </v-list>
       </template>
       <!-- 一级列表 END -->
@@ -43,61 +49,70 @@
             v-model="item.active"
             :prepend-icon="item.icon"
             no-action
+            @click="onChange(item)"
           >
             <template v-slot:activator>
               <v-list-item-content>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item-content>
             </template>
-            
-            <template v-for="child in item.children">
-              <!-- 二级列表 BEGIN -->
-              <v-list-item
-                v-if="!child.leaf"
-                :key="child.id"
-                class="pl-6"
-                link
-                @click="onSelect(child, $event)"
-              >
-                <v-list-item-icon class="mr-4">
-                  <v-icon>{{ child.icon }}</v-icon>
-                </v-list-item-icon>
 
-                <v-list-item-content>
-                  <v-list-item-title>{{ child.title }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <!-- 二级列表 END -->
+            <v-list-item-group
+              v-model="activedIndex"
+              color="primary"
+              @change="onChange(item)"
+            >
+              
+              <template v-for="child in item.children">
+                <!-- 二级列表 BEGIN -->
+                <v-list-item
+                  v-if="!child.leaf"
+                  :key="child.id"
+                  class="pl-6"
+                  link
+                  @click="onSelect(child, $event)"
+                >
+                  <v-list-item-icon class="mr-4">
+                    <v-icon>{{ child.icon }}</v-icon>
+                  </v-list-item-icon>
 
-              <!-- 三级列表 BEGIN -->
-              <v-list-group
-                v-else
-                :key="child.id"
-                :value="true"
-                no-action
-                sub-group
-              >
-                <template v-slot:activator>
                   <v-list-item-content>
                     <v-list-item-title>{{ child.title }}</v-list-item-title>
                   </v-list-item-content>
-                </template>
-      
-                <v-list-item
-                  v-for="grandChild in child.children"
-                  :key="grandChild.id"
-                  link
-                  @click="onSelect(grandChild, $event)"
-                >
-                  <v-list-item-title v-text="grandChild.title"></v-list-item-title>
-      
-                  <v-list-item-icon>
-                    <v-icon v-text="grandChild.icon"></v-icon>
-                  </v-list-item-icon>
                 </v-list-item>
-              </v-list-group>
-            </template>
-            <!-- 三级列表 END -->
+                <!-- 二级列表 END -->
+
+                <!-- 三级列表 BEGIN -->
+                <v-list-group
+                  v-else
+                  :key="child.id"
+                  :value="true"
+                  no-action
+                  sub-group
+                  @click="onChange(child)"
+                >
+                  <template v-slot:activator>
+                    <v-list-item-content>
+                      <v-list-item-title>{{ child.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </template>
+        
+                  <v-list-item
+                    v-for="grandChild in child.children"
+                    :key="grandChild.id"
+                    link
+                    @click="onSelect(grandChild, $event)"
+                  >
+                    <v-list-item-title v-text="grandChild.title"></v-list-item-title>
+        
+                    <v-list-item-icon>
+                      <v-icon v-text="grandChild.icon"></v-icon>
+                    </v-list-item-icon>
+                  </v-list-item>
+                </v-list-group>
+                <!-- 三级列表 END -->
+              </template>
+            </v-list-item-group>
           </v-list-group>
         </v-list>
       </template>
@@ -124,7 +139,7 @@
         type: Boolean,
         default: false
       },
-
+      
       color: {
         type: String,
         required: false
@@ -169,6 +184,7 @@
     data() {
       return {
         drawer: null,
+        activedIndex: 0
       }
     },
 
@@ -185,8 +201,23 @@
         this.drawer = !this.drawer
       },
 
+      onChange(item) {
+        console.log(item)
+        if(item.activedIndex >= 0) {
+          this.activedIndex = item.activedIndex
+        }
+      },
+
       onSelect(item) {
+        console.log(item)
+        this.activedIndex = item.activedIndex
         this.$router.push({ path: item.link })
+      }
+    },
+
+    watch: {
+      activedIndex(index) {
+        console.log(index)
       }
     }
   }
@@ -197,4 +228,3 @@
     min-height: 56px;
   }
 </style>
-

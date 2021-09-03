@@ -1,13 +1,14 @@
 export const menus = [
-  // {
-  //   pId: '0',
-  //   id: '1',
-  //   index: 0,
-  //   icon: 'mdi-home',
-  //   title: '首页',
-  //   link: '/home',
-  //   leaf: false
-  // },
+  {
+    pId: '0',
+    id: '1',
+    index: 0,
+    activedIndex: 0,
+    icon: 'mdi-home',
+    title: '首页',
+    // link: '/home',
+    leaf: false
+  },
   {
     pId: '0',
     id: '2',
@@ -30,6 +31,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-1',
             index: 0,
+            activedIndex: 1,
             icon: '',
             title: 'Input 输入框',
             link: '/demo/components/input'
@@ -38,6 +40,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-2',
             index: 1,
+            activedIndex: 2,
             icon: '',
             title: 'Select 选择器',
             link: '/demo/components/select'
@@ -46,6 +49,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-3',
             index: 2,
+            activedIndex: 3,
             icon: '',
             title: 'Checkboxs 多选框',
             link: '/demo/components/checkboxs'
@@ -54,6 +58,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-4',
             index: 3,
+            activedIndex: 4,
             icon: '',
             title: 'Radios 单选框',
             link: '/demo/components/radios'
@@ -62,6 +67,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-5',
             index: 4,
+            activedIndex: 5,
             icon: '',
             title: 'Switch 开关',
             link: '/demo/components/switch'
@@ -70,6 +76,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-6',
             index: 5,
+            activedIndex: 6,
             icon: '',
             title: 'Button 按钮',
             link: '/demo/components/button'
@@ -78,6 +85,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-7',
             index: 6,
+            activedIndex: 7,
             icon: '',
             title: 'Pagination 分页',
             link: '/demo/components/pagination'
@@ -86,6 +94,7 @@ export const menus = [
             pId: '2-1',
             id: '2-1-8',
             index: 7,
+            activedIndex: 8,
             icon: '',
             title: 'Drawer 导航抽屉',
             link: '/demo/components/drawer'
@@ -96,6 +105,7 @@ export const menus = [
         pId: '2',
         id: '2-2',
         index: 1,
+        activedIndex: 9,
         icon: 'mdi-form-select',
         title: '表单',
         link: '/demo/form',
@@ -105,6 +115,7 @@ export const menus = [
         pId: '2',
         id: '2-3',
         index: 2,
+        activedIndex: 10,
         icon: 'mdi-table',
         title: '表格',
         link: '/demo/table',
@@ -114,6 +125,7 @@ export const menus = [
         pId: '2',
         id: '2-4',
         index: 3,
+        activedIndex: 11,
         icon: 'mdi-language-css3',
         title: '样式',
         link: '/demo/style',

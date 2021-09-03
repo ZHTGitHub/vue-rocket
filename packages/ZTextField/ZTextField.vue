@@ -2,14 +2,24 @@
   <div :class="['z-field z-theme-default']">
     <v-text-field
       v-model="value"
-      :label="label"
-      :readonly="readonly"
-      :disabled="disabled"
       :append-icon="appendIcon"
+      :append-outer-icon="appendOuterIcon"
+      :disabled="disabled"
+      :error="error"
       :hide-details="true"
+      :hint="hint"
+      :label="label"
+      :prepend-inner-icon="prependIcon"
+      :prepend-icon="prependOuterIcon"
+      :readonly="readonly"
+      :reverse="reverse"
+      :success="success"
+      @blur="onBlur"
+      @click="onClick"
+      @change="onChange"
+      @focus="onFocus"
       @keydown="onKeydown"
       @keyup="onKeyup"
-      @blur="onBlur"
     ></v-text-field>
     <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -23,24 +33,29 @@
     name: 'ZTextField',
     mixins: [FormMixins, FormValidatorMixins],
 
-    props: {
-      appendIcon: {
-        type: String,
-        required: false
-      }
-    },
-
     methods: {
+      onBlur() {
+        this.$emit('blur')
+      },
+
+      onClick() {
+        this.$emit('click')
+      },
+
+      onChange() {
+        this.$emit('change')
+      },
+
+      onFocus() {
+        this.$emit('focus')
+      },
+
       onKeydown() {
         this.$emit('keydown')
       },
 
       onKeyup() {
         this.$emit('keyup')
-      },
-      
-      onBlur() {
-        this.$emit('blur')
       }
     },
 
