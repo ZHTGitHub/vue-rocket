@@ -15,6 +15,7 @@
 			:outlined="outlined"
 			:plain="plain"
 			:right="right"
+			:rounded="rounded"
 			:small="small"
 			:tile="tile"
 			:top="top"
