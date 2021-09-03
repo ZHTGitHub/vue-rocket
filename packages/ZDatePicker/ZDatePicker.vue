@@ -156,7 +156,7 @@
 
       date: {
         handler(date) {
-          // console.log(date)
+          console.log(date)
         },
         immediate: true
       }
