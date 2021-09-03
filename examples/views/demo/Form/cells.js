@@ -53,6 +53,16 @@ export const InfoFormCells = [
   },
 
   {
+    inputType: 'date',
+    formKey: 'date',
+    label: '日期',
+    rules: [
+      { required: true, message: '日期为必选项.' }
+    ],
+    defaultValue: '2021-09-20'
+  },
+
+  {
     inputType: 'radios',
     formKey: 'gender',
     label: '性别',

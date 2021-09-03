@@ -78,6 +78,16 @@ export default {
 		}
 	},
 
+	data() {
+		return {
+			incorrect: false
+		}
+	},
+
+	created() {
+		this.incorrect = this.error
+	},
+
 	computed: {
 		...mapState(['forms']),
 

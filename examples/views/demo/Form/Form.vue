@@ -34,6 +34,21 @@
           </v-col>
 
           <v-col 
+            v-if="item.inputType === 'date'"
+            cols="12" 
+            :key="`InfoFormInput_${ index }`"
+          > 
+            <z-date-picker
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+              :rules="item.rules"
+              prepend-icon="mdi-calendar"
+              :defaultValue="item.defaultValue"
+            ></z-date-picker>
+          </v-col>
+
+          <v-col 
             v-if="item.inputType === 'radios'"
             cols="12" 
             :key="`InfoFormInput_${ index }`"

@@ -1,11 +1,11 @@
 <template>
-  <div :class="['z-field z-theme-default']">
+  <div class="z-field z-theme-default">
     <v-text-field
       v-model="value"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
       :disabled="disabled"
-      :error="error"
+      :error="incorrect"
       :hide-details="true"
       :hint="hint"
       :label="label"
@@ -21,7 +21,7 @@
       @keydown="onKeydown"
       @keyup="onKeyup"
     ></v-text-field>
-    <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
+    <p class="z-error" v-if="incorrect">{{ errorMessage }}</p>
   </div>
 </template>
 

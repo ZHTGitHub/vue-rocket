@@ -1,20 +1,22 @@
 import ZBtn from './ZBtn'
 import ZCheckboxs from './ZCheckboxs'
+import ZDatePicker from './ZDatePicker'
+import ZPagination from './ZPagination'
 import ZRadios from './ZRadios'
 import ZSelect from './ZSelect'
 import ZSwitch from './ZSwitch'
 import ZTextField from './ZTextField'
-import ZPagination from './ZPagination'
 import ZDrawer from './ZDrawer'
 
 const components = [
 	ZBtn,
 	ZCheckboxs,
+	ZDatePicker,
+	ZPagination,
 	ZRadios,
 	ZSelect,
 	ZSwitch,
 	ZTextField,
-	ZPagination,
 	ZDrawer
 ]
 

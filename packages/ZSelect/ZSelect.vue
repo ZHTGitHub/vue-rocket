@@ -2,17 +2,25 @@
   <div :class="['z-select z-theme-default']">
     <v-select
       v-model="value"
-      :label="label"
-      :readonly="readonly"
+      :append-icon="appendIcon"
+      :append-outer-icon="appendOuterIcon"
       :disabled="disabled"
-      :items="items"
+      :error="incorrect"
       :hide-details="true"
+      :hint="hint"
+      :items="items"
+      :label="label"
+      :prepend-inner-icon="prependIcon"
+      :prepend-icon="prependOuterIcon"
+      :readonly="readonly"
+      :reverse="reverse"
+      :success="success"
       @blur="onBlur"
       @change="onChange"
       @click="onClick"
       @focus="onFocus"
     ></v-select>
-    <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
+    <p class="z-error" v-if="incorrect">{{ errorMessage }}</p>
   </div>
 </template>
 

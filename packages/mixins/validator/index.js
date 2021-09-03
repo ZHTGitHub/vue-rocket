@@ -78,10 +78,12 @@ export default {
 					else {
 						if(!validation_rules[ruleName](this.value, ruleValue)) {
 							this.errorMessage = item.message
+							this.incorrect = true
 							this.validateForm('INVALID_VALUE')
 							return
 						}else {
 							this.errorMessage = ''
+							this.incorrect = false
 							this.validateForm('VALID_VALUE')
 						}
 					}
@@ -105,6 +107,7 @@ export default {
 					})
 
 					this.errorMessage = ''
+					this.incorrect = false
 				}
 				this.$bus.off('ZHT_RESET_FORM')
 			})
@@ -118,6 +121,7 @@ export default {
 						formId: this.formId
 					})
 					this.errorMessage = ''
+					this.incorrect = false
 				}
 				this.$bus.off('ZHT_CLEAR_FORM')
 			})
