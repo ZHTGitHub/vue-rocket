@@ -14,8 +14,7 @@
         :value="item.value"
       ></v-radio>
     </v-radio-group>
-
-    <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
+    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

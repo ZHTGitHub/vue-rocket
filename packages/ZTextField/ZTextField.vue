@@ -23,17 +23,18 @@
       @keydown="onKeydown"
       @keyup="onKeyup"
     ></v-text-field>
-    <p class="z-error" v-if="incorrect">{{ errorMessage }}</p>
+    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
   </div>
-</template>
+</template> 
 
 <script>
   import FormMixins from '../mixins/form'
   import FormValidatorMixins from '../mixins/validator'
+  import FormValidationMixins from '../mixins/FormValidationMixins'
 
   export default {
     name: 'ZTextField',
-    mixins: [FormMixins, FormValidatorMixins],
+    mixins: [FormMixins, FormValidatorMixins, FormValidationMixins],
 
     methods: {
       onBlur() {

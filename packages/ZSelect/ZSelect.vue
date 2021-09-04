@@ -22,7 +22,7 @@
       @click="onClick"
       @focus="onFocus"
     ></v-select>
-    <p class="z-error" v-if="incorrect">{{ errorMessage }}</p>
+    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

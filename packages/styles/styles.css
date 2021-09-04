@@ -1,11 +1,3 @@
-.z-error {
-  position: absolute;
-  padding-top: 4px;
-  color: #ff5252;
-  text-align: left;
-  font-size: 12px;
-}
-
 @import url("./tools/_flex.css");
 @import url("./tools/_radius.css");
 @import url("./tools/_padding.css");

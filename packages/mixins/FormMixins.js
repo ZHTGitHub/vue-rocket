@@ -85,17 +85,6 @@ export default {
 		success: {
 			type: Boolean,
 			default: false
-		},
-
-		validation: {
-			type: Object,
-			required: false,
-			default: () => {
-				return {
-					rule: {},
-					message: ''
-				}
-			}
 		}
 	},
 
