@@ -4,6 +4,8 @@
       v-model="value"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
+      :clear-icon="clearIcon"
+      :clearable="clearable"
       :disabled="disabled"
       :error="incorrect"
       :hide-details="true"
@@ -56,19 +58,6 @@
 
       onKeyup() {
         this.$emit('keyup')
-      }
-    },
-
-    watch: {
-      defaultValue: {
-        handler(value) {
-          if(value === undefined || value == null) {
-            this.value = undefined
-          }else {
-            this.value = value
-          }
-        },
-        immediate: true
       }
     }
   }

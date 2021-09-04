@@ -63,6 +63,7 @@
     watch: {
       defaultValue: {
         handler(value) {
+          console.log(value)
           this.values = value
         },
         immediate: true
@@ -70,6 +71,7 @@
 
       values: {
         handler(values) {
+          console.log(values)
           if(values.length > 0) {
             this.value = values
           }
@@ -79,6 +81,7 @@
 
       value: {
         handler(value) {
+          console.log(value)
           if(!value) {
             this.values = []
           }else {

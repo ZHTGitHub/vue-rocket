@@ -14,6 +14,8 @@
           v-model="value"
           :append-icon="appendIcon"
           :append-outer-icon="appendOuterIcon"
+          :clear-icon="clearIcon"
+          :clearable="clearable"
           :disabled="disabled"
           :error="incorrect"
           :hide-details="true"
@@ -144,11 +146,10 @@
     watch: {
       defaultValue: {
         handler(value) {
-          if(value === undefined || value == null) {
-            this.value = undefined
-          }else {
-            this.value = value
-          }
+          // if(value == null) {
+          //   this.value = undefined
+          // }
+
           this.date = value
         },
         immediate: true

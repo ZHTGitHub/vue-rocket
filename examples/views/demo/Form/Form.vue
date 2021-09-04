@@ -26,6 +26,7 @@
             <z-select 
               :formId="formId"
               :formKey="item.formKey"
+              clearable
               :label="item.label"
               :rules="item.rules"
               :options="cityOptions"

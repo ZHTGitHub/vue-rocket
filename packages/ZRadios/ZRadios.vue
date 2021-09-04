@@ -4,10 +4,12 @@
       v-model="value"
       :column="column"
       :row="row"
+      hide-details
     >
       <v-radio
         v-for="(item, index) of items" 
         :key="`z_radio_${ index }`"
+        
         :label="item.label"
         :value="item.value"
       ></v-radio>
@@ -51,15 +53,6 @@
           label: item.label,
           value: item.value
         })
-      }
-    },
-
-    watch: {
-      defaultValue: {
-        handler(value) {
-          this.value = value
-        },
-        immediate: true
       }
     }
   }

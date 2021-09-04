@@ -22,6 +22,16 @@ export default {
 			required: false
 		},
 
+		clearIcon: {
+			type: String,
+			required: false
+		},
+
+		clearable: {
+			type: Boolean,
+			default: false
+		},
+
 		defaultValue: {
 			type: [String, Number, Boolean],
 			default: undefined
@@ -106,6 +116,24 @@ export default {
 				}
 				return ''
 			}
+		}
+	},
+
+	watch: {
+		value: {
+			handler(value) {
+				if(value == null) {
+					this.value = undefined
+				}
+			},
+			immediate: true
+		},
+
+		defaultValue: {
+			handler(value) {
+				this.value = value
+			},
+			immediate: true
 		}
 	}
 }

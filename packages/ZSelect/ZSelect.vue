@@ -4,6 +4,8 @@
       v-model="value"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
+      :clear-icon="clearIcon"
+      :clearable="clearable"
       :disabled="disabled"
       :error="incorrect"
       :hide-details="true"
@@ -68,15 +70,6 @@
 
       onFocus() {
         this.$emit('focus')
-      }
-    },
-
-    watch: {
-      defaultValue: {
-        handler(value) {
-          this.value = value
-        },
-        immediate: true
       }
     }
   }
