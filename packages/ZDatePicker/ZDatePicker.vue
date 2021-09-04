@@ -56,17 +56,17 @@
         </v-btn>
       </v-date-picker>
     </v-menu>
-    <p class="z-error" v-if="incorrect">{{ errorMessage }}</p>
+    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 
 <script>
-  import FormMixins from '../mixins/form'
-  import FormValidatorMixins from '../mixins/validator'
+  import FormMixins from '../mixins/FormMixins'
+  import FormValidationMixins from '../mixins/FormValidationMixins'
 
   export default {
     name: 'ZDatePicker',
-    mixins: [FormMixins, FormValidatorMixins],
+    mixins: [FormMixins, FormValidationMixins],
 
     props: {
       readonly: {
@@ -155,12 +155,12 @@
         immediate: true
       },
 
-      date: {
-        handler(date) {
-          console.log(date)
-        },
-        immediate: true
-      }
+      // date: {
+      //   handler(date) {
+      //     console.log(date)
+      //   },
+      //   immediate: true
+      // }
     }
   }
 </script>

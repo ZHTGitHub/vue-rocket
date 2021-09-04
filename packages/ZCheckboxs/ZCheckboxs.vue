@@ -19,25 +19,28 @@
 </template>
 
 <script>
-  import FormMixins from '../mixins/form'
-  import FormValidatorMixins from '../mixins/validator'
+  import FormMixins from '../mixins/FormMixins'
+  import FormValidationMixins from '../mixins/FormValidationMixins'
 
   export default {
     name: 'ZCheckboxs',
-    mixins: [FormMixins, FormValidatorMixins],
+    mixins: [FormMixins, FormValidationMixins],
     props: {
       options: {
         type: Array,
         required: true
       },
+
       // column: {
       //   type: Boolean,
       //   default: false
       // },
+
       row: {
         type: Boolean,
         default: true
       },
+
       defaultValue: {
         type: Array,
         default: () => { return [] }
@@ -63,7 +66,6 @@
     watch: {
       defaultValue: {
         handler(value) {
-          console.log(value)
           this.values = value
         },
         immediate: true
@@ -71,7 +73,6 @@
 
       values: {
         handler(values) {
-          console.log(values)
           if(values.length > 0) {
             this.value = values
           }
@@ -81,7 +82,6 @@
 
       value: {
         handler(value) {
-          console.log(value)
           if(!value) {
             this.values = []
           }else {

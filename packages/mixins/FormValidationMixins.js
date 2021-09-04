@@ -1,18 +1,34 @@
+import { mapState } from 'vuex'
+
 export default {
-  created() {
-    // if(this.validation.rule !== undefined) {
-    //   this.$validator.attach({
-    //     vm: this,
-    //     label: this.label,
-    //     rules: this.validation.rule,
-    //     getter() {
-    //       return this.value
-    //     }
-    //   })
-    // }
-    console.log(this)
-    console.log(this.label)
-    console.log(this.validation.rule)
-    console.log(this.value)
+  created() { 
+    this.$validator.attach({
+      // vm: this,
+      formId: this.formId,
+      formKey: this.formKey,
+      value: this.forms[this.formId][this.formKey],
+      label: this.label,
+      validation: this.validation
+    })
+  },
+
+  computed: {
+    ...mapState(['forms'])
+  },
+
+  watch: {
+    value() { 
+      const errorMessage = this.$validator.validate({
+        formId: this.formId,
+        formKey: this.formKey,
+        value: this.value
+      })
+      this.errorMessage = errorMessage
+      this.incorrect = false
+      if(errorMessage) {
+        this.incorrect = true
+      }
+      console.log(this.errorMessage)
+    }
   }
 }

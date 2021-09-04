@@ -1,45 +1,57 @@
-!(function() {
-  'use strict'
+import _ from 'lodash'
 
-  var Rules = Object.freeze({
-    email: email,
-    length: length,
-    max: max,
-    min: min,
-    max_value: max_value,
-    min_value: min_value,
-    numeric: numeric,
-    phone: phone,
-    required: required
-  })
+const ZValidate = {}
 
-  var validate$1 = function(value) {
+ZValidate.forms = {}
+
+ZValidate.rules = {
+  email: (value) => {
     var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
     return value.match(reg)
-  }
+  },
 
-  var email = {
-    validate: validate$1
-  }
-
-  var validate$2 = function(value) {
+  required: (value) => {
     var reg = /[\S]+/
     return reg.test(value)
-  }
+  },
 
-  var required = {
-    validate: validate$2
+  phone: (value) => {
+    const reg = /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/
+		return reg.test(value)
   }
+}
 
-  var messages = {
-    email: function(label) { return (label + '必须是正确的邮箱格式.') },
-    required: function(label) { return (label + '为必填项.') }
+ZValidate.attach = function(options) {
+  
+  _.set(ZValidate.forms, options.formId + '.' + options.formKey, {
+    value: options.value,
+    label: options.label,
+    validation: options.validation
+  })
+  
+
+  console.log(ZValidate.forms)
+}
+
+ZValidate.validate = function(options) {
+  if(!options) return
+  console.log(options)
+  console.log(ZValidate.forms[options.formId])
+
+  if(options.value !== undefined) {
+    if(ZValidate.forms[options.formId]) {
+      const { validation } = ZValidate.forms[options.formId][options.formKey]
+      for(let item of validation) {
+        if(!ZValidate.rules[item.rule](options.value)) {
+          return item.message
+        }
+      }
+    }
   }
+}
 
-  var ZValidate$1 = {
-    version: '1.0.0',
-    Rules: Rules
-  }
+ZValidate.validateAll = function(options) {
+  console.log(options)
+}
 
-  return ZValidate$1
-})();
+export default ZValidate

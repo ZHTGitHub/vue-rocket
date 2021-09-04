@@ -85,12 +85,18 @@ export default {
 		success: {
 			type: Boolean,
 			default: false
+		},
+
+		validation: {
+			type: Array,
+			required: false
 		}
 	},
 
 	data() {
 		return {
-			incorrect: false
+			incorrect: false,
+			errorMessage: ''
 		}
 	},
 

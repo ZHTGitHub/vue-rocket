@@ -13,7 +13,7 @@
               :formId="formId"
               :formKey="item.formKey"
               :label="item.label"
-              :rules="item.rules"
+              :validation="item.validation"
               :defaultValue="item.defaultValue"
             ></z-text-field>
           </v-col>
@@ -28,7 +28,7 @@
               :formKey="item.formKey"
               clearable
               :label="item.label"
-              :rules="item.rules"
+              :validation="item.validation"
               :options="cityOptions"
               :defaultValue="item.defaultValue"
             ></z-select>
@@ -43,7 +43,7 @@
               :formId="formId"
               :formKey="item.formKey"
               :label="item.label"
-              :rules="item.rules"
+              :validation="item.validation"
               prepend-icon="mdi-calendar"
               :defaultValue="item.defaultValue"
             ></z-date-picker>
@@ -58,7 +58,7 @@
               :formId="formId"
               :formKey="item.formKey"
               :label="item.label"
-              :rules="item.rules"
+              :validation="item.validation"
               :options="genderOptions"
               :defaultValue="item.defaultValue"
             >
@@ -74,7 +74,7 @@
               :formId="formId"
               :formKey="item.formKey"
               :label="item.label"
-              :rules="item.rules"
+              :validation="item.validation"
               :options="hobbyOptions"
               :defaultValue="item.defaultValue"
             ></z-checkboxs>
@@ -125,9 +125,12 @@
 <script>
   import { mapState } from 'vuex'
   import { InfoFormCells } from './cells'
+  import FormCategoryMixins from '../../../../packages/mixins/FormCategoryMixins'
 
   export default {
     name: 'ZDemoForm',
+    mixins: [FormCategoryMixins],
+
     data() {
       return {
         formId: 'Info',
@@ -153,7 +156,8 @@
     },
     methods: {
       onSubmit() {
-        console.log(this.forms[this.formId])
+        this.validateAll()
+        // console.log(this.forms[this.formId])
       }
     },
 

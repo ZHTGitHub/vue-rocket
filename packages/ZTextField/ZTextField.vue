@@ -28,13 +28,12 @@
 </template> 
 
 <script>
-  import FormMixins from '../mixins/form'
-  import FormValidatorMixins from '../mixins/validator'
+  import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
 
   export default {
     name: 'ZTextField',
-    mixins: [FormMixins, FormValidatorMixins, FormValidationMixins],
+    mixins: [FormMixins, FormValidationMixins],
 
     methods: {
       onBlur() {

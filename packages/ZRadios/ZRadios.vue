@@ -19,12 +19,12 @@
 </template>
 
 <script>
-  import FormMixins from '../mixins/form'
-  import FormValidatorMixins from '../mixins/validator'
+  import FormMixins from '../mixins/FormMixins'
+  import FormValidationMixins from '../mixins/FormValidationMixins'
 
   export default {
     name: 'ZRadios',
-    mixins: [FormMixins, FormValidatorMixins],
+    mixins: [FormMixins, FormValidationMixins],
     props: {
       options: {
         type: Array,

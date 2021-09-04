@@ -15,14 +15,18 @@ Vue.prototype.$bus = bus
 import vueRocket from '../packages/index'
 Vue.use(vueRocket)
 
-import DemoComponents from './components'
+import DemoComponents from './Components'
 Vue.use(DemoComponents)
+
+import ZValidate from '../packages/z-validate'
+Vue.prototype.$validator = ZValidate
 
 import store from './store'
 
 import util from './libs/util'
 
 Vue.prototype.util = util
+
 
 Vue.config.productionTip = false
 

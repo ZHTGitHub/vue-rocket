@@ -88,14 +88,8 @@ export default {
 		},
 
 		validation: {
-			type: Object,
-			required: false,
-			default: () => {
-				return {
-					rule: {},
-					message: ''
-				}
-			}
+			type: Array,
+			required: false
 		}
 	},
 
