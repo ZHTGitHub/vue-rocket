@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-checkboxs z-theme-default']">
+  <div :class="['z-checkboxs z-input']">
     <div :class="[row ? 'z-flex' : '']">
       <div
         v-for="(item, index) of items" 
@@ -16,7 +16,7 @@
         ></v-checkbox>
       </div>
     </div>
-    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
+    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

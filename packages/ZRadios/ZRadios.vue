@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-radios z-theme-default']">
+  <div :class="['z-radios z-input']">
     <v-radio-group
       v-model="value"
       :error="incorrect"
@@ -16,7 +16,7 @@
         :value="item.value"
       ></v-radio>
     </v-radio-group>
-    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
+    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="z-field z-theme-default">
+  <div class="z-field z-input">
     <v-text-field
       v-model="value"
       :append-icon="appendIcon"
@@ -23,7 +23,7 @@
       @keydown="onKeydown"
       @keyup="onKeyup"
     ></v-text-field>
-    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
+    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template> 
 

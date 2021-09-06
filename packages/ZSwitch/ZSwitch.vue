@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-switch z-theme-default']">
+  <div :class="['z-switch z-input']">
     <v-switch
       v-model="value"
       :label="label"
@@ -7,7 +7,7 @@
       :disabled="disabled"
       hide-details
     ></v-switch>
-    <p class="z-error" v-if="errorMessage">{{ errorMessage }}</p>
+    <p class="v-messages theme--light error--text z-messages" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 

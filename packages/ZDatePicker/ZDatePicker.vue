@@ -1,5 +1,5 @@
 <template>
-  <div class="z-date-picker z-theme-default">
+  <div class="z-date-picker z-input">
     <v-menu
       ref="menu"
       v-model="menu"
@@ -56,7 +56,7 @@
         </v-btn>
       </v-date-picker>
     </v-menu>
-    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
+    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

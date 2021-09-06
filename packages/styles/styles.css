@@ -5,3 +5,11 @@
 @import url("./tools/_typography.css");
 @import url("./tools/_float.css");
 @import url("./tools/_elevation.css");
+
+.z-input {
+  position: relative;
+}
+
+.z-input .z-messages {
+  position: absolute;
+}

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-select z-theme-default']">
+  <div :class="['z-select z-input']">
     <v-select
       v-model="value"
       :append-icon="appendIcon"
@@ -22,7 +22,7 @@
       @click="onClick"
       @focus="onFocus"
     ></v-select>
-    <span class="v-messages theme--light error--text" v-if="incorrect">{{ errorMessage }}</span>
+    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 
