@@ -75,7 +75,6 @@
 
       values: {
         handler(values) {
-          console.log(values)
           if(values.length > 0) {
             this.value = values
           }else {
@@ -87,11 +86,10 @@
 
       value: {
         handler(value) {
-          console.log(value)
-          if(!value) {
-            this.values = []
-          }else {
+          if(value) {
             this.values = value
+          }else {
+            this.values = []
           }
         },
         immediate: true
