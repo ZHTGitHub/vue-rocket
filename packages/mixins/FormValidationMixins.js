@@ -1,4 +1,4 @@
-import $validator from '../ZValidate/z-validate'
+import $validator from '../validate/z-validate'
 
 let quantity = 0
 

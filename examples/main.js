@@ -18,9 +18,6 @@ Vue.use(vueRocket)
 import DemoComponents from './Components'
 Vue.use(DemoComponents)
 
-import ZValidate from '../packages/ZValidate/z-validate'
-Vue.prototype.$validator = ZValidate
-
 import store from './store'
 
 import util from './libs/util'
