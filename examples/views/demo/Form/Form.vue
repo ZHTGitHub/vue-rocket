@@ -156,8 +156,8 @@
     },
     methods: {
       onSubmit() {
-        this.validateAll()
-        // console.log(this.forms[this.formId])
+        // this.validateAll(this.formId)
+        console.log(this.forms[this.formId])
       }
     },
 

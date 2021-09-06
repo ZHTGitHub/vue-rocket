@@ -1,7 +1,7 @@
 export default {
   methods: {
-    validateAll() {
-      this.$validator.validateAll()
+    validateAll(formId) {
+      this.$validator.validateAll(formId)
     }
   },
 }

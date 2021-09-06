@@ -7,9 +7,11 @@
       >
         <v-checkbox
           v-model="values"
-          :label="item.label"
-          :value="item.value"
+          :error="incorrect"
           hide-details
+          :label="item.label"
+          :success="success"
+          :value="item.value"
           class="mr-4"
         ></v-checkbox>
       </div>

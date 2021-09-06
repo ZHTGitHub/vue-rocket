@@ -4,38 +4,69 @@ const ZValidate = {}
 
 ZValidate.forms = {}
 
+ZValidate.validator = {}
+
 ZValidate.rules = {
   email: (value) => {
     var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
     return value.match(reg)
   },
 
+  min: (value, rule) => {
+		value = '' + value
+		const reg = new RegExp('^\\d{'+ rule +',}$')
+		return reg.test(value)
+	},
+
+  max: (value, rule) => {
+		value = '' + value
+		const reg = new RegExp('^\\d{0,'+ rule +'}$')
+		return reg.test(value)
+	},
+
+	min_value: (value, rule) => {
+		return +value >= +rule
+	},
+
+	max_value: (value, rule) => {
+		return +value <= +rule
+	},
+
+  numeric: (value) => {
+    const reg = /^[0-9]*$/
+		return reg.test(value)
+  },
+
+  phone: (value) => {
+		const reg = /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/
+		return reg.test(value)
+	},
+
+  regex: (value, rule) => {
+		const reg = rule
+		return reg.test(value)
+	},
+
   required: (value) => {
     var reg = /[\S]+/
     return reg.test(value)
   },
-
-  phone: (value) => {
-    const reg = /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/
-		return reg.test(value)
-  }
 }
 
 ZValidate.attach = function(options) {
-  
   _.set(ZValidate.forms, options.formId + '.' + options.formKey, {
     value: options.value,
     label: options.label,
     validation: options.validation
   })
-  
-
   console.log(ZValidate.forms)
 }
 
 ZValidate.validate = function(options) {
-  if(!options) return
   console.log(options)
+
+  if(!options) return
+
   console.log(ZValidate.forms[options.formId])
 
   if(options.value !== undefined) {
@@ -50,8 +81,12 @@ ZValidate.validate = function(options) {
   }
 }
 
-ZValidate.validateAll = function(options) {
-  console.log(options)
+ZValidate.validateAll = function(formId) {
+  console.log(formId)
+}
+
+ZValidate.validateFormValueByKey = function(options) {
+  _.set(ZValidate.validator, options.formId + '.' + options.formKey, options.status)
 }
 
 export default ZValidate

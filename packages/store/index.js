@@ -2,13 +2,11 @@ import Vue from 'vue'
 import _ from 'lodash'
 
 const state = {
-  forms: {},
-  validator: {}
+  forms: {}
 }
 
 const getters = {
-  forms: state => state.forms,
-  validator: state => state.validator
+  forms: state => state.forms
 }
 
 const mutations = {
@@ -26,12 +24,6 @@ const mutations = {
     const updatedForm = { ...state.forms }
     _.set(updatedForm, data.formId + '.' + data.formKey, data.defaultValue)
     Vue.set(state, 'forms', updatedForm) 
-  },
-
-  VALIDATE_FORM_VALUE_BY_KEY(state, data) {
-    const updatedValidator = { ...state.validator }
-    _.set(updatedValidator, data.formId + '.' + data.formKey, data.status)
-    Vue.set(state, 'validator', updatedValidator) 
   }
 }
 

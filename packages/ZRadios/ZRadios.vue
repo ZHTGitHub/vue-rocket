@@ -2,8 +2,10 @@
   <div :class="['z-radios z-theme-default']">
     <v-radio-group
       v-model="value"
+      :error="incorrect"
       :column="column"
       :row="row"
+      :success="success"
       hide-details
     >
       <v-radio

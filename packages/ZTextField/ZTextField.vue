@@ -8,7 +8,7 @@
       :clearable="clearable"
       :disabled="disabled"
       :error="incorrect"
-      :hide-details="true"
+      hide-details
       :hint="hint"
       :label="label"
       :prepend-inner-icon="prependIcon"
