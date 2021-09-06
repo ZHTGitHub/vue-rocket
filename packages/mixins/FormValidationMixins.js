@@ -1,3 +1,5 @@
+import $validator from '../ZValidate/z-validate'
+
 let quantity = 0
 
 export default {
@@ -15,7 +17,7 @@ export default {
 
 				this.validator()
 
-				const form = this.$validator.validator[this.formId]
+				const form = $validator.validator[this.formId]
 				const results = Object.values(form)
 				const length = results.length
 
@@ -42,7 +44,7 @@ export default {
 	},
 
 	methods: {
-		validator() {
+		validator() {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 			if(this.value !== undefined) {
 
 				// 无校验规则合法
@@ -57,11 +59,11 @@ export default {
 
 					// console.log(ruleName, ruleValue)
 
-					if(!this.$validator.rules[ruleName]) {
+					if(!$validator.rules[ruleName]) {
 						this.validateForm('VALID_VALUE')
 					}
 					else {
-						if(!this.$validator.rules[ruleName](this.value, ruleValue)) {
+						if(!$validator.rules[ruleName](this.value, ruleValue)) {
 							this.errorMessage = item.message
 							this.incorrect = true
 							this.validateForm('INVALID_VALUE')
@@ -113,7 +115,7 @@ export default {
 		},
 
 		validateForm(status) {
-			this.$validator.validateFormValueByKey({
+			$validator.validateFormValueByKey({
 				formId: this.formId,
 				formKey: this.formKey,
 				status

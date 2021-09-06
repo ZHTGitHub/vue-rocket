@@ -82,7 +82,7 @@
 
           <v-col 
             v-if="item.inputType === 'switch'"
-            cols="12" 
+            cols="2" 
             :key="`InfoFormInput_${ index }`"
           > 
             <z-switch
