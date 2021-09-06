@@ -75,8 +75,11 @@
 
       values: {
         handler(values) {
+          console.log(values)
           if(values.length > 0) {
             this.value = values
+          }else {
+            this.value = undefined
           }
         },
         immediate: true
@@ -84,6 +87,7 @@
 
       value: {
         handler(value) {
+          console.log(value)
           if(!value) {
             this.values = []
           }else {
