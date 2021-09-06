@@ -9,6 +9,7 @@
     :floating="floating"
     :permanent="permanent"
     :stateless="stateless"
+    :temporary="temporary"
     :width="width"
   >
     <div class="z-drawer-header" :style="{ height: headerHeight }">
@@ -17,106 +18,67 @@
 
     <v-divider></v-divider>
 
-    <div v-for="item in menus" :key="item.id">
-      <!-- 一级列表 BEGIN -->
-      <template v-if="!item.leaf">
-        <v-list dense>
-          <v-list-item-group
-            v-model="activedIndex"
-            color="primary"
-            @change="onChange(item)"
-          >
-            <v-list-item 
-              link
-              @click="onSelect(item, $event)"
-            >
-              <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
+    
+    <v-list dense shaped>
 
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </template>
-      <!-- 一级列表 END -->
+      <template v-for="item in menus">
+        <!-- 一级列表 BEGIN -->
+        <v-list-item 
+          v-if="!item.leaf"
+          :key="item.unique"
+          active-class="active-item"
+          :input-value="item.unique === unique"
+          @click="onSelect(item, $event)"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-      <template v-else>
-        <v-list dense>
-          <v-list-group
-            v-model="item.active"
-            :prepend-icon="item.icon"
-            no-action
-            @click="onChange(item)"
-          >
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-            </template>
-
-            <v-list-item-group
-              v-model="activedIndex"
-              color="primary"
-              @change="onChange(item)"
-            >
-              
-              <template v-for="child in item.children">
-                <!-- 二级列表 BEGIN -->
-                <v-list-item
-                  v-if="!child.leaf"
-                  :key="child.id"
-                  class="pl-6"
-                  link
-                  @click="onSelect(child, $event)"
-                >
-                  <v-list-item-icon class="mr-4">
-                    <v-icon>{{ child.icon }}</v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>{{ child.title }}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-                <!-- 二级列表 END -->
-
-                <!-- 三级列表 BEGIN -->
-                <v-list-group
-                  v-else
-                  :key="child.id"
-                  :value="true"
-                  no-action
-                  sub-group
-                  @click="onChange(child)"
-                >
-                  <template v-slot:activator>
-                    <v-list-item-content>
-                      <v-list-item-title>{{ child.title }}</v-list-item-title>
-                    </v-list-item-content>
-                  </template>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ item.title }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <!-- 一级列表 END -->
         
-                  <v-list-item
-                    v-for="grandChild in child.children"
-                    :key="grandChild.id"
-                    link
-                    @click="onSelect(grandChild, $event)"
-                  >
-                    <v-list-item-title v-text="grandChild.title"></v-list-item-title>
-        
-                    <v-list-item-icon>
-                      <v-icon v-text="grandChild.icon"></v-icon>
-                    </v-list-item-icon>
-                  </v-list-item>
-                </v-list-group>
-                <!-- 三级列表 END -->
-              </template>
-            </v-list-item-group>
-          </v-list-group>
-        </v-list>
+        <!-- 二级列表 BEGIN -->
+        <v-list-group
+          v-else
+          v-model="item.expanded"
+          :key="item.unique"
+          :prepend-icon="item.icon"
+          :value="currentItem.pId === item.id ? true : false"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ item.title }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="child in item.children"
+            :key="child.title"
+            active-class="active-item"
+            class="pl-12"
+            :input-value="child.unique === unique"
+            link
+            @click="onSelect(child, $event)"
+          >
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ child.title }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
+        <!-- 二级列表 END -->
       </template>
-    </div>
+
+      
+    </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -175,6 +137,11 @@
         default: false
       },
 
+      temporary: {
+        type: Boolean,
+        default: false
+      },
+
       width: {
         type: [Number, String],
         default: 256
@@ -184,7 +151,8 @@
     data() {
       return {
         drawer: null,
-        activedIndex: 0
+        unique: null,
+        currentItem: {}
       }
     },
 
@@ -201,24 +169,28 @@
         this.drawer = !this.drawer
       },
 
-      onChange(item) {
-        console.log(item)
-        if(item.activedIndex >= 0) {
-          this.activedIndex = item.activedIndex
-        }
-      },
-
       onSelect(item) {
-        console.log(item)
-        this.activedIndex = item.activedIndex
+        this.unique = item.unique
+        this.currentItem = item
         this.$router.push({ path: item.link })
       }
     },
 
     watch: {
-      activedIndex(index) {
-        console.log(index)
-      }
+      '$route': {
+        handler(route) {
+          const { meta } = route
+          this.unique = meta.unique
+
+          for(let item of this.menus) {
+            item.expanded = false
+            if(item.unique === meta.parent) {
+              item.expanded = true
+            }
+          }
+        },
+        immediate: true
+      },
     }
   }
 </script>
@@ -226,5 +198,9 @@
 <style scoped lang="css">
   .z-drawer-header {
     min-height: 56px;
+  }
+
+  .active-item .v-list-item__icon {
+    color: #1976d2 !important;
   }
 </style>

@@ -22,63 +22,31 @@
                   return {
                     menus: [
                       {
-                        pId: '0',
-                        id: '1',
-                        index: 0,
+                        pId: '-1',
+                        id: 'home',
+                        unique: 'home',
                         icon: 'mdi-home',
                         title: '首页',
-                        // link: '/home',
+                        link: undefined,
                         leaf: false
                       },
 
                       {
-                        pId: '0',
-                        id: '2',
-                        index: 1,
+                        pId: '-1',
+                        id: 'components',
+                        unique: 'components',
+                        expanded: false,
                         icon: 'mdi-view-dashboard',
                         title: '组件',
-                        link: '',
+                        link: undefined,
                         leaf: true,
                         children: [
                           {
-                            pId: '2',
-                            id: '2-1',
-                            index: 0,
-                            // icon: 'mdi-view-dashboard',
-                            title: 'Input 输入框',
-                            // link: '/demo/components/input',
-                            leaf: false,
-                          }
-                        ]
-                      },
-
-                      {
-                        pId: '0',
-                        id: '3',
-                        index: 2,
-                        icon: 'mdi-book-open-blank-variant',
-                        title: '示例',
-                        link: '',
-                        leaf: true,
-                        children: [
-                          {
-                            pId: '3',
-                            id: '3-1',
-                            index: 0,
-                            icon: 'mdi-view-dashboard',
-                            title: '组件',
-                            // link: '/demo/components',
-                            leaf: true,
-                            children: [
-                              {
-                                pId: '3-1',
-                                id: '3-1-1',
-                                index: 0,
-                                icon: '',
-                                title: 'Input 输入框',
-                                // link: '/demo/components/input'
-                              }
-                            ]
+                            pId: 'components',
+                            unique: 'drawer',
+                            icon: '',
+                            title: 'Drawer 导航抽屉',
+                            link: '/demo/components/drawer'
                           }
                         ]
                       }
@@ -133,12 +101,12 @@
 </template>
 
 <script>
-import { drawer } from "./cells";
+import { drawer } from "./cells"
 
-import Prism from "prismjs";
-import "prismjs/themes/prism-okaidia.css";
-import "prismjs/plugins/line-numbers/prism-line-numbers.css";
-import "prismjs/plugins/line-numbers/prism-line-numbers.js";
+import Prism from "prismjs"
+import "prismjs/themes/prism-okaidia.css"
+import "prismjs/plugins/line-numbers/prism-line-numbers.css"
+import "prismjs/plugins/line-numbers/prism-line-numbers.js"
 
 export default {
   name: "ZDemoDrawer",
@@ -147,72 +115,40 @@ export default {
       drawer,
       menus: [
         {
-          pId: "0",
-          id: "1",
-          index: 0,
-          icon: "mdi-home",
-          title: "首页",
-          // link: '/home',
-          leaf: false,
+          pId: '-1',
+          id: 'home',
+          unique: 'home',
+          icon: 'mdi-home',
+          title: '首页',
+          link: undefined,
+          leaf: false
         },
 
         {
-          pId: "0",
-          id: "2",
-          index: 1,
-          icon: "mdi-view-dashboard",
-          title: "组件",
-          link: "",
+          pId: '-1',
+          id: 'components',
+          unique: 'components',
+          expanded: false,
+          icon: 'mdi-view-dashboard',
+          title: '组件',
+          link: undefined,
           leaf: true,
           children: [
             {
-              pId: "2",
-              id: "2-1",
-              index: 0,
-              // icon: 'mdi-view-dashboard',
-              title: "Input 输入框",
-              // link: '/demo/components/input',
-              leaf: false,
-            },
-          ],
-        },
-
-        {
-          pId: "0",
-          id: "3",
-          index: 2,
-          icon: "mdi-book-open-blank-variant",
-          title: "示例",
-          link: "",
-          leaf: true,
-          children: [
-            {
-              pId: "3",
-              id: "3-1",
-              index: 0,
-              icon: "mdi-view-dashboard",
-              title: "组件",
-              // link: '/demo/components',
-              leaf: true,
-              children: [
-                {
-                  pId: "3-1",
-                  id: "3-1-1",
-                  index: 0,
-                  icon: "",
-                  title: "Input 输入框",
-                  // link: '/demo/components/input'
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    };
+              pId: 'components',
+              unique: 'drawer',
+              icon: '',
+              title: 'Drawer 导航抽屉',
+              link: '/demo/components/drawer'
+            }
+          ]
+        }
+      ]
+    }
   },
 
   mounted() {
-    Prism.highlightAll();
+    Prism.highlightAll()
   },
 };
 </script>
