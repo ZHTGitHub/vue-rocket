@@ -81,6 +81,20 @@
           </v-col>
 
           <v-col 
+            v-if="item.inputType === 'textarea'"
+            cols="12" 
+            :key="`InfoFormTextarea_${ index }`"
+          >
+            <z-textarea
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+              :validation="item.validation"
+              :defaultValue="item.defaultValue"
+            ></z-textarea>
+          </v-col>
+
+          <v-col 
             v-if="item.inputType === 'switch'"
             cols="2" 
             :key="`InfoFormInput_${ index }`"
@@ -99,7 +113,7 @@
             <z-btn 
               :formId="formId"
               color="primary"
-              btnType="submit"
+              btnType="validate"
               @click="onSubmit"
             >提交</z-btn>
 

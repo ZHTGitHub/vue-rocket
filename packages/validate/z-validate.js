@@ -12,16 +12,22 @@ ZValidate.rules = {
     return value.match(reg)
   },
 
+  length: (value, rule) => {
+    value = '' + value
+    rule = +rule
+    return value.length === rule
+  },
+
   min: (value, rule) => {
 		value = '' + value
-		const reg = new RegExp('^\\d{'+ rule +',}$')
-		return reg.test(value)
+    rule = +rule
+		return value.length >= rule
 	},
 
   max: (value, rule) => {
 		value = '' + value
-		const reg = new RegExp('^\\d{0,'+ rule +'}$')
-		return reg.test(value)
+    rule = +rule
+		return value.length <= rule
 	},
 
 	min_value: (value, rule) => {
@@ -43,6 +49,8 @@ ZValidate.rules = {
 	},
 
   regex: (value, rule) => {
+    console.log(value)
+    console.log(typeof rule, rule)
 		const reg = rule
 		return reg.test(value)
 	},
@@ -50,7 +58,7 @@ ZValidate.rules = {
   required: (value) => {
     var reg = /[\S]+/
     return reg.test(value)
-  },
+  }
 }
 
 ZValidate.attach = function(options) {

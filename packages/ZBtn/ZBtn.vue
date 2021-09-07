@@ -39,9 +39,9 @@
 
 			btnType: {
 				validator(value) {
-					return ['normal', 'new', 'modify', 'detail', 'delete', 'reset', 'clear', 'submit'].indexOf(value) !== -1
+					return ['validate', 'reset', 'clear'].indexOf(value) !== -1
 				},
-				default: 'normal'
+				required: false
 			},
 
 			lockedTime: {
@@ -174,7 +174,7 @@
 
 		created() {
 			this.$bus.on('ZHT_ALL_VALUE_VALID', (formId) => {
-				if(this.btnType === 'submit') {
+				if(this.btnType === 'validate') {
 
 					if(this.formId === formId) {
 						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
@@ -189,19 +189,18 @@
 		methods: {
 			onClick(event) {
 				this.btnEvent = event
-				switch (this.btnType) {
-					case 'submit':
-						this.$bus.emit('ZHT_VALIDATE_FORM', this.formId)
-						break;
-					case 'reset':
-						this.$bus.emit('ZHT_RESET_FORM', this.formId)
-						break;
-					case 'clear':
-						this.$bus.emit('ZHT_CLEAR_FORM', this.formId)
-						break;
-					default:
-						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
-						break;
+
+				if(this.btnType === 'validate') {
+					this.$bus.emit('ZHT_VALIDATE_FORM', this.formId)
+				}
+				else if(this.btnType === 'reset') {
+					this.$bus.emit('ZHT_RESET_FORM', this.formId)
+				}
+				else if(this.btnType === 'clear') {
+					this.$bus.emit('ZHT_CLEAR_FORM', this.formId)
+				}
+				else {
+					this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
 				}
 			},
 

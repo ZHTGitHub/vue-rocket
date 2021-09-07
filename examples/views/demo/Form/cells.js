@@ -26,7 +26,10 @@ export const InfoFormCells = [
     formKey: 'name',
     label: '姓名',
     validation: [
-      { rule: 'required', message: '姓名为必填项.' }
+      { rule: 'required', message: '姓名为必填项.' },
+      { rule: 'min:2', message: '姓名至少两个字.' },
+      { rule: 'max:16', message: '姓名至多十六个字.' },
+      { regex: /[^%&\x27,;=?$\x22]+/, message: '姓名不能出现特殊字符.' }
     ],
     defaultValue: undefined
   },
@@ -80,6 +83,17 @@ export const InfoFormCells = [
       { rule: 'required', message: '请选择兴趣.' }
     ],
     defaultValue: [2]
+  },
+
+  {
+    inputType: 'textarea',
+    formKey: 'intro',
+    label: '自我介绍',
+    validation: [
+      { rule: 'required', message: '自我介绍为必填项.' },
+      { rule: 'min:10', message: '自我介绍至少十个字.' },
+    ],
+    defaultValue: undefined
   },
 
   {

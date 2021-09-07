@@ -54,10 +54,21 @@ export default {
 				}
 
 				for(let item of this.validation) {
-					const ruleName = item.rule.split(':')[0]
-					const ruleValue = item.rule.split(':')[1]
 
-					// console.log(ruleName, ruleValue)
+					let ruleName = undefined
+					let ruleValue = undefined
+
+					if(item.rule) {
+						ruleName = item.rule.split(':')[0]
+						ruleValue = item.rule.split(':')[1]
+					}
+
+					if(item.regex) {
+						ruleName = 'regex'
+						ruleValue = item.regex
+					}
+
+					console.log(ruleName, ruleValue)
 
 					if(!$validator.rules[ruleName]) {
 						this.validateForm('VALID_VALUE')
@@ -74,6 +85,8 @@ export default {
 							this.validateForm('VALID_VALUE')
 						}
 					}
+
+					
 				}
 			}
 		},

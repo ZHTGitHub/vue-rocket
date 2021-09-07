@@ -64,6 +64,7 @@ const DemoRoutes = {
           },
           component: () => import('../../views/demo/Components/Select')
         },
+
         {
           path: 'checkboxs',
           name: 'ZDemoCheckboxs',
@@ -74,6 +75,7 @@ const DemoRoutes = {
           },
           component: () => import('../../views/demo/Components/Checkboxs')
         },
+
         {
           path: 'radios',
           name: 'ZDemoRadios',
@@ -84,6 +86,7 @@ const DemoRoutes = {
           },
           component: () => import('../../views/demo/Components/Radios')
         },
+
         {
           path: 'switch',
           name: 'ZDemoSwitch',
@@ -94,6 +97,7 @@ const DemoRoutes = {
           },
           component: () => import('../../views/demo/Components/Switch')
         },
+
         {
           path: 'button',
           name: 'ZDemoButton',
@@ -104,6 +108,7 @@ const DemoRoutes = {
           },
           component: () => import('../../views/demo/Components/Button')
         },
+
         {
           path: 'pagination',
           name: 'ZDemoPagination',
@@ -114,6 +119,7 @@ const DemoRoutes = {
           },
           component: () => import('../../views/demo/Components/Pagination')
         },
+        
         {
           path: 'drawer',
           name: 'ZDemoDrawer',
