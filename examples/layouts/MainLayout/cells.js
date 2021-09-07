@@ -59,6 +59,14 @@ export const menus = [
 
       {
         pId: 'components',
+        unique: 'textarea',
+        icon: '',
+        title: 'Teaxarea 多行文本框',
+        link: '/demo/components/textarea'
+      },
+
+      {
+        pId: 'components',
         unique: 'select',
         icon: '',
         title: 'Select 选择器',

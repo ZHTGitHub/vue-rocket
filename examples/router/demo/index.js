@@ -31,6 +31,7 @@ const DemoRoutes = {
           path: '/demo/components',
           redirect: () => 'input'
         },
+
         {
           path: 'input',
           name: 'ZDemoInput',
@@ -41,6 +42,18 @@ const DemoRoutes = {
           },
           component: () => import('../../views/demo/Components/Input')
         },
+
+        {
+          path: 'textarea',
+          name: 'ZDemoTextarea',
+          meta: {
+            title: '多行文本框',
+            unique: 'textarea',
+            parent: 'components'
+          },
+          component: () => import('../../views/demo/Components/Textarea')
+        },
+
         {
           path: 'select',
           name: 'ZDemoSelect',

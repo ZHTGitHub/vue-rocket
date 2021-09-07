@@ -5,6 +5,7 @@ import ZPagination from './ZPagination'
 import ZRadios from './ZRadios'
 import ZSelect from './ZSelect'
 import ZSwitch from './ZSwitch'
+import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZDrawer from './ZDrawer'
 
@@ -16,6 +17,7 @@ const components = [
 	ZRadios,
 	ZSelect,
 	ZSwitch,
+	ZTextarea,
 	ZTextField,
 	ZDrawer
 ]

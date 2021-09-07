@@ -1,6 +1,6 @@
 <template>
-  <div class="z-field z-input">
-    <v-text-field
+  <div class="z-textarea z-input">
+    <v-textarea
       v-model="value"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
@@ -22,7 +22,7 @@
       @focus="onFocus"
       @keydown="onKeydown"
       @keyup="onKeyup"
-    ></v-text-field>
+    ></v-textarea>
     <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template> 
@@ -32,7 +32,7 @@
   import FormValidationMixins from '../mixins/FormValidationMixins'
 
   export default {
-    name: 'ZTextField',
+    name: 'ZTextarea',
     mixins: [FormMixins, FormValidationMixins],
 
     methods: {
