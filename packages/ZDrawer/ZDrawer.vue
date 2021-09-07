@@ -195,12 +195,14 @@
   }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
   .z-drawer-header {
     min-height: 56px;
   }
 
-  .active-item .v-list-item__icon {
-    color: #1976d2 !important;
+  .active-item {
+    .v-list-item__icon {
+      color: #1976d2 !important;
+    }
   }
 </style>
