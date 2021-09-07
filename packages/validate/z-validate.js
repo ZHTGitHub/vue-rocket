@@ -12,6 +12,23 @@ ZValidate.rules = {
     return value.match(reg)
   },
 
+  excluded: (value, rule) => {
+
+  },
+
+  included: (value, rule) => {
+
+  },
+
+  is: (value, rule) => {
+
+  },
+  
+
+  is_not: (value, rule) => {
+
+  },
+
   length: (value, rule) => {
     value = '' + value
     rule = +rule
@@ -58,6 +75,10 @@ ZValidate.rules = {
   required: (value) => {
     var reg = /[\S]+/
     return reg.test(value)
+  },
+
+  url: (value) => {
+    
   }
 }
 
