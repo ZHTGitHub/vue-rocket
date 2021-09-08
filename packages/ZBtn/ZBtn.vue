@@ -194,8 +194,7 @@
 		methods: {
 			onClick() {
 				const action = this.actions.get(this.btnType)
-
-				if(!action) {
+				if(action === 'click') {
 					this.$emit(action)
 					return
 				}

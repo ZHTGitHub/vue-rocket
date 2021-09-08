@@ -134,6 +134,7 @@
               class="mx-2"
               :formId="formId"
               color="error"
+              @click="onSearch"
             >搜索</z-btn>
           </div>
         </v-col>
@@ -178,6 +179,10 @@
       onSubmit() {
         // this.validateAll(this.formId)
         console.log(this.forms[this.formId])
+      },
+
+      onSearch() {
+        console.log('form search')
       }
     },
 
