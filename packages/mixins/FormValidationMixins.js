@@ -1,4 +1,5 @@
 import $validator from '../validate/z-validate'
+import $bus from '../scripts/emitter'
 
 let quantity = 0
 
@@ -9,7 +10,7 @@ export default {
 		this.validateForm('INVALID_VALUE')
 
 		// 校验当前表单
-		this.$bus.on('ZHT_VALIDATE_FORM', (formId) => {
+		$bus.on('ZHT_VALIDATE_FORM', (formId) => {
 
 			if(this.formId === formId) {
 				++quantity
@@ -27,7 +28,7 @@ export default {
 
 				if(quantity === length) {
 					if(!results.includes('INVALID_VALUE')) {
-						this.$bus.emit('ZHT_ALL_VALUE_VALID', formId)
+						$bus.emit('ZHT_ALL_VALUE_VALID', formId)
 					}
 					quantity = 0
 				}
@@ -35,7 +36,7 @@ export default {
 				// console.log(form)
 			}
 
-			this.$bus.off('ZHT_VALIDATE_FORM')
+			$bus.off('ZHT_VALIDATE_FORM')
 		})
 
 		this.reset()
@@ -93,7 +94,7 @@ export default {
 
 		// reset current form.
 		reset() {
-			this.$bus.on('ZHT_RESET_FORM', (formId) => {
+			$bus.on('ZHT_RESET_FORM', (formId) => {
 				if(this.formId === formId) {
 
 					console.log(this.formKey, this.value)
@@ -109,13 +110,13 @@ export default {
 					this.errorMessage = ''
 					this.incorrect = false
 				}
-				this.$bus.off('ZHT_RESET_FORM')
+				$bus.off('ZHT_RESET_FORM')
 			})
 		},
 
 		// clean current form.
 		clear() {
-			this.$bus.on('ZHT_CLEAR_FORM', (formId) => {
+			$bus.on('ZHT_CLEAR_FORM', (formId) => {
 				if(this.formId === formId) {
 					this.$store.commit('CLEAN_FORM', {
 						formId: this.formId
@@ -123,7 +124,7 @@ export default {
 					this.errorMessage = ''
 					this.incorrect = false
 				}
-				this.$bus.off('ZHT_CLEAR_FORM')
+				$bus.off('ZHT_CLEAR_FORM')
 			})
 		},
 

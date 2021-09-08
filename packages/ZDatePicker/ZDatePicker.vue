@@ -101,7 +101,7 @@
 
       pickerType: {
         validator(value) {
-          return ['date', 'month'].indexOf(value) !== -1
+          return ~['date', 'month'].indexOf(value)
         },
         default: 'date'
       }

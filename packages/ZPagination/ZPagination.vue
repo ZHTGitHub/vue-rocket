@@ -44,7 +44,7 @@
 
       position: {
         validator(value) {
-          return ['start', 'center', 'end'].indexOf(value) !== -1
+          return ~['start', 'center', 'end'].indexOf(value)
         },
         default: 'start'
       }

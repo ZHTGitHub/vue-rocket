@@ -29,6 +29,8 @@
 </template>
 
 <script>
+	import $bus from '../scripts/emitter'
+
 	export default {
 		name: 'ZBtn',
 		props: {
@@ -39,7 +41,7 @@
 
 			btnType: {
 				validator(value) {
-					return ['validate', 'reset', 'clear'].indexOf(value) !== -1
+					return ~['clear', 'reset', 'validate'].indexOf(value)
 				},
 				required: false
 			},
@@ -167,41 +169,38 @@
 
 		data() {
 			return {
-				btnEvent: null,
+				actions: new Map([
+					['clear', 'ZHT_CLEAR_FORM'],
+					['reset', 'ZHT_RESET_FORM'],
+					['validate', 'ZHT_VALIDATE_FORM'],
+					[undefined, 'click']
+				]),
+				
         oldTime: null
 			}
 		},
 
 		created() {
-			this.$bus.on('ZHT_ALL_VALUE_VALID', (formId) => {
+			$bus.on('ZHT_ALL_VALUE_VALID', (formId) => {
 				if(this.btnType === 'validate') {
-
 					if(this.formId === formId) {
-						this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
+						this.$emit('click')
+						$bus.off('ZHT_ALL_VALUE_VALID')
 					}
-					
-					this.$bus.off('ZHT_ALL_VALUE_VALID')
 				}
-				
 			})
 		},
 
 		methods: {
-			onClick(event) {
-				this.btnEvent = event
+			onClick() {
+				const action = this.actions.get(this.btnType)
 
-				if(this.btnType === 'validate') {
-					this.$bus.emit('ZHT_VALIDATE_FORM', this.formId)
+				if(!action) {
+					this.$emit(action)
+					return
 				}
-				else if(this.btnType === 'reset') {
-					this.$bus.emit('ZHT_RESET_FORM', this.formId)
-				}
-				else if(this.btnType === 'clear') {
-					this.$bus.emit('ZHT_CLEAR_FORM', this.formId)
-				}
-				else {
-					this.$emit('click', { btnEvent: this.btnEvent, btnType: this.btnType })
-				}
+
+				$bus.emit(action, this.formId)
 			},
 
 			lockClick() {

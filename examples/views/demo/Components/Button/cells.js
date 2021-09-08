@@ -16,8 +16,8 @@ export const button = [
         name: 'btnType',
         required: '否',
         type: 'String',
-        acceptedValues: 'normal/new/modify/detail/delete/reset/clear/submit',
-        default: 'normal',
+        acceptedValues: 'clear | reset | validate',
+        default: '—',
         description: '设置按钮类型'
       },
 

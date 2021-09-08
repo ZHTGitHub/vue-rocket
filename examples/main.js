@@ -9,9 +9,6 @@ import './styles/styles.css'
 import request from './api/request'
 Vue.prototype.$request = request
 
-import bus from './plugins/emiter'
-Vue.prototype.$bus = bus
-
 import vueRocket from '../packages/index'
 Vue.use(vueRocket)
 
