@@ -1,6 +1,6 @@
 <template>
   <div class="demo-padding z-flex flex-wrap">
-    <template v-for="(items, index) in padding">
+    <template v-for="(items, index) in cells.padding">
       <table class="mr-4 api-table" :key="`padding_${ index }`">
         <thead>
           <tr>
@@ -17,18 +17,40 @@
         </tbody>
       </table>
     </template>
+
+    <template v-for="(items, index) in cells.margin">
+      <table class="mr-4 api-table" :key="`margin_${ index }`">
+        <thead>
+          <tr>
+            <th>类名</th>
+            <th>效果</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="(item, i) in items" :key="`margin_${ i }`">
+            <td>{{ item.class }}</td>
+            <td>{{ item.label }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
   </div>
 </template>
 
 <script>
-  import { padding } from './cells'
+  import cells from './cells'
 
   export default {
     name: 'DemoStylePadding',
     data() {
       return {
-        padding
+        cells
       }
+    },
+
+    created() {
+      console.log(this.padding)
     }
   }
 </script>

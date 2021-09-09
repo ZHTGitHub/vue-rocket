@@ -36,7 +36,56 @@ export const menus = [
     icon: 'mdi-language-css3',
     title: '样式',
     link: '/demo/style',
-    leaf: false
+    leaf: true,
+    children: [
+      {
+        pId: 'style',
+        unique: 'text',
+        icon: '',
+        title: 'Text 文本',
+        link: '/demo/style/text'
+      },
+
+      {
+        pId: 'style',
+        unique: 'spacing',
+        icon: '',
+        title: 'Spacing 间距',
+        link: '/demo/style/spacing'
+      },
+
+      {
+        pId: 'style',
+        unique: 'flex',
+        icon: '',
+        title: 'Flex 弹性布局',
+        link: '/demo/style/flex'
+      },
+
+      {
+        pId: 'style',
+        unique: 'float',
+        icon: '',
+        title: 'Float 浮动',
+        link: '/demo/style/float'
+      },
+
+      {
+        pId: 'style',
+        unique: 'radius',
+        icon: '',
+        title: 'Border Radius 边框半径',
+        link: '/demo/style/radius'
+      },
+
+      {
+        pId: 'style',
+        unique: 'elevation',
+        icon: '',
+        title: 'Elevation 海拔',
+        link: '/demo/style/elevation'
+      }
+    ]
   },
 
   {
