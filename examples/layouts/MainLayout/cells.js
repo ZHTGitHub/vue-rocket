@@ -5,7 +5,7 @@ export const menus = [
     unique: 'home',
     icon: 'mdi-home',
     title: '首页',
-    link: '/demo/home',
+    link: '/home',
     leaf: false
   },
 
@@ -15,7 +15,7 @@ export const menus = [
     unique: 'form',
     icon: 'mdi-form-select',
     title: '表单',
-    link: '/demo/form',
+    link: '/form',
     leaf: false
   },
 
@@ -25,67 +25,8 @@ export const menus = [
     unique: 'table',
     icon: 'mdi-table',
     title: '表格',
-    link: '/demo/table',
+    link: '/table',
     leaf: false
-  },
-
-  {
-    pId: '-1',
-    id: 'style',
-    unique: 'style',
-    icon: 'mdi-language-css3',
-    title: '样式',
-    link: '/demo/style',
-    leaf: true,
-    children: [
-      {
-        pId: 'style',
-        unique: 'text',
-        icon: '',
-        title: 'Text 文本',
-        link: '/demo/style/text'
-      },
-
-      {
-        pId: 'style',
-        unique: 'spacing',
-        icon: '',
-        title: 'Spacing 间距',
-        link: '/demo/style/spacing'
-      },
-
-      {
-        pId: 'style',
-        unique: 'flex',
-        icon: '',
-        title: 'Flex 弹性布局',
-        link: '/demo/style/flex'
-      },
-
-      {
-        pId: 'style',
-        unique: 'float',
-        icon: '',
-        title: 'Float 浮动',
-        link: '/demo/style/float'
-      },
-
-      {
-        pId: 'style',
-        unique: 'radius',
-        icon: '',
-        title: 'Border Radius 边框半径',
-        link: '/demo/style/radius'
-      },
-
-      {
-        pId: 'style',
-        unique: 'elevation',
-        icon: '',
-        title: 'Elevation 海拔',
-        link: '/demo/style/elevation'
-      }
-    ]
   },
 
   {
@@ -95,31 +36,23 @@ export const menus = [
     expanded: false,
     icon: 'mdi-view-dashboard',
     title: '组件',
-    link: '/demo/components',
+    link: '/components',
     leaf: true,
     children: [
       {
         pId: 'components',
-        unique: 'input',
+        unique: 'button',
         icon: '',
-        title: 'Input 输入框',
-        link: '/demo/components/input'
+        title: 'Button 按钮',
+        link: '/components/button'
       },
 
       {
         pId: 'components',
-        unique: 'textarea',
+        unique: 'buttonToggle',
         icon: '',
-        title: 'Teaxarea 多行文本框',
-        link: '/demo/components/textarea'
-      },
-
-      {
-        pId: 'components',
-        unique: 'select',
-        icon: '',
-        title: 'Select 选择器',
-        link: '/demo/components/select'
+        title: 'Button Groups 按钮组',
+        link: '/components/button-toggle'
       },
 
       {
@@ -127,39 +60,15 @@ export const menus = [
         unique: 'checkboxs',
         icon: '',
         title: 'Checkboxs 多选框',
-        link: '/demo/components/checkboxs'
+        link: '/components/checkboxs'
       },
 
       {
         pId: 'components',
-        unique: 'radios',
+        unique: 'datePicker',
         icon: '',
-        title: 'Radios 单选框',
-        link: '/demo/components/radios'
-      },
-
-      {
-        pId: 'components',
-        unique: 'switch',
-        icon: '',
-        title: 'Switch 开关',
-        link: '/demo/components/switch'
-      },
-
-      {
-        pId: 'components',
-        unique: 'button',
-        icon: '',
-        title: 'Button 按钮',
-        link: '/demo/components/button'
-      },
-
-      {
-        pId: 'components',
-        unique: 'pagination',
-        icon: '',
-        title: 'Pagination 分页',
-        link: '/demo/components/pagination'
+        title: 'Date Picker 日期选择器',
+        link: '/components/date-picker'
       },
 
       {
@@ -167,7 +76,114 @@ export const menus = [
         unique: 'drawer',
         icon: '',
         title: 'Drawer 导航抽屉',
-        link: '/demo/components/drawer'
+        link: '/components/drawer'
+      },
+
+      {
+        pId: 'components',
+        unique: 'pagination',
+        icon: '',
+        title: 'Pagination 分页',
+        link: '/components/pagination'
+      },
+
+      {
+        pId: 'components',
+        unique: 'radios',
+        icon: '',
+        title: 'Radios 单选框',
+        link: '/components/radios'
+      },
+
+      {
+        pId: 'components',
+        unique: 'select',
+        icon: '',
+        title: 'Select 选择器',
+        link: '/components/select'
+      },
+
+      {
+        pId: 'components',
+        unique: 'switch',
+        icon: '',
+        title: 'Switch 开关',
+        link: '/components/switch'
+      },
+
+      {
+        pId: 'components',
+        unique: 'textarea',
+        icon: '',
+        title: 'Teaxarea 多行文本框',
+        link: '/components/textarea'
+      },
+
+      {
+        pId: 'components',
+        unique: 'input',
+        icon: '',
+        title: 'Input 输入框',
+        link: '/components/input'
+      }
+    ]
+  },
+
+  {
+    pId: '-1',
+    id: 'style',
+    unique: 'style',
+    icon: 'mdi-language-css3',
+    title: '样式',
+    link: '/style',
+    leaf: true,
+    children: [
+      {
+        pId: 'style',
+        unique: 'text',
+        icon: '',
+        title: 'Text 文本',
+        link: '/style/text'
+      },
+
+      {
+        pId: 'style',
+        unique: 'spacing',
+        icon: '',
+        title: 'Spacing 间距',
+        link: '/style/spacing'
+      },
+
+      {
+        pId: 'style',
+        unique: 'flex',
+        icon: '',
+        title: 'Flex 弹性布局',
+        link: '/style/flex'
+      },
+
+      {
+        pId: 'style',
+        unique: 'float',
+        icon: '',
+        title: 'Float 浮动',
+        link: '/style/float'
+      },
+
+      {
+        pId: 'style',
+        unique: 'radius',
+        icon: '',
+        title: 'Border Radius 边框半径',
+        link: '/style/radius'
+      },
+
+      {
+        pId: 'style',
+        unique: 'elevation',
+        icon: '',
+        title: 'Elevation 海拔',
+        link: '/style/elevation'
       }
     ]
   }

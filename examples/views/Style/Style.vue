@@ -1,5 +1,5 @@
 <template>
-  <div class="z-demo">
+  <div class="demo-style">
     <main-layout>
       <router-view></router-view>
     </main-layout>
@@ -7,12 +7,11 @@
 </template>
 
 <script>
-  import MainLayout from '../../layouts/MainLayout'
-
   export default {
-    name: 'ZDemo',
+    name: 'DemoStyle',
+
     components: {
-      MainLayout
+      'main-layout': () => import('../../layouts/MainLayout')
     }
   }
 </script>

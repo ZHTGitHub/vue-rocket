@@ -1,50 +1,52 @@
 <template>
   <div class="demo-table">
-    <div class="filters flex">
-      <v-spacer></v-spacer>
-      <z-text-field
-        :formId="searchFormId"
-        formKey="keyword"
-        label="搜索"
-        append-icon="mdi-magnify"
-      ></z-text-field>
-    </div>
+    <main-layout>
+      <div class="filters flex">
+        <v-spacer></v-spacer>
+        <z-text-field
+          :formId="searchFormId"
+          formKey="keyword"
+          label="搜索"
+          append-icon="mdi-magnify"
+        ></z-text-field>
+      </div>
 
-    <v-data-table
-      v-model="selected"
-      :headers="headers"
-      :items="desserts"
-      show-select
-      item-key="name"
-      hide-default-footer
-      :loading="loading"
-      :loading-text="loadingText"
-    >
-      <template #[`item.options`]="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="modifyItem(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          small
-          @click="deleteItem(item)"
-        >
-          mdi-delete
-        </v-icon>
-      </template>
-    </v-data-table>
+      <v-data-table
+        v-model="selected"
+        :headers="headers"
+        :items="desserts"
+        show-select
+        item-key="name"
+        hide-default-footer
+        :loading="loading"
+        :loading-text="loadingText"
+      >
+        <template #[`item.options`]="{ item }">
+          <v-icon
+            small
+            class="mr-2"
+            @click="modifyItem(item)"
+          >
+            mdi-pencil
+          </v-icon>
+          <v-icon
+            small
+            @click="deleteItem(item)"
+          >
+            mdi-delete
+          </v-icon>
+        </template>
+      </v-data-table>
 
-    <z-pagination
-      :total="pagination.total"
-    ></z-pagination>
+      <z-pagination
+        :total="pagination.total"
+      ></z-pagination>
+    </main-layout>
   </div>
 </template>
 
 <script>
-  import TableMixins from '../../../mixins/table'
+  import TableMixins from '../../mixins/table'
 
   export default {
     name: 'ZDemoTable',
@@ -87,6 +89,10 @@
       selected(items) {
         console.log(items)
       }
+    },
+
+    components: {
+      'main-layout': () => import('../../layouts/MainLayout')
     }
   }
 </script>
