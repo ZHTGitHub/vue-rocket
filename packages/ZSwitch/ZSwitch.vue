@@ -5,7 +5,7 @@
       :label="label"
       :readonly="readonly"
       :disabled="disabled"
-      hide-details
+      :hide-details="hideDetails"
     ></v-switch>
     <p class="v-messages theme--light error--text z-messages" v-if="errorMessage">{{ errorMessage }}</p>
   </div>

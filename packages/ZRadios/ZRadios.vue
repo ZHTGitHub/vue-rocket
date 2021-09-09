@@ -6,7 +6,7 @@
       :column="column"
       :row="row"
       :success="success"
-      hide-details
+      :hide-details="hideDetails"
     >
       <v-radio
         v-for="(item, index) of items" 

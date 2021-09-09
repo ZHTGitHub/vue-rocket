@@ -8,7 +8,7 @@
         <v-checkbox
           v-model="values"
           :error="incorrect"
-          hide-details
+          :hide-details="hideDetails"
           :label="item.label"
           :success="success"
           :value="item.value"

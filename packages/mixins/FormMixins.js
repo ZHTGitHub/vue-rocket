@@ -32,6 +32,11 @@ export default {
 			default: false
 		},
 
+		counter: {
+			type: [Boolean, Number, String],
+			default: 25
+		},
+
 		defaultValue: {
 			type: [String, Number, Boolean],
 			default: undefined
@@ -45,6 +50,11 @@ export default {
 		error: {
 			type: Boolean,
 			default: false
+		},
+
+		hideDetails: {
+			type: Boolean,
+			default: true
 		},
 
 		hint: {
@@ -80,6 +90,11 @@ export default {
 		required: {
 			type: Boolean,
 			default: false
+		},
+
+		suffix: {
+			type: String,
+			required: false
 		},
 
 		success: {
