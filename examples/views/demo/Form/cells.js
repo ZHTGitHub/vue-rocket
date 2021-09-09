@@ -66,6 +66,16 @@ export const InfoFormCells = [
   },
 
   {
+    inputType: 'btnToggle',
+    formKey: 'sexual',
+    label: '性取向',
+    validation: [
+      { rule: 'required', message: '性取向为必选项.' }
+    ],
+    defaultValue: 0
+  },
+
+  {
     inputType: 'radios',
     formKey: 'gender',
     label: '性别',

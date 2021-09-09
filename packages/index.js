@@ -1,4 +1,5 @@
 import ZBtn from './ZBtn'
+import ZBtnToggle from './ZBtnToggle'
 import ZCheckboxs from './ZCheckboxs'
 import ZDatePicker from './ZDatePicker'
 import ZPagination from './ZPagination'
@@ -11,6 +12,7 @@ import ZDrawer from './ZDrawer'
 
 const components = [
 	ZBtn,
+	ZBtnToggle,
 	ZCheckboxs,
 	ZDatePicker,
 	ZPagination,

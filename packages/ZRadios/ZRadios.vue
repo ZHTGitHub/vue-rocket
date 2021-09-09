@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-radios z-input']">
+  <div class="z-radios z-input">
     <v-radio-group
       v-model="value"
       :error="incorrect"

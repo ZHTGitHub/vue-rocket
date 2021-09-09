@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-checkboxs z-input']">
+  <div class="z-checkboxs z-input">
     <div :class="[row ? 'z-flex' : '']">
       <div
         v-for="(item, index) of items" 

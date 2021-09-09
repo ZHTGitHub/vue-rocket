@@ -95,6 +95,21 @@
           </v-col>
 
           <v-col 
+            v-if="item.inputType === 'btnToggle'"
+            cols="12" 
+            :key="`InfoFormBtnToggle_${ index }`"
+          >
+            <z-btn-toggle
+              :formId="formId"
+              :formKey="item.formKey"
+              :label="item.label"
+              :validation="item.validation"
+              :options="sexualOptions"
+              :defaultValue="item.defaultValue"
+            ></z-btn-toggle>
+          </v-col>
+
+          <v-col 
             v-if="item.inputType === 'switch'"
             cols="2" 
             :key="`InfoFormInput_${ index }`"
@@ -147,8 +162,10 @@
   import { mapState } from 'vuex'
   import { InfoFormCells } from './cells'
   import FormCategoryMixins from '../../../../packages/mixins/FormCategoryMixins'
+import ZBtnToggle from '../../../../packages/ZBtnToggle/ZBtnToggle.vue'
 
   export default {
+  components: { ZBtnToggle },
     name: 'ZDemoForm',
     mixins: [FormCategoryMixins],
 
@@ -162,6 +179,12 @@
           { label: '珠海', value: 3 },
           { label: '佛山', value: 4 }
         ],
+        sexualOptions: [
+          { label: '异性恋', value: 1 },
+          { label: '同性恋', value: 2 },
+          { label: '双性恋', value: 3 },
+          { label: '无性', value: 4 }
+        ],  
         genderOptions: [
           { label: '男性', value: 1 },
           { label: '女性', value: 2 }
