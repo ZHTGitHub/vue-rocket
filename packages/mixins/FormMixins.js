@@ -34,7 +34,7 @@ export default {
 
 		counter: {
 			type: [Boolean, Number, String],
-			default: 25
+			default: false
 		},
 
 		defaultValue: {

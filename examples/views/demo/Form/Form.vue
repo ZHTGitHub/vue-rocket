@@ -102,6 +102,8 @@
             <z-btn-toggle
               :formId="formId"
               :formKey="item.formKey"
+              color="primary"
+              flip
               :label="item.label"
               :validation="item.validation"
               :options="sexualOptions"
@@ -180,10 +182,10 @@ import ZBtnToggle from '../../../../packages/ZBtnToggle/ZBtnToggle.vue'
           { label: '佛山', value: 4 }
         ],
         sexualOptions: [
-          { label: '异性恋', value: 1 },
-          { label: '同性恋', value: 2 },
-          { label: '双性恋', value: 3 },
-          { label: '无性', value: 4 }
+          { label: '异性恋', value: 1, icon: 'mdi-heart-outline' },
+          { label: '同性恋', value: 2, icon: 'mdi-heart-multiple-outline ' },
+          { label: '双性恋', value: 3, icon: 'mdi-heart-half-full' },
+          { label: '无性', value: 4, }
         ],  
         genderOptions: [
           { label: '男性', value: 1 },
@@ -200,7 +202,6 @@ import ZBtnToggle from '../../../../packages/ZBtnToggle/ZBtnToggle.vue'
     },
     methods: {
       onSubmit() {
-        // this.validateAll(this.formId)
         console.log(this.forms[this.formId])
       },
 

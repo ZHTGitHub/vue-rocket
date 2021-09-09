@@ -72,7 +72,7 @@ export const InfoFormCells = [
     validation: [
       { rule: 'required', message: '性取向为必选项.' }
     ],
-    defaultValue: 0
+    defaultValue: 1
   },
 
   {

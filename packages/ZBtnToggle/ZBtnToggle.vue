@@ -1,17 +1,30 @@
 <template>
   <div class="z-btn-toggle z-input">
-    <v-btn-toggle 
-      v-model="value"
-      borderless
-    >
-      <v-btn
-        v-for="(item, index) in items"
-        :key="`z_btn_toggle_${ index }`"
-        :value="item.value"
+    <div class="btn-groups">
+      <v-btn-toggle 
+        v-model="value"
+        :borderless="borderless"
+        :dense="dense"
+        :color="color"
+        :multiple="multiple"
+        :rounded="rounded"
+        :tile="tile"
+        @change="onChange"
       >
-        <span>{{ item.label }}</span>
-      </v-btn>
-    </v-btn-toggle>
+        <v-btn
+          v-for="(item) in items"
+          :key="item.label"
+          :value="item.value"
+          :class="flip ? 'text-rtl' : ''"  
+        >
+          <v-icon 
+            :color="value === item.value ? color : undefined"
+          >{{ item.icon }}</v-icon>
+          <span>{{ item.label }}</span>
+        </v-btn>
+      </v-btn-toggle>
+    </div>
+    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 
@@ -24,15 +37,51 @@
     mixins: [FormMixins, FormValidationMixins],
 
     props: {
+      borderless: {
+        type: Boolean,
+        default: false
+      },
+
+      color: {
+				type: String,
+				required: false
+			},
+
+      dense: {
+        type: Boolean,
+        default: false
+      },
+
+      multiple: {
+        type: Boolean,
+        default: false
+      },
+
+      flip: {
+        type: Boolean,
+        default: false
+      },
+
       options: {
         type: Array,
         required: true
+      },
+
+      rounded: {
+        type: Boolean,
+        default: false
+      },
+
+      tile: {
+        type: Boolean,
+        default: false
       }
     },
 
     data() {
       return {
-        items: []
+        items: [],
+        currentItem: {}
       }
     },
 
@@ -40,17 +89,27 @@
       for(let item of this.options) {
         this.items.push({
           label: item.label,
-          value: item.value
+          value: item.value,
+          icon: item.icon
         })
       }
+
+      this.setCurrentItem()
     },
 
-    watch: {
-      value: {
-        handler(value) {
-          console.log(value)
-        },
-        immediate: true
+    methods: {
+      onChange() {
+        this.setCurrentItem()
+        this.$emit('change', this.currentItem)
+      },
+
+      setCurrentItem() {
+        for(let item of this.items) {
+          if(item.value === this.value) {
+            this.currentItem = item
+            return
+          }
+        }
       }
     }
   }

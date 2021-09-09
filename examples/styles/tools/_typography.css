@@ -74,6 +74,14 @@
   text-align: right !important;
 }
 
+.text-ltr {
+  direction: ltr;
+}
+
+.text-rtl {
+  direction: rtl;
+}
+
 .td-none {
   text-decoration: none !important;
 }
