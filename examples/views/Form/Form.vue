@@ -174,10 +174,8 @@
   import { mapState } from 'vuex'
   import { InfoFormCells } from './cells'
   import FormCategoryMixins from '../../../packages/mixins/FormCategoryMixins'
-  import ZBtnToggle from '../../../packages/ZBtnToggle/ZBtnToggle.vue'
 
   export default {
-  components: { ZBtnToggle },
     name: 'ZDemoForm',
     mixins: [FormCategoryMixins],
 
