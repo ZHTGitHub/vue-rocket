@@ -6,7 +6,7 @@ Vue.use(Vuex)
 import store from '../../packages/store'
 
 // modules
-const files = require.context('./demo', false, /\.js$/)
+const files = require.context('./examples', false, /\.js$/)
 const modules = {}
 
 files.keys().map(key => {

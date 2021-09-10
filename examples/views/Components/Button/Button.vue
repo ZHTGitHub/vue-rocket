@@ -2,195 +2,114 @@
   <div class="z-demo-button">
     <h4 class="mb-8 text-h4">Button 按钮</h4>
 
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-btn
-                class="mr-4"
-                :formId="formId"
-                color="primary"
-              >默认按钮&lt;/z-btn>
+    <usage-examples></usage-examples>
 
-              &lt;z-btn
-                class="mr-4"
-                :formId="formId"
-                color="primary"
-                disabled
-              >禁用按钮&lt;/z-btn>
+    <v-card>
+      <v-card-title>
+        <span>Button Attributes</span>
+        <v-spacer></v-spacer>
+        <z-text-field
+          formId="apis"
+          formKey="search"
+          append-icon="mdi-magnify"
+          @keydown="onApisLocalSearch"
+        ></z-text-field>
+      </v-card-title>
 
-              &lt;z-btn
-                class="mr-4"
-                btnType="modify"
-                color="success"
-              >
-                &lt;v-icon left>
-                  mdi-pencil
-                &lt;/v-icon>
-                编辑
-              &lt;/z-btn>
+      <v-data-table
+        :headers="apisHeaders"
+        hide-default-footer
+        :items-per-page="100"
+        :items="apisDesserts"
+        :search="apisSearch"
+      ></v-data-table>
+    </v-card>
 
-              &lt;z-btn
-                class="mr-4"
-                color="warning"
-                icon
-              >
-                &lt;v-icon>mdi-thumb-up&lt;/v-icon>
-              &lt;/z-btn>
+    <v-card class="mt-12">
+      <v-card-title>
+        <span>Button Methods</span>
+        <v-spacer></v-spacer>
+        <z-text-field
+          formId="methods"
+          formKey="search"
+          append-icon="mdi-magnify"
+          @keydown="onMethodsLocalSearch"
+        ></z-text-field>
+      </v-card-title>
 
-              &lt;z-btn
-                color="error"
-                small
-                fab
-              >
-                &lt;v-icon>mdi-heart&lt;/v-icon>
-              &lt;/z-btn>
-            &lt;/template>
-
-            &lt;script>
-              import { ZBtn } from 'vue-rocket'
-
-              export default {
-                data() {
-                  return {
-                    formId: 'info'
-                  }
-                }
-              }
-            &lt;/script>
-          </code>
-        </pre>
-      </div>
-      <div slot="demo">
-
-        <div class="mb-4">
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="primary"
-            block
-          >块级按钮</z-btn>
-        </div>
-
-        <div class="z-flex">
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="normal"
-          >默认按钮</z-btn>
-
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="primary"
-          >主要按钮</z-btn>
-
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="error"
-          >报错按钮</z-btn>
-
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="warning"
-          >警告按钮</z-btn>
-
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="success"
-          >成功按钮</z-btn>
-
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="primary"
-            disabled
-          >禁用按钮</z-btn>
-
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="cyan"
-          >
-            <v-icon left>
-              mdi-pencil
-            </v-icon>
-            编辑
-          </z-btn>
-
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="warning"
-            icon
-          >
-            <v-icon>mdi-thumb-up</v-icon>
-          </z-btn>
-
-          <z-btn
-            formId="formId"
-            color="error"
-            small
-            fab
-          >
-            <v-icon>mdi-heart</v-icon>
-          </z-btn>
-        </div>
-      </div>
-    </usage-demo>
-
-    <section class="markdown api-container">
-      <h5 class="text-h5">API</h5>
-      <template v-for="(item, index) in button">
-        <div class="mb-10" :key="`input_${ index }`">
-          <h6 class="text-h6">{{ item.title }}</h6>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th v-for="(title, nIndex) in item.titles" :key="`name_${ nIndex }`">{{ title }}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr v-for="(child, i) in item.apis" :key="`input_${ index }_${ i }`">
-                <td v-if="child.name">{{ child.name }}</td>
-                <td v-if="child.required">{{ child.required }}</td>
-                <td v-if="child.type">{{ child.type }}</td>
-                <td v-if="child.acceptedValues">{{ child.acceptedValues }}</td>
-                <td v-if="child.default">{{ child.default }}</td>
-                <td v-if="child.parameters">{{ child.parameters }}</td>
-                <td v-if="child.description">{{ child.description }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </template>
-    </section>
+      <v-data-table
+        :headers="methodsHeaders"
+        hide-default-footer
+        :items-per-page="100"
+        :items="methodsDesserts"
+        :search="methodsSearch"
+      ></v-data-table>
+    </v-card>
   </div>
 </template>
 
 <script>
-  import { button } from './cells'
-
-  import Prism from 'prismjs'
-  import 'prismjs/themes/prism-okaidia.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'ZDemoButton',
+
     data() {
       return {
-        button
+        apisSearch: '',
+        apisHeaders: [
+          { text: '参数', value: 'name' },
+          { text: '必须', value: 'required', sortable: false },
+          { text: '类型', value: 'type', sortable: false },
+          { text: '可选值', value: 'acceptedValues', sortable: false },
+          { text: '默认值', value: 'default', sortable: false },
+          { text: '说明', value: 'description', sortable: false }
+        ],
+        apisDesserts: [],
+
+        methodsSearch: '',
+        methodsHeaders: [
+          { text: '名称', value: 'name' },
+          { text: '参数', value: 'parameters', sortable: false },
+          { text: '说明', value: 'description', sortable: false }
+        ],
+        methodsDesserts: [],
       }
     },
 
-    mounted() {
-      Prism.highlightAll()
+    created() {
+      this.getButtonApis()
+      this.getButtonMethods()
+    },
+
+    methods: {
+      onApisLocalSearch() {
+        const searchForm = this.forms.apis
+			  this.apisSearch = searchForm.search
+      },
+
+      onMethodsLocalSearch() {
+        const searchForm = this.forms.methods
+			  this.methodsSearch = searchForm.search
+      },
+
+      async getButtonApis() {
+        const result = await this.$store.dispatch('GET_BUTTON_APIS')
+        this.apisDesserts = result.data
+      },
+
+      async getButtonMethods() {
+        const result = await this.$store.dispatch('GET_BUTTON_METHODS')
+        this.methodsDesserts = result.data
+      }
+    },
+
+    computed: {
+      ...mapState(['forms'])
+    },
+
+    components: {
+      'usage-examples': () => import('./UsageExamples.vue')
     }
   }
 </script>

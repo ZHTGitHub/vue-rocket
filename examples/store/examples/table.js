@@ -5,10 +5,8 @@ const actions = {
     const result = await request({
       url: 'users'
     })
-    return {
-      total: 2,
-      data: result
-    }
+    console.log(result)
+    return result
   }
 }
 

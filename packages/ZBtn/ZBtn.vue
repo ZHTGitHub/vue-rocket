@@ -39,18 +39,6 @@
 				required: false
 			},
 
-			btnType: {
-				validator(value) {
-					return ~['clear', 'reset', 'validate'].indexOf(value)
-				},
-				required: false
-			},
-
-			lockedTime: {
-				type: [Number, String],
-				default: 2500
-			},
-
 			absolute: {
 				type: Boolean,
 				default: false
@@ -64,6 +52,13 @@
 			bottom: {
 				type: Boolean,
 				default: false
+			},
+
+			btnType: {
+				validator(value) {
+					return ~['clear', 'reset', 'validate'].indexOf(value)
+				},
+				required: false
 			},
 
 			color: {
@@ -119,6 +114,11 @@
 			left: {
 				type: Boolean,
 				default: false
+			},
+
+			lockedTime: {
+				type: [Number, String],
+				default: 2500
 			},
 
 			outlined: {
