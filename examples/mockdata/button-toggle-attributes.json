@@ -1,0 +1,95 @@
+{
+  "status": true,
+  "total": 10,
+  "data": [
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "按钮组所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "按钮组的 key 值"
+    },
+
+    {
+      "name": "borderless",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "移除按钮组的边框"
+    },
+
+    {
+      "name": "color",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))"
+    },
+
+    {
+      "name": "dense",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "减少按钮大小和间距"
+    },
+
+    {
+      "name": "flip",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "翻转"
+    },
+
+    {
+      "name": "multiple",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "多选"
+    },
+
+    {
+      "name": "options",
+      "required": "是",
+      "type": "{ label, value }[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "按钮组的选项内容"
+    },
+
+    {
+      "name": "rounded",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "在边缘上的圆角按钮"
+    },
+
+    {
+      "name": "tile",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "删除组件的 border-radius"
+    }
+  ]
+}

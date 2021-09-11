@@ -52,12 +52,12 @@
         default: false
       },
 
-      multiple: {
+      flip: {
         type: Boolean,
         default: false
       },
 
-      flip: {
+      multiple: {
         type: Boolean,
         default: false
       },

@@ -1,0 +1,11 @@
+{
+  "status": true,
+  "total": 1,
+  "data": [
+    {
+      "name": "change",
+      "parameters": "-",
+      "description": "选中按钮组值发生改变是触发"
+    }
+  ]
+}

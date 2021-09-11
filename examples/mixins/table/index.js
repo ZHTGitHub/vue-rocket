@@ -21,7 +21,9 @@ export default {
 
 			pagination: {
 				total: 0
-			}
+			},
+
+			search: ''
 		}
 	},
 
@@ -31,6 +33,12 @@ export default {
 	},
 
 	methods: {
+		// 本地检索
+		onLocalSearch() {
+			const searchForm = this.forms[this.searchFormId]
+			this.search = searchForm.search
+		},
+
 		// 检索
 		onSearch() {
 			this.params = {

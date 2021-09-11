@@ -7,19 +7,45 @@
             &lt;template>
               &lt;z-btn
                 class="mr-4"
-                color="primary"
+                formId="formId"
+                color="normal"
               >默认按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
+                formId="formId"
+                color="primary"
+              >主要按钮&lt;/z-btn>
+
+              &lt;z-btn
+                class="mr-4"
+                formId="formId"
+                color="error"
+              >报错按钮&lt;/z-btn>
+
+              &lt;z-btn
+                class="mr-4"
+                formId="formId"
+                color="warning"
+              >警告按钮&lt;/z-btn>
+
+              &lt;z-btn
+                class="mr-4"
+                formId="formId"
+                color="success"
+              >成功按钮&lt;/z-btn>
+
+              &lt;z-btn
+                class="mr-4"
+                formId="formId"
                 color="primary"
                 disabled
               >禁用按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
-                btnType="modify"
-                color="success"
+                formId="formId"
+                color="primary"
               >
                 &lt;v-icon left>
                   mdi-pencil
@@ -29,13 +55,15 @@
 
               &lt;z-btn
                 class="mr-4"
-                color="warning"
+                formId="formId"
+                color="primary"
                 icon
               >
                 &lt;v-icon>mdi-thumb-up&lt;/v-icon>
               &lt;/z-btn>
 
               &lt;z-btn
+                formId="formId"
                 color="error"
                 small
                 fab
@@ -47,16 +75,6 @@
         </pre>
       </div>
       <div slot="demo">
-
-        <div class="mb-4">
-          <z-btn
-            class="mr-4"
-            formId="formId"
-            color="primary"
-            block
-          >块级按钮</z-btn>
-        </div>
-
         <div class="z-flex">
           <z-btn
             class="mr-4"
@@ -98,7 +116,7 @@
           <z-btn
             class="mr-4"
             formId="formId"
-            color="cyan"
+            color="primary"
           >
             <v-icon left>
               mdi-pencil
@@ -109,7 +127,7 @@
           <z-btn
             class="mr-4"
             formId="formId"
-            color="warning"
+            color="primary"
             icon
           >
             <v-icon>mdi-thumb-up</v-icon>

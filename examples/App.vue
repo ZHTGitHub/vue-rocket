@@ -11,6 +11,10 @@
 </script>
 
 <style>
+  html, body {
+    font-size: 14px !important;
+  }
+
   .api-table {
     display: block;
     margin: 1rem 0;

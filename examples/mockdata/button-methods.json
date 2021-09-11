@@ -1,0 +1,11 @@
+{
+  "status": true,
+  "total": 1,
+  "data": [
+    {
+      "name": "click",
+      "parameters": "-",
+      "description": "单击按钮时发出的事件"
+    }
+  ]
+}

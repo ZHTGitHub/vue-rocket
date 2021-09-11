@@ -1,18 +1,13 @@
-import request from "../../api/request"
+import buttonAttributes from '../../mockdata/button-attributes.json'
+import buttonMethods from '../../mockdata/button-methods.json'
 
 const actions = {
-  async GET_BUTTON_APIS() {
-    const result = await request({
-      url: 'button-apis'
-    })
-    return result
+  GET_BUTTON_ATTRIBUTES() {
+    return buttonAttributes
   },
 
-  async GET_BUTTON_METHODS() {
-    const result = await request({
-      url: 'button-methods'
-    })
-    return result
+  GET_BUTTON_METHODS() {
+    return buttonMethods
   }
 }
 
