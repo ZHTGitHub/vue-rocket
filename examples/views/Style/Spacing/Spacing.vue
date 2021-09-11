@@ -1,6 +1,15 @@
 <template>
-  <div class="demo-padding z-flex flex-wrap">
-    <template v-for="(items, index) in cells.padding">
+  <div class="demo-padding">
+
+    <div class="orange" style="overflow:hidden">
+      <div class="green pa-2 ma-0 elevation-4">
+        <div class="white text-center">
+          Use the controls above to try out the different spacing helpers.
+        </div>
+      </div>
+    </div>
+
+    <!-- <template v-for="(items, index) in cells.padding">
       <table class="mr-4 api-table" :key="`padding_${ index }`">
         <thead>
           <tr>
@@ -34,7 +43,7 @@
           </tr>
         </tbody>
       </table>
-    </template>
+    </template> -->
   </div>
 </template>
 

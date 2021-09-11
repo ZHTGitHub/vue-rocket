@@ -81,6 +81,14 @@ export const menus = [
 
       {
         pId: 'components',
+        unique: 'input',
+        icon: '',
+        title: 'Input 输入框',
+        link: '/components/input'
+      },
+
+      {
+        pId: 'components',
         unique: 'pagination',
         icon: '',
         title: 'Pagination 分页',
@@ -117,14 +125,6 @@ export const menus = [
         icon: '',
         title: 'Teaxarea 多行文本框',
         link: '/components/textarea'
-      },
-
-      {
-        pId: 'components',
-        unique: 'input',
-        icon: '',
-        title: 'Input 输入框',
-        link: '/components/input'
       }
     ]
   },

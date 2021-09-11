@@ -1,0 +1,176 @@
+{
+  "status": true,
+  "total": 19,
+  "data": [
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "多行文本框所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "多行文本框的 key 值"
+    },
+
+    {
+      "name": "defaultValue",
+      "required": "否",
+      "type": "Number[ ] | String[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "多行文本框的默认值"
+    },
+
+    {
+      "name": "append-icon",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "在组件上附加一个图标"
+    },
+
+    {
+      "name": "append-outer-icon",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "在组件的外部添加一个图标"
+    },
+
+    {
+      "name": "clear-icon",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "当使用 clearable 且有输入值时应用"
+    },
+
+    {
+      "name": "clearable",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "添加清除已输入内容功能"
+    },
+
+    {
+      "name": "counter",
+      "required": "否",
+      "type": "Boolean | Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "为输入长度创建一个计数器"
+    },
+
+    {
+      "name": "disabled",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "是否禁用状态"
+    },
+
+    {
+      "name": "error",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将多行文本框设置为手动错误状态"
+    },
+
+    {
+      "name": "hide-details",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "隐藏提示和验证错误"
+    },
+
+    {
+      "name": "hint",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "提示文本"
+    },
+
+    {
+      "name": "label",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设置输入标签"
+    },
+
+    {
+      "name": "prepend-icon",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "在组件前添加一个图标"
+    },
+
+    {
+      "name": "prepend-outer-icon",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "在组件的外部添加一个图标"
+    },
+
+    {
+      "name": "readonly",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "是否只读状态"
+    },
+
+    {
+      "name": "reverse",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "反转输入方向"
+    },
+
+    {
+      "name": "suffix",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "显示后缀"
+    },
+
+    {
+      "name": "success",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将输入设置为手动成功状态"
+    }
+  ]
+}

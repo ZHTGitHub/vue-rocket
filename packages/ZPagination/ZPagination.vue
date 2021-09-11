@@ -2,7 +2,6 @@
   <div v-show="total > pageSize" class="z-pagination">
     <v-pagination
       v-model="page"
-      :class="position"
       :length="length"
       :circle="circle"
       @input="onInput"
@@ -17,12 +16,17 @@
     name: 'ZPagination',
 
     props: {
-      total: {
-        type: Number,
-        required: true
+      circle: {
+        type: Boolean,
+        default: false
       },
 
       length: {
+        type: Number,
+        default: 1
+      },
+
+      pageNum: {
         type: Number,
         default: 1
       },
@@ -32,22 +36,10 @@
         default: 10
       },
 
-      pageNum: {
+      total: {
         type: Number,
-        default: 1
+        required: true
       },
-
-      circle: {
-        type: Boolean,
-        default: false
-      },
-
-      position: {
-        validator(value) {
-          return ~['start', 'center', 'end'].indexOf(value)
-        },
-        default: 'start'
-      }
     },
 
     data() {

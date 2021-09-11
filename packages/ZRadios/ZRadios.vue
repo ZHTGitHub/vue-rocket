@@ -2,11 +2,14 @@
   <div class="z-radios z-input">
     <v-radio-group
       v-model="value"
-      :error="incorrect"
       :column="column"
+      :disabled="disabled"
+      :error="incorrect"
+      :hide-details="hideDetails"
+      :label="label"
+      :readonly="readonly"
       :row="row"
       :success="success"
-      :hide-details="hideDetails"
     >
       <v-radio
         v-for="(item, index) of items" 
@@ -28,14 +31,16 @@
     name: 'ZRadios',
     mixins: [FormMixins, FormValidationMixins],
     props: {
-      options: {
-        type: Array,
-        required: true
-      },
       column: {
         type: Boolean,
         default: false
       },
+
+      options: {
+        type: Array,
+        required: true
+      },
+
       row: {
         type: Boolean,
         default: true

@@ -24,9 +24,9 @@
                 data() {
                   return {
                     sexualOptions: [
-                      { label: '异性恋', value: 1, icon: 'mdi-heart-outline' },
-                      { label: '同性恋', value: 2, icon: 'mdi-heart-multiple-outline ' },
-                      { label: '双性恋', value: 3, icon: 'mdi-heart-half-full' },
+                      { label: '异性', value: 1, icon: 'mdi-heart-outline' },
+                      { label: '同性', value: 2, icon: 'mdi-heart-multiple-outline ' },
+                      { label: '双性', value: 3, icon: 'mdi-heart-half-full' },
                       { label: '无性', value: 4, }
                     ]
                   }
@@ -68,9 +68,9 @@
     data() {
       return {
         sexualOptions: [
-          { label: '异性恋', value: 1, icon: 'mdi-heart-outline' },
-          { label: '同性恋', value: 2, icon: 'mdi-heart-multiple-outline ' },
-          { label: '双性恋', value: 3, icon: 'mdi-heart-half-full' },
+          { label: '异性', value: 1, icon: 'mdi-heart-outline' },
+          { label: '同性', value: 2, icon: 'mdi-heart-multiple-outline ' },
+          { label: '双性', value: 3, icon: 'mdi-heart-half-full' },
           { label: '无性', value: 4, }
         ]
       }

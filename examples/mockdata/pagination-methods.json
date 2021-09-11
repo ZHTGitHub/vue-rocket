@@ -1,0 +1,23 @@
+{
+  "status": true,
+  "total": 3,
+  "data": [
+    {
+      "name": "input",
+      "parameters": "-",
+      "description": "跳转时触发"
+    },
+
+    {
+      "name": "next",
+      "parameters": "-",
+      "description": "跳转到下一页时触发"
+    },
+
+    {
+      "name": "previous",
+      "parameters": "-",
+      "description": "跳转到上一页时触发"
+    }
+  ]
+}

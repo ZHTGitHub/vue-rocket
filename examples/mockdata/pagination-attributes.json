@@ -1,0 +1,50 @@
+{
+  "status": true,
+  "total": 5,
+  "data": [
+    {
+      "name": "circle",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将分页元素的形状改变圆形"
+    },
+
+    {
+      "name": "length",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": 1,
+      "description": "分页组件的长度"
+    },
+
+    {
+      "name": "pageNum",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "—",
+      "default": 11,
+      "description": "当前页数"
+    },
+
+    {
+      "name": "pageSize",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "—",
+      "default": 10,
+      "description": "每页条数"
+    },
+
+    {
+      "name": "total",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "数据总数"
+    }
+  ]
+}

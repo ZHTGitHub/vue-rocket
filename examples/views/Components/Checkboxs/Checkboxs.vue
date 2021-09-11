@@ -9,8 +9,6 @@
 </template>
 
 <script>
-  import { checkboxs } from './cells'
-
   import Prism from 'prismjs'
   import 'prismjs/themes/prism-okaidia.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
@@ -20,7 +18,6 @@
     name: 'ZDemoCheckboxs',
     data() {
       return {
-        checkboxs,
         hobbyOptions: [
           { label: '游泳', value: 1 },
           { label: '网球', value: 2 },

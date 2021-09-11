@@ -1,8 +1,8 @@
 <template>
-  <div class="date-picker-attributes">
+  <div class="radios-attributes">
     <v-card>
       <v-card-title>
-        <span>DatePicker Attributes</span>
+        <span>Radios Attributes</span>
         <v-spacer></v-spacer>
         <z-text-field
           :formId="searchFormId"
@@ -31,13 +31,13 @@
   import ExamplesMixins from '../mixins'
 
   export default {
-    name: 'DatePickerAttributes',
+    name: 'RadiosAttributes',
     mixins: [TableMixins, ExamplesMixins],
 
     data() {
       return {
-        formId: 'DatePickerAttributes',
-        getHandler: 'GET_DATE_PICKER_ATTRIBUTES'
+        formId: 'RadiosAttributes',
+        getHandler: 'GET_RADIOS_ATTRIBUTES'
       }
     }
   }

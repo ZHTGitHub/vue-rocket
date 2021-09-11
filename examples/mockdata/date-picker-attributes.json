@@ -1,0 +1,95 @@
+{
+  "status": true,
+  "total": 10,
+  "data": [
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "日期选择器所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "日期选择器的 key 值"
+    },
+
+    {
+      "name": "defaultValue",
+      "required": "否",
+      "type": "Number[ ] | String[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "日期选择器的默认值"
+    },
+
+    {
+      "name": "firstDayOfWeek",
+      "required": "否",
+      "type": "Number[ ] | String[ ]",
+      "acceptedValues": "—",
+      "default": 0,
+      "description": "设置一周的第一天，从周日的 0 开始"
+    },
+
+    {
+      "name": "locale",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "zh-cn",
+      "description": "设置语言环境"
+    },
+
+    {
+      "name": "no-title",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "隐藏选择器标题"
+    },
+
+    {
+      "name": "picker-readonly",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "使选择器变为只读状态"
+    },
+
+    {
+      "name": "picker-type",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "date",
+      "description": "确定选择器的类型 - 日期选择器的 date ，月选择器的 month"
+    },
+
+    {
+      "name": "range",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "允许选择日期范围"
+    },
+
+    {
+      "name": "readonly",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "true",
+      "description": "使输入框变为只读状态"
+    }
+  ]
+}

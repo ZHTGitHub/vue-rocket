@@ -1,19 +1,28 @@
 <template>
   <div class="z-checkboxs z-input">
-    <div :class="[row ? 'z-flex' : '']">
-      <div
-        v-for="(item, index) of items" 
-        :key="`z_checkbox_${ index }`"
-      >
-        <v-checkbox
-          v-model="values"
-          :error="incorrect"
-          :hide-details="hideDetails"
-          :label="item.label"
-          :success="success"
-          :value="item.value"
-          class="mr-4"
-        ></v-checkbox>
+    <div 
+      class="z-input--checkboxs-group__input"
+      :class="[row ? 'z-flex' : '']"
+    >
+      <legend 
+        v-if="label"
+        class="v-label theme--light"
+      >{{ label }}</legend>
+      <div :class="[row ? 'z-flex' : '']">
+        <div
+          v-for="(item, index) of items" 
+          :key="`z_checkbox_${ index }`"
+        >
+          <v-checkbox
+            v-model="values"
+            :error="incorrect"
+            :hide-details="hideDetails"
+            :label="item.label"
+            :success="success"
+            :value="item.value"
+            class="mr-4"
+          ></v-checkbox>
+        </div>
       </div>
     </div>
     <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
@@ -32,11 +41,6 @@
         type: Array,
         required: true
       },
-
-      // column: {
-      //   type: Boolean,
-      //   default: false
-      // },
 
       row: {
         type: Boolean,
@@ -98,6 +102,16 @@
   }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
   @import url("../styles/styles.css");
+
+  .z-input--checkboxs-group__input {
+    legend.v-label {
+      padding-right: 8px;
+      margin-top: 24px;
+      height: auto;
+      font-size: 14px;
+      cursor: text;
+    }
+  }
 </style>

@@ -1,0 +1,29 @@
+{
+  "status": true,
+  "total": 6,
+  "data": [
+    {
+      "name": "blur",
+      "parameters": "-",
+      "description": "当选择器所失去焦点时触发"
+    },
+
+    {
+      "name": "change",
+      "parameters": "-",
+      "description": "当用户交互更改选择时触发"
+    },
+
+    {
+      "name": "click",
+      "parameters": "-",
+      "description": "在单击选择器所时触发"
+    },
+
+    {
+      "name": "focus",
+      "parameters": "-",
+      "description": "当选择器所得到焦点时触发"
+    }
+  ]
+}

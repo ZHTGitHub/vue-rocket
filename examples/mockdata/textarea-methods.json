@@ -1,0 +1,41 @@
+{
+  "status": true,
+  "total": 6,
+  "data": [
+    {
+      "name": "blur",
+      "parameters": "-",
+      "description": "当多行文本框所失去焦点时触发"
+    },
+
+    {
+      "name": "change",
+      "parameters": "-",
+      "description": "当用户交互更改输入时触发"
+    },
+
+    {
+      "name": "click",
+      "parameters": "-",
+      "description": "在单击多行文本框所时触发"
+    },
+
+    {
+      "name": "focus",
+      "parameters": "-",
+      "description": "当多行文本框所得到焦点时触发"
+    },
+
+    {
+      "name": "keydown",
+      "parameters": "-",
+      "description": "按下任何键时触发"
+    },
+
+    {
+      "name": "keyup",
+      "parameters": "-",
+      "description": "键盘抬起时触发"
+    }
+  ]
+}

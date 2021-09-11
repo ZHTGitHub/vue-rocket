@@ -1,11 +1,18 @@
 <template>
   <div class="z-demo-date-picker">
-    ZDatePicker
+    <usage-examples></usage-examples>
+
+    <date-picker-attributes></date-picker-attributes>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'ZDemoDatePicker'
+    name: 'ZDemoDatePicker',
+
+    components: {
+      'usage-examples': () => import('./UsageExamples'),
+      'date-picker-attributes': () => import('./DatePickerAttributes.vue') 
+    }
   }
 </script>

@@ -71,11 +71,6 @@
     mixins: [FormMixins, FormValidationMixins],
 
     props: {
-      readonly: {
-        type: Boolean,
-        default: true
-      },
-
       firstDayOfWeek: {
         type: [Number, String],
         default: 0
@@ -91,11 +86,6 @@
         default: false
       },
 
-      range: {
-        type: Boolean,
-        default: false
-      },
-
       pickerReadonly: {
         type: Boolean,
         default: false
@@ -106,6 +96,16 @@
           return ~['date', 'month'].indexOf(value)
         },
         default: 'date'
+      },
+
+      range: {
+        type: Boolean,
+        default: false
+      },
+
+      readonly: {
+        type: Boolean,
+        default: true
       }
     },
 
