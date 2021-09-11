@@ -30,7 +30,31 @@
           :success="success"
           v-bind="attrs"
           v-on="on"
-        ></v-text-field>
+        >
+          <!-- 输入框内部 文字之后 BEGIN -->
+          <template v-slot:append>
+            <slot name="append"></slot>
+          </template>
+          <!-- 输入框内部 文字之后 END -->
+
+          <!-- 输入框外部 文字之后 BEGIN -->
+          <template v-slot:append-outer>
+            <slot name="append-outer"></slot>
+          </template>
+          <!-- 输入框外部 文字之后 END -->
+          
+          <!-- 输入框内部 文字之前 BEGIN -->
+          <template v-slot:prepend-inner>
+            <slot name="prepend"></slot>
+          </template>
+          <!-- 输入框内部 文字之前 END -->
+
+          <!-- 输入框外部 文字之前 BEGIN -->
+          <template v-slot:prepend>
+            <slot name="prepend-outer"></slot>
+          </template>
+          <!-- 输入框外部 文字之前 END -->
+        </v-text-field>
       </template>
       <v-date-picker
         v-model="date"

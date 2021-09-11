@@ -23,7 +23,31 @@
       @change="onChange"
       @click="onClick"
       @focus="onFocus"
-    ></v-select>
+    >
+      <!-- 选择器内部 文字之后 BEGIN -->
+      <template v-slot:append>
+        <slot name="append"></slot>
+      </template>
+      <!-- 选择器内部 文字之后 END -->
+
+      <!-- 选择器外部 文字之后 BEGIN -->
+      <template v-slot:append-outer>
+        <slot name="append-outer"></slot>
+      </template>
+      <!-- 选择器外部 文字之后 END -->
+      
+      <!-- 选择器内部 文字之前 BEGIN -->
+      <template v-slot:prepend-inner>
+        <slot name="prepend"></slot>
+      </template>
+      <!-- 选择器内部 文字之前 END -->
+
+      <!-- 选择器外部 文字之前 BEGIN -->
+      <template v-slot:prepend>
+        <slot name="prepend-outer"></slot>
+      </template>
+      <!-- 选择器外部 文字之前 END -->
+    </v-select>
     <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>

@@ -22,7 +22,8 @@
           formKey="name"
           label="姓名"
           :validation="[{ rule: 'required', message: '姓名为必填项.' }]"
-        ></z-text-field>
+        >
+        </z-text-field>
       </div>
     </usage-demo>
   </div>
