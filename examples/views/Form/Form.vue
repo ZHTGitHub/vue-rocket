@@ -149,13 +149,6 @@
                     color="error"
                     btnType="clear"
                   >清空</z-btn>
-
-                  <z-btn 
-                    class="mx-2"
-                    :formId="formId"
-                    color="error"
-                    @click="onSearch"
-                  >搜索</z-btn>
                 </div>
               </v-col>
             </v-row>
@@ -212,10 +205,6 @@
     methods: {
       onSubmit() {
         console.log(this.forms[this.formId])
-      },
-
-      onSearch() {
-        console.log('form search')
       }
     },
 

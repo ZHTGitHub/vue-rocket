@@ -1,6 +1,6 @@
 <template>
   <div class="z-demo-select">
-    <h4 class="mb-8 text-h4">Select 选择器</h4>
+    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
 
     <usage-examples></usage-examples>
 

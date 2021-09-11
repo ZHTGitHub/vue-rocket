@@ -1,5 +1,7 @@
 <template>
   <div class="z-demo-date-picker">
+    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
+    
     <usage-examples></usage-examples>
 
     <date-picker-attributes></date-picker-attributes>

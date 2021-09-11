@@ -1,16 +1,19 @@
 <template>
-  <div class="demo-elevation z-flex flex-wrap justify-center pa-3 ma-auto">
+  <div class="demo-elevation">
+    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
 
-    <div
-      class="pa-3"
-      v-for="(item, index) in elevation" 
-      :key="`elevation_${ index }`"
-    >
-      <div 
-        class="elevation z-flex justify-center align-center rounded-md" 
-        :class="item.class"
+    <div class="z-flex flex-wrap justify-center pa-3 ma-auto elevations">
+      <div
+        class="pa-3"
+        v-for="(item, index) in elevation" 
+        :key="`elevation_${ index }`"
       >
-        .{{ item.class }}
+        <div 
+          class="elevation z-flex justify-center align-center rounded-md" 
+          :class="item.class"
+        >
+          .{{ item.class }}
+        </div>
       </div>
     </div>
     
@@ -30,17 +33,17 @@
   }
 </script>
 
-<style scoped>
-  .demo-elevation {
+<style scoped lang="scss">
+  .elevations {
     max-width: 650px;
     border: 1px solid transparent;
-  }
-
-  .elevation {
-    width: 100px;
-    height: 100px;
-    background-color: #5cbbf6;
-    color: #fff;
-    font-size: .875rem;
+    
+    .elevation {
+      width: 100px;
+      height: 100px;
+      background-color: #5cbbf6;
+      color: #fff;
+      font-size: .875rem;
+    }
   }
 </style>

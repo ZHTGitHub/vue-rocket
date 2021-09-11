@@ -1,6 +1,6 @@
 <template>
   <div class="z-demo-textarea">
-    <h4 class="mb-8 text-h4">Textarea 输入框</h4>
+    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
 
     <usage-examples></usage-examples>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="z-demo-radios">
-    <h4 class="mb-8 text-h4">Radios 单选框</h4>
+    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
 
     <usage-examples></usage-examples>
 
