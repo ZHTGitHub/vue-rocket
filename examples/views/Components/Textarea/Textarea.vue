@@ -7,6 +7,8 @@
     <textarea-attributes></textarea-attributes>
 
     <textarea-methods></textarea-methods>
+
+    <textarea-slots></textarea-slots>
   </div>
 </template>
 
@@ -17,7 +19,8 @@
     components: {
       'usage-examples': () => import('./UsageExamples'),
       'textarea-attributes': () => import('./TextareaAttributes'),
-      'textarea-methods': () => import('./TextareaMethods')
+      'textarea-methods': () => import('./TextareaMethods'),
+      'textarea-slots': () => import('./TextareaSlots')
     }
   }
 </script>

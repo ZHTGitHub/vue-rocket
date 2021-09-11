@@ -17,6 +17,11 @@ export default {
         { text: '名称', value: 'name' },
         { text: '参数', value: 'parameters', sortable: false },
         { text: '说明', value: 'description', sortable: false }
+      ],
+
+      slotsHeaders: [
+        { text: '名称', value: 'name' },
+        { text: '说明', value: 'description', sortable: false }
       ]
     }
   }

@@ -1,8 +1,8 @@
 <template>
-  <div class="date-picker-attributes">
+  <div class="mt-12 textarea-slots">
     <v-card>
       <v-card-title>
-        <span>Date Picker Attributes</span>
+        <span>Textarea Slots</span>
         <v-spacer></v-spacer>
         <z-text-field
           :formId="searchFormId"
@@ -13,15 +13,14 @@
       </v-card-title>
 
       <v-data-table
-        :headers="attributesHeaders"
+        :headers="slotsHeaders"
         :hide-default-footer="hideDefaultFooter"
         :items-per-page="itemsPerPage"
         :items="desserts"
         :loading="loading"
         :loadingText="loadingText"
         :search="search"
-      >
-      </v-data-table>
+      ></v-data-table>
     </v-card>
   </div>
 </template>
@@ -31,13 +30,13 @@
   import ExamplesMixins from '../mixins'
 
   export default {
-    name: 'DatePickerAttributes',
+    name: 'TextareaSlots',
     mixins: [TableMixins, ExamplesMixins],
 
     data() {
       return {
-        formId: 'DatePickerAttributes',
-        getHandler: 'GET_DATE_PICKER_ATTRIBUTES'
+        formId: 'TextareaSlots',
+        getHandler: 'GET_TEXTAREA_SLOTS'
       }
     }
   }

@@ -7,6 +7,8 @@
     <input-attributes></input-attributes>
 
     <input-methods></input-methods>
+
+    <input-slots></input-slots>
   </div>
 </template>
 
@@ -17,7 +19,8 @@
     components: {
       'usage-examples': () => import('./UsageExamples'),
       'input-attributes': () => import('./InputAttributes'),
-      'input-methods': () => import('./InputMethods')
+      'input-methods': () => import('./InputMethods'),
+      'input-slots': () => import('./InputSlots.vue')
     }
   }
 </script>
