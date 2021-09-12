@@ -5,6 +5,8 @@
     <usage-examples></usage-examples>
 
     <date-picker-attributes></date-picker-attributes>
+
+    <date-picker-slots></date-picker-slots>
   </div>
 </template>
 
@@ -14,7 +16,8 @@
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'date-picker-attributes': () => import('./DatePickerAttributes.vue') 
+      'date-picker-attributes': () => import('./DatePickerAttributes'),
+      'date-picker-slots': () => import('./DatePickerSlots'),
     }
   }
 </script>

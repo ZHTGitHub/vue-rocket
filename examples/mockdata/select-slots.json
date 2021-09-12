@@ -1,0 +1,25 @@
+{
+  "status": true,
+  "total": 4,
+  "data": [
+    {
+      "name": "append",
+      "description": "选择器内部 文字之后添加一个内容"
+    },
+
+    {
+      "name": "append-outer",
+      "description": "选择器外部 文字之后添加一个内容"
+    },
+
+    {
+      "name": "prepend",
+      "description": "选择器内部 文字之前添加一个内容"
+    },
+
+    {
+      "name": "prepend-outer",
+      "description": "选择器外部 文字之前添加一个内容"
+    }
+  ]
+}

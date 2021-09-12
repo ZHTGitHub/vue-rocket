@@ -7,6 +7,8 @@
     <select-attributes></select-attributes>
 
     <select-methods></select-methods>
+
+    <select-slots></select-slots>
   </div>
 </template>
 
@@ -17,7 +19,8 @@
     components: {
       'usage-examples': () => import('./UsageExamples'),
       'select-attributes': () => import('./SelectAttributes'),
-      'select-methods': () => import('./SelectMethods')
+      'select-methods': () => import('./SelectMethods'),
+      'select-slots': () => import('./SelectSlots')
     }
   }
 </script>
