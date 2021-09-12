@@ -21,7 +21,6 @@ import util from './libs/util'
 
 Vue.prototype.util = util
 
-
 Vue.config.productionTip = false
 
 new Vue({

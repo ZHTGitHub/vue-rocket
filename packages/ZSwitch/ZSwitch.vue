@@ -36,7 +36,3 @@
     }
   }
 </script>
-
-<style scoped lang="css">
-  @import url("../styles/styles.css");
-</style>

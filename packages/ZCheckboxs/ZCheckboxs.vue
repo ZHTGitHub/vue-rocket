@@ -103,8 +103,6 @@
 </script>
 
 <style scoped lang="scss">
-  @import url("../styles/styles.css");
-
   .z-input--checkboxs-group__input {
     legend.v-label {
       padding-right: 8px;
