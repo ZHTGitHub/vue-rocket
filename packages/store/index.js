@@ -28,7 +28,7 @@ const mutations = {
 }
 
 export default {
-    state,
-    getters,
-    mutations
+  state,
+  getters,
+  mutations
 }
