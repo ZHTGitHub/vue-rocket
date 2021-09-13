@@ -10,6 +10,7 @@ import request from './api/request'
 Vue.prototype.$request = request
 
 import vueRocket from '../packages/index'
+import '../packages/styles/styles.css'
 Vue.use(vueRocket)
 
 import DemoComponents from './Components'

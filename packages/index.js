@@ -10,6 +10,8 @@ import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZDrawer from './ZDrawer'
 
+import "./styles/styles.css"
+
 const components = [
 	ZBtn,
 	ZBtnToggle,
