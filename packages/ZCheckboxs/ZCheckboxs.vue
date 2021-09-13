@@ -8,7 +8,7 @@
         v-if="label"
         class="v-label theme--light"
       >{{ label }}</legend>
-      <div :class="[row ? 'z-flex' : '']">
+      <div :class="[row ? 'z-flex flex-wrap' : '']">
         <div
           v-for="(item, index) of items" 
           :key="`z_checkbox_${ index }`"

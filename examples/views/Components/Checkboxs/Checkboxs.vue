@@ -16,16 +16,6 @@
 
   export default {
     name: 'ZDemoCheckboxs',
-    data() {
-      return {
-        hobbyOptions: [
-          { label: '游泳', value: 1 },
-          { label: '网球', value: 2 },
-          { label: '乒乓球', value: 3 },
-          { label: '羽毛球', value: 4 }
-        ]
-      }
-    },
 
     mounted() {
       Prism.highlightAll()
