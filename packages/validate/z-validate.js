@@ -12,22 +12,22 @@ ZValidate.rules = {
     return value.match(reg)
   },
 
-  excluded: (value, rule) => {
+  // excluded: (value, rule) => {
 
-  },
+  // },
 
-  included: (value, rule) => {
+  // included: (value, rule) => {
 
-  },
+  // },
 
-  is: (value, rule) => {
+  // is: (value, rule) => {
 
-  },
+  // },
   
 
-  is_not: (value, rule) => {
+  // is_not: (value, rule) => {
 
-  },
+  // },
 
   length: (value, rule) => {
     value = '' + value
@@ -77,9 +77,9 @@ ZValidate.rules = {
     return reg.test(value)
   },
 
-  url: (value) => {
+  // url: (value) => {
     
-  }
+  // }
 }
 
 ZValidate.attach = function(options) {
@@ -119,3 +119,25 @@ ZValidate.validateFormValueByKey = function(options) {
 }
 
 export default ZValidate
+
+// class Validate {
+//   constructor() {
+
+//   }
+
+//   attach() {
+
+//   }
+
+//   validate() {
+
+//   }
+
+//   validateAll() {
+
+//   }
+
+//   validateFormValueByKey() {
+
+//   }
+// }

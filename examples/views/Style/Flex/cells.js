@@ -134,5 +134,24 @@ export const flex = [
       class: 'flex-wrap-reverse',
       label: '换行，第一行在下方'
     }
+  ],
+
+  [
+    {
+      class: 'flex-nowrap',
+      label: '不换行'
+    },
+    {
+      class: 'flex-nowrap',
+      label: '不换行'
+    },
+    {
+      class: 'flex-nowrap',
+      label: '不换行'
+    },
+    {
+      class: 'flex-nowrap',
+      label: '不换行'
+    }
   ]
 ]

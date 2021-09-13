@@ -166,11 +166,9 @@
 <script>
   import { mapState } from 'vuex'
   import { InfoFormCells } from './cells'
-  import FormCategoryMixins from '../../../packages/mixins/FormCategoryMixins'
 
   export default {
     name: 'ZDemoForm',
-    mixins: [FormCategoryMixins],
 
     data() {
       return {
