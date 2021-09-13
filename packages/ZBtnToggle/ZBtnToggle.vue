@@ -49,7 +49,7 @@
 
       dense: {
         type: Boolean,
-        default: false
+        default: true
       },
 
       flip: {

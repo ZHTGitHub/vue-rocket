@@ -25,7 +25,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "移除按钮组的边框"
     },
 
@@ -43,7 +43,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": true,
       "description": "减少按钮大小和间距"
     },
 
@@ -52,7 +52,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "翻转"
     },
 
@@ -61,7 +61,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "多选"
     },
 
@@ -79,7 +79,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "在边缘上的圆角按钮"
     },
 
@@ -88,7 +88,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "删除组件的 border-radius"
     }
   ]
