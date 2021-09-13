@@ -2,6 +2,7 @@ import ZBtn from './ZBtn'
 import ZBtnToggle from './ZBtnToggle'
 import ZCheckboxs from './ZCheckboxs'
 import ZDatePicker from './ZDatePicker'
+import ZDropdown from './ZDropdown'
 import ZPagination from './ZPagination'
 import ZRadios from './ZRadios'
 import ZSelect from './ZSelect'
@@ -17,6 +18,7 @@ const components = [
 	ZBtnToggle,
 	ZCheckboxs,
 	ZDatePicker,
+	ZDropdown,
 	ZPagination,
 	ZRadios,
 	ZSelect,
@@ -41,6 +43,7 @@ export default {
 	ZBtnToggle,
 	ZCheckboxs,
 	ZDatePicker,
+	ZDropdown,
 	ZPagination,
 	ZRadios,
 	ZSelect,

@@ -81,6 +81,14 @@ export const menus = [
 
       {
         pId: 'components',
+        unique: 'dropdown',
+        icon: '',
+        title: 'Dropdown 下拉菜单',
+        link: '/components/dropdown'
+      },
+
+      {
+        pId: 'components',
         unique: 'input',
         icon: '',
         title: 'Input 输入框',

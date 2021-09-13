@@ -68,6 +68,17 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'dropdown',
+      name: 'ZDemoDropdown',
+      meta: {
+        title: 'Dropdown 下拉菜单',
+        unique: 'dropdown',
+        parent: 'components'
+      },
+      component: () => import('../../views/Components/Dropdown')
+    },
+
+    {
       path: 'pagination',
       name: 'ZDemoPagination',
       meta: {

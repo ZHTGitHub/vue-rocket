@@ -1,0 +1,131 @@
+{
+  "status": true,
+  "total": 14,
+  "data": [
+    {
+      "name": "auto",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "在所选择的元素上居中列表"
+    },
+
+    {
+      "name": "bottom",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将组件向底部对齐"
+    },
+
+    {
+      "name": "close-on-click",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "指定菜应该在外部激活器被点击时关闭"
+    },
+
+    {
+      "name": "close-on-content-click",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "指定点击内容时菜单是否应该关闭"
+    },
+
+    {
+      "name": "left",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将组件向左边对齐"
+    },
+
+    {
+      "name": "offset-x",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "在x轴上偏移菜单 与左/右方向一起工作"
+    },
+
+    {
+      "name": "offset-y",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "在y轴上偏移菜单 与上/下方向一起工作"
+    },
+
+    {
+      "name": "options",
+      "required": "是",
+      "type": "{ label, value }[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "下拉菜单的下拉框内容"
+    },
+
+    {
+      "name": "position-x",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "undefined",
+      "description": "用于在不使用激活器插槽时定位内容"
+    },
+
+    {
+      "name": "position-y",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "undefined",
+      "description": "用于在不使用激活器插槽时定位内容"
+    },
+
+    {
+      "name": "right",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将组件向右边对齐"
+    },
+
+    {
+      "name": "rounded",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "对指定的组件应用 border-radius 样式"
+    },
+
+    {
+      "name": "tile",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "删除组件的 border-radius 样式"
+    },
+
+    {
+      "name": "top",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将组件向顶部对齐"
+    }
+  ]
+}

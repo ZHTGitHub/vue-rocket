@@ -7,7 +7,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "给导航抽屉应用 position: absolute"
     },
 
@@ -16,7 +16,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "指定导航抽屉作为应用程序布局的一部分 用于动态调整内容的大小 使用此属性的组件只有位于 v-main 组件的 外部才能正常运行"
     },
 
@@ -25,7 +25,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "指定导航抽屉位于 Toolbar 下方"
     },
 
@@ -43,7 +43,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "给导航抽屉应用 position: fixed"
     },
 
@@ -52,7 +52,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "浮动抽屉没有可见的容器（没有右边框）"
     },
 
@@ -79,7 +79,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "不管屏幕尺寸如何 抽屉都可以看到"
     },
 
@@ -88,7 +88,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "删除所有自动状态功能（调整大小、移动、路由）并手动控制抽屉状态"
     },
 
@@ -97,7 +97,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "临时抽屉位于其应用之上 并使用稀松布（叠加）来使背景变暗"
     },
 

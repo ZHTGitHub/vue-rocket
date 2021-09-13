@@ -1,0 +1,163 @@
+<template>
+  <div class="z-dropdown">
+    <v-menu 
+      :auto="auto"
+      :bottom="bottom"
+      :closeOnClick="closeOnClick"
+      :closeOnContentClick="closeOnContentClick"
+      :left="left"
+      :offset-x="offsetX"
+      :offset-y="offsetY"
+      :position-x="positionX"
+      :position-y="positionY"
+      :right="right"
+      :rounded="rounded"
+      :tile="tile"
+      :top="top"
+      @input="onInput"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          :absolute="absolute"
+          :block="block"
+          :bottom="bottom"
+          :color="color"
+          :depressed="depressed"
+          :disabled="disabled"
+          :fab="fab"
+          :fixed="fixed"
+          :icon="icon"
+          :large="large"
+          :left="left"
+          :outlined="outlined"
+          :plain="plain"
+          :right="right"
+          :rounded="rounded"
+          :small="small"
+          :tile="tile"
+          :top="top"
+          :x-large="larger"
+          :x-small="smaller"
+          v-bind="attrs"
+          v-on="on"
+        >
+          <slot></slot>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in options"
+          :key="`z_dropdown_${ index }`"
+          link
+          @click="onClick(item)"
+          @keydown="onKeydown(item)"
+        >
+          <v-list-item-title>{{ item.label }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+  </div>
+</template>
+
+<script>
+	import BtnMixins from '../mixins/BtnMixins'
+
+  export default {
+    name: 'ZDropdown',
+		mixins: [BtnMixins],
+
+    props: {
+      auto: {
+        type: Boolean,
+        default: false
+      },
+
+      bottom: {
+        type: Boolean,
+        default: false
+      },
+
+      closeOnClick: {
+        type: Boolean,
+        default: true
+      },
+
+      closeOnContentClick: {
+        type: Boolean,
+        default: true
+      },
+
+      left: {
+        type: Boolean,
+        default: false
+      },
+
+      offsetX: {
+        type: Boolean,
+        default: false
+      },
+
+      offsetY: {
+        type: Boolean,
+        default: false
+      },
+
+      options: {
+        type: Array,
+        required: true
+      },
+
+      positionX: {
+        type: Number,
+        required: false
+      },
+
+      positionY: {
+        type: Number,
+        required: false
+      },
+
+      right: {
+        type: Boolean,
+        default: false
+      },
+
+      rounded: {
+        type: Boolean,
+        required: false
+      },
+
+      tile: {
+        type: Boolean,
+        default: false
+      },
+
+      top: {
+        type: Boolean,
+        default: false
+      },  
+
+      
+    },
+
+    data() {
+      return {
+        
+      }
+    },
+
+    methods: {
+      onInput() {
+
+      },
+
+      onClick(item) {
+        this.$emit('click', item)
+      },
+
+      onKeydown(item) {
+        this.$emit('keydown', item)
+      }
+    }
+  }
+</script>
