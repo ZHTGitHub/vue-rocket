@@ -3,13 +3,13 @@ import rules from './rules'
 
 class ZValidate {
   constructor() {
-    const forms = {}
+    this.forms = {}
     this.validator = {}
     this.rules = rules
   }
 
   attach(options) {
-    _.set(forms, options.formId + '.' + options.formKey, {
+    _.set(this.forms, options.formId + '.' + options.formKey, {
       value: options.value,
       label: options.label,
       validation: options.validation
@@ -20,8 +20,8 @@ class ZValidate {
     if(!options) return
 
     if(options.value !== undefined) {
-      if(forms[options.formId]) {
-        const { validation } = forms[options.formId][options.formKey]
+      if(this.forms[options.formId]) {
+        const { validation } = this.forms[options.formId][options.formKey]
         for(let item of validation) {
           if(!this.rules[item.rule](options.value)) {
             return item.message

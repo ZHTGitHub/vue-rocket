@@ -14,16 +14,22 @@ const rules = {
    * @param {Array} rules
    */ 
   excluded: (value, rules) => {
-    return !~rules.indexOf(value)
+    for(let rule of rules.split('|')) {
+      if(~value.indexOf(rule)) {
+        return false
+      }else {
+        return true
+      }
+    }
   },
 
   /**
    * @description 包含
    * @param {String} value
-   * @param {Array} rules
+   * @param {Array} rule
    */ 
-  included: (value, rules) => {
-    return ~rules.indexOf(value)
+  included: (value, rule) => {
+    return ~value.indexOf(rule)
   },
 
   /**

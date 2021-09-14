@@ -69,7 +69,7 @@ export default {
 						ruleValue = item.regex
 					}
 
-					console.log(ruleName, ruleValue)
+					// console.log(ruleName, ruleValue)
 
 					if(!$validator.rules[ruleName]) {
 						this.validateForm('VALID_VALUE')
@@ -97,7 +97,7 @@ export default {
 			$bus.on('ZHT_RESET_FORM', (formId) => {
 				if(this.formId === formId) {
 
-					console.log(this.formKey, this.value)
+					// console.log(this.formKey, this.value)
 
 					const defaultValue = !this.util.tools.isEmpty(this.defaultValue) ? undefined : this.defaultValue
 
