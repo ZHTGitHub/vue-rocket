@@ -156,6 +156,42 @@
 
           <v-col cols="6">
             <h5 class="text-h5">表单示例二</h5>
+            <v-row>
+              <v-col cols="12">
+                <z-text-field
+                  formId="names"
+                  formKey="name"
+                  label="姓名"
+                  :validation="[
+                    { rule: 'required', message: '姓名为必选项.' }
+                  ]"
+                ></z-text-field>
+              </v-col> 
+
+              <v-col cols="12">
+                <div class="btns z-flex justify-center">
+                  <z-btn 
+                    formId="names"
+                    color="primary"
+                    btnType="validate"
+                    @click="onSave"
+                  >保存</z-btn>
+
+                  <z-btn 
+                    class="mx-2"
+                    formId="names"
+                    color="warning"
+                    btnType="reset"
+                  >重置</z-btn>
+
+                  <z-btn 
+                    formId="names"
+                    color="error"
+                    btnType="clear"
+                  >清空</z-btn>
+                </div>
+              </v-col>             
+            </v-row>
           </v-col>
         </v-row>
       </v-container>
@@ -203,6 +239,10 @@
     methods: {
       onSubmit() {
         console.log(this.forms[this.formId])
+      },
+
+      onSave() {
+        console.log(this.forms.names)
       }
     },
 

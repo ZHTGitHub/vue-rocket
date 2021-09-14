@@ -129,7 +129,7 @@ export default {
 		},
 
 		validateForm(status) {
-			$validator.validateFormValueByKey({
+			$validator.validateByKey({
 				formId: this.formId,
 				formKey: this.formKey,
 				status
