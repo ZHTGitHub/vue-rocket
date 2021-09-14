@@ -74,7 +74,6 @@
 
 			// 当前表单已重置
 			$bus.on('ZHT_FORM_RESET', (formId) => {
-				// console.log(this.btnType, formId)
 				if(this.btnType === 'reset') {
 					if(this.formId === formId) {
 						this.$emit('click')
