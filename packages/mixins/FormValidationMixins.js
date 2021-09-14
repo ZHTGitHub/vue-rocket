@@ -1,8 +1,6 @@
 import $validator from '../validate/z-validate'
 import $bus from '../scripts/emitter'
 
-let quantity = 0
-
 export default {
 	created() {
 		// console.log(this.formId, this.formKey)
@@ -13,24 +11,20 @@ export default {
 		$bus.on('ZHT_VALIDATE_FORM', (formId) => {
 
 			if(this.formId === formId) {
-				++quantity
+				++$validator.sum
 				this.value = this.value === undefined ? '' : this.value
 
 				this.validator()
 
-				const form = $validator.validator[this.formId]
-				const results = Object.values(form)
-				const length = results.length
-
 				// console.log(this.value)
-				// console.log(quantity, length)
-				// console.log(results, results.includes('INVALID_VALUE'))
 
-				if(quantity === length) {
+				const { total, results } = $validator.forms[this.formId]
+
+				if($validator.sum === total) {
 					if(!results.includes('INVALID_VALUE')) {
-						$bus.emit('ZHT_ALL_VALUE_VALID', formId)
+						$bus.emit('ZHT_FORM_VALID', formId)
 					}
-					quantity = 0
+					$validator.sum = 0
 				}
 				
 				// console.log(form)
@@ -86,8 +80,6 @@ export default {
 							this.validateForm('VALID_VALUE')
 						}
 					}
-
-					
 				}
 			}
 		},
@@ -109,6 +101,13 @@ export default {
 
 					this.errorMessage = ''
 					this.incorrect = false
+					
+					++$validator.sum
+					const { total } = $validator.forms[this.formId]
+					if($validator.sum === total) {
+						$bus.emit('ZHT_FORM_RESET', formId)
+						$validator.sum = 0
+					}
 				}
 				$bus.off('ZHT_RESET_FORM')
 			})
@@ -123,6 +122,13 @@ export default {
 					})
 					this.errorMessage = ''
 					this.incorrect = false
+
+					++$validator.sum
+					const { total } = $validator.forms[this.formId]
+					if($validator.sum === total) {
+						$bus.emit('ZHT_FORM_CLEARED', formId)
+						$validator.sum = 0
+					}
 				}
 				$bus.off('ZHT_CLEAR_FORM')
 			})

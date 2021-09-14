@@ -62,11 +62,33 @@
 		},
 
 		created() {
-			$bus.on('ZHT_ALL_VALUE_VALID', (formId) => {
+			// 当前表单合法
+			$bus.on('ZHT_FORM_VALID', (formId) => {
 				if(this.btnType === 'validate') {
 					if(this.formId === formId) {
 						this.$emit('click')
-						$bus.off('ZHT_ALL_VALUE_VALID')
+						$bus.off('ZHT_FORM_VALID')
+					}
+				}
+			})
+
+			// 当前表单已重置
+			$bus.on('ZHT_FORM_RESET', (formId) => {
+				// console.log(this.btnType, formId)
+				if(this.btnType === 'reset') {
+					if(this.formId === formId) {
+						this.$emit('click')
+						$bus.off('ZHT_FORM_RESET')
+					}
+				}
+			})
+
+			// 当前表单已清空
+			$bus.on('ZHT_FORM_CLEARED', (formId) => {
+				if(this.btnType === 'clear') {
+					if(this.formId === formId) {
+						this.$emit('click')
+						$bus.off('ZHT_FORM_CLEARED')
 					}
 				}
 			})

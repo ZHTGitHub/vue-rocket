@@ -142,12 +142,14 @@
                     :formId="formId"
                     color="warning"
                     btnType="reset"
+                    @click="onReset"
                   >重置</z-btn>
 
                   <z-btn 
                     :formId="formId"
                     color="error"
                     btnType="clear"
+                    @click="onClear"
                   >清空</z-btn>
                 </div>
               </v-col>
@@ -238,6 +240,14 @@
 
     methods: {
       onSubmit() {
+        console.log(this.forms[this.formId])
+      },
+
+      onReset() {
+        console.log(this.forms[this.formId])
+      },
+
+      onClear() {
         console.log(this.forms[this.formId])
       },
 

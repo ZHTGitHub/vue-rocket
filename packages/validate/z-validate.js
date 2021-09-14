@@ -3,40 +3,30 @@ import rules from './rules'
 
 class ZValidate {
   constructor() {
-    this.forms = {}
+    // 当前表单字段的总数
+    this.sum = 0
+
+    // 每张表单下每个字段的校验结果
     this.validator = {}
+
+    // 每张表单的 字段总数 及 校验结果集
+    this.forms = {}
+
+    // 校验规则
     this.rules = rules
-  }
-
-  attach(options) {
-    _.set(this.forms, options.formId + '.' + options.formKey, {
-      value: options.value,
-      label: options.label,
-      validation: options.validation
-    })
-  }
-
-  validate(options) {
-    if(!options) return
-
-    if(options.value !== undefined) {
-      if(this.forms[options.formId]) {
-        const { validation } = this.forms[options.formId][options.formKey]
-        for(let item of validation) {
-          if(!this.rules[item.rule](options.value)) {
-            return item.message
-          }
-        }
-      }
-    }
-  }
-
-  validateAll() {
-
   }
 
   validateByKey(options) {
     _.set(this.validator, options.formId + '.' + options.formKey, options.status)
+
+    const form = this.validator[options.formId]
+    const results = Object.values(form)
+    const total = results.length
+
+    this.forms[options.formId] = {
+      results,
+      total
+    }
   }
 }
 
