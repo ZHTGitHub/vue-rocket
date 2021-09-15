@@ -24,7 +24,35 @@ const router = [
       title: '表单',
       unique: 'form'
     },
-    component: () => import('../views/Form')
+    component: () => import('../views/Form'),
+    children: [
+      {
+        path: '/form',
+        redirect: 'rules'
+      },
+
+      {
+        path: 'rules',
+        name: 'ZDemoRules',
+        meta: {
+          title: 'Rules 校验规则',
+          unique: 'rules',
+          parent: 'form'
+        },
+        component: () => import('../views/Form/Rules')
+      },
+
+      {
+        path: 'examples',
+        name: 'ZDemoExamples',
+        meta: {
+          title: 'Examples 使用示例',
+          unique: 'examples',
+          parent: 'form'
+        },
+        component: () => import('../views/Form/Examples')
+      },
+    ]
   },
 
   {

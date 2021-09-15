@@ -16,7 +16,24 @@ export const menus = [
     icon: 'mdi-form-select',
     title: '表单',
     link: '/form',
-    leaf: false
+    leaf: true,
+    children: [
+      {
+        pId: 'form',
+        unique: 'rules',
+        icon: '',
+        title: 'Rules 校验规则',
+        link: '/form/rules'
+      },
+
+      {
+        pId: 'form',
+        unique: 'examples',
+        icon: '',
+        title: 'Examples 使用示例',
+        link: '/form/examples'
+      }
+    ]
   },
 
   {

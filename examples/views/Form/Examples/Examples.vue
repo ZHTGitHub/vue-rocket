@@ -1,0 +1,262 @@
+<template>
+  <div class="form-examples">
+    <v-row>
+      <v-col cols="6">
+        <h5 class="text-h5">表单示例一</h5>
+        <v-row>
+          <template v-for="(item, index) in InfoFormCells" >
+            <v-col 
+              v-if="item.inputType === 'text' || item.inputType === 'number'"
+              cols="12" 
+              :key="`InfoFormInput_${ index }`"
+            >
+              <z-text-field
+                :formId="formId"
+                :formKey="item.formKey"
+                :label="item.label"
+                :validation="item.validation"
+                :defaultValue="item.defaultValue"
+              ></z-text-field>
+            </v-col>
+
+            <v-col 
+              v-if="item.inputType === 'select'"
+              cols="12" 
+              :key="`InfoFormInput_${ index }`"
+            >
+              <z-select 
+                :formId="formId"
+                :formKey="item.formKey"
+                clearable
+                :label="item.label"
+                :validation="item.validation"
+                :options="cityOptions"
+                :defaultValue="item.defaultValue"
+              ></z-select>
+            </v-col>
+
+            <v-col 
+              v-if="item.inputType === 'date'"
+              cols="12" 
+              :key="`InfoFormInput_${ index }`"
+            > 
+              <z-date-picker
+                :formId="formId"
+                :formKey="item.formKey"
+                :label="item.label"
+                :validation="item.validation"
+                prepend-icon="mdi-calendar"
+                :defaultValue="item.defaultValue"
+              ></z-date-picker>
+            </v-col>
+
+            <v-col 
+              v-if="item.inputType === 'radios'"
+              cols="12" 
+              :key="`InfoFormInput_${ index }`"
+            >
+              <z-radios
+                :formId="formId"
+                :formKey="item.formKey"
+                :label="item.label"
+                :validation="item.validation"
+                :options="genderOptions"
+                :defaultValue="item.defaultValue"
+              >
+              </z-radios>
+            </v-col>
+
+            <v-col 
+              v-if="item.inputType === 'checkboxs'"
+              cols="12" 
+              :key="`InfoFormInput_${ index }`"
+            >
+              <z-checkboxs
+                :formId="formId"
+                :formKey="item.formKey"
+                :label="item.label"
+                :validation="item.validation"
+                :options="hobbyOptions"
+                :defaultValue="item.defaultValue"
+              ></z-checkboxs>
+            </v-col>
+
+            <v-col 
+              v-if="item.inputType === 'textarea'"
+              cols="12" 
+              :key="`InfoFormTextarea_${ index }`"
+            >
+              <z-textarea
+                :formId="formId"
+                :formKey="item.formKey"
+                :label="item.label"
+                :validation="item.validation"
+                :defaultValue="item.defaultValue"
+              ></z-textarea>
+            </v-col>
+
+            <v-col 
+              v-if="item.inputType === 'btnToggle'"
+              cols="12" 
+              :key="`InfoFormBtnToggle_${ index }`"
+            >
+              <z-btn-toggle
+                :formId="formId"
+                :formKey="item.formKey"
+                color="primary"
+                flip
+                :label="item.label"
+                :validation="item.validation"
+                :options="sexualOptions"
+                :defaultValue="item.defaultValue"
+              ></z-btn-toggle>
+            </v-col>
+
+            <v-col 
+              v-if="item.inputType === 'switch'"
+              cols="2" 
+              :key="`InfoFormInput_${ index }`"
+            > 
+              <z-switch
+                :formId="formId"
+                :formKey="item.formKey"
+                :label="item.label"
+                :defaultValue="item.defaultValue"
+              ></z-switch>
+            </v-col>
+          </template>
+
+          <v-col cols="12">
+            <div class="btns z-flex justify-center">
+              <z-btn 
+                :formId="formId"
+                color="primary"
+                btnType="validate"
+                @click="onSubmit"
+              >提交</z-btn>
+
+              <z-btn 
+                class="mx-2"
+                :formId="formId"
+                color="warning"
+                btnType="reset"
+                @click="onReset"
+              >重置</z-btn>
+
+              <z-btn 
+                :formId="formId"
+                color="error"
+                btnType="clear"
+                @click="onClear"
+              >清空</z-btn>
+            </div>
+          </v-col>
+        </v-row>
+      </v-col>
+
+      <v-col cols="6">
+        <h5 class="text-h5">表单示例二</h5>
+        <v-row>
+          <v-col cols="12">
+            <z-text-field
+              formId="names"
+              formKey="name"
+              label="姓名"
+              hint="姓名为中文"
+              :hide-details="false"
+              :validation="[
+                { rule: 'required', message: '姓名为必选项.' }
+              ]"
+            >
+              <span slot="prepend-outer">-</span>
+            </z-text-field>
+          </v-col> 
+
+          <v-col cols="12">
+            <div class="btns z-flex justify-center">
+              <z-btn 
+                formId="names"
+                color="primary"
+                btnType="validate"
+                @click="onSave"
+              >保存</z-btn>
+
+              <z-btn 
+                class="mx-2"
+                formId="names"
+                color="warning"
+                btnType="reset"
+              >重置</z-btn>
+
+              <z-btn 
+                formId="names"
+                color="error"
+                btnType="clear"
+              >清空</z-btn>
+            </div>
+          </v-col>             
+        </v-row>
+      </v-col>
+    </v-row>
+  </div>
+</template>
+
+<script>
+  import { mapState } from 'vuex'
+  import { InfoFormCells } from './cells'
+
+  export default {
+    name: 'FormExamples',
+
+    data() {
+      return {
+        formId: 'Info',
+        InfoFormCells: InfoFormCells,
+        cityOptions: [
+          { label: '广州', value: 1 },
+          { label: '深圳', value: 2 },
+          { label: '珠海', value: 3 },
+          { label: '佛山', value: 4 }
+        ],
+        sexualOptions: [
+          { label: '异性恋', value: 1, icon: 'mdi-heart-outline' },
+          { label: '同性恋', value: 2, icon: 'mdi-heart-multiple-outline ' },
+          { label: '双性恋', value: 3, icon: 'mdi-heart-half-full' },
+          { label: '无性', value: 4, }
+        ],  
+        genderOptions: [
+          { label: '男性', value: 1 },
+          { label: '女性', value: 2 }
+        ],
+        hobbyOptions: [
+          { label: '游泳', value: 1 },
+          { label: '网球', value: 2 },
+          { label: '乒乓球', value: 3 },
+          { label: '羽毛球', value: 4 }
+        ]
+      }
+    },
+
+    methods: {
+      onSubmit() {
+        console.log(this.forms[this.formId])
+      },
+
+      onReset() {
+        console.log(this.forms[this.formId])
+      },
+
+      onClear() {
+        console.log(this.forms[this.formId])
+      },
+
+      onSave() {
+        console.log(this.forms.names)
+      }
+    },
+
+    computed: {
+      ...mapState(['forms'])
+    },
+  }
+</script>
