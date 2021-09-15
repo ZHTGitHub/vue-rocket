@@ -153,5 +153,24 @@ export const flex = [
       class: 'flex-nowrap',
       label: '不换行'
     }
+  ],
+
+  [
+    {
+      class: 'flex-shrink-0',
+      label: '阻止该条件的发生'
+    },
+    {
+      class: 'flex-shrink-1',
+      label: '允许项目收缩到它的内容所需要的空间'
+    },
+    {
+      class: 'flex-grow-0',
+      label: '阻止该条件的发生'
+    },
+    {
+      class: 'flex-grow-1',
+      label: '允许元素增长以填充可用的空间'
+    }
   ]
 ]

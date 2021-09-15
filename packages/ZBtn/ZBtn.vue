@@ -52,6 +52,7 @@
 
 		data() {
 			return {
+				event: null,
 				actions: new Map([
 					['clear', 'ZHT_CLEAR_FORM'],
 					['reset', 'ZHT_RESET_FORM'],
@@ -66,7 +67,7 @@
 			$bus.on('ZHT_FORM_VALID', (formId) => {
 				if(this.btnType === 'validate') {
 					if(this.formId === formId) {
-						this.$emit('click')
+						this.$emit('click', this.event)
 						$bus.off('ZHT_FORM_VALID')
 					}
 				}
@@ -76,7 +77,7 @@
 			$bus.on('ZHT_FORM_RESET', (formId) => {
 				if(this.btnType === 'reset') {
 					if(this.formId === formId) {
-						this.$emit('click')
+						this.$emit('click', this.event)
 						$bus.off('ZHT_FORM_RESET')
 					}
 				}
@@ -86,7 +87,7 @@
 			$bus.on('ZHT_FORM_CLEARED', (formId) => {
 				if(this.btnType === 'clear') {
 					if(this.formId === formId) {
-						this.$emit('click')
+						this.$emit('click', this.event)
 						$bus.off('ZHT_FORM_CLEARED')
 					}
 				}
@@ -94,10 +95,11 @@
 		},
 
 		methods: {
-			onClick() {
+			onClick(event) {
+				this.event = event
 				const action = this.actions.get(this.btnType)
 				if(action === 'click') {
-					this.$emit(action)
+					this.$emit('click', this.event)
 					return
 				}
 
