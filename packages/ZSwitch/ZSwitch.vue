@@ -3,11 +3,11 @@
     <v-switch
       v-model="value"
       :disabled="disabled"
+      :error-messages="errorMessage"
       :hide-details="hideDetails"
       :label="label"
       :readonly="readonly"
     ></v-switch>
-    <p class="v-messages theme--light error--text z-messages" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 

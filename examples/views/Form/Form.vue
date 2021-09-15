@@ -164,10 +164,14 @@
                   formId="names"
                   formKey="name"
                   label="姓名"
+                  hint="姓名为中文"
+                  :hide-details="false"
                   :validation="[
                     { rule: 'required', message: '姓名为必选项.' }
                   ]"
-                ></z-text-field>
+                >
+                  <span slot="prepend-outer">-</span>
+                </z-text-field>
               </v-col> 
 
               <v-col cols="12">

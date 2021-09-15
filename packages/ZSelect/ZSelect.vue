@@ -9,6 +9,7 @@
       :counter="counter"
       :disabled="disabled"
       :error="incorrect"
+      :error-messages="errorMessage"
       :hide-details="hideDetails"
       :hint="hint"
       :items="items"
@@ -48,7 +49,6 @@
       </template>
       <!-- 选择器外部 文字之前 END -->
     </v-select>
-    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

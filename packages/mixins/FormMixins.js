@@ -54,7 +54,7 @@ export default {
 
 		hideDetails: {
 			type: Boolean,
-			default: true
+			default: false
 		},
 
 		hint: {

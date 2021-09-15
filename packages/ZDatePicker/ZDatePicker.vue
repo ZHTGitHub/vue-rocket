@@ -19,6 +19,7 @@
           :counter="counter"
           :disabled="disabled"
           :error="incorrect"
+          :error-messages="errorMessage"
           :hide-details="hideDetails"
           :hint="hint"
           :label="label"
@@ -82,7 +83,6 @@
         </v-btn>
       </v-date-picker>
     </v-menu>
-    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

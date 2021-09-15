@@ -5,6 +5,7 @@
       :column="column"
       :disabled="disabled"
       :error="incorrect"
+      :error-messages="errorMessage"
       :hide-details="hideDetails"
       :label="label"
       :readonly="readonly"
@@ -19,7 +20,6 @@
         :value="item.value"
       ></v-radio>
     </v-radio-group>
-    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template>
 

@@ -4,11 +4,13 @@
       v-model="value"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
+      autocomplete="off"
       :clear-icon="clearIcon"
       :clearable="clearable"
       :counter="counter"
       :disabled="disabled"
       :error="incorrect"
+      :error-messages="errorMessage"
       :hide-details="hideDetails"
       :hint="hint"
       :label="label"
@@ -49,7 +51,6 @@
       </template>
       <!-- 输入框外部 文字之前 END -->
     </v-text-field>
-    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
   </div>
 </template> 
 
