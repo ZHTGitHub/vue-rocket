@@ -34,8 +34,7 @@
   import 'prismjs/themes/prism-okaidia.css'
 
   const install = ` # 安装 vue-rocket
-    npm install vue-rocket
-  `
+    npm install vue-rocket`
 
   export default {
     name: 'ZHome',

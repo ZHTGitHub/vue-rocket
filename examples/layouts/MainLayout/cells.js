@@ -36,15 +36,15 @@ export const menus = [
     ]
   },
 
-  {
-    pId: '-1',
-    id: 'table',
-    unique: 'table',
-    icon: 'mdi-table',
-    title: '表格',
-    link: '/table',
-    leaf: false
-  },
+  // {
+  //   pId: '-1',
+  //   id: 'table',
+  //   unique: 'table',
+  //   icon: 'mdi-table',
+  //   title: '表格',
+  //   link: '/table',
+  //   leaf: false
+  // },
 
   {
     pId: '-1',
