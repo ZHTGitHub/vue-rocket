@@ -1,5 +1,47 @@
 const rules = {
   /**
+   * @description 英文字母
+   * @param {String} value
+   */ 
+  alpha: (value) => {
+    const reg = /^[A-Za-z]+$/
+    return reg.test(value)
+  },
+
+  /**
+   * @description 英文字母及自然数
+   * @param {String} value
+   */ 
+   alpha_num: (value) => {
+    const reg = /^[A-Za-z0-9]+$/
+    return reg.test(value)
+  },
+
+  /**
+   * @description 不得小于/大于指定的值
+   * @param {String} value
+   */ 
+   between: (value, rule) => {
+    const values = rule.split(',')
+    const min_value = +values[0]
+    const max_value = +values[1]
+    value = +value
+    if(value >= min_value && value <= max_value) {
+      return true
+    }
+    return false
+  },
+
+  /**
+   * @description 接受正负小数
+   * @param {String} value
+   */ 
+   decimal: (value) => {
+    const reg = /^(\-|\+)?\d+(\.\d+)?$/
+    return reg.test(value)
+  },
+
+  /**
    * @description 邮箱
    * @param {String} value
    */ 
@@ -111,15 +153,6 @@ const rules = {
 	},
 
   /**
-   * @description 数字
-   * @param {String} value
-   */ 
-  number: (value) => {
-    const reg = /^(\-|\+)?\d+(\.\d+)?$/
-    return reg.test(value)
-  },
-
-  /**
    * @description 正整数
    * @param {String} value
    */ 
@@ -127,15 +160,6 @@ const rules = {
     const reg = /^[0-9]*$/
 		return reg.test(value)
   },
-
-  /**
-   * @description 手机
-   * @param {String} value
-   */ 
-  phone: (value) => {
-		const reg = /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/
-		return reg.test(value)
-	},
 
   /**
    * @description 正则表达式

@@ -165,7 +165,9 @@
               hint="姓名为中文"
               :hide-details="false"
               :validation="[
-                { rule: 'required', message: '姓名为必选项.' }
+                { rule: 'required', message: '姓名为必选项.' },
+                { rule: 'decimal', message: '正负小数.' },
+                { rule: 'between:1,9', message: '必须大于等于1，小于等于9.' }
               ]"
             >
               <span slot="prepend-outer">-</span>
