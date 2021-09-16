@@ -9,7 +9,7 @@
     >
       <h6 class="text-h5">{{ item.rule }}</h6>
       <p>{{ item.usage }}</p>
-      <pre class="line-numbers"><code class="language-markup">{{ item.validation }}</code></pre>
+      <pre class="rounded-md line-numbers"><code class="language-markup">{{ item.validation }}</code></pre>
     </div>
   </div>
 </template>

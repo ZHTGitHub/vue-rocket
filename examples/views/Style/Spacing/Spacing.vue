@@ -2,71 +2,164 @@
   <div class="demo-padding">
     <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
 
+    <v-row>
+      <v-col class="z-flex" :cols="12" :sm="6">
+        <z-select
+          :formId="formId"
+          formKey="paddingDirection"
+          class="pr-2"
+          :options="directions"
+          :defaultValue="paddingDirection"
+          @change="onSelect"
+        >
+          <template v-slot:prepend-outer>
+            <strong class="primary--text py-1">p</strong>
+          </template>
+
+          <template v-slot:append-outer>
+            <div class="py-1">-</div>
+          </template>
+        </z-select>
+
+        <z-select
+          :formId="formId"
+          formKey="paddingSize"
+          :options="paddingSizes"
+          :defaultValue="paddingSize"
+          @change="onSelect"
+        >
+        </z-select>
+      </v-col>
+
+      <v-col class="z-flex" :cols="12" :sm="6">
+        <z-select
+          :formId="formId"
+          formKey="marginDirection"
+          class="pr-2"
+          :options="directions"
+          :defaultValue="marginDirection"
+          @change="onSelect"
+        >
+          <template v-slot:prepend-outer>
+            <strong class="primary--text py-1">m</strong>
+          </template>
+
+          <template v-slot:append-outer>
+            <div class="py-1">-</div>
+          </template>
+        </z-select>
+
+        <z-select
+          :formId="formId"
+          formKey="marginSize"
+          :options="marginSizes"
+          :defaultValue="marginSize"
+          @change="onSelect"
+        >
+        </z-select>
+      </v-col>
+    </v-row>
+
     
 
-    <div class="orange" style="overflow:hidden">
-      <div class="green pa-2 ma-0 elevation-4">
-        <div class="white text-center">
-          Use the controls above to try out the different spacing helpers.
+    <div class="margin">
+      <div 
+        class="padding" 
+        :class="[`p${ paddingDirection }-${ paddingSize }`, `m${ marginDirection }-${ marginSize }`]"
+      >
+        <div class="content text-center">
+          红色为外边距 绿色为内边距
         </div>
       </div>
     </div>
-
-    <!-- <template v-for="(items, index) in cells.padding">
-      <table class="mr-4 api-table" :key="`padding_${ index }`">
-        <thead>
-          <tr>
-            <th>类名</th>
-            <th>效果</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr v-for="(item, i) in items" :key="`padding_${ i }`">
-            <td>{{ item.class }}</td>
-            <td>{{ item.label }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </template>
-
-    <template v-for="(items, index) in cells.margin">
-      <table class="mr-4 api-table" :key="`margin_${ index }`">
-        <thead>
-          <tr>
-            <th>类名</th>
-            <th>效果</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr v-for="(item, i) in items" :key="`margin_${ i }`">
-            <td>{{ item.class }}</td>
-            <td>{{ item.label }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </template> -->
   </div>
 </template>
 
 <script>
   import cells from './cells'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'DemoStylePadding',
     data() {
+      const defaults = [
+        { value: 0, label: 0 },
+        { value: 1, label: 1 },
+        { value: 2, label: 2 },
+        { value: 3, label: 3 },
+        { value: 4, label: 4 },
+        { value: 5, label: 5 },
+        { value: 6, label: 6 },
+        { value: 7, label: 7 },
+        { value: 8, label: 8 },
+        { value: 9, label: 9 },
+        { value: 10, label: 10 },
+        { value: 11, label: 11 },
+        { value: 12, label: 12 },
+        { value: 13, label: 13 },
+        { value: 14, label: 14 },
+        { value: 15, label: 15 },
+        { value: 16, label: 16 }
+      ]
+
       return {
-        cells
+        cells,
+        formId: 'spacing',
+        directions: [
+          { value: 't', label: 't' },
+          { value: 'b', label: 'b' },
+          { value: 'l', label: 'l' },
+          { value: 'r', label: 'r' },
+          { value: 'x', label: 'x' },
+          { value: 'y', label: 'y' },
+          { value: 'a', label: 'a' }
+        ],
+        paddingSizes: defaults,
+        marginSizes: [
+          { value: 'auto', label: 'auto' },
+          ...defaults
+        ],
+
+        paddingDirection: 'a',
+        paddingSize: 2,
+
+        marginDirection: 'a',
+        marginSize: 2
       }
     },
 
     created() {
       console.log(this.padding)
+    },
+
+    methods: {
+      onSelect() {
+        const form = this.forms[this.formId]
+
+        this.paddingDirection = form.paddingDirection
+        this.paddingSize = form.paddingSize
+
+        this.marginDirection = form.marginDirection
+        this.marginSize = form.marginSize
+
+      }
+    },
+
+    computed: {
+      ...mapState(['forms'])
     }
   }
 </script>
 
-<style scoped>
-  
+<style scoped lang="scss">
+  .margin {
+    background-color: #F50057;
+    overflow: hidden;
+    .padding {
+      background-color: #00796B;
+      .content {
+        background-color: #fff;
+      }
+    }
+  }
 </style>
