@@ -68,7 +68,7 @@
         :class="[`p${ paddingDirection }-${ paddingSize }`, `m${ marginDirection }-${ marginSize }`]"
       >
         <div class="content text-center">
-          红色为外边距 绿色为内边距
+          红色为外边距效果 绿色为内边距效果
         </div>
       </div>
     </div>

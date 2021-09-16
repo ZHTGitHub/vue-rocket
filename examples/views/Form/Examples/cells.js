@@ -45,16 +45,16 @@ const fields = [
     defaultValue: '2021-09-20'
   },
 
-  {
-    inputType: 'textarea',
-    formKey: 'intro',
-    label: '自我介绍',
-    validation: [
-      { rule: 'required', message: '自我介绍为必填项.' },
-      { rule: 'min:10', message: '自我介绍至少十个字.' },
-    ],
-    defaultValue: undefined
-  },
+  // {
+  //   inputType: 'textarea',
+  //   formKey: 'intro',
+  //   label: '自我介绍',
+  //   validation: [
+  //     { rule: 'required', message: '自我介绍为必填项.' },
+  //     { rule: 'min:10', message: '自我介绍至少十个字.' },
+  //   ],
+  //   defaultValue: undefined
+  // },
 
   {
     inputType: 'radios',
