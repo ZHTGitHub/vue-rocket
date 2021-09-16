@@ -1,6 +1,6 @@
 {
   "name": "vue-rocket",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "description": "基于 Vue+Vuetify 的后台管理系统框架",
   "author": "zenghaitao",
   "private": false,
@@ -11,7 +11,7 @@
     "UI",
     "Vue"
   ],
-  "homepage": "https://github.com/ZHTGitHub/vue-rocket",
+  "homepage": "https://zhtgithub.github.io/vue-rocket.github.io/index.html",
   "repository": {
     "type": "git",
     "url": "https://github.com/ZHTGitHub/vue-rocket"

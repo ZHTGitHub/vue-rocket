@@ -1,6 +1,6 @@
 module.exports = {
   lintOnSave: true,
-
+  publicPath: './',
   // 修改 src 为 examples
   pages: {
     index: {
