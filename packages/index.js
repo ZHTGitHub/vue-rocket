@@ -11,6 +11,7 @@ import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZDrawer from './ZDrawer'
 
+import "./scripts/store"
 import "./styles/styles.css"
 
 const components = [
