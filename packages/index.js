@@ -11,7 +11,7 @@ import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZDrawer from './ZDrawer'
 
-import "./scripts/store"
+import store from './scripts/store'
 import "./styles/styles.css"
 
 const components = [
@@ -39,6 +39,7 @@ if(typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
+	store,
 	install,
 	ZBtn,
 	ZBtnToggle,

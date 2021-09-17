@@ -3,7 +3,9 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import store from '../../packages/store'
+import vueRocket from '../../lib/vuerocket.umd'
+
+const { store } = vueRocket
 
 // modules
 const files = require.context('./examples', false, /\.js$/)
