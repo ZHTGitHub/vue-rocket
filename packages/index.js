@@ -38,8 +38,11 @@ if(typeof window !== 'undefined' && window.Vue) {
 	install(window.Vue)
 }
 
+export { 
+	store
+}
+
 export default {
-	store,
 	install,
 	ZBtn,
 	ZBtnToggle,
