@@ -22,7 +22,7 @@
             :label="item.label"
             :success="success"
             :value="item.value"
-            class="mr-4"
+            class="mt-0 mr-4"
           ></v-checkbox>
         </div>
     </div>
@@ -105,9 +105,10 @@
 
 <style scoped lang="scss">
   .z-input--checkboxs-group__input {
+    padding-top: 12px;
+    padding-bottom: 6px;
     legend.v-label {
-      padding-right: 8px;
-      margin-top: 24px;
+      padding: 8px 8px 8px 0;
       height: auto;
       font-size: 14px;
       cursor: text;
@@ -115,7 +116,6 @@
 
     .z-checkbox {
       height: auto;
-      margin-bottom: 8px;
     }
   }
 </style>
