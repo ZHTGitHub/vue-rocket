@@ -8,8 +8,8 @@ import vuetify from './plugins/vuetify'
 import request from './api/request'
 Vue.prototype.$request = request
 
-import vueRocket from '../lib/vuerocket.umd'
-import '../lib/vuerocket.css'
+import vueRocket from '../packages'
+import '../packages/styles/styles.css'
 Vue.use(vueRocket)
 
 import DemoComponents from './Components'

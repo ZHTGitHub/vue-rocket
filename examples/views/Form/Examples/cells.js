@@ -105,7 +105,10 @@ const fields = [
     inputType: 'switch',
     formKey: 'active',
     label: '激活',
-    defaultValue: true
+    validation: [
+      { rule: 'required', message: '请勾选激活.' }
+    ],
+    defaultValue: undefined
   }
 ]
 

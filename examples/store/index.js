@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import { store } from '../../lib/vuerocket.umd'
+import { forms } from '../../lib/vuerocket.umd'
 
 // modules
 const files = require.context('./examples', false, /\.js$/)
@@ -14,6 +14,6 @@ files.keys().map(key => {
 })
 
 export default new Vuex.Store({
-  ...store,
+  ...forms,
   modules
 })

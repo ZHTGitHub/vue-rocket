@@ -24,7 +24,7 @@
         </v-btn>
       </v-btn-toggle>
     </div>
-    <span class="v-messages theme--light error--text z-messages" v-if="incorrect">{{ errorMessage }}</span>
+    <div class="error--text z-messages">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -114,3 +114,14 @@
     }
   }
 </script>
+
+<style scoped lang="scss">
+  .z-btn-toggle {
+    .btn-groups {
+      height: auto;
+      padding-top: 4px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+  }
+</style>

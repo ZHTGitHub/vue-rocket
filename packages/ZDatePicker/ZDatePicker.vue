@@ -95,6 +95,11 @@
     mixins: [FormMixins, FormValidationMixins],
 
     props: {
+      clearable: {
+        type: Boolean,
+        default: true
+      },
+
       firstDayOfWeek: {
         type: [Number, String],
         default: 0

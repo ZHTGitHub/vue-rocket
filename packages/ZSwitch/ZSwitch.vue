@@ -3,10 +3,12 @@
     <v-switch
       v-model="value"
       :disabled="disabled"
+      :error="incorrect"
       :error-messages="errorMessage"
       :hide-details="hideDetails"
       :label="label"
       :readonly="readonly"
+      :success="success"
     ></v-switch>
   </div>
 </template>

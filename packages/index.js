@@ -11,7 +11,7 @@ import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZDrawer from './ZDrawer'
 
-import store from './scripts/store'
+import forms from './scripts/forms'
 import "./styles/styles.css"
 
 const components = [
@@ -39,7 +39,7 @@ if(typeof window !== 'undefined' && window.Vue) {
 }
 
 export { 
-	store
+	forms
 }
 
 export default {
