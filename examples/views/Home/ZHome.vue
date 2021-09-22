@@ -32,7 +32,7 @@
         <code>
           npm i vue-rocket
         </code>
-        <p>安装完 vue-rocket 需在项目的状态管理引入管理表单的 store</p>
+        <p>安装完 vue-rocket 需在项目的状态管理引入管理表单的 forms</p>
         
         <div class="pl-4 pb-12">
           <img src="../../../public/forms.jpg">
