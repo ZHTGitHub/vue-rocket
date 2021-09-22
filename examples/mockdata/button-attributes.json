@@ -210,6 +210,15 @@
     },
 
     {
+      "name": "text",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "使背景透明 使用 color 时 颜色将应用于按钮文本 而不是背景"
+    },
+
+    {
       "name": "tile",
       "required": "否",
       "type": "Boolean",

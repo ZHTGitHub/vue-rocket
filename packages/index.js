@@ -1,5 +1,6 @@
 import ZBtn from './ZBtn'
 import ZBtnToggle from './ZBtnToggle'
+import ZCheckbox from './ZCheckbox'
 import ZCheckboxs from './ZCheckboxs'
 import ZDatePicker from './ZDatePicker'
 import ZDropdown from './ZDropdown'
@@ -17,6 +18,7 @@ import "./styles/styles.css"
 const components = [
 	ZBtn,
 	ZBtnToggle,
+	ZCheckbox,
 	ZCheckboxs,
 	ZDatePicker,
 	ZDropdown,

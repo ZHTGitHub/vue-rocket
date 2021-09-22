@@ -17,6 +17,7 @@
 			:right="right"
 			:rounded="rounded"
 			:small="small"
+			:text="text"
 			:tile="tile"
 			:top="top"
 			:x-large="larger"

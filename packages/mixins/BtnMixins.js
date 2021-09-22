@@ -105,6 +105,11 @@ export default {
       default: false
     },
 
+    text: {
+      type: Boolean,
+      default: false
+    },
+
     tile: {
       type: Boolean,
       default: false
