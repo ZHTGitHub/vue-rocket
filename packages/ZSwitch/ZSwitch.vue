@@ -9,6 +9,8 @@
       :label="label"
       :readonly="readonly"
       :success="success"
+      @change="onChange"
+      @click="onClick"
     ></v-switch>
   </div>
 </template>
@@ -26,6 +28,16 @@
         type: Boolean,
         default: false
       }
+    },
+
+    methods: {
+      onChange(value) {
+        this.$emit('change', value)
+      },
+
+      onClick(event) {
+        this.$emit('click', event, this.value)
+      },
     },
 
     watch: {

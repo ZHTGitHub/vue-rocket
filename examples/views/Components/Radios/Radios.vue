@@ -5,6 +5,8 @@
     <usage-examples></usage-examples>
 
     <radios-attributes></radios-attributes>
+
+    <radios-methods></radios-methods>
   </div>
 </template>
 
@@ -22,7 +24,8 @@
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'radios-attributes': () => import('./RadiosAttributes')
+      'radios-attributes': () => import('./RadiosAttributes'),
+      'radios-methods': () => import('./RadiosMethods') 
     }
   }
 </script>

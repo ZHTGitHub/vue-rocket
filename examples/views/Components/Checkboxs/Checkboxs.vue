@@ -5,6 +5,8 @@
     <usage-examples></usage-examples>
 
     <checkboxs-attributes></checkboxs-attributes>
+
+    <checkboxs-methods></checkboxs-methods>
   </div>
 </template>
 
@@ -23,7 +25,8 @@
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'checkboxs-attributes': () => import('./CheckboxsAttributes')
+      'checkboxs-attributes': () => import('./CheckboxsAttributes'),
+      'checkboxs-methods': () => import('./CheckboxsMethods')
     }
   }
 </script>

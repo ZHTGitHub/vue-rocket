@@ -11,6 +11,7 @@
       :readonly="readonly"
       :row="row"
       :success="success"
+      @change="onChange"
     >
       <v-radio
         v-for="(item, index) of items" 
@@ -18,6 +19,7 @@
         
         :label="item.label"
         :value="item.value"
+        @click="onClick"
       ></v-radio>
     </v-radio-group>
   </div>
@@ -59,6 +61,16 @@
           label: item.label,
           value: item.value
         })
+      }
+    },
+
+    methods: {
+      onChange(value) {
+        this.$emit('change', value)
+      },
+
+      onClick(event) {
+        this.$emit('click', event, this.value)
       }
     }
   }

@@ -5,7 +5,7 @@
     {
       "name": "change",
       "parameters": "-",
-      "description": "选中按钮组值发生改变是触发"
+      "description": "选中按钮组值发生改变时触发"
     }
   ]
 }

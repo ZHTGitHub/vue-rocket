@@ -4,14 +4,14 @@
   "data": [
     {
       "name": "click",
-      "parameters": "-",
+      "parameters": "(event: Event, value: Object)",
       "description": "单击下拉内容时发出的事件"
     },
 
     {
-      "name": "keydown",
-      "parameters": "-",
-      "description": ""
+      "name": "input",
+      "parameters": "(value: Boolean)",
+      "description": "被绑定模型的更新"
     }
   ]
 }

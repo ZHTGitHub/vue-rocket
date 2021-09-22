@@ -4,7 +4,7 @@
   "data": [
     {
       "name": "click",
-      "parameters": "-",
+      "parameters": "(event: Event)",
       "description": "单击按钮时发出的事件"
     }
   ]

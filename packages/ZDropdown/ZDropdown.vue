@@ -49,8 +49,7 @@
           v-for="(item, index) in options"
           :key="`z_dropdown_${ index }`"
           link
-          @click="onClick(item)"
-          @keydown="onKeydown(item)"
+          @click="onClick($event, item)"
         >
           <v-list-item-title>{{ item.label }}</v-list-item-title>
         </v-list-item>
@@ -140,23 +139,14 @@
       
     },
 
-    data() {
-      return {
-        
-      }
-    },
-
     methods: {
-      onInput() {
-
+      onClick(event, item) {
+        this.$emit('click', event, item)
       },
 
-      onClick(item) {
-        this.$emit('click', item)
-      },
-
-      onKeydown(item) {
-        this.$emit('keydown', item)
+      onInput(input) {
+        console.log(input)
+        this.$emit('input', input)
       }
     }
   }

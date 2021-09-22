@@ -139,7 +139,9 @@
               color="primary"
               btnType="validate"
               @click="onSubmit"
-            >提交</z-btn>
+            >
+            <v-icon>mdi-send</v-icon>
+            提交</z-btn>
 
             <z-btn 
               class="mx-2"
@@ -147,14 +149,18 @@
               color="warning"
               btnType="reset"
               @click="onReset"
-            >重置</z-btn>
+            >
+            <v-icon>mdi-reload</v-icon>
+            重置</z-btn>
 
             <z-btn 
               :formId="formId"
               color="error"
               btnType="clear"
               @click="onClear"
-            >清空</z-btn>
+            >
+            <v-icon>mdi-broom</v-icon>
+            清空</z-btn>
           </v-card-actions>
         </v-card>
       </v-col>

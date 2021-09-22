@@ -5,6 +5,8 @@
     <usage-examples></usage-examples>
 
     <switch-attributes></switch-attributes>
+
+    <switch-methods></switch-methods>
   </div>
 </template>
 
@@ -14,7 +16,8 @@
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'switch-attributes': () => import('./SwitchAttributes')
+      'switch-attributes': () => import('./SwitchAttributes'),
+      'switch-methods': () => import('./SwitchMethods')
     }
   }
 </script>

@@ -4,25 +4,25 @@
   "data": [
     {
       "name": "blur",
-      "parameters": "-",
+      "parameters": "(event: Event, value: String | Number)",
       "description": "当选择器所失去焦点时触发"
     },
 
     {
       "name": "change",
-      "parameters": "-",
+      "parameters": "(value: String | Number)",
       "description": "当用户交互更改选择时触发"
     },
 
     {
       "name": "click",
-      "parameters": "-",
+      "parameters": "(event: Event, value: String | Number)",
       "description": "在单击选择器所时触发"
     },
 
     {
       "name": "focus",
-      "parameters": "-",
+      "parameters": "(event: Event, value: String | Number)",
       "description": "当选择器所得到焦点时触发"
     }
   ]

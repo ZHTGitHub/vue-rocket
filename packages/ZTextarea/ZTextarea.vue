@@ -62,28 +62,28 @@
     mixins: [FormMixins, FormValidationMixins],
 
     methods: {
-      onBlur() {
-        this.$emit('blur')
+      onBlur(event) {
+        this.$emit('blur', event, this.value)
       },
 
-      onChange() {
-        this.$emit('change')
+      onChange(value) {
+        this.$emit('change', value)
       },
 
-      onClick() {
-        this.$emit('click')
+      onClick(event) {
+        this.$emit('click', event, this.value)
       },
 
-      onFocus() {
-        this.$emit('focus')
+      onFocus(event) {
+        this.$emit('focus', event, this.value)
       },
 
-      onKeydown() {
-        this.$emit('keydown')
+      onKeydown(event) {
+        this.$emit('keydown', event, this.value)
       },
 
-      onKeyup() {
-        this.$emit('keyup')
+      onKeyup(event) {
+        this.$emit('keyup', event, this.value)
       }
     }
   }

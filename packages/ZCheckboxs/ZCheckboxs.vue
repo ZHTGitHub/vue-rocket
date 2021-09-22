@@ -23,6 +23,8 @@
             :success="success"
             :value="item.value"
             class="mt-0 mr-4"
+            @change="onChange"
+            @click="onClick"
           ></v-checkbox>
         </div>
     </div>
@@ -67,6 +69,16 @@
           label: item.label,
           value: item.value
         })
+      }
+    },
+
+    methods: {
+      onChange(values) {
+        this.$emit('change', values)
+      },
+
+      onClick(event) {
+        this.$emit('click', event, this.values)
       }
     },
 
