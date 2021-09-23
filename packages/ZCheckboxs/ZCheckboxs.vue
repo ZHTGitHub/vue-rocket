@@ -52,19 +52,23 @@
 
       defaultValue: {
         type: Array,
-        default: () => { return [] }
+        default: () => []
       }
     },
 
     data() {
       return {
         values: [],
-        items: []
+        sweets: [],
+        items: [],
+        selectAll: false
       }
     },
 
     created() {
       for(let item of this.options) {
+        this.sweets.push(item.value)
+
         this.items.push({
           label: item.label,
           value: item.value
@@ -79,6 +83,21 @@
 
       onClick(event) {
         this.$emit('click', event, this.values)
+      },
+
+      onSelectAll() {
+        let values = []
+        this.selectAll = !this.selectAll
+
+        if(this.values.length !== this.options.length) {
+          this.selectAll = true
+        }
+
+        if(this.selectAll) {
+          values = this.sweets
+        }
+
+        this.values = values
       }
     },
 

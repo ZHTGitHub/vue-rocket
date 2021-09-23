@@ -5,10 +5,18 @@
         <pre class="line-numbers">
           <code class="language-markup">
             &lt;template>
+              &lt;z-btn 
+                class="mr-4 mb-2"
+                color="primary"
+                small
+                @click="onToggle"
+              >toggle&lt;/z-btn>
+
               &lt;z-checkboxs
                 formId="hobbies"
                 formKey="hobby"
                 label="兴趣爱好"
+                ref="hobbies"
                 :rules="[{ required: true, message: '兴趣爱好为必选项.' }]"
                 :options="hobbyOptions"
                 :defaultValue="[1]"
@@ -27,6 +35,12 @@
                       { label: '羽毛球', value: 4 }
                     ]
                   }
+                },
+
+                methods: {
+                  onToggle() {
+                    this.$refs.hobbies.onSelectAll()
+                  }
                 }
               }
             &lt;/script>
@@ -34,11 +48,19 @@
         </pre>
       </div>
       <div slot="demo">
-        <div class="z-flex">
+        <div class="z-flex align-center">
+          <z-btn 
+            class="mr-4 mb-2"
+            color="primary"
+            small
+            @click="onToggle"
+          >toggle</z-btn>
+
           <z-checkboxs
             formId="hobbies"
             formKey="hobby"
             label="兴趣爱好"
+            ref="hobbies"
             :rules="[{ required: true, message: '兴趣爱好为必选项.' }]"
             :options="hobbyOptions"
             :defaultValue="[1]"
@@ -71,6 +93,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      onToggle() {
+        this.$refs.hobbies.onSelectAll()
+      }
     }
   }
 </script>
