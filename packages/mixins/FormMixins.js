@@ -67,6 +67,11 @@ export default {
 			required: false
 		},
 
+		placeholder: {
+			typeof: String,
+			required: false
+		},
+
 		prependIcon: {
 			type: String,
 			required: false

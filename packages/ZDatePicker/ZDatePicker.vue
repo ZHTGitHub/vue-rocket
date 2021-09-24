@@ -23,6 +23,7 @@
           :hide-details="hideDetails"
           :hint="hint"
           :label="label"
+          :placeholder="placeholder"
           :prepend-inner-icon="prependIcon"
           :prepend-icon="prependOuterIcon"
           :readonly="readonly"

@@ -14,6 +14,7 @@
       :hide-details="hideDetails"
       :hint="hint"
       :label="label"
+      :placeholder="placeholder"
       :prepend-icon="prependOuterIcon"
       :prepend-inner-icon="prependIcon"
       :readonly="readonly"

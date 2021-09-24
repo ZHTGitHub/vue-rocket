@@ -120,6 +120,15 @@
     },
 
     {
+      "name": "placeholder",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设置输入的占位符文本"
+    },
+
+    {
       "name": "prepend-icon",
       "required": "否",
       "type": "String",

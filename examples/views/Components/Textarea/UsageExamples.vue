@@ -9,7 +9,7 @@
                 formId="intros"
                 formKey="intro"
                 label="自我介绍"
-                :rules="[{ required: true, message: '自我介绍为必填项.' }]"
+                placeholder="请输入自我介绍，长度控制在一百字以内."
               >&lt;/z-textarea>
             &lt;/template>
           </code>
@@ -20,7 +20,7 @@
           formId="intros"
           formKey="intro"
           label="自我介绍"
-          :rules="[{ required: true, message: '自我介绍为必填项.' }]"
+          placeholder="请输入自我介绍，长度控制在一百字以内."
         ></z-textarea>
       </div>
     </usage-demo>

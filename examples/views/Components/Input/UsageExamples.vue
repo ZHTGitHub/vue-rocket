@@ -9,7 +9,6 @@
                 formId="info"
                 formKey="name"
                 label="姓名"
-                :validation="[{ rule: 'required', message: '姓名为必填项.' }]"
               >
               &lt;/z-text-field>
             &lt;/template>
@@ -21,7 +20,6 @@
           formId="info"
           formKey="name"
           label="姓名"
-          :validation="[{ rule: 'required', message: '姓名为必填项.' }]"
         >
         </z-text-field>
       </div>

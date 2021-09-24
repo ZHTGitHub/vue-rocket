@@ -24,6 +24,7 @@
                     label="日期范围"
                     prepend-icon="mdi-calendar"
                     range
+                    :defaultValue="['2021-08-31', '2021-09-18']"
                   >&lt;/z-date-picker>
                 &lt;/v-col>
               &lt;/v-row>
