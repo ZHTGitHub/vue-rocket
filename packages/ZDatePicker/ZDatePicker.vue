@@ -8,6 +8,7 @@
       offset-y
       max-width="290px"
       min-width="auto"
+      z-index="10"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
