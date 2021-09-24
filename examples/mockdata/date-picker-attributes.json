@@ -1,6 +1,6 @@
 {
   "status": true,
-  "total": 10,
+  "total": 11,
   "data": [
     {
       "name": "formId",
@@ -39,6 +39,15 @@
     },
 
     {
+      "name": "immediate",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "选择完日期后立刻关闭菜单"
+    },
+
+    {
       "name": "locale",
       "required": "否",
       "type": "String",
@@ -52,7 +61,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "隐藏选择器标题"
     },
 
@@ -61,7 +70,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "使选择器变为只读状态"
     },
 
@@ -79,7 +88,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "允许选择日期范围"
     },
 
@@ -88,7 +97,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "true",
+      "default": true,
       "description": "使输入框变为只读状态"
     }
   ]

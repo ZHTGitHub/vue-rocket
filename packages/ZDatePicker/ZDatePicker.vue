@@ -65,22 +65,25 @@
         :range="range"
         :readonly="pickerReadonly"
         scrollable
+        @change="onChangeDate"
       >
-        <v-spacer></v-spacer>
-        <v-btn
-          text
-          color="primary"
-          @click="onCancel"
-        >
-          取消
-        </v-btn>
-        <v-btn
-          text
-          color="primary"
-          @click="onConfirm"
-        >
-          确认
-        </v-btn>
+        <template v-if="!immediate">
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="primary"
+            @click="menu = false"
+          >
+            取消
+          </v-btn>
+          <v-btn
+            text
+            color="primary"
+            @click="onConfirm"
+          >
+            确认
+          </v-btn>
+        </template>
       </v-date-picker>
     </v-menu>
   </div>
@@ -103,6 +106,11 @@
       firstDayOfWeek: {
         type: [Number, String],
         default: 0
+      },
+
+      immediate: {
+        type: Boolean,
+        default: true
       },
 
       locale: {
@@ -146,52 +154,32 @@
     },
 
     methods: {
+      onChangeDate() {
+        if(this.immediate) {
+          this.value = this.date
+          this.menu = false
+        }
+      },
+
       formatDate() {
         if (!this.date) return null
         const [year, month, day] = this.date.split('-')
         this.value = `${month}/${day}/${year}`
       },
 
-      onCancel() {
-        this.onClose()
-      },
-
       onConfirm() {
         this.value = this.date
-        this.onClose()
-      },
-
-      onClose() {
         this.menu = false
-      },
-
-      onOpen() {
-        this.menu = true
-      },
-
-      onToggle() {
-        this.menu = !this.menu
       }
     },
 
     watch: {
       defaultValue: {
         handler(value) {
-          // if(value == null) {
-          //   this.value = undefined
-          // }
-
           this.date = value
         },
         immediate: true
-      },
-
-      // date: {
-      //   handler(date) {
-      //     console.log(date)
-      //   },
-      //   immediate: true
-      // }
+      }
     }
   }
 </script>

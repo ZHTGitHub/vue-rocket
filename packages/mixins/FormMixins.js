@@ -38,7 +38,7 @@ export default {
 		},
 
 		defaultValue: {
-			type: [String, Number, Boolean],
+			type: [String, Number, Boolean, Array, Object],
 			default: undefined
 		},
 
