@@ -2,11 +2,14 @@
   <div :class="['z-autocomplete z-input']">
     <v-autocomplete
       v-model="value"
+      :allow-overflow="allowOverflow"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
+      :autofocus="autofocus"
       :clear-icon="clearIcon"
       :clearable="clearable"
       :counter="counter"
+      :dense="dense"
       :disabled="disabled"
       :error="incorrect"
       :error-messages="errorMessage"
@@ -14,6 +17,9 @@
       :hint="hint"
       :items="items"
       :label="label"
+      :loading="loading"
+      :multiple="multiple"
+      :noFilter="noFilter"
       :prepend-inner-icon="prependIcon"
       :prepend-icon="prependOuterIcon"
       :readonly="readonly"
@@ -60,6 +66,31 @@
     name: 'ZAutocomplete',
     mixins: [FormMixins, FormValidationMixins],
     props: {
+      allowOverflow: {
+        type: Boolean,
+        default: true
+      },
+
+      dense: {
+        type: Boolean,
+        default: false
+      },
+
+      loading: {
+        type: Boolean,
+        default: false
+      },
+
+      multiple: {
+        type: Boolean,
+        default: false
+      },
+
+      noFilter: {
+        type: Boolean,
+        default: false
+      },
+
       options: {
         type: Array,
         required: true

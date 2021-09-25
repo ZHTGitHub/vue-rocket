@@ -22,6 +22,11 @@ export default {
 			required: false
 		},
 
+		autofocus: {
+			type: Boolean,
+			default: false
+		},
+
 		clearIcon: {
 			type: String,
 			required: false
