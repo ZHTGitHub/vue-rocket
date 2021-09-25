@@ -1,3 +1,4 @@
+import ZAutocomplete from './ZAutocomplete'
 import ZBtn from './ZBtn'
 import ZBtnToggle from './ZBtnToggle'
 import ZCheckbox from './ZCheckbox'
@@ -16,6 +17,7 @@ import forms from './scripts/forms'
 import "./styles/styles.css"
 
 const components = [
+	ZAutocomplete,
 	ZBtn,
 	ZBtnToggle,
 	ZCheckbox,
@@ -46,6 +48,7 @@ export {
 
 export default {
 	install,
+	ZAutocomplete,
 	ZBtn,
 	ZBtnToggle,
 	ZCheckboxs,

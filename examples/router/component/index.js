@@ -13,6 +13,17 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'autocomplete',
+      name: 'ZDemoAutocomplete',
+      meta: {
+        title: 'Autocomplete 按钮',
+        unique: 'autocomplete',
+        parent: 'components'
+      },
+      component: () => import('../../views/Components/Autocomplete')
+    },
+
+    {
       path: 'button',
       name: 'ZDemoButton',
       meta: {

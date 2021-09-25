@@ -11,7 +11,7 @@
     {
       "name": "click",
       "parameters": "(event: Event, value: String | Number | Boolean)",
-      "description": "在单击选择器所时触发"
+      "description": "在单击选择器时触发"
     }
   ]
 }

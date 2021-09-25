@@ -58,6 +58,14 @@ export const menus = [
     children: [
       {
         pId: 'components',
+        unique: 'autocomplete',
+        icon: '',
+        title: 'Autocomplete 自动补全',
+        link: '/components/autocomplete'
+      },
+
+      {
+        pId: 'components',
         unique: 'button',
         icon: '',
         title: 'Button 按钮',

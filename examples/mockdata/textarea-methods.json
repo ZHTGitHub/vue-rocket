@@ -5,7 +5,7 @@
     {
       "name": "blur",
       "parameters": "(event: Event, value: String | Number)",
-      "description": "当多行文本框所失去焦点时触发"
+      "description": "当多行文本框失去焦点时触发"
     },
 
     {
@@ -17,13 +17,13 @@
     {
       "name": "click",
       "parameters": "(event: Event, value: String | Number)",
-      "description": "在单击多行文本框所时触发"
+      "description": "在单击多行文本框时触发"
     },
 
     {
       "name": "focus",
       "parameters": "(event: Event, value: String | Number)",
-      "description": "当多行文本框所得到焦点时触发"
+      "description": "当多行文本框得到焦点时触发"
     },
 
     {
