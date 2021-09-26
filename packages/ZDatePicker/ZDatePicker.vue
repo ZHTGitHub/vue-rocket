@@ -8,7 +8,7 @@
       offset-y
       max-width="290px"
       min-width="auto"
-      z-index="10"
+      :z-index="zIndex"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
@@ -145,6 +145,11 @@
       readonly: {
         type: Boolean,
         default: true
+      },
+
+      zIndex: {
+        type: [Number, String],
+        required: false
       }
     },
 

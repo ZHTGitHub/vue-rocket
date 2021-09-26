@@ -14,6 +14,7 @@
       :rounded="rounded"
       :tile="tile"
       :top="top"
+      :z-index="zIndex"
       @input="onInput"
     >
       <template v-slot:activator="{ on, attrs }">
@@ -136,7 +137,10 @@
         default: false
       },  
 
-      
+      zIndex: {
+        type: [Number, String],
+        required: false
+      }
     },
 
     methods: {
