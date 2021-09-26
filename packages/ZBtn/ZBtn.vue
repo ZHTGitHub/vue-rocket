@@ -109,3 +109,9 @@
 		}
 	}
 </script>
+
+<style scoped lang="scss">
+	.z-btn {
+		display: inline-block;
+	}
+</style>
