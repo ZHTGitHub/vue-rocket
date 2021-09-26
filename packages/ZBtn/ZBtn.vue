@@ -1,5 +1,5 @@
 <template>
-	<div class="z-btn" :class="[block ? '' : 'inline-block']">
+	<div class="z-btn" :class="[block ? 'v-btn--block' : '']">
 		<v-btn
 			:absolute="absolute"
 			:block="block"
@@ -109,9 +109,3 @@
 		}
 	}
 </script>
-
-<style scoped lang="scss">
-	.inline-block {
-		display: inline-block;
-	}
-</style>
