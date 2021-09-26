@@ -44,6 +44,7 @@
             color="primary"
             flip
             label="性取向"
+            mandatory
             :validation="[
               { rule: 'required', message: '性取向为必选项.' }
             ]"

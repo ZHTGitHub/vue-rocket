@@ -57,12 +57,30 @@
     },
 
     {
+      "name": "group",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "删除背景颜色、边框并增加按钮的间距"
+    },
+
+    {
       "name": "multiple",
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
       "default": false,
       "description": "多选"
+    },
+
+    {
+      "name": "mandatory",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "总是有一个（被选中的）值"
     },
 
     {

@@ -7,6 +7,7 @@
         :dense="dense"
         :color="color"
         :multiple="multiple"
+        :mandatory="mandatory"
         :rounded="rounded"
         :tile="tile"
         @change="onChange"
@@ -57,7 +58,17 @@
         default: false
       },
 
+      group: {
+        type: Boolean,
+        default: false
+      },
+
       multiple: {
+        type: Boolean,
+        default: false
+      },
+
+      mandatory: {
         type: Boolean,
         default: false
       },
