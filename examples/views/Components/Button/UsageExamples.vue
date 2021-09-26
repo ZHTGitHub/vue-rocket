@@ -7,44 +7,37 @@
             &lt;template>
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="normal"
               >默认按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="primary"
               >主要按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="error"
               >报错按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="warning"
               >警告按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="success"
               >成功按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="primary"
                 disabled
               >禁用按钮&lt;/z-btn>
 
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="primary"
               >
                 &lt;v-icon left>
@@ -55,7 +48,6 @@
 
               &lt;z-btn
                 class="mr-4"
-                formId="formId"
                 color="primary"
                 icon
               >
@@ -63,7 +55,6 @@
               &lt;/z-btn>
 
               &lt;z-btn
-                formId="formId"
                 color="error"
                 small
                 fab
@@ -78,44 +69,37 @@
         <div class="z-flex">
           <z-btn
             class="mr-4"
-            formId="formId"
             color="normal"
           >默认按钮</z-btn>
 
           <z-btn
             class="mr-4"
-            formId="formId"
             color="primary"
           >主要按钮</z-btn>
 
           <z-btn
             class="mr-4"
-            formId="formId"
             color="error"
           >报错按钮</z-btn>
 
           <z-btn
             class="mr-4"
-            formId="formId"
             color="warning"
           >警告按钮</z-btn>
 
           <z-btn
             class="mr-4"
-            formId="formId"
             color="success"
           >成功按钮</z-btn>
 
           <z-btn
             class="mr-4"
-            formId="formId"
             color="primary"
             disabled
           >禁用按钮</z-btn>
 
           <z-btn
             class="mr-4"
-            formId="formId"
             color="primary"
           >
             <v-icon left>
@@ -126,7 +110,6 @@
 
           <z-btn
             class="mr-4"
-            formId="formId"
             color="primary"
             icon
           >
@@ -134,7 +117,6 @@
           </z-btn>
 
           <z-btn
-            formId="formId"
             color="error"
             small
             fab
