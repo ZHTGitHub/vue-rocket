@@ -126,5 +126,27 @@ export const typography = [
       class: '.text-truncate',
       label: '单行文本超出省略号'
     }
+  ],
+
+  [
+    {
+      class: '.none',
+      label: '此元素不会被显示'
+    },
+
+    {
+      class: '.inline',
+      label: '此元素会被显示为内联元素'
+    },
+
+    {
+      class: '.inline-block',
+      label: '此元素会被显示为行内块元素'
+    },
+
+    {
+      class: '.block',
+      label: '此元素会被显示为块级元素'
+    }
   ]
 ]
