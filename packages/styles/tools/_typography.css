@@ -35,6 +35,62 @@
   letter-spacing: .0125em !important;
 }
 
+.text-subtitle-1 {
+  font-size: 1rem !important;
+  line-height: 1.75rem;
+  font-weight: 400;
+  letter-spacing: .009375em !important;
+  font-family: Roboto, sans-serif !important;
+}
+
+.text-subtitle-2 {
+  font-size: .875rem !important;
+  line-height: 1.375rem;
+  font-weight: 500;
+  letter-spacing: .0071428571em !important;
+  font-family: Roboto, sans-serif !important;
+}
+
+.text-body-1 {
+  font-size: 1rem !important;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: .03125em !important;
+  font-family: Roboto, sans-serif !important;
+}
+
+.text-body-2 {
+  font-size: .875rem !important;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: .0178571429em!important;
+  font-family: Roboto, sans-serif !important;
+}
+
+.text-button {
+  font-weight: 500;
+  line-height: 2.25rem;
+  letter-spacing: .0892857143em !important;
+  text-transform: uppercase !important;
+}
+
+.text-caption {
+  font-size: .75rem !important;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: .0333333333em !important;
+  font-family: Roboto, sans-serif !important;
+}
+
+.text-overline {
+  font-size: .75rem!important;
+  line-height: 2rem;
+  font-weight: 500;
+  letter-spacing: .1666666667em!important;
+  text-transform: uppercase!important;
+  font-family: Roboto, sans-serif!important;
+}
+
 /* 字体强调 */
 .fw-black {
   font-weight: 900 !important;
@@ -128,18 +184,18 @@
 }
 
 /* 元素显示类型 */
-.none {
+.d-none {
   display: none !important;
 }
 
-.inline {
+.d-inline {
   display: inline !important;
 }
 
-.inline-block {
+.d-inline-block {
   display: inline-block !important;
 }
 
-.block {
+.d-block {
   display: block !important;
 }

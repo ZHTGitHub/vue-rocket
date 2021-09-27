@@ -1,5 +1,5 @@
 <template>
-	<div class="z-btn" :class="[block ? 'block' : 'inline-block']">
+	<div class="z-btn" :class="[block ? 'd-block' : 'd-inline-block']">
 		<v-btn
 			:absolute="absolute"
 			:block="block"
