@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-autocomplete z-input']">
+  <div class="z-autocomplete z-input" :style="{ width: breadth }">
     <v-autocomplete
       v-model="value"
       :allow-overflow="allowOverflow"

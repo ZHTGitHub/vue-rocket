@@ -1,5 +1,5 @@
 <template>
-  <div class="z-radios z-input">
+  <div class="z-radios z-input" :style="{ width: breadth }">
     <v-radio-group
       v-model="value"
       :column="column"

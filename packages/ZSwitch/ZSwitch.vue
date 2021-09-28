@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-switch z-input']">
+  <div class="z-switch z-input" :style="{ width: breadth }">
     <v-switch
       v-model="value"
       :disabled="disabled"

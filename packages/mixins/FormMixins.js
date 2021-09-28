@@ -115,6 +115,18 @@ export default {
 		validation: {
 			type: Array,
 			required: false
+		},
+
+		width: {
+			type: [String, Number],
+			validator(value) {
+				if(typeof +value === 'number') {
+					console.log(value)
+					return `${ value }px`
+				}else {
+					return value
+				}
+			}
 		}
 	},
 
@@ -147,6 +159,10 @@ export default {
 				}
 				return ''
 			}
+		},
+
+		breadth() {
+			return typeof +this.width === 'number' ? `${ this.width }px` : this.width
 		}
 	},
 

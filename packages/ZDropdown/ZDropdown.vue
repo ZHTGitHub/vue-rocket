@@ -1,5 +1,5 @@
 <template>
-  <div class="z-dropdown">
+  <div class="z-dropdown" :style="{ width: breadth }">
     <v-menu 
       :auto="auto"
       :bottom="bottom"

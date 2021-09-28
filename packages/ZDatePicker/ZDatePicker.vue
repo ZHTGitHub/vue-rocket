@@ -1,5 +1,5 @@
 <template>
-  <div class="z-date-picker z-input">
+  <div class="z-date-picker z-input" :style="{ width: breadth }">
     <v-menu
       ref="menu"
       v-model="menu"

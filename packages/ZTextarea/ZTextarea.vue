@@ -1,5 +1,5 @@
 <template>
-  <div class="z-textarea z-input">
+  <div class="z-textarea z-input" :style="{ width: breadth }">
     <v-textarea
       v-model="value"
       :append-icon="appendIcon"

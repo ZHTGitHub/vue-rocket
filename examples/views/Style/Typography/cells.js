@@ -23,6 +23,34 @@ export const typography = [
     {
       class: '.text-h6',
       label: '根元素的1.25倍'
+    },
+    {
+      class: '.text-subtitle-1',
+      label: '根元素的1倍'
+    },
+    {
+      class: '.text-subtitle-2',
+      label: '根元素的0.875倍'
+    },
+    {
+      class: '.text-body-1',
+      label: '根元素的1倍'
+    },
+    {
+      class: '.text-body-2',
+      label: '根元素的0.875倍'
+    },
+    {
+      class: '.text-button',
+      label: '根元素的0.875倍'
+    },
+    {
+      class: '.text-caption',
+      label: '根元素的0.75倍'
+    },
+    {
+      class: '.text-overline',
+      label: '根元素的0.75倍'
     }
   ],
 

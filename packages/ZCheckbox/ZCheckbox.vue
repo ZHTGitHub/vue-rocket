@@ -1,5 +1,5 @@
 <template>
-  <div class="z-checkbox z-input">
+  <div class="z-checkbox z-input" :style="{ width: breadth }">
     
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['z-select z-input']">
+  <div class="z-select z-input" :style="{ width: breadth }">
     <v-select
       v-model="value"
       :append-icon="appendIcon"

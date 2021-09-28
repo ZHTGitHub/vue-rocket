@@ -1,5 +1,5 @@
 <template>
-  <div class="z-checkboxs z-input">
+  <div class="z-checkboxs z-input" :style="{ width: breadth }">
     <div 
       class="z-input--checkboxs-group__input z-flex flex-wrap" 
       :class="[row ? '' : 'flex-column']"
