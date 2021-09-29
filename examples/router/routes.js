@@ -11,8 +11,9 @@ const router = [
     path: '/home',
     name: 'ZHome',
     meta: {
+      key: 'home',
+      realm: 'home',
       title: '首页',
-      unique: 'home'
     },
     component: () => import('../views/Home')
   },
@@ -21,8 +22,8 @@ const router = [
     path: '/form',
     name: 'ZDemoForm',
     meta: {
+      key: 'form',
       title: '表单',
-      unique: 'form'
     },
     component: () => import('../views/Form'),
     children: [
@@ -35,9 +36,10 @@ const router = [
         path: 'rules',
         name: 'ZDemoRules',
         meta: {
+          key: 'rules',
+          parent: 'form',
+          realm: 'rules',
           title: 'Rules 校验规则',
-          unique: 'rules',
-          parent: 'form'
         },
         component: () => import('../views/Form/Rules')
       },
@@ -46,23 +48,14 @@ const router = [
         path: 'examples',
         name: 'ZDemoExamples',
         meta: {
+          key: 'examples',
+          parent: 'form',
+          realm: 'examples',
           title: 'Examples 使用示例',
-          unique: 'examples',
-          parent: 'form'
         },
         component: () => import('../views/Form/Examples')
       },
     ]
-  },
-
-  {
-    path: '/table',
-    name: 'ZDemoTable',
-    meta: {
-      title: '表格',
-      unique: 'table'
-    },
-    component: () => import('../views/Table')
   },
 
   ComponentRoutes,

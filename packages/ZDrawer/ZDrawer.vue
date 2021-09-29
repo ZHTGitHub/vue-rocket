@@ -17,17 +17,15 @@
     </div>
 
     <v-divider></v-divider>
-
     
     <v-list dense shaped>
-
       <template v-for="item in menus">
         <!-- 一级列表 BEGIN -->
         <v-list-item 
           v-if="!item.leaf"
-          :key="item.unique"
+          :key="item.key"
           active-class="active-item"
-          :input-value="item.unique === unique"
+          :input-value="item.realm === realm"
           @click="onSelect(item, $event)"
         >
           <v-list-item-icon>
@@ -46,7 +44,7 @@
         <v-list-group
           v-else
           v-model="item.expanded"
-          :key="item.unique"
+          :key="item.key"
           :prepend-icon="item.icon"
           :value="currentItem.pId === item.id ? true : false"
         >
@@ -60,10 +58,10 @@
 
           <v-list-item
             v-for="child in item.children"
-            :key="child.title"
+            :key="child.key"
             active-class="active-item"
             class="pl-12"
-            :input-value="child.unique === unique"
+            :input-value="child.realm === realm"
             link
             @click="onSelect(child, $event)"
           >
@@ -76,8 +74,6 @@
         </v-list-group>
         <!-- 二级列表 END -->
       </template>
-
-      
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -151,7 +147,7 @@
     data() {
       return {
         drawer: null,
-        unique: null,
+        realm: null,
         currentItem: {}
       }
     },
@@ -170,7 +166,8 @@
       },
 
       onSelect(item) {
-        this.unique = item.unique
+        console.log(item)
+        this.realm = item.realm
         this.currentItem = item
         this.$router.push({ path: item.link })
       }
@@ -180,11 +177,11 @@
       '$route': {
         handler(route) {
           const { meta } = route
-          this.unique = meta.unique
+          this.realm = meta.realm
 
           for(let item of this.menus) {
             item.expanded = false
-            if(item.unique === meta.parent) {
+            if(item.key === meta.parent) {
               item.expanded = true
             }
           }

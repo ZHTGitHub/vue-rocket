@@ -2,8 +2,8 @@ const ComponentRoutes = {
   path: '/components',
   name: 'ZDemoComponents',
   meta: {
+    key: 'components',
     title: '组件',
-    unique: 'components'
   },
   component: () => import('../../views/Components'),
   children: [
@@ -16,9 +16,10 @@ const ComponentRoutes = {
       path: 'autocomplete',
       name: 'ZDemoAutocomplete',
       meta: {
+        key: 'autocomplete',
+        parent: 'components',
+        realm: 'autocomplete',
         title: 'Autocomplete 按钮',
-        unique: 'autocomplete',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Autocomplete')
     },
@@ -27,9 +28,10 @@ const ComponentRoutes = {
       path: 'button',
       name: 'ZDemoButton',
       meta: {
+        key: 'button',
+        parent: 'components',
+        realm: 'button',
         title: 'Button 按钮',
-        unique: 'button',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Button')
     },
@@ -38,9 +40,10 @@ const ComponentRoutes = {
       path: 'button-toggle',
       name: 'ZDemoButtonToggle',
       meta: {
+        key: 'buttonToggle',
+        parent: 'components',
+        realm: 'buttonToggle',
         title: 'Button Groups 按钮组',
-        unique: 'buttonToggle',
-        parent: 'components'
       },
       component: () => import('../../views/Components/ButtonToggle')
     },
@@ -49,9 +52,10 @@ const ComponentRoutes = {
       path: 'checkboxs',
       name: 'ZDemoCheckboxs',
       meta: {
+        key: 'checkboxs',
+        parent: 'components',
+        realm: 'checkboxs',
         title: 'Checkboxs 多选框',
-        unique: 'checkboxs',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Checkboxs')
     },
@@ -60,9 +64,10 @@ const ComponentRoutes = {
       path: 'date-picker',
       name: 'ZDemoDatePicker',
       meta: {
+        key: 'datePicker',
+        parent: 'components',
+        realm: 'datePicker',
         title: 'Date Picker 日期选择器',
-        unique: 'datePicker',
-        parent: 'components'
       },
       component: () => import('../../views/Components/DatePicker')
     },
@@ -71,9 +76,10 @@ const ComponentRoutes = {
       path: 'drawer',
       name: 'ZDemoDrawer',
       meta: {
+        key: 'drawer',
+        parent: 'components',
+        realm: 'drawer',
         title: 'Drawer 导航抽屉',
-        unique: 'drawer',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Drawer')
     },
@@ -82,9 +88,10 @@ const ComponentRoutes = {
       path: 'dropdown',
       name: 'ZDemoDropdown',
       meta: {
+        key: 'dropdown',
+        parent: 'components',
+        realm: 'dropdown',
         title: 'Dropdown 下拉菜单',
-        unique: 'dropdown',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Dropdown')
     },
@@ -93,9 +100,10 @@ const ComponentRoutes = {
       path: 'pagination',
       name: 'ZDemoPagination',
       meta: {
+        key: 'pagination',
+        parent: 'components',
+        realm: 'pagination',
         title: 'Pagination 分页',
-        unique: 'pagination',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Pagination')
     },
@@ -104,9 +112,10 @@ const ComponentRoutes = {
       path: 'radios',
       name: 'ZDemoRadios',
       meta: {
+        key: 'radios',
+        parent: 'components',
+        realm: 'radios',
         title: 'Radios 单选框',
-        unique: 'radios',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Radios')
     },
@@ -115,9 +124,10 @@ const ComponentRoutes = {
       path: 'select',
       name: 'ZDemoSelect',
       meta: {
+        key: 'select',
+        parent: 'components',
+        realm: 'select',
         title: 'Select 选择器',
-        unique: 'select',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Select')
     },
@@ -126,9 +136,10 @@ const ComponentRoutes = {
       path: 'switch',
       name: 'ZDemoSwitch',
       meta: {
+        key: 'switch',
+        parent: 'components',
+        realm: 'switch',
         title: 'Switch 开关',
-        unique: 'switch',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Switch')
     },
@@ -137,9 +148,10 @@ const ComponentRoutes = {
       path: 'textarea',
       name: 'ZDemoTextarea',
       meta: {
+        key: 'textarea',
+        parent: 'components',
+        realm: 'textarea',
         title: 'Teaxarea 多行文本框',
-        unique: 'textarea',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Textarea')
     },
@@ -148,9 +160,10 @@ const ComponentRoutes = {
       path: 'input',
       name: 'ZDemoInput',
       meta: {
+        key: 'input',
+        parent: 'components',
+        realm: 'input',
         title: 'Input 输入框',
-        unique: 'input',
-        parent: 'components'
       },
       component: () => import('../../views/Components/Input')
     }

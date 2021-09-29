@@ -2,8 +2,9 @@ export const menus = [
   {
     pId: '-1',
     id: 'home',
-    unique: 'home',
+    key: 'home',
     icon: 'mdi-home',
+    realm: 'home',
     title: '首页',
     link: '/home',
     leaf: false
@@ -12,7 +13,7 @@ export const menus = [
   {
     pId: '-1',
     id: 'form',
-    unique: 'form',
+    key: 'form',
     icon: 'mdi-form-select',
     title: '表单',
     link: '/form',
@@ -20,36 +21,28 @@ export const menus = [
     children: [
       {
         pId: 'form',
-        unique: 'rules',
+        key: 'rules',
         icon: '',
+        realm: 'rules',
         title: 'Rules 校验规则',
         link: '/form/rules'
       },
 
       {
         pId: 'form',
-        unique: 'examples',
+        key: 'examples',
         icon: '',
+        realm: 'examples',
         title: 'Examples 使用示例',
         link: '/form/examples'
       }
     ]
   },
 
-  // {
-  //   pId: '-1',
-  //   id: 'table',
-  //   unique: 'table',
-  //   icon: 'mdi-table',
-  //   title: '表格',
-  //   link: '/table',
-  //   leaf: false
-  // },
-
   {
     pId: '-1',
     id: 'components',
-    unique: 'components',
+    key: 'components',
     expanded: false,
     icon: 'mdi-view-dashboard',
     title: '组件',
@@ -58,104 +51,117 @@ export const menus = [
     children: [
       {
         pId: 'components',
-        unique: 'autocomplete',
+        key: 'autocomplete',
         icon: '',
+        realm: 'autocomplete',
         title: 'Autocomplete 自动补全',
         link: '/components/autocomplete'
       },
 
       {
         pId: 'components',
-        unique: 'button',
+        key: 'button',
         icon: '',
+        realm: 'button',
         title: 'Button 按钮',
         link: '/components/button'
       },
 
       {
         pId: 'components',
-        unique: 'buttonToggle',
+        key: 'buttonToggle',
         icon: '',
+        realm: 'buttonToggle',
         title: 'Button Groups 按钮组',
         link: '/components/button-toggle'
       },
 
       {
         pId: 'components',
-        unique: 'checkboxs',
+        key: 'checkboxs',
         icon: '',
+        realm: 'checkboxs',
         title: 'Checkboxs 多选框',
         link: '/components/checkboxs'
       },
 
       {
         pId: 'components',
-        unique: 'datePicker',
+        key: 'datePicker',
         icon: '',
+        realm: 'datePicker',
         title: 'Date Picker 日期选择器',
         link: '/components/date-picker'
       },
 
       {
         pId: 'components',
-        unique: 'drawer',
+        key: 'drawer',
         icon: '',
+        realm: 'drawer',
         title: 'Drawer 导航抽屉',
         link: '/components/drawer'
       },
 
       {
         pId: 'components',
-        unique: 'dropdown',
+        key: 'dropdown',
         icon: '',
+        realm: 'dropdown',
         title: 'Dropdown 下拉菜单',
         link: '/components/dropdown'
       },
 
       {
         pId: 'components',
-        unique: 'input',
+        key: 'input',
         icon: '',
+        realm: 'input',
         title: 'Input 输入框',
         link: '/components/input'
       },
 
       {
         pId: 'components',
-        unique: 'pagination',
+        key: 'pagination',
         icon: '',
+        realm: 'pagination',
         title: 'Pagination 分页',
         link: '/components/pagination'
       },
 
       {
         pId: 'components',
-        unique: 'radios',
+        key: 'radios',
         icon: '',
+        realm: 'radios',
         title: 'Radios 单选框',
         link: '/components/radios'
       },
 
       {
         pId: 'components',
-        unique: 'select',
+        key: 'select',
         icon: '',
+        realm: 'select',
         title: 'Select 选择器',
         link: '/components/select'
       },
 
       {
         pId: 'components',
-        unique: 'switch',
+        key: 'switch',
         icon: '',
+        realm: 'switch',
         title: 'Switch 开关',
         link: '/components/switch'
       },
 
       {
         pId: 'components',
-        unique: 'textarea',
+        key: 'textarea',
         icon: '',
+        realm: 'textarea',
         title: 'Teaxarea 多行文本框',
         link: '/components/textarea'
       }
@@ -165,7 +171,7 @@ export const menus = [
   {
     pId: '-1',
     id: 'style',
-    unique: 'style',
+    key: 'style',
     icon: 'mdi-language-css3',
     title: '样式',
     link: '/style',
@@ -173,48 +179,54 @@ export const menus = [
     children: [
       {
         pId: 'style',
-        unique: 'text',
+        key: 'text',
         icon: '',
+        realm: 'text',
         title: 'Text 文本',
         link: '/style/text'
       },
 
       {
         pId: 'style',
-        unique: 'spacing',
+        key: 'spacing',
         icon: '',
+        realm: 'spacing',
         title: 'Spacing 间距',
         link: '/style/spacing'
       },
 
       {
         pId: 'style',
-        unique: 'flex',
+        key: 'flex',
         icon: '',
+        realm: 'flex',
         title: 'Flex 弹性布局',
         link: '/style/flex'
       },
 
       {
         pId: 'style',
-        unique: 'float',
+        key: 'float',
         icon: '',
+        realm: 'float',
         title: 'Float 浮动',
         link: '/style/float'
       },
 
       {
         pId: 'style',
-        unique: 'radius',
+        key: 'radius',
         icon: '',
+        realm: 'radius',
         title: 'Border Radius 边框半径',
         link: '/style/radius'
       },
 
       {
         pId: 'style',
-        unique: 'elevation',
+        key: 'elevation',
         icon: '',
+        realm: 'elevation',
         title: 'Elevation 海拔',
         link: '/style/elevation'
       }

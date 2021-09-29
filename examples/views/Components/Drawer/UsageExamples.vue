@@ -19,8 +19,9 @@
                       {
                         pId: '-1',
                         id: 'home',
-                        unique: 'home',
+                        key: 'home',
                         icon: 'mdi-home',
+                        realm: 'home',
                         title: '首页',
                         link: undefined,
                         leaf: false
@@ -29,19 +30,20 @@
                       {
                         pId: '-1',
                         id: 'components',
-                        unique: 'components',
+                        key: 'components',
                         expanded: false,
                         icon: 'mdi-view-dashboard',
                         title: '组件',
-                        link: undefined,
+                        link: '/components',
                         leaf: true,
                         children: [
                           {
                             pId: 'components',
-                            unique: 'drawer',
+                            key: 'drawer',
                             icon: '',
+                            realm: 'drawer',
                             title: 'Drawer 导航抽屉',
-                            link: undefined
+                            link: '/components/drawer'
                           }
                         ]
                       }
@@ -80,8 +82,9 @@
           {
             pId: '-1',
             id: 'home',
-            unique: 'home',
+            key: 'home',
             icon: 'mdi-home',
+            realm: 'home',
             title: '首页',
             link: undefined,
             leaf: false
@@ -90,19 +93,20 @@
           {
             pId: '-1',
             id: 'components',
-            unique: 'components',
+            key: 'components',
             expanded: false,
             icon: 'mdi-view-dashboard',
             title: '组件',
-            link: undefined,
+            link: '/components',
             leaf: true,
             children: [
               {
                 pId: 'components',
-                unique: 'drawer',
+                key: 'drawer',
                 icon: '',
+                realm: 'drawer',
                 title: 'Drawer 导航抽屉',
-                link: undefined
+                link: '/components/drawer'
               }
             ]
           }
