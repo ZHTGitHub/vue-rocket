@@ -37,7 +37,7 @@ const router = [
         name: 'ZDemoRules',
         meta: {
           key: 'rules',
-          parent: 'form',
+          nodeKey: 'form',
           realm: 'rules',
           title: 'Rules 校验规则',
         },
@@ -49,7 +49,7 @@ const router = [
         name: 'ZDemoExamples',
         meta: {
           key: 'examples',
-          parent: 'form',
+          nodeKey: 'form',
           realm: 'examples',
           title: 'Examples 使用示例',
         },

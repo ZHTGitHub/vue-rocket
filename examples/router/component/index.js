@@ -17,7 +17,7 @@ const ComponentRoutes = {
       name: 'ZDemoAutocomplete',
       meta: {
         key: 'autocomplete',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'autocomplete',
         title: 'Autocomplete 按钮',
       },
@@ -29,7 +29,7 @@ const ComponentRoutes = {
       name: 'ZDemoButton',
       meta: {
         key: 'button',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'button',
         title: 'Button 按钮',
       },
@@ -41,7 +41,7 @@ const ComponentRoutes = {
       name: 'ZDemoButtonToggle',
       meta: {
         key: 'buttonToggle',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'buttonToggle',
         title: 'Button Groups 按钮组',
       },
@@ -53,7 +53,7 @@ const ComponentRoutes = {
       name: 'ZDemoCheckboxs',
       meta: {
         key: 'checkboxs',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'checkboxs',
         title: 'Checkboxs 多选框',
       },
@@ -65,7 +65,7 @@ const ComponentRoutes = {
       name: 'ZDemoDatePicker',
       meta: {
         key: 'datePicker',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'datePicker',
         title: 'Date Picker 日期选择器',
       },
@@ -77,7 +77,7 @@ const ComponentRoutes = {
       name: 'ZDemoDrawer',
       meta: {
         key: 'drawer',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'drawer',
         title: 'Drawer 导航抽屉',
       },
@@ -89,7 +89,7 @@ const ComponentRoutes = {
       name: 'ZDemoDropdown',
       meta: {
         key: 'dropdown',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'dropdown',
         title: 'Dropdown 下拉菜单',
       },
@@ -101,7 +101,7 @@ const ComponentRoutes = {
       name: 'ZDemoPagination',
       meta: {
         key: 'pagination',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'pagination',
         title: 'Pagination 分页',
       },
@@ -113,7 +113,7 @@ const ComponentRoutes = {
       name: 'ZDemoRadios',
       meta: {
         key: 'radios',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'radios',
         title: 'Radios 单选框',
       },
@@ -125,7 +125,7 @@ const ComponentRoutes = {
       name: 'ZDemoSelect',
       meta: {
         key: 'select',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'select',
         title: 'Select 选择器',
       },
@@ -137,7 +137,7 @@ const ComponentRoutes = {
       name: 'ZDemoSwitch',
       meta: {
         key: 'switch',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'switch',
         title: 'Switch 开关',
       },
@@ -149,7 +149,7 @@ const ComponentRoutes = {
       name: 'ZDemoTextarea',
       meta: {
         key: 'textarea',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'textarea',
         title: 'Teaxarea 多行文本框',
       },
@@ -161,7 +161,7 @@ const ComponentRoutes = {
       name: 'ZDemoInput',
       meta: {
         key: 'input',
-        parent: 'components',
+        nodeKey: 'components',
         realm: 'input',
         title: 'Input 输入框',
       },

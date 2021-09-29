@@ -181,7 +181,7 @@
 
           for(let item of this.menus) {
             item.expanded = false
-            if(item.key === meta.parent) {
+            if(item.key === meta.nodeKey) {
               item.expanded = true
             }
           }
