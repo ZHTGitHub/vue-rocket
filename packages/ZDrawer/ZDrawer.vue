@@ -166,7 +166,6 @@
       },
 
       onSelect(item) {
-        console.log(item)
         this.realm = item.realm
         this.currentItem = item
         this.$router.push({ path: item.link })
