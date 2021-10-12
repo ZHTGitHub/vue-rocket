@@ -13,8 +13,9 @@ import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZDrawer from './ZDrawer'
 
+import emitter from './scripts/emitter'
 import forms from './scripts/forms'
-import "./styles/styles.css"
+import './styles/styles.css'
 
 const components = [
 	ZAutocomplete,
@@ -43,6 +44,7 @@ if(typeof window !== 'undefined' && window.Vue) {
 }
 
 export { 
+	emitter,
 	forms
 }
 
