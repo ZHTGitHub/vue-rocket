@@ -180,6 +180,15 @@
       "acceptedValues": "—",
       "default": false,
       "description": "将输入设置为手动成功状态"
+    },
+
+    {
+      "name": "type",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "text | password",
+      "default": "text",
+      "description": "设置输入类型"
     }
   ]
 }

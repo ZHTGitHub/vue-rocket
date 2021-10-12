@@ -12,6 +12,7 @@
 			:icon="icon"
 			:large="large"
 			:left="left"
+			:loading="loading"
 			:outlined="outlined"
 			:plain="plain"
 			:right="right"

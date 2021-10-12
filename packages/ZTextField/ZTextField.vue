@@ -21,6 +21,7 @@
       :reverse="reverse"
       :suffix="suffix"
       :success="success"
+      :type="type"
       @blur="onBlur"
       @change="onChange"
       @click="onClick"

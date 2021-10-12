@@ -147,6 +147,15 @@
     },
 
     {
+      "name": "loading",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "添加加载图标动画"
+    },
+
+    {
       "name": "lockedTime",
       "required": "否",
       "type": "Number | String",

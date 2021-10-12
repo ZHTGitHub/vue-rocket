@@ -70,6 +70,11 @@ export default {
       default: false
     },
 
+    loading: {
+      type: Boolean,
+      default: false
+    },
+
     lockedTime: {
       type: [Number, String],
       default: 2500

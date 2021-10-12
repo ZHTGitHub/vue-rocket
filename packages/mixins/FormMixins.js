@@ -112,6 +112,13 @@ export default {
 			default: false
 		},
 
+		type: {
+			validator(value) {
+				return ~['text', 'password'].indexOf(value)
+			},
+			default: 'text'
+		},
+
 		validation: {
 			type: Array,
 			required: false
