@@ -98,14 +98,16 @@
 
 		methods: {
 			onClick(event) {
-				this.event = event
-				const action = this.actions.get(this.btnType)
-				if(action === 'click') {
-					this.$emit('click', this.event)
-					return
-				}
+				if(this.unlocked()) {
+					this.event = event
+					const action = this.actions.get(this.btnType)
+					if(action === 'click') {
+						this.$emit('click', this.event)
+						return
+					}
 
-				$bus.emit(action, this.formId)
+					$bus.emit(action, this.formId)
+				}
 			}
 		}
 	}

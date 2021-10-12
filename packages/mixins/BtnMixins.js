@@ -77,7 +77,7 @@ export default {
 
     lockedTime: {
       type: [Number, String],
-      default: 2500
+      default: 1000
     },
 
     outlined: {
@@ -138,7 +138,7 @@ export default {
   },
 
   methods: {
-    lockClick() {
+    unlocked() {
       if(this.oldTime == null) {
         this.oldTime = new Date().getTime()
         return true

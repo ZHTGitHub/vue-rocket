@@ -160,7 +160,7 @@
       "required": "否",
       "type": "Number | String",
       "acceptedValues": "—",
-      "default": 2500,
+      "default": 1000,
       "description": "防止恶意点击间隔"
     },
 
