@@ -15,6 +15,7 @@ import ZDrawer from './ZDrawer'
 
 import emitter from './scripts/emitter'
 import forms from './scripts/forms'
+import tools from './scripts/tools'
 import './styles/styles.css'
 
 const components = [
@@ -45,7 +46,8 @@ if(typeof window !== 'undefined' && window.Vue) {
 
 export { 
 	emitter,
-	forms
+	forms,
+	tools
 }
 
 export default {

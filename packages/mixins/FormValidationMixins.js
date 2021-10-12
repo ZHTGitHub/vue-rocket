@@ -1,5 +1,7 @@
 import $validator from '../validate/z-validate'
 import $bus from '../scripts/emitter'
+import Tools from '../scripts/tools'
+const tools = new Tools
 
 export default {
 	created() {
@@ -91,7 +93,7 @@ export default {
 
 					// console.log(this.formKey, this.value)
 
-					const defaultValue = !this.util.tools.isEmpty(this.defaultValue) ? undefined : this.defaultValue
+					const defaultValue = !tools.isEmpty(this.defaultValue) ? undefined : this.defaultValue
 
 					this.$store.commit('RESET_FORM', {
 						formId: this.formId,
