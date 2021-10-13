@@ -25,6 +25,11 @@
       @blur="onBlur"
       @change="onChange"
       @click="onClick"
+      @click:append="onClickAppend"
+      @click:append-outer="onClickAppendOuter"
+      @click:clear="onClickClear"
+      @click:prepend="onClickPrependOuter"
+      @click:prepend-inner="onClickPrepend"
       @focus="onFocus"
       @keydown="onKeydown"
       @keyup="onKeyup"
@@ -75,6 +80,26 @@
 
       onClick(event) {
         this.$emit('click', event, this.value)
+      },
+
+      onClickAppend(event) {
+        this.$emit('click:append', event, this.value)
+      },
+
+      onClickAppendOuter(event) {
+        this.$emit('click:append-outer', event, this.value)
+      },
+
+      onClickClear(event) {
+        this.$emit('click:clear', event, this.value)
+      },
+
+      onClickPrependOuter(event) {
+        this.$emit('click:prepend-outer', event, this.value)
+      },
+
+      onClickPrepend(event) {
+        this.$emit('click:prepend', event, this.value)
       },
 
       onFocus(event) {

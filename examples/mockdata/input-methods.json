@@ -17,7 +17,37 @@
     {
       "name": "click",
       "parameters": "(event: Event, value: String | Number)",
-      "description": "在单击输入框时触发"
+      "description": "单击输入框时触发"
+    },
+
+    {
+      "name": "click:append",
+      "parameters": "(event: Event, value: String | Number)",
+      "description": "单击附加图标时发出"
+    },
+
+    {
+      "name": "click:append-outer",
+      "parameters": "(event: Event, value: String | Number)",
+      "description": "单击附加的外部图标时发出"
+    },
+
+    {
+      "name": "click:clear",
+      "parameters": "(event: Event, value: String | Number)",
+      "description": "单击可清除图标时发出"
+    },
+
+    {
+      "name": "click:prepend-outer",
+      "parameters": "(event: Event, value: String | Number)",
+      "description": "单击前置图标时发出"
+    },
+
+    {
+      "name": "click:prepend",
+      "parameters": "(event: Event, value: String | Number)",
+      "description": "单击前置的内部图标时发出"
     },
 
     {
