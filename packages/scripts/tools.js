@@ -65,23 +65,23 @@ const tools = {
       || value === '' 
       || value === false
     ) {
-      return false
+      return true
     }
     
     else if(value instanceof Array) {
       if(value.length === 0) {
-        return false
+        return true
       }
     }
     
     else if(typeof value === 'object') {
       var keys = Object.keys(value)
       if(keys.length === 0) {
-        return false
+        return true
       }
     }
     
-    return true
+    return false
   }
 } 
 
