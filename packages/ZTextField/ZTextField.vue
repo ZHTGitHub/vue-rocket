@@ -71,7 +71,8 @@
 
     methods: {
       onBlur(event) {
-        this.$emit('blur', event, this.value)
+        event.customValue = this.value
+        this.$emit('blur', event)
       },
 
       onChange(value) {
@@ -79,39 +80,48 @@
       },
 
       onClick(event) {
-        this.$emit('click', event, this.value)
+        event.customValue = this.value
+        this.$emit('click', event)
       },
 
       onClickAppend(event) {
-        this.$emit('click:append', event, this.value)
+        event.customValue = this.value
+        this.$emit('click:append', event)
       },
 
       onClickAppendOuter(event) {
-        this.$emit('click:append-outer', event, this.value)
+        event.customValue = this.value
+        this.$emit('click:append-outer', event)
       },
 
       onClickClear(event) {
-        this.$emit('click:clear', event, this.value)
+        event.customValue = this.value
+        this.$emit('click:clear', event)
       },
 
       onClickPrependOuter(event) {
-        this.$emit('click:prepend-outer', event, this.value)
+        event.customValue = this.value
+        this.$emit('click:prepend-outer', event)
       },
 
       onClickPrepend(event) {
-        this.$emit('click:prepend', event, this.value)
+        event.customValue = this.value
+        this.$emit('click:prepend', event)
       },
 
       onFocus(event) {
-        this.$emit('focus', event, this.value)
+        event.customValue = this.value
+        this.$emit('focus', event)
       },
 
       onKeydown(event) {
-        this.$emit('keydown', event, this.value)
+        event.customValue = this.value
+        this.$emit('keydown', event)
       },
 
       onKeyup(event) {
-        this.$emit('keyup', event, this.value)
+        event.customValue = this.value
+        this.$emit('keyup', event)
       }
     }
   }

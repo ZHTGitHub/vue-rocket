@@ -145,11 +145,11 @@
 
     methods: {
       onClick(event, item) {
-        this.$emit('click', event, item)
+        event.customValue = item
+        this.$emit('click', event)
       },
 
       onInput(input) {
-        console.log(input)
         this.$emit('input', input)
       }
     }

@@ -10,7 +10,7 @@
 
     {
       "name": "click",
-      "parameters": "(event: Event, value: Array)",
+      "parameters": "(event: Event)",
       "description": "单击按钮时发出的事件"
     }
   ]

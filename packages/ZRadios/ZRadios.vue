@@ -70,7 +70,8 @@
       },
 
       onClick(event) {
-        this.$emit('click', event, this.value)
+        event.customValue = this.value
+        this.$emit('click', event)
       }
     }
   }

@@ -111,7 +111,6 @@
     methods: {
       onChange() {
         this.setCurrentItem()
-        console.log(this.currentItem)
         this.$emit('change', this.currentItem)
       },
 

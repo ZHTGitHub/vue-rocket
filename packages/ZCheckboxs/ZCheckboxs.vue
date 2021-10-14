@@ -82,7 +82,8 @@
       },
 
       onClick(event) {
-        this.$emit('click', event, this.values)
+        event.customValue = this.values
+        this.$emit('click', event)
       },
 
       onSelectAll() {

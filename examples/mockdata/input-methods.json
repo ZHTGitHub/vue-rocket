@@ -4,7 +4,7 @@
   "data": [
     {
       "name": "blur",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "当输入框失去焦点时触发"
     },
 
@@ -16,55 +16,55 @@
 
     {
       "name": "click",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "单击输入框时触发"
     },
 
     {
       "name": "click:append",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "单击附加图标时发出"
     },
 
     {
       "name": "click:append-outer",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "单击附加的外部图标时发出"
     },
 
     {
       "name": "click:clear",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "单击可清除图标时发出"
     },
 
     {
       "name": "click:prepend-outer",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "单击前置图标时发出"
     },
 
     {
       "name": "click:prepend",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "单击前置的内部图标时发出"
     },
 
     {
       "name": "focus",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "当输入框得到焦点时触发"
     },
 
     {
       "name": "keydown",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "按下任何键时触发"
     },
 
     {
       "name": "keyup",
-      "parameters": "(event: Event, value: String | Number)",
+      "parameters": "(event: Event)",
       "description": "键盘抬起时触发"
     }
   ]

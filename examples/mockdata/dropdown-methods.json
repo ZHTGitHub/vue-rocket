@@ -4,7 +4,7 @@
   "data": [
     {
       "name": "click",
-      "parameters": "(event: Event, value: Object)",
+      "parameters": "(event: Event)",
       "description": "单击下拉内容时发出的事件"
     },
 
