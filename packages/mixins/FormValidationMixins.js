@@ -1,7 +1,6 @@
 import $validator from '../validate/z-validate'
 import $bus from '../scripts/emitter'
-import Tools from '../scripts/tools'
-const tools = new Tools
+import tools from '../scripts/tools'
 
 export default {
 	created() {
