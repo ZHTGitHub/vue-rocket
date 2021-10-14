@@ -1,4 +1,4 @@
-class Tools {
+const tools = {
 
   /**
    * @description 判断值是否为对象
@@ -12,7 +12,7 @@ class Tools {
       return true
     }
     return false
-  }
+  },
 
   /**
    * @description 判断值是否为数组
@@ -20,7 +20,7 @@ class Tools {
    */ 
   isArray(arr) {
     return arr instanceof Array
-  }
+  },
 
   /**
    * @description 判断两个值是否绝对相等，数组/对象只比较其属性值是否绝对相等
@@ -53,7 +53,7 @@ class Tools {
     }
     
     return true
-  }
+  },
 
   /**
    * @description 判断值是否合法
@@ -85,5 +85,5 @@ class Tools {
   }
 } 
 
-export { Tools }
-export default Tools
+export { tools }
+export default tools
