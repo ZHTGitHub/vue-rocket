@@ -25,7 +25,7 @@
         </v-btn>
       </v-btn-toggle>
     </div>
-    <div class="error--text z-messages">{{ errorMessage }}</div>
+    <div v-show="errorMessage" class="error--text z-messages">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -131,8 +131,7 @@
   .z-btn-toggle {
     .btn-groups {
       height: auto;
-      padding-top: 4px;
-      margin-top: 16px;
+      padding-top: 12px;
       margin-bottom: 8px;
     }
   }
