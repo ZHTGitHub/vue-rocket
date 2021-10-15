@@ -1,5 +1,5 @@
 import $validator from '../validate/z-validate'
-import $bus from '../scripts/emitter'
+import emitter from '../scripts/emitter'
 import tools from '../scripts/tools'
 
 export default {
@@ -9,29 +9,31 @@ export default {
 		this.validateForm('INVALID_VALUE')
 
 		// 校验当前表单
-		$bus.on('ZHT_VALIDATE_FORM', (formId) => {
-
+		emitter.on('ZHT_VALIDATE_FORM', (formId) => {
 			if(this.formId === formId) {
+				$validator.global = true
 				++$validator.sum
+				console.log($validator.sum, $validator.global)
+
 				this.value = this.value === undefined ? '' : this.value
-
-				this.validator()
-
 				// console.log(this.value)
+
+				this.globalValidator()
 
 				const { total, results } = $validator.forms[this.formId]
 
 				if($validator.sum === total) {
 					if(!results.includes('INVALID_VALUE')) {
-						$bus.emit('ZHT_FORM_VALID', formId)
+						emitter.emit('ZHT_FORM_VALID', formId)
 					}
+					$validator.global = false
 					$validator.sum = 0
 				}
 				
 				// console.log(form)
 			}
 
-			$bus.off('ZHT_VALIDATE_FORM')
+			emitter.off('ZHT_VALIDATE_FORM')
 		})
 
 		this.reset()
@@ -40,44 +42,83 @@ export default {
 	},
 
 	methods: {
-		validator() {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-			if(this.value !== undefined) {
+		validator() {
+			if(this.value !== undefined) { 
 
-				// 无校验规则合法
-				if(!this.validation || !this.validation.length) {
+				// 未写入校验规则
+				if(tools.isEmpty(this.validation)) {
 					this.validateForm('VALID_VALUE')
 					return
 				}
 
 				for(let item of this.validation) {
-
-					let ruleName = undefined
-					let ruleValue = undefined
-
-					if(item.rule) {
-						ruleName = item.rule.split(':')[0]
-						ruleValue = item.rule.split(':')[1]
-					}
+					let [ruleName, ruleValue] = item.rule ? [item.rule.split(':')[0], item.rule.split(':')[1]] : []
 
 					if(item.regex) {
 						ruleName = 'regex'
 						ruleValue = item.regex
 					}
 
-					// console.log(ruleName, ruleValue)
+					console.log(ruleName, ruleValue)
 
+					// 校验规则不存在
 					if(!$validator.rules[ruleName]) {
 						this.validateForm('VALID_VALUE')
 					}
+					// 校验规则存在
 					else {
-						if(!$validator.rules[ruleName](this.value, ruleValue)) {
-							this.errorMessage = item.message
+						let yummy = $validator.rules[ruleName](this.value, ruleValue)
+						
+						// 不合法
+						if(!yummy) {
 							this.incorrect = true
+							this.errorMessage = item.message
 							this.validateForm('INVALID_VALUE')
 							return
-						}else {
-							this.errorMessage = ''
+						}
+						// 合法
+						else {
 							this.incorrect = false
+							this.errorMessage = ''
+							this.validateForm('VALID_VALUE')
+						}
+					}
+				}
+			}
+		},
+
+		globalValidator() {
+			if(this.value !== undefined) {
+				// 未写入校验规则
+				if(tools.isEmpty(this.validation)) {
+					this.validateForm('VALID_VALUE')
+					return
+				}
+
+				for(let item of this.validation) {
+					let [ruleName, ruleValue] = item.rule ? [item.rule.split(':')[0], item.rule.split(':')[1]] : []
+
+
+					// 校验规则不为 required
+					if(ruleName !== 'required') {
+						this.validateForm('VALID_VALUE')
+					}
+					// 校验规则为 required
+					else {
+						console.log(ruleName)
+						let yummy = $validator.rules.required(this.value, ruleValue)
+
+						// 不合法
+						if(!yummy) {
+							this.incorrect = true
+							this.errorMessage = item.message
+							this.validateForm('INVALID_VALUE')
+							return
+						}
+						// 合法
+						else {
+							this.incorrect = false
+							this.errorMessage = ''
 							this.validateForm('VALID_VALUE')
 						}
 					}
@@ -87,12 +128,12 @@ export default {
 
 		// reset current form.
 		reset() {
-			$bus.on('ZHT_RESET_FORM', (formId) => {
+			emitter.on('ZHT_RESET_FORM', (formId) => {
 				if(this.formId === formId) {
 
 					// console.log(this.formKey, this.value)
 
-					const defaultValue = !tools.isEmpty(this.defaultValue) ? undefined : this.defaultValue
+					const defaultValue = tools.isEmpty(this.defaultValue) ? undefined : this.defaultValue
 
 					this.$store.commit('RESET_FORM', {
 						formId: this.formId,
@@ -106,17 +147,17 @@ export default {
 					++$validator.sum
 					const { total } = $validator.forms[this.formId]
 					if($validator.sum === total) {
-						$bus.emit('ZHT_FORM_RESET', formId)
+						emitter.emit('ZHT_FORM_RESET', formId)
 						$validator.sum = 0
 					}
 				}
-				$bus.off('ZHT_RESET_FORM')
+				emitter.off('ZHT_RESET_FORM')
 			})
 		},
 
 		// clean current form.
 		clear() {
-			$bus.on('ZHT_CLEAR_FORM', (formId) => {
+			emitter.on('ZHT_CLEAR_FORM', (formId) => {
 				if(this.formId === formId) {
 					this.$store.commit('CLEAN_FORM', {
 						formId: this.formId
@@ -127,11 +168,11 @@ export default {
 					++$validator.sum
 					const { total } = $validator.forms[this.formId]
 					if($validator.sum === total) {
-						$bus.emit('ZHT_FORM_CLEARED', formId)
+						emitter.emit('ZHT_FORM_CLEARED', formId)
 						$validator.sum = 0
 					}
 				}
-				$bus.off('ZHT_CLEAR_FORM')
+				emitter.off('ZHT_CLEAR_FORM')
 			})
 		},
 
@@ -141,12 +182,19 @@ export default {
 				formKey: this.formKey,
 				status
 			})
+		},
+
+		onInput() {
+			this.validator()
 		}
 	},
 
-	watch: {
-		value() {
-			this.validator()
-		}
-	}
+	// watch: {
+	// 	value() {
+	// 		if(!$validator.global) {
+	// 			console.error($validator.global)
+	// 			this.validator()
+	// 		}
+	// 	}
+	// }
 }

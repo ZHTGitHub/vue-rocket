@@ -26,7 +26,7 @@
     props: {
       defaultValue: {
         type: Boolean,
-        default: false
+        default: undefined
       }
     },
 

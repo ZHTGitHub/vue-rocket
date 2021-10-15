@@ -29,6 +29,7 @@
       @click:prepend="onClickPrependOuter"
       @click:prepend-inner="onClickPrepend"
       @focus="onFocus"
+      @input="onInput"
     >
       <!-- 选择器内部 文字之后 BEGIN -->
       <template v-slot:append>

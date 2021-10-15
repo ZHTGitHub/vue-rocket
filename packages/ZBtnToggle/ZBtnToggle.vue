@@ -2,7 +2,7 @@
   <div class="z-btn-toggle z-input" :style="{ width: breadth }">
     <div class="btn-groups">
       <v-btn-toggle 
-        v-model="value"
+        v-model="values"
         :borderless="borderless"
         :dense="dense"
         :color="color"
@@ -13,7 +13,7 @@
         @change="onChange"
       >
         <v-btn
-          v-for="(item) in items"
+          v-for="(item) in options"
           :key="item.label"
           :value="item.value"
           :class="flip ? 'text-rtl' : ''"  
@@ -91,36 +91,19 @@
 
     data() {
       return {
-        items: [],
-        currentItem: {}
+        values: []
       }
     },
 
     created() {
-      for(let item of this.options) {
-        this.items.push({
-          label: item.label,
-          value: item.value,
-          icon: item.icon
-        })
-      }
-
-      this.setCurrentItem()
+      
     },
 
     methods: {
       onChange() {
-        this.setCurrentItem()
-        this.$emit('change', this.currentItem)
-      },
-
-      setCurrentItem() {
-        for(let item of this.items) {
-          if(item.value === this.value) {
-            this.currentItem = item
-            return
-          }
-        }
+        console.log(this.value)
+        this.onInput()
+        this.$emit('change', this.value)
       }
     }
   }

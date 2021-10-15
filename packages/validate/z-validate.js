@@ -14,6 +14,9 @@ class ZValidate {
 
     // 校验规则
     this.rules = rules
+
+    // 
+    this.global = false
   }
 
   validateByKey(options) {

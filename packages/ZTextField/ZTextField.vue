@@ -31,6 +31,7 @@
       @click:prepend="onClickPrependOuter"
       @click:prepend-inner="onClickPrepend"
       @focus="onFocus"
+      @input="onInput"
       @keydown="onKeydown"
       @keyup="onKeyup"
     >

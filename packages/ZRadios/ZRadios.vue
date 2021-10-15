@@ -16,7 +16,6 @@
       <v-radio
         v-for="(item, index) of items" 
         :key="`z_radio_${ index }`"
-        
         :label="item.label"
         :value="item.value"
         @click="onClick"
@@ -66,6 +65,7 @@
 
     methods: {
       onChange(value) {
+        this.onInput()
         this.$emit('change', value)
       },
 

@@ -56,7 +56,7 @@ const tools = {
   },
 
   /**
-   * @description 判断值是否合法
+   * @description 判断值是否合法，不合法返回 true
    * @param {Any} value
    */ 
   isEmpty(value) {
@@ -82,6 +82,35 @@ const tools = {
     }
     
     return false
+  },
+
+  /**
+   * @description 判断值是否合法，合法返回 true
+   * @param {Any} value
+   */ 
+  isYummy(value) {
+    if(value === undefined 
+      || value == null 
+      || value === '' 
+      || value === false
+    ) {
+      return false
+    }
+    
+    else if(value instanceof Array) {
+      if(value.length === 0) {
+        return false
+      }
+    }
+    
+    else if(typeof value === 'object') {
+      var keys = Object.keys(value)
+      if(keys.length === 0) {
+        return false
+      }
+    }
+    
+    return true
   }
 } 
 

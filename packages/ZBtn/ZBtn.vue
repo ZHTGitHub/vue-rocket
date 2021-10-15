@@ -32,7 +32,7 @@
 
 <script>
 	import BtnMixins from '../mixins/BtnMixins'
-	import $bus from '../scripts/emitter'
+	import emitter from '../scripts/emitter'
 
 	export default {
 		name: 'ZBtn',
@@ -66,31 +66,31 @@
 
 		created() {
 			// 当前表单合法
-			$bus.on('ZHT_FORM_VALID', (formId) => {
+			emitter.on('ZHT_FORM_VALID', (formId) => {
 				if(this.btnType === 'validate') {
 					if(this.formId === formId) {
 						this.$emit('click', this.event)
-						$bus.off('ZHT_FORM_VALID')
+						emitter.off('ZHT_FORM_VALID')
 					}
 				}
 			})
 
 			// 当前表单已重置
-			$bus.on('ZHT_FORM_RESET', (formId) => {
+			emitter.on('ZHT_FORM_RESET', (formId) => {
 				if(this.btnType === 'reset') {
 					if(this.formId === formId) {
 						this.$emit('click', this.event)
-						$bus.off('ZHT_FORM_RESET')
+						emitter.off('ZHT_FORM_RESET')
 					}
 				}
 			})
 
 			// 当前表单已清空
-			$bus.on('ZHT_FORM_CLEARED', (formId) => {
+			emitter.on('ZHT_FORM_CLEARED', (formId) => {
 				if(this.btnType === 'clear') {
 					if(this.formId === formId) {
 						this.$emit('click', this.event)
-						$bus.off('ZHT_FORM_CLEARED')
+						emitter.off('ZHT_FORM_CLEARED')
 					}
 				}
 			})
@@ -106,7 +106,7 @@
 						return
 					}
 
-					$bus.emit(action, this.formId)
+					emitter.emit(action, this.formId)
 				}
 			}
 		}

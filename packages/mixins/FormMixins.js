@@ -128,7 +128,6 @@ export default {
 			type: [String, Number],
 			validator(value) {
 				if(typeof +value === 'number') {
-					console.log(value)
 					return `${ value }px`
 				}else {
 					return value
@@ -164,7 +163,7 @@ export default {
 				if(this.forms[this.formId]) {
 					return this.forms[this.formId][this.formKey]
 				}
-				return ''
+				return undefined
 			}
 		},
 

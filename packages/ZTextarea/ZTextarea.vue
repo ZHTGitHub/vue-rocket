@@ -29,6 +29,7 @@
       @click:prepend="onClickPrependOuter"
       @click:prepend-inner="onClickPrepend"
       @focus="onFocus"
+      @input="onInput"
       @keydown="onKeydown"
       @keyup="onKeyup"
     >
@@ -110,6 +111,10 @@
       onFocus(event) {
         event.customValue = this.value
         this.$emit('focus', event)
+      },
+
+      onInput() {
+        this.validator()
       },
 
       onKeydown(event) {

@@ -14,7 +14,6 @@ const fields = [
     formKey: 'phone',
     label: '手机',
     validation: [
-      { rule: 'required', message: '手机为必填项.' },
       { regex: /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/, message: '手机格式不正确.' }
     ],
     defaultValue: undefined
@@ -44,17 +43,6 @@ const fields = [
     ],
     defaultValue: '2021-09-20'
   },
-
-  // {
-  //   inputType: 'textarea',
-  //   formKey: 'intro',
-  //   label: '自我介绍',
-  //   validation: [
-  //     { rule: 'required', message: '自我介绍为必填项.' },
-  //     { rule: 'min:10', message: '自我介绍至少十个字.' },
-  //   ],
-  //   defaultValue: undefined
-  // },
 
   {
     inputType: 'radios',
@@ -96,7 +84,7 @@ const fields = [
       { label: '无性', value: 4, }
     ],
     validation: [
-      { rule: 'required', message: '性取向为必选项.' }
+      // { rule: 'required', message: '性取向为必选项.' }
     ],
     defaultValue: 1
   },

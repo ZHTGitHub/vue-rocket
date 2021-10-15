@@ -35,6 +35,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
+  import tools from '../scripts/tools'
 
   export default {
     name: 'ZCheckboxs',
@@ -78,10 +79,15 @@
 
     methods: {
       onChange(values) {
+        console.log(this.value)
+        console.error(values)
+        this.value = values
+        this.onInput()
         this.$emit('change', values)
       },
 
       onClick(event) {
+        console.log(this.value)
         event.customValue = this.values
         this.$emit('click', event)
       },
@@ -112,7 +118,7 @@
 
       values: {
         handler(values) {
-          if(values.length > 0) {
+          if(tools.isYummy(values)) {
             this.value = values
           }else {
             this.value = undefined

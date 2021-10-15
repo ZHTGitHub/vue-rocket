@@ -110,6 +110,7 @@
                   :formKey="item.formKey"
                   color="primary"
                   flip
+                  multiple
                   :label="item.label"
                   :validation="item.validation"
                   :options="item.options"
