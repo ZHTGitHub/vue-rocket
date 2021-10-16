@@ -19,7 +19,6 @@
           :class="flip ? 'text-rtl' : ''"  
         >
           <v-icon 
-            :color="value === item.value ? color : undefined"
           >{{ item.icon }}</v-icon>
           <span>{{ item.label }}</span>
         </v-btn>
@@ -91,17 +90,21 @@
 
     data() {
       return {
-        values: []
+        values: null
       }
     },
 
     created() {
-      
+      if(this.multiple) {
+        this.values = []
+      }
+      this.value = this.values
     },
 
     methods: {
       onChange() {
-        console.log(this.value)
+        console.log(this.values)
+        this.value = this.values
         this.onInput()
         this.$emit('change', this.value)
       }

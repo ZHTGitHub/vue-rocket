@@ -84,7 +84,7 @@ const fields = [
       { label: '无性', value: 4, }
     ],
     validation: [
-      // { rule: 'required', message: '性取向为必选项.' }
+      { rule: 'required', message: '性取向为必选项.' }
     ],
     defaultValue: 1
   },
