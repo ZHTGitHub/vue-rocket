@@ -30,6 +30,7 @@
       @change="onChange"
       @click="onClick"
       @focus="onFocus"
+      @input="onInput"
     >
       <!-- 选择器内部 文字之后 BEGIN -->
       <template v-slot:append>
@@ -127,6 +128,10 @@
 
       onFocus(event) {
         this.$emit('focus', event, this.value)
+      },
+
+      onInput() {
+        this.verifyField()
       }
     }
   }

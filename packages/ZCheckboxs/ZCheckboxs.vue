@@ -79,11 +79,9 @@
 
     methods: {
       onChange(values) {
-        console.log(this.value)
-        console.error(values)
         this.value = values
-        this.onInput()
         this.$emit('change', values)
+        this.verifyField()
       },
 
       onClick(event) {

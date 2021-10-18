@@ -175,7 +175,6 @@ export default {
 	watch: {
 		value: {
 			handler(value) {
-				console.log(typeof value, value)
 				if(value == null) {
 					this.value = undefined
 				}
@@ -186,7 +185,6 @@ export default {
 		defaultValue: {
 			handler(value) {
 				this.value = value
-				console.log(this.formKey, this.value)
 			},
 			immediate: true
 		}

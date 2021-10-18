@@ -115,6 +115,10 @@
         this.$emit('focus', event)
       },
 
+      onInput() {
+        this.verifyField()
+      },
+
       onKeydown(event) {
         event.customValue = this.value
         this.$emit('keydown', event)

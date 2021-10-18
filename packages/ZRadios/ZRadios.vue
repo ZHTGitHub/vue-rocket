@@ -65,8 +65,8 @@
 
     methods: {
       onChange(value) {
-        this.onInput()
         this.$emit('change', value)
+        this.verifyField()
       },
 
       onClick(event) {

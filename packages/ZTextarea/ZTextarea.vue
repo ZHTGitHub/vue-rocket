@@ -114,7 +114,7 @@
       },
 
       onInput() {
-        this.validator()
+        this.verifyField()
       },
 
       onKeydown(event) {

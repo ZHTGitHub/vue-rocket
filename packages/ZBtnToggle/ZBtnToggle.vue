@@ -102,7 +102,7 @@
       onChange() {
         this.value = this.values
         this.$emit('change', this.value)
-        this.onInput()
+        this.verifyField()
       },
 
       init() {

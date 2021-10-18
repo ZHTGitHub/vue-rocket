@@ -130,6 +130,10 @@
       onFocus(event) {
         event.customValue = this.value
         this.$emit('focus', event)
+      },
+
+      onInput() {
+        this.verifyField()
       }
     }
   }
