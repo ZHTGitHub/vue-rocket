@@ -17,9 +17,9 @@ Vue.use(DemoComponents)
 
 import store from './store'
 
-import util from './libs/util'
+// import util from './libs/util'
 
-Vue.prototype.util = util
+// Vue.prototype.util = util
 
 Vue.config.productionTip = false
 

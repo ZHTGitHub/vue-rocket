@@ -14,13 +14,12 @@ export default {
 	},
 
 	methods: {
+		// Verify field
 		verifyField() {
 			if(this.value !== undefined) {
 
-				// console.log(this.value)
-
 				// 未写入校验规则
-				if(tools.isEmpty(this.validation)) {
+				if(tools.isLousy(this.validation)) {
 					this.validateForm('VALID_VALUE')
 				}
 				// 写入校验规则
@@ -73,10 +72,11 @@ export default {
 			}
 		},
 
+		// Verify form
 		verifyForm() {
 			if(this.value !== undefined) {
 				// 未写入校验规则
-				if(tools.isEmpty(this.validation)) {
+				if(tools.isLousy(this.validation)) {
 					this.validateForm('VALID_VALUE')
 					return
 				}
@@ -163,7 +163,7 @@ export default {
 
 					// console.log(this.formKey, this.value)
 
-					const defaultValue = tools.isEmpty(this.defaultValue) ? undefined : this.defaultValue
+					const defaultValue = tools.isLousy(this.defaultValue) ? undefined : this.defaultValue
 
 					this.$store.commit('RESET_FORM', {
 						formId: this.formId,
@@ -220,6 +220,7 @@ export default {
 			this.validateForm('INVALID_VALUE')
 		},
 
+		// ???
 		validateForm(status) {
 			$validator.validateByKey({
 				formId: this.formId,

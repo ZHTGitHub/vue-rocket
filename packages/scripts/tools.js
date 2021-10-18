@@ -59,29 +59,13 @@ const tools = {
    * @description 判断值是否合法，不合法返回 true
    * @param {Any} value
    */ 
+  isLousy() {
+    return !this.isYummy(value)
+  },
+
+  // 即将废弃
   isEmpty(value) {
-    if(value === undefined 
-      || value == null 
-      || value === '' 
-      || value === false
-    ) {
-      return true
-    }
-    
-    else if(value instanceof Array) {
-      if(value.length === 0) {
-        return true
-      }
-    }
-    
-    else if(typeof value === 'object') {
-      var keys = Object.keys(value)
-      if(keys.length === 0) {
-        return true
-      }
-    }
-    
-    return false
+    return !this.isYummy(value)
   },
 
   /**

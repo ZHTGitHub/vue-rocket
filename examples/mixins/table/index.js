@@ -60,7 +60,6 @@ export default {
 				const result = await this.$store.dispatch(this.getHandler, this.params)
 				this.loading = false
 				if(result) {
-					console.log(result)
 					this.desserts = result.data
 					this.pagination.total = result.total
 				}
