@@ -95,18 +95,21 @@
     },
 
     created() {
-      if(this.multiple) {
-        this.values = []
-      }
-      this.value = this.values
+      this.init()
     },
 
     methods: {
       onChange() {
-        console.log(this.values)
         this.value = this.values
-        this.onInput()
         this.$emit('change', this.value)
+        this.onInput()
+      },
+
+      init() {
+        if(this.multiple) {
+          this.values = []
+        }
+        this.values = this.defaultValue
       }
     }
   }

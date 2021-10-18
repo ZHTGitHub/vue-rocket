@@ -11,9 +11,7 @@ export default {
 		// 校验当前表单
 		emitter.on('ZHT_VALIDATE_FORM', (formId) => {
 			if(this.formId === formId) {
-				$validator.global = true
 				++$validator.sum
-				console.log($validator.sum, $validator.global)
 
 				this.value = this.value === undefined ? '' : this.value
 				// console.log(this.value)
@@ -22,11 +20,12 @@ export default {
 
 				const { total, results } = $validator.forms[this.formId]
 
+				console.log($validator.forms)
+
 				if($validator.sum === total) {
 					if(!results.includes('INVALID_VALUE')) {
 						emitter.emit('ZHT_FORM_VALID', formId)
 					}
-					$validator.global = false
 					$validator.sum = 0
 				}
 				
@@ -43,44 +42,72 @@ export default {
 
 	methods: {
 		validator() {
-			if(this.value !== undefined) { 
+			if(this.value !== undefined) {
+
+				console.log(this.value)
 
 				// 未写入校验规则
 				if(tools.isEmpty(this.validation)) {
 					this.validateForm('VALID_VALUE')
-					return
 				}
+				// 写入校验规则
+				else {
+					for(let item of this.validation) {
+						let [ruleName, ruleValue] = item.rule ? [item.rule.split(':')[0], item.rule.split(':')[1]] : []
 
-				for(let item of this.validation) {
-					let [ruleName, ruleValue] = item.rule ? [item.rule.split(':')[0], item.rule.split(':')[1]] : []
-
-					if(item.regex) {
-						ruleName = 'regex'
-						ruleValue = item.regex
-					}
-
-					console.log(ruleName, ruleValue)
-
-					// 校验规则不存在
-					if(!$validator.rules[ruleName]) {
-						this.validateForm('VALID_VALUE')
-					}
-					// 校验规则存在
-					else {
-						let yummy = $validator.rules[ruleName](this.value, ruleValue)
-						
-						// 不合法
-						if(!yummy) {
-							this.incorrect = true
-							this.errorMessage = item.message
-							this.validateForm('INVALID_VALUE')
-							return
+						// 正则表达式
+						if(item.regex) {
+							ruleName = 'regex'
+							ruleValue = item.regex
 						}
-						// 合法
-						else {
-							this.incorrect = false
-							this.errorMessage = ''
+
+						// console.log(this.validation)
+						// console.log(ruleName, ruleValue)
+						
+						// 当前输入框的所有校验规则
+						const rules = []
+						for(let rule of this.validation) {
+							rules.push(rule.rule)
+						}
+
+						console.log(this.value, rules)
+	
+						// 校验规则不存在
+						if(!$validator.rules[ruleName]) {
 							this.validateForm('VALID_VALUE')
+						}
+						// 校验规则存在
+						else {
+							let yummy = $validator.rules[ruleName](this.value, ruleValue)
+							
+							// 不合法
+							if(!yummy) {
+								if(rules.includes('required')) {
+									this.incorrect = true
+									this.errorMessage = item.message
+									this.validateForm('INVALID_VALUE')
+								}
+
+								else if(!rules.includes('required') && this.value) {
+									this.incorrect = true
+									this.errorMessage = item.message
+									this.validateForm('INVALID_VALUE')
+								}
+
+								else {
+									this.incorrect = false
+									this.errorMessage = ''
+									this.validateForm('VALID_VALUE')
+								}
+								
+								return
+							}
+							// 合法
+							else {
+								this.incorrect = false
+								this.errorMessage = ''
+								this.validateForm('VALID_VALUE')
+							}
 						}
 					}
 				}
@@ -98,14 +125,37 @@ export default {
 				for(let item of this.validation) {
 					let [ruleName, ruleValue] = item.rule ? [item.rule.split(':')[0], item.rule.split(':')[1]] : []
 
+					if(item.regex) {
+						ruleName = 'regex'
+						ruleValue = item.regex
+					}
 
-					// 校验规则不为 required
-					if(ruleName !== 'required') {
+					// 校验规则不为 required && 值为undefined
+					if(ruleName !== 'required' && !this.value) {
 						this.validateForm('VALID_VALUE')
 					}
+
+					// 校验规则不为 required && 值不为undefined
+					else if(ruleName !== 'required' && this.value) {
+						let yummy = $validator.rules[ruleName](this.value, ruleValue)
+
+						// 不合法
+						if(!yummy) {
+							this.incorrect = true
+							this.errorMessage = item.message
+							this.validateForm('INVALID_VALUE')
+							return
+						}
+						// 合法
+						else {
+							this.incorrect = false
+							this.errorMessage = ''
+							this.validateForm('VALID_VALUE')
+						}
+					}
+
 					// 校验规则为 required
 					else {
-						console.log(ruleName)
 						let yummy = $validator.rules.required(this.value, ruleValue)
 
 						// 不合法
@@ -186,15 +236,26 @@ export default {
 
 		onInput() {
 			this.validator()
+		},
+
+		// 合法
+		savory() {
+			this.incorrect = false
+			this.errorMessage = ''
+			this.validateForm('VALID_VALUE')
+		},
+
+		// 不合法
+		unsavory() {
+			this.incorrect = true
+			this.errorMessage = item.message
+			this.validateForm('INVALID_VALUE')
 		}
 	},
 
 	// watch: {
 	// 	value() {
-	// 		if(!$validator.global) {
-	// 			console.error($validator.global)
-	// 			this.validator()
-	// 		}
+	// 		this.validator()
 	// 	}
 	// }
 }

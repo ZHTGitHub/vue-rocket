@@ -114,7 +114,7 @@
                   :label="item.label"
                   :validation="item.validation"
                   :options="item.options"
-                  :defaultValue="item.defaultValue"
+                  :defaultValue="[1]"
                 ></z-btn-toggle>
               </div>
 
