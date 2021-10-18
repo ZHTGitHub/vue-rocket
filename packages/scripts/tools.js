@@ -59,7 +59,7 @@ const tools = {
    * @description 判断值是否合法，不合法返回 true
    * @param {Any} value
    */ 
-  isLousy() {
+  isLousy(value) {
     return !this.isYummy(value)
   },
 

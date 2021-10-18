@@ -35,9 +35,6 @@ export default {
 
 						// console.log(this.validation)
 						// console.log(ruleName, ruleValue)
-						
-						// 当前 field 是否必填
-						const hasRequired = this.validation.some((r) => { return r.rule === 'required' })
 
 						// 校验规则不存在
 						if(!$validator.rules[ruleName]) {
@@ -45,18 +42,25 @@ export default {
 						}
 						// 校验规则存在
 						else {
-							let yummy = $validator.rules[ruleName](this.value, ruleValue)
-							
+							// 当前 field 是否合法
+							const yummy = $validator.rules[ruleName](this.value, ruleValue)
+
 							// 不合法
 							if(!yummy) {
+								// 当前 field 是否必填
+								const hasRequired = this.validation.some((r) => { return r.rule === 'required' })
+
+								// 必填 直接报错
 								if(hasRequired) {
 									this.unsavory(item)
 								}
 
+								// 不必填 有值 但值不合法
 								else if(!hasRequired && this.value) {
 									this.unsavory(item)
 								}
 
+								// 
 								else {
 									this.savory()
 								}
@@ -143,7 +147,7 @@ export default {
 					// console.log($validator.forms)
 	
 					if($validator.sum === total) {
-						if(~results.indexOf('INVALID_VALUE')) {
+						if(!results.includes('INVALID_VALUE')) {
 							emitter.emit('ZHT_FORM_VALID', formId)
 						}
 						$validator.sum = 0

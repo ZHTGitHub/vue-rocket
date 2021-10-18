@@ -111,6 +111,13 @@
         }
         this.values = this.defaultValue
       }
+    },
+
+    watch: {
+      values(values) {
+
+      },
+      immediate: true
     }
   }
 </script>
