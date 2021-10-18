@@ -83,30 +83,21 @@ export default {
 							// 不合法
 							if(!yummy) {
 								if(rules.includes('required')) {
-									this.incorrect = true
-									this.errorMessage = item.message
-									this.validateForm('INVALID_VALUE')
+									this.unsavory(item)
 								}
 
 								else if(!rules.includes('required') && this.value) {
-									this.incorrect = true
-									this.errorMessage = item.message
-									this.validateForm('INVALID_VALUE')
+									this.unsavory(item)
 								}
 
 								else {
-									this.incorrect = false
-									this.errorMessage = ''
-									this.validateForm('VALID_VALUE')
+									this.savory()
 								}
-								
 								return
 							}
 							// 合法
 							else {
-								this.incorrect = false
-								this.errorMessage = ''
-								this.validateForm('VALID_VALUE')
+								this.savory(item)
 							}
 						}
 					}
@@ -141,16 +132,12 @@ export default {
 
 						// 不合法
 						if(!yummy) {
-							this.incorrect = true
-							this.errorMessage = item.message
-							this.validateForm('INVALID_VALUE')
+							this.unsavory(item)
 							return
 						}
 						// 合法
 						else {
-							this.incorrect = false
-							this.errorMessage = ''
-							this.validateForm('VALID_VALUE')
+							this.savory()
 						}
 					}
 
@@ -160,16 +147,12 @@ export default {
 
 						// 不合法
 						if(!yummy) {
-							this.incorrect = true
-							this.errorMessage = item.message
-							this.validateForm('INVALID_VALUE')
+							this.unsavory(item)
 							return
 						}
 						// 合法
 						else {
-							this.incorrect = false
-							this.errorMessage = ''
-							this.validateForm('VALID_VALUE')
+							this.savory()
 						}
 					}
 				}
@@ -246,7 +229,7 @@ export default {
 		},
 
 		// 不合法
-		unsavory() {
+		unsavory(item) {
 			this.incorrect = true
 			this.errorMessage = item.message
 			this.validateForm('INVALID_VALUE')
