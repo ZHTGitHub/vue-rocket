@@ -6,7 +6,8 @@
           <code class="language-markup">
             &lt;template>
               &lt;z-pagination
-                :total="2"
+                :optinos="pageSizes"
+                :total="total"
               >&lt;/z-pagination>
             &lt;/template>
           </code>
@@ -14,6 +15,7 @@
       </div>
       <div slot="demo">
         <z-pagination
+          :options="pageSizes"
           :total="total"
         ></z-pagination>
       </div>
@@ -32,18 +34,18 @@
 
     data() {  
       return {
-        total: 0
+        total: 11,
+        pageSizes: [
+          { label: '10条/页', value: 10 },
+          { label: '20条/页', value: 20 },
+          { label: '50条/页', value: 50 },
+          { label: '100条/页', value: 100 }
+        ]
       }
     },
 
     mounted() {
       Prism.highlightAll()
-    },
-
-    created() {
-      setTimeout(() => {
-        this.total = 11
-      }) 
     }
   }
 </script>

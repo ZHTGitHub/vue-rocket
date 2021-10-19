@@ -15,6 +15,7 @@
         dense
         :options="options"
         width="105"
+        :defaultValue="defaultValue"
         @change="onSizes"
       ></z-select>
     </span>
@@ -52,6 +53,11 @@
       circle: {
         type: Boolean,
         default: false
+      },
+
+      defaultValue: {
+        type: [String, Number],
+        default: 10
       },
 
       options: {
@@ -136,8 +142,11 @@
     },
     
     watch: {
-      total() {
-        this.length = Math.ceil(this.total / this.sizes)
+      total: {
+        handler() {
+          this.length = Math.ceil(this.total / this.sizes)
+        },
+        immediate: true
       }
     }
   }
