@@ -14,7 +14,7 @@
       </div>
       <div slot="demo">
         <z-pagination
-          :total="11"
+          :total="total"
         ></z-pagination>
       </div>
     </usage-demo>
@@ -30,8 +30,20 @@
   export default {
     name: 'UsageExamples',
 
+    data() {  
+      return {
+        total: 0
+      }
+    },
+
     mounted() {
       Prism.highlightAll()
+    },
+
+    created() {
+      setTimeout(() => {
+        this.total = 11
+      }) 
     }
   }
 </script>

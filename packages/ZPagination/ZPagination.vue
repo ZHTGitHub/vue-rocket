@@ -1,5 +1,9 @@
 <template>
-  <div v-show="total > pageSize" class="z-pagination z-flex justify-center align-center">
+  <div 
+    v-show="total > sizes" 
+    class="z-pagination z-flex align-center" 
+    :class="`justify-${ position }`"
+  >
     <span class="mr-3 z-pagination__total">
       共 {{ total }} 条
     </span>
@@ -52,7 +56,7 @@
 
       options: {
         type: Array,
-        default: () => [{ label: 10, value: 10 }]
+        default: () => []
       },
 
       pageNum: {
@@ -65,9 +69,16 @@
         default: 10
       },
 
+      position: {
+        validator(value) {
+          return ~['start', 'center', 'end'].indexOf(value)
+        },
+        default: 'end'
+      },
+
       total: {
-        type: Number,
-        required: true
+        type: [Number, String],
+        default: 0
       },
     },
 
@@ -75,13 +86,14 @@
       return {
         formId: 'pagination',
         page: 1,
+        sizes: 10,
         length: 1
       }
     },
 
     created() {
       this.page = this.pageNum
-      this.length = Math.ceil(this.total / this.pageSize)
+      this.sizes = this.pageSize
     },
 
     methods: {
@@ -98,6 +110,7 @@
       },
 
       onSizes(sizes) {
+        this.sizes = sizes
         this.$emit('sizes', sizes)
       },
 
@@ -119,6 +132,12 @@
         }
 
         this.$emit('jump', this.page)
+      }
+    },
+    
+    watch: {
+      total() {
+        this.length = Math.ceil(this.total / this.sizes)
       }
     }
   }

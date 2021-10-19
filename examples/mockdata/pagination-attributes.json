@@ -12,15 +12,6 @@
     },
 
     {
-      "name": "length",
-      "required": "否",
-      "type": "Boolean",
-      "acceptedValues": "—",
-      "default": 1,
-      "description": "分页组件的长度"
-    },
-
-    {
       "name": "pageNum",
       "required": "否",
       "type": "Number",
@@ -36,6 +27,15 @@
       "acceptedValues": "—",
       "default": 10,
       "description": "每页条数"
+    },
+
+    {
+      "name": "position",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "start | center | end",
+      "default": "end",
+      "description": "分页组件的位置"
     },
 
     {
