@@ -143,32 +143,38 @@
         }
 
         this.$emit('jump', this.pagination)
+      },
+       
+      setLength() {
+        this.length = Math.ceil(this.total / this.sizes)
+      },
+
+      setPagination() {
+        this.pagination = {
+          pageSize: this.sizes,
+          pageNum: this.page
+        }
       }
     },
     
     watch: {
       total: {
         handler() {
-          this.length = Math.ceil(this.total / this.sizes)
+          this.setLength()
         },
         immediate: true
       },
 
       page: {
         handler() {
-          this.pagination = {
-            pageSize: this.sizes,
-            pageNum: this.page
-          }
+          this.setPagination()
         },
         immediate: true
       },
 
       sizes() {
-        this.pagination = {
-          pageSize: this.sizes,
-          pageNum: this.page
-        }
+        this.setPagination()
+        this.setLength()
       },
 
       pagination: {
