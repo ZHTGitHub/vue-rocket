@@ -17,6 +17,7 @@
         <z-pagination
           :options="pageSizes"
           :total="total"
+          @pagination="handlePagination"
         ></z-pagination>
       </div>
     </usage-demo>
@@ -46,6 +47,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      handlePagination(pagination) {
+        console.log(pagination)
+      }
     }
   }
 </script>

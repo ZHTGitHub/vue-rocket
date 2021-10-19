@@ -85,7 +85,7 @@
       total: {
         type: [Number, String],
         default: 0
-      },
+      }
     },
 
     data() {
@@ -93,7 +93,11 @@
         formId: 'pagination',
         page: 1,
         sizes: 10,
-        length: 1
+        length: 1,
+        pagination: {
+          pageSize: 1,
+          pageNum: 10
+        }
       }
     },
 
@@ -104,20 +108,21 @@
 
     methods: {
       onInput() {
-        this.$emit('input', this.page)
+        this.$emit('input', this.pagination)
       },
 
       onNext() {
-        this.$emit('next', this.page)
+        this.$emit('next', this.pagination)
       },
 
       onPrevious() {
-        this.$emit('previous', this.page)
+        this.$emit('previous', this.pagination)
       },
 
       onSizes(sizes) {
         this.sizes = sizes
-        this.$emit('sizes', sizes)
+        this.page = 1
+        this.$emit('sizes', this.pagination)
       },
 
       onJump(event) {
@@ -137,7 +142,7 @@
           this.page = pageNum
         }
 
-        this.$emit('jump', this.page)
+        this.$emit('jump', this.pagination)
       }
     },
     
@@ -147,6 +152,31 @@
           this.length = Math.ceil(this.total / this.sizes)
         },
         immediate: true
+      },
+
+      page: {
+        handler() {
+          this.pagination = {
+            pageSize: this.sizes,
+            pageNum: this.page
+          }
+        },
+        immediate: true
+      },
+
+      sizes() {
+        this.pagination = {
+          pageSize: this.sizes,
+          pageNum: this.page
+        }
+      },
+
+      pagination: {
+        handler() {
+          this.$emit('pagination', this.pagination)
+        },
+        immediate: true,
+        deep: true
       }
     }
   }
