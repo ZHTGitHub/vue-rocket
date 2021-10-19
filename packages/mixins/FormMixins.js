@@ -57,6 +57,11 @@ export default {
 			default: false
 		},
 
+		filled: {
+			type: Boolean,
+			default: false
+		},
+
 		hideDetails: {
 			type: Boolean,
 			default: false
@@ -70,6 +75,11 @@ export default {
 		label: {
 			type: String,
 			required: false
+		},
+
+		outlined: {
+			type: Boolean,
+			default: false
 		},
 
 		placeholder: {
@@ -98,6 +108,11 @@ export default {
 		},
 
 		required: {
+			type: Boolean,
+			default: false
+		},
+
+		solo: {
 			type: Boolean,
 			default: false
 		},
@@ -175,6 +190,7 @@ export default {
 	watch: {
 		value: {
 			handler(value) {
+				console.log(value)
 				if(value == null) {
 					this.value = undefined
 				}

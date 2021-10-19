@@ -11,14 +11,17 @@
       :disabled="disabled"
       :error="incorrect"
       :error-messages="errorMessage"
+      :filled="filled"
       :hide-details="hideDetails"
       :hint="hint"
       :label="label"
+      :outlined="outlined"
       :placeholder="placeholder"
       :prepend-icon="prependOuterIcon"
       :prepend-inner-icon="prependIcon"
       :readonly="readonly"
       :reverse="reverse"
+      :solo="solo"
       :suffix="suffix"
       :success="success"
       :type="type"
@@ -34,6 +37,7 @@
       @input="onInput"
       @keydown="onKeydown"
       @keyup="onKeyup"
+      @keyup.enter="onEnter"
     >
       <!-- 输入框内部 文字之后 BEGIN -->
       <template v-slot:append>
@@ -127,6 +131,11 @@
       onKeyup(event) {
         event.customValue = this.value
         this.$emit('keyup', event)
+      },
+
+      onEnter(event) {
+        event.customValue = this.value
+        this.$emit('enter', event)
       }
     }
   }

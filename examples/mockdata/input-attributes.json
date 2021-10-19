@@ -93,6 +93,15 @@
     },
 
     {
+      "name": "filled",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "应用替代填充输入样式"
+    },
+
+    {
       "name": "hide-details",
       "required": "否",
       "type": "Boolean",
@@ -117,6 +126,15 @@
       "acceptedValues": "—",
       "default": "—",
       "description": "设置输入标签"
+    },
+
+    {
+      "name": "outlined",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "将轮廓样式应用于输入"
     },
 
     {
@@ -162,6 +180,15 @@
       "acceptedValues": "—",
       "default": false,
       "description": "反转输入方向"
+    },
+
+    {
+      "name": "solo",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "改变输入框的样式"
     },
 
     {
