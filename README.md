@@ -1,6 +1,3 @@
-# Vue Rocket
-
-
 ## Install
 ```shell
 npm install vue-rocket -S
