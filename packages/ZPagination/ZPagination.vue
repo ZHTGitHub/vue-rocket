@@ -89,7 +89,7 @@
         size: 10,
         num: 1,
         length: 1,
-        pagination: {
+        page: {
           pageSize: 10,
           pageNum: 1
         }
@@ -103,21 +103,21 @@
 
     methods: {
       onInput() {
-        this.$emit('input', this.pagination)
+        this.$emit('input', this.page)
       },
 
       onNext() {
-        this.$emit('next', this.pagination)
+        this.$emit('next', this.page)
       },
 
       onPrevious() {
-        this.$emit('previous', this.pagination)
+        this.$emit('previous', this.page)
       },
 
       onSizes(size) {
         this.size = size
         this.num = 1
-        this.$emit('size', this.pagination)
+        this.$emit('size', this.page)
       },
 
       onJump(event) {
@@ -137,7 +137,7 @@
           this.num = pageNum
         }
 
-        this.$emit('jump', this.pagination)
+        this.$emit('jump', this.page)
       },
        
       setLength() {
@@ -145,7 +145,7 @@
       },
 
       setPagination() {
-        this.pagination = {
+        this.page = {
           pageSize: this.size,
           pageNum: this.num
         }
@@ -182,9 +182,9 @@
         immediate: true
       },
 
-      pagination: {
+      page: {
         handler() {
-          this.$emit('pagination', this.pagination)
+          this.$emit('page', this.page)
         },
         immediate: true,
         deep: true

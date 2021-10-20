@@ -4,20 +4,32 @@
   "data": [
     {
       "name": "input",
-      "parameters": "-",
+      "parameters": "{ pageSize, pageNum }",
       "description": "跳转时触发"
     },
 
     {
       "name": "next",
-      "parameters": "-",
+      "parameters": "{ pageSize, pageNum }",
       "description": "跳转到下一页时触发"
     },
 
     {
       "name": "previous",
-      "parameters": "-",
+      "parameters": "{ pageSize, pageNum }",
       "description": "跳转到上一页时触发"
+    },
+
+    {
+      "name": "page",
+      "parameters": "{ pageSize, pageNum }",
+      "description": "发生跳转时触发"
+    },
+
+    {
+      "name": "size",
+      "parameters": "{ pageSize, pageNum }",
+      "description": "选择器设置每页显示个数时触发"
     }
   ]
 }

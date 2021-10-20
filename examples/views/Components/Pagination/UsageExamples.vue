@@ -6,7 +6,9 @@
           <code class="language-markup">
             &lt;template>
               &lt;z-pagination
-                :optinos="pageSizes"
+                :options="pageOptions"
+                :pageNum="3"
+                :pageSize="20"
                 :total="total"
               >&lt;/z-pagination>
             &lt;/template>
@@ -15,9 +17,10 @@
       </div>
       <div slot="demo">
         <z-pagination
-          :options="pageSizes"
+          :options="pageOptions"
+          :pageNum="3"
+          :pageSize="20"
           :total="total"
-          @pagination="handlePagination"
         ></z-pagination>
       </div>
     </usage-demo>
@@ -36,7 +39,7 @@
     data() {  
       return {
         total: 101,
-        pageSizes: [
+        pageOptions: [
           { label: '10条/页', value: 10 },
           { label: '20条/页', value: 20 },
           { label: '50条/页', value: 50 },
@@ -47,12 +50,6 @@
 
     mounted() {
       Prism.highlightAll()
-    },
-
-    methods: {
-      handlePagination(pagination) {
-        console.log(pagination)
-      }
     }
   }
 </script>
