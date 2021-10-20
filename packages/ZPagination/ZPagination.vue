@@ -1,6 +1,6 @@
 <template>
   <div 
-    v-show="total > sizes" 
+    v-if="total > size" 
     class="z-pagination z-flex align-center" 
     :class="`justify-${ position }`"
   >
@@ -15,13 +15,13 @@
         dense
         :options="options"
         width="105"
-        :defaultValue="defaultValue"
+        :defaultValue="pageSize"
         @change="onSizes"
       ></z-select>
     </span>
 
     <v-pagination
-      v-model="page"
+      v-model="num"
       :length="length"
       :circle="circle"
       @input="onInput"
@@ -37,9 +37,9 @@
         class="mx-2"
         dense
         width="50"
-        :defaultValue="page"
-       @enter="onJump"
-       @blur="onJump"
+        :defaultValue="num"
+        @enter="onJump"
+        @blur="onJump"
       ></z-text-field>
       页
     </span>
@@ -53,11 +53,6 @@
       circle: {
         type: Boolean,
         default: false
-      },
-
-      defaultValue: {
-        type: [String, Number],
-        default: 10
       },
 
       options: {
@@ -91,19 +86,19 @@
     data() {
       return {
         formId: 'pagination',
-        page: 1,
-        sizes: 10,
+        size: 10,
+        num: 1,
         length: 1,
         pagination: {
-          pageSize: 1,
-          pageNum: 10
+          pageSize: 10,
+          pageNum: 1
         }
       }
     },
 
     created() {
-      this.page = this.pageNum
-      this.sizes = this.pageSize
+      this.num = this.pageNum
+      this.size = this.pageSize
     },
 
     methods: {
@@ -119,10 +114,10 @@
         this.$emit('previous', this.pagination)
       },
 
-      onSizes(sizes) {
-        this.sizes = sizes
-        this.page = 1
-        this.$emit('sizes', this.pagination)
+      onSizes(size) {
+        this.size = size
+        this.num = 1
+        this.$emit('size', this.pagination)
       },
 
       onJump(event) {
@@ -133,31 +128,38 @@
         }
 
         if(pageNum > this.length) {
-          this.page = this.length
+          this.num = this.length
         }
         else if(pageNum < 1) {
-          this.page = 1
+          this.num = 1
         }
         else {
-          this.page = pageNum
+          this.num = pageNum
         }
 
         this.$emit('jump', this.pagination)
       },
        
       setLength() {
-        this.length = Math.ceil(this.total / this.sizes)
+        this.length = Math.ceil(this.total / this.size)
       },
 
       setPagination() {
         this.pagination = {
-          pageSize: this.sizes,
-          pageNum: this.page
+          pageSize: this.size,
+          pageNum: this.num
         }
       }
     },
     
     watch: {
+      pageNum: {
+        handler() {
+          this.num = this.pageNum
+        },
+        immediate: true
+      },
+
       total: {
         handler() {
           this.setLength()
@@ -165,16 +167,19 @@
         immediate: true
       },
 
-      page: {
+      num: {
         handler() {
           this.setPagination()
         },
         immediate: true
       },
 
-      sizes() {
-        this.setPagination()
-        this.setLength()
+      size: {
+        handler() {
+          this.setPagination()
+          this.setLength()
+        },
+        immediate: true
       },
 
       pagination: {

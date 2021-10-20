@@ -35,7 +35,7 @@
 
     data() {  
       return {
-        total: 11,
+        total: 101,
         pageSizes: [
           { label: '10条/页', value: 10 },
           { label: '20条/页', value: 20 },
