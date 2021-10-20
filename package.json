@@ -7,9 +7,9 @@
   "main": "lib/vuerocket.umd.min.js",
   "license": "MIT",
   "keywords": [
-    "Component",
-    "UI",
-    "Vue"
+    "rocket",
+    "vue",
+    "component"
   ],
   "homepage": "https://zhtgithub.github.io/vue-rocket-docs",
   "repository": {

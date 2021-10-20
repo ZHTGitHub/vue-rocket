@@ -29,7 +29,3 @@ Vue.component(ZSelect.name, ZSelect)
 
 ## Browser Support
 Modern browsers and IE11/Safari 9(Supported with polyfill).
-
-
-## LICENSE
-[MIT](LICENSE)
