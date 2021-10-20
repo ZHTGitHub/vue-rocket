@@ -1,24 +1,35 @@
 # admin
 
-## Project setup
-```
-npm install
+
+## Install
+```shell
+npm install vue-rocket -S
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+
+## Quick Start
+``` javascript
+import Vue from 'vue'
+import VueRocket from 'vue-rocket'
+import 'vue-rocket/lib/vuerocket.css'
+
+Vue.use(VueRocket)
+
+// or
+import {
+  ZBtn,
+  ZSelect
+  // ...
+} from 'vue-rocket'
+
+Vue.component(ZBtn.name, ZBtn)
+Vue.component(ZSelect.name, ZSelect)
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Browser Support
+Modern browsers and IE11/Safari 9(Supported with polyfill).
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## LICENSE
+[MIT](LICENSE)
