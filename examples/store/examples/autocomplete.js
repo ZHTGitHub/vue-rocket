@@ -1,5 +1,5 @@
-import autocompleteAttributes from '../../mockdata/button-attributes.json'
-import autocompleteMethods from '../../mockdata/button-methods.json'
+import autocompleteAttributes from '../../mockdata/autocomplete-attributes.json'
+import autocompleteMethods from '../../mockdata/autocomplete-methods.json'
 
 const actions = {
   GET_AUTOCOMPLETE_ATTRIBUTES() {
