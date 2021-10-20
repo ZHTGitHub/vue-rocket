@@ -24,5 +24,18 @@ Vue.component(ZSelect.name, ZSelect)
 ```
 
 
+``` javascript
+import Vue from 'vue'
+import Vuex from 'vuex'
+import { forms } from 'vue-rocket'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  ...forms
+})
+```
+
+
 ## Browser Support
 Modern browsers and IE11/Safari 9(Supported with polyfill).
