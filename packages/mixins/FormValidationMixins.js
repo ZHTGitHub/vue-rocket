@@ -33,8 +33,8 @@ export default {
 							ruleValue = item.regex
 						}
 
-						// console.log(this.validation)
-						// console.log(ruleName, ruleValue)
+						console.log(this.validation)
+						console.log(ruleName, ruleValue)
 
 						// 校验规则不存在
 						if(!$validator.rules[ruleName]) {
@@ -93,8 +93,13 @@ export default {
 						ruleValue = item.regex
 					}
 
+					// 校验规则不存在
+					if(!$validator.rules[ruleName]) {
+						this.validateForm('VALID_VALUE')
+					}
+
 					// 校验规则不为 required && 值为undefined
-					if(ruleName !== 'required' && !this.value) {
+					else if(ruleName !== 'required' && !this.value) {
 						this.validateForm('VALID_VALUE')
 					}
 

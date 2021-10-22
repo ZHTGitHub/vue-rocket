@@ -164,6 +164,15 @@ export const menus = [
         realm: 'textarea',
         title: 'Teaxarea 多行文本框',
         link: '/components/textarea'
+      },
+
+      {
+        pId: 'components',
+        key: 'upload',
+        icon: '',
+        realm: 'upload',
+        title: 'Upload 上传',
+        link: '/components/upload'
       }
     ]
   },

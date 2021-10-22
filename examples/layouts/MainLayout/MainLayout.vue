@@ -29,10 +29,6 @@
       >
         <span class="white--text text-h6">HT</span>
       </v-avatar>
-
-      <v-btn icon>
-        <v-icon>mdi-export</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <z-drawer 

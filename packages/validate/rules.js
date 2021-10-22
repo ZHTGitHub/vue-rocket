@@ -118,6 +118,7 @@ const rules = {
    * @param {String} rule
    */ 
   min: (value, rule) => {
+    console.log(value)
 		value = '' + value
     rule = +rule
 		return value.length >= rule
@@ -178,7 +179,18 @@ const rules = {
   required: (value) => {
     var reg = /[\S]+/
     return reg.test(value)
-  }
+  },
+
+  /**
+   * @description 文件大小
+   * @param {String} value
+   */ 
+  // size: (value, rule) => {
+  //   const size = (value[0].size / 1024).toFixed(1)
+  //   console.log(size, rule)
+  //   console.log(+size > +rule)
+  //   return !(+size > +rule)
+  // }
 }
 
 export default rules

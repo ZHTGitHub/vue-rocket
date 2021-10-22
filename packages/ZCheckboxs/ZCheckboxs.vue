@@ -85,7 +85,6 @@
       },
 
       onClick(event) {
-        console.log(this.value)
         event.customValue = this.values
         this.$emit('click', event)
       },

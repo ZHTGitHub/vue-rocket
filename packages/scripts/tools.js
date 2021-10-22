@@ -95,6 +95,46 @@ const tools = {
     }
     
     return true
+  },
+
+  /**
+   * @description 返回匹配元素，否则返回 undefined
+   * @param {Object[]} value
+   * @param {Array|Object|String} target
+   */ 
+  find(value, target) {
+    if(this.isArray(target)) {
+      const [key, val] = target
+      for(let item of value) {
+        if(item[key] === val) {
+          return item
+        }
+      }
+    }
+    else if(this.isObject(target)) {
+      for(let item of value) {
+
+        const variety = Object.entries(target)
+
+        const result = variety.every((v) => {
+          const [key, val] = v
+          return item[key] === val
+        }) 
+
+        if(result) {
+          return item
+        }
+
+      }
+    }else {
+      for(let item of value) {
+        for(let key in item) {
+          if(item[key] === target) {
+            return item
+          }
+        }
+      }
+    }
   }
 } 
 

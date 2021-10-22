@@ -166,6 +166,18 @@ const ComponentRoutes = {
         title: 'Input 输入框',
       },
       component: () => import('../../views/Components/Input')
+    },
+
+    {
+      path: 'upload',
+      name: 'ZDemoUpload',
+      meta: {
+        key: 'upload',
+        nodeKey: 'components',
+        realm: 'upload',
+        title: 'Upload 上传',
+      },
+      component: () => import('../../views/Components/Upload')
     }
   ]
 }

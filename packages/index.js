@@ -4,6 +4,7 @@ import ZBtnToggle from './ZBtnToggle'
 import ZCheckbox from './ZCheckbox'
 import ZCheckboxs from './ZCheckboxs'
 import ZDatePicker from './ZDatePicker'
+import ZDrawer from './ZDrawer'
 import ZDropdown from './ZDropdown'
 import ZPagination from './ZPagination'
 import ZRadios from './ZRadios'
@@ -11,7 +12,7 @@ import ZSelect from './ZSelect'
 import ZSwitch from './ZSwitch'
 import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
-import ZDrawer from './ZDrawer'
+import ZUpload from './ZUpload'
 
 import emitter from './scripts/emitter'
 import forms from './scripts/forms'
@@ -25,6 +26,7 @@ const components = [
 	ZCheckbox,
 	ZCheckboxs,
 	ZDatePicker,
+	ZDrawer,
 	ZDropdown,
 	ZPagination,
 	ZRadios,
@@ -32,7 +34,7 @@ const components = [
 	ZSwitch,
 	ZTextarea,
 	ZTextField,
-	ZDrawer
+	ZUpload
 ]
 
 const install = function (Vue) {
@@ -57,6 +59,7 @@ export default {
 	ZBtnToggle,
 	ZCheckboxs,
 	ZDatePicker,
+	ZDrawer,
 	ZDropdown,
 	ZPagination,
 	ZRadios,
@@ -64,5 +67,5 @@ export default {
 	ZSwitch,
 	ZTextarea,
 	ZTextField,
-	ZDrawer
+	ZUpload
 }
