@@ -1,0 +1,11 @@
+{
+  "status": true,
+  "total": 1,
+  "data": [
+    {
+      "name": "change",
+      "parameters": "{ base64: String, lastModified: Number, name: Number, result: Object, size: Number, type: String }[]",
+      "description": "当文件状态改变时触发"
+    }
+  ]
+}

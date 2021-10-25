@@ -46,7 +46,7 @@
             type="file" 
             accept 
             style="display: none"
-            @change="getImage"
+            @change="readFile"
           >
 
           <div>
@@ -86,11 +86,6 @@
     props: {
       action: {
         type: String,
-        required: false
-      },
-
-      chain: {
-        type: String,
         required: true
       },
 
@@ -121,44 +116,14 @@
         this.$refs.zUploadInput.dispatchEvent(new MouseEvent('click'))
       },
 
-      getImage(event) {
+      // 读取
+      readFile(event) {
         this.targetFile = event.target.files[0]
 
-        const { size } = this.targetFile
-
-        const realSize = (size / 1024).toFixed(1)
-
-        let [_rule, _size] = [null, null]
-
-        if(tools.isYummy(this.validation)) {
-          for(let item of this.validation) {
-            if(item.rule.includes('size')) {
-              _rule = item
-            }
-          }
-        }
-
-        if(tools.isYummy(_rule)) {
-          _size = +_rule.rule.split(':')[1]
-        }
-        
-        if(realSize <= _size || tools.isLousy(_size)) {
-          this.readFile()
-        }
-        else {
-          const error = tools.find(this.validation, `size:${ _size }`)
-          this.errorMessage = error.message
-          const timer = setTimeout(() => {
-            this.errorMessage = ''
-            clearTimeout(timer)
-          }, 2500)
-        }
-
-      },
-
-      readFile() {
         const fileReader = new FileReader()
+
         fileReader.readAsDataURL(this.targetFile)
+
         fileReader.addEventListener('load', (event) => {
           const { error, result } = event.target
 
@@ -191,11 +156,13 @@
         })
       },
 
+      // 预览
       onPreview(item) {
         this.targetImage = item
         this.$refs.dialog.toggle()
       },
 
+      // 删除
       onDelete(item) {
         this.targetImage = item
 
@@ -210,12 +177,14 @@
         console.log(this.images)
       },
 
+      // 上传
       async uploadFile() {
         const result = await this.request()
         this.targetFileInfo.result = result
         console.log(result)
       },
 
+      // 请求
       request() {
         const formData = new FormData()
         formData.append(this.name, this.targetFile)
@@ -325,8 +294,6 @@
                 transition: all .3s;
                 content: " ";
               }
-
-              
 
               img.z-upload-list-item-img {
                 position: static;

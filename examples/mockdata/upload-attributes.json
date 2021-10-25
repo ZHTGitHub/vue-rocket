@@ -1,0 +1,32 @@
+{
+  "status": true,
+  "total": 3,
+  "data": [
+    {
+      "name": "action",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "上传地址"
+    },
+
+    {
+      "name": "method",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "post | get",
+      "default": "post",
+      "description": "上传请求的 http method"
+    },
+
+    {
+      "name": "name",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "file",
+      "description": "发到后台的文件参数名"
+    }
+  ]
+}
