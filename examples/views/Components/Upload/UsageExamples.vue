@@ -1,5 +1,6 @@
 <template>
   <div class="usage-examples">
+    <p class="error--text">Building...</p>
     <usage-demo>
       <div slot="code">
         <pre class="line-numbers">
