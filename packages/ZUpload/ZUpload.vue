@@ -34,33 +34,33 @@
               </span>
           </div>
         </div>
-      </div>
 
-      <div class="z-upload-select">
-        <span 
-          class="z-upload" 
-          @click="choiceImage"
-        >
-          <input 
-            ref="zUploadInput"
-            type="file" 
-            accept 
-            style="display: none"
-            @change="readFile"
+        <div class="z-upload-select">
+          <span 
+            class="z-upload" 
+            @click="onChoice"
           >
+            <input 
+              ref="zUploadInput"
+              type="file" 
+              accept 
+              style="display: none"
+              @change="readFile"
+            >
 
-          <div>
-            <v-icon>mdi-plus</v-icon>
-            <div class="z-upload-text">Upload</div>
-          </div>
-        </span>
+            <div>
+              <v-icon>mdi-plus</v-icon>
+              <div class="z-upload-text">Upload</div>
+            </div>
+          </span>
+        </div>
       </div>
     </div>
 
     <div class="error--text z-messages">{{ errorMessage }}</div>
 
     <preview-dialog 
-      ref="dialog"
+      ref="previewDialog"
       :targetImage="targetImage"
     ></preview-dialog>
   </div>
@@ -70,6 +70,7 @@
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import tools from '../scripts/tools'
+  import previewDialog from './previewDialog'
 
   const targetFileInfo = {
     lastModified: undefined,
@@ -112,7 +113,7 @@
     },
 
     methods: {
-      choiceImage() {
+      onChoice() {
         this.$refs.zUploadInput.dispatchEvent(new MouseEvent('click'))
       },
 
@@ -149,8 +150,6 @@
 
             this.value = this.images
 
-            console.log(this.images)
-
             this.$emit('change', this.images)
           }
         })
@@ -159,7 +158,7 @@
       // 预览
       onPreview(item) {
         this.targetImage = item
-        this.$refs.dialog.toggle()
+        this.$refs.previewDialog.toggle()
       },
 
       // 删除
@@ -173,19 +172,16 @@
             this.images.splice(i, 1)
           }
         }
-
-        console.log(this.images)
       },
 
       // 上传
       async uploadFile() {
-        const result = await this.request()
+        const result = await this._request()
         this.targetFileInfo.result = result
-        console.log(result)
       },
 
       // 请求
-      request() {
+      _request() {
         const formData = new FormData()
         formData.append(this.name, this.targetFile)
 
@@ -217,7 +213,6 @@
           }else {
             this.value = undefined
           }
-          console.error(this.value)
           this.verifyField()
         },
         immediate: true
@@ -236,7 +231,7 @@
     },
 
     components: {
-      'preview-dialog': () => import('./previewDialog')
+      previewDialog
     }
   }
 </script>

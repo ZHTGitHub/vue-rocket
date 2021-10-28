@@ -13,10 +13,10 @@
         @change="onChange"
       >
         <v-btn
-          v-for="(item) in options"
+          v-for="item in items"
           :key="item.label"
           :value="item.value"
-          :class="flip ? 'text-rtl' : ''"  
+          :class="flip ? 'text-rtl' : ''"
         >
           <v-icon 
           >{{ item.icon }}</v-icon>
@@ -90,6 +90,7 @@
 
     data() {
       return {
+        items: [],
         values: null
       }
     },
@@ -114,10 +115,12 @@
     },
 
     watch: {
-      values(values) {
-
-      },
-      immediate: true
+      options: {
+        handler() {
+          this.items = this.options
+        },
+        immediate: true
+      }
     }
   }
 </script>

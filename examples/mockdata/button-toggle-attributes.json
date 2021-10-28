@@ -86,7 +86,7 @@
     {
       "name": "options",
       "required": "是",
-      "type": "{ label, value }[ ]",
+      "type": "{ label, value, icon }[ ]",
       "acceptedValues": "—",
       "default": "—",
       "description": "按钮组的选项内容"
