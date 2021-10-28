@@ -178,6 +178,15 @@
   text-transform: capitalize !important;
 }
 
+/* 文本翻转 */
+.text-rtl {
+  direction: rtl !important;
+}
+
+.text-ltr {
+  direction: ltr !important;
+}
+
 /* 文本溢出 */
 .text-truncate {
   white-space: nowrap !important;

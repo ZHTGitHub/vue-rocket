@@ -18,8 +18,7 @@
           :value="item.value"
           :class="flip ? 'text-rtl' : ''"
         >
-          <v-icon 
-          >{{ item.icon }}</v-icon>
+          <v-icon>{{ item.icon }}</v-icon>
           <span>{{ item.label }}</span>
         </v-btn>
       </v-btn-toggle>

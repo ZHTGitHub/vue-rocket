@@ -9,12 +9,7 @@
                 formId="sexuals"
                 formKey="sexual"
                 color="primary"
-                flip
-                label="性取向"
-                :validation="[
-                  { rule: 'required', message: '性取向为必选项.' }
-                ]"
-                :options="sexualOptions"
+                :options="directionOptions"
                 :defaultValue="3"
               >&lt;/z-btn-toggle>
             &lt;/template>
@@ -23,11 +18,11 @@
               export default {
                 data() {
                   return {
-                    sexualOptions: [
-                      { label: '异性', value: 1, icon: 'mdi-heart-outline' },
-                      { label: '同性', value: 2, icon: 'mdi-heart-multiple-outline ' },
-                      { label: '双性', value: 3, icon: 'mdi-heart-half-full' },
-                      { label: '无性', value: 4, }
+                    directionOptions: [
+                      { label: '东', value: 1, icon: 'mdi-arrow-right-bold' },
+                      { label: '西', value: 2, icon: 'mdi-arrow-left-bold' },
+                      { label: '南', value: 3, icon: 'mdi-arrow-down-bold' },
+                      { label: '北', value: 4, icon: 'mdi-arrow-up-bold' }
                     ]
                   }
                 }
@@ -42,13 +37,8 @@
             formId="sexuals"
             formKey="sexual"
             color="primary"
-            flip
-            label="性取向"
             mandatory
-            :validation="[
-              { rule: 'required', message: '性取向为必选项.' }
-            ]"
-            :options="sexualOptions"
+            :options="directionOptions"
             :defaultValue="3"
           ></z-btn-toggle>
         </div>
@@ -68,11 +58,11 @@
 
     data() {
       return {
-        sexualOptions: [
-          { label: '异性', value: 1, icon: 'mdi-heart-outline' },
-          { label: '同性', value: 2, icon: 'mdi-heart-multiple-outline ' },
-          { label: '双性', value: 3, icon: 'mdi-heart-half-full' },
-          { label: '无性', value: 4, }
+        directionOptions: [
+          { label: '东', value: 1, icon: 'mdi-arrow-right-bold' },
+          { label: '西', value: 2, icon: 'mdi-arrow-left-bold' },
+          { label: '南', value: 3, icon: 'mdi-arrow-down-bold' },
+          { label: '北', value: 4, icon: 'mdi-arrow-up-bold' }
         ]
       }
     },
