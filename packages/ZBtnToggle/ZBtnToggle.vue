@@ -21,6 +21,7 @@
           :key="item.label"
           :value="item.value"
           :class="flip ? 'text-rtl' : ''"
+          @click="onClick"
         >
           <v-icon>{{ item.icon }}</v-icon>
           <span>{{ item.label }}</span>
@@ -98,26 +99,36 @@
       }
     },
 
-    created() {
-      this.init()
-    },
-
     methods: {
-      onChange() {
-        this.value = this.values
+      onChange(value) {
+        this.value = value
         this.$emit('change', this.value)
         this.verifyField()
       },
 
-      init() {
-        if(this.multiple) {
-          this.values = []
-        }
-        this.values = this.defaultValue
+      onClick(event) {
+        const oldValue = this.value
+
+        this.$nextTick(() => {
+          if(oldValue !== this.value) {
+            event.customValue = this.value
+            this.$emit('click', event)
+          }
+        })
       }
     },
 
     watch: {
+      multiple: {
+        handler() {
+          if(this.multiple) {
+            this.values = []
+          }
+          this.values = this.defaultValue
+        },  
+        immediate: true
+      },
+
       options: {
         handler() {
           this.items = this.options

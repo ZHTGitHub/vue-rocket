@@ -6,6 +6,12 @@
       "name": "change",
       "parameters": "(value: Object)",
       "description": "选中按钮组值发生改变时触发"
+    },
+
+    {
+      "name": "click",
+      "parameters": "(event: Event)",
+      "description": "点击按钮组时触发"
     }
   ]
 }
