@@ -1,9 +1,5 @@
 <template>
-  <div 
-    v-if="total > size" 
-    class="z-pagination z-flex align-center" 
-    :class="`justify-${ position }`"
-  >
+  <div class="z-pagination z-flex align-center" :class="`justify-${ position }`">
     <span class="mr-3 z-pagination__total">
       共 {{ total }} 条
     </span>
@@ -96,30 +92,45 @@
       }
     },
 
-    created() {
-      this.num = this.pageNum
-      this.size = this.pageSize
-    },
+    // created() {
+    //   this.num = this.pageNum
+    //   this.size = this.pageSize
+    // },
 
     methods: {
+      /**
+       * @description 选中分页按钮改变时触发
+       */ 
       onInput() {
-        this.$emit('input', this.page)
+        this.$emit('input', this.num)
       },
 
+      /**
+       * @description 选中分页按钮转到下一个项目时触发
+       */ 
       onNext() {
-        this.$emit('next', this.page)
+        this.$emit('next', this.num)
       },
 
+      /**
+       * @description 选中分页按钮转到上一个项目时触发
+       */ 
       onPrevious() {
-        this.$emit('previous', this.page)
+        this.$emit('previous', this.num)
       },
 
+      /**
+       * @description 改变每页条数时触发
+       */ 
       onSizes(size) {
         this.size = size
         this.num = 1
-        this.$emit('size', this.page)
+        this.$emit('size', this.size)
       },
 
+      /**
+       * @description 输入框跳转时触发
+       */ 
       onJump(event) {
         let pageNum = Math.floor(event.customValue)
 
@@ -137,7 +148,7 @@
           this.num = pageNum
         }
 
-        this.$emit('jump', this.page)
+        this.$emit('jump', this.num)
       },
        
       setLength() {
@@ -156,6 +167,13 @@
       pageNum: {
         handler() {
           this.num = this.pageNum
+        },
+        immediate: true
+      },
+
+      pageSize: {
+        handler() {
+          this.size = this.pageSize
         },
         immediate: true
       },
@@ -185,9 +203,7 @@
       page: {
         handler() {
           this.$emit('page', this.page)
-        },
-        immediate: true,
-        deep: true
+        }
       }
     }
   }

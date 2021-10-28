@@ -1,5 +1,9 @@
 <template>
-  <div class="z-btn-toggle z-input" :style="{ width: breadth }">
+  <div 
+    v-if="items.length"
+    class="z-btn-toggle z-input" 
+    :style="{ width: breadth }"
+  >
     <div class="btn-groups">
       <v-btn-toggle 
         v-model="values"

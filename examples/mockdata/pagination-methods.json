@@ -1,35 +1,41 @@
 {
   "status": true,
-  "total": 3,
+  "total": 5,
   "data": [
     {
       "name": "input",
-      "parameters": "{ pageSize, pageNum }",
-      "description": "点击分页按钮时触发"
+      "parameters": "pageNum",
+      "description": "选中分页按钮改变时触发"
+    },
+
+    {
+      "name": "jump",
+      "parameters": "pageNum",
+      "description": "输入框发生跳转时触发"
     },
 
     {
       "name": "next",
-      "parameters": "{ pageSize, pageNum }",
+      "parameters": "pageNum",
       "description": "跳转到下一页时触发"
     },
 
     {
       "name": "previous",
-      "parameters": "{ pageSize, pageNum }",
+      "parameters": "pageNum",
       "description": "跳转到上一页时触发"
     },
 
     {
       "name": "page",
       "parameters": "{ pageSize, pageNum }",
-      "description": "发生跳转时触发"
+      "description": "pageSize 或 pageNum 发生改变时触发"
     },
 
     {
       "name": "size",
-      "parameters": "{ pageSize, pageNum }",
-      "description": "选择器设置每页显示个数时触发"
+      "parameters": "pageSize",
+      "description": "选择器每页条数发生改变时触发"
     }
   ]
 }

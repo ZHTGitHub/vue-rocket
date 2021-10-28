@@ -40,6 +40,7 @@
             mandatory
             :options="directionOptions"
             :defaultValue="3"
+            @change="onChange($event)"
           ></z-btn-toggle>
         </div>
       </div>
@@ -69,6 +70,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      onChange(value) {
+        console.log(value)
+      }
     }
   }
 </script>
