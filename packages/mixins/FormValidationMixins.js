@@ -33,8 +33,8 @@ export default {
 							ruleValue = item.regex
 						}
 
-						console.log(this.validation)
-						console.log(ruleName, ruleValue)
+						// console.log(this.validation)
+						// console.log(ruleName, ruleValue)
 
 						// 校验规则不存在
 						if(!$validator.rules[ruleName]) {

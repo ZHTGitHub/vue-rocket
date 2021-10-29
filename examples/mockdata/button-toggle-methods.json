@@ -4,7 +4,7 @@
   "data": [
     {
       "name": "change",
-      "parameters": "(value: Object)",
+      "parameters": "(value: String | Number)",
       "description": "选中按钮组值发生改变时触发"
     },
 

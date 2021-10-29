@@ -1,8 +1,8 @@
 <template>
-  <div class="mt-12 autocomplete-methods">
+  <div class="mt-12 autocomplete-slots">
     <v-card>
       <v-card-title>
-        <span>Autocomplete Methods</span>
+        <span>Autocomplete Slots</span>
         <v-spacer></v-spacer>
         <z-text-field
           :formId="searchFormId"
@@ -13,7 +13,7 @@
       </v-card-title>
 
       <v-data-table
-        :headers="methodsHeaders"
+        :headers="slotsHeaders"
         :hide-default-footer="hideDefaultFooter"
         :items-per-page="itemsPerPage"
         :items="desserts"
@@ -30,13 +30,13 @@
   import ExamplesMixins from '../mixins'
 
   export default {
-    name: 'AutocompleteMethods',
+    name: 'AutocompleteSlots',
     mixins: [TableMixins, ExamplesMixins],
 
     data() {
       return {
-        formId: 'autocompleteMethods',
-        getHandler: 'GET_AUTOCOMPLETE_METHODS'
+        formId: 'autocompleteSlots',
+        getHandler: 'GET_AUTOCOMPLETE_SLOTS'
       }
     }
   }

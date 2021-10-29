@@ -79,7 +79,6 @@
 
       onClick(event) {
         const { customValue } = event
-
         console.log(customValue)
       }
     }

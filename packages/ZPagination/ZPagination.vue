@@ -1,5 +1,9 @@
 <template>
-  <div class="z-pagination z-flex align-center" :class="`justify-${ position }`">
+  <div 
+    v-if="total > 0"
+    class="z-pagination z-flex align-center" 
+    :class="`justify-${ position }`"
+  >
     <span class="mr-3 z-pagination__total">
       共 {{ total }} 条
     </span>
@@ -91,11 +95,6 @@
         }
       }
     },
-
-    // created() {
-    //   this.num = this.pageNum
-    //   this.size = this.pageSize
-    // },
 
     methods: {
       /**

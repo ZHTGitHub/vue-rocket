@@ -7,6 +7,8 @@
     <autocomplete-attributes></autocomplete-attributes>
 
     <autocomplete-methods></autocomplete-methods>
+
+    <autocomplete-slots></autocomplete-slots>
   </div>
 </template>
 
@@ -17,7 +19,8 @@
     components: {
       'usage-examples': () => import('./UsageExamples.vue'),
       'autocomplete-attributes': () => import('./AutocompleteAttributes.vue'),
-      'autocomplete-methods': () => import('./AutocompleteMethods.vue')
+      'autocomplete-methods': () => import('./AutocompleteMethods.vue'),
+      'autocomplete-slots': () => import('./AutocompleteSlots.vue')
     }
   }
 </script>

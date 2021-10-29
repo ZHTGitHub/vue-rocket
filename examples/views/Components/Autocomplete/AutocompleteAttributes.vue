@@ -36,7 +36,7 @@
 
     data() {
       return {
-        formId: 'AutocompleteAttributes',
+        formId: 'autocompleteAttributes',
         getHandler: 'GET_AUTOCOMPLETE_ATTRIBUTES'
       }
     }

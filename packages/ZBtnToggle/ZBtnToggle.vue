@@ -119,13 +119,13 @@
     },
 
     watch: {
-      multiple: {
-        handler() {
+      defaultValue: {
+        handler(value) {
           if(this.multiple) {
             this.values = []
           }
-          this.values = this.defaultValue
-        },  
+          this.values = value
+        },
         immediate: true
       },
 
