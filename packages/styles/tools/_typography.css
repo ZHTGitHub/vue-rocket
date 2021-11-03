@@ -195,18 +195,18 @@
 }
 
 /* 元素显示类型 */
-.d-none {
+.z-none {
   display: none !important;
 }
 
-.d-inline {
+.z-inline {
   display: inline !important;
 }
 
-.d-inline-block {
+.z-inline-block {
   display: inline-block !important;
 }
 
-.d-block {
+.z-block {
   display: block !important;
 }

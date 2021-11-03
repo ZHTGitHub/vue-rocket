@@ -49,6 +49,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'calendar',
+      name: 'ZDemoCalendar',
+      meta: {
+        key: 'calendar',
+        nodeKey: 'components',
+        realm: 'calendar',
+        title: 'Calendar 日历',
+      },
+      component: () => import('../../views/Components/Calendar')
+    },
+
+    {
       path: 'checkboxs',
       name: 'ZDemoCheckboxs',
       meta: {

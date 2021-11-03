@@ -66,17 +66,6 @@
       }
     },
 
-    created() {
-      for(let item of this.options) {
-        this.sweets.push(item.value)
-
-        this.items.push({
-          label: item.label,
-          value: item.value
-        })
-      }
-    },
-
     methods: {
       onChange(values) {
         this.value = values
@@ -130,6 +119,22 @@
             this.values = value
           }else {
             this.values = []
+          }
+        },
+        immediate: true
+      },
+
+      options: {
+        handler() {
+          [this.sweets, this.items] = [[], []]
+
+          for(let item of this.options) {
+            this.sweets.push(item.value)
+
+            this.items.push({
+              label: item.label,
+              value: item.value
+            })
           }
         },
         immediate: true

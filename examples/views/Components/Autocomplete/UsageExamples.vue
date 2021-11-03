@@ -35,6 +35,7 @@
             formId="auto"
             formKey="auto"
             :options="cityOptions"
+            :defaultValue="1"
           ></z-autocomplete>
         </div>
       </div>

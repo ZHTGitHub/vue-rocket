@@ -1,6 +1,7 @@
 import ZAutocomplete from './ZAutocomplete'
 import ZBtn from './ZBtn'
 import ZBtnToggle from './ZBtnToggle'
+import ZCalendar from './ZCalendar'
 import ZCheckbox from './ZCheckbox'
 import ZCheckboxs from './ZCheckboxs'
 import ZDatePicker from './ZDatePicker'
@@ -23,6 +24,7 @@ const components = [
 	ZAutocomplete,
 	ZBtn,
 	ZBtnToggle,
+	ZCalendar,
 	ZCheckbox,
 	ZCheckboxs,
 	ZDatePicker,
@@ -57,6 +59,7 @@ export default {
 	ZAutocomplete,
 	ZBtn,
 	ZBtnToggle,
+	ZCalendar,
 	ZCheckboxs,
 	ZDatePicker,
 	ZDrawer,

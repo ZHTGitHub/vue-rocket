@@ -78,6 +78,15 @@ export const menus = [
 
       {
         pId: 'components',
+        key: 'calendar',
+        icon: '',
+        realm: 'calendar',
+        title: 'Calendar 日历',
+        link: '/components/calendar'
+      },
+
+      {
+        pId: 'components',
         key: 'checkboxs',
         icon: '',
         realm: 'checkboxs',
