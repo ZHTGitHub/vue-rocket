@@ -5,20 +5,24 @@
         <pre class="line-numbers">
           <code class="language-markup">
             &lt;template>
-              
+              &lt;z-calendar @change="onChange">&lt;/z-calendar>
             &lt;/template>
 
             &lt;script>
-              
+              export default {
+                methods: {
+                  onChange(event) {
+                    console.log(event)
+                  }
+                }
+              }
             &lt;/script>
           </code>
         </pre>
       </div>
       <div slot="demo">
         <div>
-          <z-calendar>
-
-          </z-calendar>
+          <z-calendar @change="onChange"></z-calendar>
         </div>
       </div>
     </usage-demo>
@@ -42,6 +46,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      onChange(event) {
+        console.log(event)
+      }
     }
   }
 </script>

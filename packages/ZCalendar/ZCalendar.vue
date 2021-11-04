@@ -67,13 +67,12 @@
           > 
             <div :class="[
               `${ thisMonth }-${ today }` === `${ item.record.month }-${ item.record.date }` ? 'today' : '' ,
-              `${ currentMonth }-${ currentDay }` === `${ item.record.month }-${ item.record.date }` ? 'selected' : '',
-              item.cellClass,
+              item.selected ? 'selected' : '',
               'cell'
             ]"
             >
               {{ item.label }}
-              <i :class="[item.cellClass === 'selected' ? 'z-block' : 'z-none', 'badge']"></i>
+              <i :class="[item.selected ? 'z-block' : 'z-none', 'badge']"></i>
             </div>
           </div>
         </div>
@@ -88,6 +87,13 @@
 
   export default {
     name: 'ZCalendar',
+
+    props: {
+      defaultValue: {
+        type: Array,
+        default: () => []
+      }
+    },
 
     data() {
       return {
@@ -110,7 +116,8 @@
         currentMonth: null,
         currentDay: null,
 
-        selectedDate: null
+        selectedDate: null,
+        selectedItems: []
       }
     },
 
@@ -156,32 +163,20 @@
 
       /**
        * @description 当前选中日期
-       * @param {object} item
+       * @param {object} value
        */ 
-      onSelectDate(item) {
-        const { record } = item
-        this.currentYear = record.year
-        this.currentMonth = record.month
-        this.currentDay = record.date
+      onSelectDate(value) {
+        const { id, selected, record } = value
+        const { year, month, date } = record
 
-        const value = `${ this.currentMonth }-${ this.currentDay }`
-
-        console.log(value)
+        [this.currentYear, this.currentMonth, this.currentDay] = [year, month, date]
 
         for(let item of this.calendar) {
-          if(item.value === value) {
-            console.log(item)
-
-            if(item.cellClass === 'selected') {
-              item.cellClass = 'unselected'
-            }else {
-              item.cellClass = 'selected'
-            }
-
+          if(item.id === id) {
+            item.selected = !selected
+            this.setSelectedItems(item)
           }
         }
-
-        this.calendar = [...this.calendar]
 
         console.log(this.calendar)
       },
@@ -281,14 +276,15 @@
         for(let h = prevTailDaysOfMonth; h <= prevDaysOfMonth; h++) {
           head.push({
             label: h,
-            value: `${ lastMonth - 1 }-${ h }`,
+            id: '' + lastYear + (lastMonth - 1) + h,
             record: {
               year: lastYear,
               month: lastMonth - 1,
               realMonth: lastMonth,
               date: h
             },
-            class: 'gray'
+            class: 'gray',
+            selected: false
           })
         }
 
@@ -296,14 +292,15 @@
         for(let b = 1; b <= currDaysOfMonth; b++) {
           body.push({
             label: b,
-            value: `${ month }-${ b }`,
+            id: '' + thisYear + month + b,
             record: {
               year: thisYear,
               month: month,
               realMonth: thisMonth,
               date: b
             },
-            class: 'white'
+            class: 'white',
+            selected: false
           })
         }
 
@@ -311,20 +308,57 @@
         for(let t = 1; t <= nextHeadDaysOfMonth; t++) {
           tail.push({
             label: t,
-            value: `${ nextMonth - 1 }-${ t }`,
+            id: '' + nextYear + (nextMonth - 1) + t,
             record: {
               year: nextYear,
               month: nextMonth - 1,
               realMonth: nextMonth,
               date: t
             },
-            class: 'gray'
+            class: 'gray',
+            selected: false
           })
         }
 
         this.calendar = [...head, ...body, ...tail]
 
-        // console.log(this.calendar)
+        for(let c of this.calendar) {
+          for(let s of this.selectedItems) {
+            if(c.id === s.id) {
+              c.selected = true
+            }
+          }
+        }
+
+        console.log(this.calendar)
+      },
+
+      setSelectedItems(value) {
+        const { id, selected, record } = value
+        const { date, month, realMonth, year } = record
+
+        if(selected) {
+          const isRepeat = this.selectedItems.find(s => s.id === id)
+
+          if(!isRepeat) {
+            this.selectedItems.push({
+              id,
+              date,
+              month,
+              realMonth,
+              year
+            })
+          }
+        }
+        else {
+          this.selectedItems.map((item, index) => {
+            if(id === item.id) {
+              this.selectedItems.splice(index, 1)
+            }
+          })
+        }
+
+        console.log(this.selectedItems)
       },
 
       // 初始化
@@ -340,9 +374,6 @@
 
         this.currentMonth = this.month
         this.currentYear = this.year
-
-        // this.months = this.isLeapYear(this.currentYear) ? monthsLeap : monthsCommon
-        // this.setCalendar(this.currentYear, this.currentMonth)
       }
     },
 
@@ -358,16 +389,6 @@
     },
 
     watch: {
-      // currentYear() {
-      //   this.months = this.isLeapYear(this.currentYear) ? monthsLeap : monthsCommon
-      //   console.log(this.currentYear, this.currentMonth)
-      // },
-
-      // currentMonth() {
-      //   console.log(this.currentMonth)
-      //   this.setCalendar(this.currentYear, this.currentMonth)
-      // },
-
       currentYM: {
         handler(value, oldValue) {
           if(value.currentYear !== oldValue.currentYear) {
@@ -376,6 +397,14 @@
           this.setCalendar(this.currentYear, this.currentMonth)
         },
         deep: true
+      },
+
+      defaultValue: {
+        handler() {
+          this.selectedItems = this.defaultValue
+          this.$emit('change', this.selectedItems)
+        },
+        immediate: true
       }
     }
   }
@@ -447,7 +476,8 @@
 
             .cell {
               position: relative;
-              min-height: 56px;
+              height: 56px;
+              line-height: 56px;
               text-align: center;
               border: 2px solid transparent;
               border-radius: 6px;
@@ -458,7 +488,7 @@
               }
 
               &.selected {
-                border: 2px solid #bdbdbd;
+                border: 2px solid #1976d2 !important;
               }
 
               &.unselected {
