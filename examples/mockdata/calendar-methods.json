@@ -1,5 +1,41 @@
 {
   "status": true,
-  "total": 0,
-  "data": [ ]
+  "total": 6,
+  "data": [
+    {
+      "name": "back:today",
+      "parameters": "(value: Object)",
+      "description": "返回今天时触发"
+    },
+
+    {
+      "name": "change",
+      "parameters": "(event: Event, selectedItems: Array)",
+      "description": "选中当前日期时触发"
+    },
+
+    {
+      "name": "change:month",
+      "parameters": "(value: Object)",
+      "description": "月份下拉框更改选择时触发"
+    },
+
+    {
+      "name": "change:year",
+      "parameters": "(value: Object)",
+      "description": "年份下拉框更改选择时触发"
+    },
+
+    {
+      "name": "next:month",
+      "parameters": "(value: Object)",
+      "description": "跳转到下个月份时触发"
+    },
+
+    {
+      "name": "previous:month",
+      "parameters": "(value: Object)",
+      "description": "跳转到上个月份时触发"
+    }
+  ]
 }

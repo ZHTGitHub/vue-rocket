@@ -5,14 +5,43 @@
         <pre class="line-numbers">
           <code class="language-markup">
             &lt;template>
-              &lt;z-calendar @change="onChange">&lt;/z-calendar>
+              &lt;z-calendar 
+                @change:year="onChangeYear"
+                @change:month="onChangeMonth"
+                @previous:month="onPreviousMonth"
+                @next:month="onNextMonth"
+                @back:today="onBackToday"
+                @change="onChange"
+              >&lt;/z-calendar>
             &lt;/template>
 
             &lt;script>
               export default {
                 methods: {
-                  onChange(event) {
-                    console.log(event)
+                  onChangeYear(value) {
+                    console.log(value)
+                  },
+                  
+                  onChangeMonth(value) {
+                    console.log(value)
+                  },
+
+                  onPreviousMonth(value) {
+                    console.log(value)
+                  },
+
+                  onNextMonth(value) {
+                    console.log(value)
+                  },
+
+                  onBackToday(value) {
+                    console.log(value)
+                  },
+
+                  onChange(event, items) {
+                    const { customValue } = event
+                    console.log(customValue)
+                    console.log(items)
                   }
                 }
               }
@@ -22,7 +51,14 @@
       </div>
       <div slot="demo">
         <div>
-          <z-calendar @change="onChange"></z-calendar>
+          <z-calendar 
+            @change:year="onChangeYear"
+            @change:month="onChangeMonth"
+            @previous:month="onPreviousMonth"
+            @next:month="onNextMonth"
+            @back:today="onBackToday"
+            @change="onChange"
+          ></z-calendar>
         </div>
       </div>
     </usage-demo>
@@ -49,8 +85,30 @@
     },
 
     methods: {
-      onChange(event) {
-        console.log(event)
+      onChangeYear(value) {
+        console.log(value)
+      },
+      
+      onChangeMonth(value) {
+        console.log(value)
+      },
+
+      onPreviousMonth(value) {
+        console.log(value)
+      },
+
+      onNextMonth(value) {
+        console.log(value)
+      },
+
+      onBackToday(value) {
+        console.log(value)
+      },
+
+      onChange(event, items) {
+        const { customValue } = event
+        console.log(customValue)
+        console.log(items)
       }
     }
   }

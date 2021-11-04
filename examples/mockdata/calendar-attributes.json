@@ -1,5 +1,14 @@
 {
   "status": true,
-  "total": 0,
-  "data": [ ]
+  "total": 1,
+  "data": [
+    {
+      "name": "defaultValue",
+      "required": "否",
+      "type": "Array",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "日历的默认选中值"
+    }
+  ]
 }

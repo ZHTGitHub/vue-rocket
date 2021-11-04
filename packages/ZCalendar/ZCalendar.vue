@@ -2,7 +2,7 @@
   <div class="z-calendar">
     <div class="calendar-box">
       <!--  -->
-      <div class="calendar-box-header">
+      <div class="z-flex justify-center pb-2 calendar-box-header">
         <div class="year">
           <v-select
             dense
@@ -15,11 +15,13 @@
         </div>
 
         <div class="month">
-          <div 
-            class="prev-month"
-            @click="onPrevMonth"
-          >
-            <v-icon>mdi-chevron-left</v-icon>
+          <div class="pl-4 pr-1 prev-month">
+            <v-btn
+              icon
+              @click="onPrevMonth"
+            >
+              <v-icon size="28">mdi-chevron-left</v-icon>
+            </v-btn>
           </div>
 
           <div class="select-month">
@@ -33,18 +35,24 @@
             ></v-select>
           </div>
 
-          <div 
-            class="next-month"
-            @click="onNextMonth"
-          >
-            <v-icon>mdi-chevron-right</v-icon>
+          <div class="pl-1 pr-4 next-month">
+            <v-btn
+              icon
+              @click="onNextMonth"
+            >
+              <v-icon size="28">mdi-chevron-right</v-icon>
+            </v-btn>
           </div>
         </div>
 
-        <div 
-          class="back-today"
-          @click="onBackToday"
-        >返回今天</div>
+        <div class="back-today">
+          <v-btn
+            depressed
+            @click="onBackToday"
+          >
+            返回今天
+          </v-btn>
+        </div>
       </div>
       <!--  -->
 
@@ -63,7 +71,7 @@
             v-for="item in calendar"
             :key="item.value"
             :class="[item.class, 'day']"
-            @click="onSelectDate(item)"
+            @click="onSelectDate($event, item)"
           > 
             <div :class="[
               `${ thisMonth }-${ today }` === `${ item.record.month }-${ item.record.date }` ? 'today' : '' ,
@@ -150,6 +158,11 @@
       onChangeCurrentYear(value) {
         this.currentYear = value
         this.currentMonth = 0
+        this.$emit('change:year', {
+          year: value,
+          month: this.currentMonth,
+          realMonth: this.currentMonth + 1
+        })
       },
 
       /**
@@ -159,17 +172,23 @@
       onChangeCurrentMonth(value) {
         this.currentMonth = value
         this.currentDay = 1
+        this.$emit('change:month', {
+          month: value,
+          realMonth: value + 1,
+          days: this.getDaysOfMonth(value)
+        })
       },
 
       /**
        * @description 当前选中日期
        * @param {object} value
        */ 
-      onSelectDate(value) {
+      onSelectDate(event, value) {
         const { id, selected, record } = value
-        const { year, month, date } = record
 
-        [this.currentYear, this.currentMonth, this.currentDay] = [year, month, date]
+        this.currentYear = record.year
+        this.currentMonth = record.month
+        this.currentDay = record.date
 
         for(let item of this.calendar) {
           if(item.id === id) {
@@ -178,7 +197,16 @@
           }
         }
 
-        console.log(this.calendar)
+        event.customValue = {
+          id,
+          year: record.year, 
+          month: record.month, 
+          realMonth: record.realMonth, 
+          date: record.date,
+          days: this.getDaysOfMonth(record.month)
+        }
+
+        this.$emit('change', event, this.selectedItems)
       },
 
       /**
@@ -191,6 +219,12 @@
           this.currentMonth = 11
           this.currentYear -= 1
         }
+
+        this.$emit('previous:month', {
+          month: this.currentMonth,
+          realMonth: this.currentMonth + 1,
+          days: this.getDaysOfMonth(this.currentMonth)
+        })
       },
 
       /**
@@ -203,6 +237,12 @@
           this.currentMonth = 0
           this.currentYear += 1
         }
+
+        this.$emit('next:month', {
+          month: this.currentMonth,
+          realMonth: this.currentMonth + 1,
+          days: this.getDaysOfMonth(this.currentMonth)
+        })
       },
 
       /**
@@ -213,7 +253,13 @@
         this.currentMonth = this.thisMonth
         this.currentDay = this.today
 
-        console.log(this.thisYear, this.thisMonth, this.today)
+        this.$emit('back:today', {
+          year: this.thisYear,
+          month: this.thisMonth,
+          realMonth: this.thisMonth + 1,
+          date: this.today,
+          days: this.getDaysOfMonth(this.thisMonth)
+        })
       },
 
       // 闰年
@@ -330,9 +376,13 @@
           }
         }
 
-        console.log(this.calendar)
+        // console.log(this.calendar)
       },
 
+      /**
+       * @description 设置选中的日期
+       * @param {object} value
+       */ 
       setSelectedItems(value) {
         const { id, selected, record } = value
         const { date, month, realMonth, year } = record
@@ -358,7 +408,7 @@
           })
         }
 
-        console.log(this.selectedItems)
+        // console.log(this.selectedItems)
       },
 
       // 初始化
@@ -380,7 +430,7 @@
     computed: {
       currentYM() {
         const { currentYear, currentMonth } = this
-        console.log(currentYear, currentMonth)
+        // console.log(currentYear, currentMonth)
         return {
           currentYear,
           currentMonth
@@ -402,7 +452,6 @@
       defaultValue: {
         handler() {
           this.selectedItems = this.defaultValue
-          this.$emit('change', this.selectedItems)
         },
         immediate: true
       }
@@ -418,7 +467,7 @@
         align-items: center;
 
         .year {
-          width: 150px;
+          width: 120px;
         }
 
         .month {
@@ -430,7 +479,7 @@
           }
 
           .select-month {
-            width: 150px;
+            width: 120px;
           }
 
           .next-month {
@@ -484,7 +533,7 @@
               overflow: hidden;
 
               &.today {
-                border: 2px solid #1976d2 !important;
+                border: 2px solid #1E88E5 !important;
               }
 
               &.selected {
@@ -501,12 +550,27 @@
 
               i.badge {
                 position: absolute;
-                width: 30px;
-                height: 30px;
-                top: -15px;
-                right: -15px;
+                width: 35px;
+                height: 35px;
+                top: -17.5px;
+                right: -17.5px;
                 background-color: #1976d2;
                 transform: rotate(45deg);
+
+                &::after {
+                  content: " ";
+                  position: absolute;
+                  left: 6px;
+                  top: 18px;
+                  width: 55%;
+                  height: 20%;
+                  border: 2px solid #fff;
+                  border-radius: 1px;
+                  border-top: none;
+                  border-right: none;
+                  background: transparent;
+                  transform: rotate(-90deg);
+                }
               }
             }
           }
