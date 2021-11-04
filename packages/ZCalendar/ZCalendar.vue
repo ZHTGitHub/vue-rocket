@@ -530,6 +530,8 @@
               text-align: center;
               border: 2px solid transparent;
               border-radius: 6px;
+              color: #616161;
+              font-weight: bold;
               overflow: hidden;
 
               &.today {
