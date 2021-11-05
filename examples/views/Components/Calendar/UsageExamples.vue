@@ -56,6 +56,7 @@
             disabledGray
             @change:year="onChangeYear"
             @change:month="onChangeMonth"
+            @change:date="onChangeDate"
             @previous:month="onPreviousMonth"
             @next:month="onNextMonth"
             @back:today="onBackToday"
@@ -88,28 +89,31 @@
 
     methods: {
       onChangeYear(value) {
-        console.log(value)
+        // console.log(value)
       },
       
       onChangeMonth(value) {
+        // console.log(value)
+      },
+
+      onChangeDate(value) {
         console.log(value)
       },
 
       onPreviousMonth(value) {
-        console.log(value)
+        // console.log(value)
       },
 
       onNextMonth(value) {
-        console.log(value)
+        // console.log(value)
       },
 
       onBackToday(value) {
-        console.log(value)
+        // console.log(value)
       },
 
-      onChange(item, items) {
+      onChange(item) {
         console.log(item)
-        console.log(items)
       }
     }
   }

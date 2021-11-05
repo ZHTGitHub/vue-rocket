@@ -10,6 +10,12 @@
 
     {
       "name": "change",
+      "parameters": "(currentItem: Object)",
+      "description": "年月日发生更改时触发"
+    },
+
+    {
+      "name": "change:date",
       "parameters": "(selectedItem: Object, selectedItems: Array)",
       "description": "选中当前日期时触发"
     },

@@ -133,16 +133,9 @@
 
         currentYear: YEAR,
         currentMonth: MONTH,
-        currentDay: DAY,
+        currentDay: null,
 
-        selectedItem: {
-          id: null,
-          year: YEAR, 
-          month: MONTH, 
-          realMonth: MONTH + 1, 
-          date: null,
-          days: null
-        },
+        selectedItem: {},
         selectedItems: []
       }
     },
@@ -155,6 +148,8 @@
       onChangeCurrentYear(value) {
         this.currentYear = value
         this.currentMonth = 0
+        this.currentDay = null
+
         this.$emit('change:year', {
           year: value,
           month: this.currentMonth,
@@ -168,7 +163,8 @@
        */ 
       onChangeCurrentMonth(value) {
         this.currentMonth = value
-        this.currentDay = 1
+        this.currentDay = null
+
         this.$emit('change:month', {
           month: value,
           realMonth: value + 1,
@@ -191,25 +187,32 @@
 
         this.currentYear = record.year
         this.currentMonth = record.month
-        this.currentDay = record.date
 
         for(let item of this.calendar) {
           if(item.id === id) {
             item.selected = !selected
             this.setSelectedItems(item)
+
+            if(item.selected) {
+              this.currentDay = record.date
+
+              this.selectedItem = {
+                id,
+                year: record.year, 
+                month: record.month, 
+                realMonth: record.realMonth, 
+                date: record.date,
+                days: this.getDaysOfMonth(record.month)
+              }
+            }
+            else {
+              this.currentDay = null
+              this.selectedItem = {}
+            }
           }
         }
 
-        this.selectedItem = {
-          id,
-          year: record.year, 
-          month: record.month, 
-          realMonth: record.realMonth, 
-          date: record.date,
-          days: this.getDaysOfMonth(record.month)
-        }
-
-        // this.$emit('change', this.selectedItem, this.selectedItems)
+        this.$emit('change:date', this.selectedItem, this.selectedItems)
       },
 
       /**
@@ -222,6 +225,8 @@
           this.currentMonth = 11
           this.currentYear -= 1
         }
+
+        this.currentDay = null
 
         this.$emit('previous:month', {
           month: this.currentMonth,
@@ -241,6 +246,8 @@
           this.currentYear += 1
         }
 
+        this.currentDay = null
+
         this.$emit('next:month', {
           month: this.currentMonth,
           realMonth: this.currentMonth + 1,
@@ -254,7 +261,9 @@
       onBackToday() {
         this.currentYear = this.thisYear
         this.currentMonth = this.thisMonth
-        this.currentDay = this.today
+        this.currentDay = null
+
+        this.emptySelectedItems()
 
         this.$emit('back:today', {
           year: this.thisYear,
@@ -394,8 +403,6 @@
             }
           }
         }
-
-        // console.log(this.calendar)
       },
 
       /**
@@ -426,8 +433,6 @@
             }
           })
         }
-
-        // console.log(this.selectedItems)
       },
 
       /**
@@ -450,6 +455,14 @@
           currentYear: this.currentYear,
           currentMonth: this.currentMonth
         }
+      },
+
+      currentYMD() {
+        return {
+          currentYear: this.currentYear,
+          currentMonth: this.currentMonth,
+          currentDay: this.currentDay
+        }
       }
     },
 
@@ -468,18 +481,20 @@
         this.emptySelectedItems()
       },
 
-      selectedItem: {
-        handler() {
+      currentYMD: {
+        handler({ currentDay, currentMonth, currentYear }) {
+          const { id } = this.selectedItem
 
-          if(!this.selectedItem.days) {
-            this.selectedItem.days = this.getDaysOfMonth(MONTH)
+          const currentItem = {
+            id: currentDay ? id : null,
+            year: currentYear,
+            month: currentMonth,
+            realMonth: currentMonth + 1,
+            date: currentDay,
+            days: this.getDaysOfMonth(currentMonth)
           }
 
-          // console.log(this.selectedItem)
-          // console.log(this.selectedItems)
-
-          this.$emit('change', this.selectedItem, this.selectedItems)
-
+          this.$emit('change', currentItem)
         },
         immediate: true
       },
