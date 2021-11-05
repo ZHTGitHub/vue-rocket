@@ -71,11 +71,12 @@
             v-for="item in calendar"
             :key="item.value"
             :class="[item.class, 'day']"
-            @click="onSelectDate($event, item)"
+            @click="onSelectDate(item)"
           > 
             <div :class="[
               `${ thisMonth }-${ today }` === `${ item.record.month }-${ item.record.date }` ? 'today' : '' ,
               item.selected ? 'selected' : '',
+              item.disabledGray ? 'cursor-not-allow' : '',
               'cell'
             ]"
             >
@@ -93,61 +94,57 @@
 <script>
   import { monthsCommon, monthsLeap, yearsName, monthsName, weekName } from './cells'
 
+  const date = new Date()
+  // 本年本月本周本日
+  const [YEAR, MONTH, WEEK, DAY] = [date.getFullYear(), date.getMonth(), date.getDay(), date.getDate()]
+
   export default {
     name: 'ZCalendar',
 
     props: {
+      clearSelectedItems: {
+        type: Boolean,
+        default: false
+      },
+
       defaultValue: {
         type: Array,
         default: () => []
+      },
+
+      disabledGray: {
+        type: Boolean,
+        default: false
       }
     },
 
     data() {
       return {
-        weekName: weekName,
-        monthsName: [],
-        yearsName: [],
+        weekName,
+        monthsName,
+        yearsName,
 
-        year: null,
-        month: null,
-        week: null,
-        day: null,
         months: [],
         calendar: [],
 
-        thisYear: null,
-        thisMonth: null,
-        today: null,
+        thisYear: YEAR,
+        thisMonth: MONTH,
+        today: DAY,
 
-        currentYear: null,
-        currentMonth: null,
-        currentDay: null,
+        currentYear: YEAR,
+        currentMonth: MONTH,
+        currentDay: DAY,
 
-        selectedDate: null,
+        selectedItem: {
+          id: null,
+          year: YEAR, 
+          month: MONTH, 
+          realMonth: MONTH + 1, 
+          date: null,
+          days: null
+        },
         selectedItems: []
       }
-    },
-
-    created() {
-      this.monthsName = []
-      this.yearsName = []
-
-      for(let item of monthsName) {
-        this.monthsName.push({
-          text: item.label,
-          value: item.value
-        })
-      }
-
-      for(let item of yearsName) {
-        this.yearsName.push({
-          text: item.label,
-          value: item.value
-        })
-      }
-
-      this.init()
     },
 
     methods: {
@@ -183,8 +180,14 @@
        * @description 当前选中日期
        * @param {object} value
        */ 
-      onSelectDate(event, value) {
+      onSelectDate(value) {
         const { id, selected, record } = value
+
+        if(value.class === 'gray') {
+          if(this.disabledGray) {
+            return
+          }
+        }
 
         this.currentYear = record.year
         this.currentMonth = record.month
@@ -197,7 +200,7 @@
           }
         }
 
-        event.customValue = {
+        this.selectedItem = {
           id,
           year: record.year, 
           month: record.month, 
@@ -206,7 +209,7 @@
           days: this.getDaysOfMonth(record.month)
         }
 
-        this.$emit('change', event, this.selectedItems)
+        // this.$emit('change', this.selectedItem, this.selectedItems)
       },
 
       /**
@@ -262,17 +265,28 @@
         })
       },
 
-      // 闰年
+      /**
+       * @description 是否闰年
+       * @param {number} year 年
+       */ 
       isLeapYear(year) {
         return (year % 400 === 0) || (year % 100 !== 0 && year % 4 === 0)
       },
 
-      // 获取 YYYY/MM/DD 是星期几
+      /**
+       * @description 某年某月某日是星期几
+       * @param {number} 年 year
+       * @param {number} 月 month
+       * @param {number} 日 date = 1
+       */ 
       getDayOfWeek(year, month, date = 1) {
         return new Date(year, month, date).getDay()
       },
 
-      // 获取 MM 有多少天
+      /**
+       * @description 某年某月有多少天
+       * @param {number} 月 month 
+       */ 
       getDaysOfMonth(month) {
         if(month < 0) {
           return this.months[11].label
@@ -285,9 +299,12 @@
         }
       },
       
-      // 设置日历
+      /**
+       * @description 设置日历
+       * @param {number} year 年
+       * @param {number} month 月
+       */ 
       setCalendar(year, month) {
-        // console.log(year, month)
         const currDayOfWeek = this.getDayOfWeek(year, month, 1)
         const currDaysOfMonth = this.getDaysOfMonth(month)
 
@@ -330,7 +347,8 @@
               date: h
             },
             class: 'gray',
-            selected: false
+            selected: false,
+            disabledGray: this.disabledGray
           })
         }
 
@@ -362,7 +380,8 @@
               date: t
             },
             class: 'gray',
-            selected: false
+            selected: false,
+            disabledGray: this.disabledGray
           })
         }
 
@@ -380,7 +399,7 @@
       },
 
       /**
-       * @description 设置选中的日期
+       * @description 设置所有选中的日期
        * @param {object} value
        */ 
       setSelectedItems(value) {
@@ -411,29 +430,25 @@
         // console.log(this.selectedItems)
       },
 
-      // 初始化
-      init() { 
-        this.year = new Date().getFullYear()
-        this.month = new Date().getMonth()
-        this.week = new Date().getDay()
-        this.day = new Date().getDate()
+      /**
+       * @description 清除选中的日期
+       */ 
+      emptySelectedItems() {
+        if(this.clearSelectedItems) {
+          this.selectedItems = []
 
-        this.thisYear = this.year
-        this.thisMonth = this.month
-        this.today = this.day
-
-        this.currentMonth = this.month
-        this.currentYear = this.year
+          for(let item of this.calendar) {
+            item.selected = false
+          }
+        }
       }
     },
 
     computed: {
       currentYM() {
-        const { currentYear, currentMonth } = this
-        // console.log(currentYear, currentMonth)
         return {
-          currentYear,
-          currentMonth
+          currentYear: this.currentYear,
+          currentMonth: this.currentMonth
         }
       }
     },
@@ -441,12 +456,32 @@
     watch: {
       currentYM: {
         handler(value, oldValue) {
-          if(value.currentYear !== oldValue.currentYear) {
+          if(!oldValue || (value.currentYear !== oldValue.currentYear)) {
             this.months = this.isLeapYear(this.currentYear) ? monthsLeap : monthsCommon
           }
           this.setCalendar(this.currentYear, this.currentMonth)
         },
-        deep: true
+        immediate: true
+      },
+
+      currentMonth() {
+        this.emptySelectedItems()
+      },
+
+      selectedItem: {
+        handler() {
+
+          if(!this.selectedItem.days) {
+            this.selectedItem.days = this.getDaysOfMonth(MONTH)
+          }
+
+          // console.log(this.selectedItem)
+          // console.log(this.selectedItems)
+
+          this.$emit('change', this.selectedItem, this.selectedItems)
+
+        },
+        immediate: true
       },
 
       defaultValue: {
@@ -542,10 +577,6 @@
                 border: 2px solid #1976d2 !important;
               }
 
-              &.unselected {
-                border: 2px solid transparent;
-              }
-
               &:hover {
                 border: 2px solid #bdbdbd;
               }
@@ -578,6 +609,10 @@
           }
         }
       }
+    }
+
+    .cursor-not-allow {
+      cursor: not-allowed;
     }
   }
 </style>

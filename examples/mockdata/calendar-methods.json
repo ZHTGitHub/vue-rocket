@@ -10,7 +10,7 @@
 
     {
       "name": "change",
-      "parameters": "(event: Event, selectedItems: Array)",
+      "parameters": "(selectedItem: Object, selectedItems: Array)",
       "description": "选中当前日期时触发"
     },
 

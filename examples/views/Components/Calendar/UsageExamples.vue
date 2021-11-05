@@ -52,6 +52,8 @@
       <div slot="demo">
         <div>
           <z-calendar 
+            clearSelectedItems
+            disabledGray
             @change:year="onChangeYear"
             @change:month="onChangeMonth"
             @previous:month="onPreviousMonth"
@@ -105,9 +107,8 @@
         console.log(value)
       },
 
-      onChange(event, items) {
-        const { customValue } = event
-        console.log(customValue)
+      onChange(item, items) {
+        console.log(item)
         console.log(items)
       }
     }

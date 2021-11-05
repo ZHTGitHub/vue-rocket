@@ -1,7 +1,16 @@
 {
   "status": true,
-  "total": 1,
+  "total": 3,
   "data": [
+    {
+      "name": "clearSelectedItems",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "离开当前月份则清除选中的日期"
+    },
+
     {
       "name": "defaultValue",
       "required": "否",
@@ -9,6 +18,15 @@
       "acceptedValues": "—",
       "default": "—",
       "description": "日历的默认选中值"
+    },
+
+    {
+      "name": "disabledGray",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "禁用非当前月份日期"
     }
   ]
 }
