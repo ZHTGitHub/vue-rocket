@@ -184,14 +184,12 @@
 
             this._setSelectedItems(item)
 
-            if(item.selected) {
-              this.currentDay = day
-              this.selectedItem = this._setOutputDate()
+            this.selectedItem = {
+              ...this._setOutputDate(),
+              selected: item.selected
             }
-            else {
-              this.currentDay = null
-              this.selectedItem = {}
-            }
+
+            this.currentDay = item.selected ? day : null
           }
         }
 
@@ -380,15 +378,13 @@
        * @description 设置对外输出日期
        */ 
       _setOutputDate() {
-        const date = {
+        return {
           year: this.currentYear,
           month: this.currentMonth + 1,
           week: this.getDayOfWeek(this.currentYear, this.currentMonth, this.currentDay),
           day: this.currentDay,
           days: this.getDaysOfMonth(this.currentMonth)
         }
-
-        return date
       },
 
       /**
