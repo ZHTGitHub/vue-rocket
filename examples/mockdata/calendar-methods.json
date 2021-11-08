@@ -1,17 +1,11 @@
 {
   "status": true,
-  "total": 6,
+  "total": 7,
   "data": [
     {
-      "name": "back:today",
+      "name": "click:today",
       "parameters": "(value: Object)",
       "description": "返回今天时触发"
-    },
-
-    {
-      "name": "change",
-      "parameters": "(currentItem: Object)",
-      "description": "年月日发生更改时触发"
     },
 
     {
@@ -33,15 +27,21 @@
     },
 
     {
-      "name": "next:month",
+      "name": "next",
       "parameters": "(value: Object)",
       "description": "跳转到下个月份时触发"
     },
 
     {
-      "name": "previous:month",
+      "name": "prev",
       "parameters": "(value: Object)",
       "description": "跳转到上个月份时触发"
+    },
+
+    {
+      "name": "select",
+      "parameters": "(currentItem: Object, selectedItems: Array)",
+      "description": "年月日发生更改时触发"
     }
   ]
 }

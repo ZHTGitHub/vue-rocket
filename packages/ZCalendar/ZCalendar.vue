@@ -70,18 +70,17 @@
           <div 
             v-for="item in calendar"
             :key="item.value"
-            :class="[item.class, 'day']"
+            :class="['day', item.gray ? 'gray' : '']"
             @click="onSelectDate(item)"
           > 
-            <div :class="[
-              `${ thisMonth }-${ today }` === `${ item.record.month }-${ item.record.date }` ? 'today' : '' ,
-              item.selected ? 'selected' : '',
-              item.disabledGray ? 'cursor-not-allow' : '',
-              'cell'
-            ]"
+            <div 
+              :class="['cell', 
+                item.selected ? 'selected' : '', 
+                item.disabledGray ? 'cursor-not-allow' : ''
+              ]"
             >
-              {{ item.label }}
-              <i :class="[item.selected ? 'z-block' : 'z-none', 'badge']"></i>
+              {{ item.day }}
+              <i :class="['badge', item.selected ? 'z-block' : 'z-none']"></i>
             </div>
           </div>
         </div>
@@ -133,7 +132,7 @@
 
         currentYear: YEAR,
         currentMonth: MONTH,
-        currentDay: null,
+        currentDay: DAY,
 
         selectedItem: {},
         selectedItems: []
@@ -147,14 +146,7 @@
        */ 
       onChangeCurrentYear(value) {
         this.currentYear = value
-        this.currentMonth = 0
-        this.currentDay = null
-
-        this.$emit('change:year', {
-          year: value,
-          month: this.currentMonth,
-          realMonth: this.currentMonth + 1
-        })
+        this.$emit('change:year', this._setOutputDate())
       },
 
       /**
@@ -163,13 +155,7 @@
        */ 
       onChangeCurrentMonth(value) {
         this.currentMonth = value
-        this.currentDay = null
-
-        this.$emit('change:month', {
-          month: value,
-          realMonth: value + 1,
-          days: this.getDaysOfMonth(value)
-        })
+        this.$emit('change:month', this._setOutputDate())
       },
 
       /**
@@ -177,33 +163,23 @@
        * @param {object} value
        */ 
       onSelectDate(value) {
-        const { id, selected, record } = value
+        const { selected, year, month, day, gray } = value
 
-        if(value.class === 'gray') {
-          if(this.disabledGray) {
-            return
-          }
-        }
-
-        this.currentYear = record.year
-        this.currentMonth = record.month
+        if(gray && this.disabledGray) return
 
         for(let item of this.calendar) {
-          if(item.id === id) {
+          if(item.year === year 
+              && item.month === month 
+              && item.day === day
+            ) {
+
             item.selected = !selected
-            this.setSelectedItems(item)
+
+            this._setSelectedItems(item)
 
             if(item.selected) {
-              this.currentDay = record.date
-
-              this.selectedItem = {
-                id,
-                year: record.year, 
-                month: record.month, 
-                realMonth: record.realMonth, 
-                date: record.date,
-                days: this.getDaysOfMonth(record.month)
-              }
+              this.currentDay = day
+              this.selectedItem = this._setOutputDate()
             }
             else {
               this.currentDay = null
@@ -211,6 +187,8 @@
             }
           }
         }
+
+        console.log(this.selectedItem)
 
         this.$emit('change:date', this.selectedItem, this.selectedItems)
       },
@@ -226,13 +204,7 @@
           this.currentYear -= 1
         }
 
-        this.currentDay = null
-
-        this.$emit('previous:month', {
-          month: this.currentMonth,
-          realMonth: this.currentMonth + 1,
-          days: this.getDaysOfMonth(this.currentMonth)
-        })
+        this.$emit('prev', this._setOutputDate())
       },
 
       /**
@@ -246,39 +218,27 @@
           this.currentYear += 1
         }
 
-        this.currentDay = null
-
-        this.$emit('next:month', {
-          month: this.currentMonth,
-          realMonth: this.currentMonth + 1,
-          days: this.getDaysOfMonth(this.currentMonth)
-        })
+        this.$emit('next', this._setOutputDate())
       },
 
       /**
        * @description 返回今天
        */ 
       onBackToday() {
-        this.currentYear = this.thisYear
-        this.currentMonth = this.thisMonth
-        this.currentDay = null
+        this.currentYear = YEAR
+        this.currentMonth = MONTH
+        this.currentDay = DAY
 
-        this.emptySelectedItems()
+        this.$emit('click:today', this._setOutputDate())
 
-        this.$emit('back:today', {
-          year: this.thisYear,
-          month: this.thisMonth,
-          realMonth: this.thisMonth + 1,
-          date: this.today,
-          days: this.getDaysOfMonth(this.thisMonth)
-        })
+        this._emptySelectedItems()
       },
 
       /**
        * @description 是否闰年
        * @param {number} year 年
        */ 
-      isLeapYear(year) {
+      _isLeapYear(year) {
         return (year % 400 === 0) || (year % 100 !== 0 && year % 4 === 0)
       },
 
@@ -313,7 +273,7 @@
        * @param {number} year 年
        * @param {number} month 月
        */ 
-      setCalendar(year, month) {
+      _setCalendar(year, month) {
         const currDayOfWeek = this.getDayOfWeek(year, month, 1)
         const currDaysOfMonth = this.getDaysOfMonth(month)
 
@@ -345,50 +305,41 @@
         const [head, body, tail] = [[], [], []]
 
         // 上个月
-        for(let h = prevTailDaysOfMonth; h <= prevDaysOfMonth; h++) {
+        for(let day = prevTailDaysOfMonth; day <= prevDaysOfMonth; day++) {
           head.push({
-            label: h,
-            id: '' + lastYear + (lastMonth - 1) + h,
-            record: {
-              year: lastYear,
-              month: lastMonth - 1,
-              realMonth: lastMonth,
-              date: h
-            },
-            class: 'gray',
+            year: lastYear,
+            month: lastMonth,
+            week: this.getDayOfWeek(lastYear, lastMonth - 1, day),
+            day,
+
+            gray: true,
             selected: false,
             disabledGray: this.disabledGray
           })
         }
 
         // 本月
-        for(let b = 1; b <= currDaysOfMonth; b++) {
+        for(let day = 1; day <= currDaysOfMonth; day++) {
           body.push({
-            label: b,
-            id: '' + thisYear + month + b,
-            record: {
-              year: thisYear,
-              month: month,
-              realMonth: thisMonth,
-              date: b
-            },
-            class: 'white',
+            year: thisYear,
+            month: thisMonth,
+            week: this.getDayOfWeek(thisYear, month, day),
+            day,
+
+            gray: false,
             selected: false
           })
         }
 
         // 下个月
-        for(let t = 1; t <= nextHeadDaysOfMonth; t++) {
+        for(let day = 1; day <= nextHeadDaysOfMonth; day++) {
           tail.push({
-            label: t,
-            id: '' + nextYear + (nextMonth - 1) + t,
-            record: {
-              year: nextYear,
-              month: nextMonth - 1,
-              realMonth: nextMonth,
-              date: t
-            },
-            class: 'gray',
+            year: nextYear,
+            month: nextMonth,
+            week: this.getDayOfWeek(nextYear, nextMonth - 1, day),
+            day,
+
+            gray: true,
             selected: false,
             disabledGray: this.disabledGray
           })
@@ -396,39 +347,55 @@
 
         this.calendar = [...head, ...body, ...tail]
 
-        for(let c of this.calendar) {
-          for(let s of this.selectedItems) {
-            if(c.id === s.id) {
-              c.selected = true
+        if(!this.selectedItems.length) return
+
+        for(let date of this.calendar) {
+          for(let item of this.selectedItems) {
+            if(date.year === item.year
+                && date.month === item.month
+                && date.day === item.day
+            ) {
+              date.selected = true
             }
           }
         }
+
+        // console.log(this.calendar)
+      },
+
+      /**
+       * @description 设置对外输出日期
+       */ 
+      _setOutputDate() {
+        const date = {
+          year: this.currentYear,
+          month: this.currentMonth + 1,
+          week: this.getDayOfWeek(this.currentYear, this.currentMonth, this.currentDay),
+          day: this.currentDay,
+          days: this.getDaysOfMonth(this.currentMonth)
+        }
+
+        return date
       },
 
       /**
        * @description 设置所有选中的日期
        * @param {object} value
        */ 
-      setSelectedItems(value) {
-        const { id, selected, record } = value
-        const { date, month, realMonth, year } = record
+      _setSelectedItems(value) {
+        const { selected, year, month, day } = value
+        const date = '' + year + month + day
 
         if(selected) {
-          const isRepeat = this.selectedItems.find(s => s.id === id)
+          const isRepeat = this.selectedItems.find(item => ('' + item.year + item.month + item.day) === date)
 
           if(!isRepeat) {
-            this.selectedItems.push({
-              id,
-              date,
-              month,
-              realMonth,
-              year
-            })
+            this.selectedItems.push({ year, month, day })
           }
         }
         else {
           this.selectedItems.map((item, index) => {
-            if(id === item.id) {
+            if(('' + item.year + item.month + item.day) === date) {
               this.selectedItems.splice(index, 1)
             }
           })
@@ -438,7 +405,7 @@
       /**
        * @description 清除选中的日期
        */ 
-      emptySelectedItems() {
+      _emptySelectedItems() {
         if(this.clearSelectedItems) {
           this.selectedItems = []
 
@@ -450,60 +417,57 @@
     },
 
     computed: {
-      currentYM() {
-        return {
-          currentYear: this.currentYear,
-          currentMonth: this.currentMonth
-        }
-      },
-
-      currentYMD() {
+      yummyCalendar() {
         return {
           currentYear: this.currentYear,
           currentMonth: this.currentMonth,
-          currentDay: this.currentDay
+          defaultValue: this.defaultValue
+        }
+      },
+
+      yummyOutputDate() {
+        return {
+          currentYear: this.currentYear,
+          currentMonth: this.currentMonth,
+          currentDay: this.currentDay,
+          defaultValue: this.defaultValue,
+          selectedItem: this.selectedItem
         }
       }
     },
 
     watch: {
-      currentYM: {
+      // 默认选中
+      defaultValue: {
+        handler(value) {
+          if(value.length)
+            this.selectedItems = [...value]
+        },
+        immediate: true
+      },
+
+      // 日历
+      yummyCalendar: {
         handler(value, oldValue) {
           if(!oldValue || (value.currentYear !== oldValue.currentYear)) {
-            this.months = this.isLeapYear(this.currentYear) ? monthsLeap : monthsCommon
+            this.months = this._isLeapYear(this.currentYear) ? monthsLeap : monthsCommon
           }
-          this.setCalendar(this.currentYear, this.currentMonth)
+          this._setCalendar(this.currentYear, this.currentMonth)
         },
         immediate: true
       },
 
-      currentMonth() {
-        this.emptySelectedItems()
-      },
-
-      currentYMD: {
-        handler({ currentDay, currentMonth, currentYear }) {
-          const { id } = this.selectedItem
-
-          const currentItem = {
-            id: currentDay ? id : null,
-            year: currentYear,
-            month: currentMonth,
-            realMonth: currentMonth + 1,
-            date: currentDay,
-            days: this.getDaysOfMonth(currentMonth)
-          }
-
-          this.$emit('change', currentItem)
-        },
-        immediate: true
-      },
-
-      defaultValue: {
+      yummyOutputDate: {
         handler() {
-          this.selectedItems = this.defaultValue
+          if(!this.currentDay || this.selectedItems.length)
+            this.$emit('select', this._setOutputDate(), this.selectedItems)
         },
         immediate: true
+      },
+
+      // 清空默认选中
+      currentMonth() {
+        this._emptySelectedItems()
       }
     }
   }

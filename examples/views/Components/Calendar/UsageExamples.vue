@@ -6,12 +6,16 @@
           <code class="language-markup">
             &lt;template>
               &lt;z-calendar 
+                clearSelectedItems
+                disabledGray
+                :defaultValue="[{ id: '2021105' }]"
                 @change:year="onChangeYear"
                 @change:month="onChangeMonth"
-                @previous:month="onPreviousMonth"
-                @next:month="onNextMonth"
-                @back:today="onBackToday"
-                @change="onChange"
+                @change:date="onChangeDate"
+                @prev="onPreviousMonth"
+                @next="onNextMonth"
+                @click:today="onBackToday"
+                @select="onSelect"
               >&lt;/z-calendar>
             &lt;/template>
 
@@ -23,6 +27,10 @@
                   },
                   
                   onChangeMonth(value) {
+                    console.log(value)
+                  },
+
+                  onChangeDate(value) {
                     console.log(value)
                   },
 
@@ -38,10 +46,8 @@
                     console.log(value)
                   },
 
-                  onChange(event, items) {
-                    const { customValue } = event
-                    console.log(customValue)
-                    console.log(items)
+                  onSelect(item) {
+                    console.log(item)
                   }
                 }
               }
@@ -54,13 +60,14 @@
           <z-calendar 
             clearSelectedItems
             disabledGray
+            :defaultValue="defaultValue"
             @change:year="onChangeYear"
             @change:month="onChangeMonth"
             @change:date="onChangeDate"
-            @previous:month="onPreviousMonth"
-            @next:month="onNextMonth"
-            @back:today="onBackToday"
-            @change="onChange"
+            @prev="onPreviousMonth"
+            @next="onNextMonth"
+            @click:today="onBackToday"
+            @select="onSelect"
           ></z-calendar>
         </div>
       </div>
@@ -79,12 +86,24 @@
 
     data() {
       return {
-        
+        defaultValue: []
       }
     },
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    async created() {
+      setTimeout(() => {
+        this.defaultValue = [
+          // {
+          //   year: 2021,
+          //   month: 11,
+          //   day: 8
+          // }
+        ]
+      })
     },
 
     methods: {
@@ -97,7 +116,7 @@
       },
 
       onChangeDate(value) {
-        console.log(value)
+        // console.log(value)
       },
 
       onPreviousMonth(value) {
@@ -112,8 +131,9 @@
         // console.log(value)
       },
 
-      onChange(item) {
+      onSelect(item, items) {
         console.log(item)
+        console.log(items)
       }
     }
   }
