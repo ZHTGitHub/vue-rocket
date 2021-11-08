@@ -97,11 +97,11 @@
     async created() {
       setTimeout(() => {
         this.defaultValue = [
-          // {
-          //   year: 2021,
-          //   month: 11,
-          //   day: 8
-          // }
+          {
+            year: 2021,
+            month: 11,
+            day: 8
+          }
         ]
       })
     },
@@ -132,7 +132,13 @@
       },
 
       onSelect(item, items) {
-        this.defaultValue = []
+        this.defaultValue = [
+          {
+            year: 2021,
+            month: 12,
+            day: 8
+          }
+        ]
         console.log(item)
         console.log(items)
       }

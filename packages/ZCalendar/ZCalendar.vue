@@ -95,7 +95,7 @@
 
   const date = new Date()
   // 本年本月本周本日
-  const [YEAR, MONTH, WEEK, DAY] = [date.getFullYear(), date.getMonth(), date.getDay(), date.getDate()]
+  const [YEAR, MONTH, DAY] = [date.getFullYear(), date.getMonth(), date.getDate()]
 
   export default {
     name: 'ZCalendar',
@@ -137,6 +137,13 @@
         selectedItem: {},
         selectedItems: []
       }
+    },
+
+    mounted() {
+      const timer = setTimeout(() => {
+        this.onSelect()
+        clearTimeout(timer)
+      })
     },
 
     methods: {
@@ -440,7 +447,6 @@
         handler(value) {
           if(value.length) {
             this.selectedItems = [...value]
-            this.$emit('select', this._setOutputDate(), this.selectedItems)
           }
         },
         immediate: true
