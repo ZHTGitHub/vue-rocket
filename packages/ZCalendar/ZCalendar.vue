@@ -10,7 +10,7 @@
             hide-details
             :items="yearsName"
             v-model="currentYear"
-            @change="onChangeCurrentYear"
+            @change="onChangeCurrentYear($event), onSelect('year')"
           ></v-select>
         </div>
 
@@ -18,7 +18,7 @@
           <div class="pl-4 pr-1 prev-month">
             <v-btn
               icon
-              @click="onPrevMonth"
+              @click="onPrevMonth(), onSelect('prev')"
             >
               <v-icon size="28">mdi-chevron-left</v-icon>
             </v-btn>
@@ -31,14 +31,14 @@
               hide-details
               :items="monthsName"
               v-model="currentMonth"
-              @change="onChangeCurrentMonth"
+              @change="onChangeCurrentMonth($event), onSelect('month')"
             ></v-select>
           </div>
 
           <div class="pl-1 pr-4 next-month">
             <v-btn
               icon
-              @click="onNextMonth"
+              @click="onNextMonth(), onSelect('next')"
             >
               <v-icon size="28">mdi-chevron-right</v-icon>
             </v-btn>
@@ -48,7 +48,7 @@
         <div class="back-today">
           <v-btn
             depressed
-            @click="onBackToday"
+            @click="onBackToday(), onSelect('today')"
           >
             返回今天
           </v-btn>
@@ -71,7 +71,7 @@
             v-for="item in calendar"
             :key="item.value"
             :class="['day', item.gray ? 'gray' : '']"
-            @click="onSelectDate(item)"
+            @click="onSelectDate(item), onSelect('date')"
           > 
             <div 
               :class="['cell', 
@@ -230,8 +230,18 @@
         this.currentDay = DAY
 
         this.$emit('click:today', this._setOutputDate())
+      },
 
-        this._emptySelectedItems()
+      /**
+       * @description 当前选中的日期
+       * @param {string} value
+       */ 
+      onSelect(value) {
+        if(value !== 'date' && value !== 'today') {
+          this.currentDay = null
+        }
+
+        this.$emit('select', this._setOutputDate(), this.selectedItems)
       },
 
       /**
@@ -401,7 +411,7 @@
       },
 
       /**
-       * @description 清除选中的日期
+       * @description 清除选中的日期（暂时未用到）
        */ 
       _emptySelectedItems() {
         if(this.clearSelectedItems) {
@@ -421,16 +431,6 @@
           currentMonth: this.currentMonth,
           defaultValue: this.defaultValue
         }
-      },
-
-      yummyOutputDate() {
-        return {
-          currentYear: this.currentYear,
-          currentMonth: this.currentMonth,
-          currentDay: this.currentDay,
-          defaultValue: this.defaultValue,
-          selectedItem: this.selectedItem
-        }
       }
     },
 
@@ -438,8 +438,10 @@
       // 默认选中
       defaultValue: {
         handler(value) {
-          if(value.length)
+          if(value.length) {
             this.selectedItems = [...value]
+            this.$emit('select', this._setOutputDate(), this.selectedItems)
+          }
         },
         immediate: true
       },
@@ -453,19 +455,6 @@
           this._setCalendar(this.currentYear, this.currentMonth)
         },
         immediate: true
-      },
-
-      yummyOutputDate: {
-        handler() {
-          if(!this.currentDay || this.selectedItems.length)
-            this.$emit('select', this._setOutputDate(), this.selectedItems)
-        },
-        immediate: true
-      },
-
-      // 清空默认选中
-      currentMonth() {
-        this._emptySelectedItems()
       }
     }
   }

@@ -132,6 +132,7 @@
       },
 
       onSelect(item, items) {
+        this.defaultValue = []
         console.log(item)
         console.log(items)
       }
