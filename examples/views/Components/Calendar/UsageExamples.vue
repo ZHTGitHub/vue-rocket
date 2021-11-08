@@ -115,8 +115,9 @@
         // console.log(value)
       },
 
-      onChangeDate(value) {
-        // console.log(value)
+      onChangeDate(item, items) {
+        console.log(item)
+        console.log(items)
       },
 
       onPreviousMonth(value) {

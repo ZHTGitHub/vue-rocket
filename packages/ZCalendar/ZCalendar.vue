@@ -71,7 +71,7 @@
             v-for="item in calendar"
             :key="item.value"
             :class="['day', item.gray ? 'gray' : '']"
-            @click="onSelectDate(item), onSelect('date')"
+            @click="onSelectDate(item)"
           > 
             <div 
               :class="['cell', 
@@ -194,8 +194,6 @@
             }
           }
         }
-
-        // console.log(this.selectedItem)
 
         this.$emit('change:date', this.selectedItem, this.selectedItems)
       },
