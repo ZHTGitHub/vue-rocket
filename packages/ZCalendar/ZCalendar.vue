@@ -188,7 +188,7 @@
           }
         }
 
-        console.log(this.selectedItem)
+        // console.log(this.selectedItem)
 
         this.$emit('change:date', this.selectedItem, this.selectedItems)
       },
@@ -297,10 +297,8 @@
             break;
         }
 
-        // console.log('本月共'+currDaysOfMonth+'天，且一号为：星期'+currDayOfWeek)
-        // console.log('上个月共'+prevDaysOfMonth+'天')
-        // console.log('上个月开始日期'+prevTailDaysOfMonth)
-        // console.log('下个月结束日期'+nextHeadDaysOfMonth)
+        // console.log(`当前为：${ year }年，${ month + 1 }月，且1号为：周${ currDayOfWeek }`)
+        // console.log(`上个月共${ prevDaysOfMonth }天，且开始日期为：${ prevTailDaysOfMonth }号；下个月结束日期为${ nextHeadDaysOfMonth }号`)
 
         const [head, body, tail] = [[], [], []]
 
