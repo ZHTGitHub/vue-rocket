@@ -180,6 +180,8 @@
               && item.day === day
             ) {
 
+            this.currentDay = day
+
             item.selected = !selected
 
             this._setSelectedItems(item)
@@ -188,8 +190,6 @@
               ...this._setOutputDate(),
               selected: item.selected
             }
-
-            this.currentDay = item.selected ? day : null
           }
         }
 
