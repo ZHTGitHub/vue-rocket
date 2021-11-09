@@ -4,14 +4,14 @@
       <!--  -->
       <div class="z-flex justify-center pb-2 calendar-box-header">
         <div class="year">
-          <v-select
+          <v-autocomplete
             dense
             outlined
             hide-details
             :items="yearsName"
             v-model="currentYear"
             @change="onChangeCurrentYear($event), onSelect('year')"
-          ></v-select>
+          ></v-autocomplete>
         </div>
 
         <div class="month">

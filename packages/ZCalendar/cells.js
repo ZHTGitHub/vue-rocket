@@ -30,7 +30,7 @@ const monthsLeap = [
 ]
 // 年份
 const yearsName = []
-for(let year = 2010; year <= 2030; year++) {
+for(let year = 1900; year <= 2050; year++) {
   yearsName.push({ 
     text: `${ year }年`, 
     value: year 
