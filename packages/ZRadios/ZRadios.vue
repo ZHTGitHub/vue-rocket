@@ -1,14 +1,9 @@
 <template>
   <div class="z-radios z-input" :style="{ width: breadth }">
     <div class="z-flex">
-      <legend 
-        v-if="label" 
-        class="v-label theme--light"
-        :class="[incorrect ? 'error--text' : '']"
-      >
+      <div class="z-radio-prepend">
         <slot name="prepend"></slot>
-        {{ label }}
-      </legend>
+      </div>
 
       <v-radio-group
         v-model="value"
@@ -17,6 +12,7 @@
         :error="incorrect"
         :error-messages="errorMessage"
         :hide-details="hideDetails"
+        :label="label"
         :readonly="readonly"
         :row="row"
         :success="success"
@@ -25,6 +21,7 @@
         <v-radio
           v-for="(item, index) of items" 
           :key="`z_radio_${ index }`"
+          :class="[column ? '' : 'ml-2']"
           :label="item.label"
           :value="item.value"
           @click="onClick"
@@ -54,7 +51,7 @@
 
       row: {
         type: Boolean,
-        default: true
+        default: false
       }
     },
 
@@ -89,8 +86,8 @@
 
 <style scoped lang="scss">
   .z-radios {
-    legend.v-label {
-      padding: 8px 8px 0 0;
+    .z-radio-prepend {
+      padding: 4px 4px 4px 0;
       margin-top: 16px;
       height: auto;
       font-size: 14px;

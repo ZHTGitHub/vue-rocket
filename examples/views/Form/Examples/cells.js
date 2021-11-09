@@ -53,6 +53,7 @@ const fields = [
       { label: '男性', value: 1 },
       { label: '女性', value: 2 }
     ],
+    prepend: '*',
     validation: [
       { rule: 'required', message: '请选择性别.' }
     ],
@@ -68,6 +69,7 @@ const fields = [
       { label: '乒乓球', value: 2 },
       { label: '羽毛球', value: 3 }
     ],
+    prepend: '*',
     validation: [
       { rule: 'required', message: '请选择兴趣.' }
     ],

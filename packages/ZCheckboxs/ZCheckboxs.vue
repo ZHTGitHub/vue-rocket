@@ -1,37 +1,44 @@
 <template>
   <div class="z-checkboxs z-input" :style="{ width: breadth }">
-    <div 
-      class="z-input--checkboxs-group__input z-flex flex-wrap" 
-      :class="[row ? '' : 'flex-column']"
-    >
-      <legend 
-        v-if="label" 
-        class="v-label theme--light"
-        :class="[incorrect ? 'error--text' : '']"
-      >
+    <div class="z-flex">
+      <div class="z-checkboxs-prepend">
         <slot name="prepend"></slot>
-        {{ label }}
-      </legend>
+      </div>
 
-        <div
-          class="z-checkbox"
-          v-for="(item, index) of items" 
-          :key="`z_checkbox_${ index }`"
+      <div class="z-input--checkboxs-group">
+        <div 
+          class="z-flex flex-wrap flex-row z-input__slot" 
+          :class="[column ? 'flex-column' : '', row ? 'flex-row' : '']"
         >
-          <v-checkbox
-            v-model="values"
-            :error="incorrect"
-            :hide-details="true"
-            :label="item.label"
-            :success="success"
-            :value="item.value"
-            class="mt-0 mr-4"
-            @change="onChange"
-            @click="onClick"
-          ></v-checkbox>
+          <legend 
+            v-if="label" 
+            class="v-label theme--light"
+            :class="[incorrect ? 'error--text' : '']"
+          >
+            {{ label }}
+          </legend>
+
+            <div
+              class="z-checkbox"
+              v-for="(item, index) of items" 
+              :key="`z_checkbox_${ index }`"
+            >
+              <v-checkbox
+                v-model="values"
+                :error="incorrect"
+                :hide-details="true"
+                :label="item.label"
+                :success="success"
+                :value="item.value"
+                class="mt-0 mr-4"
+                @change="onChange"
+                @click="onClick"
+              ></v-checkbox>
+            </div>
         </div>
+        <div class="error--text z-messages" >{{ errorMessage }}</div>
+      </div>
     </div>
-    <div class="error--text z-messages" >{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -44,6 +51,11 @@
     name: 'ZCheckboxs',
     mixins: [FormMixins, FormValidationMixins],
     props: {
+      column: {
+        type: Boolean,
+        default: false
+      },
+      
       options: {
         type: Array,
         required: true
@@ -51,7 +63,7 @@
 
       row: {
         type: Boolean,
-        default: true
+        default: false
       },
 
       defaultValue: {
@@ -147,18 +159,35 @@
 </script>
 
 <style scoped lang="scss">
-  .z-input--checkboxs-group__input {
-    padding-top: 12px;
-    padding-bottom: 6px;
-    legend.v-label {
-      padding: 8px 8px 8px 0;
+  .z-checkboxs {
+    .z-checkboxs-prepend {
+      padding: 8px 4px 4px 0;
+      margin-top: 16px;
       height: auto;
       font-size: 14px;
       cursor: text;
     }
 
-    .z-checkbox {
-      height: auto;
+    .z-input--checkboxs-group {
+      padding-top: 4px;
+      margin-top: 16px;
+
+      .z-input__slot {
+        margin-bottom: 4px;
+
+        legend.v-label {
+          padding: 8px 8px 8px 0;
+          height: auto;
+          font-size: 14px;
+          cursor: text;
+        }
+
+        .z-checkbox {
+          height: auto;
+        }
+      }
+
+      
     }
   }
 </style>

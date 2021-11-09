@@ -63,8 +63,10 @@
                   :label="item.label"
                   :validation="item.validation"
                   :options="item.options"
+                  column
                   :defaultValue="item.defaultValue"
                 >
+                  <span class="error--text" slot="prepend">*</span>
                 </z-radios>
               </div>
 
@@ -80,8 +82,11 @@
                   :label="item.label"
                   :validation="item.validation"
                   :options="item.options"
+                  column
                   :defaultValue="item.defaultValue"
-                ></z-checkboxs>
+                >
+                  <span class="error--text" slot="prepend">*</span>
+                </z-checkboxs>
               </div>
 
               <div
