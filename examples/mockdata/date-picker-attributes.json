@@ -30,6 +30,15 @@
     },
 
     {
+      "name": "autofocus",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "启用自动聚焦"
+    },
+
+    {
       "name": "firstDayOfWeek",
       "required": "否",
       "type": "Number[ ] | String[ ]",

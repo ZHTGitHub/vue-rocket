@@ -15,6 +15,7 @@
           v-model="value"
           :append-icon="appendIcon"
           :append-outer-icon="appendOuterIcon"
+          :autofocus="autofocus"
           :clear-icon="clearIcon"
           :clearable="clearable"
           :counter="counter"

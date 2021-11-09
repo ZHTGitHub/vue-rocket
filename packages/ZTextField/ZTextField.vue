@@ -5,6 +5,7 @@
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
       autocomplete="off"
+      :autofocus="autofocus"
       :clear-icon="clearIcon"
       :clearable="clearable"
       :counter="counter"

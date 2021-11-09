@@ -99,6 +99,7 @@
 		methods: {
 			onClick(event) {
 				if(this.unlocked()) {
+					console.log(233)
 					this.event = event
 					const action = this.actions.get(this.btnType)
 					if(action === 'click') {

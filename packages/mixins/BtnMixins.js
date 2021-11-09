@@ -139,13 +139,13 @@ export default {
 
   methods: {
     unlocked() {
-      if(this.oldTime == null) {
-        this.oldTime = new Date().getTime()
+      if(!this.oldTime) {
+        this.oldTime = Date.now()
         return true
       }else {
-        let newTime = new Date().getTime()
+        const newTime = Date.now()
         if(newTime - this.oldTime > this.lockedTime) {
-          this.oldTime = new Date().getTime()
+          this.oldTime = Date.now()
           return true
         }else {
           return false

@@ -48,6 +48,15 @@
     },
 
     {
+      "name": "autofocus",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "启用自动聚焦"
+    },
+
+    {
       "name": "clear-icon",
       "required": "否",
       "type": "Boolean",
