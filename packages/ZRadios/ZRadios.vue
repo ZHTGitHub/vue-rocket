@@ -1,26 +1,36 @@
 <template>
   <div class="z-radios z-input" :style="{ width: breadth }">
-    <v-radio-group
-      v-model="value"
-      :column="column"
-      :disabled="disabled"
-      :error="incorrect"
-      :error-messages="errorMessage"
-      :hide-details="hideDetails"
-      :label="label"
-      :readonly="readonly"
-      :row="row"
-      :success="success"
-      @change="onChange"
-    >
-      <v-radio
-        v-for="(item, index) of items" 
-        :key="`z_radio_${ index }`"
-        :label="item.label"
-        :value="item.value"
-        @click="onClick"
-      ></v-radio>
-    </v-radio-group>
+    <div class="z-flex">
+      <legend 
+        v-if="label" 
+        class="v-label theme--light"
+        :class="[incorrect ? 'error--text' : '']"
+      >
+        <slot name="prepend"></slot>
+        {{ label }}
+      </legend>
+
+      <v-radio-group
+        v-model="value"
+        :column="column"
+        :disabled="disabled"
+        :error="incorrect"
+        :error-messages="errorMessage"
+        :hide-details="hideDetails"
+        :readonly="readonly"
+        :row="row"
+        :success="success"
+        @change="onChange"
+      >
+        <v-radio
+          v-for="(item, index) of items" 
+          :key="`z_radio_${ index }`"
+          :label="item.label"
+          :value="item.value"
+          @click="onClick"
+        ></v-radio>
+      </v-radio-group>
+    </div>
   </div>
 </template>
 
@@ -76,3 +86,15 @@
     }
   }
 </script>
+
+<style scoped lang="scss">
+  .z-radios {
+    legend.v-label {
+      padding: 8px 8px 0 0;
+      margin-top: 16px;
+      height: auto;
+      font-size: 14px;
+      cursor: text;
+    }
+  }
+</style>

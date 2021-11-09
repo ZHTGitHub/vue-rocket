@@ -7,6 +7,8 @@
     <checkboxs-attributes></checkboxs-attributes>
 
     <checkboxs-methods></checkboxs-methods>
+
+    <checkbox-slots></checkbox-slots>
   </div>
 </template>
 
@@ -26,7 +28,8 @@
     components: {
       'usage-examples': () => import('./UsageExamples'),
       'checkboxs-attributes': () => import('./CheckboxsAttributes'),
-      'checkboxs-methods': () => import('./CheckboxsMethods')
+      'checkboxs-methods': () => import('./CheckboxsMethods'),
+      'checkbox-slots': () => import('./CheckboxsSlots.vue')
     }
   }
 </script>

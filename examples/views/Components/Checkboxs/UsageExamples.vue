@@ -64,7 +64,8 @@
             :rules="[{ required: true, message: '兴趣爱好为必选项.' }]"
             :options="hobbyOptions"
             :defaultValue="[1]"
-          ></z-checkboxs>
+          >
+          </z-checkboxs>
         </div>
       </div>
     </usage-demo>

@@ -7,6 +7,8 @@
     <radios-attributes></radios-attributes>
 
     <radios-methods></radios-methods>
+
+    <radios-slots></radios-slots>
   </div>
 </template>
 
@@ -25,7 +27,8 @@
     components: {
       'usage-examples': () => import('./UsageExamples'),
       'radios-attributes': () => import('./RadiosAttributes'),
-      'radios-methods': () => import('./RadiosMethods') 
+      'radios-methods': () => import('./RadiosMethods'),
+      'radios-slots': () => import('./RadiosSlots.vue')
     }
   }
 </script>

@@ -8,7 +8,10 @@
         v-if="label" 
         class="v-label theme--light"
         :class="[incorrect ? 'error--text' : '']"
-      >{{ label }}</legend>
+      >
+        <slot name="prepend"></slot>
+        {{ label }}
+      </legend>
 
         <div
           class="z-checkbox"

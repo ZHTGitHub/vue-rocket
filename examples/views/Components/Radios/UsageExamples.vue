@@ -39,7 +39,8 @@
           :rules="[{ required: true, message: '请选择性别.' }]"
           :options="genderOptions"
           :defaultValue="1"
-        ></z-radios>
+        >
+        </z-radios>
       </div>
     </usage-demo>
   </div>
