@@ -39,6 +39,7 @@
               &lt;z-btn
                 class="mr-4"
                 color="primary"
+                outlined
               >
                 &lt;v-icon left>
                   mdi-pencil
@@ -101,6 +102,7 @@
           <z-btn
             class="mr-4"
             color="primary"
+            outlined
           >
             <v-icon left>
               mdi-pencil

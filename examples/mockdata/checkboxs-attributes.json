@@ -21,6 +21,15 @@
     },
 
     {
+      "name": "column",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "垂直布局"
+    },
+
+    {
       "name": "defaultValue",
       "required": "否",
       "type": "Number[ ] | String[ ]",

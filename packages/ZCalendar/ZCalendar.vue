@@ -75,6 +75,7 @@
           > 
             <div 
               :class="['cell', 
+                item.day === today ? 'today' : '',
                 item.selected ? 'selected' : '', 
                 item.disabledGray ? 'cursor-not-allow' : ''
               ]"
@@ -536,7 +537,7 @@
               overflow: hidden;
 
               &.today {
-                border: 2px solid #1E88E5 !important;
+                background-color: #E3F2FD !important;
               }
 
               &.selected {
