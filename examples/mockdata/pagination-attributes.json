@@ -54,6 +54,15 @@
       "acceptedValues": "—",
       "default": 0,
       "description": "数据总数"
+    },
+
+    {
+      "name": "totalVisible",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "—",
+      "default": 10,
+      "description": "指定最大可见分页数"
     }
   ]
 }

@@ -19,7 +19,7 @@
         <z-pagination
           :options="pageOptions"
           :pageNum="3"
-          :pageSize="20"
+          :pageSize="10"
           :total="total"
         ></z-pagination>
       </div>
@@ -38,7 +38,7 @@
 
     data() {  
       return {
-        total: 101,
+        total: 10000,
         pageOptions: [
           { label: '10条/页', value: 10 },
           { label: '20条/页', value: 20 },

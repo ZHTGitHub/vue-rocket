@@ -24,6 +24,7 @@
       v-model="num"
       :length="length"
       :circle="circle"
+      :total-visible="totalVisible"
       @input="onInput"
       @next="onNext"
       @previous="onPrevious"
@@ -78,8 +79,13 @@
       },
 
       total: {
-        type: [Number, String],
+        type: Number,
         default: 0
+      },
+
+      totalVisible: {
+        type: Number,
+        default: 10
       }
     },
 
