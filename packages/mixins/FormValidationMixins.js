@@ -3,6 +3,14 @@ import emitter from '../scripts/emitter'
 import tools from '../scripts/tools'
 
 export default {
+	data() {
+		return {
+			handleValidate: null,
+			handleReset: null,
+			handleClear: null
+		}
+	},
+
 	created() {
 		this.validateForm('INVALID_VALUE')
 
@@ -11,6 +19,12 @@ export default {
 		this.reset()
 
 		this.clear()
+	},
+
+	beforeDestroy() {
+		emitter.off('ZHT_VALIDATE_FORM', this.handleValidate)
+		emitter.off('ZHT_RESET_FORM', this.handleReset)
+		emitter.off('ZHT_CLEAR_FORM', this.handleClear)
 	},
 
 	methods: {
@@ -138,7 +152,7 @@ export default {
 
 		// Verify current form
 		verify() {
-			emitter.on('ZHT_VALIDATE_FORM', (formId) => {
+			emitter.on('ZHT_VALIDATE_FORM', this.handleValidate = (formId) => {
 				if(this.formId === formId) {
 					++$validator.sum
 	
@@ -160,14 +174,12 @@ export default {
 					
 					// console.log(form)
 				}
-	
-				emitter.off('ZHT_VALIDATE_FORM')
 			})
 		},
 
 		// Reset current form.
 		reset() {
-			emitter.on('ZHT_RESET_FORM', (formId) => {
+			emitter.on('ZHT_RESET_FORM', this.handleReset = (formId) => {
 				if(this.formId === formId) {
 
 					// console.log(this.formKey, this.value)
@@ -190,13 +202,12 @@ export default {
 						$validator.sum = 0
 					}
 				}
-				emitter.off('ZHT_RESET_FORM')
 			})
 		},
 
 		// Clean current form.
 		clear() {
-			emitter.on('ZHT_CLEAR_FORM', (formId) => {
+			emitter.on('ZHT_CLEAR_FORM', this.handleClear = (formId) => {
 				if(this.formId === formId) {
 					this.$store.commit('CLEAN_FORM', {
 						formId: this.formId
@@ -211,7 +222,6 @@ export default {
 						$validator.sum = 0
 					}
 				}
-				emitter.off('ZHT_CLEAR_FORM')
 			})
 		},
 

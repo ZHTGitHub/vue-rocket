@@ -3,6 +3,7 @@ const fields = [
     inputType: 'text',
     formKey: 'name',
     label: '姓名',
+    prependOuter: '*',
     validation: [
       { rule: 'required', message: '姓名为必填项.' },
       { rule: 'min:4', message: '字段长度不得小于4.' }
@@ -24,6 +25,7 @@ const fields = [
     inputType: 'select',
     formKey: 'area',
     label: '居住城市',
+    prependOuter: '*',
     options: [
       { label: '广州', value: 1 },
       { label: '深圳', value: 2 },
@@ -39,6 +41,7 @@ const fields = [
     inputType: 'date',
     formKey: 'date',
     label: '生日',
+    prependOuter: '*',
     validation: [
       { rule: 'required', message: '生日为必选项.' }
     ],
@@ -79,15 +82,14 @@ const fields = [
   {
     inputType: 'btnToggle',
     formKey: 'sexual',
-    label: '性取向',
+    label: '视力',
     options: [
-      { label: '异性恋', value: 1, icon: 'mdi-heart-outline' },
-      { label: '同性恋', value: 2, icon: 'mdi-heart-multiple-outline ' },
-      { label: '双性恋', value: 3, icon: 'mdi-heart-half-full' },
-      { label: '无性', value: 4, }
+      { label: '正常', value: 1 },
+      { label: '近视', value: 2 },
+      { label: '远视', value: 3 }
     ],
     validation: [
-      { rule: 'required', message: '性取向为必选项.' }
+      { rule: 'required', message: '视力为必选项.' }
     ],
     defaultValue: 1
   },

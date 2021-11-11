@@ -1,34 +1,53 @@
 <template>
-  <div 
-    v-if="items.length"
-    class="z-btn-toggle z-input" 
-    :style="{ width: breadth }"
-  >
-    <div class="btn-groups">
-      <v-btn-toggle 
-        v-model="values"
-        :borderless="borderless"
-        :dense="dense"
-        :color="color"
-        :multiple="multiple"
-        :mandatory="mandatory"
-        :rounded="rounded"
-        :tile="tile"
-        @change="onChange"
-      >
-        <v-btn
-          v-for="item in items"
-          :key="item.label"
-          :value="item.value"
-          :class="flip ? 'text-rtl' : ''"
-          @click="onClick"
+  <div v-if="items.length" class="z-btn-toggle z-input" :style="{ width: breadth }">
+    <div class="z-flex">
+      <div class="z-btn-toggle-prepend">
+        <slot name="prepend"></slot>
+      </div>
+
+      <div class="z-input--btn-toggle-group">
+
+        <div 
+          class="z-flex flex-wrap flex-row z-input__slot" 
+          :class="[column ? 'flex-column' : '', row ? 'flex-row' : '']"
         >
-          <v-icon>{{ item.icon }}</v-icon>
-          <span>{{ item.label }}</span>
-        </v-btn>
-      </v-btn-toggle>
+          <legend 
+            v-if="label" 
+            class="v-label theme--light"
+            :class="[incorrect ? 'error--text' : '']"
+          >
+            {{ label }}
+          </legend>
+
+          <div class="btn-groups">
+            <v-btn-toggle 
+              v-model="values"
+              :borderless="borderless"
+              :dense="dense"
+              :color="color"
+              :multiple="multiple"
+              :mandatory="mandatory"
+              :rounded="rounded"
+              :tile="tile"
+              @change="onChange"
+            >
+              <v-btn
+                v-for="item in items"
+                :key="item.label"
+                :value="item.value"
+                :class="flip ? 'text-rtl' : ''"
+                @click="onClick"
+              >
+                <v-icon>{{ item.icon }}</v-icon>
+                <span>{{ item.label }}</span>
+              </v-btn>
+            </v-btn-toggle>
+          </div>
+        </div>
+
+        <div v-show="errorMessage" class="error--text z-messages">{{ errorMessage }}</div>
+      </div>
     </div>
-    <div v-show="errorMessage" class="error--text z-messages">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -42,6 +61,11 @@
 
     props: {
       borderless: {
+        type: Boolean,
+        default: false
+      },
+
+      column: {
         type: Boolean,
         default: false
       },
@@ -82,6 +106,11 @@
       },
 
       rounded: {
+        type: Boolean,
+        default: false
+      },
+
+      row: {
         type: Boolean,
         default: false
       },
@@ -141,10 +170,36 @@
 
 <style scoped lang="scss">
   .z-btn-toggle {
-    .btn-groups {
+    .z-btn-toggle-prepend {
+      padding: 22px 4px 4px 0;
+      margin-top: 16px;
       height: auto;
-      padding-top: 12px;
-      margin-bottom: 8px;
+      font-size: 14px;
+      cursor: text;
     }
+
+    .z-input--btn-toggle-group {
+      padding-top: 4px;
+      margin-top: 16px;
+
+      .z-input__slot {
+        margin-bottom: 4px;
+
+        legend.v-label {
+          padding: 22px 10px 8px 0;
+          height: auto;
+          font-size: 14px;
+          cursor: text;
+        }
+
+        .btn-groups {
+          height: auto;
+          padding-top: 12px;
+          margin-bottom: 8px;
+        }
+      }
+    }
+
+    
   }
 </style>

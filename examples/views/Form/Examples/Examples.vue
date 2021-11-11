@@ -2,6 +2,47 @@
   <div class="form-examples">
     <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
 
+    <div class="filters">
+      <v-row>
+        <z-btn
+          :formId="searchFormId"
+          class="mb-2"
+          color="primary"
+          outlined
+          small
+          :lockedTime="0"
+          @click="onToggle"
+        >
+          TOGGLE
+        </z-btn>
+      </v-row>
+
+      <v-row class="z-flex align-center" v-if="show">
+        <v-col cols="2">
+          <z-text-field
+            :formId="searchFormId"
+            formKey="name"
+            label="姓名"
+            :validation="[
+              { rule: 'required', message: '姓名为必填项.' }
+            ]"
+          >
+          </z-text-field>
+        </v-col>
+
+        <z-btn
+          :formId="searchFormId"
+          btnType="validate"
+          class="mb-2"
+          color="primary"
+          lockedTime="0"
+          @click="onSearch"
+        >
+          搜索
+        </z-btn>
+      </v-row>
+    </div>
+
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8" lg="6">
         <v-card>
@@ -19,7 +60,9 @@
                   :label="item.label"
                   :validation="item.validation"
                   :defaultValue="item.defaultValue"
-                ></z-text-field>
+                >
+                  <span class="error--text" slot="prepend-outer">{{ item.prependOuter }}</span>
+                </z-text-field>
               </div>
 
               <div
@@ -35,7 +78,9 @@
                   :validation="item.validation"
                   :options="item.options"
                   :defaultValue="item.defaultValue"
-                ></z-select>
+                >
+                  <span class="error--text" slot="prepend-outer">{{ item.prependOuter }}</span>
+                </z-select>
               </div>
                 
               <div
@@ -49,7 +94,9 @@
                   :label="item.label"
                   :validation="item.validation"
                   :defaultValue="item.defaultValue"
-                ></z-date-picker>
+                >
+                  <span class="error--text" slot="prepend-outer">{{ item.prependOuter }}</span>
+                </z-date-picker>
               </div>
 
               <div
@@ -63,7 +110,6 @@
                   :label="item.label"
                   :validation="item.validation"
                   :options="item.options"
-                  column
                   :defaultValue="item.defaultValue"
                 >
                   <span class="error--text" slot="prepend">*</span>
@@ -82,7 +128,6 @@
                   :label="item.label"
                   :validation="item.validation"
                   :options="item.options"
-                  column
                   :defaultValue="item.defaultValue"
                 >
                   <span class="error--text" slot="prepend">*</span>
@@ -104,7 +149,6 @@
                 ></z-textarea>
               </div>
 
-
               <div
                 class="field"
                 v-if="item.inputType === 'btnToggle'"
@@ -120,7 +164,9 @@
                   :validation="item.validation"
                   :options="item.options"
                   :defaultValue="[1]"
-                ></z-btn-toggle>
+                >
+                  <span class="error--text" slot="prepend">*</span>
+                </z-btn-toggle>
               </div>
 
               <div
@@ -183,12 +229,22 @@
 
     data() {
       return {
-        formId: 'examples',
-        cells
+        formId: 'Examples',
+        searchFormId: 'ExamplesSearch',
+        cells,
+        show: false
       }
     },
 
     methods: {
+      onSearch() {
+        console.log(this.forms[this.searchFormId])
+      },
+
+      onToggle() {
+        this.show = !this.show
+      },
+
       onSubmit() {
         console.log(this.forms[this.formId])
       },

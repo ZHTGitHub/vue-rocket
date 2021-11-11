@@ -51,7 +51,7 @@ const router = [
           key: 'examples',
           nodeKey: 'form',
           realm: 'examples',
-          title: 'Examples 使用示例',
+          title: '表单使用示例',
         },
         component: () => import('../views/Form/Examples')
       },

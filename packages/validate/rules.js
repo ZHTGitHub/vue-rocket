@@ -118,7 +118,6 @@ const rules = {
    * @param {String} rule
    */ 
   min: (value, rule) => {
-    console.log(value)
 		value = '' + value
     rule = +rule
 		return value.length >= rule

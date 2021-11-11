@@ -6,6 +6,7 @@
       </div>
 
       <div class="z-input--checkboxs-group">
+        
         <div 
           class="z-flex flex-wrap flex-row z-input__slot" 
           :class="[column ? 'flex-column' : '', row ? 'flex-row' : '']"
@@ -18,24 +19,25 @@
             {{ label }}
           </legend>
 
-            <div
-              class="z-checkbox"
-              v-for="(item, index) of items" 
-              :key="`z_checkbox_${ index }`"
-            >
-              <v-checkbox
-                v-model="values"
-                :error="incorrect"
-                :hide-details="true"
-                :label="item.label"
-                :success="success"
-                :value="item.value"
-                class="mt-0 mr-4"
-                @change="onChange"
-                @click="onClick"
-              ></v-checkbox>
-            </div>
+          <div
+            class="z-checkbox"
+            v-for="(item, index) of items" 
+            :key="`z_checkbox_${ index }`"
+          >
+            <v-checkbox
+              v-model="values"
+              :error="incorrect"
+              :hide-details="true"
+              :label="item.label"
+              :success="success"
+              :value="item.value"
+              class="mt-0 mr-4"
+              @change="onChange"
+              @click="onClick"
+            ></v-checkbox>
+          </div>
         </div>
+
         <div class="error--text z-messages" >{{ errorMessage }}</div>
       </div>
     </div>
@@ -186,8 +188,6 @@
           height: auto;
         }
       }
-
-      
     }
   }
 </style>
