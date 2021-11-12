@@ -1,5 +1,5 @@
 import $validator from '../validate/z-validate'
-import emitter from '../scripts/emitter'
+import rocket from '../scripts/rocket'
 import tools from '../scripts/tools'
 
 export default {
@@ -22,9 +22,9 @@ export default {
 	},
 
 	beforeDestroy() {
-		emitter.off('ZHT_VALIDATE_FORM', this.handleValidate)
-		emitter.off('ZHT_RESET_FORM', this.handleReset)
-		emitter.off('ZHT_CLEAR_FORM', this.handleClear)
+		rocket.off('ZHT_VALIDATE_FORM', this.handleValidate)
+		rocket.off('ZHT_RESET_FORM', this.handleReset)
+		rocket.off('ZHT_CLEAR_FORM', this.handleClear)
 	},
 
 	methods: {
@@ -152,7 +152,7 @@ export default {
 
 		// Verify current form
 		verify() {
-			emitter.on('ZHT_VALIDATE_FORM', this.handleValidate = (formId) => {
+			rocket.on('ZHT_VALIDATE_FORM', this.handleValidate = (formId) => {
 				if(this.formId === formId) {
 					++$validator.sum
 	
@@ -167,7 +167,7 @@ export default {
 	
 					if($validator.sum === total) {
 						if(!results.includes('INVALID_VALUE')) {
-							emitter.emit('ZHT_FORM_VALID', formId)
+							rocket.emit('ZHT_FORM_VALID', formId)
 						}
 						$validator.sum = 0
 					}
@@ -179,7 +179,7 @@ export default {
 
 		// Reset current form.
 		reset() {
-			emitter.on('ZHT_RESET_FORM', this.handleReset = (formId) => {
+			rocket.on('ZHT_RESET_FORM', this.handleReset = (formId) => {
 				if(this.formId === formId) {
 
 					// console.log(this.formKey, this.value)
@@ -198,7 +198,7 @@ export default {
 					++$validator.sum
 					const { total } = $validator.forms[this.formId]
 					if($validator.sum === total) {
-						emitter.emit('ZHT_FORM_RESET', formId)
+						rocket.emit('ZHT_FORM_RESET', formId)
 						$validator.sum = 0
 					}
 				}
@@ -207,7 +207,7 @@ export default {
 
 		// Clean current form.
 		clear() {
-			emitter.on('ZHT_CLEAR_FORM', this.handleClear = (formId) => {
+			rocket.on('ZHT_CLEAR_FORM', this.handleClear = (formId) => {
 				if(this.formId === formId) {
 					this.$store.commit('CLEAN_FORM', {
 						formId: this.formId
@@ -218,7 +218,7 @@ export default {
 					++$validator.sum
 					const { total } = $validator.forms[this.formId]
 					if($validator.sum === total) {
-						emitter.emit('ZHT_FORM_CLEARED', formId)
+						rocket.emit('ZHT_FORM_CLEARED', formId)
 						$validator.sum = 0
 					}
 				}

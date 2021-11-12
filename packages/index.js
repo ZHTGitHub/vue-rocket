@@ -15,7 +15,7 @@ import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZUpload from './ZUpload'
 
-import emitter from './scripts/emitter'
+import rocket from './scripts/rocket'
 import forms from './scripts/forms'
 import tools from './scripts/tools'
 import './styles/styles.css'
@@ -48,8 +48,8 @@ if(typeof window !== 'undefined' && window.Vue) {
 	install(window.Vue)
 }
 
-export { 
-	emitter,
+export {
+	rocket,
 	forms,
 	tools
 }

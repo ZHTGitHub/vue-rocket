@@ -32,7 +32,7 @@
 
 <script>
 	import BtnMixins from '../mixins/BtnMixins'
-	import emitter from '../scripts/emitter'
+	import rocket from '../scripts/rocket'
 
 	const actions = new Map([
 		['clear', 'ZHT_CLEAR_FORM'],
@@ -70,7 +70,7 @@
 
 		created() {
 			// 当前表单合法
-			emitter.on('ZHT_FORM_VALID', this.handleValid = (formId) => {
+			rocket.on('ZHT_FORM_VALID', this.handleValid = (formId) => {
 				if(this.btnType === 'validate') {
 					if(this.formId === formId) {
 						this.$emit('click', this.event)
@@ -79,7 +79,7 @@
 			})
 
 			// 当前表单已重置
-			emitter.on('ZHT_FORM_RESET', this.handleReset = (formId) => {
+			rocket.on('ZHT_FORM_RESET', this.handleReset = (formId) => {
 				if(this.btnType === 'reset') {
 					if(this.formId === formId) {
 						this.$emit('click', this.event)
@@ -88,7 +88,7 @@
 			})
 
 			// 当前表单已清空
-			emitter.on('ZHT_FORM_CLEARED', this.handleClear = (formId) => {
+			rocket.on('ZHT_FORM_CLEARED', this.handleClear = (formId) => {
 				if(this.btnType === 'clear') {
 					if(this.formId === formId) {
 						this.$emit('click', this.event)
@@ -98,9 +98,9 @@
 		},
 
 		beforeDestroy() {
-			emitter.off('ZHT_FORM_VALID', this.handleValid)
-			emitter.off('ZHT_FORM_RESET', this.handleReset)
-			emitter.off('ZHT_FORM_CLEARED', this.handleClear)
+			rocket.off('ZHT_FORM_VALID', this.handleValid)
+			rocket.off('ZHT_FORM_RESET', this.handleReset)
+			rocket.off('ZHT_FORM_CLEARED', this.handleClear)
 		},
 
 		methods: {
@@ -113,7 +113,7 @@
 						return
 					}
 
-					emitter.emit(action, this.formId)
+					rocket.emit(action, this.formId)
 				}
 			}
 		}

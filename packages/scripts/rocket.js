@@ -19,6 +19,7 @@ class Event {
   off(eventName, fn) {
     if (this.events[eventName]) {
       const lastIndex = this.events[eventName].length - 1
+      
       for (let i = lastIndex; i >= 0; i--) {
         if (this.events[eventName][i] === fn) {
           this.events[eventName].splice(i, 1)
