@@ -108,15 +108,6 @@
       }
     },
 
-    created() {
-      for(let item of this.options) {
-        this.items.push({
-          text: item.label,
-          value: item.value
-        })
-      }
-    },
-
     methods: {
       onBlur(event) {
         this.$emit('blur', event, this.value)
@@ -136,6 +127,21 @@
 
       onInput() {
         this.verifyField()
+      }
+    },
+
+    watch: {
+      options: {
+        handler() {
+          this.items = []
+          for(let item of this.options) {
+            this.items.push({
+              text: item.label,
+              value: item.value
+            })
+          }
+        },
+        immediate: true
       }
     }
   }
