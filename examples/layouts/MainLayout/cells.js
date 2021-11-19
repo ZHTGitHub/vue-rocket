@@ -123,6 +123,15 @@ export const menus = [
 
       {
         pId: 'components',
+        key: 'fileInput',
+        icon: '',
+        realm: 'fileInput',
+        title: 'File Input 文件上传',
+        link: '/components/fileInput'
+      },
+
+      {
+        pId: 'components',
         key: 'input',
         icon: '',
         realm: 'input',

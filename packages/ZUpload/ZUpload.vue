@@ -121,6 +121,8 @@
       readFile(event) {
         this.targetFile = event.target.files[0]
 
+        console.log(this.targetFile)
+
         const fileReader = new FileReader()
 
         fileReader.readAsDataURL(this.targetFile)

@@ -169,6 +169,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'fileInput',
+      name: 'ZDemoFileInput',
+      meta: {
+        key: 'fileInput',
+        nodeKey: 'components',
+        realm: 'fileInput',
+        title: 'FileInput 文件上传',
+      },
+      component: () => import('../../views/Components/FileInput')
+    },
+
+    {
       path: 'input',
       name: 'ZDemoInput',
       meta: {

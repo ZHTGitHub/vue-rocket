@@ -239,7 +239,7 @@ export default {
 			this.validateForm('INVALID_VALUE')
 		},
 
-		// ???
+		// Memory
 		validateForm(status) {
 			$validator.validateByKey({
 				formId: this.formId,
