@@ -81,7 +81,11 @@
 
           <a class="link" target="__blank" :href="item.url">{{ item.name }}</a>
 
-          <span class="icon del-icon" @click="onDel($event, item)">
+          <span 
+            v-if="deleteIcon"
+            class="icon del-icon" 
+            @click="onDel($event, item)"
+          >
             <v-icon size="18">mdi-trash-can-outline</v-icon>
           </span>
         </div>
@@ -123,12 +127,22 @@
 
       multiple: {
         type: Boolean,
-        default: true
+        default: false
       },
 
       name: {
         type: String,
         default: 'file'
+      },
+
+      parcel: {
+        type: Boolean,
+        default: false
+      },
+
+      deleteIcon: {
+        type: Boolean,
+        default: true
       },
       
       truncateLength: {
@@ -139,7 +153,8 @@
 
     data() {
       return {
-        imageList: []
+        imageList: [],
+        formData: null
       }
     },
 
@@ -150,16 +165,38 @@
       },
 
       onChange(file) {
-        if(Array.isArray(file)) {
-          for(let item of file) {
-            this._submitFile(item)
-          }
-        }
-        else {
-          this._submitFile(file)
-        }
-
         this.$emit('change', file)
+        
+        this.formData = new FormData()
+
+        // 多选
+        if(this.multiple) {
+          // 所有文件一起上传
+          if(this.parcel) {
+            // this.formData = new FormData()
+
+            for(let item of file) {
+              this.formData.append(this.name, item)
+            }
+            this._submitFile()
+          }
+          // 单个文件单个文件上传
+          else {
+            // this.formData = new FormData()
+
+            for(let item of file) {
+              this.formData.append(this.name, item)
+              this._submitFile()
+            }
+          }
+          
+        }
+        // 单选
+        else {
+          // this.formData = new FormData()
+          this.formData.append(this.name, file)
+          this._submitFile()
+        }
       },
 
       onClick(event) {
@@ -218,45 +255,67 @@
 
       /**
        * @description 文件上传
-       * @param {object} file
+       * @param {object | array} file
        */ 
-      _submitFile(file) {
-        const reader = new FileReader()
-
-        reader.readAsDataURL(file)
-
-        reader.addEventListener('load', (event) => {
-          const { error, result } = event.target
-
-          if(error == null) {
-            const formData = new FormData()
-            formData.append(this.name, file)
-
-            if(this.effectData) {
-              for(let key in this.effectData) {
-                formData.append(key, this.effectData[key])
-              }
-            }
-
-            fetch(this.action, {
-              method: this.method,
-              body: formData
-            })
-            .then((response) => {
-              return response.json()
-            })
-            .then((response) => {
-              this.$emit('response', response)
-            })
-            .catch((error) => {
-              this.$emit('response', error)
-            })
+      _submitFile() {
+        if(this.effectData) {
+          for(let key in this.effectData) {
+            this.formData.append(key, this.effectData[key])
           }
+        }
 
-          // console.log(event)
-          // console.log(error)
-          console.log(file)
+        fetch(this.action, {
+          method: this.method,
+          body: this.formData
         })
+        .then((response) => {
+          return response.json()
+        })
+        .then((response) => {
+          this.$emit('response', response)
+        })
+        .catch((error) => {
+          this.$emit('response', error)
+        })
+
+        // const reader = new FileReader()
+
+        // reader.readAsDataURL(file)
+
+        // console.log(file)
+
+        // reader.addEventListener('load', (event) => {
+        //   const { error, result } = event.target
+
+        //   if(error == null) {
+        //     const formData = new FormData()
+        //     formData.append(this.name, file)
+
+        //     if(this.effectData) {
+        //       for(let key in this.effectData) {
+        //         formData.append(key, this.effectData[key])
+        //       }
+        //     }
+
+        //     fetch(this.action, {
+        //       method: this.method,
+        //       body: formData
+        //     })
+        //     .then((response) => {
+        //       return response.json()
+        //     })
+        //     .then((response) => {
+        //       this.$emit('response', response)
+        //     })
+        //     .catch((error) => {
+        //       this.$emit('response', error)
+        //     })
+        //   }
+
+        //   // console.log(event)
+        //   // console.log(error)
+        //   console.log(file)
+        // })
       }
     }
   }

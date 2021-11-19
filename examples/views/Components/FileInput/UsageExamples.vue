@@ -21,8 +21,11 @@
         <z-file-input
           formId="files"
           formKey="file"
-          action="http://113.106.108.93:13000/api/projectCostManagement/putConstTableByExcel"
-          :effectData="{ proId: 'B0108' }"
+          action="http://113.106.108.93:13000/api/pro-config/sys-template/update-images"
+          :effectData="{ 
+            sysProTempId: '900709761157169152',
+            proCode: 2
+          }"
           :fileList="[
             {
               url: '',
@@ -33,8 +36,11 @@
               name: 'demo1.png'
             },
           ]"
-          name="excelFile"
+          name="tempImages"
           label="File input"
+          parcel
+          :multiple="false"
+          :deleteIcon="false"
           @response="onResponse"
           @delete="onRemove"
         >
