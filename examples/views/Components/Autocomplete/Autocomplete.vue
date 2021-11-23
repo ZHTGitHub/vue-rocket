@@ -26,5 +26,25 @@
 </script>
 
 <style scoped>
-  
+  h4 {
+    border-right: 3px solid #333;
+    width: 300px;
+    /* width: 26ch; */
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(25, end), 
+    cursor-blink .5s step-end infinite alternate;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+
+  @keyframes cursor-blink {
+    50% {
+      border-color: transparent;
+    }
+  }
 </style>
