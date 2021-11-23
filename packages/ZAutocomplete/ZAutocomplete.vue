@@ -66,6 +66,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
+  import { isArray, isYummy } from '../scripts/tools'
 
   export default {
     name: 'ZAutocomplete',
