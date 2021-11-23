@@ -98,7 +98,7 @@
 
       options: {
         type: Array,
-        required: true
+        required: false
       }
     },
 
