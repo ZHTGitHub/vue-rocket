@@ -127,19 +127,26 @@
 
       onInput() {
         this.verifyField()
-      }
-    },
+      },
 
-    watch: {
-      options: {
-        handler() {
-          this.items = []
+      setOptions() {
+        this.items = []
+
+        if(isArray(this.options) && isYummy(this.options)) {
           for(let item of this.options) {
             this.items.push({
               text: item.label,
               value: item.value
             })
           }
+        }
+      }
+    },
+
+    watch: {
+      options: {
+        handler() {
+          this.setOptions()
         },
         immediate: true
       }
