@@ -66,6 +66,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
+  import { isArray, isYummy } from '../scripts/tools'
 
   export default {
     name: 'ZSelect',
@@ -73,7 +74,7 @@
     props: {
       options: {
         type: Array,
-        required: true
+        required: false
       }
     },
 
@@ -135,13 +136,16 @@
 
     watch: {
       options: {
-        handler() {
+        handler(options) {
           this.items = []
-          for(let item of this.options) {
-            this.items.push({
-              text: item.label,
-              value: item.value
-            })
+
+          if(isArray(options) && isYummy(options)) {
+            for(let item of options) {
+              this.items.push({
+                text: item.label,
+                value: item.value
+              })
+            }
           }
         },
         immediate: true
