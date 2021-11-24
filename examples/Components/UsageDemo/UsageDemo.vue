@@ -15,7 +15,10 @@
           </div>
 
           <div class="px-2 z-code" :style="{ height: expanded ? 'auto' : 0 }">
-            <slot name="code"></slot>
+            <pre class="language-markup pre">
+              <code class="language-markup code">{{ code }}</code>
+            </pre>
+            <!-- <slot name="code"></slot> -->
           </div>
         </div>
       </v-sheet>
@@ -26,8 +29,20 @@
 </template>
 
 <script>
+  import Prism from 'prismjs'
+  import 'prismjs/themes/prism.css'
+  // import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+  // import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+
   export default {
     name: 'UsageDemo',
+    props: {
+      code: {
+        type: String,
+        default: ''
+      }
+    },
+
     data() {
       return {
         sheetHeight: 52,
@@ -35,18 +50,36 @@
       }
     },
 
+    mounted() {
+      Prism.highlightAll()
+    },
+
     methods: {
       onToggle() {
         this.expanded = !this.expanded
         this.sheetHeight = this.expanded ? 'auto' : 52
+
+        console.log(this.$slots.demo)
       }
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss">
   .z-example {
     border: thin solid rgba(0,0,0,.12);
+
+    pre.pre {
+      padding: 1em !important;
+    }
+
+    code.code {
+
+    }
+
+    .line-numbers-rows {
+      left: -6.8em;
+    }
   }
 
   .z-lazy {

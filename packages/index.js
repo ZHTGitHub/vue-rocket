@@ -18,7 +18,7 @@ import ZUpload from './ZUpload'
 
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
-import tools from './scripts/tools'
+import R from './scripts/tools'
 import './styles/styles.css'
 
 const components = [
@@ -53,7 +53,7 @@ if(typeof window !== 'undefined' && window.Vue) {
 export {
 	rocket,
 	forms,
-	tools
+	R
 }
 
 export default {

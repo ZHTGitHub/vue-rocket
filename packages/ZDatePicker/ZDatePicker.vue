@@ -172,11 +172,11 @@
         }
       },
 
-      formatDate() {
-        if (!this.date) return null
-        const [year, month, day] = this.date.split('-')
-        this.value = `${month}/${day}/${year}`
-      },
+      // formatDate() {
+      //   if (!this.date) return null
+      //   const [year, month, day] = this.date.split('-')
+      //   this.value = `${month}/${day}/${year}`
+      // },
 
       onConfirm() {
         this.value = this.date
