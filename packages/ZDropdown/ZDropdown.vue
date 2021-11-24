@@ -144,8 +144,8 @@
     },
 
     methods: {
-      onClick(event, item) {
-        event.customValue = item
+      onClick(event, { value }) {
+        event.customValue = value
         this.$emit('click', event)
       },
 
