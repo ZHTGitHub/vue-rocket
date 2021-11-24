@@ -1,6 +1,6 @@
 <template>
   <div class="demo-elevation">
-    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
+    <typing-title :title="$route.meta.title"></typing-title>
 
     <div class="z-flex flex-wrap justify-center pa-3 ma-auto elevations">
       <div

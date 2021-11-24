@@ -1,6 +1,6 @@
 <template>
   <div class="z-demo-autocomplete">
-    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
+    <typing-title :title="$route.meta.title"></typing-title>
 
     <usage-examples></usage-examples>
 
@@ -25,15 +25,13 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   h4 {
+    width: 16ch;
     border-right: 3px solid #333;
-    width: 300px;
-    /* width: 26ch; */
     white-space: nowrap;
     overflow: hidden;
-    animation: typing 3s steps(25, end), 
-    cursor-blink .5s step-end infinite alternate;
+    animation: typing 3s steps(25, end), cursor-blink .5s step-end infinite alternate;
   }
 
   @keyframes typing {

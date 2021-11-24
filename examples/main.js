@@ -12,7 +12,7 @@ import vueRocket from '../packages'
 import '../packages/styles/styles.css'
 Vue.use(vueRocket)
 
-import DemoComponents from './Components'
+import DemoComponents from './components'
 Vue.use(DemoComponents)
 
 import store from './store'

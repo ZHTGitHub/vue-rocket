@@ -1,6 +1,6 @@
 <template>
   <div class="z-demo-file-input">
-    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
+    <typing-title :title="$route.meta.title"></typing-title>
 
     <usage-examples></usage-examples>
 

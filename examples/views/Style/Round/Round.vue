@@ -1,6 +1,6 @@
 <template>
   <div class="demo-round">
-    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
+    <typing-title :title="$route.meta.title"></typing-title>
     
     <div class="z-flex flex-wrap">
       <template v-for="(items, index) in round">

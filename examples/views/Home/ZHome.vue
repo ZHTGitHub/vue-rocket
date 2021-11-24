@@ -1,7 +1,7 @@
 <template>
   <div class="z-home">
     <main-layout>
-      <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
+    <typing-title :title="$route.meta.title"></typing-title>
       
       <h6 class="text-h5">介绍</h6>
       <p class="mb-12 intro"><a target="_blank" href="/">Vue Rocket</a> 是一个后台前端解决方案，它基于 <a target="_blank" href="https://cn.vuejs.org/index.html">vue</a> 和 <a target="_blank" href="https://vuetifyjs.com/">vuetify</a> 实现。它使用了最新的前端技术栈，对表单进行全局统一处理，提供了丰富的全局样式，它可以帮助你快速搭建企业级中后台产品原型。</p>

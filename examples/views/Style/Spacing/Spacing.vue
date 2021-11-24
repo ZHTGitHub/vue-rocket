@@ -1,6 +1,6 @@
 <template>
   <div class="demo-padding">
-    <h4 class="mb-8 text-h4">{{ $route.meta.title }}</h4>
+    <typing-title :title="$route.meta.title"></typing-title>
 
     <v-row>
       <v-col class="z-flex" :cols="12" :sm="6">
