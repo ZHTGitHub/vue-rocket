@@ -529,28 +529,29 @@
 
     data() {
       return {
-        dialog: false
+        dialog: false,
+        effect: {}
       }
     },
 
     methods: {
       onCancel() {
         const form = { ...this.forms[this.formId] }
-        this.$emit('cancel', form)
+        this.$emit('cancel', this.effect, form)
         this.close()
       },
 
       onConfirm() {
         const form = { ...this.forms[this.formId] }
-        this.$emit('confirm', form)
-        this.close()
+        this.$emit('confirm', this.effect, form)
       },
       
       close() {
         this.dialog = false
       },
 
-      open() {
+      open(effect) {
+        this.effect = { ...effect }
         this.dialog = true
       },
 

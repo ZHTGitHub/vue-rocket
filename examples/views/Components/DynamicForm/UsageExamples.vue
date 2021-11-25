@@ -38,14 +38,16 @@
 
     methods: {
       onOpen() {
-        this.$refs.dynamic.open()
+        this.$refs.dynamic.open({ status: -1 })
       },
 
-      handleCancel(form) {
+      handleCancel(effect, form) {
+        console.log(effect)
         console.log(form)
       },
 
-      handleConfirm(form) {
+      handleConfirm(effect, form) {
+        console.log(effect)
         console.log(form)
       }
     }
