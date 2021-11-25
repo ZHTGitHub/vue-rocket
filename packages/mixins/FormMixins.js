@@ -22,6 +22,13 @@ export default {
 			required: false
 		},
 
+		autocomplete: {
+			validator(value) {
+				return ~['on', 'off'].indexOf(value)
+			},
+			default: 'off'
+		},
+
 		autofocus: {
 			type: Boolean,
 			default: false

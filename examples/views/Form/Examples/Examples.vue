@@ -2,45 +2,18 @@
   <div class="form-examples">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="filters">
-      <v-row>
-        <z-btn
-          :formId="searchFormId"
-          class="mb-2"
-          color="primary"
-          outlined
-          small
-          :lockedTime="0"
-          @click="onToggle"
-        >
-          TOGGLE
-        </z-btn>
-      </v-row>
-
-      <v-row class="z-flex align-center" v-if="show">
-        <v-col cols="2">
-          <z-text-field
-            :formId="searchFormId"
-            formKey="name"
-            label="姓名"
-            :validation="[
-              { rule: 'required', message: '姓名为必填项.' }
-            ]"
-          >
-          </z-text-field>
-        </v-col>
-
-        <z-btn
-          :formId="searchFormId"
-          btnType="validate"
-          class="mb-2"
-          color="primary"
-          lockedTime="0"
-          @click="onSearch"
-        >
-          搜索
-        </z-btn>
-      </v-row>
+    <div class="z-flex justify-end filters">
+      <z-btn
+        :formId="searchFormId"
+        class="mb-2"
+        color="primary"
+        outlined
+        small
+        :lockedTime="0"
+        @click="onOpen"
+      >
+        open
+      </z-btn>
     </div>
 
     <v-row justify="center">
@@ -217,6 +190,15 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <z-dynamic-form 
+      ref="dynamic" 
+      title="动态表单"
+      :fieldList="cells.fields"
+      :detail="{ sexual: 1 }"
+      @cancel="handleCancel"
+      @confirm="handleConfirm"
+    ></z-dynamic-form>
   </div>
 </template>
 
@@ -231,8 +213,7 @@
       return {
         formId: 'Examples',
         searchFormId: 'ExamplesSearch',
-        cells,
-        show: false
+        cells
       }
     },
 
@@ -241,8 +222,8 @@
         console.log(this.forms[this.searchFormId])
       },
 
-      onToggle() {
-        this.show = !this.show
+      onOpen() {
+        this.$refs.dynamic.open()
       },
 
       onSubmit() {
@@ -255,6 +236,14 @@
 
       onClear() {
         console.log(this.forms[this.formId])
+      },
+
+      handleCancel(form) {
+        console.log(form)
+      },
+
+      handleConfirm(form) {
+        console.log(form)
       }
     },
 

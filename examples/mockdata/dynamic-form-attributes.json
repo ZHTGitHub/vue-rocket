@@ -1,0 +1,86 @@
+{
+  "status": true,
+  "total": 9,
+  "data": [
+    {
+      "name": "detail",
+      "required": "否",
+      "type": "Object",
+      "acceptedValues": "—",
+      "default": "{}",
+      "description": "表单的默认值"
+    },
+
+    {
+      "name": "fieldList",
+      "required": "是",
+      "type": "Object[]",
+      "acceptedValues": "—",
+      "default": "-",
+      "description": "表单结构体"
+    },
+
+    {
+      "name": "formId",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "表单ID"
+    },
+
+    {
+      "name": "fullscreen",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "改变全屏显示的布局"
+    },
+
+    {
+      "name": "title",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "-",
+      "description": "标题"
+    },
+
+    {
+      "name": "max-width",
+      "required": "否",
+      "type": "Number|String",
+      "acceptedValues": "—",
+      "default": 1200,
+      "description": "设定组件的最大宽度"
+    },
+
+    {
+      "name": "min-width",
+      "required": "否",
+      "type": "Number|String",
+      "acceptedValues": "—",
+      "default": 300,
+      "description": "设定组件的最小宽度"
+    },
+
+    {
+      "name": "transition",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "dialog-top-transition",
+      "description": "设置组件转换"
+    },
+
+    {
+      "name": "width",
+      "required": "否",
+      "type": "Number|String",
+      "acceptedValues": "—",
+      "default": 700,
+      "description": "设定组件的宽度"
+    }
+  ]
+}

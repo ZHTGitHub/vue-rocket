@@ -109,6 +109,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'dynamicForm',
+      name: 'ZDemoDynamicForm',
+      meta: {
+        key: 'dynamicForm',
+        nodeKey: 'components',
+        realm: 'dynamicForm',
+        title: 'Dynamic Form 动态表单',
+      },
+      component: () => import('../../views/Components/DynamicForm')
+    },
+
+    {
       path: 'pagination',
       name: 'ZDemoPagination',
       meta: {
@@ -175,7 +187,7 @@ const ComponentRoutes = {
         key: 'fileInput',
         nodeKey: 'components',
         realm: 'fileInput',
-        title: 'FileInput 文件上传',
+        title: 'File Input 文件上传',
       },
       component: () => import('../../views/Components/FileInput')
     },

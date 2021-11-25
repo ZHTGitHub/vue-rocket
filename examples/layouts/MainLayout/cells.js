@@ -123,6 +123,15 @@ export const menus = [
 
       {
         pId: 'components',
+        key: 'dynamicForm',
+        icon: '',
+        realm: 'dynamicForm',
+        title: 'DynamicForm 动态表单',
+        link: '/components/dynamicForm'
+      },
+
+      {
+        pId: 'components',
         key: 'fileInput',
         icon: '',
         realm: 'fileInput',

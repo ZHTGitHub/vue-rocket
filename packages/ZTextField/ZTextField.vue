@@ -4,7 +4,7 @@
       v-model="value"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
-      autocomplete="off"
+      :autocomplete="autocomplete"
       :autofocus="autofocus"
       :clear-icon="clearIcon"
       :clearable="clearable"

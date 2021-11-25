@@ -1,0 +1,23 @@
+{
+  "status": true,
+  "total": 3,
+  "data": [
+    {
+      "name": "cancel",
+      "parameters": "(value: Boolean)",
+      "description": "单击取消按钮时触发"
+    },
+
+    {
+      "name": "confirm",
+      "parameters": "(value: Boolean)",
+      "description": "单击确认按钮时触发"
+    },
+
+    {
+      "name": "dialog",
+      "parameters": "(value: Boolean)",
+      "description": "被绑定模型的更新"
+    }
+  ]
+}

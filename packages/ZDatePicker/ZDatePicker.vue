@@ -37,6 +37,8 @@
           :success="success"
           v-bind="attrs"
           v-on="on"
+          @click:clear="onClickClear"
+          @input="onInput"
         >
           <!-- 输入框内部 文字之后 BEGIN -->
           <template v-slot:append>
@@ -172,15 +174,22 @@
         }
       },
 
-      // formatDate() {
-      //   if (!this.date) return null
-      //   const [year, month, day] = this.date.split('-')
-      //   this.value = `${month}/${day}/${year}`
-      // },
-
       onConfirm() {
         this.value = this.date
         this.menu = false
+      },
+
+      onClickClear(event) {
+        this.date = ''
+        this.value = this.date
+        event.customValue = this.value
+        this.verifyField()
+        this.$emit('click:clear', event)
+      },
+
+      onInput() {
+        console.log(this.value)
+        this.verifyField()
       }
     },
 
@@ -190,6 +199,12 @@
           this.date = value
         },
         immediate: true
+      },
+
+      date: {
+        handler() {
+          this.verifyField()
+        }
       }
     }
   }
