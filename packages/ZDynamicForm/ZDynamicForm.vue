@@ -18,7 +18,7 @@
           :rounded="false"
           :style="{ width: fullscreen ? '100%' : `${ width }px` }"
         >
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-toolbar-title>{{ title || effect.title }}</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
@@ -40,8 +40,8 @@
               <v-col 
                 v-if="item.inputType === 'text'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-text-field
                   :formId="formId"
@@ -98,8 +98,8 @@
               <v-col 
                 v-else-if="item.inputType === 'textarea'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-textarea
                   :formId="formId"
@@ -156,8 +156,8 @@
               <v-col 
                 v-else-if="item.inputType === 'select'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-select 
                   :formId="formId"
@@ -213,8 +213,8 @@
               <v-col 
                 v-else-if="item.inputType === 'autocomplete'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-autocomplete 
                   :formId="formId"
@@ -275,8 +275,8 @@
               <v-col 
                 v-else-if="item.inputType === 'date'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-date-picker
                   :formId="formId"
@@ -333,8 +333,8 @@
               <v-col 
                 v-else-if="item.inputType === 'radios'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-radios
                   :formId="formId"
@@ -362,8 +362,8 @@
               <v-col 
                 v-else-if="item.inputType === 'checkboxs'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-checkboxs
                   :formId="formId"
@@ -386,8 +386,8 @@
               <v-col 
                 v-else-if="item.inputType === 'btnToggle'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-btn-toggle
                   :formId="formId"
@@ -414,8 +414,8 @@
               <v-col 
                 v-else-if="item.inputType === 'switch'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || 'py-0'"
-                :cols="item.cols || 12"
+                :class="item.colsClass || defaultColsClass"
+                :cols="item.cols || defaultCols"
               >
                 <z-switch
                   :formId="formId"
@@ -532,7 +532,9 @@
     data() {
       return {
         dialog: false,
-        effect: {}
+        effect: {},
+        defaultCols: 12,
+        defaultColsClass: 'py-0'
       }
     },
 

@@ -5,7 +5,6 @@ const fields = [
     label: '姓名',
     prependOuter: '*',
     prependOuterClass: 'error--text',
-    colsClass: 'py-0',
     validation: [
       { rule: 'required', message: '姓名为必填项.' },
       { rule: 'min:4', message: '字段长度不得小于4.' }
@@ -16,7 +15,6 @@ const fields = [
     inputType: 'text',
     formKey: 'phone',
     label: '手机',
-    colsClass: 'py-0',
     validation: [
       { regex: /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/, message: '手机格式不正确.' }
     ]
@@ -26,7 +24,6 @@ const fields = [
     inputType: 'select',
     formKey: 'area',
     label: '居住城市',
-    colsClass: 'py-0',
     prependOuter: '*',
     prependOuterClass: 'error--text',
     options: [
@@ -43,7 +40,6 @@ const fields = [
     inputType: 'autocomplete',
     formKey: 'country',
     label: '国家',
-    colsClass: 'py-0',
     prependOuter: '*',
     prependOuterClass: 'error--text',
     options: [
@@ -72,7 +68,6 @@ const fields = [
     inputType: 'radios',
     formKey: 'gender',
     label: '性别',
-    colsClass: 'py-0',
     options: [
       { label: '男性', value: 1 },
       { label: '女性', value: 2 }
@@ -88,7 +83,6 @@ const fields = [
     inputType: 'checkboxs',
     formKey: 'hobby',
     label: '兴趣',
-    colsClass: 'py-0',
     options: [
       { label: '游泳', value: 1 },
       { label: '乒乓球', value: 2 },
@@ -120,8 +114,6 @@ const fields = [
   //   inputType: 'textarea',
   //   formKey: 'intr',
   //   label: '介绍',
-  //   cols: 12,
-  //   colsClass: 'pb-0',
   //   validation: [
   //     { rule: 'min:20', message: '介绍长度不得小于20.' }
   //   ]

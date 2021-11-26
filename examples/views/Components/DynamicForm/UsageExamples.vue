@@ -13,7 +13,7 @@
       </z-btn>
     </div>
 
-    <z-dynamic-form 
+    <z-dynamic-form
       ref="dynamic" 
       title="动态表单"
       :fieldList="cells.fields"
