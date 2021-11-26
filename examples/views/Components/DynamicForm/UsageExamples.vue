@@ -49,6 +49,7 @@
       handleConfirm(effect, form) {
         console.log(effect)
         console.log(form)
+        this.$refs.dynamic.close()
       }
     }
   }

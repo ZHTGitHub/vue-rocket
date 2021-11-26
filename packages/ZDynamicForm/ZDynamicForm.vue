@@ -40,8 +40,8 @@
               <v-col 
                 v-if="item.inputType === 'text'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-text-field
                   :formId="formId"
@@ -98,8 +98,8 @@
               <v-col 
                 v-else-if="item.inputType === 'textarea'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-textarea
                   :formId="formId"
@@ -156,8 +156,8 @@
               <v-col 
                 v-else-if="item.inputType === 'select'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-select 
                   :formId="formId"
@@ -213,8 +213,8 @@
               <v-col 
                 v-else-if="item.inputType === 'autocomplete'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-autocomplete 
                   :formId="formId"
@@ -275,8 +275,8 @@
               <v-col 
                 v-else-if="item.inputType === 'date'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-date-picker
                   :formId="formId"
@@ -333,8 +333,8 @@
               <v-col 
                 v-else-if="item.inputType === 'radios'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-radios
                   :formId="formId"
@@ -362,8 +362,8 @@
               <v-col 
                 v-else-if="item.inputType === 'checkboxs'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-checkboxs
                   :formId="formId"
@@ -386,8 +386,8 @@
               <v-col 
                 v-else-if="item.inputType === 'btnToggle'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-btn-toggle
                   :formId="formId"
@@ -414,8 +414,8 @@
               <v-col 
                 v-else-if="item.inputType === 'switch'"
                 :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass"
-                :cols="item.cols"
+                :class="item.colsClass || 'py-0'"
+                :cols="item.cols || 12"
               >
                 <z-switch
                   :formId="formId"
@@ -438,7 +438,8 @@
           <z-btn
             :class="cancelProps.class"
             :color="cancelProps.color"
-            @click="onCancel"
+            depressed
+            @click="_onCancel"
           >{{ cancelProps.text }}</z-btn>
 
           <z-btn
@@ -446,7 +447,8 @@
             btnType="validate"
             :class="confirmProps.class"
             :color="confirmProps.color"
-            @click="onConfirm"
+            depressed
+            @click="_onConfirm"
           >{{ confirmProps.text }}</z-btn>
         </v-card-actions>
         <!-- Foot END -->
@@ -523,7 +525,7 @@
 
       width: {
         type: [Number, String],
-        default: 700
+        default: 600
       }
     },
 
@@ -535,15 +537,13 @@
     },
 
     methods: {
-      onCancel() {
-        const form = { ...this.forms[this.formId] }
-        this.$emit('cancel', this.effect, form)
+      _onCancel() {
+        this.$emit('cancel', this.effect, { ...this.forms[this.formId] })
         this.close()
       },
 
-      onConfirm() {
-        const form = { ...this.forms[this.formId] }
-        this.$emit('confirm', this.effect, form)
+      _onConfirm() {
+        this.$emit('confirm', this.effect, { ...this.forms[this.formId] })
       },
       
       close() {
@@ -584,6 +584,6 @@
   }
 
   .z-card-text {
-    padding-top: 76px !important;
+    padding-top: 88px !important;
   }
 </style>
