@@ -79,7 +79,7 @@
         if(isArray(this.options) && isYummy(this.options)) {
           for(let item of this.options) {
             this.items.push({
-              text: item.label,
+              label: item.label,
               value: item.value
             })
           }
