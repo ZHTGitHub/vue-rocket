@@ -54,6 +54,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
+  import { isArray, isYummy } from '../scripts/tools'
 
   export default {
     name: 'ZBtnToggle',
@@ -102,7 +103,7 @@
 
       options: {
         type: Array,
-        required: true
+        required: false
       },
 
       rounded: {
@@ -144,6 +145,12 @@
             this.$emit('click', event)
           }
         })
+      },
+
+      _setOptions() {
+        if(isArray(this.options) && isYummy(this.options)) {
+          this.items = this.options
+        }
       }
     },
 
@@ -160,7 +167,7 @@
 
       options: {
         handler() {
-          this.items = this.options
+          this._setOptions()
         },
         immediate: true
       }

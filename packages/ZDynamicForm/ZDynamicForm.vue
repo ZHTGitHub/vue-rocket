@@ -36,13 +36,13 @@
         <v-card-text class="z-card-text">
           <v-row>
             <template v-for="item in fieldList">
-              <!-- ZTextField BEGIN -->
               <v-col 
-                v-if="item.inputType === 'text'"
                 :key="`${ formId }${ item.formKey }`"
                 :class="item.colsClass || defaultColsClass"
                 :cols="item.cols || defaultCols"
               >
+              <!-- ZTextField BEGIN -->
+              <template v-if="item.inputType === 'text'">
                 <z-text-field
                   :formId="formId"
                   :formKey="item.formKey"
@@ -91,16 +91,11 @@
                     slot="prepend-outer"
                   >{{ item.prependOuter }}</span>
                 </z-text-field>
-              </v-col>
+              </template>
               <!-- ZTextField END -->
 
               <!-- ZTextarea BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'textarea'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else-if="item.inputType === 'textarea'">
                 <z-textarea
                   :formId="formId"
                   :formKey="item.formKey"
@@ -149,16 +144,11 @@
                     slot="prepend-outer"
                   >{{ item.prependOuter }}</span>
                 </z-textarea>
-              </v-col>
+              </template>
               <!-- ZTextarea END -->
 
               <!-- ZSelect BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'select'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else-if="item.inputType === 'select'">
                 <z-select 
                   :formId="formId"
                   :formKey="item.formKey"
@@ -206,16 +196,11 @@
                     slot="prepend-outer"
                   >{{ item.prependOuter }}</span>
                 </z-select>
-              </v-col>
+              </template>
               <!-- ZSelect END -->
 
               <!-- ZAutocomplete BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'autocomplete'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else-if="item.inputType === 'autocomplete'">
                 <z-autocomplete 
                   :formId="formId"
                   :formKey="item.formKey"
@@ -268,16 +253,11 @@
                     slot="prepend-outer"
                   >{{ item.prependOuter }}</span>
                 </z-autocomplete>
-              </v-col>
+              </template>
               <!-- ZAutocomplete END -->
 
               <!-- ZDatePicker BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'date'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else-if="item.inputType === 'date'">
                 <z-date-picker
                   :formId="formId"
                   :formKey="item.formKey"
@@ -326,16 +306,11 @@
                     slot="prepend-outer"
                   >{{ item.prependOuter }}</span>
                 </z-date-picker>
-              </v-col>
+              </template>
               <!-- ZDatePicker END -->
 
               <!-- ZRadios BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'radios'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else-if="item.inputType === 'radios'">
                 <z-radios
                   :formId="formId"
                   :formKey="item.formKey"
@@ -355,16 +330,11 @@
                     slot="prepend"
                   >{{ item.prepend }}</span>
                 </z-radios>
-              </v-col>
+              </template>
               <!-- ZRadios END -->
 
               <!-- ZCheckboxs BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'checkboxs'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else-if="item.inputType === 'checkboxs'">
                 <z-checkboxs
                   :formId="formId"
                   :formKey="item.formKey"
@@ -379,16 +349,11 @@
                     slot="prepend"
                   >{{ item.prepend }}</span>
                 </z-checkboxs>
-              </v-col>
+              </template>
               <!-- ZCheckboxs END -->
 
               <!-- ZButtonToggle BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'btnToggle'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else-if="item.inputType === 'btnToggle'">
                 <z-btn-toggle
                   :formId="formId"
                   :formKey="item.formKey"
@@ -407,16 +372,11 @@
                 >
                   <span class="error--text" slot="prepend">*</span>
                 </z-btn-toggle>
-              </v-col>
+              </template>
               <!-- ZButtonToggle END -->
 
               <!-- ZSwitch BEGIN -->
-              <v-col 
-                v-else-if="item.inputType === 'switch'"
-                :key="`${ formId }${ item.formKey }`"
-                :class="item.colsClass || defaultColsClass"
-                :cols="item.cols || defaultCols"
-              >
+              <template v-else>
                 <z-switch
                   :formId="formId"
                   :formKey="item.formKey"
@@ -426,8 +386,9 @@
                   :readonly="item.readonly"
                   :defaultValue="detail[item.formKey]"
                 ></z-switch>
-              </v-col>
+              </template>
               <!-- ZSwitch END -->
+              </v-col>
             </template>
           </v-row>
         </v-card-text>

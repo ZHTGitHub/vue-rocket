@@ -48,6 +48,7 @@
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import tools from '../scripts/tools'
+  import { isArray, isYummy } from '../scripts/tools'
 
   export default {
     name: 'ZCheckboxs',
@@ -60,7 +61,7 @@
       
       options: {
         type: Array,
-        required: true
+        required: false
       },
 
       row: {
@@ -108,6 +109,21 @@
         }
 
         this.values = values
+      },
+
+      _setOptions() {
+        [this.sweets, this.items] = [[], []]
+
+        if(isArray(this.options) && isYummy(this.options)) {
+          for(let item of this.options) {
+            this.sweets.push(item.value)
+
+            this.items.push({
+              label: item.label,
+              value: item.value
+            })
+          }
+        }
       }
     },
 
@@ -143,16 +159,7 @@
 
       options: {
         handler() {
-          [this.sweets, this.items] = [[], []]
-
-          for(let item of this.options) {
-            this.sweets.push(item.value)
-
-            this.items.push({
-              label: item.label,
-              value: item.value
-            })
-          }
+          this._setOptions()
         },
         immediate: true
       }

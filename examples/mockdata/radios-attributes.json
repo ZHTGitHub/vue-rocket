@@ -75,6 +75,15 @@
     },
 
     {
+      "name": "options",
+      "required": "否",
+      "type": "{ label, value }[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "单选框的选项内容"
+    },
+
+    {
       "name": "readonly",
       "required": "否",
       "type": "Boolean",

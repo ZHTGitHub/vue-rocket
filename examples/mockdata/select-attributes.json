@@ -139,7 +139,7 @@
 
     {
       "name": "options",
-      "required": "是",
+      "required": "否",
       "type": "{ label, value }[ ]",
       "acceptedValues": "—",
       "default": "—",

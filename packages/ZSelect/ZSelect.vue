@@ -133,7 +133,7 @@
         this.verifyField()
       },
 
-      setOptions() {
+      _setOptions() {
         this.items = []
 
         if(isArray(this.options) && isYummy(this.options)) {
@@ -150,7 +150,7 @@
     watch: {
       options: {
         handler() {
-          this.setOptions()
+          this._setOptions()
         },
         immediate: true
       }

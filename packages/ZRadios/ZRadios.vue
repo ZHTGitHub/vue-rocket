@@ -34,6 +34,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
+  import { isArray, isYummy } from '../scripts/tools'
 
   export default {
     name: 'ZRadios',
@@ -46,7 +47,7 @@
 
       options: {
         type: Array,
-        required: true
+        required: false
       },
 
       row: {
@@ -61,15 +62,6 @@
       }
     },
 
-    created() {
-      for(let item of this.options) {
-        this.items.push({
-          label: item.label,
-          value: item.value
-        })
-      }
-    },
-
     methods: {
       onChange(value) {
         this.$emit('change', value)
@@ -79,6 +71,28 @@
       onClick(event) {
         event.customValue = this.value
         this.$emit('click', event)
+      },
+
+      _setOptions() {
+        this.items = []
+
+        if(isArray(this.options) && isYummy(this.options)) {
+          for(let item of this.options) {
+            this.items.push({
+              text: item.label,
+              value: item.value
+            })
+          }
+        }
+      }
+    },
+
+    watch: {
+      options: {
+        handler() {
+          this._setOptions()
+        },
+        immediate: true
       }
     }
   }

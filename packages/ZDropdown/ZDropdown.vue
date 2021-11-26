@@ -47,7 +47,7 @@
       </template>
       <v-list>
         <v-list-item
-          v-for="(item, index) in options"
+          v-for="(item, index) in items"
           :key="`z_dropdown_${ index }`"
           link
           @click="onClick($event, item)"
@@ -104,7 +104,7 @@
 
       options: {
         type: Array,
-        required: true
+        required: false
       },
 
       positionX: {
@@ -143,6 +143,12 @@
       }
     },
 
+    data() {
+      return {
+        items: []
+      }
+    },
+
     methods: {
       onClick(event, { value }) {
         event.customValue = value
@@ -151,6 +157,21 @@
 
       onInput(input) {
         this.$emit('input', input)
+      },
+
+      _setOptions() {
+        if(isArray(this.options) && isYummy(this.options)) {
+          this.items = this.options
+        }
+      }
+    },
+
+    watch: {
+      options: {
+        handler() {
+          this._setOptions()
+        },
+        immediate: true
       }
     }
   }
