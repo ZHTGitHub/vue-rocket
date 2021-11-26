@@ -61,6 +61,7 @@
 
 <script>
 	import BtnMixins from '../mixins/BtnMixins'
+  import { isArray, isYummy } from '../scripts/tools'
 
   export default {
     name: 'ZDropdown',
