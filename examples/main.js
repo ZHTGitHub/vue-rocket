@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 
 import vuetify from './plugins/vuetify'
+import './plugins/highlight'
 
 import request from './api/service'
 Vue.prototype.$request = request

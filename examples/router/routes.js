@@ -1,5 +1,6 @@
 import ComponentRoutes from './component'
 import StyleRoutes from './style'
+import PluginsRoutes from './plugins'
 
 const router = [
   {
@@ -59,7 +60,8 @@ const router = [
   },
 
   ComponentRoutes,
-  StyleRoutes
+  StyleRoutes,
+  PluginsRoutes
 ]
 
 export { router }

@@ -267,5 +267,25 @@ export const menus = [
         link: '/style/elevation'
       }
     ]
+  },
+
+  {
+    pId: '-1',
+    id: 'plugins',
+    key: 'plugins',
+    icon: 'mdi-language-css3',
+    title: '插件',
+    link: '/plugins',
+    leaf: true,
+    children: [
+      {
+        pId: 'plugins',
+        key: 'xml',
+        icon: '',
+        realm: 'xml',
+        title: '编辑 xml',
+        link: '/plugins/xml'
+      }
+    ]
   }
 ]
