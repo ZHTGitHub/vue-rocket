@@ -7,7 +7,17 @@
     </div>
 
     <z-btn @click="getXml">获取xml</z-btn>
+
+    <input 
+      type="file" 
+      ref="upload" 
+      accept=".xml" 
+      @change="onSelect" 
+      class="outputlist_upload"
+    >
+
   </div>
+
 </template>
 
 <script>
@@ -25,12 +35,71 @@
     },
 
     created() {
-      this.xml_show = vkbeautify.xml(xmlSource)
+      // const result = this.loadXMLDoc('http://localhost:8899/test.xml')
+      // this.xml_show = vkbeautify.xml(result)
     },
 
     methods: {
       getXml() {
         console.log(this.$refs.code.innerText)
+      },
+
+      async onSelect() {
+        const result = await this.readXMLDoc()
+        this.xml_show = vkbeautify.xml(result)
+      },
+
+      readXMLDoc(){  
+        return new Promise((resolve, reject) => {
+          var files = this.$refs.upload.files
+
+          var reader = new FileReader()
+
+          reader.readAsText(files[0], 'UTF-8')
+
+          reader.onload = function(event) { 
+            // let [content, xmlDoc] = [event.target.result, null]
+
+            // if (window.DOMParser) {
+            //   var parser = new DOMParser()
+            //   xmlDoc = parser.parseFromString(content, 'text/xml')
+            // } else {
+            //   xmlDoc = new window.ActiveXObject('Microsoft.XMLDOM')
+            //   xmlDoc.async = false
+            //   xmlDoc.loadXML(content)
+            // }
+
+            resolve(event.target.result)
+          }
+
+          reader.onerror = function(error) {
+            reject(error)
+          }
+        })
+      },
+
+      loadXMLDoc(dname) {
+        let [xhttp, serialized] = [null, null]
+
+        if (window.XMLHttpRequest) {
+          xhttp = new XMLHttpRequest()
+        } 
+        else {
+          xhttp = new window.ActiveXObject('Microsoft.XMLHTTP')
+        }
+
+        xhttp.open('GET', dname, false)
+        xhttp.send()
+
+        try {
+          const serializer = new XMLSerializer()                                                                                           
+          serialized = serializer.serializeToString(xhttp.responseXML)                                                                            
+        }                                                                                                                                  
+        catch (e) {
+          serialized = xhttp.responseXML                                                                                                        
+        } 
+
+        return serialized
       }
     }
   }
