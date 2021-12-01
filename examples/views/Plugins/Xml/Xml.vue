@@ -35,8 +35,8 @@
     },
 
     created() {
-      // const result = this.loadXMLDoc('http://localhost:8899/test.xml')
-      // this.xml_show = vkbeautify.xml(result)
+      const result = this.loadXMLDoc('http://localhost:8899/test.xml')
+      this.xml_show = vkbeautify.xml(result)
     },
 
     methods: {
