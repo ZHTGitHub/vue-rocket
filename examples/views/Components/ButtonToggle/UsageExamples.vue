@@ -1,36 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-btn-toggle
-                formId="sexuals"
-                formKey="sexual"
-                color="primary"
-                :options="directionOptions"
-                :defaultValue="3"
-              >&lt;/z-btn-toggle>
-            &lt;/template>
-
-            &lt;script>
-              export default {
-                data() {
-                  return {
-                    directionOptions: [
-                      { label: '东', value: 1, icon: 'mdi-arrow-right-bold' },
-                      { label: '西', value: 2, icon: 'mdi-arrow-left-bold' },
-                      { label: '南', value: 3, icon: 'mdi-arrow-down-bold' },
-                      { label: '北', value: 4, icon: 'mdi-arrow-up-bold' }
-                    ]
-                  }
-                }
-              }
-            &lt;/script>
-          </code>
-        </pre>
-      </div>
+    <usage-demo :code="code">
       <div slot="demo">
         <div class="z-flex">
           <z-btn-toggle
@@ -54,11 +24,25 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code = 
+`
+<z-btn-toggle
+  formId="sexuals"
+  formKey="sexual"
+  color="primary"
+  mandatory
+  :options="directionOptions"
+  @change="onChange($event)"
+  @click="onClick"
+></z-btn-toggle>
+`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
+        code,
         directionOptions: [
           { label: '东', value: 1, icon: 'mdi-arrow-right-bold' },
           { label: '西', value: 2, icon: 'mdi-arrow-left-bold' },

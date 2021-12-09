@@ -3,6 +3,7 @@
     <div>
       <v-file-input
         v-model="value"
+        :accept="accept"
         :append-icon="appendIcon"
         :append-outer-icon="appendOuterIcon"
         autocomplete="off"
@@ -103,6 +104,11 @@
     mixins: [FormMixins, FormValidationMixins],
 
     props: {
+      accept: {
+        type: String,
+        required: false
+      },
+
       action: {
         type: String,
         required: true
@@ -278,7 +284,15 @@
           this.$emit('response', error)
         })
       }
-    }
+    },
+
+    defaultValue: {
+			handler(value) {
+				this.value = value
+			},
+      deep: true,
+			immediate: true
+		}
   }
 </script>
 

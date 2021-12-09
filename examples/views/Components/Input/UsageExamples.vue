@@ -1,20 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-text-field
-                formId="info"
-                formKey="name"
-                label="姓名"
-              >
-              &lt;/z-text-field>
-            &lt;/template>
-          </code>
-        </pre>
-      </div>
+    <usage-demo :code="code">
       <div slot="demo">
         <z-text-field
           formId="info"
@@ -33,12 +19,22 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code =
+`
+<z-text-field
+  formId="info"
+  formKey="name"
+  label="姓名"
+>
+</z-text-field>
+`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        
+        code
       }
     },
 

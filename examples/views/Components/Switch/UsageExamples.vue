@@ -1,21 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-switch
-                formId="actively"
-                formKey="active"
-                label="激活"
-                :defaultValue="true"
-              >
-              &lt;/z-switch>
-            &lt;/template>
-          </code>
-        </pre>
-      </div>
+    <usage-demo :code="code">
       <div slot="demo">
         <z-switch
           formId="actively"
@@ -34,12 +19,22 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code = 
+`
+<z-switch
+  formId="actively"
+  formKey="active"
+  label="激活"
+  :defaultValue="true"
+></z-switch>
+`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        
+        code
       }
     },
 

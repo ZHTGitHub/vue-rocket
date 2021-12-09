@@ -1,20 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-pagination
-                :options="pageOptions"
-                :pageNum="3"
-                :pageSize="20"
-                :total="total"
-              >&lt;/z-pagination>
-            &lt;/template>
-          </code>
-        </pre>
-      </div>
+    <usage-demo :code="code">
       <div slot="demo">
         <z-pagination
           :options="pageOptions"
@@ -33,11 +19,22 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code = 
+`
+<z-pagination
+  :options="pageOptions"
+  :pageNum="3"
+  :pageSize="10"
+  :total="total"
+></z-pagination>
+`
+
   export default {
     name: 'UsageExamples',
 
     data() {  
       return {
+        code,
         total: 10000,
         pageOptions: [
           { label: '10条/页', value: 10 },

@@ -1,34 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-autocomplete
-                formId="auto"
-                formKey="auto"
-                :options="cityOptions"
-              >&lt;/z-autocomplete>
-            &lt;/template>
-
-            &lt;script>
-              export default {
-                data() {
-                  return {
-                    cityOptions: [
-                      { label: '广州', value: 1 },
-                      { label: '深圳', value: 2 },
-                      { label: '珠海', value: 3 },
-                      { label: '佛山', value: 4 }
-                    ]
-                  }
-                }
-              }
-            &lt;/script>
-          </code>
-        </pre>
-      </div>
+    <usage-demo :code="code">
       <div slot="demo">
         <div class="z-flex">
           <z-autocomplete
@@ -49,11 +21,22 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code = 
+`
+<z-autocomplete
+  formId="auto"
+  formKey="auto"
+  :options="cityOptions"
+  :defaultValue="1"
+></z-autocomplete>
+`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
+        code,
         cityOptions: [
           { label: '广州', value: 1 },
           { label: '深圳', value: 2 },

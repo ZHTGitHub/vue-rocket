@@ -1,20 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-textarea
-                formId="intros"
-                formKey="intro"
-                label="自我介绍"
-                placeholder="请输入自我介绍，长度控制在一百字以内."
-              >&lt;/z-textarea>
-            &lt;/template>
-          </code>
-        </pre>
-      </div>
+    <usage-demo :code="code">
       <div slot="demo">
         <z-textarea
           formId="intros"
@@ -33,12 +19,22 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code = 
+`
+<z-textarea
+  formId="intros"
+  formKey="intro"
+  label="自我介绍"
+  placeholder="请输入自我介绍，长度控制在一百字以内."
+></z-textarea>
+`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        
+        code
       }
     },
 

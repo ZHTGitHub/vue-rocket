@@ -30,6 +30,15 @@
     },
 
     {
+      "name": "accept",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "限定提交文件的类型"
+    },
+
+    {
       "name": "append-icon",
       "required": "否",
       "type": "String",

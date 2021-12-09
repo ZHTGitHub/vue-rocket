@@ -1,28 +1,13 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        <pre class="line-numbers">
-          <code class="language-markup">
-            &lt;template>
-              &lt;z-file-input
-                formId="files"
-                formKey="file"
-                label="File input"
-              >
-              &lt;/z-file-input>
-            &lt;/template>
-          </code>
-        </pre>
-      </div>
+    <usage-demo :code="code">
       <div slot="demo">
-        <!-- action="http://113.106.108.93:13000/api/pro-config/sys-template/update-images" -->
-
         <z-file-input
           formId="files"
           formKey="file"
+          accept="image/*"
           prependIcon="mdi-file-excel-outline"
-          action="http://113.106.108.93:13000/api/pro-config/sys-template/update-images"
+          action="http://zenghaitao/update-images"
           :effectData="{ 
             sysProTempId: '900709761157169152',
             proCode: 2
@@ -31,14 +16,10 @@
             {
               url: '',
               name: 'demo.png'
-            },
-            {
-              url: '',
-              name: 'demo1.png'
-            },
+            }
           ]"
           name="tempImages"
-          label="File input"
+          label="文件上传"
           parcel
           :multiple="false"
           :deleteIcon="false"
@@ -57,12 +38,41 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code = 
+`
+<z-file-input
+  formId="files"
+  formKey="file"
+  accept="image/*"
+  prependIcon="mdi-file-excel-outline"
+  action="http://zenghaitao/update-images"
+  :effectData="{ 
+    sysProTempId: '900709761157169152',
+    proCode: 2
+  }"
+  :fileList="[
+    {
+      url: '',
+      name: 'demo.png'
+    }
+  ]"
+  name="tempImages"
+  label="文件上传"
+  parcel
+  :multiple="false"
+  :deleteIcon="false"
+  @response="onResponse"
+  @delete="onRemove"
+>
+</z-file-input>
+`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        
+        code
       }
     },
 
