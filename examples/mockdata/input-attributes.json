@@ -147,6 +147,15 @@
     },
 
     {
+      "name": "parcel",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "一次上传多个文件"
+    },
+
+    {
       "name": "placeholder",
       "required": "否",
       "type": "String",

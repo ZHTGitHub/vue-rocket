@@ -140,6 +140,11 @@
         default: false
       },
 
+      prependOuterIcon: {
+        type: String,
+        default: ''
+      },
+
       deleteIcon: {
         type: Boolean,
         default: true
@@ -173,8 +178,6 @@
         if(this.multiple) {
           // 所有文件一起上传
           if(this.parcel) {
-            // this.formData = new FormData()
-
             for(let item of file) {
               this.formData.append(this.name, item)
             }
@@ -182,8 +185,6 @@
           }
           // 单个文件单个文件上传
           else {
-            // this.formData = new FormData()
-
             for(let item of file) {
               this.formData.append(this.name, item)
               this._submitFile()
@@ -193,7 +194,6 @@
         }
         // 单选
         else {
-          // this.formData = new FormData()
           this.formData.append(this.name, file)
           this._submitFile()
         }
@@ -277,45 +277,6 @@
         .catch((error) => {
           this.$emit('response', error)
         })
-
-        // const reader = new FileReader()
-
-        // reader.readAsDataURL(file)
-
-        // console.log(file)
-
-        // reader.addEventListener('load', (event) => {
-        //   const { error, result } = event.target
-
-        //   if(error == null) {
-        //     const formData = new FormData()
-        //     formData.append(this.name, file)
-
-        //     if(this.effectData) {
-        //       for(let key in this.effectData) {
-        //         formData.append(key, this.effectData[key])
-        //       }
-        //     }
-
-        //     fetch(this.action, {
-        //       method: this.method,
-        //       body: formData
-        //     })
-        //     .then((response) => {
-        //       return response.json()
-        //     })
-        //     .then((response) => {
-        //       this.$emit('response', response)
-        //     })
-        //     .catch((error) => {
-        //       this.$emit('response', error)
-        //     })
-        //   }
-
-        //   // console.log(event)
-        //   // console.log(error)
-        //   console.log(file)
-        // })
       }
     }
   }

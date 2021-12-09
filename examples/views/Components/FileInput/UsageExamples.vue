@@ -10,7 +10,7 @@
                 formKey="file"
                 label="File input"
               >
-              &lt;/z-text-field>
+              &lt;/z-file-input>
             &lt;/template>
           </code>
         </pre>
@@ -21,6 +21,7 @@
         <z-file-input
           formId="files"
           formKey="file"
+          prependIcon="mdi-file-excel-outline"
           action="http://113.106.108.93:13000/api/pro-config/sys-template/update-images"
           :effectData="{ 
             sysProTempId: '900709761157169152',
