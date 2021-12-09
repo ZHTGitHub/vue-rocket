@@ -30,6 +30,24 @@
     },
 
     {
+      "name": "accept",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "限定上传文件的类型"
+    },
+
+    {
+      "name": "action",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "上传地址"
+    },
+
+    {
       "name": "append-icon",
       "required": "否",
       "type": "String",
@@ -54,6 +72,15 @@
       "acceptedValues": "—",
       "default": false,
       "description": "启用自动聚焦"
+    },
+
+    {
+      "name": "chips",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "改变一个已选择项为小纸片（chips）的显示方式"
     },
 
     {
@@ -84,6 +111,15 @@
     },
 
     {
+      "name": "deleteIcon",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否显示删除图标"
+    },
+
+    {
       "name": "disabled",
       "required": "否",
       "type": "Boolean",
@@ -93,12 +129,30 @@
     },
 
     {
+      "name": "effectData",
+      "required": "否",
+      "type": "Object",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "其它要上传的数据"
+    },
+
+    {
       "name": "error",
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
       "default": false,
       "description": "将输入框设置为手动错误状态"
+    },
+
+    {
+      "name": "fileList",
+      "required": "否",
+      "type": "Array",
+      "acceptedValues": "—",
+      "default": "[]",
+      "description": "已上传文件地址列表"
     },
 
     {
@@ -138,12 +192,48 @@
     },
 
     {
+      "name": "method",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "GET | POST",
+      "default": "POST",
+      "description": "上传请求的 http method"
+    },
+
+    {
+      "name": "multiple",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "是否支持多选文件"
+    },
+
+    {
+      "name": "name",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "file",
+      "description": "发到后台的文件参数名"
+    },
+
+    {
       "name": "outlined",
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
       "default": false,
       "description": "将轮廓样式应用于输入"
+    },
+
+    {
+      "name": "parcel",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "多文件合并上传"
     },
 
     {
@@ -216,6 +306,15 @@
       "acceptedValues": "—",
       "default": false,
       "description": "将输入设置为手动成功状态"
+    },
+
+    {
+      "name": "truncateLength",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "—",
+      "default": 18,
+      "description": "在用省略号截断之前的文件名的长度"
     }
   ]
 }

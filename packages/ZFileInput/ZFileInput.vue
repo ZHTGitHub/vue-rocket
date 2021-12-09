@@ -8,6 +8,7 @@
         :append-outer-icon="appendOuterIcon"
         autocomplete="off"
         :autofocus="autofocus"
+        :chips="chips"
         :clear-icon="clearIcon"
         :clearable="clearable"
         :counter="counter"
@@ -114,6 +115,16 @@
         required: true
       },
 
+      chips: {
+        type: Boolean,
+        default: false
+      },
+
+      deleteIcon: {
+        type: Boolean,
+        default: true
+      },
+
       effectData: {
         type: Object,
         required: false
@@ -149,11 +160,6 @@
       prependOuterIcon: {
         type: String,
         default: ''
-      },
-
-      deleteIcon: {
-        type: Boolean,
-        default: true
       },
       
       truncateLength: {

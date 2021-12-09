@@ -5,7 +5,8 @@
         <z-file-input
           formId="files"
           formKey="file"
-          accept="image/*"
+          accept="image/*, .xlsx"
+          chips
           prependIcon="mdi-file-excel-outline"
           action="http://zenghaitao/update-images"
           :effectData="{ 
