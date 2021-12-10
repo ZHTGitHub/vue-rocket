@@ -12,7 +12,9 @@
       <z-select
         :formId="formId"
         formKey="pageSize"
+        class="mt-n4"
         dense
+        hide-details
         :options="options"
         width="105"
         :defaultValue="pageSize"
@@ -35,8 +37,9 @@
       <z-text-field
         :formId="formId"
         formKey="pageNum"
-        class="mx-2"
+        class="mt-n4 mx-2"
         dense
+        hide-details
         width="50"
         :defaultValue="num"
         @enter="onJump"
