@@ -89,6 +89,16 @@ export default {
 			default: false
 		},
 
+		persistentHint: {
+			type: Boolean,
+			default: false
+		},
+
+		persistentPlaceholder: {
+			type: Boolean,
+			default: false
+		},
+
 		placeholder: {
 			typeof: String,
 			required: false

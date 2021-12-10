@@ -147,12 +147,21 @@
     },
 
     {
-      "name": "parcel",
+      "name": "persistent-hint",
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
       "default": false,
-      "description": "一次上传多个文件"
+      "description": "强制提示总是可见的"
+    },
+
+    {
+      "name": "persistent-placeholder",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "强制 placeholder 总是可见的"
     },
 
     {

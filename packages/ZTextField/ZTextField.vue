@@ -17,6 +17,8 @@
       :hint="hint"
       :label="label"
       :outlined="outlined"
+      :persistent-hint="persistentHint"
+      :persistent-placeholder="persistentPlaceholder"
       :placeholder="placeholder"
       :prepend-icon="prependOuterIcon"
       :prepend-inner-icon="prependIcon"

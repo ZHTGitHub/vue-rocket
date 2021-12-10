@@ -22,6 +22,8 @@
       :multiple="multiple"
       :noFilter="noFilter"
       :outlined="outlined"
+      :persistent-hint="persistentHint"
+      :persistent-placeholder="persistentPlaceholder"
       :placeholder="placeholder"
       :prepend-inner-icon="prependIcon"
       :prepend-icon="prependOuterIcon"
