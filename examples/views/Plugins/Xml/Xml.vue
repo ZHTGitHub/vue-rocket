@@ -58,6 +58,7 @@
           reader.readAsText(files[0], 'UTF-8')
 
           reader.onload = function(event) { 
+            // 23
             // let [content, xmlDoc] = [event.target.result, null]
 
             // if (window.DOMParser) {
