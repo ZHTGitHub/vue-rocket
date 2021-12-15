@@ -17,7 +17,7 @@ const fields = [
     label: '手机',
     suzerain: { 
       attackFormKey: 'name', 
-      attackValue: 'zht',
+      attackValues: ['zht', 'leslie'],
       targetFormKey: 'phone' 
     },
     validation: [
@@ -49,7 +49,7 @@ const fields = [
     prependOuterClass: 'error--text',
     suzerain: { 
       attackFormKey: 'country', 
-      attackValue: 1,
+      attackValues: [1],
       targetFormKey: 'area' 
     },
     options: [

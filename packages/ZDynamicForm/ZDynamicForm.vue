@@ -538,7 +538,10 @@
       },
 
       _isCrazy(suzerain, formKey) {
-        if(!suzerain || ((suzerain.targetFormKey === formKey) && (this.momentDetail[suzerain.attackFormKey] === suzerain.attackValue))) {
+        if(!suzerain
+          || ((suzerain.targetFormKey === formKey) 
+          && suzerain.attackValues.includes(this.momentDetail[suzerain.attackFormKey]))
+        ) {
           return true
         }
         return false
