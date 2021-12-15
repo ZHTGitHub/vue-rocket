@@ -44,6 +44,7 @@
               <!-- ZTextField BEGIN -->
               <template v-if="item.inputType === 'text'">
                 <z-text-field
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -97,6 +98,7 @@
               <!-- ZTextarea BEGIN -->
               <template v-else-if="item.inputType === 'textarea'">
                 <z-textarea
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -150,6 +152,7 @@
               <!-- ZSelect BEGIN -->
               <template v-else-if="item.inputType === 'select'">
                 <z-select 
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -202,6 +205,7 @@
               <!-- ZAutocomplete BEGIN -->
               <template v-else-if="item.inputType === 'autocomplete'">
                 <z-autocomplete 
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :allow-overflow="item.allowOverflow"
@@ -259,6 +263,7 @@
               <!-- ZDatePicker BEGIN -->
               <template v-else-if="item.inputType === 'date'">
                 <z-date-picker
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -312,6 +317,7 @@
               <!-- ZRadios BEGIN -->
               <template v-else-if="item.inputType === 'radios'">
                 <z-radios
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :column="item.column"
@@ -336,6 +342,7 @@
               <!-- ZCheckboxs BEGIN -->
               <template v-else-if="item.inputType === 'checkboxs'">
                 <z-checkboxs
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :label="item.label"
@@ -355,6 +362,7 @@
               <!-- ZButtonToggle BEGIN -->
               <template v-else-if="item.inputType === 'btnToggle'">
                 <z-btn-toggle
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :borderless="item.borderless"
@@ -378,6 +386,7 @@
               <!-- ZSwitch BEGIN -->
               <template v-else>
                 <z-switch
+                  v-if="_isCrazy(item.suzerain, item.formKey)"
                   :formId="formId"
                   :formKey="item.formKey"
                   :disabled="item.disabled"
@@ -495,8 +504,14 @@
         dialog: false,
         effect: {},
         defaultCols: 12,
-        defaultColsClass: 'py-0'
+        defaultColsClass: 'py-0',
+
+        momentDetail: {}
       }
+    },
+
+    created() {
+      this.momentDetail = { ...this.detail }
     },
 
     methods: {
@@ -520,6 +535,13 @@
 
       toggle() {
         this.dialog = !this.dialog
+      },
+
+      _isCrazy(suzerain, formKey) {
+        if(!suzerain || ((suzerain.targetFormKey === formKey) && (this.momentDetail[suzerain.attackFormKey] === suzerain.attackValue))) {
+          return true
+        }
+        return false
       }
     },
 
@@ -528,6 +550,15 @@
     },
 
     watch: {
+      forms: {
+        handler(forms) {
+          const form = forms[this.formId]
+          this.momentDetail = { ...this.momentDetail, ...form }
+        },
+        deep: true,
+        immediate: true
+      },
+
       dialog: {
         handler(dialog) {
           this.$emit('dialog', dialog)

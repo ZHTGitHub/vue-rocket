@@ -17,7 +17,7 @@
       ref="dynamic" 
       title="动态表单"
       :fieldList="cells.fields"
-      :detail="{ sexual: 1 }"
+      :detail="{ sexual: 1, country: 1 }"
       @cancel="handleCancel"
       @confirm="handleConfirm"
     ></z-dynamic-form>

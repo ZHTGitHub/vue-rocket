@@ -15,24 +15,13 @@ const fields = [
     inputType: 'text',
     formKey: 'phone',
     label: '手机',
+    suzerain: { 
+      attackFormKey: 'name', 
+      attackValue: 'zht',
+      targetFormKey: 'phone' 
+    },
     validation: [
       { regex: /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/, message: '手机格式不正确.' }
-    ]
-  },
-
-  {
-    inputType: 'select',
-    formKey: 'area',
-    label: '居住城市',
-    prependOuter: '*',
-    prependOuterClass: 'error--text',
-    options: [
-      { label: '广州', value: 1 },
-      { label: '深圳', value: 2 },
-      { label: '珠海', value: 3 }
-    ],
-    validation: [
-      { rule: 'required', message: '居住城市为必选项.' }
     ]
   },
 
@@ -43,12 +32,33 @@ const fields = [
     prependOuter: '*',
     prependOuterClass: 'error--text',
     options: [
+      { label: '中国', value: 1 },
+      { label: '美国', value: 2 },
+      { label: '日本', value: 3 }
+    ],
+    validation: [
+      { rule: 'required', message: '国家为必选项.' }
+    ]
+  },
+
+  {
+    inputType: 'select',
+    formKey: 'area',
+    label: '居住城市',
+    prependOuter: '*',
+    prependOuterClass: 'error--text',
+    suzerain: { 
+      attackFormKey: 'country', 
+      attackValue: 1,
+      targetFormKey: 'area' 
+    },
+    options: [
       { label: '广州', value: 1 },
       { label: '深圳', value: 2 },
       { label: '珠海', value: 3 }
     ],
     validation: [
-      { rule: 'required', message: '国家为必选项.' }
+      { rule: 'required', message: '居住城市为必选项.' }
     ]
   },
 
