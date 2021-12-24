@@ -17,7 +17,7 @@ const ComponentRoutes = {
       name: 'ZDemoAutocomplete',
       meta: {
         key: 'autocomplete',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'autocomplete',
         title: 'Autocomplete 按钮',
       },
@@ -29,7 +29,7 @@ const ComponentRoutes = {
       name: 'ZDemoButton',
       meta: {
         key: 'button',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'button',
         title: 'Button 按钮',
       },
@@ -41,7 +41,7 @@ const ComponentRoutes = {
       name: 'ZDemoButtonToggle',
       meta: {
         key: 'buttonToggle',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'buttonToggle',
         title: 'Button Groups 按钮组',
       },
@@ -53,7 +53,7 @@ const ComponentRoutes = {
       name: 'ZDemoCalendar',
       meta: {
         key: 'calendar',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'calendar',
         title: 'Calendar 日历',
       },
@@ -65,7 +65,7 @@ const ComponentRoutes = {
       name: 'ZDemoCheckboxs',
       meta: {
         key: 'checkboxs',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'checkboxs',
         title: 'Checkboxs 多选框',
       },
@@ -77,7 +77,7 @@ const ComponentRoutes = {
       name: 'ZDemoDatePicker',
       meta: {
         key: 'datePicker',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'datePicker',
         title: 'Date Picker 日期选择器',
       },
@@ -89,7 +89,7 @@ const ComponentRoutes = {
       name: 'ZDemoDrawer',
       meta: {
         key: 'drawer',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'drawer',
         title: 'Drawer 导航抽屉',
       },
@@ -101,7 +101,7 @@ const ComponentRoutes = {
       name: 'ZDemoDropdown',
       meta: {
         key: 'dropdown',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'dropdown',
         title: 'Dropdown 下拉菜单',
       },
@@ -113,7 +113,7 @@ const ComponentRoutes = {
       name: 'ZDemoDynamicForm',
       meta: {
         key: 'dynamicForm',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'dynamicForm',
         title: 'Dynamic Form 动态表单',
       },
@@ -125,7 +125,7 @@ const ComponentRoutes = {
       name: 'ZDemoPagination',
       meta: {
         key: 'pagination',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'pagination',
         title: 'Pagination 分页',
       },
@@ -137,7 +137,7 @@ const ComponentRoutes = {
       name: 'ZDemoRadios',
       meta: {
         key: 'radios',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'radios',
         title: 'Radios 单选框',
       },
@@ -149,7 +149,7 @@ const ComponentRoutes = {
       name: 'ZDemoSelect',
       meta: {
         key: 'select',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'select',
         title: 'Select 选择器',
       },
@@ -161,7 +161,7 @@ const ComponentRoutes = {
       name: 'ZDemoSwitch',
       meta: {
         key: 'switch',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'switch',
         title: 'Switch 开关',
       },
@@ -173,7 +173,7 @@ const ComponentRoutes = {
       name: 'ZDemoTextarea',
       meta: {
         key: 'textarea',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'textarea',
         title: 'Teaxarea 多行文本框',
       },
@@ -185,7 +185,7 @@ const ComponentRoutes = {
       name: 'ZDemoFileInput',
       meta: {
         key: 'fileInput',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'fileInput',
         title: 'File Input 文件上传',
       },
@@ -197,7 +197,7 @@ const ComponentRoutes = {
       name: 'ZDemoInput',
       meta: {
         key: 'input',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'input',
         title: 'Input 输入框',
       },
@@ -209,7 +209,7 @@ const ComponentRoutes = {
       name: 'ZDemoUpload',
       meta: {
         key: 'upload',
-        nodeKey: 'components',
+        pKey: 'components',
         realm: 'upload',
         title: 'Upload 上传',
       },

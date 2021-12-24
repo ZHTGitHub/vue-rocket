@@ -21,6 +21,15 @@
     },
 
     {
+      "name": "autopilot",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "自动导航到页面"
+    },
+
+    {
       "name": "clipped",
       "required": "否",
       "type": "Boolean",
@@ -54,15 +63,6 @@
       "acceptedValues": "—",
       "default": false,
       "description": "浮动抽屉没有可见的容器（没有右边框）"
-    },
-
-    {
-      "name": "header-height",
-      "required": "否",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "56px",
-      "description": "设置导航抽屉 header 高度"
     },
 
     {

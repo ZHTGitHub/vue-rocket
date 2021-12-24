@@ -35,7 +35,9 @@
       ref="drawer"
       :menus="menus"
       app
-    ></z-drawer>
+    >
+      <div class="drawer-top" slot="top"></div>
+    </z-drawer>
 
     <v-main>
       <v-container>
@@ -64,3 +66,9 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .drawer-top {
+    height: 56px;
+  }
+</style>

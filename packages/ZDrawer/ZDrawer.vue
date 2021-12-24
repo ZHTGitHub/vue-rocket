@@ -12,13 +12,17 @@
     :temporary="temporary"
     :width="width"
   >
-    <div class="z-drawer-header" :style="{ height: headerHeight }">
+    <!-- <div 
+      class="z-drawer-header" 
+      :style="{ height: headerHeight }"
+    >
       <slot name="header"></slot>
-    </div>
+    </div> -->
 
     <v-divider></v-divider>
     
     <v-list dense shaped>
+      <!-- <v-list-item-group> -->
       <template v-for="item in menus">
         <!-- 一级列表 BEGIN -->
         <v-list-item 
@@ -74,7 +78,26 @@
         </v-list-group>
         <!-- 二级列表 END -->
       </template>
+      <!-- </v-list-item-group> -->
     </v-list>
+
+    <!-- 抽屉底部的插槽 BEGIN -->
+    <template v-slot:append>
+      <slot name="bottom"></slot>
+    </template>
+    <!-- 抽屉底部的插槽 END -->
+
+    <!-- 用于修改 v-img 属性时使用 src 属性 BEGIN -->
+    <template v-slot:img>
+      <slot name="img"></slot>
+    </template>
+    <!-- 用于修改 v-img 属性时使用 src 属性 END -->
+
+    <!-- 抽屉顶部的插槽 BEGIN -->
+    <template v-slot:prepend>
+      <slot name="top"></slot>
+    </template>
+    <!-- 抽屉顶部的插槽 END -->
   </v-navigation-drawer>
 </template>
 
@@ -91,6 +114,11 @@
       app: {
         type: Boolean,
         default: false
+      },
+
+      autopilot: {
+        type: Boolean,
+        default: true
       },
 
       clipped: {
@@ -111,11 +139,6 @@
       floating: {
         type: Boolean,
         default: false
-      },
-
-      headerHeight: {
-        type: String,
-        default: '56px'
       },
 
       menus: {
@@ -168,7 +191,12 @@
       onSelect(item) {
         this.realm = item.realm
         this.currentItem = item
-        this.$router.push({ path: item.link })
+
+        if(this.autopilot && !!item.link) {
+          item.autopilot !== false && this.$router.push({ path: item.link })
+        }
+
+        this.$emit('select', { ...item })
       }
     },
 
@@ -180,7 +208,7 @@
 
           for(let item of this.menus) {
             item.expanded = false
-            if(item.key === meta.nodeKey) {
+            if(item.key === meta.pKey) {
               item.expanded = true
             }
           }
@@ -192,10 +220,6 @@
 </script>
 
 <style scoped lang="scss">
-  .z-drawer-header {
-    min-height: 56px;
-  }
-
   .active-item {
     .v-list-item__icon {
       color: #1976d2 !important;

@@ -17,7 +17,7 @@ const PluginsRoutes = {
       name: 'ZDemoXml',
       meta: {
         key: 'xml',
-        nodeKey: 'plugins',
+        pKey: 'plugins',
         realm: 'xml',
         title: '编辑 xml',
       },

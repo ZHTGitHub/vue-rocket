@@ -17,7 +17,7 @@ const StyleRoutes = {
       name: 'DemoStyleTypography',
       meta: {
         key: 'text',
-        nodeKey: 'style',
+        pKey: 'style',
         realm: 'text',
         title: 'Text 文本',
       },
@@ -29,7 +29,7 @@ const StyleRoutes = {
       name: 'DemoStyleSpacing',
       meta: {
         key: 'spacing',
-        nodeKey: 'style',
+        pKey: 'style',
         realm: 'spacing',
         title: 'Spacing 间距',
       },
@@ -41,7 +41,7 @@ const StyleRoutes = {
       name: 'DemoStyleFlex',
       meta: {
         key: 'flex',
-        nodeKey: 'style',
+        pKey: 'style',
         realm: 'flex',
         title: 'Flex 弹性布局',
       },
@@ -53,7 +53,7 @@ const StyleRoutes = {
       name: 'DemoStyleFloat',
       meta: {
         key: 'float',
-        nodeKey: 'style',
+        pKey: 'style',
         realm: 'float',
         title: 'Float 浮动',
       },
@@ -65,7 +65,7 @@ const StyleRoutes = {
       name: 'DemoStyleRound',
       meta: {
         key: 'radius',
-        nodeKey: 'style',
+        pKey: 'style',
         realm: 'radius',
         title: 'Border Radius 边框半径',
       },
@@ -77,7 +77,7 @@ const StyleRoutes = {
       name: 'DemoStyleElevation',
       meta: {
         key: 'elevation',
-        nodeKey: 'style',
+        pKey: 'style',
         realm: 'elevation',
         title: 'Elevation 海拔',
       },

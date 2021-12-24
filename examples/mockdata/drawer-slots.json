@@ -1,0 +1,20 @@
+{
+  "status": true,
+  "total": 3,
+  "data": [
+    {
+      "name": "bottom",
+      "description": "抽屉底部的插槽"
+    },
+
+    {
+      "name": "img",
+      "description": "用于修改 v-img 属性时使用 src 属性"
+    },
+
+    {
+      "name": "top",
+      "description": "抽屉顶部的插槽"
+    }
+  ]
+}

@@ -5,6 +5,10 @@
     <usage-examples></usage-examples>
 
     <drawer-attributes></drawer-attributes>
+
+    <drawer-methods></drawer-methods>
+
+    <drawer-slots></drawer-slots>
   </div>
 </template>
 
@@ -14,7 +18,9 @@
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'drawer-attributes': () => import('./DrawerAttributes.vue')
+      'drawer-attributes': () => import('./DrawerAttributes'),
+      'drawer-methods': () => import('./DrawerMethods'),
+      'drawer-slots': () => import('./DrawerSlots.vue')
     }
   }
 </script>
