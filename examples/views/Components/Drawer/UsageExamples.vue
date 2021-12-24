@@ -7,6 +7,7 @@
             <v-treeview
               activatable
               dense
+              open-all
               :items="items"
             ></v-treeview>
           </v-col>
@@ -14,7 +15,6 @@
           <v-col :cols="5">
             <v-card height="400" width="256" class="mx-auto">
               <z-drawer 
-                header-height="auto"
                 :menus="menus" 
                 permanent
                 @select="onSelect"
