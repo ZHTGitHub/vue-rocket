@@ -122,7 +122,8 @@
         this.$emit('focus', event)
       },
 
-      onInput() {
+      onInput(value) {
+        this.$emit('input', value)
         this.verifyField()
       },
 

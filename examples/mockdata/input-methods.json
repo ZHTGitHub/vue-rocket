@@ -57,6 +57,12 @@
     },
 
     {
+      "name": "input",
+      "parameters": "(value: String)",
+      "description": "当输入框值更新时触发"
+    },
+
+    {
       "name": "keydown",
       "parameters": "(event: Event)",
       "description": "按下任何键时触发"

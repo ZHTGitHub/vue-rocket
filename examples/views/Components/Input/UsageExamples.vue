@@ -6,6 +6,7 @@
           formId="info"
           formKey="name"
           label="姓名"
+          @change="onChange"
         >
         </z-text-field>
       </div>
@@ -40,6 +41,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      onChange() {
+        console.log(23)
+      }
     }
   }
 </script>
