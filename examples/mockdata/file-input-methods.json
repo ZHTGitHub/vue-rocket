@@ -1,6 +1,6 @@
 {
   "status": true,
-  "total": 6,
+  "total": 12,
   "data": [
     {
       "name": "blur",
@@ -66,6 +66,12 @@
       "name": "keyup",
       "parameters": "(event: Event)",
       "description": "键盘抬起时触发"
+    },
+
+    {
+      "name": "response",
+      "parameters": "(event: any)",
+      "description": "后端响应时触发"
     }
   ]
 }
