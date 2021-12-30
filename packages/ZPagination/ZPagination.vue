@@ -4,11 +4,17 @@
     class="z-pagination z-flex align-center" 
     :class="`justify-${ position }`"
   >
-    <span class="mr-3 z-pagination__total">
+    <span 
+      v-if="showTotalItems"
+      class="mr-3 z-pagination__total"
+    >
       共 {{ total }} 条
     </span>
 
-    <span class="mr-3 z-pagination__sizes">
+    <span 
+      v-if="showSizeChanger"
+      class="mr-3 z-pagination__sizes"
+    >
       <z-select
         :formId="formId"
         formKey="pageSize"
@@ -32,7 +38,10 @@
       @previous="onPrevious"
     ></v-pagination>
 
-    <span class="z-flex align-center ml-6 z-pagination__jump">
+    <span 
+      v-if="showQuickJumper"
+      class="z-flex align-center ml-6 z-pagination__jump"
+    >
       前往
       <z-text-field
         :formId="formId"
@@ -79,6 +88,21 @@
           return ~['start', 'center', 'end'].indexOf(value)
         },
         default: 'end'
+      },
+
+      showQuickJumper: {
+        type: Boolean,
+        default: true
+      },
+
+      showSizeChanger: {
+        type: Boolean,
+        default: true
+      },
+
+      showTotalItems: {
+        type: Boolean,
+        default: true
       },
 
       total: {

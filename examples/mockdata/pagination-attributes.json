@@ -48,6 +48,33 @@
     },
 
     {
+      "name": "showQuickJumper",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否可以快速跳转至某页"
+    },
+
+    {
+      "name": "showSizeChanger",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否展示 pageSize 切换器"
+    },
+
+    {
+      "name": "showTotalItems",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否展示项目总数"
+    },
+
+    {
       "name": "total",
       "required": "否",
       "type": "Number",
