@@ -10,17 +10,13 @@ import request from './api/service'
 Vue.prototype.$request = request
 
 import vueRocket from '../packages'
-import '../packages/styles/styles.css'
+import '../packages/styles/styles.scss'
 Vue.use(vueRocket)
 
 import DemoComponents from './components'
 Vue.use(DemoComponents)
 
 import store from './store'
-
-// import util from './libs/util'
-
-// Vue.prototype.util = util
 
 Vue.config.productionTip = false
 

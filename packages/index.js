@@ -20,7 +20,7 @@ import ZUpload from './ZUpload'
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
 import R from './scripts/tools'
-import './styles/styles.css'
+import './styles/styles.scss'
 
 const components = [
 	ZAutocomplete,
