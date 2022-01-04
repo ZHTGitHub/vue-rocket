@@ -6,6 +6,7 @@ import ZCheckbox from './ZCheckbox'
 import ZCheckboxs from './ZCheckboxs'
 import ZDatePicker from './ZDatePicker'
 import ZDrawer from './ZDrawer'
+import ZDrawImage from './ZDrawImage'
 import ZDropdown from './ZDropdown'
 import ZDynamicForm from './ZDynamicForm'
 import ZFileInput from './ZFileInput'
@@ -31,6 +32,7 @@ const components = [
 	ZCheckboxs,
 	ZDatePicker,
 	ZDrawer,
+	ZDrawImage,
 	ZDropdown,
 	ZDynamicForm,
 	ZFileInput,
@@ -67,6 +69,7 @@ export default {
 	ZCheckboxs,
 	ZDatePicker,
 	ZDrawer,
+	ZDrawImage,
 	ZDropdown,
 	ZDynamicForm,
 	ZFileInput,

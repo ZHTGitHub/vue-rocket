@@ -111,6 +111,15 @@ export const menus = [
         title: 'Drawer 导航抽屉',
         link: '/components/drawer'
       },
+      
+      {
+        pId: 'components',
+        key: 'drawImage',
+        icon: '',
+        realm: 'drawImage',
+        title: 'Draw image 绘图',
+        link: '/components/drawImage'
+      },
 
       {
         pId: 'components',

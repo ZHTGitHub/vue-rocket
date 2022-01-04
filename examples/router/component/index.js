@@ -97,6 +97,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'drawImage',
+      name: 'ZDemoDrawImage',
+      meta: {
+        key: 'drawImage',
+        pKey: 'components',
+        realm: 'drawImage',
+        title: 'Draw image 绘图',
+      },
+      component: () => import('../../views/Components/DrawImage')
+    },
+
+    {
       path: 'dropdown',
       name: 'ZDemoDropdown',
       meta: {
