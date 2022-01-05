@@ -6,7 +6,12 @@
       </div>
       <div slot="demo">
         <div class="z-flex">
-          <z-draw-image :src="require('/public/forms.jpg')"></z-draw-image>
+          <z-draw-image 
+            showDrew
+            width="600"
+            height="700"
+            :src="require('/public/test.jpg')"
+          ></z-draw-image>
         </div>
       </div>
     </usage-demo>

@@ -2,7 +2,7 @@ const options = [
   {
     key: 'screenshot',
     icon: 'mdi-content-cut',
-    tips: '切图(ctrl+a)',
+    tips: '切图(Ctrl+A)',
     color: '#6a6a6a',
     size: 20,
     style: {
@@ -13,7 +13,7 @@ const options = [
   {
     key: 'rectangle',
     icon: 'mdi-checkbox-blank-outline',
-    tips: '矩形(ctrl+x)',
+    tips: '矩形(Ctrl+X)',
     color: '#6a6a6a',
     size: 23
   },
@@ -21,15 +21,31 @@ const options = [
   {
     key: 'text',
     icon: 'mdi-format-text',
-    tips: '文字(ctrl+e)',
+    tips: '文字(Ctrl+E)',
     color: '#6a6a6a',
     size: 24
   },
 
   {
+    key: 'rotateL',
+    icon: 'mdi-rotate-left-variant',
+    tips: '左旋转(Ctrl+L)',
+    color: '#6a6a6a',
+    size: 20
+  },
+
+  {
+    key: 'rotateR',
+    icon: 'mdi-rotate-right-variant',
+    tips: '右旋转(Ctrl+R)',
+    color: '#6a6a6a',
+    size: 20
+  },
+
+  {
     key: 'clear',
     icon: 'mdi-close',
-    tips: '清除(ctrl+z)',
+    tips: '清除(Ctrl+Z)',
     color: 'error',
     size: 24
   },
@@ -37,7 +53,7 @@ const options = [
   {
     key: 'save',
     icon: 'mdi-check',
-    tips: '保存(ctrl+s)',
+    tips: '保存(Ctrl+S)',
     color: 'success',
     size: 24
   }

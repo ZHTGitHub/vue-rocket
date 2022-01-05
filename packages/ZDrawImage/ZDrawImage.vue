@@ -4,17 +4,17 @@
       <div class="options">
         <ul class="z-flex align-center">
           <div 
-            v-for="(item, index) in cells.options" 
+            v-for="(item, index) in options" 
             :key="item.key"
-            :class="{ 'divider z-flex align-center': index === 3 }"
+            :class="{ 'divider z-flex align-center': index === 5 }"
           >
             <li class="mr-2">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     :color="item.color"
-                    dark
                     icon
+                    :disabled="item.disabled"
                     v-bind="attrs"
                     v-on="on"
                     @click="onSelect(item)"
@@ -32,27 +32,43 @@
         </ul>
       </div>
 
-      <div id="drawing" class="drawing">
-        <canvas 
-          id="drewCanvas" 
-          ref="drewCanvas"
-        ></canvas>
+      <div 
+        id="drawing" 
+        class="drawing"
+        :style="{
+          width: `${ width }px`,
+          height: `${ height }px`
+        }"
+      >
+        <div 
+          class="rotate"
+          :style="{ 
+            width: `${ oImageHeight }px`,
+            transform: `rotate(${ rotateAngle }deg)` 
+          }"
+        >
+          <canvas 
+            id="drewCanvas" 
+            ref="drewCanvas"
+          ></canvas>
 
-        <canvas 
-          id="drawingCanvas" 
-          ref="drawingCanvas"
-        ></canvas>
+          <canvas 
+            id="drawingCanvas" 
+            ref="drawingCanvas"
+          ></canvas>
 
-        <div class="z-image">
-          <img 
-            id="oImage"
-            ref="oImage"
-            :src="src" 
-          />
+          <div class="z-image">
+            <img 
+              id="oImage"
+              ref="oImage"
+              :width="width"
+              :src="src" 
+            />
+          </div>
         </div>
       </div>
 
-      <div class="drew">
+      <div v-if="showDrew" class="drew">
         <img 
           ref="dImage"
           :src="drewImageDataURL" 
@@ -64,24 +80,49 @@
 
 <script>
   import cells from './cells'
+  import tools from '../scripts/tools'
   import { base64ToFile } from './tools'
 
   const defaultRectangleBorderColor = '#ff1e10'
   const defaultFontColor = '#ff1e10'
+  const angle = 90
+  const rotateCountAgg = [-3, -2, -1, 0, 1, 2, 3]
+  const colRotateCountAgg = [-1, -3, 1, 3]
 
   export default {
     name: 'ZDrawImage',
 
     props: {
+      height: {
+        type: [Number, String],
+        default: 'auto'
+      },
+
+      isDownload: {
+        type: Boolean,
+        default: false
+      },
+
+      showDrew: {
+        type: Boolean,
+        default: false
+      },
+
       src: {
         type: String,
         required: false
+      },
+
+      width: {
+        type: [Number, String],
+        default: 'auto'
       }
     },
 
     data() {
       return {
         cells,
+        options: cells.options,
 
         rectangleBorderColor: defaultRectangleBorderColor,
         fontColor: defaultFontColor,
@@ -113,14 +154,20 @@
         
         input: null,
         inputValue: '',
-        textArea: {}
+        textArea: {},
+
+        rotateCount: 0,
+        rotateAngle: 0,
+
+        scale: 1,
+
+        isScreenshot: true,
+        disabledText: false
       }
     },
 
     mounted() {
       this.keyboardEvents()
-
-      
     },
 
     methods: {
@@ -149,6 +196,44 @@
         this.image.onload = function() {
           const { width, height } = vm.image
           vm.drewCtx.drawImage(this, 0, 0, width, height, 0, 0, vm.oImageWidth, vm.oImageHeight)
+        }
+      },
+
+      // 旋转
+      rotateImage(direction) {
+        this.initialize()
+
+        if(direction === 'left') {
+          --this.rotateCount
+        }
+        else if(direction === 'right') {
+          ++this.rotateCount
+        }
+
+        // 旋转至270°/-270°，重置为0°
+        if(!rotateCountAgg.includes(this.rotateCount)) {
+          this.rotateCount = 0
+        }
+
+        this.rotateAngle = this.rotateCount * angle
+
+        // 旋转至90°/270°/-90°/-270°，按比例缩放
+        if(colRotateCountAgg.includes(this.rotateCount)) {
+          // this.scale = this.oImageHeight / this.oImageWidth
+        }
+        // 还原
+        else {
+          // this.scale = 1
+        }
+
+        console.log(this.oImageHeight)
+
+        // 旋转后不可输入文字
+        for(let item of this.options) {
+          if(item.key === 'text') {
+            item.disabled = this.rotateCount !== 0 ? true : false
+            this.disabledText = item.disabled
+          }
         }
       },
 
@@ -211,6 +296,7 @@
             x: event.offsetX,
             y: event.offsetY
           }
+          console.log(startXY)
         }
 
         this.drawingCanvas.onmousemove = function(event) {
@@ -239,16 +325,17 @@
 
         this.drawingCtx = this.drawingCanvas.getContext('2d')
         
-        let [startXY, prevStartXY] = [null, null]
-
         const drawing = document.getElementById('drawing')
-        let input = null
+
+        let [startXY, prevStartXY, input, inputXY] = [null, null, null, null]
 
         this.drawingCanvas.onmousedown = function(event) {
           startXY = {
             x: event.offsetX,
             y: event.offsetY
           }
+
+          inputXY = vm.computeInputXY(startXY.x, startXY.y)
 
           input = document.getElementById('drawTextInput')
 
@@ -259,7 +346,7 @@
             input.style.left = startXY.x + 'px'
             input.style.top = startXY.y + 'px'
             input.style.border = '1px solid #ff1e10'
-            input.style.color = '#fff'
+            input.style.color = '#ff1e10'
             input.style.outline = 'none'
             drawing.appendChild(input)
           }
@@ -268,12 +355,13 @@
               input.style.left = startXY.x + 'px'
               input.style.top = startXY.y + 'px'
               input.style.border = '1px solid #ff1e10'
+              input.readOnly = false
             }
             else {
               input.style.border = '1px solid transparent'
+              input.readOnly = true
             }
 
-            // const value = input.value
             vm.inputValue = input.value
             vm.writeText(prevStartXY.x, prevStartXY.y, 250, vm.inputValue, vm.drawingCtx)
             input.value = ''
@@ -284,13 +372,7 @@
         document.addEventListener('mouseup', function(event) {
           const nodeName = event.target.nodeName
 
-          const nodes = ['CANVAS', 'INPUT']
-
-          console.log(nodeName)
-
-          if(!~nodes.indexOf(nodeName)) {
-            drawing.removeChild(input)
-          }
+          !~['CANVAS', 'INPUT'].indexOf(nodeName) && input.remove()
 
           if(startXY) {
             prevStartXY = {}
@@ -304,13 +386,19 @@
 
       // 保存
       onSave() {
+        this.isDownload && this.downloadDrewImage()
 
+        this.$emit('drew', {
+          dataURL: this.memoImageDataURL
+        })
+
+        this.onClear()
       },
 
       // 清除
       onClear() {
-        this.drawingCtx.clearRect(0, 0, this.drawingCanvas.width, this.drawingCanvas.height)
-        this.drewCtx.clearRect(0, 0, this.drewCanvas.width, this.drewCanvas.height)
+        this.drawingCtx.clearRect && this.drawingCtx.clearRect(0, 0, this.drawingCanvas.width, this.drawingCanvas.height)
+        this.drewCtx.clearRect && this.drewCtx.clearRect(0, 0, this.drewCanvas.width, this.drewCanvas.height)
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
         this.drewArea = {}
@@ -432,9 +520,39 @@
         this.textArea = {
           startX,
           startY,
-          maxWidth,
-          // text
+          maxWidth
         }
+      },
+
+      // 计算不同角度输入框坐标
+      computeInputXY(startX, startY) {
+        const [canvasW, canvasH] = [oImage.offsetWidth, oImage.offsetHeight]
+        console.log(canvasW, canvasH)
+        console.log(startX, startY)
+        console.log(this.rotateCount)
+        switch (this.rotateCount) {
+          case 1:
+            return {
+              x: canvasW - startX,
+              y: startY
+            }
+        }
+      },
+
+      // 同时按下Ctrl+Alt+Z进行切图和框图切换
+      screenshotOrRectangle() {
+        this.isScreenshot = !this.isScreenshot
+
+        if(this.isScreenshot) this.drawScreenshot()
+        else this.drawRectangle()
+      },
+
+      // 下载已绘制图片
+      downloadDrewImage() {
+        const a = document.createElement('a')
+        a.href = this.memoImageDataURL
+        a.download = new Date().getTime() + '.png'
+        a.click()
       },
 
       // 某项操作
@@ -452,8 +570,20 @@
             this.drawText()
             break;
           
+          case 'rotateL':
+            this.rotateImage('left')
+            break;
+
+          case 'rotateR':
+            this.rotateImage('right')
+            break;
+          
           case 'clear':
             this.onClear()
+            break;
+          
+          case 'save':
+            this.onSave()
             break;
         }
       },
@@ -461,32 +591,56 @@
       // 按键
       keyboardEvents() {
         window.addEventListener('keydown', (event) => {
-          const { ctrlKey, keyCode } = event
+          const { altKey, ctrlKey, keyCode } = event
 
           switch (keyCode) {
+            // 切图
             case 65:
               event.preventDefault()
               ctrlKey && this.drawScreenshot()
               break;
-          
+
+            // 矩形
             case 88:
               event.preventDefault()
               ctrlKey && this.drawRectangle()
               break;
-            
+
+            // 文字
             case 69:
               event.preventDefault()
-              ctrlKey && this.drawText()
+              if(!this.disabledText) {
+                ctrlKey && this.drawText()
+              }
               break;
 
+            // 左旋转
+            case 76:
+              event.preventDefault()
+              ctrlKey && this.rotateImage('left')
+              break;
+
+            // 右旋转
+            case 82:
+              event.preventDefault()
+              ctrlKey && this.rotateImage('right')
+              break;
+
+            // 清除
             case 90:
               event.preventDefault()
-              ctrlKey && this.onClear()           
+              if(ctrlKey && !altKey) {
+                this.onClear()
+              }
+              else if(ctrlKey && altKey) {
+                this.screenshotOrRectangle()
+              }
               break;
             
+            // 保存
             case 83:
               event.preventDefault()
-              ctrlKey && console.log('保存')
+              ctrlKey && this.onSave()
               break;
           }
         })
@@ -522,9 +676,14 @@
 
   .drawing {
     position: relative;
+    overflow: auto;
 
-    canvas {
-      position: absolute;
+    .rotate {
+      position: relative;
+      
+      canvas {
+        position: absolute;
+      }
     }
   }
 </style>
