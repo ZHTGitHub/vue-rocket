@@ -360,6 +360,9 @@
       onSave() {
         this.isDownload && this.downloadDrewImage()
 
+        console.log(this.memoImageDataURL)
+        // console.log(this.drewImageDataURL)
+
         this.$emit('drew', {
           dataURL: this.memoImageDataURL
         })
@@ -423,7 +426,7 @@
         }
       },
       
-      // 复制已截图
+      // 复制已切图
       copyScreenshot() {
         const { startX, startY, rectW, rectH } = this.drewArea
 
@@ -442,6 +445,7 @@
         // const file = base64ToFile(dataURL, 'copyScreenshot')
 
         this.drewImageDataURL = dataURL
+        this.memoImageDataURL = dataURL
         this.drewArea = {}
       },
 
