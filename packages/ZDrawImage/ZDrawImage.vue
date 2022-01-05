@@ -32,14 +32,7 @@
         </ul>
       </div>
 
-      <div 
-        id="drawing" 
-        class="drawing"
-        :style="{
-          width: `${ width }px`,
-          height: `${ height }px`
-        }"
-      >
+      <div id="drawing" class="drawing">
         <div 
           class="rotate"
           :style="{ 
@@ -47,32 +40,18 @@
             transform: `rotate(${ rotateAngle }deg)` 
           }"
         >
-          <canvas 
-            id="drewCanvas" 
-            ref="drewCanvas"
-          ></canvas>
+          <canvas ref="drewCanvas"></canvas>
 
-          <canvas 
-            id="drawingCanvas" 
-            ref="drawingCanvas"
-          ></canvas>
+          <canvas ref="drawingCanvas"></canvas>
 
           <div class="z-image">
-            <img 
-              id="oImage"
-              ref="oImage"
-              :width="width"
-              :src="src" 
-            />
+            <img ref="oImage" :width="width" :src="src" />
           </div>
         </div>
       </div>
 
       <div v-if="showDrew" class="drew">
-        <img 
-          ref="dImage"
-          :src="drewImageDataURL" 
-        />
+        <img ref="dImage" :src="drewImageDataURL" />
       </div>
     </div>
   </div>
@@ -80,8 +59,6 @@
 
 <script>
   import cells from './cells'
-  import tools from '../scripts/tools'
-  import { base64ToFile } from './tools'
 
   const defaultRectangleBorderColor = '#ff1e10'
   const defaultFontColor = '#ff1e10'
@@ -93,11 +70,6 @@
     name: 'ZDrawImage',
 
     props: {
-      height: {
-        type: [Number, String],
-        default: 'auto'
-      },
-
       isDownload: {
         type: Boolean,
         default: false
@@ -175,7 +147,7 @@
       initialize() {
         const vm = this
 
-        const oImage = document.getElementById('oImage')
+        const oImage = this.$refs.oImage
 
         this.oImageWidth = oImage.offsetWidth
         this.oImageHeight = oImage.offsetHeight
@@ -335,7 +307,7 @@
             y: event.offsetY
           }
 
-          inputXY = vm.computeInputXY(startXY.x, startXY.y)
+          // inputXY = vm.computeInputXY(startXY.x, startXY.y)
 
           input = document.getElementById('drawTextInput')
 
@@ -526,16 +498,9 @@
 
       // 计算不同角度输入框坐标
       computeInputXY(startX, startY) {
-        const [canvasW, canvasH] = [oImage.offsetWidth, oImage.offsetHeight]
-        console.log(canvasW, canvasH)
-        console.log(startX, startY)
-        console.log(this.rotateCount)
-        switch (this.rotateCount) {
-          case 1:
-            return {
-              x: canvasW - startX,
-              y: startY
-            }
+        return {
+          x: startX,
+          y: startY
         }
       },
 
@@ -657,32 +622,45 @@
 </script>
 
 <style scoped lang="scss">
-  .options {
-    ul, li {
-      padding: 0;
-      margin: 0;
-      list-style-type: none;
-    }
-
-    .divider::before {
-      content: '';
-      display: inline-block;
-      margin-right: 8px;
-      width: 1px;
-      height: 20px;
-      background-color: rgba(0, 0, 0, .15);
-    }
-  }
-
-  .drawing {
+  .z-draw-image {
     position: relative;
-    overflow: auto;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, .02);
 
-    .rotate {
+    .options {
+      position: absolute;
+      top: -38px;
+      border: 1px solid rgba(0, 0, 0, .02);
+      background-color: #fff;
+      z-index: 1;
+
+      ul, li {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      }
+
+      .divider::before {
+        content: '';
+        display: inline-block;
+        margin-right: 8px;
+        width: 1px;
+        height: 20px;
+        background-color: rgba(0, 0, 0, .15);
+      }
+    }
+
+    .drawing {
       position: relative;
-      
-      canvas {
-        position: absolute;
+      overflow: auto;
+
+      .rotate {
+        position: relative;
+        
+        canvas {
+          position: absolute;
+        }
       }
     }
   }

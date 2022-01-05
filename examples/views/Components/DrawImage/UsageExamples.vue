@@ -8,8 +8,7 @@
         <div class="z-flex">
           <z-draw-image 
             showDrew
-            width="600"
-            height="700"
+            width="1200"
             :src="require('/public/test.jpg')"
           ></z-draw-image>
         </div>
