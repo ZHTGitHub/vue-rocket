@@ -163,7 +163,8 @@
 
         this.drewCtx = this.drewCanvas.getContext('2d') 
 
-        this.image.src = this.memoImageDataURL || this.src
+        this.image.src = this.memoImageDataURL || `${ this.src }?${ new Date().getTime() }`
+        this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = function() {
           const { width, height } = vm.image
@@ -623,6 +624,8 @@
       }
     }
   }
+
+// https://blog.csdn.net/leftfist/article/details/106947101
 </script>
 
 <style scoped lang="scss">

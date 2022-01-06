@@ -1,3 +1,9 @@
+// 值类型
+const valueType = ['undefined', 'number', 'string', 'boolean', 'symbol'];
+
+// 引用类型
+const referenceType = ['object', 'function'];
+
 /**
  * @description 判断值是否为对象
  * @param {Object} obj
@@ -130,13 +136,72 @@ const find = function(collection, predicate) {
   }
 };
 
+/**
+ * @description 深拷贝
+ * @param {Any} value
+ */ 
+const deepClone = function(value = {}) {
+  if(typeof value !== 'object' || value == null) {
+    return value
+  }
+
+  const result = (value instanceof Array) ? [] : {}
+
+  for(let key in value) {
+    if(value.hasOwnProperty(key)) {
+      result[key] = deepClone(value[key])
+    }
+  }
+
+  return result
+};
+
+/**
+ * @description 数组去重
+ * @param {Any[]} value
+ */ 
+const cleanArray = function(value = []) {
+  if(!Array.isArray(value)) {
+    return value
+  }
+
+  const result = []
+
+  for(let val of value) {
+    // val 为值类型
+    if(~valueType.indexOf(typeof val)) {
+      if(!result.includes(val)) {
+        result.push(val)
+      }
+    }
+    // val 为引用类型
+    else if(~referenceType.indexOf(typeof val)) {
+      if(!result.length) {
+        result.push(val)
+      }
+      else {
+        const existed = result.some(unique => JSON.stringify(unique) === JSON.stringify(val))
+
+        if(!existed) {
+          result.push(val)
+        }
+      }
+    }
+  }
+
+  return result
+};
+
 export {
   isObject,
   isArray,
   isEqual,
   isLousy,
   isYummy,
-  find
+
+  find,
+  deepClone,
+  cleanArray
 }
 
 export default {
@@ -145,5 +210,8 @@ export default {
   isEqual,
   isLousy,
   isYummy,
-  find
+
+  find,
+  deepClone,
+  cleanArray
 }

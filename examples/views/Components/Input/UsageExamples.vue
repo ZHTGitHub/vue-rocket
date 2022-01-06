@@ -6,7 +6,7 @@
           formId="info"
           formKey="name"
           label="姓名"
-          @change="onChange"
+          @enter="onChange"
         >
         </z-text-field>
       </div>
