@@ -185,7 +185,7 @@
 
       onChange(file) {
         this.$emit('change', file)
-        
+
         this.formData = new FormData()
 
         // 多选

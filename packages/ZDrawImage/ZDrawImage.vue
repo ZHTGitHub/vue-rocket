@@ -37,6 +37,11 @@
     name: 'ZDrawImage',
 
     props: {
+      fileName: {
+        type: String,
+        default: 'file'
+      },
+
       isDownload: {
         type: Boolean,
         default: false
@@ -380,7 +385,7 @@
 
         const dataURL = canvas.toDataURL('image/png')
 
-        this.file = base64ToFile(dataURL, 'file')
+        this.file = base64ToFile(dataURL, vm.fileName)
         this.screenshotDataURL = dataURL
         this.drewArea = {}
 
@@ -418,7 +423,7 @@
 
           const dataURL = canvas.toDataURL('image/png')
 
-          vm.file = base64ToFile(dataURL, 'file')
+          vm.file = base64ToFile(dataURL, vm.fileName)
           vm.drewImageDataURL = dataURL
 
           vm.$emit('drew', {
