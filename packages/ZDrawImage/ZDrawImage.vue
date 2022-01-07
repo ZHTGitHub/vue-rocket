@@ -1,68 +1,35 @@
 <template>
   <div class="z-draw-image">
-    <div class="draw">
-      <div class="options">
-        <ul class="z-flex align-center">
-          <div 
-            v-for="(item, index) in options" 
-            :key="item.key"
-            :class="{ 'divider z-flex align-center': index === 5 }"
-          >
-            <li class="mr-2">
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    :color="item.color"
-                    icon
-                    :disabled="item.disabled"
-                    v-bind="attrs"
-                    v-on="on"
-                    @click="onSelect(item)"
-                  >
-                    <v-icon 
-                      :size="item.size"
-                      :style="item.style"
-                    >{{ item.icon }}</v-icon>
-                  </v-btn>
-                </template>
-                <span>{{ item.tips }}</span>
-              </v-tooltip>
-            </li>
-          </div>
-        </ul>
-      </div>
+    <div id="drawing" class="drawing">
+      <div 
+        class="rotate"
+        :style="{ 
+          width: `${ oImageHeight }px`,
+        }"
+      >
+          <!-- transform: `rotate(${ rotateDegrees }deg)`  -->
+        <canvas ref="drewCanvas" class="drewCanvas"></canvas>
 
-      <div id="drawing" class="drawing">
-        <div 
-          class="rotate"
-          :style="{ 
-            width: `${ oImageHeight }px`,
-            transform: `rotate(${ rotateAngle }deg)` 
-          }"
-        >
-          <canvas ref="drewCanvas"></canvas>
+        <canvas ref="drawingCanvas" class="drawingCanvas"></canvas>
 
-          <canvas ref="drawingCanvas"></canvas>
-
-          <div class="z-image">
-            <img ref="oImage" :width="width" :src="src" />
-          </div>
+        <div class="z-image">
+          <img 
+            ref="oImage" 
+            :width="width" 
+            :src="src" 
+          />
         </div>
-      </div>
-
-      <div v-if="showDrew" class="drew">
-        <img ref="dImage" :src="drewImageDataURL" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import cells from './cells'
+  import { base64ToFile } from './tools'
 
   const defaultRectangleBorderColor = '#ff1e10'
   const defaultFontColor = '#ff1e10'
-  const angle = 90
+  const degrees = 90
   const rotateCountAgg = [-3, -2, -1, 0, 1, 2, 3]
   const colRotateCountAgg = [-1, -3, 1, 3]
 
@@ -71,11 +38,6 @@
 
     props: {
       isDownload: {
-        type: Boolean,
-        default: false
-      },
-
-      showDrew: {
         type: Boolean,
         default: false
       },
@@ -93,9 +55,6 @@
 
     data() {
       return {
-        cells,
-        options: cells.options,
-
         rectangleBorderColor: defaultRectangleBorderColor,
         fontColor: defaultFontColor,
 
@@ -121,17 +80,16 @@
         },
 
         drewArea: {},
+        file: '',
+        screenshotDataURL: '',
         drewImageDataURL: '',
-        memoImageDataURL: '',
         
         input: null,
         inputValue: '',
         textArea: {},
 
         rotateCount: 0,
-        rotateAngle: 0,
-
-        scale: 1,
+        rotateDegrees: 0,
 
         isScreenshot: true,
         disabledText: false
@@ -139,7 +97,7 @@
     },
 
     mounted() {
-      this.keyboardEvents()
+      this._keyboardEvents()
     },
 
     methods: {
@@ -152,18 +110,28 @@
         this.oImageWidth = oImage.offsetWidth
         this.oImageHeight = oImage.offsetHeight
 
+        // drawing
         this.drawingCanvas = this.$refs.drawingCanvas
-        this.drewCanvas = this.$refs.drewCanvas
 
         this.drawingCanvas.width = this.oImageWidth
         this.drawingCanvas.height = this.oImageHeight
+
+        this.drawingCtx = this.drawingCanvas.getContext('2d') 
+
+        // this.drawingCtx.rotate(this.rotateDegrees * Math.PI / 180)
+
+        // drew
+        this.drewCanvas = this.$refs.drewCanvas
 
         this.drewCanvas.width = this.oImageWidth
         this.drewCanvas.height = this.oImageHeight
 
         this.drewCtx = this.drewCanvas.getContext('2d') 
 
-        this.image.src = this.memoImageDataURL || `${ this.src }?${ new Date().getTime() }`
+        // this.drewCtx.rotate(this.rotateDegrees * Math.PI / 180)
+
+        // image
+        this.image.src = this.drewImageDataURL || `${ this.src }?${ new Date().getTime() }`
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = function() {
@@ -183,43 +151,17 @@
           ++this.rotateCount
         }
 
-        // 旋转至270°/-270°，重置为0°
-        if(!rotateCountAgg.includes(this.rotateCount)) {
-          this.rotateCount = 0
-        }
-
-        this.rotateAngle = this.rotateCount * angle
-
-        // 旋转至90°/270°/-90°/-270°，按比例缩放
-        if(colRotateCountAgg.includes(this.rotateCount)) {
-          // this.scale = this.oImageHeight / this.oImageWidth
-        }
-        // 还原
-        else {
-          // this.scale = 1
-        }
-
-        console.log(this.oImageHeight)
-
-        // 旋转后不可输入文字
-        for(let item of this.options) {
-          if(item.key === 'text') {
-            item.disabled = this.rotateCount !== 0 ? true : false
-            this.disabledText = item.disabled
-          }
-        }
+        this.rotateDegrees = this.rotateCount * degrees
       },
 
       // 切图
       drawScreenshot() {
         const vm = this 
 
-        this.clearEventListener()
+        this._clearEventListener()
 
         this.initialize()
 
-        this.drawingCtx = this.drawingCanvas.getContext('2d')
-        
         this.drawingCtx.fillStyle = 'rgba(0, 0, 0, .46)'
         this.drawingCtx.lineWidth = 2
         this.drawingCtx.strokeStyle = '#1aad19'
@@ -239,14 +181,14 @@
             const rectW = event.offsetX - startX
             const rectH = event.offsetY - startY
 
-            vm.fillRect(startX, startY, rectW, rectH, vm.drawingCtx, true)
+            vm.fillRectangle(startX, startY, rectW, rectH, vm.drawingCtx, true)
           }
         }
 
         document.addEventListener('mouseup', function() {
           if(startXY) {
             startXY = null
-            vm.copyScreenshot()
+            vm.createScreenshotFile()
           }
         })
       },
@@ -256,8 +198,6 @@
         const vm = this
 
         this.initialize()
-
-        this.drawingCtx = this.drawingCanvas.getContext('2d')
 
         this.drawingCtx.lineWidth = 3
         this.drawingCtx.strokeStyle = this.rectangleBorderColor
@@ -269,7 +209,6 @@
             x: event.offsetX,
             y: event.offsetY
           }
-          console.log(startXY)
         }
 
         this.drawingCanvas.onmousemove = function(event) {
@@ -278,14 +217,14 @@
             const rectW = event.offsetX - startX
             const rectH = event.offsetY - startY
 
-            vm.fillRect(startX, startY, rectW, rectH, vm.drawingCtx)
+            vm.fillRectangle(startX, startY, rectW, rectH, vm.drawingCtx)
           }
         }
 
         document.addEventListener('mouseup', function() {
           if(startXY) {
             startXY = null
-            vm.copyDrew()
+            vm.createDrewFile()
           }
         })
       },
@@ -296,8 +235,6 @@
 
         this.initialize()
 
-        this.drawingCtx = this.drawingCanvas.getContext('2d')
-        
         const drawing = document.getElementById('drawing')
 
         let [startXY, prevStartXY, input, inputXY] = [null, null, null, null]
@@ -315,6 +252,7 @@
           if(!input) {
             input = document.createElement('input')
             input.id = 'drawTextInput'
+            input.autocomplete = 'off'
             input.style.position = 'absolute'
             input.style.left = startXY.x + 'px'
             input.style.top = startXY.y + 'px'
@@ -352,20 +290,18 @@
             prevStartXY.x = startXY.x
             prevStartXY.y = startXY.y
             startXY = null          
-            vm.copyDrew()
+            vm.createDrewFile()
           }
         })
       },
 
       // 保存
       onSave() {
-        this.isDownload && this.downloadDrewImage()
+        this.isDownload && this._downloadDrewImage()
 
-        console.log(this.memoImageDataURL)
-        // console.log(this.drewImageDataURL)
-
-        this.$emit('drew', {
-          dataURL: this.memoImageDataURL
+        this.$emit('save', {
+          dataURL: this.screenshotDataURL || this.drewImageDataURL,
+          file: this.file
         })
 
         this.onClear()
@@ -378,8 +314,8 @@
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
         this.drewArea = {}
+        this.screenshotDataURL = ''
         this.drewImageDataURL = ''
-        this.memoImageDataURL = ''
         this.textArea = {}
       },
 
@@ -392,7 +328,7 @@
        * @param ctx 绘图环境
        * @param overlay 遮罩
        */
-      fillRect(startX, startY, rectW, rectH, ctx, overlay) {
+      fillRectangle(startX, startY, rectW, rectH, ctx, overlay) {
         ctx.clearRect(0, 0, this.oImageWidth, this.oImageHeight)
 
         ctx.beginPath()
@@ -427,9 +363,11 @@
         }
       },
       
-      // 复制已切图
-      copyScreenshot() {
+      // 生成切图文件
+      createScreenshotFile() {
         const { startX, startY, rectW, rectH } = this.drewArea
+
+        if(!startX || !startY || !rectW || !rectH) return
 
         // canvas
         const canvas = document.createElement('canvas')
@@ -442,22 +380,24 @@
 
         const dataURL = canvas.toDataURL('image/png')
 
-        // 生成文件
-        // const file = base64ToFile(dataURL, 'copyScreenshot')
-
-        this.drewImageDataURL = dataURL
-        this.memoImageDataURL = dataURL
+        this.file = base64ToFile(dataURL, 'file')
+        this.screenshotDataURL = dataURL
         this.drewArea = {}
+
+        this.$emit('drew', {
+          dataURL: this.screenshotDataURL,
+          file: this.file
+        })
       },
 
-      // 复制已绘制
-      copyDrew() { 
+      // 生成已绘制(框图/文字)文件
+      createDrewFile() { 
         const vm = this
         const { startX, startY, rectW, rectH } = this.drewArea
 
         this.drewCtx = this.drewCanvas.getContext('2d')
         
-        this.image.src = this.memoImageDataURL || this.src
+        this.image.src = this.drewImageDataURL || this.src
 
         this.image.onload = function() {
           const { width, height } = vm.image
@@ -478,11 +418,13 @@
 
           const dataURL = canvas.toDataURL('image/png')
 
-          // 生成文件
-          // const file = base64ToFile(dataURL, 'copyDrew')
-
+          vm.file = base64ToFile(dataURL, 'file')
           vm.drewImageDataURL = dataURL
-          vm.memoImageDataURL = dataURL
+
+          vm.$emit('drew', {
+            dataURL: vm.drewImageDataURL,
+            file: vm.file
+          })
         }
       },
 
@@ -518,48 +460,15 @@
       },
 
       // 下载已绘制图片
-      downloadDrewImage() {
+      _downloadDrewImage() {
         const a = document.createElement('a')
-        a.href = this.memoImageDataURL
+        a.href = this.screenshotDataURL || this.drewImageDataURL
         a.download = new Date().getTime() + '.png'
         a.click()
       },
 
-      // 某项操作
-      onSelect({ key }) {
-        switch (key) {
-          case 'screenshot':
-            this.drawScreenshot()
-            break;
-
-          case 'rectangle':
-            this.drawRectangle()
-            break;
-          
-          case 'text':
-            this.drawText()
-            break;
-          
-          case 'rotateL':
-            this.rotateImage('left')
-            break;
-
-          case 'rotateR':
-            this.rotateImage('right')
-            break;
-          
-          case 'clear':
-            this.onClear()
-            break;
-          
-          case 'save':
-            this.onSave()
-            break;
-        }
-      },
-
       // 按键
-      keyboardEvents() {
+      _keyboardEvents() {
         window.addEventListener('keydown', (event) => {
           const { altKey, ctrlKey, keyCode } = event
 
@@ -617,15 +526,13 @@
       },
 
       // 清空绑定的事件
-      clearEventListener() {
+      _clearEventListener() {
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
         document.removeEventListener('mouseup', function() {}, false)
       }
     }
   }
-
-// https://blog.csdn.net/leftfist/article/details/106947101
 </script>
 
 <style scoped lang="scss">
@@ -633,29 +540,12 @@
     position: relative;
     width: 100%;
     height: 100%;
-    border: 1px solid rgba(0, 0, 0, .02);
+    border: 1px solid rgba(0, 0, 0, .05);
+    transition: border .15s linear;
+    -webkit-user-select: none;
 
-    .options {
-      position: absolute;
-      top: -38px;
-      border: 1px solid rgba(0, 0, 0, .02);
-      background-color: #fff;
-      z-index: 1;
-
-      ul, li {
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-      }
-
-      .divider::before {
-        content: '';
-        display: inline-block;
-        margin-right: 8px;
-        width: 1px;
-        height: 20px;
-        background-color: rgba(0, 0, 0, .15);
-      }
+    &:hover {
+      border: 1px solid rgba(0, 0, 0, .2);
     }
 
     .drawing {
