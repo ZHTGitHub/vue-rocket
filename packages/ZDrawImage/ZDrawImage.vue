@@ -18,6 +18,8 @@
             :width="width" 
             :src="src" 
           />
+
+          <img :src="blobSrc" alt="">
         </div>
       </div>
     </div>
@@ -25,7 +27,7 @@
 </template>
 
 <script>
-  import { base64ToFile } from './tools'
+  import { base64ToFile, base64ToBlob } from './tools'
 
   const defaultRectangleBorderColor = '#ff1e10'
   const defaultFontColor = '#ff1e10'
@@ -96,14 +98,13 @@
         rotateCount: 0,
         rotateDegrees: 0,
 
-        isScreenshot: true,
-        disabledText: false
+        blobSrc: ''
       }
     },
 
     mounted() {
-      this._keyboardEvents()
-    },
+      this.initialize()
+    }, 
 
     methods: {
       // 初始化
@@ -121,9 +122,7 @@
         this.drawingCanvas.width = this.oImageWidth
         this.drawingCanvas.height = this.oImageHeight
 
-        this.drawingCtx = this.drawingCanvas.getContext('2d') 
-
-        // this.drawingCtx.rotate(this.rotateDegrees * Math.PI / 180)
+        this.drawingCtx = this.drawingCanvas.getContext('2d')
 
         // drew
         this.drewCanvas = this.$refs.drewCanvas
@@ -131,9 +130,7 @@
         this.drewCanvas.width = this.oImageWidth
         this.drewCanvas.height = this.oImageHeight
 
-        this.drewCtx = this.drewCanvas.getContext('2d') 
-
-        // this.drewCtx.rotate(this.rotateDegrees * Math.PI / 180)
+        this.drewCtx = this.drewCanvas.getContext('2d')
 
         // image
         this.image.src = this.drewImageDataURL || `${ this.src }?${ new Date().getTime() }`
@@ -147,7 +144,7 @@
 
       // 旋转
       rotateImage(direction) {
-        this.initialize()
+        // this.initialize()
 
         if(direction === 'left') {
           --this.rotateCount
@@ -157,6 +154,10 @@
         }
 
         this.rotateDegrees = this.rotateCount * degrees
+
+        this._createCanvas(this.image, 400, 400)
+
+        console.log(this.rotateDegrees)
       },
 
       // 切图
@@ -250,8 +251,6 @@
             y: event.offsetY
           }
 
-          // inputXY = vm.computeInputXY(startXY.x, startXY.y)
-
           input = document.getElementById('drawTextInput')
 
           if(!input) {
@@ -304,12 +303,25 @@
       onSave() {
         this.isDownload && this._downloadDrewImage()
 
-        this.$emit('save', {
-          dataURL: this.screenshotDataURL || this.drewImageDataURL,
-          file: this.file
+        const vm = this
+
+        let base64 = this.drewImageDataURL.split(',')[1]
+        base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
+          const blobUrl = window.URL.createObjectURL(res)
+          vm.blobSrc = blobUrl
+          console.log(blobUrl)
         })
 
-        this.onClear()
+        console.log(this.drewImageDataURL)
+
+        return
+
+        // this.$emit('save', {
+        //   dataURL: this.screenshotDataURL || this.drewImageDataURL,
+        //   file: this.file
+        // })
+
+        // this.onClear()
       },
 
       // 清除
@@ -385,7 +397,7 @@
 
         const dataURL = canvas.toDataURL('image/png')
 
-        this.file = base64ToFile(dataURL, vm.fileName)
+        this.file = base64ToFile(dataURL, this.fileName)
         this.screenshotDataURL = dataURL
         this.drewArea = {}
 
@@ -448,20 +460,39 @@
         }
       },
 
-      // 计算不同角度输入框坐标
-      computeInputXY(startX, startY) {
-        return {
-          x: startX,
-          y: startY
-        }
-      },
+      // 动态创建 canvas
+      _createCanvas(image, width, height) {
+        const canvas = document.createElement('canvas')
+        canvas.width = width
+        canvas.height = height
 
-      // 同时按下Ctrl+Alt+Z进行切图和框图切换
-      screenshotOrRectangle() {
-        this.isScreenshot = !this.isScreenshot
+        const ctx = canvas.getContext('2d')
+        const startX = width / 2
+        const startY = height / 2
+        ctx.translate(startX, startY)
+        ctx.rotate(90 * Math.PI / 180)
 
-        if(this.isScreenshot) this.drawScreenshot()
-        else this.drawRectangle()
+        ctx.drawImage(image, 0, 0, image.width, image.height, -startX, -startY, width, height)
+
+        const dataURL = canvas.toDataURL('image/png')
+
+        // console.log(dataURL)
+
+        let base64 = dataURL.split(',')[1]
+        base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
+          // 转后后的blob对象
+          console.log('blob', res.preview)
+
+          this.blobSrc = res.preview
+
+          this.drewImageDataURL = res.preview
+
+          this.initialize()
+
+          // const blobUrl = window.URL.createObjectURL(res)
+
+          // console.log(blobUrl)
+        })
       },
 
       // 下载已绘制图片
@@ -470,64 +501,6 @@
         a.href = this.screenshotDataURL || this.drewImageDataURL
         a.download = new Date().getTime() + '.png'
         a.click()
-      },
-
-      // 按键
-      _keyboardEvents() {
-        window.addEventListener('keydown', (event) => {
-          const { altKey, ctrlKey, keyCode } = event
-
-          switch (keyCode) {
-            // 切图
-            case 65:
-              event.preventDefault()
-              ctrlKey && this.drawScreenshot()
-              break;
-
-            // 矩形
-            case 88:
-              event.preventDefault()
-              ctrlKey && this.drawRectangle()
-              break;
-
-            // 文字
-            case 69:
-              event.preventDefault()
-              if(!this.disabledText) {
-                ctrlKey && this.drawText()
-              }
-              break;
-
-            // 左旋转
-            case 76:
-              event.preventDefault()
-              ctrlKey && this.rotateImage('left')
-              break;
-
-            // 右旋转
-            case 82:
-              event.preventDefault()
-              ctrlKey && this.rotateImage('right')
-              break;
-
-            // 清除
-            case 90:
-              event.preventDefault()
-              if(ctrlKey && !altKey) {
-                this.onClear()
-              }
-              else if(ctrlKey && altKey) {
-                this.screenshotOrRectangle()
-              }
-              break;
-            
-            // 保存
-            case 83:
-              event.preventDefault()
-              ctrlKey && this.onSave()
-              break;
-          }
-        })
       },
 
       // 清空绑定的事件

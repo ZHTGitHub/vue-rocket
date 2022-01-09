@@ -41,8 +41,8 @@
           <v-col :cols="6">
             <z-draw-image 
               ref="drawImage"
-              :width="300"
-              src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0821%252F29809d6bj00qy6do3002ac000f000xcc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644054961&t=638e8df7c78ff3a35a85ff2324580380"
+              :width="400"
+              src="https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800"
               @drew="handleDrew"
               @save="handleSave"
             ></z-draw-image>
@@ -74,12 +74,15 @@
     data() {
       return {
         options: cells.options,
-        dataURL: ''
+        dataURL: '',
+
+        isScreenshot: true
       }
     },
 
     mounted() {
       Prism.highlightAll()
+      this._keyboardEvents()
     },
 
     methods: {
@@ -123,6 +126,70 @@
             this.$refs.drawImage.onSave()
             break;
         }
+      },
+
+      // 按键
+      _keyboardEvents() {
+        window.addEventListener('keydown', (event) => {
+          const { altKey, ctrlKey, keyCode } = event
+
+          switch (keyCode) {
+            // 切图
+            case 65:
+              event.preventDefault()
+              ctrlKey && this.$refs.drawImage.drawScreenshot()
+              break;
+
+            // 矩形
+            case 88:
+              event.preventDefault()
+              ctrlKey && this.$refs.drawImage.drawRectangle()
+              break;
+
+            // 文字
+            case 69:
+              event.preventDefault()
+              ctrlKey && this.$refs.drawImage.drawText()
+              break;
+
+            // 左旋转
+            case 76:
+              event.preventDefault()
+              ctrlKey && this.$refs.drawImage.rotateImage('left')
+              break;
+
+            // 右旋转
+            case 82:
+              event.preventDefault()
+              ctrlKey && this.$refs.drawImage.rotateImage('right')
+              break;
+
+            // 清除
+            case 90:
+              event.preventDefault()
+              if(ctrlKey && !altKey) {
+                this.$refs.drawImage.onClear()
+              }
+              else if(ctrlKey && altKey) {
+                this.screenshotOrRectangle()
+              }
+              break;
+            
+            // 保存
+            case 83:
+              event.preventDefault()
+              ctrlKey && this.$refs.drawImage.onSave()
+              break;
+          }
+        })
+      },
+
+      // 同时按下Ctrl+Alt+Z进行切图和框图切换
+      screenshotOrRectangle() {
+        this.isScreenshot = !this.isScreenshot
+
+        if(this.isScreenshot) this.$refs.drawImage.drawScreenshot()
+        else this.$refs.drawImage.drawRectangle()
       }
     }
   }
