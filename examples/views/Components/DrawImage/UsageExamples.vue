@@ -41,6 +41,7 @@
           <v-col :cols="6">
             <z-draw-image 
               ref="drawImage"
+              fileName="file.png"
               :width="400"
               src="https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800"
               @drew="handleDrew"

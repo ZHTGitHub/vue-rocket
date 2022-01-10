@@ -44,6 +44,13 @@
         default: 'file'
       },
 
+      imageType: {
+        validator(value) {
+          return ~['image/png', 'image/jpeg', 'image/webp'].indexOf(value)
+        },
+        default: 'image/png'
+      },
+
       isDownload: {
         type: Boolean,
         default: false
@@ -303,25 +310,12 @@
       onSave() {
         this.isDownload && this._downloadDrewImage()
 
-        const vm = this
-
-        let base64 = this.drewImageDataURL.split(',')[1]
-        base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
-          const blobUrl = window.URL.createObjectURL(res)
-          vm.blobSrc = blobUrl
-          console.log(blobUrl)
+        this.$emit('save', {
+          dataURL: this.screenshotDataURL || this.drewImageDataURL,
+          file: this.file
         })
 
-        console.log(this.drewImageDataURL)
-
-        return
-
-        // this.$emit('save', {
-        //   dataURL: this.screenshotDataURL || this.drewImageDataURL,
-        //   file: this.file
-        // })
-
-        // this.onClear()
+        this.onClear()
       },
 
       // 清除
@@ -395,7 +389,7 @@
         const context = canvas.getContext('2d')
         context.putImageData(data, 0, 0)
 
-        const dataURL = canvas.toDataURL('image/png')
+        const dataURL = canvas.toDataURL(this.imageType)
 
         this.file = base64ToFile(dataURL, this.fileName)
         this.screenshotDataURL = dataURL
@@ -433,7 +427,7 @@
           const context = canvas.getContext('2d')
           context.putImageData(data, 0, 0)
 
-          const dataURL = canvas.toDataURL('image/png')
+          const dataURL = canvas.toDataURL(this.imageType)
 
           vm.file = base64ToFile(dataURL, vm.fileName)
           vm.drewImageDataURL = dataURL
@@ -474,7 +468,7 @@
 
         ctx.drawImage(image, 0, 0, image.width, image.height, -startX, -startY, width, height)
 
-        const dataURL = canvas.toDataURL('image/png')
+        const dataURL = canvas.toDataURL(this.imageType)
 
         // console.log(dataURL)
 
