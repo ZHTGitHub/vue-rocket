@@ -9,6 +9,7 @@
               formKey="day"
               label="日期"
               prepend-icon="mdi-calendar"
+              picker-type="month"
               :immediate="false"
               defaultValue="2021-08-31"
             ></z-date-picker>

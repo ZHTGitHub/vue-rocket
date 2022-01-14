@@ -73,6 +73,7 @@
         :no-title="noTitle"
         :range="range"
         :readonly="pickerReadonly"
+        :type="pickerType"
         scrollable
         @change="onChangeDate"
       >
