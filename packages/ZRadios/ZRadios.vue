@@ -8,6 +8,7 @@
       <v-radio-group
         v-model="value"
         :column="column"
+        :dense="dense"
         :disabled="disabled"
         :error="incorrect"
         :error-messages="errorMessage"

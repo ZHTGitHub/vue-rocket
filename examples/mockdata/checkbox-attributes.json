@@ -1,6 +1,6 @@
 {
   "status": true,
-  "total": 10,
+  "total": 7,
   "data": [
     {
       "name": "formId",
@@ -18,15 +18,6 @@
       "acceptedValues": "—",
       "default": "—",
       "description": "多选框的 key 值"
-    },
-
-    {
-      "name": "column",
-      "required": "否",
-      "type": "Boolean",
-      "acceptedValues": "—",
-      "default": false,
-      "description": "垂直布局"
     },
 
     {
@@ -57,15 +48,6 @@
     },
 
     {
-      "name": "options",
-      "required": "否",
-      "type": "{ label, value }[ ]",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "多选框的选项内容"
-    },
-
-    {
       "name": "readonly",
       "required": "否",
       "type": "Boolean",
@@ -81,15 +63,6 @@
       "acceptedValues": "—",
       "default": "false",
       "description": "是否必填"
-    },
-
-    {
-      "name": "row",
-      "required": "否",
-      "type": "Boolean",
-      "acceptedValues": "—",
-      "default": "true",
-      "description": "水平布局"
     }
   ]
 }

@@ -87,6 +87,15 @@ export const menus = [
 
       {
         pId: 'components',
+        key: 'checkbox',
+        icon: '',
+        realm: 'checkbox',
+        title: 'Checkbox 复选框',
+        link: '/components/checkbox'
+      },
+
+      {
+        pId: 'components',
         key: 'checkboxs',
         icon: '',
         realm: 'checkboxs',

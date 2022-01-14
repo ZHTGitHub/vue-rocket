@@ -8,6 +8,7 @@
       :clear-icon="clearIcon"
       :clearable="clearable"
       :counter="counter"
+      :dense="dense"
       :disabled="disabled"
       :error="incorrect"
       :error-messages="errorMessage"

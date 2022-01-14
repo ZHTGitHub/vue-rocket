@@ -6,6 +6,7 @@
           <z-btn 
             class="mr-4 mb-2"
             color="primary"
+            :lockedTime="0"
             small
             @click="onToggle"
           >toggle</z-btn>

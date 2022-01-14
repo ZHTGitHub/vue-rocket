@@ -61,6 +61,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'checkbox',
+      name: 'ZDemoCheckbox',
+      meta: {
+        key: 'checkbox',
+        pKey: 'components',
+        realm: 'checkbox',
+        title: 'Checkbox 复选框',
+      },
+      component: () => import('../../views/Components/Checkbox')
+    },
+
+    {
       path: 'checkboxs',
       name: 'ZDemoCheckboxs',
       meta: {
