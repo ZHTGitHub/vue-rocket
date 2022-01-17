@@ -46,7 +46,7 @@
 
       falseValue: {
         type: [String, Number, Boolean, undefined, null, NaN, Symbol, Object, Array],
-        required: false
+        default: undefined
       },
 
       indeterminate: {
@@ -81,7 +81,7 @@
 
       trueValue: {
         type: [String, Number, Boolean, undefined, null, NaN, Symbol, Object, Array],
-        required: false
+        default: undefined
       },
     },
 
