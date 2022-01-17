@@ -29,6 +29,8 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
 
+  const TYPES = [undefined, Number, String, Boolean, Symbol, Object, Array]
+
   export default {
     name: 'ZCheckbox',
     mixins: [FormMixins],
@@ -40,12 +42,12 @@
       },
 
       customValue: {
-        type: [String, Number],
+        type: TYPES,
         required: false
       },
 
       falseValue: {
-        type: [String, Number, Boolean, undefined, null, NaN, Symbol, Object, Array],
+        type: TYPES,
         default: undefined
       },
 
@@ -80,7 +82,7 @@
       },
 
       trueValue: {
-        type: [String, Number, Boolean, undefined, null, NaN, Symbol, Object, Array],
+        type: TYPES,
         default: undefined
       },
     },

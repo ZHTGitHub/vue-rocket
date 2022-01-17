@@ -77,7 +77,7 @@ export default {
 
     lockedTime: {
       type: [Number, String],
-      default: 1000
+      default: 350
     },
 
     outlined: {

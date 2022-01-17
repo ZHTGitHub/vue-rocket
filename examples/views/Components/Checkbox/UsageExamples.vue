@@ -14,6 +14,10 @@
             formKey="red"
             label="红色"
             customValue="red"
+            :true-value="true"
+            :false-value="false"
+            :on-icon="'mdi-checkbox-marked-circle'"
+            :indeterminate="indeterminate"
           >
           </z-checkbox>
 
@@ -46,7 +50,9 @@
     data() {
       return {
         code,
-        formId: 'color'
+        formId: 'color',
+
+        indeterminate: false
       }
     },
 
@@ -56,6 +62,7 @@
 
     methods: {
       onConfirm() {
+        this.indeterminate = !this.indeterminate
         console.log(this.forms[this.formId])
       }
     },
