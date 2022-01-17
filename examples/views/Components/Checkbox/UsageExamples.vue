@@ -13,10 +13,9 @@
             :formId="formId"
             formKey="red"
             label="红色"
-            customValue="red"
+            :customValue="undefined"
             :true-value="true"
             :false-value="false"
-            :on-icon="'mdi-checkbox-marked-circle'"
             :indeterminate="indeterminate"
           >
           </z-checkbox>

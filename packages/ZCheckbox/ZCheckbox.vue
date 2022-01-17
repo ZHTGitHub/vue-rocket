@@ -29,7 +29,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
 
-  const TYPES = [undefined, Number, String, Boolean, Symbol, Object, Array]
+  const TYPES = [Number, String, Boolean, Symbol, Object, Array]
 
   export default {
     name: 'ZCheckbox',
