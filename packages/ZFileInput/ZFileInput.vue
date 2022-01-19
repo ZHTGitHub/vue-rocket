@@ -173,7 +173,7 @@
 
     data() {
       return {
-        imageList: [],
+        files: [],
         formData: null
       }
     },
@@ -186,8 +186,6 @@
 
       onChange(file) {
         this.$emit('change', file)
-
-        console.log(file)
 
         this.formData = new FormData()
 
@@ -207,12 +205,17 @@
               this._submitFile()
             }
           }
-          
+
+          // 记录当前上传的文件
+          this.files = file
         }
         // 单选
         else {
           this.formData.append(this.name, file)
           this._submitFile()
+
+          // 记录当前上传的文件
+          this.files = [file]
         }
       },
 
@@ -289,10 +292,16 @@
           return response.json()
         })
         .then((response) => {
-          this.$emit('response', response)
+          this.$emit('response', {
+            ...response,
+            files: this.files
+          })
         })
         .catch((error) => {
-          this.$emit('response', error)
+          this.$emit('response', {
+            ...error,
+            files: this.files
+          })
         })
       }
     },

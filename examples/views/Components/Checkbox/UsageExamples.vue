@@ -13,18 +13,17 @@
             :formId="formId"
             formKey="red"
             label="红色"
-            :customValue="undefined"
             :true-value="true"
             :false-value="false"
-            :indeterminate="indeterminate"
           >
           </z-checkbox>
 
           <z-checkbox
             :formId="formId"
             formKey="blue"
+            :true-value="true"
+            :false-value="false"
             label="蓝色"
-            customValue="blue"
           >
           </z-checkbox>
         </div>
@@ -61,7 +60,6 @@
 
     methods: {
       onConfirm() {
-        this.indeterminate = !this.indeterminate
         console.log(this.forms[this.formId])
       }
     },

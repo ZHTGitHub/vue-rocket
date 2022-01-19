@@ -19,7 +19,6 @@
       :readonly="readonly"
       :success="success"
       :true-value="trueValue"
-      :value="customValue"
       @change="onChange"
       @click="onClick"
     ></v-checkbox>
@@ -38,11 +37,6 @@
     props: {
       color: {
         type: String,
-        required: false
-      },
-
-      customValue: {
-        type: TYPES,
         required: false
       },
 
@@ -84,12 +78,6 @@
       trueValue: {
         type: TYPES,
         default: undefined
-      },
-    },
-
-    data() {
-      return {
-        
       }
     },
 

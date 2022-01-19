@@ -7,8 +7,9 @@
           formKey="file"
           accept="image/*, .xlsx"
           chips
+          clearable
           prependIcon="mdi-file-excel-outline"
-          action="http://zenghaitao/update-images"
+          action="http://113.106.108.93:13000/api/pro-config/project-cost-management/putConstTableByExcel"
           :effectData="{ 
             sysProTempId: '900709761157169152',
             proCode: 2
@@ -22,7 +23,7 @@
           name="tempImages"
           label="文件上传"
           parcel
-          :multiple="false"
+          :multiple="true"
           :deleteIcon="false"
           @response="onResponse"
           @delete="onRemove"
