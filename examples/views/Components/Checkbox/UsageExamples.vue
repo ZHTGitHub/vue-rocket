@@ -5,6 +5,7 @@
         <z-btn
           depressed
           color="primary"
+          lockedTime="0"
           @click="onConfirm"
         >确认</z-btn>
 
@@ -15,6 +16,8 @@
             label="红色"
             :true-value="true"
             :false-value="false"
+            :indeterminate="indeterminate"
+            :defaultValue="defaultValue"
           >
           </z-checkbox>
 
@@ -50,7 +53,8 @@
         code,
         formId: 'color',
 
-        indeterminate: false
+        indeterminate: false,
+        defaultValue: false
       }
     },
 
@@ -60,6 +64,8 @@
 
     methods: {
       onConfirm() {
+        this.defaultValue = !this.defaultValue
+        this.indeterminate = !this.defaultValue
         console.log(this.forms[this.formId])
       }
     },

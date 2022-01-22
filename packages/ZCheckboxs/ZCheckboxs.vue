@@ -109,6 +109,7 @@
         }
 
         this.values = values
+        this.$emit('change', values)
       },
 
       _setOptions() {

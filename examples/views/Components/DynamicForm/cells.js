@@ -107,7 +107,7 @@ const fields = [
 
   {
     inputType: 'btnToggle',
-    formKey: 'sexual',
+    formKey: 'vision',
     label: '视力',
     mandatory: true,
     options: [
