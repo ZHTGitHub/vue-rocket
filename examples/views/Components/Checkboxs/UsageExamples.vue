@@ -19,6 +19,7 @@
             :rules="[{ required: true, message: '兴趣爱好为必选项.' }]"
             :options="hobbyOptions"
             :defaultValue="[1]"
+            @change="selectItems"
           >
           </z-checkboxs>
         </div>
@@ -78,6 +79,10 @@
     methods: {
       onToggle() {
         this.$refs.hobbies.onSelectAll()
+      },
+
+      selectItems(values) {
+        console.log(values)
       }
     }
   }

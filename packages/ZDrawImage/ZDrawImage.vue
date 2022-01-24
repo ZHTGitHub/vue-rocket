@@ -140,14 +140,8 @@
         this.drewCtx = this.drewCanvas.getContext('2d')
 
         // image
-        this.image.src = this.drewImageDataURL || `${ this.src }?${ new Date().getTime() }`
-        this.image.setAttribute('crossOrigin', '')
-
-        this.image.onload = function() {
-          const { width, height } = vm.image
-          vm.drewCtx.drawImage(this, 0, 0, width, height, 0, 0, vm.oImageWidth, vm.oImageHeight)
-        }
-      },
+        this._updateImageSrc()
+      },      
 
       // 旋转
       rotateImage(direction) {
@@ -454,6 +448,20 @@
         }
       },
 
+      // 更新图片资源
+      _updateImageSrc() {
+        const vm = this
+
+        // image
+        this.image.src = this.drewImageDataURL || `${ this.src }?${ new Date().getTime() }`
+        this.image.setAttribute('crossOrigin', '')
+
+        this.image.onload = function() {
+          const { width, height } = vm.image
+          vm.drewCtx.drawImage(this, 0, 0, width, height, 0, 0, vm.oImageWidth, vm.oImageHeight)
+        }
+      },
+
       // 动态创建 canvas
       _createCanvas(image, width, height) {
         const canvas = document.createElement('canvas')
@@ -502,6 +510,14 @@
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
         document.removeEventListener('mouseup', function() {}, false)
+      }
+    },
+
+    watch: {
+      src: {
+        handler() {
+          this._updateImageSrc()
+        }
       }
     }
   }

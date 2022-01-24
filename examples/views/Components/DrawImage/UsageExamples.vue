@@ -43,10 +43,16 @@
               ref="drawImage"
               fileName="file.png"
               :width="400"
-              src="https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800"
+              :src="src"
               @drew="handleDrew"
               @save="handleSave"
             ></z-draw-image>
+
+            <z-btn 
+              color="primary"
+              lockedTime="0"
+              @click="changeImg"
+            >更新图片</z-btn>
           </v-col>
           <!-- 截图 END -->
 
@@ -69,6 +75,12 @@
 
   import cells from './cells'
 
+  const src1 = 'https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800'
+  const src2 = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F21%2Fc0%2Ff5%2F21c0f5d2f4b6325808b548d2f94e0ef3.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645605370&t=faae47f3683b7bb35d33c2bb12303945'
+  const src3 = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Fd8%2Fb7%2F36%2Fd8b736f5168f2a98667bce3d7ad3e5ed.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645605753&t=4b17ed8044f949083c0e9291edd35d26'
+  const src4 = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F30%2F90%2F40%2F309040a0602c672cebc6ab3a1bbbc8cd.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645605789&t=99690dc4580d61831b148c62c118e01f'
+  const src5 = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F80%2Fd6%2F5a%2F80d65af4e7e937be899ba595732b79e8.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645605807&t=77529507289fc0f73a68a77d59e5c7e3'
+
   export default {
     name: 'UsageExamples',
 
@@ -77,7 +89,9 @@
         options: cells.options,
         dataURL: '',
 
-        isScreenshot: true
+        isScreenshot: true,
+
+        src: src1
       }
     },
 
@@ -94,6 +108,12 @@
       handleSave({ dataURL, file }) {
         console.log(dataURL)
         console.log(file)
+      },
+
+      changeImg() {
+        const images = [src1, src2, src3, src4, src5]
+        const index = Math.floor(Math.random() * 5)
+        this.src = `${ images[index] }?updateTime=${ new Date().getTime() }`
       },
 
       // 某项操作
