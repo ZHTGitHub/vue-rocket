@@ -1,3 +1,5 @@
+import rules from '../validate/rules'
+
 // 值类型
 const valueType = ['undefined', 'number', 'string', 'boolean', 'symbol'];
 
@@ -192,6 +194,22 @@ const cleanArray = function(value = []) {
   return result
 };
 
+/**
+ * @description 数组拍平
+ * @param {Any[]} value
+ */ 
+const flatArray = function(value = []) {
+  const isDeep = value.some(item => item instanceof Array)
+
+  if(!isDeep) {        
+      return value
+  }
+
+  const result = Array.prototype.concat.apply([], value)
+  
+  return flatArray(result)
+}
+
 export {
   isObject,
   isArray,
@@ -201,7 +219,10 @@ export {
 
   find,
   deepClone,
-  cleanArray
+  cleanArray,
+  flatArray,
+
+  rules
 }
 
 export default {
@@ -213,5 +234,8 @@ export default {
 
   find,
   deepClone,
-  cleanArray
+  cleanArray,
+  flatArray,
+
+  rules
 }

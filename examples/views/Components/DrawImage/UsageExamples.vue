@@ -74,6 +74,7 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
   import cells from './cells'
+  import { flatArray } from '../../../../packages/scripts/tools'
 
   const src1 = 'https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800'
   const src2 = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F21%2Fc0%2Ff5%2F21c0f5d2f4b6325808b548d2f94e0ef3.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645605370&t=faae47f3683b7bb35d33c2bb12303945'
@@ -93,6 +94,11 @@
 
         src: src1
       }
+    },
+
+    created() {
+      const arr = [[{a: 1}], [{b: 2}]]
+      console.log(flatArray(arr))
     },
 
     mounted() {
