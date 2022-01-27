@@ -33,6 +33,7 @@
                   :label="item.label"
                   :validation="item.validation"
                   :defaultValue="item.defaultValue"
+                  @enter="onEnter"
                 >
                   <span class="error--text" slot="prepend-outer">{{ item.prependOuter }}</span>
                 </z-text-field>
@@ -244,6 +245,10 @@
 
       handleConfirm(form) {
         console.log(form)
+      },
+
+      onEnter() {
+        console.log(23)
       }
     },
 
