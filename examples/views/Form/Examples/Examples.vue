@@ -9,7 +9,7 @@
         lockedTime="1000"
         :unlocked="true"
         @click="getForms"
-      >form</z-btn>
+      >forms</z-btn>
 
       <v-btn-toggle
         color="primary"
@@ -95,11 +95,9 @@
 
 <script>
   import { mapState } from 'vuex'
-import ZBtnToggle from '../../../../packages/ZBtnToggle/ZBtnToggle.vue'
   import cells from './cells'
 
   export default {
-  components: { ZBtnToggle },
     name: 'FormExamples',
 
     data() {
