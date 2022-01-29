@@ -77,7 +77,7 @@ export default {
 
     lockedTime: {
       type: [Number, String],
-      default: 350
+      default: 330
     },
 
     outlined: {
@@ -125,6 +125,11 @@ export default {
       default: false
     },
 
+    unlocked: {
+      type: Boolean,
+      default: false
+    },
+
     width: {
       type: [Number, String],
       required: false
@@ -138,17 +143,14 @@ export default {
   },
 
   methods: {
-    unlocked() {
+    limitEvent(fn) {
       if(!this.oldTime) {
+        fn()
         this.oldTime = Date.now()
-        return true
       }else {
-        const newTime = Date.now()
-        if(newTime - this.oldTime > this.lockedTime) {
+        if(Date.now() - this.oldTime > this.lockedTime) {
+          fn()
           this.oldTime = Date.now()
-          return true
-        }else {
-          return false
         }
       }
     }

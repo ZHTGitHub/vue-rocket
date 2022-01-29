@@ -9,6 +9,8 @@ class ZValidate {
     // 每张表单下每个字段的校验结果
     this.validator = {}
 
+    this.formsValidate = {}
+
     // 每张表单的 字段总数 及 校验结果集
     this.forms = {}
 
@@ -16,15 +18,30 @@ class ZValidate {
     this.rules = rules
   }
 
-  validateByKey(options) {
-    _.set(this.validator, options.formId + '.' + options.formKey, options.status)
+  // 给校验表单的每个 [value] 所对应的 [key] 设置 [value] 的校验结果
+  SET_FORM_VALIDATE_VALUE_BY_KEY(data) {
+    _.set(this.validator, data.formId + '.' + data.formKey, data.status)
 
-    const form = this.validator[options.formId]
-    const results = Object.values(form)
-    const total = results.length
+    const form = this.validator[data.formId]
+    const values = Object.values(form)
+    const total = values.length
 
-    this.forms[options.formId] = {
-      results,
+    this.forms[data.formId] = {
+      results: values,
+      total
+    }
+  }
+
+  // 删除校验表单的[key]
+  DELETE_FORM_VALIDATE_KEY(data) {
+    delete this.validator[data.formId][data.formKey]
+
+    const form = this.validator[data.formId]
+    const values = Object.values(form)
+    const total = values.length
+
+    this.forms[data.formId] = {
+      results: values,
       total
     }
   }

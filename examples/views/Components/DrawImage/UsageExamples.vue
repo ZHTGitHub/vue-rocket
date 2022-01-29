@@ -107,8 +107,9 @@
     },
 
     methods: {
-      handleDrew({ dataURL }) {
+      handleDrew({ dataURL, file }) {
         this.dataURL = dataURL
+        console.log(file)
       },
 
       handleSave({ dataURL, file }) {

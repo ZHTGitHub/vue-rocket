@@ -22,6 +22,11 @@ export default {
 	},
 
 	beforeDestroy() {
+		$validator.DELETE_FORM_VALIDATE_KEY({
+			formId: this.formId,
+			formKey: this.formKey
+		})
+
 		rocket.off('ZHT_VALIDATE_FORM', this.handleValidate)
 		rocket.off('ZHT_RESET_FORM', this.handleReset)
 		rocket.off('ZHT_CLEAR_FORM', this.handleClear)
@@ -31,7 +36,6 @@ export default {
 		// Verify field
 		verifyField() {
 			if(this.value !== undefined) {
-
 				// 未写入校验规则
 				if(tools.isLousy(this.validation)) {
 					this.validateForm('VALID_VALUE')
@@ -75,10 +79,10 @@ export default {
 								}
 
 								// 
-								else {
-									this.savory()
-								}
-								return
+								// else {
+								// 	this.savory()
+								// }
+								// return
 							}
 							// 合法
 							else {
@@ -157,13 +161,14 @@ export default {
 					++$validator.sum
 	
 					this.value = this.value === undefined ? '' : this.value
-					// console.log(this.value)
 	
 					this.verifyForm()
 	
 					const { total, results } = $validator.forms[this.formId]
 	
-					// console.log($validator.forms)
+					// console.log($validator.forms[this.formId])
+
+					// console.log($validator.sum, total)
 	
 					if($validator.sum === total) {
 						if(!results.includes('INVALID_VALUE')) {
@@ -210,7 +215,8 @@ export default {
 			rocket.on('ZHT_CLEAR_FORM', this.handleClear = (formId) => {
 				if(this.formId === formId) {
 					this.$store.commit('CLEAN_FORM', {
-						formId: this.formId
+						formId: this.formId,
+						formKey: this.formKey
 					})
 					this.errorMessage = ''
 					this.incorrect = false
@@ -241,7 +247,7 @@ export default {
 
 		// Memory
 		validateForm(status) {
-			$validator.validateByKey({
+			$validator.SET_FORM_VALIDATE_VALUE_BY_KEY({
 				formId: this.formId,
 				formKey: this.formKey,
 				status

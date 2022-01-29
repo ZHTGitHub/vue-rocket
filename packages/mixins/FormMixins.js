@@ -180,6 +180,13 @@ export default {
 		}
 	},
 
+	beforeDestroy() {
+		this.$store.commit('DELETE_FORM_KEY', {
+			formId: this.formId,
+			formKey: this.formKey
+		})
+	},
+
 	created() {
 		this.incorrect = this.error
 	},
@@ -212,7 +219,6 @@ export default {
 	watch: {
 		value: {
 			handler(value) {
-				console.log(value)
 				if(value == null) {
 					this.value = undefined
 				}

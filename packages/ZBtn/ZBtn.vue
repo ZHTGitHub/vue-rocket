@@ -34,7 +34,7 @@
 	import BtnMixins from '../mixins/BtnMixins'
 	import rocket from '../scripts/rocket'
 
-	const actions = new Map([
+	const btnTypes = new Map([
 		['clear', 'ZHT_CLEAR_FORM'],
 		['reset', 'ZHT_RESET_FORM'],
 		['validate', 'ZHT_VALIDATE_FORM'],
@@ -105,16 +105,20 @@
 
 		methods: {
 			onClick(event) {
-				if(this.unlocked()) {
-					this.event = event
-					const action = actions.get(this.btnType)
-					if(action === 'click') {
-						this.$emit('click', this.event)
-						return
-					}
+				this.event = event
 
-					rocket.emit(action, this.formId)
+				this.unlocked ? this.action() : this.limitEvent(this.action)
+			},
+
+			action() {
+				const btnType = btnTypes.get(this.btnType)
+				
+				if(btnType === 'click') {
+					this.$emit('click', this.event)
+					return
 				}
+
+				rocket.emit(btnType, this.formId)
 			}
 		}
 	}

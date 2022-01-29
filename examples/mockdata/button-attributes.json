@@ -1,6 +1,6 @@
 {
   "status": true,
-  "total": 26,
+  "total": 27,
   "data": [
     {
       "name": "formId",
@@ -16,7 +16,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "按钮 position: absolute"
     },
 
@@ -25,7 +25,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "块级按钮可填满全部可以用宽度"
     },
 
@@ -34,7 +34,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "按钮向底部对齐"
     },
 
@@ -61,7 +61,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "移除按钮的阴影效果"
     },
 
@@ -70,7 +70,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "是否禁用状态"
     },
 
@@ -88,7 +88,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "将按钮指定为浮动操作按钮，按钮将变圆"
     },
 
@@ -97,7 +97,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "按钮 position: fixed"
     },
 
@@ -115,7 +115,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "将按钮指定为图标"
     },
 
@@ -124,7 +124,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "使按钮尺寸变的巨大"
     },
 
@@ -133,7 +133,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "使按钮尺寸变的无比巨大"
     },
 
@@ -142,7 +142,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "将按钮向左对齐"
     },
 
@@ -151,7 +151,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "添加加载图标动画"
     },
 
@@ -160,7 +160,7 @@
       "required": "否",
       "type": "Number | String",
       "acceptedValues": "—",
-      "default": 1000,
+      "default": 330,
       "description": "防止恶意点击间隔"
     },
 
@@ -169,7 +169,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "使背景透明并使用薄边框"
     },
 
@@ -178,7 +178,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "朴素按钮"
     },
 
@@ -187,7 +187,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "将按钮向右对齐"
     },
 
@@ -196,7 +196,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "在按钮上应用较大的边框半径"
     },
 
@@ -205,7 +205,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "使按钮尺寸变小"
     },
 
@@ -214,7 +214,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "使按钮尺寸变的更小"
     },
 
@@ -223,7 +223,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "使背景透明 使用 color 时 颜色将应用于按钮文本 而不是背景"
     },
 
@@ -232,7 +232,7 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "删除按钮的 border-radius 样式"
     },
 
@@ -241,8 +241,17 @@
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
-      "default": "false",
+      "default": false,
       "description": "将按钮向顶部对齐"
+    },
+
+    {
+      "name": "unlocked",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否开启防止恶意点击"
     },
 
     {

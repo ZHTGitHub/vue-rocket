@@ -2,10 +2,29 @@
   <div class="form-examples">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <z-btn
-      color="primary"
-      @click="getForms"
-    >form</z-btn>
+    <div class="z-flex align-center">
+      <z-btn
+        class="mr-4"
+        color="primary"
+        lockedTime="1000"
+        :unlocked="true"
+        @click="getForms"
+      >form</z-btn>
+
+      <v-btn-toggle
+        color="primary"
+        dense
+        mandatory
+        @change="changeForm"
+      >
+        <v-btn>
+          1
+        </v-btn>
+        <v-btn>
+          2
+        </v-btn>
+      </v-btn-toggle>
+    </div>
 
     <v-row justify="center">
       <v-col cols="6">
@@ -25,6 +44,7 @@
             </z-text-field>
 
             <z-text-field
+              v-if="formLayout === 0"
               :formId="formId"
               formKey="phone"
               label="手机"
@@ -42,6 +62,7 @@
               :formId="formId"
               color="primary"
               btnType="validate"
+              lockedTime="0"
               @click="onSubmit"
             >
             <v-icon>mdi-send</v-icon>
@@ -74,22 +95,29 @@
 
 <script>
   import { mapState } from 'vuex'
+import ZBtnToggle from '../../../../packages/ZBtnToggle/ZBtnToggle.vue'
   import cells from './cells'
 
   export default {
+  components: { ZBtnToggle },
     name: 'FormExamples',
 
     data() {
       return {
         formId: 'Examples',
         searchFormId: 'ExamplesSearch',
-        cells
+        cells,
+        formLayout: 0
       }
     },
 
     methods: {
       getForms() {
         console.log(this.forms)
+      },
+
+      changeForm(value) {
+        this.formLayout = value
       },
 
       onSearch() {

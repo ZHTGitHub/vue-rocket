@@ -9,10 +9,10 @@
           chips
           clearable
           prependIcon="mdi-file-excel-outline"
-          action="http://113.106.108.93:13000/api/pro-config/project-cost-management/putConstTableByExcel"
+          action="http://113.106.108.93:1620/task/uploadImage"
           :effectData="{ 
-            sysProTempId: '900709761157169152',
-            proCode: 2
+            path: 'B0118/download/2021/12-09/682021060032022/',
+            name: 'leslie.png'
           }"
           :fileList="[
             {
@@ -20,7 +20,7 @@
               name: 'demo.png'
             }
           ]"
-          name="tempImages"
+          name="file"
           label="文件上传"
           parcel
           :multiple="true"
