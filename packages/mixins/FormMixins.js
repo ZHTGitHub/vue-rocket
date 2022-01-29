@@ -212,6 +212,7 @@ export default {
 	watch: {
 		value: {
 			handler(value) {
+				console.log(value)
 				if(value == null) {
 					this.value = undefined
 				}

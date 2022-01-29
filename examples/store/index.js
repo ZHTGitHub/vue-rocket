@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import { forms } from '../../lib/vuerocket.umd'
+import forms from '../../packages/scripts/forms'
 
 // modules
 const files = require.context('./examples', false, /\.js$/)

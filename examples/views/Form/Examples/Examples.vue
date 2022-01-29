@@ -2,160 +2,38 @@
   <div class="form-examples">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="z-flex justify-end filters">
-      <z-btn
-        :formId="searchFormId"
-        class="mb-2"
-        color="primary"
-        outlined
-        small
-        :lockedTime="0"
-        @click="onOpen"
-      >
-        open
-      </z-btn>
-    </div>
+    <z-btn
+      color="primary"
+      @click="getForms"
+    >form</z-btn>
 
     <v-row justify="center">
-      <v-col cols="12" sm="10" md="8" lg="6">
+      <v-col cols="6">
         <v-card>
           <v-card-text>
-            <template v-for="(item, index) in cells.fields" >
-              
-              <div
-                class="field"
-                v-if="item.inputType === 'text'"
-                :key="`InfoFormInput_${ index }`"
-              >
-                <z-text-field
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  :label="item.label"
-                  :validation="item.validation"
-                  :defaultValue="item.defaultValue"
-                  @enter="onEnter"
-                >
-                  <span class="error--text" slot="prepend-outer">{{ item.prependOuter }}</span>
-                </z-text-field>
-              </div>
+            <z-text-field
+              :formId="formId"
+              formKey="name"
+              label="姓名"
+              :validation="[
+                { rule: 'required', message: '姓名为必填项.' },
+                { rule: 'min:4', message: '字段长度不得小于4.' }
+              ]"
+              defaultValue="Leslie"
+            >
+              <span class="error--text" slot="prepend-outer">*</span>
+            </z-text-field>
 
-              <div
-                class="field"
-                v-if="item.inputType === 'select'"
-                :key="`InfoFormInput_${ index }`"
-              >
-                <z-select 
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  clearable
-                  :label="item.label"
-                  :validation="item.validation"
-                  :options="item.options"
-                  :defaultValue="item.defaultValue"
-                >
-                  <span class="error--text" slot="prepend-outer">{{ item.prependOuter }}</span>
-                </z-select>
-              </div>
-                
-              <div
-                class="field"
-                v-if="item.inputType === 'date'"
-                :key="`InfoFormInput_${ index }`"
-              >
-                <z-date-picker
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  :label="item.label"
-                  :validation="item.validation"
-                  :defaultValue="item.defaultValue"
-                >
-                  <span class="error--text" slot="prepend-outer">{{ item.prependOuter }}</span>
-                </z-date-picker>
-              </div>
-
-              <div
-                class="field"
-                v-if="item.inputType === 'radios'"
-                :key="`InfoFormInput_${ index }`"
-              >
-                <z-radios
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  :label="item.label"
-                  :validation="item.validation"
-                  :options="item.options"
-                  :defaultValue="item.defaultValue"
-                >
-                  <span class="error--text" slot="prepend">*</span>
-                </z-radios>
-              </div>
-
-              <div
-                class="field"
-                v-if="item.inputType === 'checkboxs'"
-                cols="12" 
-                :key="`InfoFormInput_${ index }`"
-              >
-                <z-checkboxs
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  :label="item.label"
-                  :validation="item.validation"
-                  :options="item.options"
-                  :defaultValue="item.defaultValue"
-                >
-                  <span class="error--text" slot="prepend">*</span>
-                </z-checkboxs>
-              </div>
-
-              <div
-                class="field"
-                v-if="item.inputType === 'textarea'"
-                cols="12" 
-                :key="`InfoFormTextarea_${ index }`"
-              >
-                <z-textarea
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  :label="item.label"
-                  :validation="item.validation"
-                  :defaultValue="item.defaultValue"
-                ></z-textarea>
-              </div>
-
-              <div
-                class="field"
-                v-if="item.inputType === 'btnToggle'"
-                :key="`InfoFormBtnToggle_${ index }`"
-              >
-                <z-btn-toggle
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  color="primary"
-                  flip
-                  multiple
-                  :label="item.label"
-                  :validation="item.validation"
-                  :options="item.options"
-                  :defaultValue="[1]"
-                >
-                  <span class="error--text" slot="prepend">*</span>
-                </z-btn-toggle>
-              </div>
-
-              <div
-                class="field"
-                v-if="item.inputType === 'switch'"
-                :key="`InfoFormInput_${ index }`"
-              >
-                <z-switch
-                  :formId="formId"
-                  :formKey="item.formKey"
-                  :label="item.label"
-                  :defaultValue="item.defaultValue"
-                ></z-switch>
-              </div>
-            </template>
+            <z-text-field
+              :formId="formId"
+              formKey="phone"
+              label="手机"
+              :validation="[
+                { rule: 'required', message: '姓名为必填项.' }
+              ]"
+            >
+              <span class="error--text" slot="prepend-outer">*</span>
+            </z-text-field>
           </v-card-text>
 
           <v-card-actions>
@@ -191,15 +69,6 @@
         </v-card>
       </v-col>
     </v-row>
-
-    <z-dynamic-form 
-      ref="dynamic" 
-      title="动态表单"
-      :fieldList="cells.fields"
-      :detail="{ sexual: 1 }"
-      @cancel="handleCancel"
-      @confirm="handleConfirm"
-    ></z-dynamic-form>
   </div>
 </template>
 
@@ -219,6 +88,10 @@
     },
 
     methods: {
+      getForms() {
+        console.log(this.forms)
+      },
+
       onSearch() {
         console.log(this.forms[this.searchFormId])
       },
@@ -237,18 +110,6 @@
 
       onClear() {
         console.log(this.forms[this.formId])
-      },
-
-      handleCancel(form) {
-        console.log(form)
-      },
-
-      handleConfirm(form) {
-        console.log(form)
-      },
-
-      onEnter() {
-        console.log(23)
       }
     },
 

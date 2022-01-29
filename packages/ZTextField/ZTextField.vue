@@ -141,7 +141,6 @@
       onEnter(event) {
         event.customValue = this.value
         this.$emit('enter', event)
-        this.verifyField()
       }
     }
   }
