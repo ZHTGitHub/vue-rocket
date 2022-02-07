@@ -20,6 +20,16 @@ export default {
       required: false
     },
 
+    className: {
+      type: String,
+      required: false
+    },
+
+    dark: {
+			type: Boolean,
+			default: false
+		},
+
     depressed: {
       type: Boolean,
       default: false

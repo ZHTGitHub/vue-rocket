@@ -49,6 +49,11 @@ export default {
 			required: false
 		},
 
+		dark: {
+			type: Boolean,
+			default: false
+		},
+
 		defaultValue: {
 			type: [String, Number, Boolean, Array, Object],
 			default: undefined

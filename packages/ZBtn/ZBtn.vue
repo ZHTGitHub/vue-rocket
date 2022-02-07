@@ -5,6 +5,8 @@
 			:block="block"
 			:bottom="bottom"
 			:color="color"
+			:class="className"
+			:dark="dark"
 			:depressed="depressed"
 			:disabled="disabled"
 			:fab="fab"

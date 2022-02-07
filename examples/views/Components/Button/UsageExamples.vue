@@ -25,7 +25,8 @@
 
           <z-btn
             class="mr-4"
-            color="success"
+            className="white--text"
+            color="#f60"
           >成功按钮</z-btn>
 
           <z-btn

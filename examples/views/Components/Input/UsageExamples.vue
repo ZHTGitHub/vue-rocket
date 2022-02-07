@@ -6,6 +6,7 @@
           formId="info"
           formKey="name"
           label="姓名"
+          :defaultValue="23"
           @enter="onChange"
         >
         </z-text-field>
