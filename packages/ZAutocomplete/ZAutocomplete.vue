@@ -8,6 +8,7 @@
       :autofocus="autofocus"
       :clear-icon="clearIcon"
       :clearable="clearable"
+			:color="color"
       :counter="counter"
       :dense="dense"
       :disabled="disabled"

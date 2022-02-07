@@ -2,6 +2,7 @@
   <div class="z-switch z-input" :style="{ width: breadth }">
     <v-switch
       v-model="value"
+			:color="color"
       :dense="dense"
       :disabled="disabled"
       :error="incorrect"

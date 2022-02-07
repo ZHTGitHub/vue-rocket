@@ -44,6 +44,11 @@ export default {
 			default: false
 		},
 
+		color: {
+      type: String,
+      required: false
+    },
+
 		counter: {
 			type: [Boolean, Number, String],
 			required: false

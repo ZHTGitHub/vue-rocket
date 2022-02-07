@@ -23,6 +23,7 @@
           v-for="(item, index) of items" 
           :key="`z_radio_${ index }`"
           :class="[column ? '' : 'ml-2']"
+			    :color="color"
           :label="item.label"
           :value="item.value"
           @click="onClick"

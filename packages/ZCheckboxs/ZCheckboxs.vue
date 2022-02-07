@@ -26,6 +26,7 @@
           >
             <v-checkbox
               v-model="values"
+			        :color="color"
               :error="incorrect"
               :hide-details="true"
               :label="item.label"
