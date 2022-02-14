@@ -47,7 +47,7 @@ const rules = {
    */ 
   email: (value) => {
     var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-    return value.match(reg)
+    return reg.test(value)
   },
 
   /**
@@ -159,6 +159,15 @@ const rules = {
   numeric: (value) => {
     const reg = /^[0-9]*$/
 		return reg.test(value)
+  },
+
+  /**
+   * @description 手机号
+   * @param {String} value
+   */ 
+  phone: (value) => {
+    var reg = /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/
+    return reg.test(value)
   },
 
   /**

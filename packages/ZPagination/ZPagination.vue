@@ -30,6 +30,7 @@
 
     <v-pagination
       v-model="num"
+			:color="color"
       :length="length"
       :circle="circle"
       :total-visible="totalVisible"
@@ -66,6 +67,11 @@
       circle: {
         type: Boolean,
         default: false
+      },
+
+      color: {
+        type: String,
+        required: false
       },
 
       options: {

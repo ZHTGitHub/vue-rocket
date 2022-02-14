@@ -158,7 +158,7 @@
 
         this._createCanvas(this.image, 400, 400)
 
-        console.log(this.rotateDegrees)
+        // console.log(this.rotateDegrees)
       },
 
       // 切图
@@ -401,8 +401,9 @@
         const { startX, startY, rectW, rectH } = this.drewArea
 
         this.drewCtx = this.drewCanvas.getContext('2d')
-        
-        this.image.src = this.drewImageDataURL || this.src
+
+        this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
+        this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = function() {
           const { width, height } = vm.image
@@ -453,7 +454,7 @@
         const vm = this
 
         // image
-        this.image.src = this.drewImageDataURL || `${ this.src }?${ new Date().getTime() }`
+        this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = function() {
@@ -483,7 +484,7 @@
         let base64 = dataURL.split(',')[1]
         base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
           // 转后后的blob对象
-          console.log('blob', res.preview)
+          // console.log('blob', res.preview)
 
           this.blobSrc = res.preview
 

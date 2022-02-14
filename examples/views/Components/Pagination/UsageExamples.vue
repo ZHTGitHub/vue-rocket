@@ -4,8 +4,8 @@
       <div slot="demo">
         <z-pagination
           :options="pageOptions"
-          :pageNum="3"
-          :pageSize="10"
+          :pageNum="1"
+          :pageSize="1"
           :total="total"
         ></z-pagination>
       </div>
@@ -35,12 +35,12 @@
     data() {  
       return {
         code,
-        total: 10000,
+        total: 2,
         pageOptions: [
-          { label: '10条/页', value: 10 },
-          { label: '20条/页', value: 20 },
-          { label: '50条/页', value: 50 },
-          { label: '100条/页', value: 100 }
+          { label: '10条/页', value: 1 },
+          // { label: '20条/页', value: 20 },
+          // { label: '50条/页', value: 50 },
+          // { label: '100条/页', value: 100 }
         ]
       }
     },

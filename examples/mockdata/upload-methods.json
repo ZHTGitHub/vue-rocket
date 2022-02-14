@@ -1,11 +1,17 @@
 {
   "status": true,
-  "total": 1,
+  "total": 2,
   "data": [
     {
       "name": "change",
-      "parameters": "{ base64: String, lastModified: Number, name: Number, result: Object, size: Number, type: String }[]",
+      "parameters": "{ base64: String, lastModified: Number, name: Number, response: Any, size: Number, type: String }[]",
       "description": "当文件状态改变时触发"
+    },
+
+    {
+      "name": "response",
+      "parameters": "Any",
+      "description": "文件上传成功/失败时触发"
     }
   ]
 }

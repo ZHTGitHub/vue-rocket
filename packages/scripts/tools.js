@@ -208,7 +208,7 @@ const flatArray = function(value = []) {
   const result = Array.prototype.concat.apply([], value)
   
   return flatArray(result)
-}
+};
 
 export {
   isObject,

@@ -15,6 +15,7 @@
           <v-col :cols="5">
             <v-card height="400" width="256" class="mx-auto">
               <z-drawer 
+                activeClass="pink--text"
                 :menus="menus" 
                 permanent
                 @select="onSelect"

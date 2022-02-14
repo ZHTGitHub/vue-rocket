@@ -1,22 +1,25 @@
 <template>
   <div class="usage-examples">
-    <p class="error--text">Building...</p>
     <usage-demo :code="code">
       <div slot="demo">
         <z-upload 
           :formId="formId"
           formKey="upload"
-          action="http://zenghaitao/upload"
+          action="http://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
+          color="#f00"
+          disabled
           :validation="[
             { rule: 'required', message: '头像不能为空.' }
           ]"
-        ></z-upload>
+        >
+          <v-icon>mdi-plus</v-icon>
+          <div class="z-upload-text">Upload</div>
+        </z-upload>
 
         <z-btn
-          :formId="formId"
-          btnType="validate"
           class="mt-2"
           color="primary"
+          @click="submit"
         >
           submit
         </z-btn>

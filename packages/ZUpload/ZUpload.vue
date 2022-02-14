@@ -1,7 +1,7 @@
 <template>
   <div class="z-upload z-input">
     <div class="z-flex z-upload-wrapper">
-      <div class="z-upload-list">
+      <div class="z-flex z-upload-list" :class="flip ? 'flex-row-reverse' : 'flex-row'">
         <div 
           v-for="item of images"
           :key="item.lastModified"
@@ -35,22 +35,28 @@
           </div>
         </div>
 
-        <div class="z-upload-select">
+        <div 
+          class="z-upload-select"
+          :style="hoverStyle"
+          @mouseenter="onMouseenter"
+          @mouseleave="onMouseleave"
+        >
           <span 
             class="z-upload" 
             @click="onChoice"
           >
             <input 
+              accept 
+              :disabled="disabled"
               ref="zUploadInput"
               type="file" 
-              accept 
-              style="display: none"
               @change="readFile"
             >
 
-            <div>
-              <v-icon>mdi-plus</v-icon>
-              <div class="z-upload-text">Upload</div>
+            <div class="slot">
+              <slot>
+                <v-icon>mdi-plus</v-icon>
+              </slot>
             </div>
           </span>
         </div>
@@ -90,6 +96,21 @@
         required: true
       },
 
+      color: {
+        type: String,
+        default: '#1976d2'
+      },
+
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+
+      flip: {
+        type: Boolean,
+        default: false
+      },
+
       method: {
         validator(value) {
           return ~['get', 'post'].indexOf(value)
@@ -108,7 +129,9 @@
         targetFile: null,
         targetFileInfo: targetFileInfo,
         images: [],
-        targetImage: {}
+        targetImage: {},
+
+        hoverStyle: {}
       }
     },
 
@@ -121,7 +144,7 @@
       readFile(event) {
         this.targetFile = event.target.files[0]
 
-        console.log(this.targetFile)
+        // console.log(this.targetFile)
 
         const fileReader = new FileReader()
 
@@ -152,6 +175,8 @@
 
             this.value = this.images
 
+            // console.log(this.value)
+
             this.$emit('change', this.images)
           }
         })
@@ -179,7 +204,10 @@
       // 上传
       async uploadFile() {
         const result = await this._request()
-        this.targetFileInfo.result = result
+
+        this.targetFileInfo.response = result
+
+        this.$emit('response', result)
       },
 
       // 请求
@@ -197,7 +225,21 @@
         .catch((err) => {
           console.error(err)
         }) 
-      }
+      },
+
+      onMouseenter() {
+        if(!this.disabled) {
+          this.hoverStyle = {
+            border: `1px dashed ${ this.color }`
+          }
+        }
+      },
+
+      onMouseleave() {
+        this.hoverStyle = {
+          border: `1px dashed #d9d9d9`
+        }
+      },
     },
 
     watch: {
@@ -248,27 +290,42 @@
 
       .z-upload-list {
         box-sizing: border-box;
+
+        /* 翻转前 */
+        &.flex-row {
+          .z-upload-list-image-container {
+            margin: 0 8px 8px 0;
+          }
+        }
+
+        /* 翻转后 */
+        &.flex-row-reverse {
+          .z-upload-list-image-container {
+            margin: 0 0 8px 8px;
+          }
+        }
+
         .z-upload-list-image-container {
           float: left;
           width: 104px;
           height: 104px;
-          margin: 0 8px 8px 0;
+
           .z-upload-list-item {
             position: relative;
             width: 104px;
             height: 104px;
             padding: 8px;
-            margin: 0 8px 8px 0;
+            /* margin: 0 8px 8px 0; */
             border: 1px solid #d9d9d9;
             border-radius: 4px;
 
             &:hover .z-upload-list-item-info:before {
-                opacity: 1;
+              opacity: 1;
             }
 
             &:hover .z-upload-list-item-info+.z-upload-list-item-actions {
-                opacity: 1;
-              }
+              opacity: 1;
+            }
 
             .z-upload-list-item-info {
               position: relative;
@@ -324,6 +381,7 @@
         border-radius: 4px;
         cursor: pointer;
         transition: border-color .3s ease;
+
         &:hover {
           border: 1px dashed #1976d2;
         }
@@ -337,13 +395,14 @@
           vertical-align: middle;
 
           input[type=file] {
+            display: none;
             cursor: pointer;
           }
 
-          .z-upload-text {
+          /* .z-upload-text {
             color: #333;
             font-size: 14px;
-          }
+          } */
         }
       }
     }

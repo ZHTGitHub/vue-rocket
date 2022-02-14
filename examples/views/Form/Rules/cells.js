@@ -96,6 +96,12 @@ const rules = [
   },
 
   {
+    rule: 'phone',
+    usage: '接受有效的手机号',
+    validation: `<z-text-field :validation="[{ rule: 'phone', message: '手机号不合法.' }]"></z-text-field>`
+  },
+
+  {
     rule: 'regex',
     usage: '正则表达式',
     validation: `<z-text-field :validation="[{ regex: /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/, message: '手机格式不正确.' }]"></z-text-field>`

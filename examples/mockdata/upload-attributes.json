@@ -1,6 +1,6 @@
 {
   "status": true,
-  "total": 3,
+  "total": 6,
   "data": [
     {
       "name": "action",
@@ -9,6 +9,33 @@
       "acceptedValues": "—",
       "default": "—",
       "description": "上传地址"
+    },
+
+    {
+      "name": "color",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "#1976d2",
+      "description": "指定组件颜色"
+    },
+
+    {
+      "name": "disabled",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "禁用组件"
+    },
+
+    {
+      "name": "flip",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "翻转"
     },
 
     {

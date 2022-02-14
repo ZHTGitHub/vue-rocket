@@ -1,7 +1,20 @@
 <template>
   <div class="test">
-    <child1-component></child1-component>
-    <child2-component></child2-component>
+
+    <z-btn
+      @click="add"
+    >
+      add
+    </z-btn>
+
+    <div v-for="(items, index) in list" :key="index">
+      <template v-for="(item, iIndex) in items">
+        <div :key="iIndex">{{ item.a }}</div>
+      </template>
+    </div>
+    
+    <!-- <child1-component></child1-component>
+    <child2-component></child2-component> -->
   </div>
 </template>
 
@@ -9,21 +22,27 @@
   import Child1 from './Child1'
 
   export default {
-    beforeCreate() {
-      console.error('parent beforeCreate')
+    data() {
+      return {
+        list: [[{a: 1}, { a: 2}], [{a: 3}, { a: 4}]]
+      }
     },
 
-    created() {
-      console.error('parent created')
-    },
+    // beforeCreate() {
+    //   console.error('parent beforeCreate')
+    // },
 
-    beforeMount() {
-      console.error('parent beforeMount')
-    },
+    // created() {
+    //   console.error('parent created')
+    // },
 
-    mounted() {
-      console.error('parent mounted')
-    },
+    // beforeMount() {
+    //   console.error('parent beforeMount')
+    // },
+
+    // mounted() {
+    //   console.error('parent mounted')
+    // },
 
     // beforeUpdate() {
     //   console.error('parent beforeUpdate')
@@ -32,6 +51,14 @@
     // updated() {
     //   console.error('parent updated')
     // },
+
+    methods: {
+      add() {
+
+        this.$set(this.list, this.list.length, [{a: 5}, { a: 6}])
+        // this.list.push([{a: 5}, { a: 6}])
+      }
+    },
 
     components: {
       'child1-component': Child1,

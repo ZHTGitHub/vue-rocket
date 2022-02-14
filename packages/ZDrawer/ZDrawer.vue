@@ -28,12 +28,14 @@
         <v-list-item 
           v-if="!item.leaf"
           :key="item.key"
-          active-class="active-item"
+          :active-class="activeClass"
           :input-value="item.realm === realm"
           @click="onSelect(item, $event)"
         >
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon 
+              :color="item.activeColor"
+            >{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -49,6 +51,7 @@
           v-else
           v-model="item.expanded"
           :key="item.key"
+          :active-class="activeClass"
           :prepend-icon="item.icon"
           :value="currentItem.pId === item.id ? true : false"
         >
@@ -63,7 +66,7 @@
           <v-list-item
             v-for="child in item.children"
             :key="child.key"
-            active-class="active-item"
+            :active-class="activeClass"
             class="pl-12"
             :input-value="child.realm === realm"
             link
@@ -109,6 +112,11 @@
       absolute: {
         type: Boolean,
         default: false
+      },
+
+      activeClass: {
+        type: String,
+        required: false
       },
 
       app: {
@@ -205,6 +213,8 @@
         handler(route) {
           const { meta } = route
           this.realm = meta.realm
+
+          console.log(this.realm)
 
           for(let item of this.menus) {
             item.expanded = false
