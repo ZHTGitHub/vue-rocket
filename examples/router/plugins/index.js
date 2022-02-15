@@ -22,6 +22,18 @@ const PluginsRoutes = {
         title: '编辑 xml',
       },
       component: () => import('../../views/Plugins/Xml')
+    },
+
+    {
+      path: 'scroll',
+      name: 'ZDemoScroll',
+      meta: {
+        key: 'scroll',
+        pKey: 'plugins',
+        realm: 'xml',
+        title: '滚动 scroll',
+      },
+      component: () => import('../../views/Plugins/Scroll')
     }
   ]
 }

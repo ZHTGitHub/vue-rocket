@@ -303,6 +303,15 @@ export const menus = [
         realm: 'xml',
         title: '编辑 xml',
         link: '/plugins/xml'
+      },
+
+      {
+        pId: 'plugins',
+        key: 'scroll',
+        icon: '',
+        realm: 'scroll',
+        title: '滚动 scroll',
+        link: '/plugins/scroll'
       }
     ]
   }
