@@ -67,35 +67,76 @@
           <!-- 输入框外部 文字之前 END -->
         </v-text-field>
       </template>
-      <v-date-picker
-        v-model="date"
-        :first-day-of-week="firstDayOfWeek"
-        :locale="locale"
-        :no-title="noTitle"
-        :range="range"
-        :readonly="pickerReadonly"
-        :type="pickerType"
-        scrollable
-        @change="onChangeDate"
-      >
-        <template v-if="!immediate">
-          <v-spacer></v-spacer>
-          <v-btn
-            text
-            color="primary"
-            @click="menu = false"
-          >
-            取消
-          </v-btn>
-          <v-btn
-            text
-            color="primary"
-            @click="onConfirm"
-          >
-            确认
-          </v-btn>
-        </template>
-      </v-date-picker>
+      
+      <!-- 日期选择器 BEGIN -->
+      <template v-if="mode === 'date'">
+        <v-date-picker
+          v-model="date"
+          :first-day-of-week="firstDayOfWeek"
+          :locale="locale"
+          :no-title="noTitle"
+          :range="range"
+          :readonly="pickerReadonly"
+          :type="pickerType"
+          scrollable
+          @change="onChangeDate"
+        >
+          <template v-if="!immediate">
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              color="primary"
+              @click="menu = false"
+            >
+              取消
+            </v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="onConfirm"
+            >
+              确认
+            </v-btn>
+          </template>
+        </v-date-picker>
+      </template>
+      <!-- 日期选择器 END -->
+      
+      <!-- 时间选择器 BEGIN -->
+      <template v-else>
+        <v-time-picker
+          v-model="date"
+          :first-day-of-week="firstDayOfWeek"
+          :format="timeFormat"
+          :locale="locale"
+          :no-title="noTitle"
+          :range="range"
+          :readonly="pickerReadonly"
+          scrollable
+          :type="pickerType"
+          :use-seconds="timeUseSeconds"
+          @change="onChangeDate"
+        >
+          <template v-if="!immediate">
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              color="primary"
+              @click="menu = false"
+            >
+              取消
+            </v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="onConfirm"
+            >
+              确认
+            </v-btn>
+          </template>
+        </v-time-picker>
+      </template>
+      <!-- 时间选择器 END -->
     </v-menu>
   </div>
 </template>
@@ -129,6 +170,13 @@
         default: 'zh-cn'
       },
 
+      mode: {
+        validator(value) {
+          return ~['date', 'month', 'time'].indexOf(value)
+        },
+        default: 'date'
+      },
+
       noTitle: {
         type: Boolean,
         default: false
@@ -154,6 +202,18 @@
       readonly: {
         type: Boolean,
         default: true
+      },
+
+      timeFormat: {
+        validator(value) {
+          return ~['ampm', '24hr'].indexOf(value)
+        },
+        default: 'ampm'
+      },
+
+      timeUseSeconds: {
+        type: Boolean,
+        default: false
       },
 
       zIndex: {

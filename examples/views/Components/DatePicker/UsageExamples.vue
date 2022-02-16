@@ -2,10 +2,16 @@
   <div class="usage-examples">
     <usage-demo :code="code">
       <div slot="demo">
+        <z-btn
+          color="primary"
+          @click="getDate"
+        >获取日期
+        </z-btn>
+
         <v-row>
           <v-col>
             <z-date-picker
-              formId="date"
+              :formId="formId"
               formKey="day"
               label="日期"
               prepend-icon="mdi-calendar"
@@ -17,12 +23,26 @@
 
           <v-col>
             <z-date-picker
-              formId="date"
+              :formId="formId"
               formKey="dayRange"
               label="日期范围"
               prepend-icon="mdi-calendar"
               range
               :defaultValue="['2021-08-31', '2021-09-18']"
+            ></z-date-picker>
+          </v-col>
+
+          <v-col>
+            <z-date-picker
+              :formId="formId"
+              formKey="time"
+              label="时间"
+              format="24hr"
+              mode="time"
+              prepend-icon="mdi-alarm"
+              time-use-seconds
+              time-format="24hr"
+              defaultValue="12:30:20"
             ></z-date-picker>
           </v-col>
         </v-row>
@@ -64,17 +84,30 @@
 </v-row>
 `
 
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
+        formId: 'DatePickerUsageExample',
         code
       }
     },
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      getDate() {
+        console.log(this.forms[this.formId])
+      }
+    },
+
+    computed: {
+      ...mapGetters(['forms'])
     }
   }
 </script>
