@@ -42,6 +42,7 @@
             <z-draw-image 
               ref="drawImage"
               fileName="file.png"
+              isDownload
               :width="400"
               :src="src"
               @drew="handleDrew"
@@ -69,6 +70,8 @@
 
   import cells from './cells'
 
+  import tools from '../../../../packages/scripts/tools'
+
   export default {
     name: 'UsageExamples',
 
@@ -79,8 +82,18 @@
 
         isScreenshot: true,
 
-        src: 'http://113.106.108.93:1620/files/B0118/download/2022/01-24/292022010000189/292022010000189-030111-262616903-2.png'
+        src: 'http://113.106.108.93:1620/files/B0118/download/2022/01-24/292022010000189/292022010000189-030111-262616903-2.png',
+        // src: 'https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800'
       }
+    },
+
+    created() {
+      const arr = [
+        { a: 1, b: 2, c: 3 },
+        { a: 1, b: 2, c: 33 },
+      ]
+
+      console.log(tools.find(arr, { a: 1, b: 2 }))
     },
 
     mounted() {

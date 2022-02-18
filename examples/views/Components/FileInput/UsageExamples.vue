@@ -20,6 +20,7 @@
               name: 'demo.png'
             }
           ]"
+          :headers="{ 'x-name': 'Leslie' }"
           name="file"
           label="文件上传"
           parcel

@@ -139,6 +139,11 @@
         default: () => []
       },
 
+      headers: {
+        type: Object,
+        default: () => {}
+      },
+
       method: {
         validator(value) {
           return ~['GET', 'POST'].indexOf(value)
@@ -288,6 +293,7 @@
         }
 
         fetch(this.action, {
+          headers: this.headers,
           method: this.method,
           body: this.formData
         })

@@ -289,9 +289,29 @@ export const menus = [
 
   {
     pId: '-1',
+    id: 'JSUtil',
+    key: 'JSUtil',
+    icon: 'mdi-hammer-wrench',
+    title: 'JSUtil',
+    link: '/JSUtil',
+    leaf: true,
+    children: [
+      {
+        pId: 'JSUtil',
+        key: 'tools',
+        icon: '',
+        realm: 'tools',
+        title: '工具 tools',
+        link: '/JSUtil/tools'
+      }
+    ]
+  },
+
+  {
+    pId: '-1',
     id: 'plugins',
     key: 'plugins',
-    icon: 'mdi-language-css3',
+    icon: 'mdi-puzzle',
     title: '插件',
     link: '/plugins',
     leaf: true,

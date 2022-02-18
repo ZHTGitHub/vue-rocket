@@ -116,8 +116,6 @@
     methods: {
       // 初始化
       initialize() {
-        const vm = this
-
         const oImage = this.$refs.oImage
 
         this.oImageWidth = oImage.offsetWidth
@@ -156,9 +154,18 @@
 
         this.rotateDegrees = this.rotateCount * degrees
 
-        this._createCanvas(this.image, 400, 400)
+        const absRotateDegrees = Math.abs(this.rotateDegrees)
+        const times = absRotateDegrees / 90
+        const odd = times % 2 !== 0 ? true : false
 
-        // console.log(this.rotateDegrees)
+        let [rotateImageWidth, rotateImageHeight] = [this.oImageWidth, this.oImageHeight]
+
+        if(odd) {
+          rotateImageWidth = this.oImageHeight
+          rotateImageHeight = this.oImageWidth
+        }
+
+        this._createCanvas(this.image, rotateImageWidth, rotateImageHeight)
       },
 
       // 切图
@@ -465,6 +472,9 @@
 
       // 动态创建 canvas
       _createCanvas(image, width, height) {
+        console.log(width, height)
+        console.log(image.width, image.height)
+
         const canvas = document.createElement('canvas')
         canvas.width = width
         canvas.height = height
@@ -473,8 +483,9 @@
         const startX = width / 2
         const startY = height / 2
         ctx.translate(startX, startY)
-        ctx.rotate(90 * Math.PI / 180)
+        ctx.rotate(this.rotateDegrees * Math.PI / 180)
 
+        // ctx.drawImage(image, 0, 0, image.width, image.height, -startX, -startY, width, height)
         ctx.drawImage(image, 0, 0, image.width, image.height, -startX, -startY, width, height)
 
         const dataURL = canvas.toDataURL(this.imageType)
@@ -500,10 +511,10 @@
 
       // 下载已绘制图片
       _downloadDrewImage() {
-        const a = document.createElement('a')
-        a.href = this.screenshotDataURL || this.drewImageDataURL
-        a.download = new Date().getTime() + '.png'
-        a.click()
+        const anchor = document.createElement('a')
+        anchor.href = this.screenshotDataURL || this.drewImageDataURL
+        anchor.download = new Date().getTime() + '.png'
+        anchor.click()
       },
 
       // 清空绑定的事件

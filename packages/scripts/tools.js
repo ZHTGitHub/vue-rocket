@@ -202,7 +202,7 @@ const flatArray = function(value = []) {
   const isDeep = value.some(item => item instanceof Array)
 
   if(!isDeep) {        
-      return value
+    return value
   }
 
   const result = Array.prototype.concat.apply([], value)

@@ -1,6 +1,7 @@
 import ComponentRoutes from './component'
 import StyleRoutes from './style'
 import PluginsRoutes from './plugins'
+import JSUtilRoutes from './JSUtil'
 
 const router = [
   {
@@ -61,7 +62,8 @@ const router = [
 
   ComponentRoutes,
   StyleRoutes,
-  PluginsRoutes
+  PluginsRoutes,
+  JSUtilRoutes
 ]
 
 export { router }
