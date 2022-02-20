@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import rules from './rules'
 
 class ZValidate {
   constructor() {
@@ -9,13 +8,8 @@ class ZValidate {
     // 每张表单下每个字段的校验结果
     this.validator = {}
 
-    this.formsValidate = {}
-
     // 每张表单的 字段总数 及 校验结果集
     this.forms = {}
-
-    // 校验规则
-    this.rules = rules
   }
 
   // 给校验表单的每个 [value] 所对应的 [key] 设置 [value] 的校验结果

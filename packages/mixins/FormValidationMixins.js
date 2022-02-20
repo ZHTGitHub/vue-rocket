@@ -1,6 +1,7 @@
 import $validator from '../validate/z-validate'
 import rocket from '../scripts/rocket'
 import tools from '../scripts/tools'
+import rules from '../validate/rules'
 
 export default {
 	data() {
@@ -55,13 +56,13 @@ export default {
 						// console.log(ruleName, ruleValue)
 
 						// 校验规则不存在
-						if(!$validator.rules[ruleName]) {
+						if(!rules[ruleName]) {
 							this.validateForm('VALID_VALUE')
 						}
 						// 校验规则存在
 						else {
 							// 当前 field 是否合法
-							const yummy = $validator.rules[ruleName](this.value, ruleValue)
+							const yummy = rules[ruleName](this.value, ruleValue)
 
 							// 不合法
 							if(!yummy) {
@@ -112,7 +113,7 @@ export default {
 					}
 
 					// 校验规则不存在
-					if(!$validator.rules[ruleName]) {
+					if(!rules[ruleName]) {
 						this.validateForm('VALID_VALUE')
 					}
 
@@ -123,7 +124,7 @@ export default {
 
 					// 校验规则不为 required && 值不为undefined
 					else if(ruleName !== 'required' && this.value) {
-						let yummy = $validator.rules[ruleName](this.value, ruleValue)
+						let yummy = rules[ruleName](this.value, ruleValue)
 
 						// 不合法
 						if(!yummy) {
@@ -138,7 +139,7 @@ export default {
 
 					// 校验规则为 required
 					else {
-						let yummy = $validator.rules.required(this.value, ruleValue)
+						let yummy = rules.required(this.value, ruleValue)
 
 						// 不合法
 						if(!yummy) {
