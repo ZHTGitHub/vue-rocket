@@ -154,18 +154,18 @@
 
         this.rotateDegrees = this.rotateCount * degrees
 
-        // const absRotateDegrees = Math.abs(this.rotateDegrees)
-        // const times = absRotateDegrees / 90
-        // const odd = times % 2 !== 0 ? true : false
+        const absRotateDegrees = Math.abs(this.rotateDegrees)
+        const times = absRotateDegrees / 90
+        const odd = times % 2 !== 0 ? true : false
 
-        // let [rotateImageWidth, rotateImageHeight] = [this.oImageWidth, this.oImageHeight]
+        let [rotateImageWidth, rotateImageHeight] = [this.oImageWidth, this.oImageHeight]
 
-        // if(odd) {
-        //   rotateImageWidth = this.oImageHeight
-        //   rotateImageHeight = this.oImageWidth
-        // }
+        if(odd) {
+          rotateImageWidth = this.oImageHeight
+          rotateImageHeight = this.oImageWidth
+        }
 
-        this._createCanvas(this.image)
+        this._createCanvas(this.image, rotateImageWidth, rotateImageHeight)
       },
 
       // 切图
@@ -471,37 +471,21 @@
       },
 
       // 动态创建 canvas
-      _createCanvas(image) {
-        const absRotateDegrees = Math.abs(this.rotateDegrees)
-        const times = absRotateDegrees / 90
-        const odd = times % 2 !== 0 ? true : false
-
-        let [rotateImageWidth, rotateImageHeight] = [this.oImageWidth, this.oImageHeight]
-        let [imageWidth, imageHeight] = [this.image.width, this.image.height]
-
-        console.log(this.image.width)
-        console.log(this.image.height)
-
-        if(odd) {
-          rotateImageWidth = this.oImageHeight
-          rotateImageHeight = this.oImageWidth
-
-          // imageWidth = imageHeight
-          // imageHeight = imageWidth
-        }
-
-        console.log({rotateImageWidth, rotateImageHeight})
-        console.log({imageWidth, imageHeight})  
+      _createCanvas(image, width, height) {
+        console.log(width, height)
+        console.log(image.width, image.height)
 
         const canvas = document.createElement('canvas')
-        canvas.width = rotateImageWidth
-        canvas.height = rotateImageHeight
+        canvas.width = width
+        canvas.height = height
 
         const ctx = canvas.getContext('2d')
+        const startX = width / 2
+        const startY = height / 2
+        ctx.translate(startX, startY)
         ctx.rotate(this.rotateDegrees * Math.PI / 180)
-        // console.log(this.rotateDegrees)
 
-        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, -280, rotateImageWidth, rotateImageHeight)
+        ctx.drawImage(image, 0, 0, image.width, image.height, -startX, -startY, width, height)
 
         const dataURL = canvas.toDataURL(this.imageType)
 
