@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import { base64ToFile, base64ToBlob } from './tools'
+  import { base64ToFile, base64ToBlob, downloadImageCoordinate } from './tools'
 
   const defaultRectangleBorderColor = '#ff1e10'
   const defaultFontColor = '#ff1e10'
@@ -72,8 +72,6 @@
 
         image: new Image(),
 
-        oImageWidth: 0,
-        oImageHeight: 0,
         dynamicHeight: 0,
 
         rotatedWidth: 0, 
@@ -111,45 +109,31 @@
       }
     },
 
-    mounted() {
-      this.initialize()
-    }, 
-
     methods: {
       // 初始化
       initialize() {
-        // const oImage = this.$refs.oImage
-        const oImage = new Image()
-        oImage.src = this.src
+        const image = new Image()
+        image.src = this.src
 
-        console.log(oImage)
-
-        oImage.onload = () => {
-
-          this.dynamicHeight = this.width * oImage.height / oImage.width
-
-          this.oImageWidth = this.width
-          this.oImageHeight = this.dynamicHeight
+        image.onload = () => {
+          this.dynamicHeight = this.width * image.height / image.width
 
           this.rotatedWidth = this.width
           this.rotatedHeight = this.dynamicHeight
 
-          console.log(oImage.width)
-          console.log(oImage.height)
-
           // drawing
           this.drawingCanvas = this.$refs.drawingCanvas
 
-          this.drawingCanvas.width = this.oImageWidth
-          this.drawingCanvas.height = this.oImageHeight
+          this.drawingCanvas.width = this.width
+          this.drawingCanvas.height = this.dynamicHeight
 
           this.drawingCtx = this.drawingCanvas.getContext('2d')
 
           // drew
           this.drewCanvas = this.$refs.drewCanvas
 
-          this.drewCanvas.width = this.oImageWidth
-          this.drewCanvas.height = this.oImageHeight
+          this.drewCanvas.width = this.width
+          this.drewCanvas.height = this.dynamicHeight
 
           this.drewCtx = this.drewCanvas.getContext('2d')
 
@@ -194,13 +178,13 @@
         // this._createCanvas()
       },
 
-      // 切图
+      // 截图
       drawScreenshot() {
         const vm = this 
 
         this._clearEventListener()
 
-        this.initialize()
+        // this.initialize()
 
         this.drawingCtx.fillStyle = 'rgba(0, 0, 0, .46)'
         this.drawingCtx.lineWidth = 2
@@ -273,7 +257,7 @@
       drawText() {
         const vm = this
 
-        this.initialize()
+        // this.initialize()
 
         const drawing = document.getElementById('drawing')
 
@@ -369,14 +353,14 @@
        * @param overlay 遮罩
        */
       fillRectangle(startX, startY, rectW, rectH, ctx, overlay) {
-        ctx.clearRect(0, 0, this.oImageWidth, this.oImageHeight)
+        ctx.clearRect(0, 0, this.width, this.dynamicHeight)
 
         ctx.beginPath()
 
         // 遮罩
         if(overlay) {
           ctx.globalCompositeOperation = 'source-over'
-          ctx.fillRect(0, 0, this.oImageWidth,this.oImageHeight)
+          ctx.fillRect(0, 0, this.width,this.dynamicHeight)
         }
 
         // 边框
@@ -443,16 +427,16 @@
         this.image.onload = function() {
           const { width, height } = vm.image
 
-          vm.drewCtx.drawImage(this, 0, 0, width, height, 0, 0, vm.oImageWidth, vm.oImageHeight)
+          vm.drewCtx.drawImage(this, 0, 0, width, height, 0, 0, vm.width, vm.dynamicHeight)
           vm.writeText(vm.textArea.startX, vm.textArea.startY, 250, vm.inputValue, vm.drewCtx)
           vm.drewCtx.strokeStyle = vm.rectangleBorderColor
           vm.drewCtx.strokeRect(startX, startY, rectW, rectH)
 
           // canvas
           const canvas = document.createElement('canvas')
-          canvas.width = vm.oImageWidth
-          canvas.height = vm.oImageHeight
-          const data = vm.drewCtx.getImageData(0, 0, vm.oImageWidth, vm.oImageHeight)
+          canvas.width = vm.width
+          canvas.height = vm.dynamicHeight
+          const data = vm.drewCtx.getImageData(0, 0, vm.width, vm.dynamicHeight)
 
           const context = canvas.getContext('2d')
           context.putImageData(data, 0, 0)
@@ -486,137 +470,87 @@
 
       // 更新图片资源
       _updateImageSrc() {
-        const vm = this
-
         // image
         this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
         this.image.setAttribute('crossOrigin', '')
 
-        this.image.onload = function() {
-          const { width, height } = vm.image
-          vm.drewCtx.drawImage(this, 0, 0, width, height, 0, 0, vm.oImageWidth, vm.oImageHeight)
+        this.image.onload = () => {
+          console.log(this.image.width)
+          console.log(this.image.height)  
+          console.log(this.width, this.dynamicHeight)
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
         }
       },
 
-      // // 动态创建 canvas
-      // _createCanvas() {
-      //   const absRotateDegrees = Math.abs(this.rotateDegrees)
-      //   const times = absRotateDegrees / 90
-      //   const odd = times % 2 !== 0 ? true : false
-
-      //   let [rotateImageWidth, rotateImageHeight] = [this.oImageWidth, this.oImageHeight]
-      //   let [imageWidth, imageHeight] = [this.image.width, this.image.height]
-
-      //   console.log(this.image.width)
-      //   console.log(this.image.height)
-
-      //   if(odd) {
-      //     rotateImageWidth = this.oImageHeight
-      //     rotateImageHeight = this.oImageWidth
-
-      //     // imageWidth = imageHeight
-      //     // imageHeight = imageWidth
-      //   }
-
-      //   console.log({rotateImageWidth, rotateImageHeight})
-      //   console.log({imageWidth, imageHeight})  
-
-      //   const canvas = document.createElement('canvas')
-      //   canvas.width = rotateImageWidth
-      //   canvas.height = rotateImageHeight
-
-      //   const ctx = canvas.getContext('2d')
-      //   ctx.rotate(this.rotateDegrees * Math.PI / 180)
-      //   // console.log(this.rotateDegrees)
-
-      //   ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, -280, rotateImageWidth, rotateImageHeight)
-
-      //   const dataURL = canvas.toDataURL(this.imageType)
-
-      //   // console.log(dataURL)
-
-      //   let base64 = dataURL.split(',')[1]
-      //   base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
-      //     // 转后后的blob对象
-      //     // console.log('blob', res.preview)
-
-      //     this.blobSrc = res.preview
-
-      //     this.drewImageDataURL = res.preview
-
-      //     this.initialize()
-
-      //     // const blobUrl = window.URL.createObjectURL(res)
-
-      //     // console.log(blobUrl)
-      //   })
-      // },
-
       // 下载已绘制图片
       _downloadDrewImage() {
-
         const downloadImage = new Image()
         downloadImage.src = this.screenshotDataURL || this.drewImageDataURL
 
         downloadImage.onload = () => {
-          const even = (this.rotateDegrees / 90) % 2 === 0 ? true : false
-          let [downloadWidth, downloadHeight] = [this.width, this.dynamicHeight]
 
-          if(!even) {
-            downloadWidth = this.dynamicHeight
-            downloadHeight = this.width
+          // 根据旋转角度绘制画布的宽高
+          {
+            const even = (this.rotateDegrees / 90) % 2 === 0 ? true : false
+            let [downloadWidth, downloadHeight] = [this.width, this.dynamicHeight]
+
+            if(!even) {
+              downloadWidth = this.dynamicHeight
+              downloadHeight = this.width
+            }
+
+            const dynamicCanvas = document.createElement('canvas')
+            dynamicCanvas.width = downloadWidth
+            dynamicCanvas.height = downloadHeight
+
+            const dynamicCtx = dynamicCanvas.getContext('2d')
+
+            dynamicCtx.rotate(this.rotateDegrees * Math.PI / 180)
           }
 
-          const dynamicCanvas = document.createElement('canvas')
-          dynamicCanvas.width = downloadWidth
-          dynamicCanvas.height = downloadHeight
+          // 根据旋转角度设置绘制后的图片在画布上的坐标
+          {
+            const { moveX, moveY } = downloadImageCoordinate(this.rotateDegrees)
 
-          const dynamicCtx = dynamicCanvas.getContext('2d')
+            let [x, y] = [0, 0]
 
-          dynamicCtx.rotate(this.rotateDegrees * Math.PI / 180)
+            if(!moveX && !moveY) {
+              x = 0
+              y = 0
+            }else if(!moveX && moveY) {
+              x = 0
+              y = -this.dynamicHeight
+            }else if(moveX && moveY) {
+              x = -this.width
+              y = -this.dynamicHeight
+            }else if(moveX && !moveY) {
+              x = -this.width
+              y = 0
+            }
 
-          if(this.rotateDegrees === 0 || this.rotateDegrees - 360 === 0 || this.rotateDegrees + 360 === 0) {
-            dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, 0, 0, this.width, this.dynamicHeight)
+            dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, x, y, this.width, this.dynamicHeight)
           }
-          else if(this.rotateDegrees === 90 || this.rotateDegrees - 360 === 90 || this.rotateDegrees === -270 || this.rotateDegrees + 360 === -270) {
-            dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, 0, -this.dynamicHeight, this.width, this.dynamicHeight)
+
+          // 动态创建 a 标签，并下载绘制后的图片
+          {
+            const anchor = document.createElement('a')
+            const dataURL = dynamicCanvas.toDataURL('image/png')
+
+            // console.log(dataURL)
+
+            let base64 = dataURL.split(',')[1]
+            base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
+              // 转后后的blob对象
+              // console.log('blob', res)
+
+              const blobUrl = window.URL.createObjectURL(res)
+
+              anchor.href = blobUrl
+              anchor.download = 'dynamicCanvas'
+              anchor.click()
+            })
           }
-          else if(this.rotateDegrees === 180 || this.rotateDegrees - 360 === 180 || this.rotateDegrees === -180 || this.rotateDegrees + 360 === -180) {
-            dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, -this.width, -this.dynamicHeight, this.width, this.dynamicHeight)
-          }
-          else if(this.rotateDegrees === 270 || this.rotateDegrees - 360 === 270 || this.rotateDegrees === -90 || this.rotateDegrees + 360 === -90) {
-            dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, -this.width, 0, this.width, this.dynamicHeight)
-          }
-
-
-          console.log(this.rotateDegrees, even)
-
-          const anchor = document.createElement('a')
-          const dataURL = dynamicCanvas.toDataURL('image/png')
-
-          // console.log(dataURL)
-
-          let base64 = dataURL.split(',')[1]
-          base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
-            // 转后后的blob对象
-            console.log('blob', res)
-
-            const blobUrl = window.URL.createObjectURL(res)
-
-            console.log(blobUrl)
-
-            anchor.href = blobUrl
-            anchor.download = 'dynamicCanvas'
-            anchor.click()
-          })
         }
-
-        
-
-        // const anchor = document.createElement('a')
-        // anchor.href = this.screenshotDataURL || this.drewImageDataURL
-        // anchor.download = new Date().getTime() + '.png'
-        // anchor.click()
       },
 
       // 清空绑定的事件
@@ -630,8 +564,14 @@
     watch: {
       src: {
         handler() {
-          this._updateImageSrc()
-        }
+          // this._updateImageSrc()
+
+          console.log(this.src)
+
+          this.initialize()
+
+        },
+        immediate: true
       }
     }
   }
