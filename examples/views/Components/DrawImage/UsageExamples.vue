@@ -36,8 +36,6 @@
           </ul>
         </div>
 
-        
-
         <v-row class="pt-8">
           <!-- 截图 BEGIN -->
           <v-col :cols="6">
@@ -53,6 +51,7 @@
 
             <z-btn
               color="primary"
+              unlocked
               @click="changeImage"
             >
               change
@@ -97,9 +96,9 @@
 
         isScreenshot: true,
 
-        // src: 'http://113.106.108.93:1620/files/B0118/download/2022/01-24/292022010000189/292022010000189-030111-262616903-2.png',
-        src: 'https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800',
-        // src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.2008php.com%2F2011_Website_appreciate%2F11-07-08%2F20110708212417.jpg&refer=http%3A%2F%2Fwww.2008php.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1647949776&t=46fbf4d715d8e64a7de6e82c6470bfa2'
+        num: -1,
+
+        src: images[1]
       }
     },
 
@@ -226,13 +225,13 @@
       },
 
       changeImage() {
-        const num = Math.floor(Math.random() * 3)
+        ++this.num
 
-        console.log(num)
-
-        if(images[num] !== this.src) {
-          this.src = images[num]
+        if(this.num >= images.length) {
+          this.num = 0
         }
+
+        this.src = images[this.num]
       }
     }
   }

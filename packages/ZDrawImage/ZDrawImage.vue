@@ -112,8 +112,11 @@
     methods: {
       // 初始化
       initialize() {
+        this.rotateCount = 0
+
         const image = new Image()
         image.src = this.src
+        // image.setAttribute('crossOrigin', '')
 
         image.onload = () => {
           this.dynamicHeight = this.width * image.height / image.width
@@ -126,6 +129,7 @@
 
           this.drawingCanvas.width = this.width
           this.drawingCanvas.height = this.dynamicHeight
+          this.drawingCanvas.style.transform = 'rotate(0)'
 
           this.drawingCtx = this.drawingCanvas.getContext('2d')
 
@@ -134,11 +138,12 @@
 
           this.drewCanvas.width = this.width
           this.drewCanvas.height = this.dynamicHeight
+          this.drewCanvas.style.transform = 'rotate(0)'
 
           this.drewCtx = this.drewCanvas.getContext('2d')
 
-          // image
-          this._updateImageSrc()
+          // 初始化图片
+          this.drewCtx.drawImage(image, 0, 0, image.width, image.height, 0, 0, this.width, this.dynamicHeight)
         }
       },      
 
@@ -326,11 +331,11 @@
           file: this.file
         })
 
-        // this.onClear()
+        // this.clear()
       },
 
       // 清除
-      onClear() {
+      clear() {
         this.drawingCtx.clearRect && this.drawingCtx.clearRect(0, 0, this.drawingCanvas.width, this.drawingCanvas.height)
         this.drewCtx.clearRect && this.drewCtx.clearRect(0, 0, this.drewCanvas.width, this.drewCanvas.height)
         this.drawingCanvas.onmousedown = undefined
@@ -340,7 +345,7 @@
         this.drewImageDataURL = ''
         this.textArea = {}
 
-        this._updateImageSrc()
+        // this._updateImageSrc()
       },
 
       /**
@@ -416,39 +421,37 @@
 
       // 生成已绘制(框图/文字)文件
       createDrewFile() { 
-        const vm = this
         const { startX, startY, rectW, rectH } = this.drewArea
-
+        
         this.drewCtx = this.drewCanvas.getContext('2d')
 
         this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
-        this.image.setAttribute('crossOrigin', '')
+        this.image.setAttribute('crossOrigin', 'anonymous')
 
-        this.image.onload = function() {
-          const { width, height } = vm.image
 
-          vm.drewCtx.drawImage(this, 0, 0, width, height, 0, 0, vm.width, vm.dynamicHeight)
-          vm.writeText(vm.textArea.startX, vm.textArea.startY, 250, vm.inputValue, vm.drewCtx)
-          vm.drewCtx.strokeStyle = vm.rectangleBorderColor
-          vm.drewCtx.strokeRect(startX, startY, rectW, rectH)
+        this.image.onload = () => {
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+          this.writeText(this.textArea.startX, this.textArea.startY, 250, this.inputValue, this.drewCtx)
+          this.drewCtx.strokeStyle = this.rectangleBorderColor
+          this.drewCtx.strokeRect(startX, startY, rectW, rectH)
 
           // canvas
           const canvas = document.createElement('canvas')
-          canvas.width = vm.width
-          canvas.height = vm.dynamicHeight
-          const data = vm.drewCtx.getImageData(0, 0, vm.width, vm.dynamicHeight)
+          canvas.width = this.width
+          canvas.height = this.dynamicHeight
+          const data = this.drewCtx.getImageData(0, 0, this.width, this.dynamicHeight)
 
           const context = canvas.getContext('2d')
           context.putImageData(data, 0, 0)
 
           const dataURL = canvas.toDataURL(this.imageType)
 
-          vm.file = base64ToFile(dataURL, vm.fileName)
-          vm.drewImageDataURL = dataURL
+          this.file = base64ToFile(dataURL, this.fileName)
+          this.drewImageDataURL = dataURL
 
-          vm.$emit('drew', {
-            dataURL: vm.drewImageDataURL,
-            file: vm.file
+          this.$emit('drew', {
+            dataURL: this.drewImageDataURL,
+            file: this.file
           })
         }
       },
@@ -475,9 +478,6 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          console.log(this.image.width)
-          console.log(this.image.height)  
-          console.log(this.width, this.dynamicHeight)
           this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
         }
       },
@@ -506,50 +506,50 @@
             const dynamicCtx = dynamicCanvas.getContext('2d')
 
             dynamicCtx.rotate(this.rotateDegrees * Math.PI / 180)
-          }
 
-          // 根据旋转角度设置绘制后的图片在画布上的坐标
-          {
-            const { moveX, moveY } = downloadImageCoordinate(this.rotateDegrees)
+            // 根据旋转角度设置绘制后的图片在画布上的坐标
+            {
+              const { moveX, moveY } = downloadImageCoordinate(this.rotateDegrees)
 
-            let [x, y] = [0, 0]
+              let [x, y] = [0, 0]
 
-            if(!moveX && !moveY) {
-              x = 0
-              y = 0
-            }else if(!moveX && moveY) {
-              x = 0
-              y = -this.dynamicHeight
-            }else if(moveX && moveY) {
-              x = -this.width
-              y = -this.dynamicHeight
-            }else if(moveX && !moveY) {
-              x = -this.width
-              y = 0
+              if(!moveX && !moveY) {
+                x = 0
+                y = 0
+              }else if(!moveX && moveY) {
+                x = 0
+                y = -this.dynamicHeight
+              }else if(moveX && moveY) {
+                x = -this.width
+                y = -this.dynamicHeight
+              }else if(moveX && !moveY) {
+                x = -this.width
+                y = 0
+              }
+
+              dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, x, y, this.width, this.dynamicHeight)
             }
 
-            dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, x, y, this.width, this.dynamicHeight)
+            // 动态创建 a 标签，并下载绘制后的图片
+            {
+              const anchor = document.createElement('a')
+              const dataURL = dynamicCanvas.toDataURL('image/png')
+
+              let base64 = dataURL.split(',')[1]
+              base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
+                // 转后后的blob对象
+                // console.log('blob', res)
+
+                const blobUrl = window.URL.createObjectURL(res)
+
+                anchor.href = blobUrl
+                anchor.download = 'dynamicCanvas'
+                anchor.click()
+              })
+            }
           }
 
-          // 动态创建 a 标签，并下载绘制后的图片
-          {
-            const anchor = document.createElement('a')
-            const dataURL = dynamicCanvas.toDataURL('image/png')
-
-            // console.log(dataURL)
-
-            let base64 = dataURL.split(',')[1]
-            base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
-              // 转后后的blob对象
-              // console.log('blob', res)
-
-              const blobUrl = window.URL.createObjectURL(res)
-
-              anchor.href = blobUrl
-              anchor.download = 'dynamicCanvas'
-              anchor.click()
-            })
-          }
+          
         }
       },
 
@@ -564,12 +564,8 @@
     watch: {
       src: {
         handler() {
-          // this._updateImageSrc()
-
           console.log(this.src)
-
           this.initialize()
-
         },
         immediate: true
       }
