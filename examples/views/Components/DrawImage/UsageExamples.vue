@@ -151,7 +151,7 @@
             break;
           
           case 'clear':
-            this.$refs.drawImage.onClear()
+            this.$refs.drawImage.clear()
             break;
           
           case 'save':

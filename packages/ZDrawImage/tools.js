@@ -43,10 +43,10 @@ export const base64ToBlob = ({b64data = '', contentType = '', sliceSize = 512} =
 
 // 旋转后下载图片坐标
 export const downloadImageCoordinate = (deg) => {
-  const move0 = (deg === 0 || (deg - 360) % 360 === 0) || (deg === -360 || (deg + 360) % 360 === 0)
-  const moveY = (deg === 90 || (deg - 90) % 360 === 0) || (deg === -270 || (deg + 270) % 360 === 0)
-  const moveXY = (deg === 180 || (deg - 180) % 360 === 0) || (deg === -180 || (deg + 180) % 360 === 0)
-  const moveX = deg === (270 || (deg - 270) % 360 === 0) || (deg === -90 || (deg + 90) % 360 === 0)
+  const move0 = deg === 0 || (deg - 360) % 360 === 0 || (deg + 360) % 360 === 0
+  const moveY = (deg - 90) % 360 === 0 || (deg + 270) % 360 === 0
+  const moveXY = (deg - 180) % 360 === 0 || (deg + 180) % 360 === 0
+  const moveX = (deg - 270) % 360 === 0 || (deg + 90) % 360 === 0
 
   if(move0) {
     return {

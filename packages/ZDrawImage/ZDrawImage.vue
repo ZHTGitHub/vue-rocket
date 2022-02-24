@@ -11,16 +11,6 @@
         <canvas ref="drewCanvas" class="drewCanvas"></canvas>
 
         <canvas ref="drawingCanvas" class="drawingCanvas"></canvas>
-
-        <!-- <div class="z-image">
-          <img 
-            ref="oImage" 
-            :width="width" 
-            :src="src" 
-          />
-
-          <img :src="blobSrc" alt="">
-        </div> -->
       </div>
     </div>
   </div>
@@ -29,9 +19,11 @@
 <script>
   import { base64ToFile, base64ToBlob, downloadImageCoordinate } from './tools'
 
-  const defaultRectangleBorderColor = '#ff1e10'
-  const defaultFontColor = '#ff1e10'
+  const rectangleBorderColor = '#ff1e10'
+  const fontColor = '#ff1e10'
   const degrees = 90
+
+  const defaultStartXY = { x: null, y: null }
 
   export default {
     name: 'ZDrawImage',
@@ -67,13 +59,13 @@
 
     data() {
       return {
-        rectangleBorderColor: defaultRectangleBorderColor,
-        fontColor: defaultFontColor,
-
         image: new Image(),
 
         dynamicHeight: 0,
 
+        // 记录旋转次数、角度及旋转后宽高
+        rotateCount: 0,
+        rotateDegrees: 0,
         rotatedWidth: 0, 
         rotatedHeight: 0,
 
@@ -83,29 +75,26 @@
         drawingCtx: {},
         drewCtx: {},
 
-        startXY: {
-          x: null,
-          y: null
-        },
+        // 记录矩形开始坐标
+        startXY: { ...defaultStartXY },
 
-        endXY: {
-          x: null,
-          y: null
-        },
-
+        // 绘制区域
         drewArea: {},
+
+        // 文件
         file: '',
+
+        // 截图后生成的文件
         screenshotDataURL: '',
+
+        // 绘制后生成的文件
         drewImageDataURL: '',
         
-        input: null,
+        // 当前输入的文字
         inputValue: '',
-        textArea: {},
 
-        rotateCount: 0,
-        rotateDegrees: 0,
-
-        blobSrc: ''
+        // 记录文字开始坐标，及最大宽度
+        textArea: {}
       }
     },
 
@@ -113,13 +102,25 @@
       // 初始化
       initialize() {
         this.rotateCount = 0
+        this.rotateDegrees = 0
 
-        const image = new Image()
-        image.src = this.src
-        // image.setAttribute('crossOrigin', '')
+        this.startXY = { ...defaultStartXY }
 
-        image.onload = () => {
-          this.dynamicHeight = this.width * image.height / image.width
+        this.drewArea = {}
+
+        this.file = ''
+        this.screenshotDataURL = ''
+        this.drewImageDataURL = ''
+
+        this.inputValue = ''
+        this.textArea = {}
+
+        this.image = new Image()
+        this.image.src = `${ this.src }?${ Date.now() }`
+        this.image.setAttribute('crossOrigin', '')
+
+        this.image.onload = () => {
+          this.dynamicHeight = this.width * this.image.height / this.image.width
 
           this.rotatedWidth = this.width
           this.rotatedHeight = this.dynamicHeight
@@ -129,6 +130,7 @@
 
           this.drawingCanvas.width = this.width
           this.drawingCanvas.height = this.dynamicHeight
+          this.drawingCanvas.style.top = 0
           this.drawingCanvas.style.transform = 'rotate(0)'
 
           this.drawingCtx = this.drawingCanvas.getContext('2d')
@@ -138,12 +140,13 @@
 
           this.drewCanvas.width = this.width
           this.drewCanvas.height = this.dynamicHeight
+          this.drewCanvas.style.top = 0
           this.drewCanvas.style.transform = 'rotate(0)'
 
           this.drewCtx = this.drewCanvas.getContext('2d')
 
           // 初始化图片
-          this.drewCtx.drawImage(image, 0, 0, image.width, image.height, 0, 0, this.width, this.dynamicHeight)
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
         }
       },      
 
@@ -185,11 +188,9 @@
 
       // 截图
       drawScreenshot() {
-        const vm = this 
+        const that = this 
 
         this._clearEventListener()
-
-        // this.initialize()
 
         this.drawingCtx.fillStyle = 'rgba(0, 0, 0, .46)'
         this.drawingCtx.lineWidth = 2
@@ -210,26 +211,26 @@
             const rectW = event.offsetX - startX
             const rectH = event.offsetY - startY
 
-            vm.fillRectangle(startX, startY, rectW, rectH, vm.drawingCtx, true)
+            that.fillRectangle(startX, startY, rectW, rectH, that.drawingCtx, true)
           }
         }
 
-        document.addEventListener('mouseup', function() {
+        document.addEventListener('mouseup', () => {
           if(startXY) {
             startXY = null
-            vm.createScreenshotFile()
+            this.createScreenshotFile()
           }
         })
       },
 
       // 矩形
       drawRectangle() {
-        const vm = this
+        const that = this
 
-        // this.initialize()
+        this._clearEventListener()
 
         this.drawingCtx.lineWidth = 3
-        this.drawingCtx.strokeStyle = this.rectangleBorderColor
+        this.drawingCtx.strokeStyle = rectangleBorderColor
 
         let startXY = null
 
@@ -246,27 +247,25 @@
             const rectW = event.offsetX - startX
             const rectH = event.offsetY - startY
 
-            vm.fillRectangle(startX, startY, rectW, rectH, vm.drawingCtx)
+            that.fillRectangle(startX, startY, rectW, rectH, that.drawingCtx)
           }
         }
 
         document.addEventListener('mouseup', function() {
           if(startXY) {
             startXY = null
-            vm.createDrewFile()
+            that.createDrewFile()
           }
         })
       },
 
       // 文字
       drawText() {
-        const vm = this
-
-        // this.initialize()
+        const that = this
 
         const drawing = document.getElementById('drawing')
 
-        let [startXY, prevStartXY, input, inputXY] = [null, null, null, null]
+        let [startXY, prevStartXY, input] = [null, null, null]
 
         this.drawingCanvas.onmousedown = function(event) {
           startXY = {
@@ -274,10 +273,13 @@
             y: event.offsetY
           }
 
+          console.log(startXY)
+
           input = document.getElementById('drawTextInput')
 
           if(!input) {
             input = document.createElement('input')
+
             input.id = 'drawTextInput'
             input.autocomplete = 'off'
             input.style.position = 'absolute'
@@ -286,6 +288,7 @@
             input.style.border = '1px solid #ff1e10'
             input.style.color = '#ff1e10'
             input.style.outline = 'none'
+
             drawing.appendChild(input)
           }
           else {
@@ -300,11 +303,10 @@
               input.readOnly = true
             }
 
-            vm.inputValue = input.value
-            vm.writeText(prevStartXY.x, prevStartXY.y, 250, vm.inputValue, vm.drawingCtx)
+            that.inputValue = input.value
+            that.writeText(prevStartXY.x, prevStartXY.y, 250, that.inputValue, that.drawingCtx)
             input.value = ''
           }
-
         }
 
         document.addEventListener('mouseup', function(event) {
@@ -317,7 +319,7 @@
             prevStartXY.x = startXY.x
             prevStartXY.y = startXY.y
             startXY = null          
-            vm.createDrewFile()
+            that.createDrewFile()
           }
         })
       },
@@ -336,16 +338,25 @@
 
       // 清除
       clear() {
-        this.drawingCtx.clearRect && this.drawingCtx.clearRect(0, 0, this.drawingCanvas.width, this.drawingCanvas.height)
-        this.drewCtx.clearRect && this.drewCtx.clearRect(0, 0, this.drewCanvas.width, this.drewCanvas.height)
+        // this.drawingCtx.clearRect && this.drawingCtx.clearRect(0, 0, this.drawingCanvas.width, this.drawingCanvas.height)
+        // this.drewCtx.clearRect && this.drewCtx.clearRect(0, 0, this.drewCanvas.width, this.drewCanvas.height)
+        
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
-        this.drewArea = {}
+
         this.screenshotDataURL = ''
         this.drewImageDataURL = ''
+
+        this.drewArea = {}
         this.textArea = {}
 
-        // this._updateImageSrc()
+        this.image.src = `${ this.src }?${ Date.now() }`
+        this.image.setAttribute('crossOrigin', '')
+
+        this.image.onload = () => {
+          this.drawingCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+        }
       },
 
       /**
@@ -426,13 +437,12 @@
         this.drewCtx = this.drewCanvas.getContext('2d')
 
         this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
-        this.image.setAttribute('crossOrigin', 'anonymous')
-
+        this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
           this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
           this.writeText(this.textArea.startX, this.textArea.startY, 250, this.inputValue, this.drewCtx)
-          this.drewCtx.strokeStyle = this.rectangleBorderColor
+          this.drewCtx.strokeStyle = rectangleBorderColor
           this.drewCtx.strokeRect(startX, startY, rectW, rectH)
 
           // canvas
@@ -459,8 +469,8 @@
       // 写入文字
       writeText(startX, startY, maxWidth, text, ctx) {
         ctx.font = '20px Microsoft YaHei'
-        ctx.fillStyle = this.fontColor
-        ctx.strokeStyle = this.fontColor
+        ctx.fillStyle = fontColor
+        ctx.strokeStyle = fontColor
         
         ctx.fillText(text, startX, startY + 18, maxWidth)
 
@@ -472,15 +482,15 @@
       },
 
       // 更新图片资源
-      _updateImageSrc() {
-        // image
-        this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
-        this.image.setAttribute('crossOrigin', '')
+      // _updateImageSrc() {
+      //   // image
+      //   this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
+      //   this.image.setAttribute('crossOrigin', '')
 
-        this.image.onload = () => {
-          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
-        }
-      },
+      //   this.image.onload = () => {
+      //     this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+      //   }
+      // },
 
       // 下载已绘制图片
       _downloadDrewImage() {
@@ -557,14 +567,13 @@
       _clearEventListener() {
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
-        document.removeEventListener('mouseup', function() {}, false)
+        // document.removeEventListener('mouseup', function() {}, false)
       }
     },
 
     watch: {
       src: {
         handler() {
-          console.log(this.src)
           this.initialize()
         },
         immediate: true

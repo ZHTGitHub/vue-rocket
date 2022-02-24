@@ -37,10 +37,16 @@
               :color="item.activeColor"
             >{{ item.icon }}</v-icon>
           </v-list-item-icon>
-
+          
           <v-list-item-content>
             <v-list-item-title>
-              {{ item.title }}
+              <span class="badge-text">
+                {{ item.title }}
+                <i 
+                  v-if="item.badge"
+                  :class="['badge', item.badge.class]"
+                >{{ item.badge.total }}</i>
+              </span>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -74,7 +80,13 @@
           >
             <v-list-item-content>
               <v-list-item-title>
-                {{ child.title }}
+                <span class="badge-text">
+                  {{ child.title }}
+                  <i 
+                    v-if="child.badge"
+                    :class="['badge', child.class]"
+                  >{{ child.badge.total }}</i>
+                </span>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -230,9 +242,31 @@
 </script>
 
 <style scoped lang="scss">
-  .active-item {
+  .v-list-item__title {
+    overflow: visible !important;
+  }
+
+  .badge-text {
+    position: relative;
+
+    i.badge {
+      position: absolute;
+      top: -4px;
+      padding-left: 4px;
+      padding-right: 4px;
+      margin-left: 2px;
+      min-width: 16px;
+      min-height: 16px;
+      border-radius: 9999px !important;
+      background-color: #ff5252;
+      color: #fff;
+      font-style: normal;
+      font-size: 12px;
+    }
+  }
+  /* .active-item {
     .v-list-item__icon {
       color: #1976d2 !important;
     }
-  }
+  } */
 </style>

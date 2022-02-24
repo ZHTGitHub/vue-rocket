@@ -6,8 +6,10 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import './plugins/highlight'
 
-import './plugins/vue-virtual-scroller'
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import 'animate.css'
+
+// import './plugins/vue-virtual-scroller'
+// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 import request from './api/service'
 Vue.prototype.$request = request

@@ -80,7 +80,12 @@
             realm: 'home',
             title: '首页',
             link: undefined,
-            leaf: false
+            leaf: false,
+            badge: {
+              mode: '',
+              total: 99,
+              class: 'animate__animated animate__bounce'
+            }
           },
 
           {
@@ -99,7 +104,11 @@
                 icon: '',
                 realm: 'drawer',
                 title: 'Drawer 导航抽屉',
-                link: '/components/drawer'
+                link: '/components/drawer',
+                badge: {
+                  mode: '',
+                  total: 6
+                }
               }
             ]
           }
