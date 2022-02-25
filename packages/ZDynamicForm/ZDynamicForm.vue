@@ -558,15 +558,6 @@
     },
 
     watch: {
-      // detail: {
-      //   handler(detail) {
-      //     this.detailInfo = { ...detail }
-      //     console.log(this.detailInfo)
-      //   },
-      //   deep: true,
-      //   immediate: true
-      // },
-
       forms: {
         handler(forms) {
           const form = forms[this.formId]
@@ -582,11 +573,9 @@
 
           if(dialog) {
             this.detailInfo = { ...this.detail }
-            console.log(this.detailInfo)
           }else {
             rocket.emit('ZHT_RESET_FORM', this.formId)
           }
-          // !dialog && rocket.emit('ZHT_RESET_FORM', this.formId)
         },
         immediate: true
       }
