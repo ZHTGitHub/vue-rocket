@@ -558,13 +558,14 @@
     },
 
     watch: {
-      detail: {
-        handler(detail) {
-          this.detailInfo = { ...detail }
-        },
-        deep: true,
-        immediate: true
-      },
+      // detail: {
+      //   handler(detail) {
+      //     this.detailInfo = { ...detail }
+      //     console.log(this.detailInfo)
+      //   },
+      //   deep: true,
+      //   immediate: true
+      // },
 
       forms: {
         handler(forms) {
@@ -578,7 +579,14 @@
       dialog: {
         handler(dialog) {
           this.$emit('dialog', dialog)
-          !dialog && rocket.emit('ZHT_RESET_FORM', this.formId)
+
+          if(dialog) {
+            this.detailInfo = { ...this.detail }
+            console.log(this.detailInfo)
+          }else {
+            rocket.emit('ZHT_RESET_FORM', this.formId)
+          }
+          // !dialog && rocket.emit('ZHT_RESET_FORM', this.formId)
         },
         immediate: true
       }
