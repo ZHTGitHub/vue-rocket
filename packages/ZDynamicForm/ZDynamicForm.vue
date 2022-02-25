@@ -69,7 +69,7 @@
                   :suffix="item.suffix"
                   :type="item.type"
                   :validation="item.validation"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
                     v-if="item.append"
@@ -123,7 +123,7 @@
                   :suffix="item.suffix"
                   :type="item.type"
                   :validation="item.validation"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
                     v-if="item.append"
@@ -176,7 +176,7 @@
                   :suffix="item.suffix"
                   :validation="item.validation"
                   :options="item.options"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
                     v-if="item.append"
@@ -234,7 +234,7 @@
                   :suffix="item.suffix"
                   :validation="item.validation"
                   :options="item.options"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
                     v-if="item.append"
@@ -291,7 +291,7 @@
                   :time-use-seconds="item.timeUseSeconds"
                   :type="item.type"
                   :validation="item.validation"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
                     v-if="item.append"
@@ -331,7 +331,7 @@
                   :row="item.row"
                   :validation="item.validation"
                   :options="item.options"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
                     v-if="item.prepend"
@@ -351,7 +351,7 @@
                   :label="item.label"
                   :validation="item.validation"
                   :options="item.options"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
                     v-if="item.prepend"
@@ -379,7 +379,7 @@
                   :tile="item.tile"
                   :validation="item.validation"
                   :options="item.options"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 >
                   <span class="error--text" slot="prepend">*</span>
                 </z-btn-toggle>
@@ -396,7 +396,7 @@
                   :hide-details="item.hideDetails"
                   :label="item.label"
                   :readonly="item.readonly"
-                  :defaultValue="detail[item.formKey]"
+                  :defaultValue="detailInfo[item.formKey]"
                 ></z-switch>
               </template>
               <!-- ZSwitch END -->
@@ -509,6 +509,8 @@
         defaultCols: 12,
         defaultColsClass: 'py-0',
 
+        detailInfo: {},
+
         momentDetail: {}
       }
     },
@@ -556,6 +558,14 @@
     },
 
     watch: {
+      detail: {
+        handler(detail) {
+          this.detailInfo = { ...detail }
+        },
+        deep: true,
+        immediate: true
+      },
+
       forms: {
         handler(forms) {
           const form = forms[this.formId]

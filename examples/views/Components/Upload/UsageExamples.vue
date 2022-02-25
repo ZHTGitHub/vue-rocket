@@ -7,7 +7,6 @@
           formKey="upload"
           action="http://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
           color="#f00"
-          disabled
           :validation="[
             { rule: 'required', message: '头像不能为空.' }
           ]"
