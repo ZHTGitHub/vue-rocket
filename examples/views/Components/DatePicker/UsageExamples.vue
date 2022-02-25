@@ -25,10 +25,12 @@
             <z-date-picker
               :formId="formId"
               formKey="dayRange"
+              :immediate="false"
               label="日期范围"
               prepend-icon="mdi-calendar"
               range
               :defaultValue="['2021-08-31', '2021-09-18']"
+              @confirm="confirmDate"
             ></z-date-picker>
           </v-col>
 
@@ -38,11 +40,13 @@
               formKey="time"
               label="时间"
               format="24hr"
+              :immediate="false"
               mode="time"
               prepend-icon="mdi-alarm"
               time-use-seconds
               time-format="24hr"
               defaultValue="12:30:20"
+              @confirm="confirmDate"
             ></z-date-picker>
           </v-col>
         </v-row>
@@ -103,6 +107,10 @@
     methods: {
       getDate() {
         console.log(this.forms[this.formId])
+      },
+
+      confirmDate(value) {
+        console.log(value)
       }
     },
 

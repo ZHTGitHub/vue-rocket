@@ -2,22 +2,7 @@
   <div class="scroll">
     <div class="scroll" id="scroll">
       <ul class="items">
-        <RecycleScroller
-          class="scroller"
-          :items="list"
-          :item-size="116"
-          key-field="label"
-          v-slot="{ item, index }"
-        >
-          <li 
-            :key="index"
-            class="item"
-          >
-            {{ item.label }}
-          </li>
-        </RecycleScroller>
-
-        <!-- <template v-for="(item, index) in list" >
+        <template v-for="(item, index) in list" >
           <li 
             v-if="scrollTop - item.offsetTop <= 200"
             :key="index"
@@ -25,7 +10,7 @@
             :id="`item_${ index }`"
             class="item"
           >{{ item.label }}</li>
-        </template> -->
+        </template>
       </ul>
     </div>
   </div>

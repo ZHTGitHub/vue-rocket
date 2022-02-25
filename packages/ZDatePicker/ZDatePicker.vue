@@ -240,6 +240,7 @@
       onConfirm() {
         this.value = this.date
         this.menu = false
+        this.$emit('confirm', this.value)
       },
 
       onClickClear(event) {
