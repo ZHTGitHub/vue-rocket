@@ -25,8 +25,9 @@ const rules = {
     const values = rule.split(',')
     const min_value = +values[0]
     const max_value = +values[1]
-    value = +value
-    if(value >= min_value && value <= max_value) {
+    const length = value.length
+
+    if(length >= min_value && length <= max_value) {
       return true
     }
     return false
@@ -185,7 +186,7 @@ const rules = {
    * @param {String} value
    */ 
   required: (value) => {
-    var reg = /[\S]+/
+    const reg = /[\S]+/
     return reg.test(value)
   },
 

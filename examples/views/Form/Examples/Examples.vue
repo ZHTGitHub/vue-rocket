@@ -36,7 +36,7 @@
               label="姓名"
               :validation="[
                 { rule: 'required', message: '姓名为必填项.' },
-                { rule: 'min:4', message: '字段长度不得小于4.' }
+                { rule: 'between:8,16', message: '字段长度在8-16位.' }
               ]"
               defaultValue="Leslie"
             >

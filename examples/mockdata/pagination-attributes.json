@@ -48,11 +48,20 @@
     },
 
     {
-      "name": "showQuickJumper",
+      "name": "showNoData",
       "required": "否",
       "type": "Boolean",
       "acceptedValues": "—",
       "default": true,
+      "description": "当 total 为零是否显示"
+    },
+
+    {
+      "name": "showQuickJumper",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
       "description": "是否可以快速跳转至某页"
     },
 

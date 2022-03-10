@@ -151,7 +151,11 @@
       value: {
         handler(value) {
           if(value) {
-            this.values = value
+            if(Array.isArray(value)) {
+              this.values = value
+            }else {
+              this.values = [value]
+            }
           }else {
             this.values = []
           }

@@ -111,6 +111,11 @@
         default: false
       },
 
+      headers: {
+        type: Object,
+        default: () => {}
+      },
+
       method: {
         validator(value) {
           return ~['get', 'post'].indexOf(value)
@@ -216,15 +221,23 @@
         formData.append(this.name, this.targetFile)
 
         return fetch(this.action, {
+          headers: this.headers,
           method: this.method,
           body: formData
         })
-        .then((res) => {
-          return res.json()
+        .then((response) => {
+          return response.json()
         })
-        .catch((err) => {
-          console.error(err)
-        }) 
+        .then((response) => {
+          this.$emit('response', {
+            ...response,
+          })
+        })
+        .catch((error) => {
+          this.$emit('response', {
+            ...error,
+          })
+        })
       },
 
       onMouseenter() {

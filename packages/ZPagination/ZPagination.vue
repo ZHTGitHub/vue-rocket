@@ -97,6 +97,11 @@
         default: 'end'
       },
 
+      showNoData: {
+        type: Boolean,
+        default: false
+      },
+
       showQuickJumper: {
         type: Boolean,
         default: true

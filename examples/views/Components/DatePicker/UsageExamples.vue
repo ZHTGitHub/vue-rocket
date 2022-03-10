@@ -45,7 +45,7 @@
               prepend-icon="mdi-alarm"
               time-use-seconds
               time-format="24hr"
-              defaultValue="12:30:20"
+              defaultValue=""
               @confirm="confirmDate"
             ></z-date-picker>
           </v-col>
