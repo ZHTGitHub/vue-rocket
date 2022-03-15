@@ -3,17 +3,16 @@
     <div class="z-flex z-upload-wrapper">
       <div class="z-flex z-upload-list" :class="flip ? 'flex-row-reverse' : 'flex-row'">
         <div 
-          v-for="item of images"
-          :key="item.lastModified"
+          v-for="(image, index) of images"
+          :key="index"
           class="z-upload-list-image-container"
         >
           <div class="z-upload-list-item">
               <div class="z-upload-list-item-info">
                 <span>
                   <img 
-                    :alt="item.name"
                     class="z-upload-list-item-img"
-                    :src="item.base64" 
+                    :src="image.url" 
                   >
                 </span>
               </div>
@@ -23,13 +22,13 @@
                   class="mr-2" 
                   color="#ffffffd9" 
                   small
-                  @click="onPreview(item)"
+                  @click="onPreview(image)"
                 >mdi-eye-outline</v-icon>
 
                 <v-icon 
                   color="#ffffffd9" 
                   small
-                  @click="onDelete(item)"
+                  @click="onDelete(index, image)"
                 >mdi-trash-can-outline</v-icon>
               </span>
           </div>
@@ -83,7 +82,7 @@
     name: '',
     size: 0,
     type: '',
-    base64: ''
+    url: ''
   }
 
   export default {
@@ -169,7 +168,7 @@
               name,
               size,
               type,
-              base64: result
+              url: result
             }
 
             if(!tools.isArray(this.images)) {
@@ -194,16 +193,9 @@
       },
 
       // 删除
-      onDelete(item) {
+      onDelete(index, item) {
         this.targetImage = item
-
-        const length = this.images.length
-
-        for(let i = length - 1; i >= 0; i--) {
-          if(this.images[i].lastModified === item.lastModified) {
-            this.images.splice(i, 1)
-          }
-        }
+        this.images.splice(index, 1)
       },
 
       // 上传

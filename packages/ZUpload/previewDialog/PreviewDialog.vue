@@ -12,7 +12,7 @@
       <v-card-text>
         <img 
           :alt="targetImage.name"
-          :src="targetImage.base64" 
+          :src="targetImage.url" 
           width="100%"
         >
       </v-card-text>

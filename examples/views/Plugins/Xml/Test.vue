@@ -1,68 +1,107 @@
 <template>
-  <div class="test">
+  <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    <v-text-field
+      v-model="name"
+      :counter="10"
+      label="Name"
+      @keyup.enter="onEnter"
+      @keyup="onKeyup"
+    ></v-text-field>
 
-    <z-btn
-      @click="add"
+    <!-- <v-text-field
+      v-model="email"
+      :rules="emailRules"
+      label="E-mail"
+      required
+    ></v-text-field>
+
+    <v-select
+      v-model="select"
+      :items="items"
+      :rules="[v => !!v || 'Item is required']"
+      label="Item"
+      required
+    ></v-select>
+
+    <v-checkbox
+      v-model="checkbox"
+      :rules="[v => !!v || 'You must agree to continue!']"
+      label="Do you agree?"
+      required
+    ></v-checkbox> -->
+
+    <!-- <v-btn
+      :disabled="!valid"
+      color="success"
+      class="mr-4"
+      @click="validate"
     >
-      add
-    </z-btn>
+      Validate
+    </v-btn>  
 
-    <div v-for="(items, index) in list" :key="index">
-      <template v-for="(item, iIndex) in items">
-        <div :key="iIndex">{{ item.a }}</div>
-      </template>
-    </div>
-    
-    <!-- <child1-component></child1-component>
-    <child2-component></child2-component> -->
-  </div>
+    <v-btn
+      color="error"
+      class="mr-4"
+      @click="reset"
+    >
+      Reset Form
+    </v-btn>
+
+    <v-btn
+      color="warning"
+      @click="resetValidation"
+    >
+      Reset Validation
+    </v-btn> -->
+  </v-form>
 </template>
 
 <script>
-  import Child1 from './Child1'
-
   export default {
-    data() {
-      return {
-        list: [[{a: 1}, { a: 2}], [{a: 3}, { a: 4}]]
-      }
-    },
-
-    // beforeCreate() {
-    //   console.error('parent beforeCreate')
-    // },
-
-    // created() {
-    //   console.error('parent created')
-    // },
-
-    // beforeMount() {
-    //   console.error('parent beforeMount')
-    // },
-
-    // mounted() {
-    //   console.error('parent mounted')
-    // },
-
-    // beforeUpdate() {
-    //   console.error('parent beforeUpdate')
-    // },
-
-    // updated() {
-    //   console.error('parent updated')
-    // },
+    data: () => ({
+      valid: true,
+      name: '',
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+      ],
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
+      select: null,
+      items: [
+        'Item 1',
+        'Item 2',
+        'Item 3',
+        'Item 4',
+      ],
+      checkbox: false,
+    }),
 
     methods: {
-      add() {
+      validate () {
+        this.$refs.form.validate()
+      },
+      reset () {
+        this.$refs.form.reset()
+      },
+      resetValidation () {
+        this.$refs.form.resetValidation()
+      },
 
-        this.$set(this.list, this.list.length, [{a: 5}, { a: 6}])
-        // this.list.push([{a: 5}, { a: 6}])
+      onEnter() {
+
+      },
+
+      onKeyup() {
+
       }
     },
-
-    components: {
-      'child1-component': Child1,
-      'child2-component': () => import('./Child2')
-    }
   }
 </script>

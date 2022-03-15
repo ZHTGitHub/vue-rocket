@@ -61,34 +61,17 @@ export default {
 						}
 						// 校验规则存在
 						else {
-							// 当前 field 是否合法
-							const yummy = rules[ruleName](this.value, ruleValue)
+							// 当前字段是否合法
+							const isYummy = rules[ruleName](this.value, ruleValue)
 
 							// 不合法
-							if(!yummy) {
-								// 当前 field 是否必填
-								const hasRequired = this.validation.some((r) => { return r.rule === 'required' })
-
-								// 必填 直接报错
-								if(hasRequired) {
-									this.unsavory(item)
-								}
-
-								// 不必填 有值 但值不合法
-								else if(!hasRequired && this.value) {
-									this.unsavory(item)
-								}
-
-								// 
-								// else {
-								// 	this.savory()
-								// }
-								// return
+							if(!isYummy) {
+								this.unsavory(item)
+								return
 							}
+							
 							// 合法
-							else {
-								this.savory(item)
-							}
+							this.savory(item)
 						}
 					}
 				}

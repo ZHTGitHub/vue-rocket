@@ -10,6 +10,9 @@
           :validation="[
             { rule: 'required', message: '头像不能为空.' }
           ]"
+          :defaultValue="[{
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+          }]"
         >
           <v-icon>mdi-plus</v-icon>
           <div class="z-upload-text">Upload</div>
