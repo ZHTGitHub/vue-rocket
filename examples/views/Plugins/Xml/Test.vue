@@ -6,10 +6,7 @@
   >
     <v-text-field
       v-model="name"
-      :counter="10"
       label="Name"
-      @keyup.enter="onEnter"
-      @keyup="onKeyup"
     ></v-text-field>
 
     <!-- <v-text-field
@@ -34,14 +31,14 @@
       required
     ></v-checkbox> -->
 
-    <!-- <v-btn
+    <v-btn
       :disabled="!valid"
       color="success"
       class="mr-4"
       @click="validate"
     >
       Validate
-    </v-btn>  
+    </v-btn>
 
     <v-btn
       color="error"
@@ -56,7 +53,7 @@
       @click="resetValidation"
     >
       Reset Validation
-    </v-btn> -->
+    </v-btn>
   </v-form>
 </template>
 
@@ -94,14 +91,6 @@
       resetValidation () {
         this.$refs.form.resetValidation()
       },
-
-      onEnter() {
-
-      },
-
-      onKeyup() {
-
-      }
     },
   }
 </script>

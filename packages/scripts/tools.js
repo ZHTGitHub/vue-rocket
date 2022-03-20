@@ -7,6 +7,75 @@ const valueType = ['undefined', 'number', 'string', 'boolean', 'symbol'];
 const referenceType = ['object', 'function'];
 
 /**
+ * @description 返回值的数据类型
+ * @param {Any} value
+ */ 
+const getType = function(value) {
+  const type = Object.prototype.toString.call(value)
+
+  switch (type) {
+    case '[object Boolean]': return 'boolean';
+    case '[object Number]': return 'number';
+    case '[object String]': return 'string';
+
+    case '[object Array]': return 'array';
+    case '[object Function]': return 'function';
+    case '[object Object]': return 'object';
+
+    case '[object Null]': return 'null';
+    case '[object Undefined]': return 'undefined';
+    
+    case '[object Symbol]': return 'symbol';
+
+    default: return value;
+  }
+}
+
+/**
+ * @description 获得滚动条滚动距离
+ */ 
+const getScrollOffset = function() {
+  if (window.pageXOffset) {
+    return {
+      x: window.pageXOffset,
+      y: window.pageYOffset
+    }
+  }else {
+    return {
+      x: document.body.scrollLeft + document.documentElement.scrollLeft,
+      y: document.body.scrollTop + document.documentElement.scrollTop
+    }
+  }
+}
+
+/**
+ * @description 获取视口的尺寸
+ */ 
+const getViewportSize = function() {
+  if(window.innerWidth) {
+    return {
+      width: window.innerWidth,
+      heigth: window.innerHeight
+    }
+  }else {
+    // ie8及其以下
+    if (document.compatMode === 'BackCompat') {
+      // 怪异模式
+      return {
+        width: document.body.clientWidth,
+        height: document.body.clientHeight
+      }
+    } else {
+      // 标准模式
+      return {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      }
+    }
+  }
+}
+
+/**
  * @description 判断值是否为对象
  * @param {Object} obj
  */ 
@@ -210,7 +279,19 @@ const flatArray = function(value = []) {
   return flatArray(result)
 };
 
+/**
+ * @description 复制到剪贴板
+ * @param {String} text
+ */ 
+const copyToClipboard = function(text) {
+  return navigator.clipboard.writeText(text)
+}
+
 export {
+  getType,
+  getScrollOffset,
+  getViewportSize,
+
   isObject,
   isArray,
   isEqual,
@@ -221,11 +302,17 @@ export {
   deepClone,
   cleanArray,
   flatArray,
+
+  copyToClipboard,
 
   rules
 }
 
 export default {
+  getType,
+  getScrollOffset,
+  getViewportSize,
+
   isObject,
   isArray,
   isEqual,
@@ -236,6 +323,8 @@ export default {
   deepClone,
   cleanArray,
   flatArray,
+
+  copyToClipboard,
 
   rules
 }
