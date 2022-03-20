@@ -9,7 +9,7 @@
             color="primary"
             mandatory
             :options="directionOptions"
-            @change="onChange($event)"
+            @change="onChange"
             @click="onClick"
           ></z-btn-toggle>
         </div>
@@ -58,12 +58,12 @@
 
     methods: {
       onChange(value) {
-        console.log(value)
+        console.log('change', value)
       },
 
       onClick(event) {
         const { customValue } = event
-        console.log(customValue)
+        console.log('click', customValue)
       }
     }
   }
