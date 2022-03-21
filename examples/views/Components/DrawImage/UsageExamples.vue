@@ -44,7 +44,7 @@
               fileName="file.png"
               isDownload
               :width="400"
-              :src="src"
+              :src="require('/public/task-demo.png')"
               @drew="handleDrew"
               @save="handleSave"
             ></z-draw-image>

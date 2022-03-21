@@ -45,11 +45,11 @@
             @click="onChoice"
           >
             <input 
-              accept 
-              :disabled="disabled"
-              ref="zUploadInput"
+              ref="input"
               type="file" 
-              @change="readFile"
+              accept="image/*" 
+              :disabled="disabled"
+              @change="handleReadImage"
             >
 
             <div class="slot">
@@ -141,14 +141,12 @@
 
     methods: {
       onChoice() {
-        this.$refs.zUploadInput.dispatchEvent(new MouseEvent('click'))
+        this.$refs.input.dispatchEvent(new MouseEvent('click'))
       },
 
       // 读取
-      readFile(event) {
+      handleReadImage(event) {
         this.targetFile = event.target.files[0]
-
-        // console.log(this.targetFile)
 
         const fileReader = new FileReader()
 
@@ -200,35 +198,29 @@
 
       // 上传
       async uploadFile() {
-        const result = await this._request()
+        const result = await this.request()
 
         this.targetFileInfo.response = result
+
+        this.$refs.input.value = null
 
         this.$emit('response', result)
       },
 
       // 请求
-      _request() {
+      request() {
         const formData = new FormData()
         formData.append(this.name, this.targetFile)
 
-        return fetch(this.action, {
-          headers: this.headers,
-          method: this.method,
-          body: formData
-        })
-        .then((response) => {
-          return response.json()
-        })
-        .then((response) => {
-          this.$emit('response', {
-            ...response,
+        return new Promise((resolve) => {
+          fetch(this.action, {
+            headers: this.headers,
+            method: this.method,
+            body: formData
           })
-        })
-        .catch((error) => {
-          this.$emit('response', {
-            ...error,
-          })
+          .then((result) => result.json())
+          .then((result) => resolve(result))
+          .catch((error) => resolve(error))
         })
       },
 
@@ -244,7 +236,7 @@
         this.hoverStyle = {
           border: `1px dashed #d9d9d9`
         }
-      },
+      }
     },
 
     watch: {

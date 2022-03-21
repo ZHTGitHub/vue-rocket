@@ -13,6 +13,7 @@
           :defaultValue="[{
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
           }]"
+          @response="handleResponse"
         >
           <v-icon>mdi-plus</v-icon>
           <div class="z-upload-text">Upload</div>
@@ -67,6 +68,10 @@
     methods: {
       submit() {
         console.log(this.forms[this.formId])
+      },
+
+      handleResponse(response) {
+        console.log(response)
       }
     },
 
