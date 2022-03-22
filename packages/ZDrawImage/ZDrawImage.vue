@@ -338,8 +338,8 @@
 
       // 清除
       clear() {
-        // this.drawingCtx.clearRect && this.drawingCtx.clearRect(0, 0, this.drawingCanvas.width, this.drawingCanvas.height)
-        // this.drewCtx.clearRect && this.drewCtx.clearRect(0, 0, this.drewCanvas.width, this.drewCanvas.height)
+        this.drawingCtx.clearRect && this.drawingCtx.clearRect(0, 0, this.drawingCanvas.width, this.drawingCanvas.height)
+        this.drewCtx.clearRect && this.drewCtx.clearRect(0, 0, this.drewCanvas.width, this.drewCanvas.height)
         
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
@@ -440,7 +440,7 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+          // this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
           this.writeText(this.textArea.startX, this.textArea.startY, 250, this.inputValue, this.drewCtx)
           this.drewCtx.strokeStyle = rectangleBorderColor
           this.drewCtx.strokeRect(startX, startY, rectW, rectH)
