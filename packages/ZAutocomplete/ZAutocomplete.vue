@@ -30,6 +30,7 @@
       :prepend-icon="prependOuterIcon"
       :readonly="readonly"
       :reverse="reverse"
+      :search-input="searchInput"
       :solo="solo"
       :suffix="suffix"
       :success="success"
@@ -102,6 +103,11 @@
 
       options: {
         type: Array,
+        required: false
+      },
+
+      searchInput: {
+        type: String,
         required: false
       }
     },

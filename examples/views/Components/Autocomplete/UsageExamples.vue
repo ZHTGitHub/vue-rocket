@@ -6,6 +6,7 @@
           <z-autocomplete
             formId="auto"
             formKey="auto"
+            :search-input="search"
             :options="cityOptions"
             :defaultValue="1"
           ></z-autocomplete>
