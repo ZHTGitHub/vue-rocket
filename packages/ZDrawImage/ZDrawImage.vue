@@ -436,6 +436,10 @@
         
         this.drewCtx = this.drewCanvas.getContext('2d')
 
+        console.log(this.drewImageDataURL)
+        console.log(`${ this.src }?${ Date.now() }`)
+        console.log(this.src)
+
         this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
         this.image.setAttribute('crossOrigin', '')
 

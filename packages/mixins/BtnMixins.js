@@ -135,6 +135,11 @@ export default {
       default: false
     },
 
+    width: {
+      type: [Number, String],
+      required: false
+    },
+
     unlocked: {
       type: Boolean,
       default: false

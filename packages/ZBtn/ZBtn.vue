@@ -20,6 +20,7 @@
 			:right="right"
 			:rounded="rounded"
 			:small="small"
+			:style="{ width: `${ width }px`, height: `${ height }px` }"
 			:text="text"
 			:tile="tile"
 			:top="top"
