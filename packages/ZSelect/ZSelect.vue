@@ -25,6 +25,7 @@
       :prepend-inner-icon="prependIcon"
       :prepend-icon="prependOuterIcon"
       :readonly="readonly"
+      :return-object="returnObject"
       :reverse="reverse"
       :solo="solo"
       :suffix="suffix"
@@ -79,6 +80,11 @@
       options: {
         type: Array,
         required: false
+      },
+
+      returnObject: {
+        type: Boolean,
+        default: false
       }
     },
 

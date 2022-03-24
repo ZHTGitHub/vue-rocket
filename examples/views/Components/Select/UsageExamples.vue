@@ -6,9 +6,11 @@
           formId="cities"
           formKey="city"
           label="居住城市"
+          return-object
           :rules="[{ required: true, message: '居住城市为必选项.' }]"
           :options="cityOptions"
           :defaultValue="1"
+          @change="handleChange"
         ></z-select>
       </div>
     </usage-demo>
@@ -50,6 +52,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      handleChange(value) {
+        console.log(value)
+      }
     }
   }
 </script>

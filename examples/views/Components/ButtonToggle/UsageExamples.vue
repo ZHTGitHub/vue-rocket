@@ -12,6 +12,16 @@
             @change="onChange"
             @click="onClick"
           ></z-btn-toggle>
+
+          <z-btn-toggle
+            formId="sexuals"
+            formKey="sexual1"
+            color="primary"
+            mandatory
+            :options="directionOptions"
+            @change="onChange"
+            @click="onClick"
+          ></z-btn-toggle>
         </div>
       </div>
     </usage-demo>

@@ -37,14 +37,26 @@
         </div>
 
         <v-row class="pt-8">
+          <v-col :cols="2">
+            <ul>
+              <li 
+                v-for="image in images" 
+                :key="image"
+                @click="switchImage(image)"
+              >
+                <img width="100" :src="image" />
+              </li>
+            </ul>
+          </v-col>
+
           <!-- 截图 BEGIN -->
-          <v-col :cols="6">
+          <v-col :cols="5">
             <z-draw-image 
               ref="drawImage"
               fileName="file.png"
               isDownload
               :width="400"
-              :src="require('/public/task-demo.png')"
+              :src="src"
               @drew="handleDrew"
               @save="handleSave"
             ></z-draw-image>
@@ -60,7 +72,7 @@
           <!-- 截图 END -->
 
           <!-- 预览 BEGIN -->
-          <v-col :cols="6">
+          <v-col :cols="5">
             <img :src="dataURL" />
           </v-col>
           <!-- 预览 END -->
@@ -81,9 +93,10 @@
   import tools from '../../../../packages/scripts/tools'
 
   const images = [
-    'http://113.106.108.93:1620/files/B0118/download/2022/01-24/292022010000189/292022010000189-030111-262616903-2.png',
-    'https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800',
-    'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.2008php.com%2F2011_Website_appreciate%2F11-07-08%2F20110708212417.jpg&refer=http%3A%2F%2Fwww.2008php.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1647949776&t=46fbf4d715d8e64a7de6e82c6470bfa2'
+    require('../../../../public/lp1.png'),
+    require('../../../../public/lp2.png'),
+    require('../../../../public/lp3.png'),
+    require('../../../../public/lp4.jpg')
   ]
 
   export default {
@@ -91,6 +104,7 @@
 
     data() {
       return {
+        images,
         options: cells.options,
         dataURL: '',
 
@@ -117,6 +131,12 @@
     },
 
     methods: {
+      switchImage(image) {
+        this.src = image
+
+        console.log(this.src)
+      },
+
       handleDrew({ dataURL, file }) {
         this.dataURL = dataURL
         console.log(file)
