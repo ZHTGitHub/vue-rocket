@@ -91,11 +91,6 @@
         default: false
       },
 
-      lockedTime: {
-        type: [Number, String],
-        default: 330
-      },
-
       multiple: {
         type: Boolean,
         default: false
@@ -124,80 +119,31 @@
       tile: {
         type: Boolean,
         default: false
-      },
-
-      unlocked: {
-        type: Boolean,
-        default: false
       }
     },
 
     data() {
       return {
         items: [],
-        values: null,
-
-        changeOldTime: null,
-        clickOldTime: null
+        values: null
       }
     },
 
     methods: {
       onChange(value) {
         this.value = value
-
-        const action = () => {
-          this.$emit('change', this.value)
-        }
-
-        this.unlocked ? action() : this.limitChange(action)
-
+        this.$emit('change', this.value)
         this.verifyField()
       },
 
       onClick(event) {
-        const oldValue = this.value
-
-        const action = () => {
-          this.$emit('click', event)
-        }
-
-        this.$nextTick(() => {
-          if(oldValue !== this.value) {
-            event.customValue = this.value
-
-            this.unlocked ? action() : this.limitClick(action)
-          }
-        })
+        event.customValue = this.value
+        this.$emit('click', event)
       },
 
-      _setOptions() {
+      setItems() {
         if(isArray(this.options) && isYummy(this.options)) {
           this.items = this.options
-        }
-      },
-
-      limitChange(fn) {
-        if(!this.changeOldTime) {
-          fn()
-          this.changeOldTime = Date.now()
-        }else {
-          if(Date.now() - this.changeOldTime > this.lockedTime) {
-            fn()
-            this.changeOldTime = Date.now()
-          }
-        }
-      },
-
-      limitClick(fn) {
-        if(!this.clickOldTime) {
-          fn()
-          this.clickOldTime = Date.now()
-        }else {
-          if(Date.now() - this.clickOldTime > this.lockedTime) {
-            fn()
-            this.clickOldTime = Date.now()
-          }
         }
       }
     },
@@ -215,7 +161,7 @@
 
       options: {
         handler() {
-          this._setOptions()
+          this.setItems()
         },
         immediate: true
       }

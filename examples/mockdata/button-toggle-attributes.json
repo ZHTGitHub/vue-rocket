@@ -66,15 +66,6 @@
     },
 
     {
-      "name": "lockedTime",
-      "required": "否",
-      "type": "Number | String",
-      "acceptedValues": "—",
-      "default": 330,
-      "description": "防止恶意点击间隔"
-    },
-
-    {
       "name": "multiple",
       "required": "否",
       "type": "Boolean",
@@ -117,15 +108,6 @@
       "acceptedValues": "—",
       "default": false,
       "description": "删除组件的 border-radius"
-    },
-
-    {
-      "name": "unlocked",
-      "required": "否",
-      "type": "Boolean",
-      "acceptedValues": "—",
-      "default": true,
-      "description": "是否开启防止恶意点击"
     }
   ]
 }
