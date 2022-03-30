@@ -210,6 +210,15 @@
     },
 
     {
+      "name": "return-object",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "组件更改为直接返回对象"
+    },
+
+    {
       "name": "reverse",
       "required": "否",
       "type": "Boolean",

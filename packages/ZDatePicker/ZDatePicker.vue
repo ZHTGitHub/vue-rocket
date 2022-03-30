@@ -39,7 +39,7 @@
           :success="success"
           v-bind="attrs"
           v-on="on"
-          @click:clear="onClickClear"
+          @click:clear="clearDate" 
           @input="onInput"
         >
           <!-- 输入框内部 文字之后 BEGIN -->
@@ -79,7 +79,7 @@
           :readonly="pickerReadonly"
           :type="pickerType"
           scrollable
-          @change="onChangeDate"
+          @change="changeDate"
         >
           <template v-if="!immediate">
             <v-spacer></v-spacer>
@@ -93,7 +93,7 @@
             <v-btn
               text
               color="primary"
-              @click="onConfirm"
+              @click="confirmDate"
             >
               确认
             </v-btn>
@@ -115,7 +115,7 @@
           scrollable
           :type="pickerType"
           :use-seconds="timeUseSeconds"
-          @change="onChangeDate"
+          @change="changeDate"
         >
           <template v-if="!immediate">
             <v-spacer></v-spacer>
@@ -129,7 +129,7 @@
             <v-btn
               text
               color="primary"
-              @click="onConfirm"
+              @click="confirmDate"
             >
               确认
             </v-btn>
@@ -230,20 +230,20 @@
     },
 
     methods: {
-      onChangeDate() {
+      changeDate() {
         if(this.immediate) {
           this.value = this.date
           this.menu = false
         }
       },
 
-      onConfirm() {
+      confirmDate() {
         this.value = this.date
         this.menu = false
         this.$emit('confirm', this.value)
       },
 
-      onClickClear(event) {
+      clearDate(event) {
         this.date = ''
         this.value = this.date
         event.customValue = this.value
@@ -252,7 +252,6 @@
       },
 
       onInput() {
-        console.log(this.value)
         this.verifyField()
       }
     },
@@ -262,13 +261,14 @@
         handler(value) {
           this.date = value
         },
-        immediate: true
+        deep: true
       },
 
       date: {
         handler() {
           this.verifyField()
-        }
+        },
+        deep: true
       }
     }
   }

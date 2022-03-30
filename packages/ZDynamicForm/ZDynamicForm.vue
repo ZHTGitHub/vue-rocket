@@ -171,6 +171,7 @@
                   :prepend-inner-icon="item.prependIcon"
                   :prepend-icon="item.prependOuterIcon"
                   :readonly="item.readonly"
+                  :return-object="item.returnObject"
                   :reverse="item.reverse"
                   :solo="item.solo"
                   :suffix="item.suffix"

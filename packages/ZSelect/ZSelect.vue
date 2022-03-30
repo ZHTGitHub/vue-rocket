@@ -25,7 +25,6 @@
       :prepend-inner-icon="prependIcon"
       :prepend-icon="prependOuterIcon"
       :readonly="readonly"
-      :return-object="returnObject"
       :reverse="reverse"
       :solo="solo"
       :suffix="suffix"
@@ -96,54 +95,74 @@
 
     methods: {
       onBlur(event) {
-        event.customValue = this.value
-        this.$emit('blur', event)
+        // event.customValue = this.value
+        this.$emit('blur', this.setCustomValue(event))
       },
 
-      onChange(value) {
-        this.$emit('change', value)
+      onChange() {
+        this.$emit('change', this.setCustomValue())
       },
 
       onClick(event) {
-        event.customValue = this.value
-        this.$emit('click', event)
+        // event.customValue = this.value
+        this.$emit('click', this.setCustomValue(event))
       },
 
       onClickAppend(event) {
-        event.customValue = this.value
-        this.$emit('click:append', event)
+        // event.customValue = this.value
+        this.$emit('click:append', this.setCustomValue(event))
       },
 
       onClickAppendOuter(event) {
-        event.customValue = this.value
-        this.$emit('click:append-outer', event)
+        // event.customValue = this.value
+        this.$emit('click:append-outer', this.setCustomValue(event))
       },
 
       onClickClear(event) {
-        event.customValue = this.value
-        this.$emit('click:clear', event)
+        // event.customValue = this.value
+        this.$emit('click:clear', this.setCustomValue(event))
       },
 
       onClickPrependOuter(event) {
-        event.customValue = this.value
-        this.$emit('click:prepend-outer')
+        // event.customValue = this.value
+        this.$emit('click:prepend-outer', this.setCustomValue(event))
       },
 
       onClickPrepend(event) {
-        event.customValue = this.value
-        this.$emit('click:prepend', event)
+        // event.customValue = this.value
+        this.$emit('click:prepend', this.setCustomValue(event))
       },
 
       onFocus(event) {
-        event.customValue = this.value
-        this.$emit('focus', event)
+        // event.customValue = this.value
+        this.$emit('focus', this.setCustomValue(event))
       },
 
       onInput() {
         this.verifyField()
       },
 
-      _setOptions() {
+      // return object or value
+      setCustomValue(event = null) {
+        if(!event) {
+          if(!this.returnObject) {
+            return this.value
+          }else {
+            return this.options.find(item => item.value === this.value)
+          }
+        }
+        else {
+          if(!this.returnObject) {
+            event.customValue = this.value
+          }else {
+            event.customValue = this.options.find(item => item.value === this.value)
+          }
+
+          return event
+        }
+      },
+
+      setOptions() {
         this.items = []
 
         if(isArray(this.options) && isYummy(this.options)) {
@@ -160,7 +179,7 @@
     watch: {
       options: {
         handler() {
-          this._setOptions()
+          this.setOptions()
         },
         immediate: true
       }

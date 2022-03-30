@@ -6,10 +6,11 @@
           formId="cities"
           formKey="city"
           label="居住城市"
-          return-object
+          :return-object="false"
           :rules="[{ required: true, message: '居住城市为必选项.' }]"
           :options="cityOptions"
           :defaultValue="1"
+          @blur="handleBlur"
           @change="handleChange"
         ></z-select>
       </div>
@@ -55,6 +56,10 @@
     },
 
     methods: {
+      handleBlur(value) {
+        console.log(value)
+      },
+
       handleChange(value) {
         console.log(value)
       }
