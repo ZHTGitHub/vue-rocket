@@ -102,6 +102,15 @@
     },
 
     {
+      "name": "height",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设置组件的高度"
+    },
+
+    {
       "name": "filled",
       "required": "否",
       "type": "Boolean",

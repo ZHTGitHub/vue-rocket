@@ -6,8 +6,8 @@
           formId="info"
           formKey="name"
           label="姓名"
-          :defaultValue="23"
-          @enter="onChange"
+          defaultValue="Leslie"
+          @change="onChange"
         >
         </z-text-field>
       </div>
@@ -45,8 +45,8 @@
     },
 
     methods: {
-      onChange() {
-        console.log(23)
+      onChange(value) {
+        console.log(value)
       }
     }
   }

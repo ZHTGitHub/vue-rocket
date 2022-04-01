@@ -6,6 +6,8 @@
           formId="intros"
           formKey="intro"
           label="自我介绍"
+          width="500"
+          height="30"
           placeholder="请输入自我介绍，长度控制在一百字以内."
         ></z-textarea>
       </div>

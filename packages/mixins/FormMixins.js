@@ -84,6 +84,11 @@ export default {
 			default: false
 		},
 
+		height: {
+			type: [Number, String],
+			required: false
+		},
+
 		hideDetails: {
 			type: Boolean,
 			default: false
@@ -221,8 +226,14 @@ export default {
 			}
 		},
 
-		breadth() {
-			return typeof +this.width === 'number' ? `${ this.width }px` : this.width
+		computedWidth() {
+			const width = String(this.width) 
+			return width.slice(-2) === 'px' ? width : `${ this.width }px`
+		},
+
+		computedHeight() {
+			const height = String(this.height) 
+			return height.slice(-2) === 'px' ? height : `${ this.height }px`
 		}
 	},
 

@@ -1,5 +1,11 @@
 <template>
-  <div class="z-select z-input" :style="{ width: breadth }">
+  <div 
+    class="z-select z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <v-select
       v-model="value"
       :append-icon="appendIcon"
@@ -13,6 +19,7 @@
       :disabled="disabled"
       :error="incorrect"
       :error-messages="errorMessage"
+      :height="height"
       :filled="filled"
       :hide-details="hideDetails"
       :hint="hint"
@@ -95,7 +102,6 @@
 
     methods: {
       onBlur(event) {
-        // event.customValue = this.value
         this.$emit('blur', this.setCustomValue(event))
       },
 
@@ -104,37 +110,30 @@
       },
 
       onClick(event) {
-        // event.customValue = this.value
         this.$emit('click', this.setCustomValue(event))
       },
 
       onClickAppend(event) {
-        // event.customValue = this.value
         this.$emit('click:append', this.setCustomValue(event))
       },
 
       onClickAppendOuter(event) {
-        // event.customValue = this.value
         this.$emit('click:append-outer', this.setCustomValue(event))
       },
 
       onClickClear(event) {
-        // event.customValue = this.value
         this.$emit('click:clear', this.setCustomValue(event))
       },
 
       onClickPrependOuter(event) {
-        // event.customValue = this.value
         this.$emit('click:prepend-outer', this.setCustomValue(event))
       },
 
       onClickPrepend(event) {
-        // event.customValue = this.value
         this.$emit('click:prepend', this.setCustomValue(event))
       },
 
       onFocus(event) {
-        // event.customValue = this.value
         this.$emit('focus', this.setCustomValue(event))
       },
 

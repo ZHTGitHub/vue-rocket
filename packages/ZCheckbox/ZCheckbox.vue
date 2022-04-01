@@ -1,5 +1,11 @@
 <template>
-  <div class="z-checkbox z-input" :style="{ width: breadth }">
+  <div 
+    class="z-checkbox z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <v-checkbox
       v-model="value"
       :color="color"

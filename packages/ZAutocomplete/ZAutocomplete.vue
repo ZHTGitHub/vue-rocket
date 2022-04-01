@@ -1,5 +1,11 @@
 <template>
-  <div class="z-autocomplete z-input" :style="{ width: breadth }">
+  <div 
+    class="z-autocomplete z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <v-autocomplete
       v-model="value"
       :allow-overflow="allowOverflow"
@@ -15,6 +21,7 @@
       :error="incorrect"
       :error-messages="errorMessage"
       :filled="filled"
+      :height="height"
       :hide-details="hideDetails"
       :hint="hint"
       :items="items"
@@ -120,23 +127,43 @@
 
     methods: {
       onBlur(event) {
-        this.$emit('blur', event, this.value)
+        this.$emit('blur', this.setCustomValue(event))
       },
 
-      onChange(value) {
-        this.$emit('change', value)
+      onChange() {
+        this.$emit('change', this.setCustomValue())
       },
 
       onClick(event) {
-        this.$emit('click', event, this.value)
+        this.$emit('click', this.setCustomValue(event))
       },
 
       onFocus(event) {
-        this.$emit('focus', event, this.value)
+        this.$emit('focus', this.setCustomValue(event))
       },
 
       onInput() {
         this.verifyField()
+      },
+
+      // return object or value
+      setCustomValue(event = null) {
+        if(!event) {
+          if(!this.returnObject) {
+            return this.value
+          }else {
+            return this.options.find(item => item.value === this.value)
+          }
+        }
+        else {
+          if(!this.returnObject) {
+            event.customValue = this.value
+          }else {
+            event.customValue = this.options.find(item => item.value === this.value)
+          }
+
+          return event
+        }
       },
 
       setOptions() {

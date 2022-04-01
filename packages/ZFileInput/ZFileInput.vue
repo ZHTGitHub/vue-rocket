@@ -1,5 +1,11 @@
 <template>
-  <div class="z-file-input z-input" :style="{ width: breadth }">
+  <div 
+    class="z-file-input z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <div>
       <v-file-input
         v-model="value"
@@ -18,6 +24,7 @@
         :error="incorrect"
         :error-messages="errorMessage"
         :filled="filled"
+        :height="height"
         :hide-details="hideDetails"
         :hint="hint"
         :label="label"
@@ -193,8 +200,6 @@
       onChange(file) {
         this.$emit('change', file)
 
-        console.log(file)
-
         this.formData = new FormData()
 
         // 多选
@@ -204,13 +209,13 @@
             for(let item of file) {
               this.formData.append(this.name, item)
             }
-            this._submitFile()
+            this.uploadFile()
           }
           // 单个文件单个文件上传
           else {
             for(let item of file) {
               this.formData.append(this.name, item)
-              this._submitFile()
+              this.uploadFile()
             }
           }
 
@@ -220,7 +225,7 @@
         // 单选
         else {
           this.formData.append(this.name, file)
-          this._submitFile()
+          this.uploadFile()
 
           // 记录当前上传的文件
           this.files = [file]
@@ -228,38 +233,31 @@
       },
 
       onClick(event) {
-        event.customValue = this.value
-        this.$emit('click', event)
+        this.$emit('click', this.setCustomValue(event))
       },
 
       onClickAppend(event) {
-        event.customValue = this.value
-        this.$emit('click:append', event)
+        this.$emit('click:append', this.setCustomValue(event))
       },
 
       onClickAppendOuter(event) {
-        event.customValue = this.value
-        this.$emit('click:append-outer', event)
+        this.$emit('click:append-outer', this.setCustomValue(event))
       },
 
       onClickClear(event) {
-        event.customValue = this.value
-        this.$emit('click:clear', event)
+        this.$emit('click:clear', this.setCustomValue(event))
       },
 
       onClickPrependOuter(event) {
-        event.customValue = this.value
-        this.$emit('click:prepend-outer', event)
+        this.$emit('click:prepend-outer', this.setCustomValue(event))
       },
 
       onClickPrepend(event) {
-        event.customValue = this.value
-        this.$emit('click:prepend', event)
+        this.$emit('click:prepend', this.setCustomValue(event))
       },
 
       onFocus(event) {
-        event.customValue = this.value
-        this.$emit('focus', event)
+        this.$emit('focus', this.setCustomValue(event))
       },
 
       onInput() {
@@ -267,13 +265,11 @@
       },
 
       onKeydown(event) {
-        event.customValue = this.value
-        this.$emit('keydown', event)
+        this.$emit('keydown', this.setCustomValue(event))
       },
 
       onKeyup(event) {
-        event.customValue = this.value
-        this.$emit('keyup', event)
+        this.$emit('keyup', this.setCustomValue(event))
       },
 
       onDel(event, item) {
@@ -285,7 +281,7 @@
        * @description 文件上传
        * @param {object | array} file
        */ 
-      _submitFile() {
+      uploadFile() {
         if(this.effectData) {
           for(let key in this.effectData) {
             this.formData.append(key, this.effectData[key])
@@ -312,6 +308,16 @@
             files: this.files
           })
         })
+      },
+
+      setCustomValue(event = null) {
+        if(!event) {
+          return this.value
+        }
+        else {
+          event.customValue = this.value
+          return event
+        }
       }
     },
 

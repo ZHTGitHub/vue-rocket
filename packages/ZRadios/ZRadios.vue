@@ -1,5 +1,11 @@
 <template>
-  <div class="z-radios z-input" :style="{ width: breadth }">
+  <div 
+    class="z-radios z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <div class="z-flex">
       <div class="z-radio-prepend">
         <slot name="prepend"></slot>

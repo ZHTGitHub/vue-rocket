@@ -9,6 +9,7 @@
             :search-input="search"
             :options="cityOptions"
             :defaultValue="1"
+            @change="handleChange"
           ></z-autocomplete>
         </div>
       </div>
@@ -43,12 +44,19 @@
           { label: '深圳', value: 2 },
           { label: '珠海', value: 3 },
           { label: '佛山', value: 4 }
-        ]
+        ],
+        search: ''
       }
     },
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      handleChange(value) {
+        console.log(value)
+      }
     }
   }
 </script>

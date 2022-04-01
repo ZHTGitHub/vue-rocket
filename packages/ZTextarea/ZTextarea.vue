@@ -1,5 +1,11 @@
 <template>
-  <div class="z-textarea z-input" :style="{ width: breadth }">
+  <div 
+    class="z-textarea z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <v-textarea
       v-model="value"
       :append-icon="appendIcon"
@@ -14,6 +20,7 @@
       :error="incorrect"
       :error-messages="errorMessage"
       :filled="filled"
+      :height="height"
       :hide-details="hideDetails"
       :hint="hint"
       :label="label"
@@ -78,47 +85,39 @@
 
     methods: {
       onBlur(event) {
-        event.customValue = this.value
-        this.$emit('blur', event)
+        this.$emit('blur', this.setCustomValue(event))
       },
 
-      onChange(value) {
-        this.$emit('change', value)
+      onChange() {
+        this.$emit('change', this.setCustomValue())
       },
 
       onClick(event) {
-        event.customValue = this.value
-        this.$emit('click', event)
+        this.$emit('click', this.setCustomValue(event))
       },
 
       onClickAppend(event) {
-        event.customValue = this.value
-        this.$emit('click:append', event)
+        this.$emit('click:append', this.setCustomValue(event))
       },
 
       onClickAppendOuter(event) {
-        event.customValue = this.value
-        this.$emit('click:append-outer', event)
+        this.$emit('click:append-outer', this.setCustomValue(event))
       },
 
       onClickClear(event) {
-        event.customValue = this.value
-        this.$emit('click:clear', event)
+        this.$emit('click:clear', this.setCustomValue(event))
       },
 
       onClickPrependOuter(event) {
-        event.customValue = this.value
-        this.$emit('click:prepend-outer', event)
+        this.$emit('click:prepend-outer', this.setCustomValue(event))
       },
 
       onClickPrepend(event) {
-        event.customValue = this.value
-        this.$emit('click:prepend', event)
+        this.$emit('click:prepend', this.setCustomValue(event))
       },
 
       onFocus(event) {
-        event.customValue = this.value
-        this.$emit('focus', event)
+        this.$emit('focus', this.setCustomValue(event))
       },
 
       onInput() {
@@ -126,13 +125,20 @@
       },
 
       onKeydown(event) {
-        event.customValue = this.value
-        this.$emit('keydown', event)
+        this.$emit('keydown', this.setCustomValue(event))
       },
 
       onKeyup(event) {
-        event.customValue = this.value
-        this.$emit('keyup', event)
+        this.$emit('keyup', this.setCustomValue(event))
+      },
+
+      setCustomValue(event = null) {
+        if(!event) {
+          return this.value
+        }
+        else {
+          return event
+        }
       }
     }
   }

@@ -48,6 +48,15 @@
     },
 
     {
+      "name": "height",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设置组件的高度"
+    },
+
+    {
       "name": "immediate",
       "required": "否",
       "type": "Boolean",

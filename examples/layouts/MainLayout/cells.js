@@ -81,7 +81,7 @@ export const menus = [
         key: 'calendar',
         icon: '',
         realm: 'calendar',
-        title: 'Calendar 日历',
+        title: 'Calendar 日历（即将移除）',
         link: '/components/calendar'
       },
 
@@ -117,7 +117,7 @@ export const menus = [
         key: 'drawer',
         icon: '',
         realm: 'drawer',
-        title: 'Drawer 导航抽屉',
+        title: 'Drawer 导航抽屉（即将移除）',
         link: '/components/drawer'
       },
       

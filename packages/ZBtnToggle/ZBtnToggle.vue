@@ -1,5 +1,12 @@
 <template>
-  <div v-if="items.length" class="z-btn-toggle z-input" :style="{ width: breadth }">
+  <div 
+    v-if="items.length" 
+    class="z-btn-toggle z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <div class="z-flex">
       <div class="z-btn-toggle-prepend">
         <slot name="prepend"></slot>
@@ -135,7 +142,8 @@
         this.$emit('change', this.value)
         this.verifyField()
       },
-
+      
+      // click无法及时更新值
       onClick(event) {
         event.customValue = this.value
         this.$emit('click', event)

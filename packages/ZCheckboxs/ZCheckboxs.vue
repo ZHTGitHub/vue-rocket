@@ -1,5 +1,11 @@
 <template>
-  <div class="z-checkboxs z-input" :style="{ width: breadth }">
+  <div 
+    class="z-checkboxs z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <div class="z-flex">
       <div class="z-checkboxs-prepend">
         <slot name="prepend"></slot>

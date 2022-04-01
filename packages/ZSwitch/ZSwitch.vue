@@ -1,5 +1,11 @@
 <template>
-  <div class="z-switch z-input" :style="{ width: breadth }">
+  <div 
+    class="z-switch z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <v-switch
       v-model="value"
 			:color="color"

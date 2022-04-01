@@ -1,5 +1,11 @@
 <template>
-  <div class="z-date-picker z-input" :style="{ width: breadth }">
+  <div 
+    class="z-date-picker z-input" 
+    :style="{ 
+      width: computedWidth,
+      height: computedHeight
+    }"
+  >
     <v-menu
       ref="menu"
       v-model="menu"
@@ -25,6 +31,7 @@
           :error="incorrect"
           :error-messages="errorMessage"
           :filled="filled"
+          :height="height"
           :hide-details="hideDetails"
           :hint="hint"
           :label="label"
