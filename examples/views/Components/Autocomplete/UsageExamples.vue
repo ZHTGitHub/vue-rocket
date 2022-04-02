@@ -6,11 +6,10 @@
           <z-autocomplete
             formId="auto"
             formKey="auto"
-            :search-input="search"
             :options="cityOptions"
-            :defaultValue="1"
             @change="handleChange"
             @enter="handleEnter"
+            @search="handleSearch"
           ></z-autocomplete>
         </div>
       </div>
@@ -61,7 +60,18 @@
 
       handleEnter(event) {
         console.log(event)
+      },
+
+      handleSearch(value) {
+        console.log(value)
       }
+    },
+
+    watch: {
+      search(value) {
+        console.log(value)
+      },
+      immediate: true
     }
   }
 </script>

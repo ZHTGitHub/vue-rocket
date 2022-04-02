@@ -30,6 +30,12 @@
       "name": "focus",
       "parameters": "(event: Event, value: String | Number)",
       "description": "当输入框得到焦点时触发"
+    },
+
+    {
+      "name": "search",
+      "parameters": "(value: String | Number)",
+      "description": "当输入框搜索值变化时触发"
     }
   ]
 }

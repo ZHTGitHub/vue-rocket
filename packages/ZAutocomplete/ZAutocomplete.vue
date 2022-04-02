@@ -36,8 +36,8 @@
       :prepend-inner-icon="prependIcon"
       :prepend-icon="prependOuterIcon"
       :readonly="readonly"
-      :reverse="reverse"
-      :search-input="searchInput"
+      :reverse="reverse"  
+      :search-input.sync="search"
       :solo="solo"
       :suffix="suffix"
       :success="success"
@@ -112,16 +112,12 @@
       options: {
         type: Array,
         required: false
-      },
-
-      searchInput: {
-        type: String,
-        required: false
       }
     },
 
     data() {
       return {
+        search: null,
         items: []
       }
     },
@@ -152,7 +148,7 @@
       },
 
       // return object or value
-      setCustomValue(event = null) {
+      setCustomValue(event = null) {  
         if(!event) {
           if(!this.returnObject) {
             return this.value
@@ -186,6 +182,10 @@
     },
 
     watch: {
+      search(value) {
+        this.$emit('search', value)
+      },
+
       options: {
         handler() {
           this.setOptions()
