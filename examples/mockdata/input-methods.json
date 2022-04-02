@@ -51,6 +51,12 @@
     },
 
     {
+      "name": "enter",
+      "parameters": "(event: Event)",
+      "description": "当输入框回车时触发"
+    },
+
+    {
       "name": "focus",
       "parameters": "(event: Event)",
       "description": "当输入框得到焦点时触发"

@@ -10,6 +10,7 @@
             :options="cityOptions"
             :defaultValue="1"
             @change="handleChange"
+            @enter="handleEnter"
           ></z-autocomplete>
         </div>
       </div>
@@ -56,6 +57,10 @@
     methods: {
       handleChange(value) {
         console.log(value)
+      },
+
+      handleEnter(event) {
+        console.log(event)
       }
     }
   }

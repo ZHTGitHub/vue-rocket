@@ -119,6 +119,10 @@
         this.$emit('click:prepend', this.setCustomValue(event))
       },
 
+      onEnter(event) {
+        this.$emit('enter', this.setCustomValue(event))
+      },
+
       onFocus(event) {
         this.$emit('focus', this.setCustomValue(event))
       },
@@ -134,10 +138,6 @@
 
       onKeyup(event) {
         this.$emit('keyup', this.setCustomValue(event))
-      },
-
-      onEnter(event) {
-        this.$emit('enter', this.setCustomValue(event))
       },
 
       setCustomValue(event = null) {

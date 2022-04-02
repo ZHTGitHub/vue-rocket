@@ -135,7 +135,7 @@ export const menus = [
         key: 'dropdown',
         icon: '',
         realm: 'dropdown',
-        title: 'Dropdown 下拉菜单',
+        title: 'Dropdown 下拉菜单（即将移除）',
         link: '/components/dropdown'
       },
 

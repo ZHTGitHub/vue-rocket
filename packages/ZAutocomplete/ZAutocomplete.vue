@@ -46,6 +46,7 @@
       @click="onClick"
       @focus="onFocus"
       @input="onInput"
+      @keyup.enter="onEnter"
     >
       <!-- 选择器内部 文字之后 BEGIN -->
       <template v-slot:append>
@@ -136,6 +137,10 @@
 
       onClick(event) {
         this.$emit('click', this.setCustomValue(event))
+      },
+
+      onEnter(event) {
+        this.$emit('enter', this.setCustomValue(event))
       },
 
       onFocus(event) {
