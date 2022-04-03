@@ -21,16 +21,16 @@ const router = [
   },
 
   {
-    path: '/form',
+    path: '/forms',
     name: 'ZDemoForm',
     meta: {
-      key: 'form',
+      key: 'forms',
       title: '表单',
     },
     component: () => import('../views/Form'),
     children: [
       {
-        path: '/form',
+        path: '/forms',
         redirect: 'rules'
       },
 
@@ -38,7 +38,7 @@ const router = [
         path: 'rules',
         name: 'ZDemoRules',
         meta: {
-          pKey: 'form',
+          pKey: 'forms',
           key: 'rules',
           realm: 'rules',
           title: 'Rules 校验规则',
@@ -50,7 +50,7 @@ const router = [
         path: 'examples',
         name: 'ZDemoExamples',
         meta: {
-          pKey: 'form',
+          pKey: 'forms',
           key: 'examples',
           realm: 'examples',
           title: '表单使用示例',

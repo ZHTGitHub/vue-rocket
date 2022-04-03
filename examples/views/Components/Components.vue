@@ -1,9 +1,9 @@
 <template>
-  <div class="mb-12 demo-components">
+  <!-- <div class="mb-12 demo-components"> -->
     <main-layout>
       <router-view></router-view>
     </main-layout>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

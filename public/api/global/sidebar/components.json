@@ -1,0 +1,146 @@
+{
+  "code": 200,
+  "items": [
+    {
+      "value": "common",
+      "label": "通用",
+      "children": [
+        {
+          "value": "button",
+          "label": "Button 按钮",
+          "link": "/components/button"
+        }
+      ]
+    },
+
+    {
+      "value": "navigation",
+      "label": "导航",
+      "children": [
+        {
+          "value": "pagination",
+          "label": "Pagination 分页",
+          "link": "/components/pagination"
+        }
+      ]
+    },
+
+   {
+    "value": "input",
+    "label": "数据录入",
+    "children": [
+      {
+        "value": "autocomplete",
+        "icon": "",
+        "label": "Autocomplete 自动补全",
+        "link": "/components/autocomplete"
+      },
+
+      {
+        "value": "buttonToggle",
+        "icon": "",
+        "label": "Button Groups 按钮组",
+        "link": "/components/button-toggle"
+      },
+
+      {
+        "value": "checkbox",
+        "icon": "",
+        "label": "Checkbox 复选框",
+        "link": "/components/checkbox"
+      },
+
+      {
+        "value": "checkboxs",
+        "icon": "",
+        "label": "Checkboxs 多选框",
+        "link": "/components/checkboxs"
+      },
+
+      {
+        "value": "datePicker",
+        "icon": "",
+        "label": "Date Picker 日期选择器",
+        "link": "/components/date-picker"
+      },
+
+      {
+        "value": "dropdown",
+        "icon": "",
+        "label": "Dropdown 下拉菜单",
+        "link": "/components/dropdown"
+      },
+
+      {
+        "value": "dynamicForm",
+        "icon": "",
+        "label": "DynamicForm 动态表单",
+        "link": "/components/dynamicForm"
+      },
+
+      {
+        "value": "fileInput",
+        "icon": "",
+        "label": "File Input 文件上传",
+        "link": "/components/fileInput"
+      },
+
+      {
+        "value": "input",
+        "icon": "",
+        "label": "Input 输入框",
+        "link": "/components/input"
+      },
+
+      {
+        "value": "radios",
+        "icon": "",
+        "label": "Radios 单选框",
+        "link": "/components/radios"
+      },
+
+      {
+        "value": "select",
+        "icon": "",
+        "label": "Select 选择器",
+        "link": "/components/select"
+      },
+
+      {
+        "value": "switch",
+        "icon": "",
+        "label": "Switch 开关",
+        "link": "/components/switch"
+      },
+
+      {
+        "value": "textarea",
+        "icon": "",
+        "label": "Teaxarea 多行文本框",
+        "link": "/components/textarea"
+      },
+
+      {
+        "value": "upload",
+        "icon": "",
+        "label": "Upload 上传",
+        "link": "/components/upload"
+      }
+    ]
+   },
+
+   {
+      "value": "others",
+      "label": "其它",
+      "children": [
+        {
+          "value": "drawImage",
+          "label": "Draw image 绘图",
+          "link": "/components/drawImage"
+        }
+      ]
+    }
+  ],
+  "message": "获取components成功",
+  "total": 1
+}

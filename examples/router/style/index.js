@@ -1,14 +1,14 @@
 const StyleRoutes = {
-  path: '/style',
+  path: '/styles',
   name: 'ZDemoStyle',
   meta: {
-    key: 'style',
+    key: 'styles',
     title: '样式',
   },
   component: () => import('../../views/Style'),
   children: [
     {
-      path: '/style',
+      path: '/styles',
       redirect: () => 'text'
     },
 
@@ -17,7 +17,7 @@ const StyleRoutes = {
       name: 'DemoStyleTypography',
       meta: {
         key: 'text',
-        pKey: 'style',
+        pKey: 'styles',
         realm: 'text',
         title: 'Text 文本',
       },
@@ -29,7 +29,7 @@ const StyleRoutes = {
       name: 'DemoStyleSpacing',
       meta: {
         key: 'spacing',
-        pKey: 'style',
+        pKey: 'styles',
         realm: 'spacing',
         title: 'Spacing 间距',
       },
@@ -41,7 +41,7 @@ const StyleRoutes = {
       name: 'DemoStyleFlex',
       meta: {
         key: 'flex',
-        pKey: 'style',
+        pKey: 'styles',
         realm: 'flex',
         title: 'Flex 弹性布局',
       },
@@ -53,7 +53,7 @@ const StyleRoutes = {
       name: 'DemoStyleFloat',
       meta: {
         key: 'float',
-        pKey: 'style',
+        pKey: 'styles',
         realm: 'float',
         title: 'Float 浮动',
       },
@@ -65,7 +65,7 @@ const StyleRoutes = {
       name: 'DemoStyleRound',
       meta: {
         key: 'radius',
-        pKey: 'style',
+        pKey: 'styles',
         realm: 'radius',
         title: 'Border Radius 边框半径',
       },
@@ -77,7 +77,7 @@ const StyleRoutes = {
       name: 'DemoStyleElevation',
       meta: {
         key: 'elevation',
-        pKey: 'style',
+        pKey: 'styles',
         realm: 'elevation',
         title: 'Elevation 海拔',
       },

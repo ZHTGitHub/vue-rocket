@@ -4,8 +4,8 @@ import axios from 'axios'
  * @description 基础路径
  */ 
 function arenaBaseUrl() {
-    const devUrl = `https://my-json-server.typicode.com/ZHTGitHub/vue-rocket-mockdata/`
-    const proUrl = `https://my-json-server.typicode.com/ZHTGitHub/vue-rocket-mockdata/`
+    const devUrl = ``
+    const proUrl = ``
 
     const env = process.env.NODE_ENV || 'development'
     

@@ -11,6 +11,16 @@
 </script>
 
 <style>
+  html, body {
+    overflow: hidden !important;
+  }
+
+  ul, li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
   .api-table {
     display: block;
     margin: 1rem 0;

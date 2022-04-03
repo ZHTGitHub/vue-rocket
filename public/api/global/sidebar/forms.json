@@ -1,0 +1,28 @@
+{
+  "code": 200,
+  "items": [
+    {
+      "value": "forms",
+      "icon": "mdi-form-select",
+      "label": "表单",
+      "link": "/forms",
+      "children": [
+        {
+          "value": "rules",
+          "icon": "",
+          "label": "Rules 校验规则",
+          "link": "/forms/rules"
+        },
+  
+        {
+          "value": "examples",
+          "icon": "",
+          "label": "Examples 使用示例",
+          "link": "/forms/examples"
+        }
+      ]
+    }
+  ],
+  "message": "获取forms成功",
+  "total": 1
+}

@@ -1,14 +1,14 @@
 const JSUtilRoutes = {
-  path: '/JSUtil',
-  name: 'ZDemoJSUtil',
+  path: '/utils',
+  name: 'ZDemoUtils',
   meta: {
-    key: 'JSUtil',
-    title: 'JSUtil',
+    key: 'utils',
+    title: 'utils',
   },
   component: () => import('../../views/JSUtil'),
   children: [
     {
-      path: '/JSUtil',
+      path: '/utils',
       redirect: () => 'tools'
     },
 

@@ -1,0 +1,30 @@
+{
+  "code": 200,
+  "items": [
+    { 
+      "label": "组件", 
+      "value": "components", 
+      "pathname": "/components" 
+    },
+
+    { 
+      "label": "表单", 
+      "value": "forms", 
+      "pathname": "/forms" 
+    },
+
+    { 
+      "label": "JS Util", 
+      "value": "utils", 
+      "pathname": "/utils" 
+    },
+
+    { 
+      "label": "样式", 
+      "value": "styles", 
+      "pathname": "/styles" 
+    }
+  ],
+  "message": "获取tabs成功!",
+  "total": 4
+}
