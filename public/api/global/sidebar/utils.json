@@ -2,9 +2,9 @@
   "code": 200,
   "items": [
     {
-      "value": "JSUtil",
+      "value": "utils",
       "icon": "mdi-hammer-wrench",
-      "label": "JSUtil",
+      "label": "utils",
       "link": "/JSUtil",
       "children": [
         {

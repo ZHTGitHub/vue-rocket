@@ -57,7 +57,6 @@
       switchTabs({ value, pathname }) {
         this.selected = value
         this.$router.push({ path: pathname })
-        console.log(pathname)
       }
     },
 

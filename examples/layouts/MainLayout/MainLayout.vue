@@ -2,15 +2,16 @@
   <div class="main-layout">
     <ZHeader />
 
-    <!-- <v-main> -->
-      <div class="z-flex z-main">
-        <ZSidebar />
+    <div class="z-flex z-main">
+      <ZSidebar v-show="showSidebar" />
 
-        <div class="pa-6 z-container">
-          <slot></slot>
-        </div>
+      <div 
+        class="pa-6 z-container"
+        :class="showSidebar ? 'with-sidebar' : ''"
+      >
+        <slot></slot>
       </div>
-    <!-- </v-main> -->
+    </div>
   </div>
 </template>
 
@@ -20,6 +21,13 @@
 
   export default {
     name: 'MainLayout',
+
+    props: {
+      showSidebar: {
+        type: Boolean,
+        default: true
+      }
+    },
 
     components: {
       ZHeader,
@@ -42,9 +50,13 @@
       .z-container {
         padding-bottom: 120px !important;
         height: 100%;
-        width: calc(100vw - 256px);
+        width: 100vw;
         overflow-x: hidden;
         overflow-y: auto;
+
+        &.with-sidebar {
+          width: calc(100vw - 256px);
+        }
       }
     }
   }

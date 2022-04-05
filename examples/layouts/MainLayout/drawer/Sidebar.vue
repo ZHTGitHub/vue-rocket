@@ -162,11 +162,6 @@
         default: false
       },
 
-      // menus: {
-      //   type: Array,
-      //   required: true
-      // },
-
       permanent: {
         type: Boolean,
         default: false
@@ -199,7 +194,6 @@
     },
 
     created() {
-      console.log(this.$slots.top)
       this.getMenus()
     },
 
@@ -241,8 +235,6 @@
         handler(route) {
           const { meta } = route
           this.realm = meta.realm
-
-          console.log(this.realm)
 
           for(let item of this.menus) {
             item.expanded = false

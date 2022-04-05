@@ -1,0 +1,89 @@
+.z-typography {
+  color: #000000d9;
+  overflow-wrap: break-word;
+
+  &.z-typography-secondary {
+    color: #00000073;
+  }
+
+  &.z-typography-success {
+    color: #4caf50;
+  }
+
+  &.z-typography-warning {
+    color: #fb8c00;
+  }
+
+  &.z-typography-danger {
+    color: #ff5252;
+  }
+
+  &.z-typography-disabled {
+    color: #00000040;
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+  & mark {
+    padding: 0;
+    background-color: #ffe58f;
+  }
+
+  & code {
+    margin: 0 0.2em;
+    padding: 0.2em 0.4em 0.1em;
+    font-size: 85%;
+    background: rgba(150,150,150,.1);
+    border: 1px solid rgba(100,100,100,.2);
+    border-radius: 3px;
+  }
+
+  & u {
+    text-decoration: underline;
+    -webkit-text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  & del {
+    text-decoration: line-through;
+  }
+
+  & strong {
+    font-weight: 600;
+  }
+}
+
+h1.z-typography {
+  color: #000000d9;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.23;
+}
+
+h2.z-typography {
+  color: #000000d9;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.35;
+}
+
+h3.z-typography {
+  color: #000000d9;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+h4.z-typography {
+  color: #000000d9;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+h5.z-typography {
+  color: #000000d9;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+}

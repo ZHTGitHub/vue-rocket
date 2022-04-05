@@ -4,7 +4,7 @@
     {
       "value": "style",
       "icon": "mdi-language-css3",
-      "label": "样式",
+      "label": "styles",
       "link": "/styles",
       "children": [
         {

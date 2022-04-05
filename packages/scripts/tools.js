@@ -14,25 +14,38 @@ const getType = function(value) {
   const type = Object.prototype.toString.call(value)
 
   switch (type) {
-    case '[object Boolean]': return 'boolean';
-    case '[object Number]': return 'number';
-    case '[object String]': return 'string';
+    case '[object Boolean]': 
+      return 'boolean';
 
-    case '[object Array]': return 'array';
-    case '[object Function]': return 'function';
-    case '[object Object]': return 'object';
+    case '[object Number]': 
+      return isNaN(value) ? 'NaN' : 'number'
 
-    case '[object Null]': return 'null';
-    case '[object Undefined]': return 'undefined';
+    case '[object String]': 
+      return 'string';
+
+    case '[object Array]': 
+      return 'array';
+
+    case '[object Function]': 
+      return 'function';
+
+    case '[object Object]': 
+      return 'object';
+
+    case '[object Null]': 
+      return 'null';
+    case '[object Undefined]': 
+      return 'undefined';
     
-    case '[object Symbol]': return 'symbol';
+    case '[object Symbol]': 
+      return 'symbol';
 
     default: return value;
   }
 }
 
 /**
- * @description 获得滚动条滚动距离
+ * @description 返回滚动条滚动距离
  */ 
 const getScrollOffset = function() {
   if (window.pageXOffset) {
@@ -49,7 +62,7 @@ const getScrollOffset = function() {
 }
 
 /**
- * @description 获取视口的尺寸
+ * @description 返回视口尺寸
  */ 
 const getViewportSize = function() {
   if(window.innerWidth) {

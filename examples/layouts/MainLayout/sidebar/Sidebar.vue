@@ -39,6 +39,9 @@
 
     methods: {
       async getMenus() {
+        if(this.name === 'home')
+          return
+
         const result = await this.$store.dispatch('GLOBAL_GET_MENU', this.name)
 
         if(result.code === 200) {

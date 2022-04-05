@@ -19,7 +19,7 @@ const ComponentRoutes = {
         key: 'autocomplete',
         pKey: 'components',
         realm: 'autocomplete',
-        title: 'Autocomplete 按钮',
+        title: 'Autocomplete 自动补全',
       },
       component: () => import('../../views/Components/Autocomplete')
     },
@@ -202,6 +202,18 @@ const ComponentRoutes = {
         title: 'Teaxarea 多行文本框',
       },
       component: () => import('../../views/Components/Textarea')
+    },
+
+    {
+      path: 'typography',
+      name: 'ZDemoTypography',
+      meta: {
+        key: 'typography',
+        pKey: 'components',
+        realm: 'typography',
+        title: 'Typography 排版',
+      },
+      component: () => import('../../views/Components/Typography')
     },
 
     {

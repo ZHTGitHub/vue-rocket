@@ -1,11 +1,11 @@
 import ZAutocomplete from './ZAutocomplete'
 import ZBtn from './ZBtn'
 import ZBtnToggle from './ZBtnToggle'
-import ZCalendar from './ZCalendar'
+// import ZCalendar from './ZCalendar'
 import ZCheckbox from './ZCheckbox'
 import ZCheckboxs from './ZCheckboxs'
 import ZDatePicker from './ZDatePicker'
-import ZDrawer from './ZDrawer'
+// import ZDrawer from './ZDrawer'
 import ZDrawImage from './ZDrawImage'
 import ZDropdown from './ZDropdown'
 import ZDynamicForm from './ZDynamicForm'
@@ -16,6 +16,12 @@ import ZSelect from './ZSelect'
 import ZSwitch from './ZSwitch'
 import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
+import ZTypography from './ZTypography'
+import { 
+	Paragraph as ZTypographyParagraph,
+	Text as ZTypographyText,
+	Title as ZTypographyTitle
+} from './ZTypography'
 import ZUpload from './ZUpload'
 
 import rocket from './scripts/rocket'
@@ -27,11 +33,11 @@ const components = [
 	ZAutocomplete,
 	ZBtn,
 	ZBtnToggle,
-	ZCalendar,
+	// ZCalendar,
 	ZCheckbox,
 	ZCheckboxs,
 	ZDatePicker,
-	ZDrawer,
+	// ZDrawer,
 	ZDrawImage,
 	ZDropdown,
 	ZDynamicForm,
@@ -42,6 +48,10 @@ const components = [
 	ZSwitch,
 	ZTextarea,
 	ZTextField,
+	ZTypography,
+	ZTypographyParagraph,
+	ZTypographyText,
+	ZTypographyTitle,
 	ZUpload
 ]
 
@@ -65,10 +75,10 @@ export default {
 	ZAutocomplete,
 	ZBtn,
 	ZBtnToggle,
-	ZCalendar,
+	// ZCalendar,
 	ZCheckboxs,
 	ZDatePicker,
-	ZDrawer,
+	// ZDrawer,
 	ZDrawImage,
 	ZDropdown,
 	ZDynamicForm,
@@ -79,5 +89,9 @@ export default {
 	ZSwitch,
 	ZTextarea,
 	ZTextField,
+	ZTypography,
+	ZTypographyParagraph,
+	ZTypographyText,
+	ZTypographyTitle,
 	ZUpload
 }

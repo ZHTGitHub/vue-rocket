@@ -5,5 +5,4 @@ ZTextField.install = function (Vue) {
 }
 
 
-export { ZTextField }
 export default ZTextField

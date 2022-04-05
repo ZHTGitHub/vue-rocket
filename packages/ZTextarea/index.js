@@ -5,5 +5,4 @@ ZTextarea.install = function (Vue) {
 }
 
 
-export { ZTextarea }
 export default ZTextarea
