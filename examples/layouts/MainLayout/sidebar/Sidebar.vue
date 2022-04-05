@@ -143,6 +143,7 @@
 
             li.ant-menu-item-selected {
               background-color: #e6f7ff;
+              color: #2196f3;
 
               &::after {
                 content: "";

@@ -1,4 +1,5 @@
-import _ from 'lodash'
+// import _ from 'lodash'
+import { set } from '../scripts/tools'
 
 class ZValidate {
   constructor() {
@@ -14,7 +15,7 @@ class ZValidate {
 
   // 给校验表单的每个 [value] 所对应的 [key] 设置 [value] 的校验结果
   SET_FORM_VALIDATE_VALUE_BY_KEY(data) {
-    _.set(this.validator, data.formId + '.' + data.formKey, data.status)
+    set(this.validator, data.formId + '.' + data.formKey, data.status)
 
     const form = this.validator[data.formId]
     const values = Object.values(form)

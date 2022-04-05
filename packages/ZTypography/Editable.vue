@@ -1,6 +1,9 @@
 <template>
-  <div class="editable">
-    <textarea></textarea>
+  <div class="editable">    
+    <v-textarea
+      outlined
+      rows="1"
+    ></v-textarea>
   </div>
 </template>
 

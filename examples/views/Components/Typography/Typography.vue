@@ -1,5 +1,7 @@
 <template>
   <div class="z-demo-typograhpy">
+    <typing-title :title="$route.meta.title"></typing-title>
+    
     <ZTypography.Title 
       :level="2"
       editable
