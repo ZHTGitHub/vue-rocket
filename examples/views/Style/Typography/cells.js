@@ -2,55 +2,23 @@ export const typography = [
   [
     {
       class: '.text-h1',
-      label: '根元素的6倍'
+      label: '38px'
     },
     {
       class: '.text-h2',
-      label: '根元素的3.75倍'
+      label: '30px'
     },
     {
       class: '.text-h3',
-      label: '根元素的3倍'
+      label: '24px'
     },
     {
       class: '.text-h4',
-      label: '根元素的2.15倍'
+      label: '20px'
     },
     {
       class: '.text-h5',
-      label: '根元素的1.5倍'
-    },
-    {
-      class: '.text-h6',
-      label: '根元素的1.25倍'
-    },
-    {
-      class: '.text-subtitle-1',
-      label: '根元素的1倍'
-    },
-    {
-      class: '.text-subtitle-2',
-      label: '根元素的0.875倍'
-    },
-    {
-      class: '.text-body-1',
-      label: '根元素的1倍'
-    },
-    {
-      class: '.text-body-2',
-      label: '根元素的0.875倍'
-    },
-    {
-      class: '.text-button',
-      label: '根元素的0.875倍'
-    },
-    {
-      class: '.text-caption',
-      label: '根元素的0.75倍'
-    },
-    {
-      class: '.text-overline',
-      label: '根元素的0.75倍'
+      label: '16px'
     }
   ],
 
