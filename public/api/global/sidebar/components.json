@@ -71,13 +71,6 @@
       },
 
       {
-        "value": "dropdown",
-        "icon": "",
-        "label": "Dropdown 下拉菜单",
-        "link": "/components/dropdown"
-      },
-
-      {
         "value": "dynamicForm",
         "icon": "",
         "label": "DynamicForm 动态表单",

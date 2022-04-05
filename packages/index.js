@@ -1,28 +1,38 @@
-import ZAutocomplete from './ZAutocomplete'
+
+// 通用
 import ZBtn from './ZBtn'
-import ZBtnToggle from './ZBtnToggle'
-// import ZCalendar from './ZCalendar'
-import ZCheckbox from './ZCheckbox'
-import ZCheckboxs from './ZCheckboxs'
-import ZDatePicker from './ZDatePicker'
-// import ZDrawer from './ZDrawer'
-import ZDrawImage from './ZDrawImage'
-import ZDropdown from './ZDropdown'
-import ZDynamicForm from './ZDynamicForm'
-import ZFileInput from './ZFileInput'
-import ZPagination from './ZPagination'
-import ZRadios from './ZRadios'
-import ZSelect from './ZSelect'
-import ZSwitch from './ZSwitch'
-import ZTextarea from './ZTextarea'
-import ZTextField from './ZTextField'
 import ZTypography from './ZTypography'
 import { 
 	Paragraph as ZTypographyParagraph,
 	Text as ZTypographyText,
 	Title as ZTypographyTitle
 } from './ZTypography'
+
+// 导航
+import ZPagination from './ZPagination'
+
+// 数据录入
+import ZAutocomplete from './ZAutocomplete'
+import ZBtnToggle from './ZBtnToggle'
+import ZCheckbox from './ZCheckbox'
+import ZCheckboxs from './ZCheckboxs'
+import ZDatePicker from './ZDatePicker'
+import ZDynamicForm from './ZDynamicForm'
+import ZFileInput from './ZFileInput'
+import ZRadios from './ZRadios'
+import ZSelect from './ZSelect'
+import ZSwitch from './ZSwitch'
+import ZTextarea from './ZTextarea'
+import ZTextField from './ZTextField'
 import ZUpload from './ZUpload'
+
+// 其它
+import ZDrawImage from './ZDrawImage'
+
+// 废弃
+// import ZCalendar from './ZCalendar'
+// import ZDrawer from './ZDrawer'
+// import ZDropdown from './ZDropdown'
 
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
@@ -30,29 +40,29 @@ import R from './scripts/tools'
 import './styles/styles.scss'
 
 const components = [
-	ZAutocomplete,
 	ZBtn,
+	ZTypography,
+	ZTypographyParagraph,
+	ZTypographyText,
+	ZTypographyTitle,
+
+	ZPagination,
+
+	ZAutocomplete,
 	ZBtnToggle,
-	// ZCalendar,
 	ZCheckbox,
 	ZCheckboxs,
 	ZDatePicker,
-	// ZDrawer,
-	ZDrawImage,
-	ZDropdown,
 	ZDynamicForm,
 	ZFileInput,
-	ZPagination,
 	ZRadios,
 	ZSelect,
 	ZSwitch,
 	ZTextarea,
 	ZTextField,
-	ZTypography,
-	ZTypographyParagraph,
-	ZTypographyText,
-	ZTypographyTitle,
-	ZUpload
+	ZUpload,
+
+	ZDrawImage
 ]
 
 const install = function (Vue) {
@@ -72,26 +82,26 @@ export {
 
 export default {
 	install,
-	ZAutocomplete,
 	ZBtn,
+	ZTypography,
+	ZTypographyParagraph,
+	ZTypographyText,
+	ZTypographyTitle,
+
+	ZPagination,
+
+	ZAutocomplete,
 	ZBtnToggle,
-	// ZCalendar,
 	ZCheckboxs,
 	ZDatePicker,
-	// ZDrawer,
-	ZDrawImage,
-	ZDropdown,
 	ZDynamicForm,
 	ZFileInput,
-	ZPagination,
 	ZRadios,
 	ZSelect,
 	ZSwitch,
 	ZTextarea,
 	ZTextField,
-	ZTypography,
-	ZTypographyParagraph,
-	ZTypographyText,
-	ZTypographyTitle,
-	ZUpload
+	ZUpload,
+
+	ZDrawImage
 }
