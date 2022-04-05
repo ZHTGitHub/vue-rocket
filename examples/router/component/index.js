@@ -48,18 +48,6 @@ const ComponentRoutes = {
       component: () => import('../../views/Components/ButtonToggle')
     },
 
-    // {
-    //   path: 'calendar',
-    //   name: 'ZDemoCalendar',
-    //   meta: {
-    //     key: 'calendar',
-    //     pKey: 'components',
-    //     realm: 'calendar',
-    //     title: 'Calendar 日历',
-    //   },
-    //   component: () => import('../../views/Components/Calendar')
-    // },
-
     {
       path: 'checkbox',
       name: 'ZDemoCheckbox',
@@ -96,18 +84,6 @@ const ComponentRoutes = {
       component: () => import('../../views/Components/DatePicker')
     },
 
-    // {
-    //   path: 'drawer',
-    //   name: 'ZDemoDrawer',
-    //   meta: {
-    //     key: 'drawer',
-    //     pKey: 'components',
-    //     realm: 'drawer',
-    //     title: 'Drawer 导航抽屉',
-    //   },
-    //   component: () => import('../../views/Components/Drawer')
-    // },
-
     {
       path: 'drawImage',
       name: 'ZDemoDrawImage',
@@ -119,18 +95,6 @@ const ComponentRoutes = {
       },
       component: () => import('../../views/Components/DrawImage')
     },
-
-    // {
-    //   path: 'dropdown',
-    //   name: 'ZDemoDropdown',
-    //   meta: {
-    //     key: 'dropdown',
-    //     pKey: 'components',
-    //     realm: 'dropdown',
-    //     title: 'Dropdown 下拉菜单',
-    //   },
-    //   component: () => import('../../views/Components/Dropdown')
-    // },
 
     {
       path: 'dynamicForm',

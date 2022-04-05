@@ -29,11 +29,6 @@ import ZUpload from './ZUpload'
 // 其它
 import ZDrawImage from './ZDrawImage'
 
-// 废弃
-// import ZCalendar from './ZCalendar'
-// import ZDrawer from './ZDrawer'
-// import ZDropdown from './ZDropdown'
-
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
 import R from './scripts/tools'
