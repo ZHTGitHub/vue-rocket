@@ -1,8 +1,8 @@
 <template>
-  <div class="input-attributes">
+  <div class="attributes">
     <v-card>
       <v-card-title>
-        <span>Input Attributes</span>
+        <span>TextField Attributes</span>
         <v-spacer></v-spacer>
         <z-text-field
           :formId="searchFormId"
@@ -31,13 +31,13 @@
   import ExamplesMixins from '../mixins'
 
   export default {
-    name: 'InputAttributes',
+    name: 'TextFieldAttributes',
     mixins: [TableMixins, ExamplesMixins],
 
     data() {
       return {
-        formId: 'InputAttributes',
-        getHandler: 'GET_INPUT_ATTRIBUTES'
+        formId: 'TextFieldAttributes',
+        dispatchList: 'TEXT_FIELD_GET_ATTRIBUTES'
       }
     }
   }

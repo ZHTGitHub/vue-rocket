@@ -1,7 +1,6 @@
 {
-  "status": true,
-  "total": 19,
-  "data": [
+  "code": 200,
+  "items": [
     {
       "name": "formId",
       "required": "是",
@@ -253,5 +252,7 @@
       "default": "text",
       "description": "设置输入类型"
     }
-  ]
+  ],
+  "message": "获取输入框属性成功",
+  "total": 19
 }

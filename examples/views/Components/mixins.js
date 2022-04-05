@@ -22,7 +22,7 @@ export default {
       slotsHeaders: [
         { text: '名称', value: 'name' },
         { text: '说明', value: 'description', sortable: false }
-      ]
+      ],
     }
   }
 }

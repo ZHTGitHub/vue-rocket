@@ -1,8 +1,8 @@
 <template>
-  <div class="mt-12 input-methods">
+  <div class="mt-12 methods">
     <v-card>
       <v-card-title>
-        <span>Input Methods</span>
+        <span>TextField Methods</span>
         <v-spacer></v-spacer>
         <z-text-field
           :formId="searchFormId"
@@ -30,13 +30,13 @@
   import ExamplesMixins from '../mixins'
 
   export default {
-    name: 'InputMethods',
+    name: 'TextFieldMethods',
     mixins: [TableMixins, ExamplesMixins],
 
     data() {
       return {
-        formId: 'InputMethods',
-        getHandler: 'GET_INPUT_METHODS'
+        formId: 'TextFieldMethods',
+        dispatchList: 'TEXT_FIELD_GET_METHODS'
       }
     }
   }

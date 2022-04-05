@@ -50,12 +50,11 @@ export default {
 		},
 
 		// 分页
-		handlePagination() {
-
-		},
+		handlePagination() {},
 
 		// 获取列表
 		async getList() {
+			// 等待废弃
 			if(this.getHandler) {
 				const result = await this.$store.dispatch(this.getHandler, this.params)
 				this.loading = false
@@ -65,12 +64,20 @@ export default {
 				}
 				return result
 			}
+
+			if(this.dispatchList) {
+        const result = await this.$store.dispatch(this.dispatchList)
+
+        if(result.code === 200) {
+          this.desserts = result.items
+        }
+
+				this.loading = false
+      }
 		},
 
 		// 获取详情
-		async getDetail() {
-			
-		},
+		async getDetail() {},
 
 		stickFormId() {
 			this.searchFormId = this.formId + this.searchId

@@ -1,8 +1,8 @@
 <template>
-  <div class="mt-12 input-slots">
+  <div class="mt-12 slots">
     <v-card>
       <v-card-title>
-        <span>Input Slots</span>
+        <span>TextField Slots</span>
         <v-spacer></v-spacer>
         <z-text-field
           :formId="searchFormId"
@@ -30,13 +30,13 @@
   import ExamplesMixins from '../mixins'
 
   export default {
-    name: 'InputSlots',
+    name: 'TextFieldSlots',
     mixins: [TableMixins, ExamplesMixins],
 
     data() {
       return {
-        formId: 'InputSlots',
-        getHandler: 'GET_INPUT_SLOTS'
+        formId: 'TextFieldSlots',
+        dispatchList: 'TEXT_FIELD_GET_SLOTS'
       }
     }
   }

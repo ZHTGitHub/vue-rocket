@@ -38,7 +38,7 @@
         {
           "value": "radius",
           "icon": "",
-          "label": "Border Radius 边框半径",
+          "label": "BorderRadius 边框半径",
           "link": "/styles/radius"
         },
   

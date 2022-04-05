@@ -45,7 +45,7 @@
       {
         "value": "buttonToggle",
         "icon": "",
-        "label": "Button Groups 按钮组",
+        "label": "ButtonGroups 按钮组",
         "link": "/components/button-toggle"
       },
 
@@ -66,7 +66,7 @@
       {
         "value": "datePicker",
         "icon": "",
-        "label": "Date Picker 日期选择器",
+        "label": "DatePicker 日期选择器",
         "link": "/components/date-picker"
       },
 
@@ -80,15 +80,8 @@
       {
         "value": "fileInput",
         "icon": "",
-        "label": "File Input 文件上传",
+        "label": "FileInput 文件上传",
         "link": "/components/fileInput"
-      },
-
-      {
-        "value": "input",
-        "icon": "",
-        "label": "Input 输入框",
-        "link": "/components/input"
       },
 
       {
@@ -120,6 +113,13 @@
       },
 
       {
+        "value": "textField",
+        "icon": "",
+        "label": "TextField 输入框",
+        "link": "/components/textField"
+      },
+
+      {
         "value": "upload",
         "icon": "",
         "label": "Upload 上传",
@@ -134,7 +134,7 @@
       "children": [
         {
           "value": "drawImage",
-          "label": "Draw image 绘图",
+          "label": "DrawImage 绘图",
           "link": "/components/drawImage"
         }
       ]

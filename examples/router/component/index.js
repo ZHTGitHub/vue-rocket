@@ -193,15 +193,15 @@ const ComponentRoutes = {
     },
 
     {
-      path: 'input',
-      name: 'ZDemoInput',
+      path: 'textField',
+      name: 'ZDemoTextField',
       meta: {
-        key: 'input',
+        key: 'textField',
         pKey: 'components',
-        realm: 'input',
-        title: 'Input 输入框',
+        realm: 'textField',
+        title: 'TextField 输入框',
       },
-      component: () => import('../../views/Components/Input')
+      component: () => import('../../views/Components/TextField')
     },
 
     {
