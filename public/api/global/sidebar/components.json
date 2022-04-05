@@ -7,13 +7,13 @@
       "children": [
         {
           "value": "button",
-          "label": "Button 按钮",
+          "label": ["Button", "按钮"],
           "link": "/components/button"
         },
 
         {
           "value": "typography",
-          "label": "Typography 排版",
+          "label": ["Typography", "排版"],
           "link": "/components/typography"
         }
       ]
@@ -25,7 +25,7 @@
       "children": [
         {
           "value": "pagination",
-          "label": "Pagination 分页",
+          "label": ["Pagination", "分页"],
           "link": "/components/pagination"
         }
       ]
@@ -37,92 +37,79 @@
     "children": [
       {
         "value": "autocomplete",
-        "icon": "",
-        "label": "Autocomplete 自动补全",
+        "label": ["Autocomplete", "自动补全"],
         "link": "/components/autocomplete"
       },
 
       {
         "value": "buttonToggle",
-        "icon": "",
-        "label": "ButtonGroups 按钮组",
+        "label": ["ButtonGroups", "按钮组"],
         "link": "/components/button-toggle"
       },
 
       {
         "value": "checkbox",
-        "icon": "",
-        "label": "Checkbox 复选框",
+        "label": ["Checkbox", "复选框"],
         "link": "/components/checkbox"
       },
 
       {
         "value": "checkboxs",
-        "icon": "",
-        "label": "Checkboxs 多选框",
+        "label": ["Checkboxs", "多选框"],
         "link": "/components/checkboxs"
       },
 
       {
         "value": "datePicker",
-        "icon": "",
-        "label": "DatePicker 日期选择器",
+        "label": ["DatePicker", "日期选择器"],
         "link": "/components/date-picker"
       },
 
       {
         "value": "dynamicForm",
-        "icon": "",
-        "label": "DynamicForm 动态表单",
+        "label": ["DynamicForm", "动态表单"],
         "link": "/components/dynamicForm"
       },
 
       {
         "value": "fileInput",
-        "icon": "",
-        "label": "FileInput 文件上传",
+        "label": ["FileInput", "文件上传"],
         "link": "/components/fileInput"
       },
 
       {
         "value": "radios",
-        "icon": "",
-        "label": "Radios 单选框",
+        "label": ["Radios", "单选框"],
         "link": "/components/radios"
       },
 
       {
         "value": "select",
-        "icon": "",
-        "label": "Select 选择器",
+        "label": ["Select", "选择器"],
         "link": "/components/select"
       },
 
       {
         "value": "switch",
-        "icon": "",
-        "label": "Switch 开关",
+        "label": ["Switch", "开关"],
         "link": "/components/switch"
       },
 
       {
         "value": "textarea",
-        "icon": "",
-        "label": "Teaxarea 多行文本框",
+        "label": ["Teaxarea", "多行文本框"],
         "link": "/components/textarea"
       },
 
       {
         "value": "textField",
-        "icon": "",
-        "label": "TextField 输入框",
+        "label": ["TextField", "输入框"],
         "link": "/components/textField"
       },
 
       {
         "value": "upload",
-        "icon": "",
-        "label": "Upload 上传",
+        "label": ["Upload", "上传"],
         "link": "/components/upload"
       }
     ]
@@ -134,7 +121,7 @@
       "children": [
         {
           "value": "drawImage",
-          "label": "DrawImage 绘图",
+          "label": ["DrawImage", "绘图"],
           "link": "/components/drawImage"
         }
       ]

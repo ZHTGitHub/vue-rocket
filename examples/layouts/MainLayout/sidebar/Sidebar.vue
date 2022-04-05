@@ -17,7 +17,10 @@
             <li 
               :class="`${ child.value === selected ? 'ant-menu-item-selected' : '' } ant-menu-item menu-item-only-child`"
               @click="switchMenu(child)"
-            >{{ child.label }}</li>
+            >
+              {{ child.label[0] }}
+              <span class="chinese">{{ child.label[1] }}</span>
+            </li>
           </ul>
         </li>
       </ul>
@@ -121,9 +124,17 @@
               margin-top: 4px;
               height: 40px;
               line-height: 40px;
+              font-size: 14px;
               text-overflow: ellipsis;
               cursor: pointer;
               overflow: hidden;
+
+              span.chinese {
+                margin-left: 6px;
+                font-size: 12px;
+                font-weight: 400;
+                opacity: .67;
+              }
 
               &:hover {
                 color: #2196f3;

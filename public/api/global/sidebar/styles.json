@@ -10,42 +10,42 @@
         {
           "value": "text",
           "icon": "",
-          "label": "Text 文本",
+          "label": ["Text", "文本"],
           "link": "/styles/text"
         },
   
         {
           "value": "spacing",
           "icon": "",
-          "label": "Spacing 间距",
+          "label": ["Spacing", "间距"],
           "link": "/styles/spacing"
         },
   
         {
           "value": "flex",
           "icon": "",
-          "label": "Flex 弹性布局",
+          "label": ["Flex", "弹性布局"],
           "link": "/styles/flex"
         },
   
         {
           "value": "float",
           "icon": "",
-          "label": "Float 浮动",
+          "label": ["Float", "浮动"],
           "link": "/styles/float"
         },
   
         {
           "value": "radius",
           "icon": "",
-          "label": "BorderRadius 边框半径",
+          "label": ["BorderRadius", "边框半径"],
           "link": "/styles/radius"
         },
   
         {
           "value": "elevation",
           "icon": "",
-          "label": "Elevation 海拔",
+          "label": ["Elevation", "海拔"],
           "link": "/styles/elevation"
         }
       ]

@@ -10,14 +10,14 @@
         {
           "value": "rules",
           "icon": "",
-          "label": "Rules 校验规则",
+          "label": ["Rules", "校验规则"],
           "link": "/forms/rules"
         },
   
         {
           "value": "examples",
           "icon": "",
-          "label": "Examples 使用示例",
+          "label": ["Examples", "使用示例"],
           "link": "/forms/examples"
         }
       ]

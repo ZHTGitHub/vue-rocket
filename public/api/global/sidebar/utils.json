@@ -10,7 +10,7 @@
         {
           "value": "tools",
           "icon": "",
-          "label": "Tools 工具",
+          "label": ["Tools", "工具"],
           "link": "/utils/tools"
         }
       ]
