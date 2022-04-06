@@ -68,7 +68,7 @@ const getViewportSize = function() {
   if(window.innerWidth) {
     return {
       width: window.innerWidth,
-      heigth: window.innerHeight
+      height: window.innerHeight
     }
   }else {
     // ie8及其以下
