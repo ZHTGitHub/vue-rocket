@@ -47,6 +47,13 @@
               always: false,
               includes: ['ZHT'],
               excludes: []
+            },
+
+            {
+              formKey: 'country',
+              always: true,
+              includes: ['ZHT'],
+              excludes: []
             }
           ]
         },

@@ -176,7 +176,7 @@
                   :solo="item.solo"
                   :suffix="item.suffix"
                   :validation="item.validation"
-                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
+                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -234,7 +234,7 @@
                   :solo="item.solo"
                   :suffix="item.suffix"
                   :validation="item.validation"
-                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
+                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -331,7 +331,7 @@
                   :readonly="item.readonly"
                   :row="item.row"
                   :validation="item.validation"
-                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
+                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -351,7 +351,7 @@
                   :formKey="item.formKey"
                   :label="item.label"
                   :validation="item.validation"
-                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
+                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -379,7 +379,7 @@
                   :rounded="item.rounded"
                   :tile="item.tile"
                   :validation="item.validation"
-                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
+                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span class="error--text" slot="prepend">*</span>
