@@ -29,6 +29,7 @@ const fields = [
     inputType: 'autocomplete',
     formKey: 'country',
     label: '国家',
+    clearable: true,
     prependOuter: '*',
     prependOuterClass: 'error--text',
     options: [

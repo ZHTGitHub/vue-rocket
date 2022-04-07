@@ -44,7 +44,7 @@
               <!-- ZTextField BEGIN -->
               <template v-if="item.inputType === 'text'">
                 <z-text-field
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -58,7 +58,7 @@
                   :filled="item.filled"
                   :hide-details="item.hideDetails"
                   :hint="item.hint"
-                  :label="item.label"
+                  :label="item.label + mutexForm[item.formKey]"
                   :outlined="item.outlined"
                   :placeholder="item.placeholder"
                   :prepend-icon="item.prependOuterIcon"
@@ -98,7 +98,7 @@
               <!-- ZTextarea BEGIN -->
               <template v-else-if="item.inputType === 'textarea'">
                 <z-textarea
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -152,7 +152,7 @@
               <!-- ZSelect BEGIN -->
               <template v-else-if="item.inputType === 'select'">
                 <z-select 
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -176,7 +176,7 @@
                   :solo="item.solo"
                   :suffix="item.suffix"
                   :validation="item.validation"
-                  :options="item.options"
+                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -206,7 +206,7 @@
               <!-- ZAutocomplete BEGIN -->
               <template v-else-if="item.inputType === 'autocomplete'">
                 <z-autocomplete 
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :allow-overflow="item.allowOverflow"
@@ -234,7 +234,7 @@
                   :solo="item.solo"
                   :suffix="item.suffix"
                   :validation="item.validation"
-                  :options="item.options"
+                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -264,7 +264,7 @@
               <!-- ZDatePicker BEGIN -->
               <template v-else-if="item.inputType === 'date'">
                 <z-date-picker
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :append-icon="item.appendIcon"
@@ -321,7 +321,7 @@
               <!-- ZRadios BEGIN -->
               <template v-else-if="item.inputType === 'radios'">
                 <z-radios
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :column="item.column"
@@ -331,7 +331,7 @@
                   :readonly="item.readonly"
                   :row="item.row"
                   :validation="item.validation"
-                  :options="item.options"
+                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -346,12 +346,12 @@
               <!-- ZCheckboxs BEGIN -->
               <template v-else-if="item.inputType === 'checkboxs'">
                 <z-checkboxs
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :label="item.label"
                   :validation="item.validation"
-                  :options="item.options"
+                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -366,7 +366,7 @@
               <!-- ZButtonToggle BEGIN -->
               <template v-else-if="item.inputType === 'btnToggle'">
                 <z-btn-toggle
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :borderless="item.borderless"
@@ -379,7 +379,7 @@
                   :rounded="item.rounded"
                   :tile="item.tile"
                   :validation="item.validation"
-                  :options="item.options"
+                  :options="conf[item.formKey] ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span class="error--text" slot="prepend">*</span>
@@ -390,7 +390,7 @@
               <!-- ZSwitch BEGIN -->
               <template v-else>
                 <z-switch
-                  v-if="_isCrazy(item.suzerain, item.formKey)"
+                  v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
                   :disabled="item.disabled"
@@ -399,7 +399,7 @@
                   :readonly="item.readonly"
                   :defaultValue="detailInfo[item.formKey]"
                 ></z-switch>
-              </template>
+              </template> 
               <!-- ZSwitch END -->
               </v-col>
             </template>
@@ -434,6 +434,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import rocket from '../scripts/rocket'
+  import { isYummy, deepClone } from '../scripts/tools'
 
   export default {
     name: 'ZDynamicForm',
@@ -446,6 +447,11 @@
           color: 'normal',
           text: '取消'
         })
+      },
+
+      config: {
+        type: Object,
+        default: () => ({})
       },
 
       confirmProps: {
@@ -510,24 +516,20 @@
         defaultCols: 12,
         defaultColsClass: 'py-0',
 
+        conf: {},
         detailInfo: {},
-
-        momentDetail: {}
+        mutexForm: {}
       }
-    },
-
-    created() {
-      this.momentDetail = { ...this.detail }
     },
 
     methods: {
       _onCancel() {
-        this.$emit('cancel', this.effect, { ...this.forms[this.formId] })
+        this.$emit('cancel', this.effect, deepClone(this.forms[this.formId]))
         this.close()
       },
 
       _onConfirm() {
-        this.$emit('confirm', this.effect, { ...this.forms[this.formId] })
+        this.$emit('confirm', this.effect, deepClone(this.forms[this.formId]))
       },
       
       close() {
@@ -535,7 +537,7 @@
       },
 
       open(effect) {
-        this.effect = { ...effect }
+        this.effect = deepClone(effect)
         this.dialog = true
       },
 
@@ -543,14 +545,24 @@
         this.dialog = !this.dialog
       },
 
-      _isCrazy(suzerain, formKey) {
-        if(!suzerain
-          || ((suzerain.targetFormKey === formKey) 
-          && suzerain.attackValues.includes(this.momentDetail[suzerain.attackFormKey]))
-        ) {
-          return true
+      setMutex(value, { formKey, always, includes, excludes }) {
+        // 若 always 为 true，只要当前 field 有值跟其互斥的输入框就不显示
+        if(always) {
+          this.$set(this.mutexForm, formKey, isYummy(value) ? false : true)
+          return
         }
-        return false
+        
+        // 只要当前 field 的值跟 includes 的值匹配，跟其互斥的输入框就不显示
+        if(isYummy(includes)) {
+          this.$set(this.mutexForm, formKey, includes.includes(value) ? false : true)
+          return
+        }
+
+        // 只要当前 field 的值跟 excludes 的值匹配，跟其互斥的输入框就显示
+        if(isYummy(excludes)) {
+          this.$set(this.mutexForm, formKey, excludes.includes(value) ? true : false)
+          return
+        }
       }
     },
 
@@ -559,10 +571,35 @@
     },
 
     watch: {
+      config: {
+        handler(config) {
+          this.conf = {}
+
+          if(isYummy(config)) {
+            this.conf = deepClone(config)
+          }
+        },
+        deep: true,
+        immediate: true
+      },
+
       forms: {
         handler(forms) {
           const form = forms[this.formId]
-          this.momentDetail = { ...this.momentDetail, ...form }
+
+          console.log(form)
+
+          this.$nextTick(() => {
+            if(isYummy(form)) {
+              for(let formKey in form) {
+                this.conf[formKey]?.mutex?.map(item => {
+                  this.setMutex(form[formKey], item)
+                })
+              }
+
+              console.log(this.mutexForm)
+            }
+          }) 
         },
         deep: true,
         immediate: true
@@ -573,7 +610,7 @@
           this.$emit('dialog', dialog)
 
           if(dialog) {
-            this.detailInfo = { ...this.detail }
+            this.detailInfo = deepClone(this.detail)
           }else {
             rocket.emit('ZHT_RESET_FORM', this.formId)
           }

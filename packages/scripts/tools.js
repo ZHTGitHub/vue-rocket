@@ -334,9 +334,9 @@ const set =  function(object, path, value) {
  * @description 复制到剪贴板
  * @param {String} text
  */ 
-const copyToClipboard = function(text) {
-  return navigator.clipboard.writeText(text)
-};
+// const copyToClipboard = function(text) {
+//   return navigator.clipboard.writeText(text)
+// };
 
 export {
   getType,
@@ -357,7 +357,7 @@ export {
   get,
   set,
 
-  copyToClipboard,
+  // copyToClipboard,
 
   rules
 }
@@ -381,7 +381,7 @@ export default {
   get,
   set,
 
-  copyToClipboard,
+  // copyToClipboard,
 
   rules
 }

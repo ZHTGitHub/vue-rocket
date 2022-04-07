@@ -47,7 +47,6 @@
           v-bind="attrs"
           v-on="on"
           @click:clear="clearDate" 
-          @input="onInput"
         >
           <!-- 输入框内部 文字之后 BEGIN -->
           <template v-slot:append>
@@ -247,19 +246,31 @@
       confirmDate() {
         this.value = this.date
         this.menu = false
+
         this.$emit('confirm', this.value)
       },
 
       clearDate(event) {
         this.date = ''
         this.value = this.date
-        event.customValue = this.value
+
+        this.$emit('click:clear', this.setCustomValue(event))
         this.verifyField()
-        this.$emit('click:clear', event)
       },
 
-      onInput() {
-        this.verifyField()
+      // onInput() {
+      //   this.$emit('input', this.setCustomValue())
+      //   this.verifyField()
+      // },
+
+      setCustomValue(event = null) {
+        if(!event) {
+          return this.value
+        }
+        else {
+          event.customValue = this.value
+          return event
+        }
       }
     },
 
@@ -276,6 +287,11 @@
           this.verifyField()
         },
         deep: true
+      },
+
+      value() {
+        // console.log({date: this.value})
+        this.$emit('input', this.setCustomValue())
       }
     }
   }

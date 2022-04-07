@@ -144,6 +144,7 @@
       },
 
       onInput() {
+        this.$emit('input', this.setCustomValue())
         this.verifyField()
       },
 
