@@ -58,7 +58,7 @@
                   :filled="item.filled"
                   :hide-details="item.hideDetails"
                   :hint="item.hint"
-                  :label="item.label + mutexForm[item.formKey]"
+                  :label="item.label"
                   :outlined="item.outlined"
                   :placeholder="item.placeholder"
                   :prepend-icon="item.prependOuterIcon"
@@ -587,19 +587,13 @@
         handler(forms) {
           const form = forms[this.formId]
 
-          console.log(form)
-
-          this.$nextTick(() => {
-            if(isYummy(form)) {
-              for(let formKey in form) {
-                this.conf[formKey]?.mutex?.map(item => {
-                  this.setMutex(form[formKey], item)
-                })
-              }
-
-              console.log(this.mutexForm)
+          if(isYummy(form)) {
+            for(let formKey in form) {
+              this.conf[formKey]?.mutex?.map(item => {
+                this.setMutex(form[formKey], item)
+              })
             }
-          }) 
+          }
         },
         deep: true,
         immediate: true

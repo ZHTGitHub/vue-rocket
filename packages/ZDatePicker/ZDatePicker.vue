@@ -240,6 +240,8 @@
         if(this.immediate) {
           this.value = this.date
           this.menu = false
+          
+          this.$emit('input', this.setCustomValue())
         }
       },
 
@@ -291,7 +293,7 @@
 
       value() {
         // console.log({date: this.value})
-        this.$emit('input', this.setCustomValue())
+        // this.$emit('input', this.setCustomValue())
       }
     }
   }
