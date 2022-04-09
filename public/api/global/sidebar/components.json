@@ -44,7 +44,7 @@
       {
         "value": "buttonToggle",
         "label": ["ButtonGroups", "按钮组"],
-        "link": "/components/button-toggle"
+        "link": "/components/buttonToggle"
       },
 
       {
@@ -62,7 +62,7 @@
       {
         "value": "datePicker",
         "label": ["DatePicker", "日期选择器"],
-        "link": "/components/date-picker"
+        "link": "/components/datePicker"
       },
 
       {

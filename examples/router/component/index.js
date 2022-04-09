@@ -37,7 +37,7 @@ const ComponentRoutes = {
     },
 
     {
-      path: 'button-toggle',
+      path: 'buttonToggle',
       name: 'ZDemoButtonToggle',
       meta: {
         key: 'buttonToggle',
@@ -73,7 +73,7 @@ const ComponentRoutes = {
     },
 
     {
-      path: 'date-picker',
+      path: 'datePicker',
       name: 'ZDemoDatePicker',
       meta: {
         key: 'datePicker',
