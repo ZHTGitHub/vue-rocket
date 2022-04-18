@@ -59,12 +59,16 @@
 }
 
 /* 文本对齐 */
-.text-left {
-  text-align: left !important;
-}
-
 .text-center {
   text-align: center !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+.text-left {
+  text-align: left !important;
 }
 
 .text-right {
@@ -131,18 +135,18 @@
 }
 
 /* 元素显示类型 */
-.z-none {
+.display-none {
   display: none !important;
 }
 
-.z-inline {
+.display-inline {
   display: inline !important;
 }
 
-.z-inline-block {
+.display-inline-block {
   display: inline-block !important;
 }
 
-.z-block {
+.display-block {
   display: block !important;
 }

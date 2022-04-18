@@ -126,22 +126,22 @@ export const typography = [
 
   [
     {
-      class: '.none',
+      class: '.display-none',
       label: '此元素不会被显示'
     },
 
     {
-      class: '.inline',
+      class: '.display-inline',
       label: '此元素会被显示为内联元素'
     },
 
     {
-      class: '.inline-block',
+      class: '.display-inline-block',
       label: '此元素会被显示为行内块元素'
     },
 
     {
-      class: '.block',
+      class: '.display-block',
       label: '此元素会被显示为块级元素'
     }
   ]
