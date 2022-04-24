@@ -169,17 +169,15 @@
               url: result
             }
 
-            if(!tools.isArray(this.images)) {
-              this.images = []
-            }
+            // if(!tools.isArray(this.images)) {
+            //   this.images = []
+            // }
 
-            this.images.unshift(this.targetFileInfo)
+            // this.images.unshift(this.targetFileInfo)
 
-            this.value = this.images
+            // this.value = this.images
 
-            // console.log(this.value)
-
-            this.$emit('change', this.images)
+            this.$emit('change', this.targetFileInfo)
           }
         })
       },

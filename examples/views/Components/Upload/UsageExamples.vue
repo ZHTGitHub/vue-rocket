@@ -5,8 +5,9 @@
         <z-upload 
           :formId="formId"
           formKey="upload"
-          action="http://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
+          action="https://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
           color="#f00"
+          :headers="headers"
           :validation="[
             { rule: 'required', message: '头像不能为空.' }
           ]"
@@ -57,7 +58,11 @@
     data() {
       return {
         formId: 'upload',
-        code
+        code,
+
+        headers: {
+          token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImV4cCI6MTY1MTM3NjAzMiwidXNlcklkIjoiMzQ5NDQ0YWYzOTkwNDU1ZmI1ZDczNWRlZjA4YTE0ZDEifQ.Fd29jS6ywd3gZvZwecsdXOYONKRYQlU4vBqIv7PzcXI'
+        }
       }
     },
 
