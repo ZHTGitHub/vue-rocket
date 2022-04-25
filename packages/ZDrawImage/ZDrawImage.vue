@@ -587,8 +587,6 @@
 <style scoped lang="scss">
   .z-draw-image {
     position: relative;
-    width: 100%;
-    height: 100%;
     border: 1px solid rgba(0, 0, 0, .05);
     transition: border .15s linear;
     -webkit-user-select: none;
