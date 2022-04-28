@@ -9,6 +9,7 @@ import {
 } from './ZTypography'
 
 // 导航
+import ZDropdown from './ZDropdown'
 import ZPagination from './ZPagination'
 
 // 数据录入
@@ -41,6 +42,7 @@ const components = [
 	ZTypographyText,
 	ZTypographyTitle,
 
+	ZDropdown,
 	ZPagination,
 
 	ZAutocomplete,
@@ -83,6 +85,7 @@ export default {
 	ZTypographyText,
 	ZTypographyTitle,
 
+	ZDropdown,
 	ZPagination,
 
 	ZAutocomplete,

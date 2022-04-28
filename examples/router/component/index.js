@@ -97,6 +97,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'dropdown',
+      name: 'ZDemoDropdown',
+      meta: {
+        key: 'dropdown',
+        pKey: 'components',
+        realm: 'dropdown',
+        title: 'Dropdown 下拉列表',
+      },
+      component: () => import('../../views/Components/Dropdown')
+    },
+
+    {
       path: 'dynamicForm',
       name: 'ZDemoDynamicForm',
       meta: {
