@@ -7,7 +7,7 @@
       class="z-dropdown-menu"
     >
       <template
-        v-for="(item, index) in items"
+        v-for="(item, index) in options"
       >
         <li 
           v-if="item.show !== false"
@@ -126,8 +126,8 @@
                   }
               });
 
-              console.log({showItem, hideItem})
-              console.log({showIndex, hideIndex})
+              // console.log({showItem, hideItem})
+              // console.log({showIndex, hideIndex})
               const lastIndex = vm.options.length - 1
 
               vm.lastGoodIndex = showIndex + 10 < lastIndex ? showIndex + 10 : showIndex
@@ -138,19 +138,22 @@
                 vm.firstGoodIndex = hideIndex - 10 > 0 ? hideIndex - 10 : 0
               }
 
-              // vm.options.map((option, optionIndex) => {
-              //   if(optionIndex >= vm.firstGoodIndex && optionIndex <= vm.lastGoodIndex) {
-              //     option.show = true
-              //     vm.$set(option, optionIndex, { ...option, show: true })
-              //   }else {
-              //     option.show = false
-              //     vm.$set(option, optionIndex, { ...option, show: false })
-              //   }
-              // })
+              console.log({ firstGoodIndex: vm.firstGoodIndex })
+              console.log({ lastGoodIndex: vm.lastGoodIndex })
 
-              // console.log(vm.options)
+              vm.options.map((option, optionIndex) => {
+                if(optionIndex >= vm.firstGoodIndex && optionIndex <= vm.lastGoodIndex) {
+                  option.show = true
+                  // vm.$set(option, optionIndex, { ...option, show: true })
+                }else {
+                  // option.show = false
+                  // vm.$set(option, optionIndex, { ...option, show: false })
+                }
+              })
 
-              // vm.options = [...vm.options]
+              console.log(vm.options)
+
+              vm.options = [...vm.options]
 
           }, {
               threshold: [0.5], // 展现面积为50%触发
@@ -180,23 +183,6 @@
 
           // return wrapper[0]?.offsetTop
         })
-      }
-    },
-
-    watch: {
-      lastGoodIndex: {
-        handler(index) {
-          console.log(index)
-          this.options.map((option, optionIndex) => {
-                if(optionIndex <= index) {
-                  this.$set(option, optionIndex, { ...option, show: true })
-                }
-                else {
-                  this.$set(option, optionIndex, { ...option, show: false })
-                }
-              })
-        },
-        immediate: true
       }
     }
   }
