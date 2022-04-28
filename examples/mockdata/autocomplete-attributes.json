@@ -129,6 +129,15 @@
     },
 
     {
+      "name": "hide-no-data",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "当没有要显示的选项时 隐藏菜单"
+    },
+
+    {
       "name": "hint",
       "required": "否",
       "type": "String",
@@ -144,6 +153,15 @@
       "acceptedValues": "—",
       "default": "—",
       "description": "设置输入标签"
+    },
+
+    {
+      "name": "no-data-text",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "当没有数据时显示的文本"
     },
 
     {

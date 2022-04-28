@@ -23,11 +23,13 @@
       :filled="filled"
       :height="height"
       :hide-details="hideDetails"
+      :hide-no-data="hideNoData"
       :hint="hint"
       :items="items"
       :label="label"
       :loading="loading"
       :multiple="multiple"
+      :no-data-text="noDataText"
       :noFilter="noFilter"
       :outlined="outlined"
       :persistent-hint="persistentHint"
@@ -94,9 +96,19 @@
         default: false
       },
 
+      hideNoData: {
+        type: Boolean,
+        default: false
+      },
+
       loading: {
         type: Boolean,
         default: false
+      },
+
+      noDataText: {
+        type: String,
+        required: false
       },
 
       multiple: {
