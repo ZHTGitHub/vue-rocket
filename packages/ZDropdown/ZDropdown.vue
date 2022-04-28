@@ -1,20 +1,23 @@
 <template>
   <div 
-    ref="ZDropdownWrapper"
     class="z-dropdown"
   >
     <ul 
-      ref="ZDropdownMenuWrapper"
+      id="ZDropdownMenuWrapper"
       class="z-dropdown-menu"
     >
-      <li 
+      <template
         v-for="(item, index) in items"
-        :key="`z.dropdown.menu.item.${ index }`"
-        :ref="`ZDropdownMenuItemWrapper.${ index }`"
-        class="z-dropdown-menu-item"
       >
-        {{ item.label }} - {{ item.offsetTop }}
-      </li>
+        <li 
+          v-if="item.show !== false"
+          :key="`z.dropdown.menu.item.${ index }`"
+          class="z-dropdown-menu-item"
+          :data-index="index"
+        >
+          {{ item.label }} - {{ item.show }}
+        </li>
+      </template>
     </ul>
   </div>
 </template>
@@ -71,7 +74,9 @@
 
     data() {
       return {
-        options: []
+        options: [],
+        firstGoodIndex: -1,
+        lastGoodIndex: -1,
       }
     },
 
@@ -80,12 +85,81 @@
     },
 
     mounted() {
-      const dropdownWrapper = this.$refs.ZDropdownWrapper
+      // const dropdownWrapper = this.$refs.ZDropdownWrapper
 
-      dropdownWrapper.addEventListener('scroll', () => {
-        // console.log(dropdownWrapper.offsetHeight)
-        // console.log(dropdownWrapper.scrollTop)
-      })
+      // dropdownWrapper.addEventListener('scroll', () => {
+      //   // console.log(dropdownWrapper.offsetHeight)
+      //   // console.log(dropdownWrapper.scrollTop)
+      // })
+      const vm = this
+      
+      let [showItem, hideItem] = [{}, {}]
+      let [showIndex, hideIndex] = [-1, -1]
+
+      observerHandle(document.querySelectorAll("#ZDropdownMenuWrapper .z-dropdown-menu-item"), function (res) {
+          console.log(234, res);
+      });
+
+      function observerHandle (elements, callback) {
+          let observer = new IntersectionObserver(entries => {
+              entries.forEach((item) => {
+                  if (item.intersectionRatio >= 0.5) {
+                      // item.target.dataset.visible = 1
+                      showIndex = +item.target.dataset.index
+
+                      showItem = vm.options[showIndex]
+
+                      // console.log(vm.options[showIndex])
+
+                      // console.log(item.target.dataset);
+                      console.log(item.target.innerHTML, '显示', item.intersectionRatio);
+                  } else {
+                      // item.target.dataset.visible = 0
+                      hideIndex = +item.target.dataset.index
+
+                      hideItem = vm.options[hideIndex]
+
+                      // console.log(vm.options[hideIndex])
+
+                      // console.log(item);
+                      console.log(item.target.innerHTML, '不显示', item.intersectionRatio);
+                  }
+              });
+
+              console.log({showItem, hideItem})
+              console.log({showIndex, hideIndex})
+              const lastIndex = vm.options.length - 1
+
+              vm.lastGoodIndex = showIndex + 10 < lastIndex ? showIndex + 10 : showIndex
+
+              if(hideIndex === lastIndex) {
+                vm.firstGoodIndex = showIndex - 10 > 0 ? showIndex - 10 : 0
+              }else {
+                vm.firstGoodIndex = hideIndex - 10 > 0 ? hideIndex - 10 : 0
+              }
+
+              // vm.options.map((option, optionIndex) => {
+              //   if(optionIndex >= vm.firstGoodIndex && optionIndex <= vm.lastGoodIndex) {
+              //     option.show = true
+              //     vm.$set(option, optionIndex, { ...option, show: true })
+              //   }else {
+              //     option.show = false
+              //     vm.$set(option, optionIndex, { ...option, show: false })
+              //   }
+              // })
+
+              // console.log(vm.options)
+
+              // vm.options = [...vm.options]
+
+          }, {
+              threshold: [0.5], // 展现面积为50%触发
+          });
+
+          observer.POLL_INTERVAL = 50; // 节流时间为50毫秒
+
+          Array.from(elements).forEach(el => observer.observe(el));
+      }
     },
 
     beforeDestroy() {
@@ -109,8 +183,21 @@
       }
     },
 
-    computed: {
-      
+    watch: {
+      lastGoodIndex: {
+        handler(index) {
+          console.log(index)
+          this.options.map((option, optionIndex) => {
+                if(optionIndex <= index) {
+                  this.$set(option, optionIndex, { ...option, show: true })
+                }
+                else {
+                  this.$set(option, optionIndex, { ...option, show: false })
+                }
+              })
+        },
+        immediate: true
+      }
     }
   }
 </script>

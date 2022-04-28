@@ -10,15 +10,13 @@
 
     data() {
       return {
-        items: [
-          { label: 'item1', value: '1' }
-        ]
+        items: []
       }
     },
 
     created() {
-      for(let i = 0; i < 20; i+=1) {
-        this.items.push({ label: `item${ i + 1 }`, value: `${ i + 1 }` })
+      for(let i = 0; i < 300; i+=1) {
+        this.items.push({ label: `item${ i }`, value: `${ i }` })
       }
     },
   }
