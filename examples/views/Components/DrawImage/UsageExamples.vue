@@ -4,6 +4,7 @@
       <div slot="code">
         
       </div>
+
       <div class="z-draw-image-demo" slot="demo">
         <div class="options">
           <ul class="z-flex align-center">
@@ -50,7 +51,7 @@
           </v-col>
 
           <!-- 截图 BEGIN -->
-          <v-col :cols="5">
+          <v-col :cols="5" class="box">
             <z-draw-image 
               ref="drawImage"
               fileName="file.png"
@@ -61,20 +62,20 @@
               @save="handleSave"
             ></z-draw-image>
 
-            <z-btn
+            <!-- <z-btn
               color="primary"
               unlocked
               @click="changeImage"
             >
               change
-            </z-btn>
+            </z-btn> -->
           </v-col>
           <!-- 截图 END -->
 
           <!-- 预览 BEGIN -->
-          <v-col :cols="5">
+          <!-- <v-col :cols="5">
             <img :src="dataURL" />
-          </v-col>
+          </v-col> -->
           <!-- 预览 END -->
         </v-row>
       </div>
@@ -112,17 +113,8 @@
 
         num: -1,
 
-        src: images[1]
+        src: images[0]
       }
-    },
-
-    created() {
-      const arr = [
-        { a: 1, b: 2, c: 3 },
-        { a: 1, b: 2, c: 33 },
-      ]
-
-      console.log(tools.find(arr, { a: 1, b: 2 }))
     },
 
     mounted() {
@@ -281,6 +273,10 @@
         height: 20px;
         background-color: rgba(0, 0, 0, .15);
       }
+    }
+
+    .box {
+      overflow: hidden;
     }
   }
 </style>

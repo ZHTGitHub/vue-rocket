@@ -4,8 +4,8 @@
       <div 
         class="rotate"
         :style="{ 
-          width: `${ rotatedWidth }px`,
-          height: `${ rotatedHeight }px`
+          width: `${ dynamicSize }px`,
+          height: `${ dynamicSize }px`
         }"
       >
         <canvas ref="drewCanvas" class="drewCanvas"></canvas>
@@ -62,6 +62,7 @@
         image: new Image(),
 
         dynamicHeight: 0,
+        dynamicSize: 0,
 
         // 记录旋转次数、角度及旋转后宽高
         rotateCount: 0,
@@ -124,6 +125,15 @@
 
           this.rotatedWidth = this.width
           this.rotatedHeight = this.dynamicHeight
+
+          this.dynamicSize = Math.max(this.width, this.dynamicHeight)
+
+          // 保证 canvas 在容器内水平居中
+          this.$nextTick(() => {
+            const drawing = document.getElementById('drawing')
+            const scrollLeft = (this.dynamicSize - this.width) / 2
+            drawing.scrollLeft = scrollLeft
+          })
 
           // drawing
           this.drawingCanvas = this.$refs.drawingCanvas
@@ -587,6 +597,8 @@
 <style scoped lang="scss">
   .z-draw-image {
     position: relative;
+    width: 100%;
+    height: 100%;
     border: 1px solid rgba(0, 0, 0, .05);
     transition: border .15s linear;
     -webkit-user-select: none;
@@ -597,12 +609,16 @@
 
     .drawing {
       position: relative;
+      width: inherit;
+      height: inherit;
       overflow: auto;
 
       .rotate {
+        display: flex;
+        justify-content: center;
         position: relative;
-        
-        canvas {
+
+        canvas {  
           position: absolute;
         }
       }
