@@ -178,6 +178,22 @@
           const { altKey, ctrlKey, keyCode } = event
 
           switch (keyCode) {
+            case 37: 
+              ctrlKey && this.$refs.drawImage.scrollLeft()
+              break;
+
+            case 38: 
+              ctrlKey && this.$refs.drawImage.scrollTop()
+              break;
+
+            case 39: 
+              ctrlKey && this.$refs.drawImage.scrollRight()
+              break;
+
+            case 40: 
+              ctrlKey && this.$refs.drawImage.scrollBottom()
+              break;
+
             // 切图
             case 65:
               event.preventDefault()
@@ -276,6 +292,7 @@
     }
 
     .box {
+      height: 400px;
       overflow: hidden;
     }
   }

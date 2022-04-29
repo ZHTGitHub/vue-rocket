@@ -2,6 +2,7 @@
   <div class="z-draw-image">
     <div id="drawing" class="drawing">
       <div 
+        id="rotate"
         class="rotate"
         :style="{ 
           width: `${ dynamicSize }px`,
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+  import ScrollMixins from './ScrollMixins'
   import { base64ToFile, base64ToBlob, downloadImageCoordinate } from './tools'
 
   const rectangleBorderColor = '#ff1e10'
@@ -27,6 +29,7 @@
 
   export default {
     name: 'ZDrawImage',
+    mixins: [ScrollMixins],
 
     props: {
       fileName: {
@@ -128,12 +131,7 @@
 
           this.dynamicSize = Math.max(this.width, this.dynamicHeight)
 
-          // 保证 canvas 在容器内水平居中
-          this.$nextTick(() => {
-            const drawing = document.getElementById('drawing')
-            const scrollLeft = (this.dynamicSize - this.width) / 2
-            drawing.scrollLeft = scrollLeft
-          })
+          this.getWrapperInfo()
 
           // drawing
           this.drawingCanvas = this.$refs.drawingCanvas
