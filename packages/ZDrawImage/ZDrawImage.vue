@@ -162,9 +162,17 @@
       rotateImage(direction) {
         if(direction === 'left') {
           --this.rotateCount
+
+          if(this.rotateCount <= -4) {
+            this.rotateCount = 0
+          }
         }
         else if(direction === 'right') {
           ++this.rotateCount
+
+          if(this.rotateCount >= 4) {
+            this.rotateCount = 0
+          }
         }
 
         this.rotateDegrees = this.rotateCount * degrees
@@ -190,8 +198,6 @@
           this.drewCanvas.style.top = `${ fromTop }px`
           this.drawingCanvas.style.top = `${ fromTop }px`
         }
-
-        // this._createCanvas()
       },
 
       // 截图
@@ -281,8 +287,6 @@
             y: event.offsetY
           }
 
-          // console.log(startXY)
-
           input = document.getElementById('drawTextInput')
 
           if(!input) {
@@ -335,6 +339,9 @@
       // 保存
       onSave() {
         this.isDownload && this._downloadDrewImage()
+
+        this.drawingCanvas.onmousedown = undefined
+        this.drawingCanvas.onmousemove = undefined
 
         this.$emit('save', {
           dataURL: this.screenshotDataURL || this.drewImageDataURL,
@@ -577,7 +584,6 @@
       _clearEventListener() {
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
-        // document.removeEventListener('mouseup', function() {}, false)
       }
     },
 
