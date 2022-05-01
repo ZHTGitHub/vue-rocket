@@ -1,12 +1,19 @@
 <template>
-  <div class="z-draw-image">
-    <div id="drawing" class="drawing">
+  <div id="drawImage" class="z-draw-image">
+    <div 
+      id="drawing" 
+      class="drawing"
+      :style="{ 
+        width: `${ dynamicSize }px`,
+        height: `${ dynamicSize }px`
+      }"
+    >
       <div 
         id="rotate"
         class="rotate"
         :style="{ 
-          width: `${ dynamicSize }px`,
-          height: `${ dynamicSize }px`
+          width: `${ rotatedWidth }px`,
+          height: `${ rotatedHeight }px`
         }"
       >
         <canvas ref="drewCanvas" class="drewCanvas"></canvas>
@@ -18,18 +25,20 @@
 </template>
 
 <script>
+  import RotateMixins from './RotateMixins'
   import ScrollMixins from './ScrollMixins'
-  import { base64ToFile, base64ToBlob, downloadImageCoordinate } from './tools'
 
-  const rectangleBorderColor = '#ff1e10'
-  const fontColor = '#ff1e10'
-  const degrees = 90
+  import ScreenshotMixins from './ScreenshotMixins'
+  import DrawRectMixins from './DrawRectMixins'
+  import DrawTextMixins from './DrawTextMixins'
+
+  import { base64ToFile, base64ToBlob, rotatedDirectionMap } from './tools'
 
   const defaultStartXY = { x: null, y: null }
 
   export default {
     name: 'ZDrawImage',
-    mixins: [ScrollMixins],
+    mixins: [RotateMixins, ScrollMixins, ScreenshotMixins, DrawRectMixins, DrawTextMixins],
 
     props: {
       fileName: {
@@ -47,6 +56,11 @@
       isDownload: {
         type: Boolean,
         default: false
+      },
+
+      rectColor: {
+        type: String,
+        default: '#ff1e10'
       },
 
       src: {
@@ -158,187 +172,9 @@
         }
       },      
 
-      // 旋转
-      rotateImage(direction) {
-        if(direction === 'left') {
-          --this.rotateCount
-
-          if(this.rotateCount <= -4) {
-            this.rotateCount = 0
-          }
-        }
-        else if(direction === 'right') {
-          ++this.rotateCount
-
-          if(this.rotateCount >= 4) {
-            this.rotateCount = 0
-          }
-        }
-
-        this.rotateDegrees = this.rotateCount * degrees
-
-        this.drewCanvas.style.transform = `rotate(${ this.rotateDegrees }deg)`
-        this.drawingCanvas.style.transform = `rotate(${ this.rotateDegrees }deg)`
-
-        const even = (this.rotateDegrees / 90) % 2 === 0 ? true : false
-
-        if(even) {
-          this.rotatedWidth = this.width
-          this.rotatedHeight = this.dynamicHeight
-
-          this.drewCanvas.style.top = 0
-          this.drawingCanvas.style.top = 0
-        }
-        else {
-          this.rotatedWidth = this.dynamicHeight
-          this.rotatedHeight = this.width
-
-          const fromTop = (this.width / 2) - (this.dynamicHeight / 2)
-
-          this.drewCanvas.style.top = `${ fromTop }px`
-          this.drawingCanvas.style.top = `${ fromTop }px`
-        }
-      },
-
-      // 截图
-      drawScreenshot() {
-        const that = this 
-
-        this._clearEventListener()
-
-        this.drawingCtx.fillStyle = 'rgba(0, 0, 0, .46)'
-        this.drawingCtx.lineWidth = 2
-        this.drawingCtx.strokeStyle = '#1aad19'
-
-        let startXY = null
-
-        this.drawingCanvas.onmousedown = function(event) {
-          startXY = {
-            x: event.offsetX,
-            y: event.offsetY
-          }
-        }
-
-        this.drawingCanvas.onmousemove = function(event) {
-          if(startXY) {
-            const { x: startX, y: startY } = startXY
-            const rectW = event.offsetX - startX
-            const rectH = event.offsetY - startY
-
-            that.fillRectangle(startX, startY, rectW, rectH, that.drawingCtx, true)
-          }
-        }
-
-        document.addEventListener('mouseup', () => {
-          if(startXY) {
-            startXY = null
-            this.createScreenshotFile()
-          }
-        })
-      },
-
-      // 矩形
-      drawRectangle() {
-        const that = this
-
-        this._clearEventListener()
-
-        this.drawingCtx.lineWidth = 3
-        this.drawingCtx.strokeStyle = rectangleBorderColor
-
-        let startXY = null
-
-        this.drawingCanvas.onmousedown = function(event) {
-          startXY = {
-            x: event.offsetX,
-            y: event.offsetY
-          }
-        }
-
-        this.drawingCanvas.onmousemove = function(event) {
-          if(startXY) {
-            const { x: startX, y: startY } = startXY
-            const rectW = event.offsetX - startX
-            const rectH = event.offsetY - startY
-
-            that.fillRectangle(startX, startY, rectW, rectH, that.drawingCtx)
-          }
-        }
-
-        document.addEventListener('mouseup', function() {
-          if(startXY) {
-            startXY = null
-            that.createDrewFile()
-          }
-        })
-      },
-
-      // 文字
-      drawText() {
-        const that = this
-
-        const drawing = document.getElementById('drawing')
-
-        let [startXY, prevStartXY, input] = [null, null, null]
-
-        this.drawingCanvas.onmousedown = function(event) {
-          startXY = {
-            x: event.offsetX,
-            y: event.offsetY
-          }
-
-          input = document.getElementById('drawTextInput')
-
-          if(!input) {
-            input = document.createElement('input')
-
-            input.id = 'drawTextInput'
-            input.autocomplete = 'off'
-            input.style.position = 'absolute'
-            input.style.left = startXY.x + 'px'
-            input.style.top = startXY.y + 'px'
-            input.style.border = '1px solid #ff1e10'
-            input.style.color = '#ff1e10'
-            input.style.outline = 'none'
-
-            drawing.appendChild(input)
-          }
-          else {
-            if(!input.value) {
-              input.style.left = startXY.x + 'px'
-              input.style.top = startXY.y + 'px'
-              input.style.border = '1px solid #ff1e10'
-              input.readOnly = false
-            }
-            else {
-              input.style.border = '1px solid transparent'
-              input.readOnly = true
-            }
-
-            that.inputValue = input.value
-            that.writeText(prevStartXY.x, prevStartXY.y, 250, that.inputValue, that.drawingCtx)
-            input.value = ''
-          }
-        }
-
-        document.addEventListener('mouseup', function(event) {
-          const nodeName = event.target.nodeName
-
-          !~['CANVAS', 'INPUT'].indexOf(nodeName) && input.remove()
-
-          if(startXY) {
-            prevStartXY = {}
-            prevStartXY.x = startXY.x
-            prevStartXY.y = startXY.y
-            startXY = null          
-            that.createDrewFile()
-          }
-        })
-      },
-
       // 保存
       onSave() {
-        this.isDownload && this._downloadDrewImage()
+        this.isDownload && this.downloadDrewImage()
 
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
@@ -383,7 +219,7 @@
        * @param ctx 绘图环境
        * @param overlay 遮罩
        */
-      fillRectangle(startX, startY, rectW, rectH, ctx, overlay) {
+      fillRectangle({ startX, startY, rectW, rectH, ctx, overlay }) {
         ctx.clearRect(0, 0, this.width, this.dynamicHeight)
 
         ctx.beginPath()
@@ -426,12 +262,12 @@
 
         // canvas
         const canvas = document.createElement('canvas')
-        canvas.width = rectW
-        canvas.height = rectH
+        canvas.width = Math.abs(rectW)
+        canvas.height = Math.abs(rectH)
         const data = this.drewCtx.getImageData(startX, startY, rectW, rectH)
 
-        const context = canvas.getContext('2d')
-        context.putImageData(data, 0, 0)
+        const ctx = canvas.getContext('2d')
+        ctx.putImageData(data, 0, 0)
 
         const dataURL = canvas.toDataURL(this.imageType)
 
@@ -451,17 +287,15 @@
         
         this.drewCtx = this.drewCanvas.getContext('2d')
 
-        // console.log(this.drewImageDataURL)
-        // console.log(`${ this.src }?${ Date.now() }`)
-        // console.log(this.src)
-
         this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
           // this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
           this.writeText(this.textArea.startX, this.textArea.startY, 250, this.inputValue, this.drewCtx)
-          this.drewCtx.strokeStyle = rectangleBorderColor
+          this.inputValue = ''
+
+          this.drewCtx.strokeStyle = this.rectColor
           this.drewCtx.strokeRect(startX, startY, rectW, rectH)
 
           // canvas
@@ -485,97 +319,68 @@
         }
       },
 
-      // 写入文字
-      writeText(startX, startY, maxWidth, text, ctx) {
-        ctx.font = '20px Microsoft YaHei'
-        ctx.fillStyle = fontColor
-        ctx.strokeStyle = fontColor
-        
-        ctx.fillText(text, startX, startY + 18, maxWidth)
-
-        this.textArea = {
-          startX,
-          startY,
-          maxWidth
-        }
-      },
-
-      // 更新图片资源
-      // _updateImageSrc() {
-      //   // image
-      //   this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
-      //   this.image.setAttribute('crossOrigin', '')
-
-      //   this.image.onload = () => {
-      //     this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
-      //   }
-      // },
-
       // 下载已绘制图片
-      _downloadDrewImage() {
+      downloadDrewImage() {
         const downloadImage = new Image()
         downloadImage.src = this.screenshotDataURL || this.drewImageDataURL
 
         downloadImage.onload = () => {
+          const direction = rotatedDirectionMap.get(this.rotateCount)
+          const [width, height] = [downloadImage.width, downloadImage.height]
+          let [canvasW, canvasH] = [0, 0]
 
-          // 根据旋转角度绘制画布的宽高
+          if(direction === 'top' || direction === 'bottom') {
+            canvasW = width
+            canvasH = height
+          }
+          else {
+            canvasW = height
+            canvasH = width
+          }
+
+          const downloadCanvas = document.createElement('canvas')
+          downloadCanvas.width = canvasW
+          downloadCanvas.height = canvasH
+
+          const downloadCtx = downloadCanvas.getContext('2d')
+
+          switch (direction) {
+            case 'top':
+              downloadCtx.translate(0, 0)
+              downloadCtx.rotate(0)
+              break;
+          
+            case 'right':
+              downloadCtx.translate(canvasW, 0)
+              downloadCtx.rotate(90 * Math.PI / 180)
+              break;
+
+            case 'bottom':
+              downloadCtx.translate(canvasW, canvasH)
+              downloadCtx.rotate(180 * Math.PI / 180)
+              break;
+
+            case 'left':
+              downloadCtx.translate(0, canvasH)
+              downloadCtx.rotate(-90 * Math.PI / 180)
+              break;
+          }
+
+          downloadCtx.drawImage(downloadImage, 0, 0, width, height, 0, 0, width, height)
+
+          // 动态创建 a 标签，并下载绘制后的图片
           {
-            const even = (this.rotateDegrees / 90) % 2 === 0 ? true : false
-            let [downloadWidth, downloadHeight] = [this.width, this.dynamicHeight]
+            const anchor = document.createElement('a')
+            const dataURL = downloadCanvas.toDataURL('image/png')
 
-            if(!even) {
-              downloadWidth = this.dynamicHeight
-              downloadHeight = this.width
-            }
+            let base64 = dataURL.split(',')[1]
+            base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
+              const blobUrl = window.URL.createObjectURL(res)
 
-            const dynamicCanvas = document.createElement('canvas')
-            dynamicCanvas.width = downloadWidth
-            dynamicCanvas.height = downloadHeight
-
-            const dynamicCtx = dynamicCanvas.getContext('2d')
-
-            dynamicCtx.rotate(this.rotateDegrees * Math.PI / 180)
-
-            // 根据旋转角度设置绘制后的图片在画布上的坐标
-            {
-              const { moveX, moveY } = downloadImageCoordinate(this.rotateDegrees)
-
-              let [x, y] = [0, 0]
-
-              if(!moveX && !moveY) {
-                x = 0
-                y = 0
-              }else if(!moveX && moveY) {
-                x = 0
-                y = -this.dynamicHeight
-              }else if(moveX && moveY) {
-                x = -this.width
-                y = -this.dynamicHeight
-              }else if(moveX && !moveY) {
-                x = -this.width
-                y = 0
-              }
-
-              dynamicCtx.drawImage(downloadImage, 0, 0, downloadImage.width, downloadImage.height, x, y, this.width, this.dynamicHeight)
-            }
-
-            // 动态创建 a 标签，并下载绘制后的图片
-            {
-              const anchor = document.createElement('a')
-              const dataURL = dynamicCanvas.toDataURL('image/png')
-
-              let base64 = dataURL.split(',')[1]
-              base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
-                // 转后后的blob对象
-                // console.log('blob', res)
-
-                const blobUrl = window.URL.createObjectURL(res)
-
-                anchor.href = blobUrl
-                anchor.download = 'dynamicCanvas'
-                anchor.click()
-              })
-            }
+              anchor.href = blobUrl
+              anchor.download = 'dynamicCanvas'
+              anchor.click()
+            })
           }
         }
       },
@@ -605,6 +410,7 @@
     height: 100%;
     border: 1px solid rgba(0, 0, 0, .05);
     transition: border .15s linear;
+    overflow: auto;
     -webkit-user-select: none;
 
     &:hover {
@@ -613,13 +419,9 @@
 
     .drawing {
       position: relative;
-      width: inherit;
-      height: inherit;
-      overflow: auto;
+      background: #fafafa;
 
       .rotate {
-        display: flex;
-        justify-content: center;
         position: relative;
 
         canvas {  

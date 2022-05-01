@@ -1,0 +1,56 @@
+  const DEG = 90
+
+export default {
+  methods: {
+    // 旋转
+    rotateImage(direction) {
+      if(direction === 'left') {
+        --this.rotateCount
+
+        if(this.rotateCount <= -4) {
+          this.rotateCount = 0
+        }
+      }
+      else if(direction === 'right') {
+        ++this.rotateCount
+
+        if(this.rotateCount >= 4) {
+          this.rotateCount = 0
+        }
+      }
+
+      this.rotateDegrees = this.rotateCount * DEG
+
+      this.drewCanvas.style.transform = `rotate(${ this.rotateDegrees }deg)`
+      this.drawingCanvas.style.transform = `rotate(${ this.rotateDegrees }deg)`
+
+      const even = (this.rotateDegrees / 90) % 2 === 0 ? true : false
+
+      if(even) {
+        this.rotatedWidth = this.width
+        this.rotatedHeight = this.dynamicHeight
+
+        this.drewCanvas.style.top = 0
+        this.drawingCanvas.style.top = 0
+
+        this.drewCanvas.style.left = 0
+        this.drawingCanvas.style.left = 0
+      }
+      else {
+        this.rotatedWidth = this.dynamicHeight
+        this.rotatedHeight = this.width
+
+        const fromTop = (this.width / 2) - (this.dynamicHeight / 2)
+        const fromLeft = (this.dynamicHeight / 2) - (this.width / 2)
+
+        console.log({ width: this.width, dynamicHeight: this.dynamicHeight })
+
+        this.drewCanvas.style.top = `${ fromTop }px`
+        this.drawingCanvas.style.top = `${ fromTop }px`
+
+        this.drewCanvas.style.left = `${ fromLeft }px`
+        this.drawingCanvas.style.left = `${ fromLeft }px`
+      }
+    }
+  }
+}

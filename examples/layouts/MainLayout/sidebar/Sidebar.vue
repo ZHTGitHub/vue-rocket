@@ -50,8 +50,6 @@
         if(result.code === 200) {
           this.items = result.items
         }
-
-        console.log(this.items)
       },
 
       switchMenu({ value, link }) {

@@ -1,5 +1,5 @@
-let [drawing, rotate] = [null, null]
-let [drawingH, drawingW, rotateH, rotateW] = [0, 0, 0, 0]
+let [drawImage, drawing] = [null, null]
+let [drawImageH, drawImageW, drawingH, drawingW] = [0, 0, 0, 0]
 let [scrollLeft, scrollTop] = [0, 0]
 
 export default {
@@ -10,26 +10,20 @@ export default {
     }
   },
 
-  data() {
-    return {
-      
-    }
-  },
-
   methods: {
     getWrapperInfo() {
       this.$nextTick(() => {
+        drawImage = document.getElementById('drawImage')
         drawing = document.getElementById('drawing')
-        rotate = document.getElementById('rotate')
+    
+        drawImageH = drawImage.offsetHeight
+        drawImageW = drawImage.offsetWidth
     
         drawingH = drawing.offsetHeight
         drawingW = drawing.offsetWidth
-    
-        rotateH = rotate.offsetHeight
-        rotateW = rotate.offsetWidth
 
+        // console.log({ drawImageH, drawImageW })
         // console.log({ drawingH, drawingW })
-        // console.log({ rotateH, rotateW })
 
         this.setCanvasCenter()
       })
@@ -37,8 +31,8 @@ export default {
 
     // 保证 canvas 在容器内水平居中
     setCanvasCenter() {
-      const max = Math.max(rotateH, rotateW)
-      drawing.scrollLeft = (max - drawingW) / 2
+      const max = Math.max(drawingH, drawingW)
+      drawImage.scrollLeft = (max - drawImageW) / 2
     },
 
     // 向左滚动
@@ -49,7 +43,7 @@ export default {
         scrollLeft = 0
       }
 
-      drawing.scrollLeft = scrollLeft
+      drawImage.scrollLeft = scrollLeft
     },
 
     // 向上滚动
@@ -60,29 +54,29 @@ export default {
         scrollTop = 0
       }
 
-      drawing.scrollTop = scrollTop
+      drawImage.scrollTop = scrollTop
     },
 
     // 向右滚动
     scrollRight() {
       scrollLeft += this.scrollRange
 
-      if(scrollLeft >= rotateW - drawingW) {
-        scrollLeft = rotateW - drawingW
+      if(scrollLeft >= drawingW - drawImageW) {
+        scrollLeft = drawingW - drawImageW
       }
 
-      drawing.scrollLeft = scrollLeft
+      drawImage.scrollLeft = scrollLeft
     },
 
     // 向下滚动
     scrollBottom() {
       scrollTop += this.scrollRange
       
-      if(scrollTop >= rotateH - drawingH) {
-        scrollTop = rotateH - drawingH
+      if(scrollTop >= drawingH - drawImageH) {
+        scrollTop = drawingH - drawImageH
       }
 
-      drawing.scrollTop = scrollTop
+      drawImage.scrollTop = scrollTop
     }
   },
 }

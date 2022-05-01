@@ -51,7 +51,7 @@
           </v-col>
 
           <!-- 截图 BEGIN -->
-          <v-col :cols="5" class="box">
+          <v-col :cols="10" class="box">
             <z-draw-image 
               ref="drawImage"
               fileName="file.png"
@@ -91,8 +91,6 @@
 
   import cells from './cells'
 
-  import tools from '../../../../packages/scripts/tools'
-
   const images = [
     require('../../../../public/lp1.png'),
     require('../../../../public/lp2.png'),
@@ -125,18 +123,17 @@
     methods: {
       switchImage(image) {
         this.src = image
-
-        console.log(this.src)
+        // console.log(this.src)
       },
 
       handleDrew({ dataURL, file }) {
         this.dataURL = dataURL
-        console.log(file)
+        // console.log(file)
       },
 
       handleSave({ dataURL, file }) {
-        console.log(dataURL)
-        console.log(file)
+        // console.log(dataURL)
+        // console.log(file)
       },
 
       // 某项操作
@@ -228,7 +225,7 @@
             case 90:
               event.preventDefault()
               if(ctrlKey && !altKey) {
-                this.$refs.drawImage.onClear()
+                this.$refs.drawImage.clear()
               }
               else if(ctrlKey && altKey) {
                 this.screenshotOrRectangle()

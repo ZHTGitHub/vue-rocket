@@ -47,33 +47,13 @@ export const base64ToBlob = ({ b64data = '', contentType = '', name = 'image.png
   })
 }
 
-// 旋转后下载图片坐标
-export const downloadImageCoordinate = (deg) => {
-  const move0 = deg === 0 || (deg - 360) % 360 === 0 || (deg + 360) % 360 === 0
-  const moveY = (deg - 90) % 360 === 0 || (deg + 270) % 360 === 0
-  const moveXY = (deg - 180) % 360 === 0 || (deg + 180) % 360 === 0
-  const moveX = (deg - 270) % 360 === 0 || (deg + 90) % 360 === 0
-
-  if(move0) {
-    return {
-      moveX: false,
-      moveY: false
-    }
-  }else if(moveY) {
-    return {
-      moveX: false,
-      moveY: true
-    }
-  }else if(moveXY) {
-    return {
-      moveX: true,
-      moveY: true
-    }
-  }else if(moveX) {
-    return {
-      moveX: true,
-      moveY: false
-    }
-  }
-}
+export const rotatedDirectionMap = new Map([
+  [0, 'top'],
+  [1, 'right'],
+  [-3, 'right'],
+  [2, 'bottom'],
+  [-2, 'bottom'],
+  [3, 'left'],
+  [-1, 'left']
+])
 
