@@ -41,6 +41,13 @@
     mixins: [RotateMixins, ScrollMixins, ScreenshotMixins, DrawRectMixins, DrawTextMixins],
 
     props: {
+      direction: {
+        validator(value) {
+          return !!~['top', 'right', 'bottom', 'left'].indexOf(value)
+        },
+        default: 'top'
+      },
+
       fileName: {
         type: String,
         default: 'file'
@@ -48,12 +55,12 @@
 
       imageType: {
         validator(value) {
-          return ~['image/png', 'image/jpeg', 'image/webp'].indexOf(value)
+          return !!~['image/png', 'image/jpeg', 'image/webp'].indexOf(value)
         },
         default: 'image/png'
       },
 
-      isDownload: {
+      download: {
         type: Boolean,
         default: false
       },
@@ -77,6 +84,7 @@
     data() {
       return {
         image: new Image(),
+        ratio: 1,
 
         dynamicHeight: 0,
         dynamicSize: 0,
@@ -138,7 +146,8 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          this.dynamicHeight = this.width * this.image.height / this.image.width
+          this.ratio = this.image.width / this.width
+          this.dynamicHeight = this.image.height / this.ratio
 
           this.rotatedWidth = this.width
           this.rotatedHeight = this.dynamicHeight
@@ -169,12 +178,14 @@
 
           // 初始化图片
           this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+
+          this.setImageDirection()
         }
       },      
 
       // 保存
       onSave() {
-        this.isDownload && this.downloadDrewImage()
+        this.download && this.downloadDrewImage()
 
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
@@ -378,7 +389,7 @@
               const blobUrl = window.URL.createObjectURL(res)
 
               anchor.href = blobUrl
-              anchor.download = 'dynamicCanvas'
+              anchor.download = this.fileName
               anchor.click()
             })
           }

@@ -3,7 +3,7 @@
 export default {
   methods: {
     // 旋转
-    rotateImage(direction) {
+    rotateImage(direction) { 
       if(direction === 'left') {
         --this.rotateCount
 
@@ -43,14 +43,35 @@ export default {
         const fromTop = (this.width / 2) - (this.dynamicHeight / 2)
         const fromLeft = (this.dynamicHeight / 2) - (this.width / 2)
 
-        console.log({ width: this.width, dynamicHeight: this.dynamicHeight })
-
         this.drewCanvas.style.top = `${ fromTop }px`
         this.drawingCanvas.style.top = `${ fromTop }px`
 
         this.drewCanvas.style.left = `${ fromLeft }px`
         this.drawingCanvas.style.left = `${ fromLeft }px`
       }
+    },
+
+    // 设置图片默认方向
+    setImageDirection() {
+      switch(this.direction) {
+        case 'top':
+          this.rotateCount = -1
+          break;
+      
+        case 'right':
+          this.rotateCount = 0
+          break;
+        
+        case 'bottom':
+          this.rotateCount = 1
+          break;
+
+        case 'left':
+          this.rotateCount = 2
+          break;
+      }
+
+      this.rotateImage('right')
     }
   }
 }

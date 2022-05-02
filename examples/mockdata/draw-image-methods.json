@@ -1,4 +1,17 @@
 {
   "status": true,
-  "total": 0
+  "total": 2,
+  "data": [
+    {
+      "name": "drew",
+      "parameters": "{ dataURL, file }",
+      "description": "生成已绘制框图/文字/切图文件时触发"
+    },
+
+    {
+      "name": "save",
+      "parameters": "{ dataURL, file }",
+      "description": "保存时触发"
+    }
+  ]
 }

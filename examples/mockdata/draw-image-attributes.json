@@ -1,4 +1,68 @@
 {
   "status": true,
-  "total": 0
+  "total": 7,
+  "data": [
+    {
+      "name": "direction",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "top | right | bottom | left",
+      "default": "top",
+      "description": "图像默认方向"
+    },
+
+    {
+      "name": "fileName",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "-",
+      "default": "file",
+      "description": "图像名"
+    },
+
+    {
+      "name": "imageType",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "image/png ｜ image/jpeg ｜ image/webp",
+      "default": "image/png",
+      "description": "图像格式"
+    },
+
+    {
+      "name": "download",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "-",
+      "default": false,
+      "description": "保存的时候是否下载图像"
+    },
+
+    {
+      "name": "rectColor",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "-",
+      "default": "#ff1e10",
+      "description": "框图时矩形边框颜色"
+    },
+
+    {
+      "name": "src",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "-",
+      "default": "-",
+      "description": "图像源路径"
+    },
+
+    {
+      "name": "width",
+      "required": "否",
+      "type": "Number ｜ String",
+      "acceptedValues": "-",
+      "default": "auto",
+      "description": "设置画布及图像的宽"
+    }
+  ]
 }

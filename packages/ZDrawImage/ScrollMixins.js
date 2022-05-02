@@ -22,17 +22,19 @@ export default {
         drawingH = drawing.offsetHeight
         drawingW = drawing.offsetWidth
 
-        // console.log({ drawImageH, drawImageW })
-        // console.log({ drawingH, drawingW })
+        console.log({ drawImageH, drawImageW })
+        console.log({ drawingH, drawingW })
 
-        this.setCanvasCenter()
+        this.setCanvasLeft()
       })
     },
 
-    // 保证 canvas 在容器内水平居中
-    setCanvasCenter() {
-      const max = Math.max(drawingH, drawingW)
-      drawImage.scrollLeft = (max - drawImageW) / 2
+    // 保证 canvas 在容器左侧
+    setCanvasLeft() {
+      // const max = Math.max(drawingH, drawingW)
+      // drawImage.scrollLeft = (max - drawImageW) / 2
+
+      drawImage.scrollLeft = 0
     },
 
     // 向左滚动
@@ -78,5 +80,5 @@ export default {
 
       drawImage.scrollTop = scrollTop
     }
-  },
+  }
 }

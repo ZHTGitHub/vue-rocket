@@ -55,7 +55,7 @@
             <z-draw-image 
               ref="drawImage"
               fileName="file.png"
-              isDownload
+              download
               :width="400"
               :src="src"
               @drew="handleDrew"
@@ -111,7 +111,7 @@
 
         num: -1,
 
-        src: images[0]
+        src: images[1]
       }
     },
 
@@ -289,7 +289,6 @@
     }
 
     .box {
-      height: 400px;
       overflow: hidden;
     }
   }
