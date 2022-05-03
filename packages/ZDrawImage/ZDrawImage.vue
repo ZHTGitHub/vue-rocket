@@ -53,6 +53,11 @@
         default: 'file'
       },
 
+      imageWidth: {
+        type: [Number, String],
+        required: false
+      },
+
       imageType: {
         validator(value) {
           return !!~['image/png', 'image/jpeg', 'image/webp'].indexOf(value)
@@ -73,11 +78,6 @@
       src: {
         type: String,
         required: false
-      },
-
-      width: {
-        type: [Number, String],
-        default: 'auto'
       }
     },
 
@@ -85,6 +85,7 @@
       return {
         image: new Image(),
         ratio: 1,
+        width: 'auto',
 
         dynamicHeight: 0,
         dynamicSize: 0,
@@ -146,6 +147,13 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
+          if(this.imageWidth) {
+            this.width = this.imageWidth
+          }
+          else {
+            this.width = this.image.width
+          }
+
           this.ratio = this.image.width / this.width
           this.dynamicHeight = this.image.height / this.ratio
 
@@ -355,7 +363,7 @@
 
           const downloadCtx = downloadCanvas.getContext('2d')
 
-          switch (direction) {
+          switch(direction) {
             case 'top':
               downloadCtx.translate(0, 0)
               downloadCtx.rotate(0)

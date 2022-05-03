@@ -21,6 +21,15 @@
     },
 
     {
+      "name": "imageWidth",
+      "required": "否",
+      "type": "Number ｜ String",
+      "acceptedValues": "-",
+      "default": "auto",
+      "description": "设置画布及图像的宽"
+    },
+
+    {
       "name": "imageType",
       "required": "否",
       "type": "String",
@@ -54,15 +63,6 @@
       "acceptedValues": "-",
       "default": "-",
       "description": "图像源路径"
-    },
-
-    {
-      "name": "width",
-      "required": "否",
-      "type": "Number ｜ String",
-      "acceptedValues": "-",
-      "default": "auto",
-      "description": "设置画布及图像的宽"
     }
   ]
 }

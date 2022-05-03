@@ -56,7 +56,6 @@
               ref="drawImage"
               fileName="file.png"
               download
-              :width="400"
               :src="src"
               @drew="handleDrew"
               @save="handleSave"
@@ -289,6 +288,7 @@
     }
 
     .box {
+      height: 600px;
       overflow: hidden;
     }
   }
