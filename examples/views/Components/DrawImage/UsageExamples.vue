@@ -56,6 +56,7 @@
               ref="drawImage"
               fileName="file.png"
               download
+              imageWidth="800"
               :src="src"
               @drew="handleDrew"
               @save="handleSave"
