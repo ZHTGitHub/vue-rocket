@@ -1,5 +1,6 @@
 # 超快速开发后台管理系统，统一管理表单数据，常用JavaScript方法封装，提供丰富的全局样式。
 
+
 ## Install
 ```shell
 npm install vue-rocket -S
