@@ -39,6 +39,24 @@
     },
 
     {
+      "name": "headers",
+      "required": "否",
+      "type": "Object",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设置上传的请求头部"
+    },
+
+    {
+      "name": "limit",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "最大允许上传个数"
+    },
+
+    {
       "name": "method",
       "required": "否",
       "type": "String",

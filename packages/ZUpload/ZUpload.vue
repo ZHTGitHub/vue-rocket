@@ -35,6 +35,7 @@
         </div>
 
         <div 
+          v-show="!images || images.length < limit"
           class="z-upload-select"
           :style="hoverStyle"
           @mouseenter="onMouseenter"
@@ -112,7 +113,12 @@
 
       headers: {
         type: Object,
-        default: () => {}
+        required: false
+      },
+
+      limit: {
+        type: [Number, String],
+        required: false
       },
 
       method: {
@@ -249,9 +255,11 @@
         handler(images) {
           if(tools.isYummy(images)) {
             this.value = images
-          }else {
+          }
+          else {
             this.value = undefined
           }
+
           this.verifyField()
         },
         immediate: true
