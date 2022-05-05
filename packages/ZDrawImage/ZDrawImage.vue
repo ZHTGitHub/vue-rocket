@@ -1,6 +1,7 @@
 <template>
-  <div id="drawImage" class="z-draw-image">
+  <div ref="drawImage" id="drawImage" class="z-draw-image">
     <div 
+      ref="drawing"
       id="drawing" 
       class="drawing"
       :style="{ 
@@ -162,8 +163,6 @@
 
           this.dynamicSize = Math.max(this.width, this.dynamicHeight)
 
-          this.getWrapperInfo()
-
           // drawing
           this.drawingCanvas = this.$refs.drawingCanvas
 
@@ -186,6 +185,9 @@
 
           // 初始化图片
           this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+
+          // 
+          this.getWrapperInfo()
 
           this.setImageDirection()
         }

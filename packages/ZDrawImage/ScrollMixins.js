@@ -13,8 +13,11 @@ export default {
   methods: {
     getWrapperInfo() {
       this.$nextTick(() => {
-        drawImage = document.getElementById('drawImage')
-        drawing = document.getElementById('drawing')
+        // drawImage = document.getElementById('drawImage')
+        // drawing = document.getElementById('drawing')
+
+        drawImage = this.$refs.drawImage
+        drawing = this.$refs.drawing
     
         drawImageH = drawImage.offsetHeight
         drawImageW = drawImage.offsetWidth
