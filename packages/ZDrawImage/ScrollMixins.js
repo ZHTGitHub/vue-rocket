@@ -13,9 +13,6 @@ export default {
   methods: {
     getWrapperInfo() {
       this.$nextTick(() => {
-        // drawImage = document.getElementById('drawImage')
-        // drawing = document.getElementById('drawing')
-
         drawImage = this.$refs.drawImage
         drawing = this.$refs.drawing
     
@@ -25,8 +22,8 @@ export default {
         drawingH = drawing.offsetHeight
         drawingW = drawing.offsetWidth
 
-        console.log({ drawImageH, drawImageW })
-        console.log({ drawingH, drawingW })
+        // console.log({ drawImageH, drawImageW })
+        // console.log({ drawingH, drawingW })
 
         this.setCanvasLeft()
       })
@@ -37,6 +34,7 @@ export default {
       // const max = Math.max(drawingH, drawingW)
       // drawImage.scrollLeft = (max - drawImageW) / 2
 
+      drawImage.scrollTop = 0
       drawImage.scrollLeft = 0
     },
 

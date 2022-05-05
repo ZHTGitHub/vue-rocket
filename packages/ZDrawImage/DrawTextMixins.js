@@ -21,9 +21,6 @@ export default {
 
         input = document.getElementById('drawTextInput')
 
-        console.log(input?.value)
-        console.log(that.inputValue)
-
         if(!input) {
           input = document.createElement('input')
 

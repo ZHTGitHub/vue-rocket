@@ -1,8 +1,7 @@
 <template>
-  <div ref="drawImage" id="drawImage" class="z-draw-image">
+  <div ref="drawImage" class="z-draw-image">
     <div 
       ref="drawing"
-      id="drawing" 
       class="drawing"
       :style="{ 
         width: `${ dynamicSize }px`,
@@ -221,6 +220,12 @@
 
         this.drewArea = {}
         this.textArea = {}
+  
+        const drawTextInput = document.getElementById('drawTextInput')
+
+        if(drawTextInput) {
+          drawTextInput.parentNode.removeChild(drawTextInput)
+        }
 
         this.image.src = `${ this.src }?${ Date.now() }`
         this.image.setAttribute('crossOrigin', '')
