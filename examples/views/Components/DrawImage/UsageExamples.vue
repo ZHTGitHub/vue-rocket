@@ -132,8 +132,8 @@
       },
 
       handleSave({ dataURL, file }) {
-        // console.log(dataURL)
-        // console.log(file)
+        console.log(dataURL)
+        console.log(file)
       },
 
       // 某项操作

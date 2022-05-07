@@ -185,7 +185,6 @@
           // 初始化图片
           this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
 
-          // 
           this.getWrapperInfo()
 
           this.setImageDirection()
@@ -194,18 +193,10 @@
 
       // 保存
       onSave() {
-        this.download && this.downloadDrewImage()
+        this.downloadDrewImage()
 
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
-
-        const dataURL = this.screenshotDataURL || this.drewImageDataURL
-        this.file = base64ToFile(dataURL, this.fileName)
-
-        this.$emit('save', {
-          dataURL,
-          file: this.file
-        })
 
         // this.clear()
       },
@@ -397,13 +388,20 @@
 
           downloadCtx.drawImage(downloadImage, 0, 0, width, height, 0, 0, width, height)
 
-          // 动态创建 a 标签，并下载绘制后的图片
-          {
-            const anchor = document.createElement('a')
-            const dataURL = downloadCanvas.toDataURL('image/png')
+          const dataURL = downloadCanvas.toDataURL('image/png')
+          this.file = base64ToFile(dataURL, this.fileName)
 
-            let base64 = dataURL.split(',')[1]
-            base64ToBlob({b64data: base64, contentType: 'image/png'}).then(res => {
+          this.$emit('save', {
+            dataURL,
+            file: this.file
+          })
+
+          // 动态创建 a 标签，并下载绘制后的图片
+          if(this.download) {
+            const anchor = document.createElement('a')
+            const base64 = dataURL.split(',')[1]
+
+            base64ToBlob({ b64data: base64, contentType: 'image/png' }).then(res => {
               const blobUrl = window.URL.createObjectURL(res)
 
               anchor.href = blobUrl
