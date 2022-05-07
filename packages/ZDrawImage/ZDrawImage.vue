@@ -199,8 +199,11 @@
         this.drawingCanvas.onmousedown = undefined
         this.drawingCanvas.onmousemove = undefined
 
+        const dataURL = this.screenshotDataURL || this.drewImageDataURL
+        this.file = base64ToFile(dataURL, this.fileName)
+
         this.$emit('save', {
-          dataURL: this.screenshotDataURL || this.drewImageDataURL,
+          dataURL,
           file: this.file
         })
 
