@@ -49,6 +49,8 @@ export default {
         this.drewCanvas.style.left = `${ fromLeft }px`
         this.drawingCanvas.style.left = `${ fromLeft }px`
       }
+
+      this.createDrewFile()
     },
 
     // 设置图片默认方向

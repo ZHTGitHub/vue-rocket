@@ -209,7 +209,8 @@ const find = function(collection, predicate) {
       }
 
     }
-  }else {
+  }
+  else {
     for(let item of collection) {
       for(let key in item) {
         if(item[key] === predicate) {
