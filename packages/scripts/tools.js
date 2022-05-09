@@ -184,10 +184,12 @@ const isLousy = function(value) {
  * @description 返回匹配元素，否则返回 undefined
  * @param {Object[]} collection
  * @param {Array|Object|String} predicate
+ * @param {Object} deepClone
  */ 
-const find = function(collection, predicate) {
+const find = function(collection, predicate, deepClone = false) {
   if(isArray(predicate)) {
     const [key, val] = predicate
+
     for(let item of collection) {
       if(item[key] === val) {
         return item
@@ -201,13 +203,13 @@ const find = function(collection, predicate) {
 
       const result = variety.every((v) => {
         const [key, val] = v
+
         return item[key] === val
       }) 
 
       if(result) {
         return item
       }
-
     }
   }
   else {
@@ -244,8 +246,9 @@ const deepClone = function(value = {}) {
 /**
  * @description 数组去重
  * @param {Any[]} value
+ * @param {Boolean} deepClone
  */ 
-const cleanArray = function(value = []) {
+const cleanArray = function(value = [], deepClone = false) {
   if(!Array.isArray(value)) {
     return value
   }
@@ -280,8 +283,9 @@ const cleanArray = function(value = []) {
 /**
  * @description 数组拍平
  * @param {Any[]} value
+ * @param {Boolean} deepClone
  */ 
-const flatArray = function(value = []) {
+const flatArray = function(value = [], deepClone = false) {
   const isDeep = value.some(item => item instanceof Array)
 
   if(!isDeep) {        
