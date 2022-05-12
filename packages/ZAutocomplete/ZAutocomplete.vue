@@ -21,7 +21,6 @@
       :error="incorrect"
       :error-messages="errorMessage"
       :filled="filled"
-      :filter="filter"
       :height="height"
       :hide-details="hideDetails"
       :hide-no-data="hideNoData"
@@ -131,13 +130,7 @@
     data() {
       return {
         search: null,
-        items: [],
-
-        filter(item, queryText, itemText) {
-          console.log(item, queryText, itemText)
-          return queryText
-          // return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
-        },
+        items: []
       }
     },
 
