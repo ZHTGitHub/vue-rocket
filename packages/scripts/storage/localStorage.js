@@ -1,4 +1,4 @@
-const localStore = {
+const localStorage = {
   set(key, value) {
     window.localStorage.setItem(key, JSON.stringify(value))
   },
@@ -16,4 +16,4 @@ const localStore = {
   }
 }
 
-export default localStore
+export default localStorage

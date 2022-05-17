@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import LocalDB from '../../../../packages/scripts/storage/indexedDB'
+  import IndexedDB from '../../../../packages/scripts/storage/indexedDB'
 
   export default {
     name: 'IndexedDB',
@@ -17,31 +17,32 @@
     },
 
     async created() {
-      const localDB = new LocalDB('Students')
-      const result = await localDB.open('levels')
-      console.log(result)
+      const tableName = 'zhongshan_university'
 
-      await localDB.add('levels', {
-        id: '1',
-        level: 1,
-        total: 45,
-        male: 22,
-        female: 23
-      })
+      const indexedDB = new IndexedDB('School')
+      const open_result = await indexedDB.open(tableName)
+      console.log(open_result)
 
-      const added = await localDB.add('levels', {
-        id: '2',
-        level: 2,
-        total: 46,
-        male: 20,
-        female: 20
-      })
+      // const add_result = await indexedDB.add(tableName, {
+      //   id: '001',
+      //   name: '国立中山大学',
+      // })
+      // console.log(add_result)
 
-      console.log(added)
+      const get_result = await indexedDB.get(tableName, '003')
+      console.log(get_result)
 
-      const got = await localDB.get({ tableName: 'levels' })
+      // const put_result = await indexedDB.put(tableName, {
+      //   id: '003',
+      //   name: '国立中山大学_003'
+      // })
+      // console.log(put_result)
 
-      console.log(got)
+      // const remove_result = await indexedDB.remove(tableName, '003')
+      // console.log(remove_result)
+
+      // const clear_result = await indexedDB.clear(tableName)
+      // console.log(clear_result)
     }
   }
 </script>

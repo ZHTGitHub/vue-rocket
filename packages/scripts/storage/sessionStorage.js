@@ -1,4 +1,4 @@
-const sessionStore = {
+const sessionStorage = {
   set(key, value) {
     window.sessionStorage.setItem(key, JSON.stringify(value))
   },
@@ -16,4 +16,4 @@ const sessionStore = {
   }
 }
 
-export default sessionStore
+export default sessionStorage

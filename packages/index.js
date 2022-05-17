@@ -32,8 +32,9 @@ import ZDrawImage from './ZDrawImage'
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
 import R from './scripts/tools'
-import localStore from './scripts/storage/localStorage'
-import sessionStore from './scripts/storage/sessionStorage'
+import localStorage from './scripts/storage/localStorage'
+import sessionStorage from './scripts/storage/sessionStorage'
+import IndexedDB from './scripts/storage/indexedDB'
 import './styles/styles.scss'
 
 const components = [
@@ -75,7 +76,10 @@ if(typeof window !== 'undefined' && window.Vue) {
 export {
 	rocket,
 	forms,
-	R
+	R,
+	localStorage,
+	sessionStorage,
+	IndexedDB
 }
 
 export default {
