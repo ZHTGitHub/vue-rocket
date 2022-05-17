@@ -22,7 +22,10 @@ class LocalDB {
   }
 
   // 打开数据库
-  open(tableName) {
+  open(tableName, {
+    autoIncrement,
+    keyPath
+  }) {
     return new Promise(resolve => {
       const open = indexedDB.open(this.dbName, this.version)
 
@@ -33,8 +36,8 @@ class LocalDB {
         if(!this.db.objectStoreNames.contains(tableName)) {
           // 主键
           this.db.createObjectStore(tableName, { 
-            // autoIncrement: true,
-            keyPath: 'id'
+            autoIncrement,
+            keyPath
           })
 
           resolve({

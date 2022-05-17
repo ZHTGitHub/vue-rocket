@@ -20,16 +20,18 @@
       const tableName = 'zhongshan_university'
 
       const indexedDB = new IndexedDB('School')
-      const open_result = await indexedDB.open(tableName)
+      const open_result = await indexedDB.open(tableName, {
+        keyPath: 'id'
+      })
       console.log(open_result)
 
-      // const add_result = await indexedDB.add(tableName, {
-      //   id: '001',
-      //   name: '国立中山大学',
-      // })
-      // console.log(add_result)
+      const add_result = await indexedDB.add(tableName, {
+        id: '001',
+        name: '国立中山大学',
+      })
+      console.log(add_result)
 
-      const get_result = await indexedDB.get(tableName, '003')
+      const get_result = await indexedDB.get(tableName, '001')
       console.log(get_result)
 
       // const put_result = await indexedDB.put(tableName, {
