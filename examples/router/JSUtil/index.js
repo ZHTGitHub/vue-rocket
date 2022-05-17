@@ -22,6 +22,18 @@ const JSUtilRoutes = {
         title: '工具 tools',
       },
       component: () => import('../../views/JSUtil/tools')
+    },
+
+    {
+      path: 'indexedDB',
+      name: 'ZDemoIndexedDb',
+      meta: {
+        key: 'indexedDB',
+        pKey: 'plugins',
+        realm: 'indexedDB',
+        title: 'IndexedDB',
+      },
+      component: () => import('../../views/JSUtil/indexedDB')
     }
   ]
 }

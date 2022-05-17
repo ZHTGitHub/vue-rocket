@@ -1,4 +1,3 @@
-
 // 通用
 import ZBtn from './ZBtn'
 import ZTypography from './ZTypography'
@@ -33,6 +32,8 @@ import ZDrawImage from './ZDrawImage'
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
 import R from './scripts/tools'
+import localStore from './scripts/storage/localStorage'
+import sessionStore from './scripts/storage/sessionStorage'
 import './styles/styles.scss'
 
 const components = [

@@ -12,6 +12,13 @@
           "icon": "",
           "label": ["Tools", "工具"],
           "link": "/utils/tools"
+        },
+
+        {
+          "value": "indexedDB",
+          "icon": "",
+          "label": ["IndexedDB"],
+          "link": "/utils/indexedDB"
         }
       ]
     }
