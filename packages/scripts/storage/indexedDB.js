@@ -15,10 +15,7 @@ class IndexedDB {
     this.version = version
 
     this.db = null
-  }
-
-  init(tableName) {
-
+    this.transaction = null
   }
 
   // 打开数据库
@@ -27,11 +24,14 @@ class IndexedDB {
     keyPath
   }) {
     return new Promise(resolve => {
-      const open = indexedDB.open(this.dbName, this.version)
+      const request = indexedDB.open(this.dbName, this.version)
 
       // 数据库升级成功
-      open.onupgradeneeded = (event) => {
+      request.onupgradeneeded = (event) => {
         this.db = event.target.result
+        this.transaction = event.target.transaction
+
+        // console.log(this.transaction)
 
         if(!this.db.objectStoreNames.contains(tableName)) {
           // 主键
@@ -49,8 +49,11 @@ class IndexedDB {
       }
 
       // 数据库打开成功
-      open.onsuccess = (event) => {
+      request.onsuccess = (event) => {
         this.db = event.target.result
+        this.transaction = event.target.transaction
+
+        // console.log(this.transaction)
 
         resolve({
           code: 200,
@@ -60,7 +63,7 @@ class IndexedDB {
       }
 
       // 数据库打开报错
-      open.onerror = (event) => {
+      request.onerror = (event) => {
         resolve({
           code: 400,
           status: 'open_failed',
@@ -73,7 +76,8 @@ class IndexedDB {
   // 新增
   add(tableName, data) {
     return new Promise(resolve => {
-      const request = this.db.transaction([tableName], 'readwrite')
+      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
+      const request = transaction
         .objectStore(tableName)
         .add(data)
 
@@ -104,7 +108,8 @@ class IndexedDB {
   // 更新
   put(tableName, data) {
     return new Promise(resolve => {
-      const request = this.db.transaction([tableName], 'readwrite')
+      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
+      const request = transaction
         .objectStore(tableName)
         .put(data)
 
@@ -131,7 +136,7 @@ class IndexedDB {
   // 读取
   get(tableName, keyPath) {
     return new Promise(resolve => {
-      const transaction = this.db.transaction([tableName])
+      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName])
       const objectStore = transaction.objectStore(tableName)
       const request = objectStore.get(keyPath)
 
@@ -156,10 +161,11 @@ class IndexedDB {
     })
   }
 
-  // 读取所有
+  // 读取所有（开发中...）
   getAll(tableName) {
     return new Promise(resolve => {
-      const objectStore = this.db.transaction([tableName]).objectStore(tableName)
+      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName])
+      const objectStore = transaction.objectStore(tableName)
       
       objectStore.openCursor().onsuccess = function(event) {
         const result = event.target.result
@@ -179,7 +185,8 @@ class IndexedDB {
   // 删除
   remove(tableName, keyPath) {
     return new Promise(resolve => {
-      const request = this.db.transaction([tableName], 'readwrite')
+      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
+      const request = transaction
         .objectStore(tableName)
         .delete(keyPath)
 
@@ -198,7 +205,8 @@ class IndexedDB {
   // 清空
   clear(tableName) {
     return new Promise(resolve => {
-      const request = this.db.transaction([tableName], 'readwrite')
+      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
+      const request = transaction
         .objectStore(tableName)
         .clear()
 
