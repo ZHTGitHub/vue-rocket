@@ -25,14 +25,17 @@
       })
       console.log(open_result)
 
-      const add_result = await indexedDB.add(tableName, {
-        id: '001',
-        name: '国立中山大学',
-      })
-      console.log(add_result)
+      // const add_result = await indexedDB.add(tableName, {
+      //   id: '002',
+      //   name: '国立中山大学',
+      // })
+      // console.log(add_result)
 
       const get_result = await indexedDB.get(tableName, '001')
       console.log(get_result)
+
+      const getAll_result = await indexedDB.getAll(tableName)
+      console.log(getAll_result)
 
       // const put_result = await indexedDB.put(tableName, {
       //   id: '003',

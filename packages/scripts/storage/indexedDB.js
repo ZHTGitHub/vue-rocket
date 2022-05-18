@@ -156,6 +156,26 @@ class LocalDB {
     })
   }
 
+  // 读取所有
+  getAll(tableName) {
+    return new Promise(resolve => {
+      const objectStore = this.db.transaction([tableName]).objectStore(tableName)
+      
+      objectStore.openCursor().onsuccess = function(event) {
+        const result = event.target.result
+
+        console.log(event)
+
+        resolve({
+          code: 200,
+          status: 'got_all',
+          error: event.target.error,
+          data: result.continue()
+        })
+      }
+    }) 
+  }
+
   // 删除
   remove(tableName, keyPath) {
     return new Promise(resolve => {
