@@ -1,6 +1,6 @@
 {
   "name": "vue-rocket",
-  "version": "0.25.19",
+  "version": "0.26.0",
   "description": "基于 Vue+Vuetify 的后台管理系统框架",
   "author": "zenghaitao",
   "private": false,

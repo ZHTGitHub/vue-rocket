@@ -1,4 +1,4 @@
-class LocalDB {
+class IndexedDB {
   constructor(dbName, version = 1) {
     this.localDB = 
       window.indexedDB || 
@@ -215,4 +215,4 @@ class LocalDB {
   }
 }
 
-export default LocalDB
+export default IndexedDB
