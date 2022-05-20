@@ -1,6 +1,6 @@
 <template>
   <div class="indexed-db">
-    
+    <typing-title :title="$route.meta.title"></typing-title>
   </div>
 </template>
 
