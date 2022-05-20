@@ -25,7 +25,7 @@
   import cells from './cells'
 
   export default {
-    name: 'FormRules',
+    name: 'Tools',
 
     data() {
       return {
@@ -36,16 +36,5 @@
 </script>
 
 <style scoped lang="scss">
-  .rule {
-    margin-bottom: 52px;
-    h6 {
-      padding-bottom: 4px;
-      border-bottom: 1px solid rgba($color: #000000, $alpha: .12);
-    }
-
-    p {
-      padding: 20px 0;
-      margin: 0;
-    }
-  }
+  @import "../style.scss";
 </style>
