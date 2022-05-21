@@ -26,7 +26,7 @@ const rules = [
 
   {
     name: 'clear()',
-    intr: '清空 localStorage 中所有信息.',
+    intr: '清空 sessionStorage 中所有信息.',
     params: [
       { text: '无.' }
     ]

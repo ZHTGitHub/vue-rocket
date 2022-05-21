@@ -58,7 +58,7 @@ const rules = [
 
   {
     name: 'isLousy(value)',
-    intr: '判断值是否合法，值为 undefined | null | "" | false | [] | {} 不合法返回 true，其余值(包含数字 0)均合法返回 false.',
+    intr: '判断值是否不合法，值为 undefined | null | "" | false | [] | {} 不合法返回 true，其余值(包含数字 0)均合法返回 false.',
     params: [
       { text: '任意值.' }
     ]

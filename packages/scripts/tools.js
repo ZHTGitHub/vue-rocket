@@ -173,7 +173,7 @@ const isYummy = function(value) {
 };
 
 /**
- * @description 判断值是否合法，不合法返回 true
+ * @description 判断值是否不合法，不合法返回 true
  * @param {Any} value
  */ 
 const isLousy = function(value) {

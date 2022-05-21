@@ -43,21 +43,15 @@
       })
       console.log(open_result)
 
-      const add_result = await indexedDB.add(tableName, {
-        id: '001',
-        name: '国立中山大学',
-      })
-      console.log(add_result)
-
-      const get_result = await indexedDB.get(tableName, '001')
-      console.log(get_result)
-
-      // const getAll_result = await indexedDB.getAll(tableName)
-      // console.log(getAll_result)
+      // const add_result = await indexedDB.add(tableName, {
+      //   id: '001',
+      //   name: '国立中山大学',
+      // })
+      // console.log(add_result)
 
       // const put_result = await indexedDB.put(tableName, {
-      //   id: '004',
-      //   name: '国立中山大学_002'
+      //   id: '002',
+      //   name: '华南师范大学'
       // })
       // console.log(put_result)
 
@@ -66,6 +60,12 @@
 
       // const clear_result = await indexedDB.clear(tableName)
       // console.log(clear_result)
+
+      // const get_result = await indexedDB.get(tableName, '001')
+      // console.log(get_result)
+
+      const getAll_result = await indexedDB.getAll(tableName)
+      console.log(getAll_result)
     }
   }
 </script>

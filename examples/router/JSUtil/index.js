@@ -19,7 +19,7 @@ const JSUtilRoutes = {
         key: 'tools',
         pKey: 'plugins',
         realm: 'tools',
-        title: '工具 tools',
+        title: 'Tools 工具',
       },
       component: () => import('../../views/JSUtil/tools')
     },

@@ -5,7 +5,7 @@ class IndexedDB {
       window.mozIndexedDB || 
       window.webkitIndexedDB || 
       window.msIndexedDB ||
-      window.shimIndexedDB;
+      window.shimIndexedDB
     
     if(!this.localDB) {
       alert('你的浏览器不支持IndexedDB')
@@ -18,20 +18,25 @@ class IndexedDB {
     this.transaction = null
   }
 
-  // 打开数据库
+  /**
+   * 打开数据库
+   * @param tableName 表
+   * @param autoIncrement boolean类型，键生成器，是否自动生成，默认false
+   * @param keyPath 指定键路径，需要唯一，可以不指定
+   * @param index 索引
+   */ 
   open(tableName, {
     autoIncrement,
-    keyPath
+    keyPath,
+    index
   }) {
     return new Promise(resolve => {
       const request = indexedDB.open(this.dbName, this.version)
-
+      
       // 数据库升级成功
       request.onupgradeneeded = (event) => {
-        this.db = event.target.result
-        this.transaction = event.target.transaction
-
-        // console.log(this.transaction)
+        this.db = request.result
+        this.transaction = request.transaction
 
         if(!this.db.objectStoreNames.contains(tableName)) {
           // 主键
@@ -39,6 +44,7 @@ class IndexedDB {
             autoIncrement,
             keyPath
           })
+
 
           resolve({
             code: 200,
@@ -50,10 +56,8 @@ class IndexedDB {
 
       // 数据库打开成功
       request.onsuccess = (event) => {
-        this.db = event.target.result
-        this.transaction = event.target.transaction
-
-        // console.log(this.transaction)
+        this.db = request.result
+        this.transaction = request.transaction
 
         resolve({
           code: 200,
@@ -76,8 +80,7 @@ class IndexedDB {
   // 新增
   add(tableName, data) {
     return new Promise(resolve => {
-      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
-      const request = transaction
+      const request = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
         .objectStore(tableName)
         .add(data)
 
@@ -108,8 +111,7 @@ class IndexedDB {
   // 更新
   put(tableName, data) {
     return new Promise(resolve => {
-      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
-      const request = transaction
+      const request = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
         .objectStore(tableName)
         .put(data)
 
@@ -164,20 +166,29 @@ class IndexedDB {
   // 读取所有（开发中...）
   getAll(tableName) {
     return new Promise(resolve => {
-      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName])
+      const transaction = this.transaction ? this.transaction : this.db.transaction(tableName)
       const objectStore = transaction.objectStore(tableName)
+      const openCursor = objectStore.openCursor()
+
+      const items = []
       
-      objectStore.openCursor().onsuccess = function(event) {
-        const result = event.target.result
+      openCursor.onsuccess = function(event) {
+        const cursor = event.target.result
 
-        console.log(event)
+        if(cursor) {
+          items.push(cursor.value)
+          cursor.continue()
+        }
+        else {
+          resolve({
+            code: 200,
+            status: 'got_all',
+            error: event.target.error,
+            data: items
+          })
+        }
 
-        resolve({
-          code: 200,
-          status: 'got_all',
-          error: event.target.error,
-          data: result.continue()
-        })
+        
       }
     }) 
   }
@@ -185,8 +196,7 @@ class IndexedDB {
   // 删除
   remove(tableName, keyPath) {
     return new Promise(resolve => {
-      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
-      const request = transaction
+      const request = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
         .objectStore(tableName)
         .delete(keyPath)
 
@@ -205,8 +215,7 @@ class IndexedDB {
   // 清空
   clear(tableName) {
     return new Promise(resolve => {
-      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
-      const request = transaction
+      const request = this.transaction ? this.transaction : this.db.transaction([tableName], 'readwrite')
         .objectStore(tableName)
         .clear()
 
