@@ -3,8 +3,8 @@ const rules = [
     name: 'open(tableName, info)',
     intr: '打开数据库.',
     params: [
-      { text: 'tableName (*): 表名.' },
-      { text: 'info (*): { autoIncrement, keyPath }.' }
+      { text: 'tableName (String): 表名.' },
+      { text: 'info ({ autoIncrement, keyPath }): autoIncrement(boolean类型，键生成器，是否自动生成，默认false)；keyPath(指定键路径，需要唯一，可以不指定).' }
     ]
   },
 
@@ -12,8 +12,8 @@ const rules = [
     name: 'add(tableName, data)',
     intr: '新增数据.',
     params: [
-      { text: 'tableName (*): 表名.' },
-      { text: 'data (*): Any.' }
+      { text: 'tableName (String): 表名.' },
+      { text: 'data (Any): 任意值.' }
     ]
   },
 
@@ -22,16 +22,25 @@ const rules = [
     intr: '更新数据.',
     params: [
       { text: 'tableName (*): 表名.' },
-      { text: 'data (*): Any.' }
+      { text: 'data (Any): 任意值.' }
     ]
   },
 
   {
-    name: 'get(tableName, keyPath)',
+    name: 'get(tableName, keyPath, indexObj)',
     intr: '读取数据.',
     params: [
-      { text: 'tableName (*): 表名.' },
-      { text: 'keyPath (*): keyPath.' }
+      { text: 'tableName (String): 表名.' },
+      { text: 'keyPath (String): 主键.' },
+      { text: 'indexObj (Object): 索引.' }
+    ]
+  },
+
+  {
+    name: 'getAll(tableName)',
+    intr: '读取所有数据.',
+    params: [
+      { text: 'tableName (String): 表名.' }
     ]
   },
 
@@ -39,8 +48,8 @@ const rules = [
     name: 'remove(tableName, keyPath)',
     intr: '删除数据.',
     params: [
-      { text: 'tableName (*): 表名.' },
-      { text: 'keyPath (*): keyPath.' }
+      { text: 'tableName (String): 表名.' },
+      { text: 'keyPath (String): 主键.' }
     ]
   },
 
@@ -48,7 +57,7 @@ const rules = [
     name: 'clear(tableName)',
     intr: '清空数据库.',
     params: [
-      { text: 'tableName (*): 表名.' }
+      { text: 'tableName (String): 表名.' }
     ]
   }
 ]
