@@ -107,12 +107,8 @@ class IndexedDB {
         .objectStore(tableName)
         .put(data)
 
-      console.log(request)
-
       // 数据更新成功
       request.onsuccess = (event) => {
-        console.log(event)
-
         resolve({
           code: 200,
           status: 'put',
