@@ -18,18 +18,8 @@ class IndexedDB {
     this.transaction = null
   }
 
-  /**
-   * 打开数据库
-   * @param tableName 表
-   * @param autoIncrement boolean类型，键生成器，是否自动生成，默认false
-   * @param keyPath 指定键路径，需要唯一，可以不指定
-   * @param index 索引
-   */ 
-  open(tableName, {
-    autoIncrement,
-    keyPath,
-    index
-  }) {
+  // 打开数据库
+  open(tableName, { autoIncrement, keyPath }, indexes) {
     return new Promise(resolve => {
       const request = indexedDB.open(this.dbName, this.version)
       
@@ -40,17 +30,19 @@ class IndexedDB {
 
         if(!this.db.objectStoreNames.contains(tableName)) {
           // 主键
-          this.db.createObjectStore(tableName, { 
+          const objectStore = this.db.createObjectStore(tableName, { 
             autoIncrement,
             keyPath
           })
 
-
-          resolve({
-            code: 200,
-            status: 'upgrade',
-            error: event.target.error
+          // 索引
+          indexes.map(index => {
+            objectStore.createIndex(index.name, index.keyPath, index.options)
           })
+
+          if(event.target.error === null) {
+            this.open(tableName, { autoIncrement, keyPath }, indexes)
+          }
         }
       }
 
@@ -115,8 +107,12 @@ class IndexedDB {
         .objectStore(tableName)
         .put(data)
 
+      console.log(request)
+
       // 数据更新成功
       request.onsuccess = (event) => {
+        console.log(event)
+
         resolve({
           code: 200,
           status: 'put',
@@ -136,11 +132,21 @@ class IndexedDB {
   }
 
   // 读取
-  get(tableName, keyPath) {
+  get(tableName, keyPath, indexObj) {
     return new Promise(resolve => {
-      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName])
+      const transaction = this.transaction ? this.transaction : this.db.transaction([tableName], 'readonly')
       const objectStore = transaction.objectStore(tableName)
-      const request = objectStore.get(keyPath)
+
+      let request = null
+
+      if(keyPath) {
+        request = objectStore.get(keyPath)
+      }
+      else {
+        const [key, value] = Object.entries(indexObj)[0]
+        const index = objectStore.index(key)
+        request = index.get(value)
+      }
 
       // 成功
       request.onsuccess = (event) => {
@@ -163,7 +169,7 @@ class IndexedDB {
     })
   }
 
-  // 读取所有（开发中...）
+  // 读取所有
   getAll(tableName) {
     return new Promise(resolve => {
       const transaction = this.transaction ? this.transaction : this.db.transaction(tableName)
@@ -187,8 +193,6 @@ class IndexedDB {
             data: items
           })
         }
-
-        
       }
     }) 
   }
