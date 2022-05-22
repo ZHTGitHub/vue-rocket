@@ -434,7 +434,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import rocket from '../scripts/rocket'
-  import { isYummy, deepClone } from '../scripts/tools'
+  import { tools } from '../scripts/utils'
 
   export default {
     name: 'ZDynamicForm',
@@ -524,12 +524,12 @@
 
     methods: {
       _onCancel() {
-        this.$emit('cancel', this.effect, deepClone(this.forms[this.formId]))
+        this.$emit('cancel', this.effect, tools.deepClone(this.forms[this.formId]))
         this.close()
       },
 
       _onConfirm() {
-        this.$emit('confirm', this.effect, deepClone(this.forms[this.formId]))
+        this.$emit('confirm', this.effect, tools.deepClone(this.forms[this.formId]))
       },
       
       close() {
@@ -537,7 +537,7 @@
       },
 
       open(effect) {
-        this.effect = deepClone(effect)
+        this.effect = tools.deepClone(effect)
         this.dialog = true
       },
 
@@ -548,18 +548,18 @@
       setMutex(value, { formKey, always, includes, excludes }) {
         // 若 always 为 true，只要当前 field 有值跟其互斥的输入框就不显示
         if(always) {
-          this.$set(this.mutexForm, formKey, isYummy(value) ? false : true)
+          this.$set(this.mutexForm, formKey, tools.isYummy(value) ? false : true)
           return
         }
         
         // 只要当前 field 的值跟 includes 的值匹配，跟其互斥的输入框就不显示
-        if(isYummy(includes)) {
+        if(tools.isYummy(includes)) {
           this.$set(this.mutexForm, formKey, includes.includes(value) ? false : true)
           return
         }
 
         // 只要当前 field 的值跟 excludes 的值匹配，跟其互斥的输入框就显示
-        if(isYummy(excludes)) {
+        if(tools.isYummy(excludes)) {
           this.$set(this.mutexForm, formKey, excludes.includes(value) ? true : false)
           return
         }
@@ -575,8 +575,8 @@
         handler(config) {
           this.conf = {}
 
-          if(isYummy(config)) {
-            this.conf = deepClone(config)
+          if(tools.isYummy(config)) {
+            this.conf = tools.deepClone(config)
           }
         },
         deep: true,
@@ -587,7 +587,7 @@
         handler(forms) {
           const form = forms[this.formId]
 
-          if(isYummy(form)) {
+          if(tools.isYummy(form)) {
             for(let formKey in form) {
               this.conf[formKey]?.mutex?.map(item => {
                 this.setMutex(form[formKey], item)
@@ -604,7 +604,7 @@
           this.$emit('dialog', dialog)
 
           if(dialog) {
-            this.detailInfo = deepClone(this.detail)
+            this.detailInfo = tools.deepClone(this.detail)
           }else {
             rocket.emit('ZHT_RESET_FORM', this.formId)
           }

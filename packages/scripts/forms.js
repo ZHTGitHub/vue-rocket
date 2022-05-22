@@ -1,6 +1,5 @@
 import Vue from 'vue'
-// import _ from 'lodash'
-import { set } from './tools'
+import { tools } from './utils'
 
 const state = {
   forms: {}
@@ -14,21 +13,21 @@ const mutations = {
   // 给表单的每个[key]设置[value]
   SET_FORM_VALUE_BY_KEY(state, data) {
     const updatedForm = { ...state.forms }
-    set(updatedForm, data.formId + '.' + data.formKey, data.value)
+    tools.set(updatedForm, data.formId + '.' + data.formKey, data.value)
     Vue.set(state, 'forms', updatedForm) 
   },
 
   // 清空表单
   CLEAN_FORM(state, data) {
     const updatedForm = { ...state.forms }
-    set(updatedForm, data.formId + '.' + data.formKey, undefined)
+    tools.set(updatedForm, data.formId + '.' + data.formKey, undefined)
     Vue.set(state, 'forms', updatedForm) 
   },
 
   // 重置表单
   RESET_FORM(state, data) {
     const updatedForm = { ...state.forms }
-    set(updatedForm, data.formId + '.' + data.formKey, data.defaultValue)
+    tools.set(updatedForm, data.formId + '.' + data.formKey, data.defaultValue)
     Vue.set(state, 'forms', updatedForm) 
   },
 

@@ -1,5 +1,5 @@
-// import _ from 'lodash'
-import { set } from '../scripts/tools'
+import { tools } from '../scripts/utils'
+const { set } = tools
 
 class ZValidate {
   constructor() {

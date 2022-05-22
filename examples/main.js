@@ -8,9 +8,6 @@ import './plugins/highlight'
 
 import 'animate.css'
 
-// import './plugins/vue-virtual-scroller'
-// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
-
 import request from './api/service'
 Vue.prototype.$request = request
 

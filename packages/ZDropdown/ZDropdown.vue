@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { deepClone, getType } from '../../packages/scripts/tools'
+  import { tools } from '../../packages/scripts/utils'
 
   export default {
     name: 'ZDropdown',
@@ -90,18 +90,18 @@
     },
 
     created() {
-      this.originItems = deepClone(this.items)
+      this.originItems = tools.deepClone(this.items)
       this.filterItems = this.originItems
     },
 
     methods: {
       search() {
         if(this.value) {
-          if(getType(this.limit) === 'boolean') {
+          if(tools.getType(this.limit) === 'boolean') {
             this.searchItems()
           }
           else {
-            if(getType(+this.limit) === 'number') {
+            if(tools.getType(+this.limit) === 'number') {
               this.searchItems()
             }
             else {
@@ -117,7 +117,7 @@
       searchItems() {
         const filterItems = this.originItems.filter(item => item.label.includes(this.value))
 
-        if(getType(+this.limit) === 'number') {
+        if(tools.getType(+this.limit) === 'number') {
           this.filterItems = filterItems.slice(0, this.limit)
         }
         else {

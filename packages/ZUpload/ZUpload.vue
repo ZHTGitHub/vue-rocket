@@ -75,7 +75,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
-  import tools from '../scripts/tools'
+  import { tools } from '../scripts/utils'
   import previewDialog from './previewDialog'
 
   const targetFileInfo = {

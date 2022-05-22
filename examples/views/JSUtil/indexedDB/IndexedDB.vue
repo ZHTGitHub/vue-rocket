@@ -23,7 +23,7 @@
 
 <script>
   import cells from './cells'
-  import IndexedDB from '../../../../packages/scripts/storage/indexedDB'
+  import IndexedDB from '../../../../packages/scripts/utils/storage/indexedDB'
 
   export default {
     name: 'IndexedDB',

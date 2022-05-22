@@ -1,6 +1,6 @@
 import $validator from '../validate/z-validate'
 import rocket from '../scripts/rocket'
-import tools from '../scripts/tools'
+import { tools } from '../scripts/utils'
 import rules from '../validate/rules'
 
 export default {

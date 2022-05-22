@@ -31,10 +31,7 @@ import ZDrawImage from './ZDrawImage'
 
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
-import R from './scripts/tools'
-import localStorage from './scripts/storage/localStorage'
-import sessionStorage from './scripts/storage/sessionStorage'
-import IndexedDB from './scripts/storage/indexedDB'
+import { tools as R, localStorage, sessionStorage, IndexedDB } from './scripts/utils'
 import './styles/styles.scss'
 
 const components = [

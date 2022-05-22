@@ -1,6 +1,5 @@
 import Vue from 'vue'
-// import _ from 'lodash'
-import { set } from './tools'
+import { tools } from './utils'
 
 const state = {
   formsValidate: {}
@@ -14,7 +13,7 @@ const mutations = {
   // 给校验表单的每个 [value] 所对应的 [key] 设置 [value] 的校验结果
   SET_FORM_VALIDATE_VALUE_BY_KEY(state, data) {
     const updatedForm = { ...state.formsValidate }
-    set(updatedForm, data.formId + '.' + data.formKey, data.status)
+    tools.set(updatedForm, data.formId + '.' + data.formKey, data.status)
     Vue.set(state, 'formsValidate', updatedForm) 
   },
 

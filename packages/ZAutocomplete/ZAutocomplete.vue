@@ -80,7 +80,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
-  import { isArray, isYummy } from '../scripts/tools'
+  import { tools } from '../scripts/utils'
 
   export default {
     name: 'ZAutocomplete',
@@ -183,7 +183,7 @@
       setOptions() {
         this.items = []
 
-        if(isArray(this.options) && isYummy(this.options)) {
+        if(tools.isArray(this.options) && tools.isYummy(this.options)) {
           for(let item of this.options) {
             this.items.push({
               text: item.label,
