@@ -31,7 +31,7 @@ import ZDrawImage from './ZDrawImage'
 
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
-import { tools as R, localStorage, sessionStorage, IndexedDB } from './scripts/utils'
+import { tools, localStorage, sessionStorage, IndexedDB } from './scripts/utils'
 import './styles/styles.scss'
 
 const components = [
@@ -73,7 +73,8 @@ if(typeof window !== 'undefined' && window.Vue) {
 export {
 	rocket,
 	forms,
-	R,
+	tools,
+	tools as R,
 	localStorage,
 	sessionStorage,
 	IndexedDB
