@@ -43,7 +43,7 @@
                 :key="item.label"
                 :value="item.value"
                 :class="flip ? 'text-rtl' : ''"
-                @click="onClick"
+                @click="onClick(item.value)"
               >
                 <v-icon>{{ item.icon }}</v-icon>
                 <span>{{ item.label }}</span>
@@ -144,9 +144,9 @@
       },
       
       // click无法及时更新值
-      onClick(event) {
-        event.customValue = this.value
-        this.$emit('click', event)
+      onClick(value) {
+        this.value = value
+        this.$emit('click', this.value)
       },
 
       setItems() {

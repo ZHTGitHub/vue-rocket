@@ -13,15 +13,15 @@
             @click="onClick"
           ></z-btn-toggle>
 
-          <!-- <z-btn-toggle
+          <z-btn-toggle
             formId="sexuals"
             formKey="sexual1"
             color="primary"
             mandatory
-            :options="directionOptions"
+            :options="choiceItems"
             @change="onChange"
             @click="onClick"
-          ></z-btn-toggle> -->
+          ></z-btn-toggle>
         </div>
       </div>
     </usage-demo>
@@ -58,6 +58,11 @@
           { label: '西', value: 2, icon: 'mdi-arrow-left-bold' },
           { label: '南', value: 3, icon: 'mdi-arrow-down-bold' },
           { label: '北', value: 4, icon: 'mdi-arrow-up-bold' }
+        ],
+
+        choiceItems: [
+          { label: '是', value: true },
+          { label: '否', value: false }
         ]
       }
     },
