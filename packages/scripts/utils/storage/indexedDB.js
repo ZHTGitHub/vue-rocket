@@ -36,7 +36,7 @@ class IndexedDB {
           })
 
           // 索引
-          indexes.map(index => {
+          indexes?.map(index => {
             objectStore.createIndex(index.name, index.keyPath, index.options)
           })
 
