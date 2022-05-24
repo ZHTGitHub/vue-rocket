@@ -53,7 +53,6 @@ class IndexedDB {
 
         resolve({
           code: 200,
-          status: 'opened',
           error: event.target.error
         })
       }
@@ -61,8 +60,7 @@ class IndexedDB {
       // 数据库打开报错
       request.onerror = (event) => {
         resolve({
-          code: 400,
-          status: 'open_failed',
+          code: 500,
           error: event.target.error
         })
       }
@@ -80,7 +78,6 @@ class IndexedDB {
       request.onsuccess = (event) => {
         resolve({
           code: 200,
-          status: 'added',
           error: event.target.error
         })
       }
@@ -88,8 +85,7 @@ class IndexedDB {
       // 数据写入失败
       request.onerror = (event) => {
         resolve({
-          code: 400,
-          status: 'add_failed',
+          code: 500,
           error: event.target.error
         })
       }
@@ -111,7 +107,6 @@ class IndexedDB {
       request.onsuccess = (event) => {
         resolve({
           code: 200,
-          status: 'put',
           error: event.target.error
         })
       }
@@ -119,8 +114,7 @@ class IndexedDB {
       // 数据更新失败
       request.onerror = (event) => {
         resolve({
-          code: 400,
-          status: 'put_failed',
+          code: 500,
           error: event.target.error
         })
       }
@@ -146,19 +140,19 @@ class IndexedDB {
 
       // 成功
       request.onsuccess = (event) => {
+        const data = request.result
+
         resolve({
-          code: 200,
-          status: 'got',
-          error: event.target.error,
-          data: request.result
+          code: data === undefined ? 400 : 200,
+          data,
+          error: event.target.error
         })
       }
 
       // 失败
       request.onerror = (event) => {
         resolve({
-          code: 400,
-          status: 'get_failed',
+          code: 500,
           error: event.target.error
         })
       }
@@ -172,21 +166,20 @@ class IndexedDB {
       const objectStore = transaction.objectStore(tableName)
       const openCursor = objectStore.openCursor()
 
-      const items = []
+      const data = []
       
       openCursor.onsuccess = function(event) {
         const cursor = event.target.result
 
         if(cursor) {
-          items.push(cursor.value)
+          data.push(cursor.value)
           cursor.continue()
         }
         else {
           resolve({
-            code: 200,
-            status: 'got_all',
-            error: event.target.error,
-            data: items
+            code: data.length === 0 ? 400 : 200,
+            data,
+            error: event.target.error
           })
         }
       }
@@ -204,9 +197,8 @@ class IndexedDB {
       request.onsuccess = (event) => {
         resolve({
           code: 200,
-          status: 'removed',
-          error: event.target.error,
-          data: request.result
+          data: request.result,
+          error: event.target.error
         })
       }
     })
@@ -223,9 +215,8 @@ class IndexedDB {
       request.onsuccess = (event) => {
         resolve({
           code: 200,
-          status: 'cleared',
-          error: event.target.error,
-          data: request.result
+          data: request.result,
+          error: event.target.error
         })
       }
     })
