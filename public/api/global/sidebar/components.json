@@ -122,6 +122,18 @@
    },
 
    {
+    "value": "show",
+    "label": "数据展示",
+    "children": [
+      {
+        "value": "image",
+        "label": ["Image", "图片"],
+        "link": "/components/image"
+      }
+    ]
+   },
+
+   {
       "value": "others",
       "label": "其它",
       "children": [

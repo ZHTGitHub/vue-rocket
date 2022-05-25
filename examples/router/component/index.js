@@ -121,6 +121,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'image',
+      name: 'ZDemoImage',
+      meta: {
+        key: 'image',
+        pKey: 'components',
+        realm: 'image',
+        title: 'Image 图片',
+      },
+      component: () => import('../../views/Components/Image')
+    },
+
+    {
       path: 'pagination',
       name: 'ZDemoPagination',
       meta: {

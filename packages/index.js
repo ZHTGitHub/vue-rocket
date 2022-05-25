@@ -26,6 +26,9 @@ import ZTextarea from './ZTextarea'
 import ZTextField from './ZTextField'
 import ZUpload from './ZUpload'
 
+// 数据展示
+import ZImage from './ZImage'
+
 // 其它
 import ZDrawImage from './ZDrawImage'
 
@@ -57,6 +60,8 @@ const components = [
 	ZTextarea,
 	ZTextField,
 	ZUpload,
+
+	ZImage,
 
 	ZDrawImage
 ]
@@ -103,6 +108,8 @@ export default {
 	ZTextarea,
 	ZTextField,
 	ZUpload,
+
+	ZImage,
 
 	ZDrawImage
 }
