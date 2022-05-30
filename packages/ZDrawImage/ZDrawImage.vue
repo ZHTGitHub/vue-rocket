@@ -25,12 +25,12 @@
 </template>
 
 <script>
-  import RotateMixins from './RotateMixins'
-  import ScrollMixins from './ScrollMixins'
-
-  import ScreenshotMixins from './ScreenshotMixins'
   import DrawRectMixins from './DrawRectMixins'
   import DrawTextMixins from './DrawTextMixins'
+  import RotateMixins from './RotateMixins'
+  import ScreenshotMixins from './ScreenshotMixins'
+  import ScrollMixins from './ScrollMixins'
+  import ZoomMixins from './ZoomMixins'
 
   import { base64ToFile, base64ToBlob, rotatedDirectionMap } from './tools'
 
@@ -38,7 +38,14 @@
 
   export default {
     name: 'ZDrawImage',
-    mixins: [RotateMixins, ScrollMixins, ScreenshotMixins, DrawRectMixins, DrawTextMixins],
+    mixins: [
+      DrawRectMixins,
+      DrawTextMixins,
+      RotateMixins,
+      ScreenshotMixins,
+      ScrollMixins,
+      ZoomMixins
+    ],
 
     props: {
       direction: {
@@ -188,6 +195,8 @@
           this.getWrapperInfo()
 
           this.setImageDirection()
+
+          this.$emit('initialized')
         }
       },      
 

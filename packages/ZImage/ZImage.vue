@@ -1,5 +1,5 @@
 <template>
-  <div ref="zImage" class="z-image">
+  <div ref="zImageRef" class="z-image">
     <div 
       class="dynamic"
       :style="{
@@ -8,7 +8,7 @@
       }"
     >
       <img 
-        ref="img"
+        ref="imgRef"
         :src="src" 
         :style="{
           width: `${ imageWidth }px`,
@@ -20,26 +20,34 @@
 </template>
 
 <script>
-  let [zImage, img] = [null, null]
-  let [hiddenPX, zoomWidth, zoomHeight, blocks] = [0, 0, 0, 5]
+  import RotateMixins from './RotateMixins'
+  import ScrollMixins from './ScrollMixins'
+  import ZoomMixins from './ZoomMixins'
+  import { ROTATE_DEGREE } from './cells'
 
   export default {
     name: 'ZImage',
+    mixins: [RotateMixins, ScrollMixins, ZoomMixins],
 
     props: {
-      degree: {
+      blocks: {
         type: [Number, String],
-        default: 90
+        default: 5
       },
 
-      maxZoomIn: {
+      maxTimes: {
         type: [Number, String],
         default: 2
       },
 
-      minZoomOut: {
+      minTimes: {
         type: [Number, String],
         default: .25
+      },
+
+      scrollRange: {
+        type: [Number, String],
+        default: 50
       },
 
       src: {
@@ -55,14 +63,19 @@
 
     data() {
       return {
-        angle: 0,
-        hypotenuse: 0,
+        zImageRef: null,
+        imgRef: null,
+
+        degree: 0,
 
         imageWidth: 0,
         imageHeight: 0,
 
         dynamicWidth: 0,
-        dynamicHeight: 0
+        dynamicHeight: 0,
+
+        zoomWidth: 0,
+        zoomHeight: 0
       }
     },
 
@@ -71,93 +84,42 @@
         const image = new Image()
         image.src = this.src
 
-        zImage = this.$refs.zImage
-        img = this.$refs.img
+        this.zImageRef = this.$refs.zImageRef
+        this.imgRef = this.$refs.imgRef
 
         image.onload = () => {
           const ratio = image.width / image.height
 
-          this.imageWidth = +this.width
+          this.imageWidth = +this.width || image.width
           this.imageHeight = this.imageWidth / ratio
-          this.hypotenuse = Math.sqrt(Math.pow(this.width, 2) + Math.pow(this.imageHeight, 2))
 
-          zoomWidth = this.imageWidth / blocks
-          zoomHeight = this.imageHeight / blocks
+          this.zoomWidth = this.imageWidth / this.blocks
+          this.zoomHeight = this.imageHeight / this.blocks
 
           this.setDynamicSize()
         }
       },
 
-      // 放大
-      zoomIn() {
-        this.imageWidth += zoomWidth
-        this.imageHeight += zoomHeight
-
-        const maxWidth = zoomWidth * blocks * this.maxZoomIn
-        const maxHeight = zoomHeight * blocks * this.maxZoomIn
-
-        if(this.imageWidth >= maxWidth) {
-          this.imageWidth = maxWidth
-          this.imageHeight = maxHeight
-        }
-
-        this.setDynamicSize()
-      },
-
-      // 缩小
-      zoomOut() {
-        this.imageWidth -= zoomWidth
-        this.imageHeight -= zoomHeight
-
-        const minWidth = zoomWidth * blocks * this.minZoomOut
-        const minHeight = zoomHeight * blocks * this.minZoomOut
-
-        if(this.imageWidth <= minWidth) {
-          this.imageWidth = minWidth
-          this.imageHeight = minHeight
-        }
-
-        this.setDynamicSize()
-      },
-
-      // 左旋转
-      rotateLeft() {
-        this.angle -= this.degree
-
-        img.style.transform = `rotate(${ this.angle }deg)`
-        zImage.scrollTop = 0
-
-        this.setDynamicSize()
-      },
-
-      // 右旋转
-      rotateRight() {
-        this.angle += this.degree
-
-        img.style.transform = `rotate(${ this.angle }deg)`
-        zImage.scrollTop = 0
-        
-        this.setDynamicSize()
-      },
-
       setDynamicSize() {
-        const odd = Math.abs(this.angle / this.degree) % 2 !== 0 ? true : false
+        // 奇数次
+        const odd = Math.abs(this.degree / ROTATE_DEGREE) % 2 !== 0 ? true : false
 
         this.dynamicWidth = this.imageWidth
         this.dynamicHeight = this.imageHeight
 
-        img.style.left = 'auto'
-        img.style.top = 'auto'
+        this.imgRef.style.left = 'auto'
+        this.imgRef.style.top = 'auto'
+
+        const hiddenX = (this.imageHeight - this.imageWidth) / 2
+        const hiddenY = (this.imageWidth - this.imageHeight) / 2
 
         if(odd) {
           this.dynamicWidth = this.imageHeight
           this.dynamicHeight = this.imageWidth
 
-          img.style.left = `${ hiddenPX }px`
-          img.style.top = `-${ hiddenPX }px`
+          this.imgRef.style.left = `${ hiddenX }px`
+          this.imgRef.style.top = `${ hiddenY }px`
         }
-
-        hiddenPX = (this.imageHeight - this.imageWidth) / 2
       }
     },
 

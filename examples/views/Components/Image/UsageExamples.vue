@@ -1,41 +1,78 @@
 <template>
   <div class="usage-examples">
-    <div class="mb-4 btns">
-      <z-btn 
-        class="mr-4"
-        color="primary" 
-        :unlocked="false"
-        @click="zoomIn"
-      >放大</z-btn>
+    <usage-demo :code="code">
+      <div slot="demo">
+        <div class="mb-4 btns">
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.zoom('grow')"
+          >放大</z-btn>
 
-      <z-btn 
-        class="mr-4"
-        color="primary" 
-        :unlocked="false"
-        @click="zoomOut"
-      >缩小</z-btn>
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.zoom('shrink')"
+          >缩小</z-btn>
 
-      <z-btn 
-        class="mr-4"
-        color="primary" 
-        :unlocked="false"
-        @click="rotateLeft"
-      >左旋转</z-btn>
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.zoom('origin')"
+          >还原</z-btn>
 
-      <z-btn 
-        color="primary" 
-        :unlocked="false"
-        @click="rotateRight"
-      >右旋转</z-btn>
-    </div>
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.rotate('left')"
+          >左旋转</z-btn>
 
-    <usage-demo>
-      <div slot="code">
-        
-      </div>
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.rotate('right')"
+          >右旋转</z-btn>
 
-      <div slot="demo" class="image-box">
-        <z-image ref="image" :src="imageUrl" width="700"></z-image>
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.scroll('left')"
+          >向左滚动</z-btn>
+
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.scroll('right')"
+          >向右滚动</z-btn>
+
+          <z-btn 
+            class="mr-4"
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.scroll('up')"
+          >向上滚动</z-btn>
+
+          <z-btn 
+            color="primary" 
+            :unlocked="false"
+            @click="$refs.image.scroll('down')"
+          >向下滚动</z-btn>
+        </div>
+
+        <div class="image-box">
+          <z-image 
+            ref="image" 
+            :src="imageUrl" 
+            width="700"
+          ></z-image>
+        </div>
       </div>
     </usage-demo>
   </div>
@@ -47,35 +84,30 @@
   import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
   import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
+  const code = 
+`
+  <z-btn @click="$refs.image.zoom('grow')">放大</z-btn>
+  <z-btn @click="$refs.image.zoom('shrink')">缩小</z-btn>
+  <z-btn @click="$refs.image.zoom('origin')">还原</z-btn>
+  <z-btn @click="$refs.image.rotate('left')">左旋转</z-btn>
+  <z-btn @click="$refs.image.rotate('right')">右旋转</z-btn>
+  <z-btn @click="$refs.image.scroll('left')">向左滚动</z-btn>
+  <z-btn @click="$refs.image.scroll('right')">向右滚动</z-btn>
+  <z-btn @click="$refs.image.scroll('up')">向上滚动</z-btn>
+  <z-btn @click="$refs.image.scroll('down')">向下滚动</z-btn>`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        imageUrl: require('../../../../public/lp1.png')
+        code,
+        imageUrl: require('../../../../public/images/global/lp6.png')
       }
     },
 
     mounted() {
       Prism.highlightAll()
-    },
-
-    methods: {
-      zoomIn() {
-        this.$refs.image.zoomIn()
-      },
-
-      zoomOut() {
-        this.$refs.image.zoomOut()
-      },
-
-      rotateLeft() {
-        this.$refs.image.rotateLeft()
-      },
-
-      rotateRight() {
-        this.$refs.image.rotateRight()
-      }
     }
   }
 </script>

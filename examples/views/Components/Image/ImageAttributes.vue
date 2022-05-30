@@ -37,7 +37,7 @@
     data() {
       return {
         formId: 'ImageAttributes',
-        getHandler: 'GET_IMAGE_ATTRIBUTES'
+        dispatchList: 'GET_IMAGE_ATTRIBUTES'
       }
     }
   }

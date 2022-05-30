@@ -1,0 +1,60 @@
+{
+  "code": 200,
+  "items": [
+    {
+      "name": "blocks",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "5",
+      "description": "等比例分割图片宽高，用于设置每次放大缩小图片的宽高."
+    },
+
+    {
+      "name": "max-times",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "2",
+      "description": "图片最大放大倍数."
+    },
+
+    {
+      "name": "min-times",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "0.25",
+      "description": "图片最小缩小倍数."
+    },
+
+    {
+      "name": "scroll-range",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "50",
+      "description": "滚动条每次滚动距离."
+    },
+
+    {
+      "name": "src",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "图片地址."
+    },
+
+    {
+      "name": "width",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "图像宽度."
+    }
+  ],
+  "message": "获取成功!",
+  "total": 6
+}

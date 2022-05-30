@@ -22,6 +22,7 @@
 </template>
 
 <script>
+  import tools from '../../../../packages/scripts/utils/tools'
   import cells from './cells'
 
   export default {

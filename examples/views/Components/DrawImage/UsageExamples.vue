@@ -59,6 +59,7 @@
               imageWidth="800"
               :src="src"
               @drew="handleDrew"
+              @init="handleInit"
               @save="handleSave"
             ></z-draw-image>
 
@@ -92,10 +93,10 @@
   import cells from './cells'
 
   const images = [
-    require('../../../../public/lp1.png'),
-    require('../../../../public/lp2.png'),
-    require('../../../../public/lp3.png'),
-    require('../../../../public/lp4.jpg')
+    require('../../../../public/images/global/lp1.png'),
+    require('../../../../public/images/global/lp2.png'),
+    require('../../../../public/images/global/lp3.png'),
+    require('../../../../public/images/global/lp4.jpg')
   ]
 
   export default {
@@ -121,6 +122,10 @@
     },
 
     methods: {
+      handleInit() {
+        this.$refs.drawImage.drawScreenshot()
+      },
+
       switchImage(image) {
         this.src = image
         // console.log(this.src)
@@ -157,6 +162,14 @@
 
           case 'rotateR':
             this.$refs.drawImage.rotateImage('right')
+            break;
+
+          case 'grow':
+            this.$refs.drawImage.zoomIn()
+            break;
+
+          case 'shrink':
+            this.$refs.drawImage.zoomOut()
             break;
           
           case 'clear':

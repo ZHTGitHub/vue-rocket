@@ -43,6 +43,22 @@ const options = [
   },
 
   {
+    key: 'grow',
+    icon: 'mdi-magnify-plus-outline',
+    tips: '放大',
+    color: '#6a6a6a',
+    size: 20
+  },
+
+  {
+    key: 'shrink',
+    icon: 'mdi-magnify-minus-outline',
+    tips: '缩小',
+    color: '#6a6a6a',
+    size: 20
+  },
+
+  {
     key: 'clear',
     icon: 'mdi-close',
     tips: '清除(Ctrl+Z)',

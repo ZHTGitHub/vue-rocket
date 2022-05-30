@@ -1,9 +1,12 @@
+import request from '../../api/service'
+
 const actions = {
-  GET_IMAGE_ATTRIBUTES() {
-    return {
-      code: 200,
-      items: []
-    }
+  async GET_IMAGE_ATTRIBUTES() {
+    const result = await request({
+      url: 'api/image/attributes.json'
+    })
+
+    return result
   },
 
   GET_IMAGE_METHODS() {

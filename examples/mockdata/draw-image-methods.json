@@ -9,6 +9,12 @@
     },
 
     {
+      "name": "initialized",
+      "parameters": "-",
+      "description": "已生成绘图"
+    },
+
+    {
       "name": "save",
       "parameters": "{ dataURL, file }",
       "description": "保存时触发"
