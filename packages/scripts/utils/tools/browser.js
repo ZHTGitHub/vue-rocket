@@ -59,3 +59,7 @@ export const getViewportSize = function() {
   
   return obj
 };
+
+export const download = function() {
+  
+}
