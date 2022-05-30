@@ -24,9 +24,9 @@
       "label": "导航",
       "children": [
         {
-          "value": "dropdown",
-          "label": ["Dropdown", "下拉列表"],
-          "link": "/components/dropdown"
+          "value": "virtualScroll",
+          "label": ["VirtualScroll", "虚拟滚动条"],
+          "link": "/components/virtualScroll"
         },
 
         {

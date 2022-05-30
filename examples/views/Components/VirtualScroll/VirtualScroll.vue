@@ -4,9 +4,9 @@
     
     <usage-examples></usage-examples>
 
-    <dropdown-attributes></dropdown-attributes>
+    <virtual-scroll-attributes></virtual-scroll-attributes>
 
-    <dropdown-slots></dropdown-slots>
+    <virtual-scroll-slots></virtual-scroll-slots>
   </div>
 </template>
 
@@ -16,8 +16,8 @@
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'dropdown-attributes': () => import('./DropdownAttributes'),
-      'dropdown-slots': () => import('./DropdownSlots'),
+      'virtual-scroll-attributes': () => import('./VirtualScrollAttributes'),
+      'virtual-scroll-slots': () => import('./VirtualScrollSlots'),
     }
   }
 </script>

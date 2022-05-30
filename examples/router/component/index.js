@@ -97,18 +97,6 @@ const ComponentRoutes = {
     },
 
     {
-      path: 'dropdown',
-      name: 'ZDemoDropdown',
-      meta: {
-        key: 'dropdown',
-        pKey: 'components',
-        realm: 'dropdown',
-        title: 'Dropdown 下拉列表',
-      },
-      component: () => import('../../views/Components/Dropdown')
-    },
-
-    {
       path: 'dynamicForm',
       name: 'ZDemoDynamicForm',
       meta: {
@@ -238,6 +226,18 @@ const ComponentRoutes = {
         title: 'Upload 上传',
       },
       component: () => import('../../views/Components/Upload')
+    },
+
+    {
+      path: 'virtualScroll',
+      name: 'ZDemoVirtualScroll',
+      meta: {
+        key: 'virtualScroll',
+        pKey: 'components',
+        realm: 'virtualScroll',
+        title: 'VirtualScroll 虚拟滚动条',
+      },
+      component: () => import('../../views/Components/VirtualScroll')
     }
   ]
 }

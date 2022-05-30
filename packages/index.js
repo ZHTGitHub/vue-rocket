@@ -8,8 +8,8 @@ import {
 } from './ZTypography'
 
 // 导航
-import ZDropdown from './ZDropdown'
 import ZPagination from './ZPagination'
+import ZVirtualScroll from './ZVirtualScroll'
 
 // 数据录入
 import ZAutocomplete from './ZAutocomplete'
@@ -44,8 +44,8 @@ const components = [
 	ZTypographyText,
 	ZTypographyTitle,
 
-	ZDropdown,
 	ZPagination,
+	ZVirtualScroll,
 
 	ZAutocomplete,
 	ZBtnToggle,
@@ -93,8 +93,8 @@ export default {
 	ZTypographyText,
 	ZTypographyTitle,
 
-	ZDropdown,
 	ZPagination,
+	ZVirtualScroll,
 
 	ZAutocomplete,
 	ZBtnToggle,

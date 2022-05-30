@@ -1,9 +1,8 @@
 <template>
-  <div class="z-dropdown">
+  <div class="z-virtual-scroll">
     <div 
       ref="viewport"
       class="viewport" 
-      
       @scroll="onScroll"
     > 
       <div 
@@ -14,7 +13,7 @@
       <div 
         class="list-area"
         :style="{
-          transform: `translate3d(0, ${ startOffset }px, 0)`
+          transform: `translateY(${ startOffset }px)`
         }"
       > 
         <template v-for="(item, index) in list">
@@ -36,7 +35,7 @@
   import { tools } from '../../packages/scripts/utils'
 
   export default {
-    name: 'ZDropdown',
+    name: 'ZVirtualScroll',
 
     data() {
       return {
@@ -68,10 +67,6 @@
       }
 
       this.phantomHeight = this.list.length * this.itemHeight
-    },
-
-    mounted() {
-
     },
 
     methods: {
@@ -112,7 +107,7 @@
   .viewport {
     position: relative;
     height: 40vh;
-    overflow: scroll;
+    overflow-y: auto;
   }
 
   .list-phantom {

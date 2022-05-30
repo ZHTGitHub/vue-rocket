@@ -1,6 +1,6 @@
 <template>
   <div class="usage-examples">
-    <z-dropdown></z-dropdown>
+    <z-virtual-scroll></z-virtual-scroll>
   </div>
 </template>
 
