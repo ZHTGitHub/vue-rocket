@@ -1,24 +1,34 @@
 <template>
   <div class="z-dropdown">
-    <v-text-field ></v-text-field>
+    <div 
+      ref="viewport"
+      class="viewport" 
+      
+      @scroll="onScroll"
+    > 
+      <div 
+        class="list-phantom" 
+        :style="{ height: `${ phantomHeight }px` }"
+      ></div> 
 
-    <ul 
-      id="ZDropdownMenuWrapper"
-      class="z-dropdown-menu"
-    >
-      <template
-        v-for="(item, index) in filterItems"
-      >
-        <li 
-          v-if="item.show !== false"
-          :key="`z.dropdown.menu.item.${ index }`"
-          class="z-dropdown-menu-item"
-          :data-index="index"
-        >
-          {{ item.label }} - {{ item.show }}
-        </li>
-      </template>
-    </ul>
+      <div 
+        class="list-area"
+        :style="{
+          transform: `translate3d(0, ${ startOffset }px, 0)`
+        }"
+      > 
+        <template v-for="(item, index) in list">
+          <div 
+            v-if="isBetweenViewRanges(index)"
+            :key="index"
+            class="list-item" 
+            :style="{
+              height: `${ itemHeight }px`
+            }"
+          >{{ item.label }}</div>
+        </template>
+      </div>
+  </div>
   </div>
 </template>
 
@@ -28,136 +38,93 @@
   export default {
     name: 'ZDropdown',
 
-    props: {
-      height: {
-        type: [Number, String],
-        required: false
-      },
-
-      items: {
-        type: Array,
-        default: () => ([])
-      },
-
-      limit: {
-        type: [Boolean, Number, String],
-        required: false
-      },
-
-      maxHeight: {
-        type: [Number, String],
-        required: false
-      },
-
-      maxWidth: {
-        type: [Number, String],
-        required: false
-      },
-
-      minHeight: {
-        type: [Number, String],
-        required: false
-      },
-
-      minWidth: {
-        type: [Number, String],
-        required: false
-      },
-
-      value: {
-        type: String,
-        required: false
-      },
-
-      width: {
-        type: [Number, String],
-        required: false
-      },
-
-      placement: {
-        validator(value) {
-          return ['bottom', 'bottomLeft', 'bottomRight', 'top', 'topLeft', 'topRight'].indexOf(value) !== -1
-        },
-        default: 'bottomLeft'
-      }
-    },
-
     data() {
       return {
-        originItems: [],
-        filterItems: []
+        list: [],
+
+        // 每项列表的高度
+        itemHeight: 100,
+
+        // 列表总高度
+        phantomHeight: 0,
+
+        // 渲染数量
+        viewCount: 10,
+
+        // 开始index
+        startIndex: 0,
+
+        // 结束index
+        endIndex: 0,
+
+        // 偏移量
+        startOffset: 0
       }
     },
 
     created() {
-      this.originItems = tools.deepClone(this.items)
-      this.filterItems = this.originItems
+      for(let i = 0; i < 100; i+=1) {
+        this.list.push({ label: `列表${ i + 1 }` })
+      }
+
+      this.phantomHeight = this.list.length * this.itemHeight
+    },
+
+    mounted() {
+
     },
 
     methods: {
-      search() {
-        if(this.value) {
-          if(tools.getType(this.limit) === 'boolean') {
-            this.searchItems()
-          }
-          else {
-            if(tools.getType(+this.limit) === 'number') {
-              this.searchItems()
-            }
-            else {
-              this.searchItems()
-            }
-          }
-        }
-        else {
-          this.filterItems = this.originItems
-        }
+      onScroll() {
+        const scrollTop = this.$refs.viewport.scrollTop
+        this.startIndex = this.getStartIndex(scrollTop)
+        this.startOffset = this.getStartOffset(this.startIndex)
       },
 
-      searchItems() {
-        const filterItems = this.originItems.filter(item => item.label.includes(this.value))
+      // 获取startIndex
+      getStartIndex(scrollTop) {
+        return Math.floor(scrollTop / this.itemHeight)
+      },
+      
+      // 获取startOffset
+      getStartOffset(startIndex) {
+        return startIndex * this.itemHeight
+      },
 
-        if(tools.getType(+this.limit) === 'number') {
-          this.filterItems = filterItems.slice(0, this.limit)
-        }
-        else {
-          this.filterItems = filterItems
-        }
+      // 是否在显示范围之间
+      isBetweenViewRanges(index) {
+        return index >= this.startIndex && index <= this.endIndex
       }
     },
 
     watch: {
-      value: {
-        handler(value) {
-          this.search()
+      startIndex: {
+        handler(startIndex) {
+          this.endIndex = startIndex + this.viewCount 
         },
-        // immediate: true
+        immediate: true
       }
     }
   }
 </script>
 
 <style scoped lang="scss">
-  .z-dropdown {
+  .viewport {
     position: relative;
-    max-height: 304px;
-    overflow: auto;
+    height: 40vh;
+    overflow: scroll;
+  }
 
-    .z-dropdown-menu {
+  .list-phantom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 
-      .z-dropdown-menu-item {
-        display: flex;
-        align-items: center;
-        align-self: center;
-        flex-wrap: wrap;
-        flex: 1 1;
-        padding: 12px 16px;
-        overflow: hidden;
-
-        &:hover {
-          background-color: rgba(0, 0, 0, .03);
-        }
-      }
-    }
+  .list-item {
+    color: #555;
+    box-sizing: border-box;
+    border-bottom: 1px solid #999;
   }
 </style>
