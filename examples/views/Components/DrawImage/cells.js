@@ -45,7 +45,7 @@ const options = [
   {
     key: 'grow',
     icon: 'mdi-magnify-plus-outline',
-    tips: '放大',
+    tips: '放大(building)',
     color: '#6a6a6a',
     size: 20
   },
@@ -53,7 +53,7 @@ const options = [
   {
     key: 'shrink',
     icon: 'mdi-magnify-minus-outline',
-    tips: '缩小',
+    tips: '缩小(building)',
     color: '#6a6a6a',
     size: 20
   },

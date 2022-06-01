@@ -17,9 +17,7 @@ Router.prototype.replace = function replace (location) {
 Vue.use(Router)
 
 const router = new Router({
-    mode: 'hash',
     routes
 })
 
-export { router }
 export default router

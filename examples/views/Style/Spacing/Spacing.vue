@@ -153,10 +153,10 @@
 
 <style scoped lang="scss">
   .margin {
-    background-color: #F50057;
+    background-color: #ff5252;
     overflow: hidden;
     .padding {
-      background-color: #00796B;
+      background-color: #4caf50;
       .content {
         background-color: #fff;
       }

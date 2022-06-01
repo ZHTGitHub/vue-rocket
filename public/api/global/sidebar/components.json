@@ -9,12 +9,6 @@
           "value": "button",
           "label": ["Button", "按钮"],
           "link": "/components/button"
-        },
-
-        {
-          "value": "typography",
-          "label": ["Typography", "排版"],
-          "link": "/components/typography"
         }
       ]
     },

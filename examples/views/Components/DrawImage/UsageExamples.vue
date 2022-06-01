@@ -1,10 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo>
-      <div slot="code">
-        
-      </div>
-
+    <usage-demo :code="code">
       <div class="z-draw-image-demo" slot="demo">
         <div class="options">
           <ul class="z-flex align-center">
@@ -62,22 +58,8 @@
               @init="handleInit"
               @save="handleSave"
             ></z-draw-image>
-
-            <!-- <z-btn
-              color="primary"
-              unlocked
-              @click="changeImage"
-            >
-              change
-            </z-btn> -->
           </v-col>
           <!-- 截图 END -->
-
-          <!-- 预览 BEGIN -->
-          <!-- <v-col :cols="5">
-            <img :src="dataURL" />
-          </v-col> -->
-          <!-- 预览 END -->
         </v-row>
       </div>
     </usage-demo>
@@ -93,17 +75,31 @@
   import cells from './cells'
 
   const images = [
-    require('../../../../public/images/global/lp1.png'),
-    require('../../../../public/images/global/lp2.png'),
-    require('../../../../public/images/global/lp3.png'),
-    require('../../../../public/images/global/lp4.jpg')
+    require('../../../../public/images/global/1.jpg'),
+    require('../../../../public/images/global/2.jpg'),
+    require('../../../../public/images/global/3.jpg')
   ]
+
+  const code = 
+`
+<z-draw-image 
+  ref="drawImage"
+  fileName="file.png"
+  download
+  imageWidth="800"
+  :src="src"
+  @drew="handleDrew"
+  @init="handleInit"
+  @save="handleSave"
+></z-draw-image>`
 
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
+        code,
+
         images,
         options: cells.options,
         dataURL: '',
@@ -112,7 +108,7 @@
 
         num: -1,
 
-        src: images[1]
+        src: images[0]
       }
     },
 
