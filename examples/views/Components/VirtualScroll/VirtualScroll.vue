@@ -1,23 +1,23 @@
 <template>
-  <div class="z-demo-dropdown">
+  <div class="z-virtual-scroll">
     <typing-title :title="$route.meta.title"></typing-title>
     
     <usage-examples></usage-examples>
 
-    <virtual-scroll-attributes></virtual-scroll-attributes>
+    <attributes></attributes>
 
-    <virtual-scroll-slots></virtual-scroll-slots>
+    <slots></slots>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'ZDemoDropdown',
+    name: 'ZVirtualScroll',
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'virtual-scroll-attributes': () => import('./VirtualScrollAttributes'),
-      'virtual-scroll-slots': () => import('./VirtualScrollSlots'),
+      'attributes': () => import('./Attributes'),
+      'slots': () => import('./Slots'),
     }
   }
 </script>

@@ -1,0 +1,11 @@
+{
+  "code": 200,
+  "items": [
+    {
+      "name": "default",
+      "description": "自定义项目外观的默认插槽"
+    }
+  ],
+  "message": "获取列表成功",
+  "total": 1
+}

@@ -3,6 +3,10 @@
     <div 
       ref="viewport"
       class="viewport" 
+      :style="{ 
+        width: width ? `${ width }px` : '100%',
+        height: height ? `${ height }px` : '100%' 
+      }"
       @scroll="onScroll"
     > 
       <div 
@@ -16,15 +20,17 @@
           transform: `translateY(${ startOffset }px)`
         }"
       > 
-        <template v-for="(item, index) in list">
+        <template v-for="(item, index) in items">
           <div 
             v-if="isBetweenViewRanges(index)"
             :key="index"
-            class="list-item" 
-            :style="{
-              height: `${ itemHeight }px`
-            }"
-          >{{ item.label }}</div>
+            :style="{ height: `${ itemHeight }px` }"
+          >
+            <slot 
+              :index="index"
+              :item="item"
+            ></slot>
+          </div>
         </template>
       </div>
   </div>
@@ -32,23 +38,47 @@
 </template>
 
 <script>
-  import { tools } from '../../packages/scripts/utils'
+  // import { tools } from '../../packages/scripts/utils'
 
   export default {
     name: 'ZVirtualScroll',
 
+    props: {
+      // 渲染数量
+      count: {
+        type: [Number, String],
+        default: 10
+      },
+
+      // 设定组件高度
+      height: {
+        type: [Number, String],
+        required: false
+      },
+
+      // 每项列表的高度
+      itemHeight: {
+        type: [Number, String],
+        required: false
+      },
+
+      // 要显示的项目数组
+      items: {
+        type: Array,
+        default: () => ([])
+      },  
+
+      // 设定组件的宽度
+      width: {
+        type: [Number, String],
+        required: false
+      }
+    },
+
     data() {
       return {
-        list: [],
-
-        // 每项列表的高度
-        itemHeight: 100,
-
         // 列表总高度
         phantomHeight: 0,
-
-        // 渲染数量
-        viewCount: 10,
 
         // 开始index
         startIndex: 0,
@@ -62,11 +92,7 @@
     },
 
     created() {
-      for(let i = 0; i < 100; i+=1) {
-        this.list.push({ label: `列表${ i + 1 }` })
-      }
-
-      this.phantomHeight = this.list.length * this.itemHeight
+      this.phantomHeight = this.items.length * this.itemHeight
     },
 
     methods: {
@@ -95,7 +121,7 @@
     watch: {
       startIndex: {
         handler(startIndex) {
-          this.endIndex = startIndex + this.viewCount 
+          this.endIndex = startIndex + Number(this.count)
         },
         immediate: true
       }
@@ -106,7 +132,6 @@
 <style scoped lang="scss">
   .viewport {
     position: relative;
-    height: 40vh;
     overflow-y: auto;
   }
 
@@ -115,11 +140,5 @@
     top: 0;
     left: 0;
     width: 100%;
-  }
-
-  .list-item {
-    color: #555;
-    box-sizing: border-box;
-    border-bottom: 1px solid #999;
   }
 </style>

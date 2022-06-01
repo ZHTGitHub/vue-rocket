@@ -1,30 +1,69 @@
 <template>
   <div class="usage-examples">
-    <z-virtual-scroll></z-virtual-scroll>
+    <usage-demo :code="code">
+      <div slot="demo">
+        <z-virtual-scroll 
+          :height="300"
+          :itemHeight="100"
+          :items="items"  
+        >
+          <template v-slot:default="{ item }">
+            <div class="list-item">
+              {{ item.label }}
+            </div>
+          </template>
+        </z-virtual-scroll>
+      </div>
+    </usage-demo>
   </div>
 </template>
 
 <script>
+  import Prism from 'prismjs'
+  import 'prismjs/themes/prism-okaidia.css'
+  import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+  import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+
+  const code =
+`
+<z-virtual-scroll 
+  :height="300"
+  :itemHeight="100"
+  :items="items"  
+>
+  <template v-slot:default="{ item }">
+    <div class="list-item">
+      {{ item.label }}
+    </div>
+  </template>
+</z-virtual-scroll>`
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        value: '',
+        code,
         items: []
       }
     },
 
     created() {
-      for(let i = 0; i < 50; i+=1) {
-        this.items.push({ label: `item${ i }`, value: `${ i }` })
+      for(let i = 0; i < 500; i+=1) {
+        this.items.push({ label: `列表${ i + 1 }` })
       }
     },
 
-    methods: {
-      handleInput(event) {
-        this.value = event.target.value
-      }
+    mounted() {
+      Prism.highlightAll()
     }
   }
 </script>
+
+<style lang="scss">
+  .list-item {
+    color: #555;
+    box-sizing: border-box;
+    border-bottom: 1px solid #999;
+  }
+</style>

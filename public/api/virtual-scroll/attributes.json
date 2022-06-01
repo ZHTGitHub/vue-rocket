@@ -1,0 +1,51 @@
+{
+  "code": 200,
+  "items": [
+    {
+      "name": "count",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "10",
+      "description": "渲染数量"
+    },
+
+    {
+      "name": "height",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设定组件高度"
+    },
+
+    {
+      "name": "itemHeight",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "每项列表的高度"
+    },
+
+    {
+      "name": "items",
+      "required": "否",
+      "type": "Array",
+      "acceptedValues": "—",
+      "default": "[]",
+      "description": "要显示的项目数组"
+    },
+
+    {
+      "name": "width",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设定组件的宽度"
+    }
+  ],
+  "message": "获取列表成功",
+  "total": 5
+}
