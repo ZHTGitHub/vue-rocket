@@ -80,6 +80,8 @@
           v-model="date"
           :first-day-of-week="firstDayOfWeek"
           :locale="locale"
+          :max="max"
+          :min="min"
           :no-title="noTitle"
           :range="range"
           :readonly="pickerReadonly"
@@ -115,6 +117,8 @@
           :first-day-of-week="firstDayOfWeek"
           :format="timeFormat"
           :locale="locale"
+          :max="max"
+          :min="min"
           :no-title="noTitle"
           :range="range"
           :readonly="pickerReadonly"
@@ -174,6 +178,16 @@
       locale: {
         type: String,
         default: 'zh-cn'
+      },
+
+      max: {
+        type: String,
+        required: false
+      },
+
+      min: {
+        type: String,
+        required: false
       },
 
       mode: {
@@ -237,6 +251,16 @@
 
     methods: {
       changeDate() {
+        if(this.range) {
+          const [startDate, endDate] = this.date
+          const startTime = new Date(startDate).getTime()
+          const endTime = new Date(endDate).getTime()
+
+          if(endTime < startTime) {
+            this.date = this.date.reverse()
+          }
+        }
+
         if(this.immediate) {
           this.value = this.date
           this.menu = false

@@ -49,7 +49,7 @@
     },
 
     created() {
-      for(let i = 0; i < 500; i+=1) {
+      for(let i = 0; i < 1000; i+=1) {
         this.items.push({ label: `列表${ i + 1 }` })
       }
     },
