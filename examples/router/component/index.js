@@ -121,6 +121,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'list',
+      name: 'ZDemoList',
+      meta: {
+        key: 'list',
+        pKey: 'components',
+        realm: 'list',
+        title: 'List 列表',
+      },
+      component: () => import('../../views/Components/List')
+    },
+
+    {
       path: 'pagination',
       name: 'ZDemoPagination',
       meta: {

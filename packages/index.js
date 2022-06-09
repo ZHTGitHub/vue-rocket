@@ -9,7 +9,6 @@ import {
 
 // 导航
 import ZPagination from './ZPagination'
-import ZVirtualScroll from './ZVirtualScroll'
 
 // 数据录入
 import ZAutocomplete from './ZAutocomplete'
@@ -28,6 +27,8 @@ import ZUpload from './ZUpload'
 
 // 数据展示
 import ZImage from './ZImage'
+import ZList from './ZList'
+import ZVirtualScroll from './ZVirtualScroll'
 
 // 其它
 import ZDrawImage from './ZDrawImage'
@@ -45,7 +46,6 @@ const components = [
 	ZTypographyTitle,
 
 	ZPagination,
-	ZVirtualScroll,
 
 	ZAutocomplete,
 	ZBtnToggle,
@@ -62,6 +62,8 @@ const components = [
 	ZUpload,
 
 	ZImage,
+	ZList,
+	ZVirtualScroll,
 
 	ZDrawImage
 ]
@@ -94,7 +96,6 @@ export default {
 	ZTypographyTitle,
 
 	ZPagination,
-	ZVirtualScroll,
 
 	ZAutocomplete,
 	ZBtnToggle,
@@ -110,6 +111,8 @@ export default {
 	ZUpload,
 
 	ZImage,
+	ZList,
+	ZVirtualScroll,
 
 	ZDrawImage
 }
