@@ -2,17 +2,31 @@
   <div class="usage-examples">
     <usage-demo :code="code">
       <div slot="demo">
-        <z-list 
-          :dataSource="list"
-          :elevation="1"
-          @input="handleInput"
-        >
-          <template v-slot:default="{ item }">
-            <div style="height: 30px;">
-              {{ item }}
-            </div>
-          </template>
-        </z-list>
+        <div class="box">
+          <z-text-field 
+            formId="list" 
+            formKey="list"
+            :defaultValue="value"
+            @blur="onBlur"
+            @focus="onFocus"
+          ></z-text-field>
+
+          <z-list 
+            v-if="focus"
+            :dataSource="list"
+            :elevation="1"
+            position="absolute"
+            width="300"
+            :defaultValue="value"
+            @input="handleInput"
+          >
+            <template v-slot:default="{ item }">
+              <div style="height: 30px;">
+                {{ item }}
+              </div>
+            </template>
+          </z-list>
+        </div>
       </div>
     </usage-demo>
   </div>
@@ -35,7 +49,9 @@
     data() {  
       return {
         code,
-        list: []
+        list: [],
+        focus: false,
+        value: 15
       }
     },
 
@@ -47,12 +63,32 @@
 
     mounted() {
       Prism.highlightAll()
+
+      document.addEventListener('click', function(event) {
+        console.log(event)
+        console.log(event.target.nodeName)
+      }, true)
     },
 
     methods: {
-      handleInput(value) {
-        console.log(value)
+      onBlur() {
+        // this.focus = false
+      },
+
+      onFocus() {
+        this.focus = true
+      },
+
+      handleInput({ item: value }) {
+        this.value = value
+        this.focus = false
       }
     }
   }
 </script>
+
+<style scoped lang="scss">
+  .box {
+    position: relative;
+  }
+</style>

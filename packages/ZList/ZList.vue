@@ -6,7 +6,9 @@
       position,
       height: computedHeight,
       maxHeight: computedMaxHeight,
-      minHeight: computedMinHeight
+      minHeight: computedMinHeight,
+      width: computedWidth,
+      zIndex: zIndex
     }"
     @scroll="onScroll"
   >
@@ -33,6 +35,7 @@
 </template>
 
 <script>
+  import tools from '../scripts/utils/tools'
   let [scrollTop, viewportHeight] = [0, 0]
   const keyCodes = [13, 38, 40]
 
@@ -45,14 +48,14 @@
         default: () => ([])
       },
 
+      defaultValue: {
+        type: [Number, String],
+        required: false
+      },
+
       elevation: {
         type: [Number, String],
         default: 0
-      },
-
-      focus: {
-        type: Boolean,
-        default: true
       },
 
       height: {
@@ -75,14 +78,22 @@
           return ['relative', 'absolute', 'fixed'].includes(value)
         },
         default: 'relative'
+      },
+
+      width: {
+        type: [Number, String],
+        required: false
+      },
+
+      zIndex: {
+        type: [Number, String],
+        default: 1
       }
     },
 
     data() {
       return {
         activedIndex: -1,
-        startIndex: -1,
-        endIndex: -1,
         lastIndex: -1
       }
     },
@@ -94,27 +105,11 @@
     mounted() {
       viewportHeight = this.$refs.zList.offsetHeight
 
-      document.addEventListener('keydown', (event) => {
-        const { keyCode } = event
+      document.addEventListener('keydown', this.todo)
+    },
 
-        if(keyCodes.includes(keyCode)) {
-          event.preventDefault()
-
-          switch (keyCode) {
-            case 13: 
-              this.$emit('input', this.dataSource[this.activedIndex])
-              break;
-
-            case 38:
-              this.scrollUp()
-              break;
-
-            case 40:
-              this.scrollDn()
-              break;
-          }
-        }
-      })
+    beforeDestroy() {
+      document.removeEventListener('keydown', this.todo)
     },
 
     methods: {
@@ -125,9 +120,13 @@
       onSelectItem(index) {
         this.activedIndex = index
 
-        this.$emit('input', this.dataSource[this.activedIndex])
+        this.$emit('input', {
+          item: this.dataSource[this.activedIndex],
+          index: this.activedIndex
+        })
       },
 
+      // 向上
       scrollUp() {
         --this.activedIndex
 
@@ -139,12 +138,12 @@
 
         const target = document.querySelector(`.z-list-item${ this.activedIndex }`)
 
-
         if(target.offsetTop - scrollTop <= 0) {
           this.$refs.zList.scrollTop = target.offsetTop - target.offsetHeight
         }
       },
 
+      // 向下
       scrollDn() {
         ++this.activedIndex
 
@@ -157,6 +156,31 @@
 
         if(target.offsetTop - scrollTop >= viewportHeight) {
           this.$refs.zList.scrollTop = target.offsetTop - viewportHeight + target.offsetHeight
+        }
+      },
+
+      todo(event) {
+        const { keyCode } = event
+
+        if(keyCodes.includes(keyCode)) {
+          event.preventDefault()
+
+          switch (keyCode) {
+            case 13: 
+              this.$emit('input', {
+                item: this.dataSource[this.activedIndex],
+                index: this.activedIndex
+              })
+              break;
+
+            case 38:
+              this.scrollUp()
+              break;
+
+            case 40:
+              this.scrollDn()
+              break;
+          }
         }
       }
     },
@@ -193,6 +217,34 @@
         }
 
         return this.minHeight
+      },
+
+      computedWidth() {
+        const width = +this.width
+        const isNumber = !isNaN(width)
+
+        if(isNumber) {
+          return `${ width }px`
+        }
+
+        return this.width
+      },
+    },
+
+    watch: {
+      defaultValue: {
+        handler(value) {
+          if(value) {
+            this.activedIndex = tools.findIndex(this.dataSource, value)
+
+            this.$nextTick(() => {
+              const target = document.querySelector(`.z-list-item${ this.activedIndex }`)
+
+              this.$refs.zList.scrollTop = target.offsetTop - target.offsetHeight
+            })
+          }
+        },
+        immediate: true
       }
     }
   }
@@ -200,6 +252,7 @@
 
 <style scoped lang="scss">
   .z-list {
+    background-color: #fff;
     overflow-y: auto;
 
     ul.z-list-items {

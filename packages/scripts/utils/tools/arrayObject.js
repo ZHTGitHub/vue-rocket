@@ -1,4 +1,4 @@
-import { isArray, isObject } from './messy'
+import { isArray, isObject, isEqual } from './messy'
 
 // 值类型
 const valueType = ['undefined', 'number', 'string', 'boolean', 'symbol'];
@@ -67,6 +67,23 @@ export const find = function(collection, predicate, deepClone = false) {
       }
     }
   }
+};
+
+/**
+ * @description 返回匹配元素的下标，否则返回 -1
+ * @param {Object[]} collection
+ * @param {Array|Object|String} predicate
+ */ 
+export const findIndex = function(collection, predicate) { 
+  if(isArray(collection)) {
+    for(let index in collection) {
+      if(isEqual(collection[index], predicate)) {
+        return +index
+      }
+    }
+  }
+
+  return -1
 };
 
 /**
