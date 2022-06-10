@@ -6,22 +6,24 @@
           <z-text-field 
             formId="list" 
             formKey="list"
+            :autofocus="autofocus"
             :defaultValue="value"
             @blur="onBlur"
             @focus="onFocus"
+            @input="onInput"
           ></z-text-field>
 
           <z-list 
-            v-if="focus"
+            v-if="show"
             :dataSource="list"
-            :elevation="1"
+            :elevation="1"  
             position="absolute"
             width="300"
             :defaultValue="value"
             @input="handleInput"
           >
             <template v-slot:default="{ item }">
-              <div style="height: 30px;">
+              <div class="item" style="height: 30px;">
                 {{ item }}
               </div>
             </template>
@@ -50,8 +52,9 @@
       return {
         code,
         list: [],
-        focus: false,
-        value: 15
+        show: false,
+        value: 15,
+        autofocus: false
       }
     },
 
@@ -64,24 +67,35 @@
     mounted() {
       Prism.highlightAll()
 
-      document.addEventListener('click', function(event) {
+      document.body.addEventListener('click', (event) => {
+        // event.stopPropagation()
+
         console.log(event)
         console.log(event.target.nodeName)
-      }, true)
+
+        if(event.target.className !== 'item' && event.target.nodeName !== 'INPUT') {
+          this.show = false
+        }
+      })
     },
 
     methods: {
       onBlur() {
-        // this.focus = false
+        // this.show = false 
       },
 
       onFocus() {
-        this.focus = true
+        this.show = true
+      },
+
+      onInput() {
+        this.show = true
+        console.log('change')
       },
 
       handleInput({ item: value }) {
         this.value = value
-        this.focus = false
+        this.show = false
       }
     }
   }
