@@ -13,21 +13,23 @@
             @input="onInput"
           ></z-text-field>
 
-          <z-list 
-            v-if="show"
-            :dataSource="list"
-            :elevation="1"  
-            position="absolute"
-            width="300"
-            :defaultValue="value"
-            @input="handleInput"
+          <div 
+            v-if="show" 
+            class="dropdown"
           >
-            <template v-slot:default="{ item }">
-              <div class="item" style="height: 30px;">
-                {{ item }}
-              </div>
-            </template>
-          </z-list>
+            <z-list 
+              :dataSource="list"
+              :elevation="1"  
+              :defaultValue="value"
+              @input="handleInput"
+            >
+              <template v-slot:default="{ item }">
+                <div class="item" style="height: 30px;">
+                  {{ item }}
+                </div>
+              </template>
+            </z-list>
+          </div>
         </div>
       </div>
     </usage-demo>
@@ -104,5 +106,12 @@
 <style scoped lang="scss">
   .box {
     position: relative;
+
+    .dropdown {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      z-index: 1;
+    }
   }
 </style>

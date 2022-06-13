@@ -3,19 +3,20 @@
     ref="zList"
     :class="['z-list', `elevation-${ elevation }`]" 
     :style="{
-      position,
       height: computedHeight,
       maxHeight: computedMaxHeight,
       minHeight: computedMinHeight,
-      width: computedWidth,
-      zIndex: zIndex
+      width: computedWidth
     }"
     @scroll="onScroll"
   >
+    <!-- 头部 BEGIN -->
     <div class="z-list-header">
       <slot name="header"></slot>
     </div>
+    <!-- 头部 END -->
 
+    <!-- 列表 BEGIN -->
     <ul class="z-list-items">
       <template v-for="(item, index) in dataSource">
         <li 
@@ -27,10 +28,13 @@
         </li>
       </template>
     </ul>
+    <!-- 列表 END -->
 
+    <!-- 底部 BEGIN -->
     <div class="z-list-footer">
       <slot name="footer"></slot>
     </div>
+    <!-- 底部 END -->
   </div>
 </template>
 
@@ -60,7 +64,7 @@
 
       height: {
         type: [Number, String],
-        default: 300
+        default: '100%'
       },
 
       maxHeight: {
@@ -73,21 +77,9 @@
         required: false
       },
 
-      position: {
-        valirator(value) {
-          return ['relative', 'absolute', 'fixed'].includes(value)
-        },
-        default: 'relative'
-      },
-
       width: {
         type: [Number, String],
         required: false
-      },
-
-      zIndex: {
-        type: [Number, String],
-        default: 1
       }
     },
 
