@@ -61,9 +61,11 @@
     },
 
     created() {
-      for(let i = 0; i < 30; i+=1) {
-        this.list.push(i)
-      }
+      setTimeout(() => {
+        for(let i = 0; i < 30; i+=1) {
+          this.list.push(i)
+        }
+      }, 1000)
     },
 
     mounted() {

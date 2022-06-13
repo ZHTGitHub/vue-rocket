@@ -90,10 +90,6 @@
       }
     },
 
-    created() {
-      this.lastIndex = this.dataSource.length - 1
-    },
-
     mounted() {
       viewportHeight = this.$refs.zList.offsetHeight
 
@@ -224,18 +220,19 @@
     },
 
     watch: {
-      defaultValue: {
-        handler(value) {
-          if(value) {
-            this.activedIndex = tools.findIndex(this.dataSource, value)
+      dataSource: {
+        handler(dataSource) {
+          this.lastIndex = dataSource.length - 1
+          this.activedIndex = tools.findIndex(dataSource, this.defaultValue)
 
+          if(this.activedIndex > -1) {
             this.$nextTick(() => {
               const target = document.querySelector(`.z-list-item${ this.activedIndex }`)
-
               this.$refs.zList.scrollTop = target.offsetTop - target.offsetHeight
             })
           }
         },
+        deep: true,
         immediate: true
       }
     }
