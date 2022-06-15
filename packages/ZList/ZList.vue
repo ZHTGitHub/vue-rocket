@@ -91,8 +91,6 @@
     },
 
     mounted() {
-      viewportHeight = this.$refs.zList.offsetHeight
-
       document.addEventListener('keydown', this.todo)
     },
 
@@ -225,12 +223,16 @@
           this.lastIndex = dataSource.length - 1
           this.activedIndex = tools.findIndex(dataSource, this.defaultValue)
 
-          if(this.activedIndex > -1) {
-            this.$nextTick(() => {
+          const timer = setTimeout(() => {
+            viewportHeight = this.$refs.zList.offsetHeight
+
+            if(this.activedIndex > -1) {
               const target = document.querySelector(`.z-list-item${ this.activedIndex }`)
               this.$refs.zList.scrollTop = target.offsetTop - target.offsetHeight
-            })
-          }
+            }
+
+            clearTimeout(timer)
+          }, 25)
         },
         deep: true,
         immediate: true
