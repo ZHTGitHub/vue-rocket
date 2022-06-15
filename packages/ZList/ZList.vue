@@ -40,7 +40,6 @@
 
 <script>
   import tools from '../scripts/utils/tools'
-  let [scrollTop, viewportHeight] = [0, 0]
   const keyCodes = [13, 38, 40]
 
   export default {
@@ -85,6 +84,8 @@
 
     data() {
       return {
+        scrollTop: 0,
+        viewportHeight: 0,
         activedIndex: -1,
         lastIndex: -1
       }
@@ -100,7 +101,7 @@
 
     methods: {
       onScroll() {
-        scrollTop = this.$refs.zList.scrollTop
+        this.scrollTop = this.$refs.zList.scrollTop
       },
 
       onSelectItem(index) {
@@ -124,7 +125,7 @@
 
         const target = document.querySelector(`.z-list-item${ this.activedIndex }`)
 
-        if(target.offsetTop - scrollTop <= 0) {
+        if(target.offsetTop - this.scrollTop <= 0) {
           this.$refs.zList.scrollTop = target.offsetTop - target.offsetHeight
         }
       },
@@ -140,8 +141,8 @@
 
         const target = document.querySelector(`.z-list-item${ this.activedIndex }`)
 
-        if(target.offsetTop - scrollTop >= viewportHeight) {
-          this.$refs.zList.scrollTop = target.offsetTop - viewportHeight + target.offsetHeight
+        if(target.offsetTop - this.scrollTop >= this.viewportHeight) {
+          this.$refs.zList.scrollTop = target.offsetTop - this.viewportHeight + target.offsetHeight
         }
       },
 
@@ -224,7 +225,7 @@
           this.activedIndex = tools.findIndex(dataSource, this.defaultValue)
 
           const timer = setTimeout(() => {
-            viewportHeight = this.$refs.zList.offsetHeight
+            this.viewportHeight = this.$refs.zList.offsetHeight
 
             if(this.activedIndex > -1) {
               const target = document.querySelector(`.z-list-item${ this.activedIndex }`)
