@@ -138,25 +138,6 @@ export const flex = [
 
   [
     {
-      class: 'flex-nowrap',
-      label: '不换行'
-    },
-    {
-      class: 'flex-nowrap',
-      label: '不换行'
-    },
-    {
-      class: 'flex-nowrap',
-      label: '不换行'
-    },
-    {
-      class: 'flex-nowrap',
-      label: '不换行'
-    }
-  ],
-
-  [
-    {
       class: 'flex-shrink-0',
       label: '阻止该条件的发生'
     },

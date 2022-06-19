@@ -150,3 +150,125 @@
 .display-block {
   display: block !important;
 }
+
+/* 文字颜色 */
+.text-red {
+	color: #e54d42;
+}
+
+.text-orange {
+	color: #f37b1d;
+}
+
+.text-yellow {
+	color: #fbbd08;
+}
+
+.text-olive {
+	color: #8dc63f;
+}
+
+.text-green {
+	color: #39b54a;
+}
+
+.text-cyan {
+	color: #1cbbb4;
+}
+
+.text-blue {
+	color: #0081ff;
+}
+
+.text-purple {
+	color: #6739b6;
+}
+
+.text-mauve {
+	color: #9c26b0;
+}
+
+.text-pink {
+	color: #e03997;
+}
+
+.text-brown {
+	color: #a5673f;
+}
+
+.text-grey {
+	color: #8799a3;
+}
+
+.text-gray {
+	color: #aaa;
+}
+
+.text-black {
+	color: #333;
+}
+
+.text-white {
+	color: #fff;
+}
+
+/* 文字阴影 */
+.text-shadow[class*="-red"] {
+	text-shadow: 6px 6px 8px rgba(204, 69, 59, 0.2);
+}
+
+.text-shadow[class*="-orange"] {
+	text-shadow: 6px 6px 8px rgba(217, 109, 26, 0.2);
+}
+
+.text-shadow[class*="-yellow"] {
+	text-shadow: 6px 6px 8px rgba(224, 170, 7, 0.2);
+}
+
+.text-shadow[class*="-olive"] {
+	text-shadow: 6px 6px 8px rgba(124, 173, 55, 0.2);
+}
+
+.text-shadow[class*="-green"] {
+	text-shadow: 6px 6px 8px rgba(48, 156, 63, 0.2);
+}
+
+.text-shadow[class*="-cyan"] {
+	text-shadow: 6px 6px 8px rgba(28, 187, 180, 0.2);
+}
+
+.text-shadow[class*="-blue"] {
+	text-shadow: 6px 6px 8px rgba(0, 102, 204, 0.2);
+}
+
+.text-shadow[class*="-purple"] {
+	text-shadow: 6px 6px 8px rgba(88, 48, 156, 0.2);
+}
+
+.text-shadow[class*="-mauve"] {
+	text-shadow: 6px 6px 8px rgba(133, 33, 150, 0.2);
+}
+
+.text-shadow[class*="-pink"] {
+	text-shadow: 6px 6px 8px rgba(199, 50, 134, 0.2);
+}
+
+.text-shadow[class*="-brown"] {
+	text-shadow: 6px 6px 8px rgba(140, 88, 53, 0.2);
+}
+
+.text-shadow[class*="-grey"] {
+	text-shadow: 6px 6px 8px rgba(114, 130, 138, 0.2);
+}
+
+.text-shadow[class*="-gray"] {
+	text-shadow: 6px 6px 8px rgba(114, 130, 138, 0.2);
+}
+
+.text-shadow[class*="-black"] {
+	text-shadow: 6px 6px 8px rgba(26, 26, 26, 0.2);
+}
+
+.text-shadow[class*="-white"] {
+	text-shadow: 6px 6px 8px rgba(255, 255, 255, 0.2);
+}

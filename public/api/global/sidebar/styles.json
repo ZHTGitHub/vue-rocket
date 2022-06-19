@@ -8,17 +8,24 @@
       "link": "/styles",
       "children": [
         {
-          "value": "text",
+          "value": "background",
           "icon": "",
-          "label": ["Text", "文本"],
-          "link": "/styles/text"
+          "label": ["Background", "背景"],
+          "link": "/styles/background"
+        },
+
+        {
+          "value": "radius",
+          "icon": "",
+          "label": ["BorderRadius", "边框半径"],
+          "link": "/styles/radius"
         },
   
         {
-          "value": "spacing",
+          "value": "elevation",
           "icon": "",
-          "label": ["Spacing", "间距"],
-          "link": "/styles/spacing"
+          "label": ["Elevation", "海拔"],
+          "link": "/styles/elevation"
         },
   
         {
@@ -36,17 +43,17 @@
         },
   
         {
-          "value": "radius",
+          "value": "spacing",
           "icon": "",
-          "label": ["BorderRadius", "边框半径"],
-          "link": "/styles/radius"
+          "label": ["Spacing", "间距"],
+          "link": "/styles/spacing"
         },
-  
+
         {
-          "value": "elevation",
+          "value": "text",
           "icon": "",
-          "label": ["Elevation", "海拔"],
-          "link": "/styles/elevation"
+          "label": ["Text", "文本"],
+          "link": "/styles/text"
         }
       ]
     }

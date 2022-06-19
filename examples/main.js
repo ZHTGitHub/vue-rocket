@@ -12,7 +12,7 @@ import request from './api/service'
 Vue.prototype.$request = request
 
 import vueRocket from '../packages'
-import '../packages/styles/styles.scss'
+import '../packages/styles/styles.css'
 Vue.use(vueRocket)
 
 import DemoComponents from './components'

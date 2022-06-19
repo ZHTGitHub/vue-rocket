@@ -13,6 +13,18 @@ const StyleRoutes = {
     },
 
     {
+      path: 'background',
+      name: 'DemoStyleBackground',
+      meta: {
+        key: 'background',
+        pKey: 'styles',
+        realm: 'background',
+        title: 'Background 背景',
+      },
+      component: () => import('../../views/Style/Background')
+    },
+
+    {
       path: 'text',
       name: 'DemoStyleTypography',
       meta: {

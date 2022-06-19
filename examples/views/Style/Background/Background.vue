@@ -1,0 +1,49 @@
+<template>
+  <div class="demo-background">
+    <typing-title :title="$route.meta.title"></typing-title>
+
+    <div class="z-flex flex-wrap justify-center pa-3 ma-auto elevations">
+      <div
+        class="pa-3"
+        v-for="(item, index) in elevation" 
+        :key="`background_${ index }`"
+      >
+        <div 
+          class="background z-flex justify-center align-center rounded-md" 
+          :class="item.class"
+        >
+          .{{ item.class }}
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</template>
+
+<script>
+  import { elevation } from './cells'
+
+  export default {
+    name: 'DemoStyleElevation',
+    data() {
+      return {
+        elevation
+      }
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+  .elevations {
+    max-width: 650px;
+    border: 1px solid transparent;
+    
+    .elevation {
+      width: 100px;
+      height: 100px;
+      background-color: #5cbbf6;
+      color: #fff;
+      font-size: .875rem;
+    }
+  }
+</style>

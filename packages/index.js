@@ -36,7 +36,7 @@ import ZDrawImage from './ZDrawImage'
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
 import { tools, localStorage, sessionStorage, IndexedDB } from './scripts/utils'
-import './styles/styles.scss'
+import './styles/styles.css'
 
 const components = [
 	ZBtn,
