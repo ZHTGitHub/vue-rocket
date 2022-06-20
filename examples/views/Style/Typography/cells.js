@@ -146,3 +146,80 @@ export const typography = [
     }
   ]
 ]
+
+export const colorItems = [
+  {
+    class: 'text-red',
+    label: '嫣红'
+  },
+
+  {
+    class: 'text-orange',
+    label: '橘橙'
+  },
+
+  {
+    class: 'text-yellow',
+    label: '明黄'
+  },
+
+  {
+    class: 'text-olive',
+    label: '橄榄'
+  },
+
+  {
+    class: 'text-green',
+    label: '森绿'
+  },
+
+  {
+    class: 'text-cyan',
+    label: '天青'
+  },
+
+  {
+    class: 'text-blue',
+    label: '海蓝'
+  },
+
+  {
+    class: 'text-purple',
+    label: '姹紫'
+  },
+
+  {
+    class: 'text-mauve',
+    label: '木槿'
+  },
+
+  {
+    class: 'text-pink',
+    label: '桃粉'
+  },
+
+  {
+    class: 'text-brown',
+    label: '棕褐'
+  },
+
+  {
+    class: 'text-grey',
+    label: '玄灰'
+  },
+
+  {
+    class: 'text-gray',
+    label: '草灰'
+  },
+
+  {
+    class: 'text-black',
+    label: '墨黑'
+  },
+
+  {
+    class: 'text-white',
+    label: '雅白'
+  }
+]

@@ -152,123 +152,155 @@
 }
 
 /* 文字颜色 */
+
+/* 嫣红 */
 .text-red {
 	color: #e54d42;
 }
 
+/* 橘橙 */
 .text-orange {
 	color: #f37b1d;
 }
 
+/* 明黄 */
 .text-yellow {
 	color: #fbbd08;
 }
 
+/* 橄榄 */
 .text-olive {
 	color: #8dc63f;
 }
 
+/* 森绿 */
 .text-green {
 	color: #39b54a;
 }
 
+/* 天青 */
 .text-cyan {
 	color: #1cbbb4;
 }
 
+/* 海蓝 */
 .text-blue {
 	color: #0081ff;
 }
 
+/* 姹紫 */
 .text-purple {
 	color: #6739b6;
 }
 
+/* 木槿 */
 .text-mauve {
 	color: #9c26b0;
 }
 
+/* 桃粉 */
 .text-pink {
 	color: #e03997;
 }
 
+/* 棕褐 */
 .text-brown {
 	color: #a5673f;
 }
 
+/* 玄灰 */
 .text-grey {
 	color: #8799a3;
 }
 
+/* 草灰 */
 .text-gray {
 	color: #aaa;
 }
 
+/* 墨黑 */
 .text-black {
 	color: #333;
 }
 
+/* 雅白 */
 .text-white {
 	color: #fff;
 }
 
 /* 文字阴影 */
+
+/* 嫣红 */
 .text-shadow[class*="-red"] {
 	text-shadow: 6px 6px 8px rgba(204, 69, 59, 0.2);
 }
 
+/* 橘橙 */
 .text-shadow[class*="-orange"] {
 	text-shadow: 6px 6px 8px rgba(217, 109, 26, 0.2);
 }
 
+/* 明黄 */
 .text-shadow[class*="-yellow"] {
 	text-shadow: 6px 6px 8px rgba(224, 170, 7, 0.2);
 }
 
+/* 橄榄 */
 .text-shadow[class*="-olive"] {
 	text-shadow: 6px 6px 8px rgba(124, 173, 55, 0.2);
 }
 
+/* 森绿 */
 .text-shadow[class*="-green"] {
 	text-shadow: 6px 6px 8px rgba(48, 156, 63, 0.2);
 }
 
+/* 天青 */
 .text-shadow[class*="-cyan"] {
 	text-shadow: 6px 6px 8px rgba(28, 187, 180, 0.2);
 }
 
+/* 海蓝 */
 .text-shadow[class*="-blue"] {
 	text-shadow: 6px 6px 8px rgba(0, 102, 204, 0.2);
 }
 
+/* 姹紫 */
 .text-shadow[class*="-purple"] {
 	text-shadow: 6px 6px 8px rgba(88, 48, 156, 0.2);
 }
 
+/* 木槿 */
 .text-shadow[class*="-mauve"] {
 	text-shadow: 6px 6px 8px rgba(133, 33, 150, 0.2);
 }
 
+/* 桃粉 */
 .text-shadow[class*="-pink"] {
 	text-shadow: 6px 6px 8px rgba(199, 50, 134, 0.2);
 }
 
+/* 棕褐 */
 .text-shadow[class*="-brown"] {
 	text-shadow: 6px 6px 8px rgba(140, 88, 53, 0.2);
 }
 
+/*  玄灰 */
 .text-shadow[class*="-grey"] {
 	text-shadow: 6px 6px 8px rgba(114, 130, 138, 0.2);
 }
 
+/* 草灰 */
 .text-shadow[class*="-gray"] {
 	text-shadow: 6px 6px 8px rgba(114, 130, 138, 0.2);
 }
 
+/* 墨黑 */
 .text-shadow[class*="-black"] {
 	text-shadow: 6px 6px 8px rgba(26, 26, 26, 0.2);
 }
 
+/* 雅白 */
 .text-shadow[class*="-white"] {
 	text-shadow: 6px 6px 8px rgba(255, 255, 255, 0.2);
 }

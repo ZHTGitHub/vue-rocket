@@ -21,17 +21,34 @@
         </table>
       </template>
     </div>
+
+    <div class="z-flex">
+      <span 
+        v-for="(item, index) in colorItems"
+        :key="`color_${ index }`"
+        :class="['mr-4', item.class]"
+      >{{ item.label }}</span>
+    </div>
+
+    <div class="z-flex mt-12">
+      <span 
+        v-for="(item, index) in colorItems"
+        :key="`color_${ index }`"
+        :class="['text-shadow mr-4', item.class]"
+      >{{ item.label }}</span>
+    </div>
   </div>
 </template>
 
 <script>
-  import { typography } from './cells'
+  import { typography, colorItems } from './cells'
 
   export default {
     name: 'DemoStyleTypography',
     data() {
       return {
-        typography
+        typography,
+        colorItems
       }
     }
   }
