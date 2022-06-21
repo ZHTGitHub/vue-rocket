@@ -2,8 +2,8 @@
   <div class="demo-padding">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <v-row>
-      <v-col class="z-flex" :cols="12" :sm="6">
+    <div class="z-row">
+      <div class="z-flex z-col-12">
         <z-select
           :formId="formId"
           formKey="paddingDirection"
@@ -29,9 +29,9 @@
           @change="onSelect"
         >
         </z-select>
-      </v-col>
+      </div>  
 
-      <v-col class="z-flex" :cols="12" :sm="6">
+      <div class="z-flex z-col-12">
         <z-select
           :formId="formId"
           formKey="marginDirection"
@@ -57,17 +57,15 @@
           @change="onSelect"
         >
         </z-select>
-      </v-col>
-    </v-row>
+      </div>  
+    </div>
 
-    
-
-    <div class="margin">
+    <div class="bg-red margin">
       <div 
-        class="padding" 
+        class="bg-green text-black" 
         :class="[`p${ paddingDirection }-${ paddingSize }`, `m${ marginDirection }-${ marginSize }`]"
       >
-        <div class="content text-center">
+        <div class="bg-white text-center">
           红色为外边距效果 绿色为内边距效果
         </div>
       </div>
@@ -153,13 +151,6 @@
 
 <style scoped lang="scss">
   .margin {
-    background-color: #ff5252;
     overflow: hidden;
-    .padding {
-      background-color: #4caf50;
-      .content {
-        background-color: #fff;
-      }
-    }
   }
 </style>
