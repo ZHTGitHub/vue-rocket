@@ -1,4 +1,4 @@
-export const round = [
+export const roundList = [
   {
     class: 'rounded-0',
     label: '圆角边框0px'

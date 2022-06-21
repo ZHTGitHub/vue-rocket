@@ -2,17 +2,17 @@
   <div class="demo-elevation">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="z-flex flex-wrap justify-center pa-3 ma-auto squares">
+    <div class="z-flex flex-wrap justify-center squares">
       <div
         class="pa-3"
-        v-for="(item, index) in elevation" 
+        v-for="(item, index) in elevationList" 
         :key="`elevation_${ index }`"
       >
         <div 
           class="z-flex justify-center align-center rounded-md square" 
           :class="item.class"
         >
-          .{{ item.class }}
+          {{ item.class }}
         </div>
       </div>
     </div>
@@ -20,14 +20,14 @@
 </template>
 
 <script>
-  import { elevation } from './cells'
+  import { elevationList } from './cells'
 
   export default {
     name: 'DemoStyleElevation',
 
     data() {
       return {
-        elevation
+        elevationList
       }
     }
   }

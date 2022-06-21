@@ -1,4 +1,4 @@
-export const elevation = [
+export const elevationList = [
   {
     class: 'elevation-0'
   },

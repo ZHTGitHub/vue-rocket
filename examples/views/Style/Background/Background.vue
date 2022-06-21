@@ -2,47 +2,85 @@
   <div class="demo-background">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="z-flex flex-wrap justify-center pa-3 ma-auto elevations">
+    <!-- 深色背景 BEGIN -->
+    <div class="z-flex flex-wrap squares">
       <div
         class="pa-3"
-        v-for="(item, index) in elevation" 
-        :key="`background_${ index }`"
+        v-for="(item, index) in bgDeepList" 
+        :key="`elevation_${ index }`"
       >
         <div 
-          class="background z-flex justify-center align-center rounded-md" 
+          class="z-flex flex-column justify-center align-center rounded-md elevation-2 square" 
           :class="item.class"
         >
-          .{{ item.class }}
+          <span>{{ item.label }}</span>
+          <span>{{ item.class }}</span>
         </div>
       </div>
     </div>
+    <!-- 深色背景 END -->
     
+    <!-- 浅色背景 BEGIN -->
+    <div class="z-flex flex-wrap squares">
+      <div
+        class="pa-3"
+        v-for="(item, index) in bgLightList" 
+        :key="`elevation_${ index }`"
+      >
+        <div 
+          class="z-flex flex-column justify-center align-center rounded-md elevation-2 square" 
+          :class="item.class"
+        >
+          <span>{{ item.label }}</span>
+          <span>{{ item.class }}</span>
+        </div>
+      </div>
+    </div>
+    <!-- 浅色背景 END -->
+
+    <!-- 渐变背景 BEGIN -->
+    <div class="z-flex flex-wrap squares">
+      <div
+        class="pa-3"
+        v-for="(item, index) in bgGradualList" 
+        :key="`elevation_${ index }`"
+      >
+        <div 
+          class="z-flex flex-column justify-center align-center rounded-md elevation-2 square" 
+          :class="item.class"
+        >
+          <span>{{ item.label }}</span>
+          <span>{{ item.class }}</span>
+        </div>
+      </div>
+    </div>
+    <!-- 渐变背景 END -->
   </div>
 </template>
 
 <script>
-  import { elevation } from './cells'
+  import { bgDeepList, bgLightList, bgGradualList } from './cells'
 
   export default {
     name: 'DemoStyleElevation',
     data() {
       return {
-        elevation
+        bgDeepList,
+        bgLightList,
+        bgGradualList
       }
     }
   }
 </script>
 
 <style scoped lang="scss">
-  .elevations {
-    max-width: 650px;
+  .squares {
+    max-width: 1200px;
     border: 1px solid transparent;
     
-    .elevation {
-      width: 100px;
-      height: 100px;
-      background-color: #5cbbf6;
-      color: #fff;
+    .square {
+      width: 140px;
+      height: 70px;
       font-size: .875rem;
     }
   }

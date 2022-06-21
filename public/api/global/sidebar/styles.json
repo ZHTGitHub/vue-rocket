@@ -13,13 +13,6 @@
           "label": ["Background", "背景"],
           "link": "/styles/background"
         },
-
-        {
-          "value": "radius",
-          "icon": "",
-          "label": ["BorderRadius", "边框半径"],
-          "link": "/styles/radius"
-        },
   
         {
           "value": "elevation",
@@ -40,6 +33,13 @@
           "icon": "",
           "label": ["Float", "浮动"],
           "link": "/styles/float"
+        },
+
+        {
+          "value": "radius",
+          "icon": "",
+          "label": ["Round", "边框半径"],
+          "link": "/styles/radius"
         },
   
         {
