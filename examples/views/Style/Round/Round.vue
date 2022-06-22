@@ -9,7 +9,7 @@
         :key="` round_${ index }`"
       >
         <div 
-          class="z-flex justify-center align-center square" 
+          class="z-flex justify-center align-center bg-cyan square" 
           :class="item.class"
         >
           {{ item.class }}
@@ -36,14 +36,12 @@
 <style scoped lang="scss">
   .squares {
     max-width: 650px;
-    border: 1px solid transparent;
     
     .square {
       width: 120px;
       height: 120px;
-      background-color: #5cbbf6;
-      color: #fff;
       font-size: .875rem;
+
       &.rounded-pill {
         margin-top: 30px;
         height: 60px;

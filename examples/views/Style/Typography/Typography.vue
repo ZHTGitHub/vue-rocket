@@ -2,27 +2,61 @@
   <div class="demo-typography">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="z-flex flex-wrap">
-      <template v-for="(items, index) in typography">
-        <table class="mr-4 api-table" :key="`typography_${ index }`">
-          <thead>
-            <tr>
-              <th>类名</th>
-              <th>效果</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr v-for="(item, i) in items" :key="`typography_${ i }`">
-              <td>{{ item.class }}</td>
-              <td>{{ item.label }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
+    <div>
+      <h1 class="text-h1">text-h1</h1>
+      <h2 class="text-h2">text-h2</h2>
+      <h3 class="text-h3">text-h3</h3>
+      <h4 class="text-h4">text-h4</h4>
+      <h5 class="text-h5">text-h5</h5>
     </div>
 
-    <div class="z-flex">
+    <div class="mt-4">
+      <div class="fw-black">fw-black</div>
+      <div class="fw-bold">fw-bold</div>
+      <div class="fw-medium">fw-medium</div>
+      <div class="fw-regular">fw-regular</div>
+      <div class="fw-light">fw-light</div>
+      <div class="fw-thin">fw-thin</div>
+      <div class="font-italic">font-italic</div>  
+    </div>
+
+    <div class="mt-4">
+      <div class="text-left">左对齐(text-left)</div>
+      <div class="text-center">居中(text-center)</div>
+      <div class="text-right">右对齐(text-right)</div>
+    </div>
+
+    <div class="mt-4">
+      <div class="td-none">默认(td-none)</div>
+      <div class="td-line-through">中划线(td-line-through)</div>
+      <div class="td-overline">上划线(td-overline)</div>
+      <div class="td-underline">下划线(td-underline)</div>
+    </div>
+
+    <div class="mt-4">
+      <div class="text-primary">高度强调(text-primary)</div>
+      <div class="text-secondary">中等强调(text-secondary)</div>
+      <div class="text-disabled">禁用文本(text-disabled)</div>
+    </div>
+
+    <div class="mt-4">
+      <div class="text-lowercase">仅有小写字母(text-lowercase)</div>
+      <div class="text-uppercase">仅有大写字母(text-uppercase)</div>
+      <div class="text-capitalize">单词首字母大写(text-capitalize)</div>
+    </div>
+
+    <div class="mt-4">
+      <div class="text-truncate" style="width: 300px">单行文本超出省略号(text-truncate)这是需要省略的内容</div>
+    </div>
+
+    <div class="mt-4">
+      <div>此元素不会被显示(display-none)</div>
+      <div>此元素会被显示为内联元素(display-inline)</div>
+      <div>此元素会被显示为行内块元素(display-inline-block)</div>
+      <div>此元素会被显示为块级元素(display-block)</div>
+    </div>
+    
+    <div class="mt-4 z-flex">
       <span 
         v-for="(item, index) in colorItems"
         :key="`color_${ index }`"
@@ -54,6 +88,34 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .text-h1 {
+    font-weight: 600;
+    font-size: 38px !important;
+    line-height: 1.23;
+  }
 
+  .text-h2 {
+    font-weight: 600;
+    font-size: 30px !important;
+    line-height: 1.35;
+  }
+
+  .text-h3 {
+    font-weight: 600;
+    font-size: 24px !important;
+    line-height: 1.35;
+  }
+
+  .text-h4 {
+    font-weight: 600;
+    font-size: 20px !important;
+    line-height: 1.4;
+  }
+
+  .text-h5 {
+    font-weight: 600;
+    font-size: 16px !important;
+    line-height: 1.5;
+  }
 </style>

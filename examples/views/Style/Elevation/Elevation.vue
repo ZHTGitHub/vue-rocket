@@ -9,7 +9,7 @@
         :key="`elevation_${ index }`"
       >
         <div 
-          class="z-flex justify-center align-center rounded-md square" 
+          class="z-flex justify-center align-center rounded-md bg-cyan square" 
           :class="item.class"
         >
           {{ item.class }}
@@ -36,13 +36,10 @@
 <style scoped lang="scss">
   .squares {
     max-width: 650px;
-    border: 1px solid transparent;
     
     .square {
       width: 100px;
       height: 100px;
-      background-color: #5cbbf6;
-      color: #fff;
       font-size: .875rem;
     }
   }

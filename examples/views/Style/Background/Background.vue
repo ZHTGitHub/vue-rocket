@@ -76,7 +76,7 @@
 <style scoped lang="scss">
   .squares {
     max-width: 1200px;
-    border: 1px solid transparent;
+    /* border: 1px solid transparent; */
     
     .square {
       width: 140px;
