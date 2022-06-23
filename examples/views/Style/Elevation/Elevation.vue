@@ -43,10 +43,11 @@
           :key="`elevation_${ index }`"
         >
           <div 
-            class="z-flex justify-center align-center rounded-md bg-cyan square" 
+            class="z-flex flex-column justify-center align-center rounded-md bg-cyan square" 
             :class="item.class"
           >
-            {{ item.class }}
+            <span>elevation-wrap</span>
+            <span>{{ item.class }}</span>
           </div>
         </div>
       </div>

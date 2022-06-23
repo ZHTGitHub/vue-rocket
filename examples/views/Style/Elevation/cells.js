@@ -78,6 +78,6 @@ export const elevationList = [
 
 export const wrapElevationList = [
   {
-    class: 'elevation-wrap elevation-1'
+    class: 'elevation-1'
   }
 ]
