@@ -2,71 +2,72 @@
   <div class="demo-padding">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="z-row">
-      <div class="z-flex z-col-12">
-        <z-select
-          :formId="formId"
-          formKey="paddingDirection"
-          class="pr-2"
-          :options="directions"
-          :defaultValue="paddingDirection"
-          @change="onSelect"
-        >
-          <template v-slot:prepend-outer>
-            <strong class="primary--text py-1">p</strong>
-          </template>
+    <div class="box">
+      <div class="z-row">
+        <div class="z-flex z-col-12">
+          <z-select
+            :formId="formId"
+            formKey="paddingDirection"
+            class="pr-2"
+            :options="directions"
+            :defaultValue="paddingDirection"
+            @change="onSelect"
+          >
+            <template v-slot:prepend-outer>
+              <strong class="primary--text py-1">p</strong>
+            </template>
 
-          <template v-slot:append-outer>
-            <div class="py-1">-</div>
-          </template>
-        </z-select>
+            <template v-slot:append-outer>
+              <div class="py-1">-</div>
+            </template>
+          </z-select>
 
-        <z-select
-          :formId="formId"
-          formKey="paddingSize"
-          :options="paddingSizes"
-          :defaultValue="paddingSize"
-          @change="onSelect"
-        >
-        </z-select>
-      </div>  
+          <z-select
+            :formId="formId"
+            formKey="paddingSize"
+            :options="paddingSizes"
+            :defaultValue="paddingSize"
+            @change="onSelect"
+          >
+          </z-select>
+        </div>  
 
-      <div class="z-flex z-col-12">
-        <z-select
-          :formId="formId"
-          formKey="marginDirection"
-          class="pr-2"
-          :options="directions"
-          :defaultValue="marginDirection"
-          @change="onSelect"
-        >
-          <template v-slot:prepend-outer>
-            <strong class="primary--text py-1">m</strong>
-          </template>
+        <div class="z-flex z-col-12">
+          <z-select
+            :formId="formId"
+            formKey="marginDirection"
+            class="pr-2"
+            :options="directions"
+            :defaultValue="marginDirection"
+            @change="onSelect"
+          >
+            <template v-slot:prepend-outer>
+              <strong class="primary--text py-1">m</strong>
+            </template>
 
-          <template v-slot:append-outer>
-            <div class="py-1">-</div>
-          </template>
-        </z-select>
+            <template v-slot:append-outer>
+              <div class="py-1">-</div>
+            </template>
+          </z-select>
 
-        <z-select
-          :formId="formId"
-          formKey="marginSize"
-          :options="marginSizes"
-          :defaultValue="marginSize"
-          @change="onSelect"
-        >
-        </z-select>
-      </div>  
-    </div>
+          <z-select
+            :formId="formId"
+            formKey="marginSize"
+            :options="marginSizes"
+            :defaultValue="marginSize"
+            @change="onSelect"
+          >
+          </z-select>
+        </div>  
+      </div>
 
-    <div class="bg-red margin">
-      <div 
-        class="bg-green text-black" 
-        :class="[`p${ paddingDirection }-${ paddingSize }`, `m${ marginDirection }-${ marginSize }`]"
-      >
-        <div class="bg-white text-center">
-          红色为外边距效果 绿色为内边距效果
+      <div class="bg-orange light m-box">
+        <div :class="`m${ marginDirection }-${ marginSize }`">
+          <div :class="['bg-green light text-black elevation-4 p-box', `p${ paddingDirection }-${ paddingSize }`]">
+            <div class="pa-6 bg-white text-center">
+              橙色为外边距效果 绿色为内边距效果
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -103,6 +104,7 @@
       return {
         cells,
         formId: 'spacing',
+
         directions: [
           { value: 't', label: 't' },
           { value: 'b', label: 'b' },
@@ -112,17 +114,35 @@
           { value: 'y', label: 'y' },
           { value: 'a', label: 'a' }
         ],
+
         paddingSizes: defaults,
+
         marginSizes: [
           { value: 'auto', label: 'auto' },
-          ...defaults
+          ...defaults,
+          { value: 'n1', label: 'n1' },
+          { value: 'n2', label: 'n2' },
+          { value: 'n3', label: 'n3' },
+          { value: 'n4', label: 'n4' },
+          { value: 'n5', label: 'n5' },
+          { value: 'n6', label: 'n6' },
+          { value: 'n7', label: 'n7' },
+          { value: 'n8', label: 'n8' },
+          { value: 'n9', label: 'n9' },
+          { value: 'n10', label: 'n10' },
+          { value: 'n11', label: 'n11' },
+          { value: 'n12', label: 'n12' },
+          { value: 'n13', label: 'n13' },
+          { value: 'n14', label: 'n14' },
+          { value: 'n15', label: 'n15' },
+          { value: 'n16', label: 'n16' }
         ],
 
         paddingDirection: 'a',
-        paddingSize: 2,
+        paddingSize: 6,
 
         marginDirection: 'a',
-        marginSize: 2
+        marginSize: 3
       }
     },
 
@@ -150,7 +170,14 @@
 </script>
 
 <style scoped lang="scss">
-  .margin {
-    overflow: hidden;
+  .box {
+    width: 960px;
+    padding: 16px;
+    margin: 0 auto;
+    border: thin solid rgba(0, 0, 0, .12);
+
+    .m-box {
+      border: 1px solid #fff;
+    }
   }
-</style>
+</style>  
