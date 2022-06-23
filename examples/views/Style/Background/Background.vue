@@ -3,7 +3,17 @@
     <typing-title :title="$route.meta.title"></typing-title>
 
     <!-- 深色背景 BEGIN -->
-    <div class="z-flex flex-wrap squares">
+    <v-alert
+      border="left"
+      colored-border
+      :color="color"
+      dense
+      elevation="1"
+    >
+      深色背景
+    </v-alert>
+
+    <div class="z-flex flex-wrap ml-n3 mb-16 squares">
       <div
         class="pa-3"
         v-for="(item, index) in bgDeepList" 
@@ -21,7 +31,17 @@
     <!-- 深色背景 END -->
     
     <!-- 浅色背景 BEGIN -->
-    <div class="z-flex flex-wrap squares">
+    <v-alert
+      border="left"
+      colored-border
+      :color="color"
+      dense
+      elevation="1"
+    >
+      浅色背景
+    </v-alert>
+
+    <div class="z-flex flex-wrap ml-n3 mb-16 squares">
       <div
         class="pa-3"
         v-for="(item, index) in bgLightList" 
@@ -39,7 +59,17 @@
     <!-- 浅色背景 END -->
 
     <!-- 渐变背景 BEGIN -->
-    <div class="z-flex flex-wrap squares">
+    <v-alert
+      border="left"
+      colored-border
+      :color="color"
+      dense
+      elevation="1"
+    >
+      渐变背景
+    </v-alert>
+
+    <div class="z-flex flex-wrap ml-n3 squares">
       <div
         class="pa-3"
         v-for="(item, index) in bgGradualList" 
@@ -67,7 +97,8 @@
       return {
         bgDeepList,
         bgLightList,
-        bgGradualList
+        bgGradualList,
+        color: 'text-blue'
       }
     }
   }

@@ -38,12 +38,13 @@
       const tableName = 'zhongshan_university'
 
       const indexedDB = new IndexedDB('School')
-      const open_result = await indexedDB.open(
-        tableName, 
-        { keyPath: 'id' },
-        [{ name: 'name', keyPath: 'name', options: { unique: false } }]
-      )
-      console.log(open_result)
+
+      // const open_result = await indexedDB.open(
+      //   tableName, 
+      //   { keyPath: 'id' },
+      //   [{ name: 'name', keyPath: 'name', options: { unique: false } }]
+      // )
+      // console.log(open_result)
 
       const add_result = await indexedDB.add(tableName, {
         id: '001',
