@@ -35,8 +35,6 @@
 
 <style scoped lang="scss">
   .squares {
-    max-width: 650px;
-    
     .square {
       width: 120px;
       height: 120px;

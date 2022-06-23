@@ -17,7 +17,7 @@
       <h1 
         v-for="(item, index) in titleList" 
         :key="index" 
-        :class="item.class"
+        :class="['mb-4', item.class]"
       >{{ `${ item.class } ${ item.label }` }}</h1>
     </div>
     <!-- 标题 END -->
@@ -37,7 +37,7 @@
       <span 
         v-for="(item, index) in colorList"
         :key="`color_${ index }`"
-        :class="[item.class]"
+        :class="['mb-3', item.class]"
       >{{ `${ item.class } ${ item.label }` }}</span>
     </div>
     <!-- 字体颜色 END -->
@@ -53,11 +53,16 @@
       字体阴影
     </v-alert>
 
+    <div class="mb-4">
+      <span class="text-capitalize">usage：</span>
+      &lt;span class="text-shadow text-red"&gt;嫣红&lt;/span&gt;
+    </div>
+
     <div class="z-flex flex-wrap mb-16 colors">
       <span 
         v-for="(item, index) in colorList"
         :key="`color_${ index }`"
-        :class="['text-shadow', item.class]"
+        :class="['mb-3 text-shadow', item.class]"
       >{{ `${ item.class } ${ item.label }` }}</span>
     </div>
     <!-- 字体阴影 END -->
@@ -74,11 +79,11 @@
     </v-alert>
 
     <div class="mb-16">
-      <div
+      <p
         v-for="(item, index) in weightList"
         :key="index"
-        :class="item.class"
-      >{{ `${ item.class } ${ item.label }` }}</div>
+        :class="[item.class]"
+      >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
     <!-- 字体粗细 END -->
 
@@ -114,11 +119,11 @@
     </v-alert>
 
     <div class="mb-16">
-      <div
+      <p
         v-for="(item, index) in lineList"
         :key="index"
         :class="item.class"
-      >{{ `${ item.class } ${ item.label }` }}</div>
+      >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
     <!-- 文本装饰 END -->
 
@@ -134,11 +139,11 @@
     </v-alert>
 
     <div class="mb-16">
-      <div
+      <p
         v-for="(item, index) in accentList"
         :key="index"
         :class="item.class"
-      >{{ `${ item.class } ${ item.label }` }}</div>
+      >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
     <!-- 字体强调 END -->
 
@@ -154,11 +159,11 @@
     </v-alert>
 
     <div class="mb-16">
-      <div
+      <p
         v-for="(item, index) in caseList"
         :key="index"
         :class="item.class"
-      >{{ `${ item.class } ${ item.label }` }}</div>
+      >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
     <!-- 文本变形 END -->
 
@@ -174,11 +179,11 @@
     </v-alert>
 
     <div class="mb-16">
-      <div
+      <p
         v-for="(item, index) in reverseList"
         :key="index"
         :class="item.class"
-      >{{ `${ item.class } ${ item.label }` }}</div>
+      >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
     <!-- 文本方向 END -->
 
@@ -214,10 +219,10 @@
     </v-alert>
 
     <div class="mb-0">
-      <div
+      <p
         v-for="(item, index) in dsiplayList"
         :key="index"
-      >{{ `${ item.class } ${ item.label }` }}</div>
+      >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
     <!-- 元素显示类型 END -->
   </div>
@@ -291,7 +296,7 @@
 
   .colors {
     width: 550px;
-    padding: 16px;
+    padding: 16px 16px 4px 16px;
     background-color: #f1f1f1;
 
     &>span {
