@@ -33,12 +33,12 @@
       字体颜色
     </v-alert>
 
-    <div class="z-flex mb-16">
+    <div class="z-flex flex-wrap mb-16 colors">
       <span 
         v-for="(item, index) in colorList"
         :key="`color_${ index }`"
-        :class="['mr-4', item.class]"
-      >{{ item.label }}</span>
+        :class="[item.class]"
+      >{{ `${ item.class } ${ item.label }` }}</span>
     </div>
     <!-- 字体颜色 END -->
 
@@ -53,12 +53,12 @@
       字体阴影
     </v-alert>
 
-    <div class="z-flex mb-16">
+    <div class="z-flex flex-wrap mb-16 colors">
       <span 
         v-for="(item, index) in colorList"
         :key="`color_${ index }`"
-        :class="['text-shadow mr-4', item.class]"
-      >{{ item.label }}</span>
+        :class="['text-shadow', item.class]"
+      >{{ `${ item.class } ${ item.label }` }}</span>
     </div>
     <!-- 字体阴影 END -->
 
@@ -287,5 +287,16 @@
     font-weight: 600;
     font-size: 16px !important;
     line-height: 1.5;
+  }
+
+  .colors {
+    width: 550px;
+    padding: 16px;
+    background-color: #f1f1f1;
+
+    &>span {
+      display: inline-block;
+      width: 160px;
+    }
   }
 </style>
