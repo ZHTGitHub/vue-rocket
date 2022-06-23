@@ -75,3 +75,9 @@ export const elevationList = [
     class: 'elevation-24'
   }
 ]
+
+export const wrapElevationList = [
+  {
+    class: 'elevation-wrap elevation-1'
+  }
+]
