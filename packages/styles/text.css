@@ -1,4 +1,4 @@
-/* 字体大小 */
+/* 标题大小 */
 .text-h1 {
   font-weight: 600;
   font-size: 38px !important;
@@ -30,31 +30,31 @@
 }
 
 /* 字体强调 */
-.fw-black {
+.text-black {
   font-weight: 900 !important;
 }
 
-.fw-bold {
+.text-bold {
   font-weight: 700 !important;
 }
 
-.fw-medium {
+.text-medium {
   font-weight: 500 !important;
 }
 
-.fw-regular {
+.text-regular {
   font-weight: 400 !important;
 }
 
-.fw-light {
+.text-light {
   font-weight: 300 !important;
 }
 
-.fw-thin {
+.text-thin {
   font-weight: 100 !important;
 }
 
-.font-italic {
+.text-italic {
   font-style: italic !important;
 }
 
@@ -92,7 +92,7 @@
   text-decoration: underline !important;
 }
 
-/* 文本不透明度 */
+/* 字体强调 */
 .text-primary {
   color: rgba(0, 0, 0, .87) !important;
 }
