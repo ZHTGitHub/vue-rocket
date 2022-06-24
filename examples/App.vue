@@ -12,6 +12,7 @@
 
 <style>
   html, body {
+    font-size: 14px !important;
     overflow: hidden !important;
   }
 

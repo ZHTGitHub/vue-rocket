@@ -2,23 +2,45 @@
 export const titleList = [
   {
     class: 'text-h1',
-    label: '38px'
+    label: ''
   },
+
   {
     class: 'text-h2',
-    label: '30px'
+    label: ''
   },
+
   {
     class: 'text-h3',
-    label: '24px'
+    label: ''
   },
+
   {
     class: 'text-h4',
-    label: '20px'
+    label: ''
   },
+
   {
     class: 'text-h5',
-    label: '16px'
+    label: ''
+  },
+  
+  {
+    class: 'text-h6',
+    label: ''
+  }
+]
+
+// 副标题大小
+export const subtitleList = [
+  {
+    class: 'text-subtitle-1',
+    label: ''
+  },
+
+  {
+    class: 'text-subtitle-2',
+    label: ''
   }
 ]
 
@@ -100,7 +122,7 @@ export const colorList = [
   }
 ]
 
-// 字体粗细
+// 字体强调
 export const weightList = [
   {
     class: 'text-black',
@@ -148,27 +170,27 @@ export const alignList = [
   }
 ]
 
-// 文本装饰
+// 装饰线
 export const lineList = [
   {
-    class: 'td-none',
+    class: 'text-none',
     label: '默认'
   },
   {
-    class: 'td-line-through',
+    class: 'text-line-through',
     label: '中划线'
   },
   {
-    class: 'td-overline',
+    class: 'text-overline',
     label: '上划线'
   },
   {
-    class: 'td-underline',
+    class: 'text-underline',
     label: '下划线'
   }
 ]
 
-// 字体强调
+// 不透明度
 export const accentList = [
   {
     class: 'text-primary',
@@ -184,7 +206,7 @@ export const accentList = [
   }
 ]
 
-// 文本变形
+// 变形
 export const caseList = [
   {
     class: 'text-lowercase',
@@ -213,11 +235,18 @@ export const reverseList = [
   }
 ]
 
-// 文本溢出
+// 文本换行和溢出
 export const truncateList = [
   {
+    class: 'text-no-wrap',
+    label: '防止文本换行',
+    width: 150
+  },
+
+  {
     class: 'text-truncate',
-    label: '单行文本超出省略号'
+    label: '单行文本超出省略号',
+    width: 150
   }
 ]
 

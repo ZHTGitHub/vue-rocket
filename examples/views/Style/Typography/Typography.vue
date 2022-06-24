@@ -22,6 +22,26 @@
     </div>
     <!-- 标题 END -->
 
+    <!-- 副标题大小 BEGIN -->
+    <v-alert
+      border="left"
+      colored-border
+      :color="color"
+      dense
+      elevation="1"
+    >
+      副标题大小
+    </v-alert>
+
+    <div class="mb-16">
+      <h1 
+        v-for="(item, index) in subtitleList" 
+        :key="index" 
+        :class="['mb-4', item.class]"
+      >{{ `${ item.class } ${ item.label }` }}</h1>
+    </div>
+    <!-- 副标题大小 END -->
+
     <!-- 字体颜色 BEGIN -->
     <v-alert
       border="left"
@@ -67,7 +87,7 @@
     </div>
     <!-- 字体阴影 END -->
 
-    <!-- 字体粗细 BEGIN -->
+    <!-- 字体强调 BEGIN -->
     <v-alert
       border="left"
       colored-border
@@ -75,7 +95,7 @@
       dense
       elevation="1"
     >
-      字体粗细
+      字体强调
     </v-alert>
 
     <div class="mb-16">
@@ -85,7 +105,7 @@
         :class="[item.class]"
       >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
-    <!-- 字体粗细 END -->
+    <!-- 字体强调 END -->
 
     <!-- 对齐方式 BEGIN -->
     <v-alert
@@ -107,7 +127,7 @@
     </div>
     <!-- 对齐方式 END -->
 
-    <!-- 文本装饰 BEGIN -->
+    <!-- 装饰线 BEGIN -->
     <v-alert
       border="left"
       colored-border
@@ -115,7 +135,7 @@
       dense
       elevation="1"
     >
-      文本装饰
+      装饰线
     </v-alert>
 
     <div class="mb-16">
@@ -125,9 +145,9 @@
         :class="item.class"
       >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
-    <!-- 文本装饰 END -->
+    <!-- 装饰线 END -->
 
-    <!-- 字体强调 BEGIN -->
+    <!-- 不透明度 BEGIN -->
     <v-alert
       border="left"
       colored-border
@@ -135,7 +155,7 @@
       dense
       elevation="1"
     >
-      字体强调
+      不透明度
     </v-alert>
 
     <div class="mb-16">
@@ -145,9 +165,9 @@
         :class="item.class"
       >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
-    <!-- 字体强调 END -->
+    <!-- 不透明度 END -->
 
-    <!-- 文本变形 BEGIN -->
+    <!-- 变形 BEGIN -->
     <v-alert
       border="left"
       colored-border
@@ -155,7 +175,7 @@
       dense
       elevation="1"
     >
-      文本变形
+      变形
     </v-alert>
 
     <div class="mb-16">
@@ -165,7 +185,7 @@
         :class="item.class"
       >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
-    <!-- 文本变形 END -->
+    <!-- 变形 END -->
 
     <!-- 文本方向 BEGIN -->
     <v-alert
@@ -187,7 +207,7 @@
     </div>
     <!-- 文本方向 END -->
 
-    <!-- 文本溢出 BEGIN -->
+    <!-- 文本换行和溢出 BEGIN -->
     <v-alert
       border="left"
       colored-border
@@ -195,17 +215,18 @@
       dense
       elevation="1"
     >
-      文本溢出
+      文本换行和溢出
     </v-alert>
 
     <div class="mb-16">
-      <div
+      <p
         v-for="(item, index) in truncateList"
         :key="index"
-        :class="item.class"
-      >{{ `${ item.class } ${ item.label }` }}</div>
+        :class="['bg-yellow light', item.class]"
+        :style="{ width: `${ item.width }px` }"
+      >{{ `${ item.class } ${ item.label }` }}</p>
     </div>
-    <!-- 文本溢出 END -->
+    <!-- 文本换行和溢出 END -->
 
     <!-- 元素显示类型 BEGIN -->
     <v-alert
@@ -231,6 +252,7 @@
 <script>
   import { 
     titleList, 
+    subtitleList,
     colorList, 
     weightList, 
     alignList, 
@@ -247,6 +269,7 @@
     data() {
       return {
         titleList,
+        subtitleList,
         colorList,
         weightList,
         alignList,
@@ -264,36 +287,6 @@
 </script>
 
 <style scoped lang="scss">
-  .text-h1 {
-    font-weight: 600;
-    font-size: 38px !important;
-    line-height: 1.23;
-  }
-
-  .text-h2 {
-    font-weight: 600;
-    font-size: 30px !important;
-    line-height: 1.35;
-  }
-
-  .text-h3 {
-    font-weight: 600;
-    font-size: 24px !important;
-    line-height: 1.35;
-  }
-
-  .text-h4 {
-    font-weight: 600;
-    font-size: 20px !important;
-    line-height: 1.4;
-  }
-
-  .text-h5 {
-    font-weight: 600;
-    font-size: 16px !important;
-    line-height: 1.5;
-  }
-
   .colors {
     width: 550px;
     padding: 16px 16px 4px 16px;
