@@ -20,6 +20,13 @@
           "label": ["Elevation", "海拔"],
           "link": "/styles/elevation"
         },
+
+        {
+          "value": "display",
+          "icon": "",
+          "label": ["Display", "显示辅助"],
+          "link": "/styles/display"
+        },
   
         {
           "value": "flex",

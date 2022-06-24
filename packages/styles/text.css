@@ -159,23 +159,6 @@
   overflow: hidden !important;
 }
 
-/* 元素显示类型 */
-.display-none {
-  display: none !important;
-}
-
-.display-inline {
-  display: inline !important;
-}
-
-.display-inline-block {
-  display: inline-block !important;
-}
-
-.display-block {
-  display: block !important;
-}
-
 /* 文字颜色 */
 
 /* 嫣红 */

@@ -42,51 +42,6 @@
     </div>
     <!-- 副标题大小 END -->
 
-    <!-- 字体颜色 BEGIN -->
-    <v-alert
-      border="left"
-      colored-border
-      :color="color"
-      dense
-      elevation="1"
-    >
-      字体颜色
-    </v-alert>
-
-    <div class="z-flex flex-wrap mb-16 colors">
-      <span 
-        v-for="(item, index) in colorList"
-        :key="`color_${ index }`"
-        :class="['mb-3', item.class]"
-      >{{ `${ item.class } ${ item.label }` }}</span>
-    </div>
-    <!-- 字体颜色 END -->
-
-    <!-- 字体阴影 BEGIN -->
-    <v-alert
-      border="left"
-      colored-border
-      :color="color"
-      dense
-      elevation="1"
-    >
-      字体阴影
-    </v-alert>
-
-    <div class="mb-4">
-      <span class="text-capitalize">usage：</span>
-      &lt;span class="text-shadow text-red"&gt;嫣红&lt;/span&gt;
-    </div>
-
-    <div class="z-flex flex-wrap mb-16 colors">
-      <span 
-        v-for="(item, index) in colorList"
-        :key="`color_${ index }`"
-        :class="['mb-3 text-shadow', item.class]"
-      >{{ `${ item.class } ${ item.label }` }}</span>
-    </div>
-    <!-- 字体阴影 END -->
-
     <!-- 字体强调 BEGIN -->
     <v-alert
       border="left"
@@ -228,7 +183,7 @@
     </div>
     <!-- 文本换行和溢出 END -->
 
-    <!-- 元素显示类型 BEGIN -->
+    <!-- 字体颜色 BEGIN -->
     <v-alert
       border="left"
       colored-border
@@ -236,16 +191,42 @@
       dense
       elevation="1"
     >
-      元素显示类型
+      字体颜色
     </v-alert>
 
-    <div class="mb-0">
-      <p
-        v-for="(item, index) in dsiplayList"
-        :key="index"
-      >{{ `${ item.class } ${ item.label }` }}</p>
+    <div class="z-flex flex-wrap mb-16 colors">
+      <span 
+        v-for="(item, index) in colorList"
+        :key="`color_${ index }`"
+        :class="['mb-3', item.class]"
+      >{{ `${ item.class } ${ item.label }` }}</span>
     </div>
-    <!-- 元素显示类型 END -->
+    <!-- 字体颜色 END -->
+
+    <!-- 字体阴影 BEGIN -->
+    <v-alert
+      border="left"
+      colored-border
+      :color="color"
+      dense
+      elevation="1"
+    >
+      字体阴影
+    </v-alert>
+
+    <div class="mb-4">
+      <span class="text-capitalize">usage：</span>
+      &lt;span class="text-shadow text-red"&gt;嫣红&lt;/span&gt;
+    </div>
+
+    <div class="z-flex flex-wrap mb-16 colors">
+      <span 
+        v-for="(item, index) in colorList"
+        :key="`color_${ index }`"
+        :class="['mb-3 text-shadow', item.class]"
+      >{{ `${ item.class } ${ item.label }` }}</span>
+    </div>
+    <!-- 字体阴影 END -->
   </div>
 </template>
 
@@ -253,7 +234,6 @@
   import { 
     titleList, 
     subtitleList,
-    colorList, 
     weightList, 
     alignList, 
     lineList, 
@@ -261,7 +241,7 @@
     caseList,
     reverseList,
     truncateList,
-    dsiplayList
+    colorList
   } from './cells'
 
   export default {
@@ -270,7 +250,6 @@
       return {
         titleList,
         subtitleList,
-        colorList,
         weightList,
         alignList,
         lineList,
@@ -278,7 +257,7 @@
         caseList,
         reverseList,
         truncateList,
-        dsiplayList,
+        colorList,
 
         color: 'text-blue'
       }

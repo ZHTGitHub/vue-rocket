@@ -23,29 +23,29 @@ const StyleRoutes = {
       },
       component: () => import('../../views/Style/Background')
     },
-
+    
     {
-      path: 'text',
-      name: 'DemoStyleTypography',
+      path: 'elevation',
+      name: 'DemoStyleElevation',
       meta: {
-        key: 'text',
+        key: 'elevation',
         pKey: 'styles',
-        realm: 'text',
-        title: 'Text 文本',
+        realm: 'elevation',
+        title: 'Elevation 海拔',
       },
-      component: () => import('../../views/Style/Typography')
+      component: () => import('../../views/Style/Elevation')
     },
 
     {
-      path: 'spacing',
-      name: 'DemoStyleSpacing',
+      path: 'display',
+      name: 'DemoStyleDisplay',
       meta: {
-        key: 'spacing',
+        key: 'display',
         pKey: 'styles',
-        realm: 'spacing',
-        title: 'Spacing 间距',
+        realm: 'display',
+        title: 'Display 显示辅助',
       },
-      component: () => import('../../views/Style/Spacing')
+      component: () => import('../../views/Style/Display')
     },
 
     {
@@ -85,16 +85,28 @@ const StyleRoutes = {
     },
 
     {
-      path: 'elevation',
-      name: 'DemoStyleElevation',
+      path: 'spacing',
+      name: 'DemoStyleSpacing',
       meta: {
-        key: 'elevation',
+        key: 'spacing',
         pKey: 'styles',
-        realm: 'elevation',
-        title: 'Elevation 海拔',
+        realm: 'spacing',
+        title: 'Spacing 间距',
       },
-      component: () => import('../../views/Style/Elevation')
-    }
+      component: () => import('../../views/Style/Spacing')
+    },
+
+    {
+      path: 'text',
+      name: 'DemoStyleTypography',
+      meta: {
+        key: 'text',
+        pKey: 'styles',
+        realm: 'text',
+        title: 'Text 文本',
+      },
+      component: () => import('../../views/Style/Typography')
+    },
   ]
 }
 
