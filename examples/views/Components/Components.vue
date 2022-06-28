@@ -1,17 +1,11 @@
 <template>
-  <!-- <div class="mb-12 demo-components"> -->
-    <main-layout>
-      <router-view></router-view>
-    </main-layout>
-  <!-- </div> -->
+  <div class="demo-components">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'DemoComponents',
-
-    components: {
-      'main-layout': () => import('../../layouts/MainLayout')
-    }
+    name: 'DemoComponents'
   }
 </script>

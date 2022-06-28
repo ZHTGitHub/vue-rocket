@@ -1,17 +1,11 @@
 <template>
   <div class="js-util">
-    <main-layout>
-      <router-view></router-view>
-    </main-layout>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'JSUtil',
-
-    components: {
-      'main-layout': () => import('../../layouts/MainLayout')
-    }
+    name: 'JSUtil'
   }
 </script>

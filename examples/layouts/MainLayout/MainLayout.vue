@@ -1,14 +1,11 @@
 <template>
   <div class="main-layout">
-    <ZHeader />
+    <z-header></z-header>
 
     <div class="z-flex z-main">
-      <ZSidebar v-show="showSidebar" />
+      <z-sidebar v-show="showSidebar"></z-sidebar>
 
-      <div 
-        class="pa-6 z-container"
-        :class="showSidebar ? 'with-sidebar' : ''"
-      >
+      <div :class="['pa-6 z-container', showSidebar ? 'with-sidebar' : '']">
         <slot></slot>
       </div>
     </div>
@@ -16,9 +13,6 @@
 </template>
 
 <script>
-  import ZHeader from './header'
-  import ZSidebar from './sidebar'
-
   export default {
     name: 'MainLayout',
 
@@ -30,8 +24,8 @@
     },
 
     components: {
-      ZHeader,
-      ZSidebar
+      'z-header': () => import('./header'),
+      'z-sidebar': () => import('./sidebar')
     }
   }
 </script>

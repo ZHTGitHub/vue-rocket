@@ -9,7 +9,7 @@ const StyleRoutes = {
   children: [
     {
       path: '/styles',
-      redirect: () => 'text'
+      redirect: 'background'
     },
 
     {

@@ -9,7 +9,7 @@ const ComponentRoutes = {
   children: [
     {
       path: '/components',
-      redirect: () => 'button'
+      redirect: 'button'
     },
 
     {

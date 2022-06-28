@@ -1,12 +1,34 @@
 <template>
   <v-app>
-    <router-view></router-view>
+    <main-layout :showSidebar="showSidebar">
+      <router-view></router-view>
+    </main-layout>
   </v-app>
 </template>
 
 <script>
   export default {
-    name: 'App'
+    name: 'App',
+
+    data() {
+      return {
+        showSidebar: false,
+        name: 'ZHome'
+      }
+    },
+
+    watch: {
+      '$route': {
+        handler({ name }) {
+          this.showSidebar = name === 'ZHome' ? false : true
+        },
+        immediate: true
+      }
+    },
+
+    components: {
+      'main-layout': () => import('./layouts/MainLayout')
+    }
   }
 </script>
 
