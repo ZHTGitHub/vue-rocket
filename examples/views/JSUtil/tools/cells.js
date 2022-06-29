@@ -82,7 +82,7 @@ const rules = [
   },
 
   {
-    name: 'cleanArray(value)',
+    name: 'removeDuplicate(value)',
     intr: '数组去重，若value不为数组，返回value.',
     params: [
       { text: '任意值' }
