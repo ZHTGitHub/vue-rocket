@@ -49,6 +49,7 @@ class Toasted {
   /**
    * @description 动态
    * @param {String} message
+   * @param {Any} customType
    * @param {Object} options
    */ 
   dynamic(message, customType, options) {
@@ -57,6 +58,9 @@ class Toasted {
     if(type) {
       const assignOptions = Object.assign(this.customOptions, options)
       this[type](message, assignOptions)
+    }
+    else {
+      this.info(message, options)
     }
   }
 }

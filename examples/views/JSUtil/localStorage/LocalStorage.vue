@@ -2,6 +2,11 @@
   <div class="local-storage">
     <typing-title :title="$route.meta.title"></typing-title>
 
+    <div class="mb-12">
+      <p class="text-black">导入</p>
+      <pre><code class="language-javascript">import { localStorage } from 'vue-rocket'</code></pre>
+    </div>
+
     <div 
       class="rule" 
       v-for="(item, index) in cells.rules"
@@ -30,6 +35,11 @@
 </template>
 
 <script>
+  import Prism from 'prismjs'
+  import 'prismjs/themes/prism-okaidia.css'
+  import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+  import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+
   import localStorage from '../../../../packages/scripts/utils/storage/localStorage'
   import cells from './cells'
 
@@ -55,6 +65,10 @@
         a: {val: 1, key: 'A'},
         b: {val: 2, key: 'B'}
       })
+    },
+
+    mounted() {
+      Prism.highlightAll()
     },
 
     methods: {
