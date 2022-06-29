@@ -1,9 +1,9 @@
 {
   "name": "vue-rocket",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "description": "基于 Vue+Vuetify 的后台管理系统框架",
   "author": "zenghaitao",
-  "private": false, 
+  "private": false,
   "main": "lib/vuerocket.umd.min.js",
   "license": "MIT",
   "keywords": [
@@ -81,6 +81,7 @@
     }
   },
   "dependencies": {
-    "vee-validate": "^3.4.14"
+    "vee-validate": "^3.4.14",
+    "vue-toastification": "^1.7.14"
   }
 }

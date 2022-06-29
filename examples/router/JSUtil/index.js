@@ -13,6 +13,18 @@ const JSUtilRoutes = {
     },
 
     {
+      path: 'toasted',
+      name: 'ZDemoToasted',
+      meta: {
+        key: 'toasted',
+        pKey: 'plugins',
+        realm: 'toasted',
+        title: 'Toasted 消息提示/通知',
+      },
+      component: () => import('../../views/JSUtil/toasted')
+    },
+
+    {
       path: 'tools',
       name: 'ZDemoTools',
       meta: {

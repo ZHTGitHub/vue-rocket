@@ -8,6 +8,13 @@
       "link": "/JSUtil",
       "children": [
         {
+          "value": "toasted",
+          "icon": "",
+          "label": ["Toasted", "消息提示/通知"],
+          "link": "/utils/toasted"
+        },
+
+        {
           "value": "tools",
           "icon": "",
           "label": ["Tools", "工具"],

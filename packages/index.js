@@ -35,7 +35,7 @@ import ZDrawImage from './ZDrawImage'
 
 import rocket from './scripts/rocket'
 import forms from './scripts/forms'
-import { tools, localStorage, sessionStorage, IndexedDB } from './scripts/utils'
+import { Toasted, tools, localStorage, sessionStorage, IndexedDB } from './scripts/utils'
 import './styles/styles.css'
 
 const components = [
@@ -80,6 +80,7 @@ if(typeof window !== 'undefined' && window.Vue) {
 export {
 	rocket,
 	forms,
+	Toasted,
 	tools,
 	tools as R,
 	localStorage,
