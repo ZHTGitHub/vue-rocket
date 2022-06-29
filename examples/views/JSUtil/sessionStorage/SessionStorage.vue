@@ -8,13 +8,18 @@
       :key="`rules_${ index }`"
     >
       <h6 class="text-h5">{{ item.name }}</h6>
-      <p>{{ item.intr }}</p>
+
+      <p 
+        v-for="(item, index) in item.intrs"
+        :key="`intr_${ index }`"
+        class="ma-0 pa-0 py-2"
+      >{{ item.text }}</p>
 
       <h5 class="fw-black">参数</h5>
 
       <p 
         v-for="(item, index) in item.params"
-        :key="index"
+        :key="`param_${ index }`"
         class="ma-0 pa-0"
       >{{ item.text }}</p>
     </div>
