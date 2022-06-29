@@ -1,3 +1,5 @@
+import tools from '../tools'
+
 const sessionStorage = {
   /**
    * @description 设置
