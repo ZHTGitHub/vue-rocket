@@ -3,8 +3,10 @@
     <typing-title :title="$route.meta.title"></typing-title>
 
     <div>
-      <p>提示：Toasted 封装自 <a class="text-none" href="https://vue-toastification.maronato.dev">vue-toastification</a> 插件，
-      除 toasted.dynamic 第二个参数为“自定义对应 Toasted 类型的值”，其余参数的用法均与 <a class="text-none" href="https://vue-toastification.maronato.dev">vue-toastification</a> 保持一致。</p>
+      <p>
+        提示：<span class="text-black">请先在项目中安装 <a class="text-blue" :href="href">vue-toastification</a>；</span> Toasted 封装自 <span class="text-blue">vue-toastification</span> 插件，
+        除 <span class="text-italic">toasted.dynamic</span> 第二个参数为“自定义对应 Toasted 类型的值”，其余参数的用法均与 <span class="text-blue">vue-toastification</span> 保持一致。
+      </p>
     </div>
 
     <div class="mt-12">
@@ -95,6 +97,7 @@
 
     data() {
       return {
+        href: 'https://vue-toastification.maronato.dev',
         code
       }
     },
