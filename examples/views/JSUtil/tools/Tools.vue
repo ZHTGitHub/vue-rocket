@@ -28,9 +28,7 @@
 
 <script>
   import Prism from 'prismjs'
-  import 'prismjs/themes/prism-okaidia.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+  import 'prismjs/themes/prism-okaidia.min.css'
 
   import tools from '../../../../packages/scripts/utils/tools'
   import cells from './cells'

@@ -43,9 +43,7 @@
 
 <script>
   import Prism from 'prismjs'
-  import 'prismjs/themes/prism-okaidia.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+  import 'prismjs/themes/prism-okaidia.min.css'
 
   import Toasted from '../../../../packages/scripts/utils/toasted'
 
