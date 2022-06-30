@@ -2,99 +2,83 @@
   <div class="form-examples">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="z-flex align-center">
-      <z-btn
-        class="mr-4"
-        color="primary"
-        lockedTime="1000"
-        :unlocked="true"
-        @click="getForms"
-      >forms</z-btn>
-
-      <v-btn-toggle
-        color="primary"
-        dense
-        mandatory
-        @change="changeForm"
-      >
-        <v-btn>
-          1
-        </v-btn>
-        <v-btn>
-          2
-        </v-btn>
-      </v-btn-toggle>
+    <div class="mt-12">
+      <p class="text-black">使用</p>
+      <pre><code class="language-html" v-text="cells.code"></code></pre>
     </div>
 
-    <v-row justify="center">
-      <v-col cols="6">
-        <v-card>
-          <v-card-text>
-            <z-text-field
-              :formId="formId"
-              formKey="name"
-              label="姓名"
-              :validation="[
-                { rule: 'required', message: '姓名为必填项.' },
-                { rule: 'alpha_num', message: '字段只能包含英文字母及自然数.' },
-                { rule: 'between:8,16', message: '字段长度在8-16位.' },
-              ]"
-              defaultValue="Leslie"
-            >
-              <span class="error--text" slot="prepend-outer">*</span>
-            </z-text-field>
+    <div class="z-row justify-start mt-12">
+      <div class="z-col-10 pa-4 rounded-md elevation-2">
+        <div class="fields">
+          <z-text-field
+            :formId="formId"
+            formKey="username"
+            label="用户名"
+            :validation="[
+              { rule: 'required', message: '用户名为必填项.' },
+              { rule: 'between:2,16', message: '用户名长度在2-16位.' }
+            ]"
+            defaultValue="Leslie"
+          >
+            <span class="error--text" slot="prepend-outer">*</span>
+          </z-text-field>
 
-            <z-text-field
-              v-if="formLayout === 0"
-              :formId="formId"
-              formKey="phone"
-              label="手机"
-              :validation="[
-                { rule: 'required', message: '姓名为必填项.' }
-              ]"
-            >
-              <span class="error--text" slot="prepend-outer">*</span>
-            </z-text-field>
-          </v-card-text>
+          <z-text-field
+            :formId="formId"
+            formKey="password"
+            label="密码"
+            :validation="[
+              { rule: 'required', message: '密码为必填项.' },
+              { rule: 'between:8,16', message: '密码长度在8-16位.' }
+            ]"
+          >
+            <span class="error--text" slot="prepend-outer">*</span>
+          </z-text-field>
+        </div>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <z-btn 
-              :formId="formId"
-              color="primary"
-              btnType="validate"
-              lockedTime="0"
-              @click="onSubmit"
-            >
-            <v-icon>mdi-send</v-icon>
-            提交</z-btn>
+        <div class="z-flex justify-end actions">
+          <z-btn 
+            :formId="formId"
+            color="primary"
+            btnType="validate"
+            lockedTime="0"
+            @click="onSubmit"
+          >
+          <v-icon>mdi-send</v-icon>
+          提交</z-btn>
 
-            <z-btn 
-              class="mx-2"
-              :formId="formId"
-              color="warning"
-              btnType="reset"
-              @click="onReset"
-            >
-            <v-icon>mdi-reload</v-icon>
-            重置</z-btn>
+          <z-btn 
+            class="mx-2"
+            :formId="formId"
+            color="warning"
+            btnType="reset"
+            @click="onReset"
+          >
+          <v-icon>mdi-reload</v-icon>
+          重置</z-btn>
 
-            <z-btn 
-              :formId="formId"
-              color="error"
-              btnType="clear"
-              @click="onClear"
-            >
-            <v-icon>mdi-broom</v-icon>
-            清空</z-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
+          <z-btn 
+            :formId="formId"
+            color="error"
+            btnType="clear"
+            @click="onClear"
+          >
+          <v-icon>mdi-broom</v-icon>
+          清空</z-btn>
+        </div>
+      </div>
+
+      <div class="z-col-14 px-4 py-2 rounded-md">
+        {{ forms[formId] }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  import Prism from 'prismjs'
+  import 'prismjs/themes/prism-okaidia.min.css'
+
   import { mapState } from 'vuex'
   import cells from './cells'
 
@@ -105,28 +89,15 @@
       return {
         formId: 'Examples',
         searchFormId: 'ExamplesSearch',
-        cells,
-        formLayout: 0
+        cells
       }
     },
 
+    mounted() {
+      Prism.highlightAll()
+    },
+
     methods: {
-      getForms() {
-        console.log(this.forms)
-      },
-
-      changeForm(value) {
-        this.formLayout = value
-      },
-
-      onSearch() {
-        console.log(this.forms[this.searchFormId])
-      },
-
-      onOpen() {
-        this.$refs.dynamic.open()
-      },
-
       onSubmit() {
         console.log(this.forms[this.formId])
       },

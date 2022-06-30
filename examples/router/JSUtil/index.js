@@ -9,7 +9,7 @@ const JSUtilRoutes = {
   children: [
     {
       path: '/utils',
-      redirect: 'tools'
+      redirect: 'toasted'
     },
 
     {

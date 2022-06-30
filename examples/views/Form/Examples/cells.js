@@ -1,148 +1,99 @@
-const fields = [
-  {
-    inputType: 'text',
-    formKey: 'name',
-    label: '姓名',
-    prependOuter: '*',
-    prependOuterClass: 'error--text',
-    cols: 12,
-    colsClass: 'pb-0',
-    validation: [
-      { rule: 'required', message: '姓名为必填项.' },
-      { rule: 'min:4', message: '字段长度不得小于4.' }
-    ]
-  },
+const code =
+`<div class="z-row justify-center">
+  <div class="z-col-10 pa-4 rounded-md elevation-4">
+    <div class="fields">
+      <z-text-field
+        :formId="formId"
+        formKey="username"
+        label="用户名"
+        :validation="[
+          { rule: 'required', message: '用户名为必填项.' },
+          { rule: 'between:2,16', message: '用户名长度在2-16位.' }
+        ]"
+        defaultValue="Leslie"
+      >
+        <span class="error--text" slot="prepend-outer">*</span>
+      </z-text-field>
 
-  {
-    inputType: 'text',
-    formKey: 'phone',
-    label: '手机',
-    cols: 12,
-    colsClass: 'py-0',
-    validation: [
-      { regex: /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/, message: '手机格式不正确.' }
-    ]
-  },
+      <z-text-field
+        :formId="formId"
+        formKey="password"
+        label="密码"
+        :validation="[
+          { rule: 'required', message: '密码为必填项.' },
+          { rule: 'between:8,16', message: '密码长度在8-16位.' }
+        ]"
+      >
+        <span class="error--text" slot="prepend-outer">*</span>
+      </z-text-field>
+    </div>
 
-  // {
-  //   inputType: 'select',
-  //   formKey: 'area',
-  //   label: '居住城市',
-  //   cols: 12,
-  //   colsClass: 'py-0',
-  //   prependOuter: '*',
-  //   prependOuterClass: 'error--text',
-  //   options: [
-  //     { label: '广州', value: 1 },
-  //     { label: '深圳', value: 2 },
-  //     { label: '珠海', value: 3 }
-  //   ],
-  //   validation: [
-  //     { rule: 'required', message: '居住城市为必选项.' }
-  //   ]
-  // },
+    <div class="z-flex justify-end actions">
+      <z-btn 
+        :formId="formId"
+        color="primary"
+        btnType="validate"
+        lockedTime="0"
+        @click="onSubmit"
+      >
+      <v-icon>mdi-send</v-icon>
+      提交</z-btn>
 
-  // {
-  //   inputType: 'autocomplete',
-  //   formKey: 'country',
-  //   label: '国家',
-  //   cols: 12,
-  //   colsClass: 'py-0',
-  //   prependOuter: '*',
-  //   prependOuterClass: 'error--text',
-  //   options: [
-  //     { label: '广州', value: 1 },
-  //     { label: '深圳', value: 2 },
-  //     { label: '珠海', value: 3 }
-  //   ],
-  //   validation: [
-  //     { rule: 'required', message: '国家为必选项.' }
-  //   ]
-  // },
+      <z-btn 
+        class="mx-2"
+        :formId="formId"
+        color="warning"
+        btnType="reset"
+        @click="onReset"
+      >
+      <v-icon>mdi-reload</v-icon>
+      重置</z-btn>
 
-  // {
-  //   inputType: 'date',
-  //   formKey: 'date',
-  //   label: '生日',
-  //   prependOuter: '*',
-  //   prependOuterClass: 'error--text',
-  //   validation: [
-  //     { rule: 'required', message: '生日为必选项.' }
-  //   ],
-  //   defaultValue: '2021-09-20'
-  // },
+      <z-btn 
+        :formId="formId"
+        color="error"
+        btnType="clear"
+        @click="onClear"
+      >
+      <v-icon>mdi-broom</v-icon>
+      清空</z-btn>
+    </div>
+  </div>
+</div>
 
-  // {
-  //   inputType: 'radios',
-  //   formKey: 'gender',
-  //   label: '性别',
-  //   cols: 12,
-  //   colsClass: 'py-0',
-  //   options: [
-  //     { label: '男性', value: 1 },
-  //     { label: '女性', value: 2 }
-  //   ],
-  //   prepend: '*',
-  //   prependClass: 'error--text',
-  //   validation: [
-  //     { rule: 'required', message: '请选择性别.' }
-  //   ]
-  // },
+<script>
+  import { mapState } from 'vuex'
 
-  // {
-  //   inputType: 'checkboxs',
-  //   formKey: 'hobby',
-  //   label: '兴趣',
-  //   cols: 12,
-  //   colsClass: 'py-0',
-  //   options: [
-  //     { label: '游泳', value: 1 },
-  //     { label: '乒乓球', value: 2 },
-  //     { label: '羽毛球', value: 3 }
-  //   ],
-  //   prepend: '*',
-  //   prependClass: 'error--text',
-  //   validation: [
-  //     { rule: 'required', message: '请选择兴趣.' }
-  //   ]
-  // },
+  export default {
+    name: 'FormExamples',
 
-  // {
-  //   inputType: 'btnToggle',
-  //   formKey: 'sexual',
-  //   label: '视力',
-  //   mandatory: true,
-  //   options: [
-  //     { label: '正常', value: 1 },
-  //     { label: '近视', value: 2 },
-  //     { label: '远视', value: 3 }
-  //   ],
-  //   validation: [
-  //     { rule: 'required', message: '视力为必选项.' }
-  //   ]
-  // },
+    data() {
+      return {
+        formId: 'Examples'
+      }
+    },
 
-  // {
-  //   inputType: 'textarea',
-  //   formKey: 'intr',
-  //   label: '介绍',
-  //   cols: 12,
-  //   colsClass: 'pb-0',
-  //   validation: [
-  //     { rule: 'min:20', message: '介绍长度不得小于20.' }
-  //   ]
-  // },
+    methods: {
+      onSubmit() {
+        console.log(this.forms[this.formId])
+      },
 
-  // {
-  //   inputType: 'switch',
-  //   formKey: 'active',
-  //   label: '激活',
-  //   validation: [
-  //     { rule: 'required', message: '请勾选激活.' }
-  //   ]
-  // }
-]
+      onReset() {
+        console.log(this.forms[this.formId])
+      },
+
+      onClear() {
+        console.log(this.forms[this.formId])
+      }
+    },
+
+    computed: {
+      ...mapState(['forms'])
+    }
+  }
+</script>
+`
 
 export default {
-  fields
+  code
 }

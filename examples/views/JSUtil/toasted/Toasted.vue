@@ -4,7 +4,7 @@
 
     <div>
       <p>
-        提示：<span class="text-black">请先在项目中安装 <a class="text-blue" :href="href">vue-toastification</a>；</span> Toasted 封装自 <span class="text-blue">vue-toastification</span> 插件，
+        提示：<span class="text-black">请先在项目中安装 <a class="text-blue" target="__blank" :href="href">vue-toastification</a> 并引入；</span> Toasted 封装自 <span class="text-blue">vue-toastification</span> 插件，
         除 <span class="text-italic">toasted.dynamic</span> 第二个参数为“自定义对应 Toasted 类型的值”，其余参数的用法均与 <span class="text-blue">vue-toastification</span> 保持一致。
       </p>
     </div>
