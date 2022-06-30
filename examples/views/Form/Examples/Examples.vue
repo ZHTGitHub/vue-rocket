@@ -7,7 +7,11 @@
       <pre><code class="language-html" v-text="cells.code"></code></pre>
     </div>
 
-    <div class="z-row justify-start mt-12">
+    <div class="mt-12">
+      <p class="text-black">演示</p>
+    </div>
+
+    <div class="z-row justify-start">
       <div class="z-col-10 pa-4 rounded-md elevation-2">
         <div class="fields">
           <z-text-field
