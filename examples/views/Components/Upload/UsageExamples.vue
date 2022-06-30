@@ -36,8 +36,6 @@
 <script>
   import Prism from 'prismjs'
   import 'prismjs/themes/prism-okaidia.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
-  import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
   import { mapState } from 'vuex'
 
