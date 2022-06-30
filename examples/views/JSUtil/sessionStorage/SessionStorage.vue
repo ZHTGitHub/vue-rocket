@@ -2,31 +2,29 @@
   <div class="session-storage">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="mb-12">
+    <div>
       <p class="text-black">导入</p>
-      <pre><code class="language-javascript">import { sessionStorage } from 'vue-rocket'</code></pre>
+      <pre><code class="language-javascript" v-text="cells.importCode"></code></pre>
     </div>
 
-    <div 
-      class="rule" 
-      v-for="(item, index) in cells.rules"
-      :key="`rules_${ index }`"
-    >
-      <h6 class="text-h5">{{ item.name }}</h6>
+    <div class="mt-12">
+      <h6 class="text-h5">set(key, value)</h6>
+      <pre><code class="language-javascript" v-text="cells.setCode"></code></pre>
+    </div>
 
-      <p 
-        v-for="(item, index) in item.intrs"
-        :key="`intr_${ index }`"
-        class="ma-0 pa-0 py-2"
-      >{{ item.text }}</p>
+    <div class="mt-12">
+      <h6 class="text-h5">get(key)</h6>
+      <pre><code class="language-javascript" v-text="cells.getCode"></code></pre>
+    </div>
 
-      <h5 class="fw-black">参数</h5>
+    <div class="mt-12">
+      <h6 class="text-h5">delete(key)</h6>
+      <pre><code class="language-javascript" v-text="cells.deleteCode"></code></pre>
+    </div>
 
-      <p 
-        v-for="(item, index) in item.params"
-        :key="`param_${ index }`"
-        class="ma-0 pa-0"
-      >{{ item.text }}</p>
+    <div class="mt-12">
+      <h6 class="text-h5">clear()</h6>
+      <pre><code class="language-javascript" v-text="cells.clearCode"></code></pre>
     </div>
   </div>
 </template>
