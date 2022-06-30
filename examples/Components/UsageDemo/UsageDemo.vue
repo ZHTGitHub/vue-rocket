@@ -15,10 +15,7 @@
           </div>
 
           <div class="px-2 z-code" :style="{ height: expanded ? 'auto' : 0 }">
-            <pre class="language-markup pre">
-              <code class="language-markup code">{{ code }}</code>
-            </pre>
-            <!-- <slot name="code"></slot> -->
+            <pre class="language-markup pre"><code class="language-markup code">{{ code }}</code></pre>
           </div>
         </div>
       </v-sheet>

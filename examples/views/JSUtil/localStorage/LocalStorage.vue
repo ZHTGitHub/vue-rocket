@@ -46,18 +46,20 @@
     },
 
     created() {
-      const obj = {}
+      localStorage.set('profile', { name: 'leslie', age: 18 })
 
-      for(let i = 0; i < 100; i+=1) {
-        obj[i] = i
-      }
+      // const obj = {}
 
-      localStorage.set(obj)
+      // for(let i = 0; i < 100; i+=1) {
+      //   obj[i] = i
+      // }
 
-      localStorage.set({
-        a: {val: 1, key: 'A'},
-        b: {val: 2, key: 'B'}
-      })
+      // localStorage.set(obj)
+
+      // localStorage.set({
+      //   a: {val: 1, key: 'A'},
+      //   b: {val: 2, key: 'B'}
+      // })
     },
 
     mounted() {

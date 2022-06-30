@@ -31,29 +31,26 @@ const code =
     <div class="z-flex justify-end actions">
       <z-btn 
         :formId="formId"
-        color="primary"
         btnType="validate"
+        color="primary"
         lockedTime="0"
-        @click="onSubmit"
       >
       <v-icon>mdi-send</v-icon>
       提交</z-btn>
 
       <z-btn 
-        class="mx-2"
         :formId="formId"
-        color="warning"
         btnType="reset"
-        @click="onReset"
+        class="mx-2"
+        color="warning"
       >
       <v-icon>mdi-reload</v-icon>
       重置</z-btn>
 
       <z-btn 
         :formId="formId"
-        color="error"
         btnType="clear"
-        @click="onClear"
+        color="error"
       >
       <v-icon>mdi-broom</v-icon>
       清空</z-btn>
@@ -70,20 +67,6 @@ const code =
     data() {
       return {
         formId: 'Examples'
-      }
-    },
-
-    methods: {
-      onSubmit() {
-        console.log(this.forms[this.formId])
-      },
-
-      onReset() {
-        console.log(this.forms[this.formId])
-      },
-
-      onClear() {
-        console.log(this.forms[this.formId])
       }
     },
 
