@@ -19,7 +19,7 @@ const JSUtilRoutes = {
         key: 'toasted',
         pKey: 'plugins',
         realm: 'toasted',
-        title: 'Toasted 消息提示/通知',
+        title: 'Toasted 提示/通知',
       },
       component: () => import('../../views/JSUtil/toasted')
     },
