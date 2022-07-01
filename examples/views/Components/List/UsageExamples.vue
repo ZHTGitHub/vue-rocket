@@ -72,7 +72,7 @@
           '哈尔滨市第一专科医院白渔泡分院',
         ],
         show: false,
-        value: '',
+        value: '青白江区爱雅堂口腔门诊部',
         autofocus: false
       }
     },

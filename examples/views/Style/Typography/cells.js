@@ -125,7 +125,7 @@ export const colorList = [
 // 字体强调
 export const weightList = [
   {
-    class: 'text-black',
+    class: 'text-bolder',
     label: '900'
   },
 

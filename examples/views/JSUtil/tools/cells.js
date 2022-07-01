@@ -69,7 +69,16 @@ const rules = [
     intr: '遍历 collection 集合，返回与 predicate 匹配的第一个元素，否则返回 undefined.',
     params: [
       { text: 'collection (Object[]): 一个用来迭代的集合' },
-      { text: 'predicate (Array|Object|String): 匹配的条件' }
+      { text: 'predicate (Any): 匹配的条件' }
+    ]
+  },
+
+  {
+    name: 'findIndex(collection, predicate)',
+    intr: '遍历 collection 集合，返回与 predicate 匹配的第一个元素，否则返回 -1.',
+    params: [
+      { text: 'collection (Object[]): 一个用来迭代的集合' },
+      { text: 'predicate (Any): 匹配的条件' }
     ]
   },
 

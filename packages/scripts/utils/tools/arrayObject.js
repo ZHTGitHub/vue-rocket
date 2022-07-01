@@ -33,6 +33,7 @@ export const deepClone = function(value = {}) {
  * @param {Object} deepClone
  */ 
 export const find = function(collection, predicate, deepClone = false) {
+  // predicate 为数组
   if(isArray(predicate)) {
     const [key, val] = predicate
 
@@ -42,13 +43,13 @@ export const find = function(collection, predicate, deepClone = false) {
       }
     }
   }
+  // predicate 为对象
   else if(isObject(predicate)) {
+    const entries = Object.entries(predicate)
+    
     for(let item of collection) {
-
-      const variety = Object.entries(predicate)
-
-      const result = variety.every((v) => {
-        const [key, val] = v
+      const result = entries.every((entry) => {
+        const [key, val] = entry
 
         return item[key] === val
       }) 
@@ -58,10 +59,19 @@ export const find = function(collection, predicate, deepClone = false) {
       }
     }
   }
+  // predicate 不为数组/对象
   else {
     for(let item of collection) {
-      for(let key in item) {
-        if(item[key] === predicate) {
+
+      if(typeof item === 'object') {
+        for(let key in item) {
+          if(item[key] === predicate) {
+            return item
+          }
+        }
+      }
+      else {
+        if(item === predicate) {
           return item
         }
       }
@@ -75,10 +85,48 @@ export const find = function(collection, predicate, deepClone = false) {
  * @param {Array|Object|String} predicate
  */ 
 export const findIndex = function(collection, predicate) { 
-  if(isArray(collection)) {
+  // predicate 为数组
+  if(isArray(predicate)) {
+    const [key, val] = predicate
+
     for(let index in collection) {
-      if(isEqual(collection[index], predicate)) {
+      if(collection[index][key] === val) {
         return +index
+      }
+    }
+  }
+  // predicate 为对象
+  else if(isObject(predicate)) {
+    const entries = Object.entries(predicate)
+
+    for(let index in collection) {
+      const result = entries.every((entry) => {
+        const [key, val] = entry
+
+        return collection[index][key] === val
+      }) 
+
+      if(result) {
+        return +index
+      }
+    }
+  }
+  // predicate 不为数组/对象
+  else {
+    for(let index in collection) {
+      const item = collection[index]
+
+      if(typeof item === 'object') {
+        for(let key in item) {
+          if(item[key] === predicate) {
+            return +index
+          }
+        }
+      }
+      else {
+        if(item === predicate) {
+          return +index
+        }
       }
     }
   }
