@@ -73,6 +73,18 @@ const StyleRoutes = {
     },
 
     {
+      path: 'grid',
+      name: 'DemoStyleGrid',
+      meta: {
+        key: 'grid',
+        pKey: 'styles',
+        realm: 'grid',
+        title: 'Grid 栅格',
+      },
+      component: () => import('../../views/Style/Grid')
+    },
+
+    {
       path: 'radius',
       name: 'DemoStyleRound',
       meta: {

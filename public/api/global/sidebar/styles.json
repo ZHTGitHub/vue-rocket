@@ -43,6 +43,13 @@
         },
 
         {
+          "value": "grid",
+          "icon": "",
+          "label": ["Grid", "栅格"],
+          "link": "/styles/grid"
+        },
+
+        {
           "value": "radius",
           "icon": "",
           "label": ["Round", "边框半径"],
