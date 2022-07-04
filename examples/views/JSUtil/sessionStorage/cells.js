@@ -67,7 +67,7 @@ const getCode =
 ` // 1、获取名称为 name 的值，若 name 不存在返回 null
   sessionStorage.get('name')
 
-  // 2、返回数组里 name、profile 对应的值，若不存在返回 null
+  // 2、返回名称为 name、profile 对应的值，若不存在返回 null
   sessionStorage.get(['name', 'profile'])
 `
 
@@ -75,7 +75,7 @@ const deleteCode =
 ` // 1、删除名称为 name 的信息
   sessionStorage.delete('name')
 
-  // 2、删除数组里 name、profile 对应的信息
+  // 2、删除名称为 name、profile 对应的信息
   sessionStorage.delete(['name', 'profile'])
 `
 
