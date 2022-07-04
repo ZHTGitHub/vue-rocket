@@ -3,8 +3,8 @@
     <typing-title :title="$route.meta.title"></typing-title>
 
     <div class="box">
-      <div class="z-row">
-        <div class="z-flex z-col-12">
+      <div class="px-4 mb-1 row">
+        <div class="z-flex col-12">
           <z-select
             :formId="formId"
             formKey="paddingDirection"
@@ -32,7 +32,7 @@
           </z-select>
         </div>  
 
-        <div class="z-flex z-col-12">
+        <div class="z-flex col-12">
           <z-select
             :formId="formId"
             formKey="marginDirection"
