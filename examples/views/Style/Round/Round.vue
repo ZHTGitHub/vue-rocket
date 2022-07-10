@@ -1,6 +1,18 @@
 <template>
   <div class="demo-round">
     <typing-title :title="$route.meta.title"></typing-title>
+
+    <div class="solids">
+      <div class="pa-4 mb-6 solid text-center bg-gray">solid</div>
+
+      <div class="pa-4 mb-6 solid-top text-center bg-gray">solid-top</div>
+
+      <div class="pa-4 mb-6 solid-right text-center bg-gray">solid-right</div>
+
+      <div class="pa-4 mb-6 solid-bottom text-center bg-gray">solid-bottom</div>
+
+      <div class="pa-4 mb-6 solid-left text-center bg-gray">solid-left</div>
+    </div>
     
     <div class="z-flex flex-wrap squares">
       <div
