@@ -40,6 +40,7 @@
       :readonly="readonly"
       :reverse="reverse"  
       :search-input.sync="search"
+      :small-chips="smallChips"
       :solo="solo"
       :suffix="suffix"
       :success="success"
@@ -112,6 +113,11 @@
       },
 
       multiple: {
+        type: Boolean,
+        default: false
+      },
+
+      smallChips: {
         type: Boolean,
         default: false
       },
