@@ -1,130 +1,130 @@
-.row {
+.z-row {
   display: flex;
   flex-wrap: wrap;
   flex: 1 1 auto;
 }
 
-.row [class*="col-"] {
+.z-row [class*="z-col-"] {
   display: block;
   padding: 0;
 }
 
-.col-24 {
+.z-col-24 {
   flex: 0 0 100%;
   max-width: 100%;
 }
 
-.col-23 {
+.z-col-23 {
   flex: 0 0 95.83333333%;
   max-width: 95.83333333%;
 }
 
-.col-22 {
+.z-col-22 {
   flex: 0 0 91.66666667%;
   max-width: 91.66666667%;
 }
 
-.col-21 {
+.z-col-21 {
   flex: 0 0 87.5%;
   max-width: 87.5%;
 }
 
-.col-20 {
+.z-col-20 {
   flex: 0 0 83.33333333%;
   max-width: 83.33333333%;
 }
 
-.col-19 {
+.z-col-19 {
   flex: 0 0 79.16666667%;
   max-width: 79.16666667%;
 }
 
-.col-18 {
+.z-col-18 {
   flex: 0 0 75%;
   max-width: 75%;
 }
 
-.col-17 {
+.z-col-17 {
   flex: 0 0 70.83333333%;
   max-width: 70.83333333%;
 }
 
-.col-16 {
+.z-col-16 {
   flex: 0 0 66.66666667%;
   max-width: 66.66666667%;
 }
 
-.col-15 {
+.z-col-15 {
   flex: 0 0 62.5%;
   max-width: 62.5%;
 }
 
-.col-14 {
+.z-col-14 {
   flex: 0 0 58.33333333%;
   max-width: 58.33333333%;
 }
 
-.col-13 {
+.z-col-13 {
   flex: 0 0 54.16666667%;
   max-width: 54.16666667%;
 }
 
-.col-12 {
+.z-col-12 {
   flex: 0 0 50%;
   max-width: 50%;
 }
 
-.col-11 {
+.z-col-11 {
   flex: 0 0 45.83333333%;
   max-width: 45.83333333%;
 }
 
-.col-10 {
+.z-col-10 {
   flex: 0 0 41.66666667%;
   max-width: 41.66666667%;
 }
 
-.col-9 {
+.z-col-9 {
   flex: 0 0 37.5%;
   max-width: 37.5%;
 }
 
-.col-8 {
+.z-col-8 {
   flex: 0 0 33.33333333%;
   max-width: 33.33333333%;
 }
 
-.col-7 {
+.z-col-7 {
   flex: 0 0 29.16666667%;
   max-width: 29.16666667%;
 }
 
-.col-6 {
+.z-col-6 {
   flex: 0 0 25%;
   max-width: 25%;
 }
 
-.col-5 {
+.z-col-5 {
   flex: 0 0 20.83333333%;
   max-width: 20.83333333%;
 }
 
-.col-4 {
+.z-col-4 {
   flex: 0 0 16.66666667%;
   max-width: 16.66666667%;
 }
 
-.col-3 {
+.z-col-3 {
   flex: 0 0 12.5%;
   max-width: 12.5%;
 }
 
-.col-2 {
+.z-col-2 {
   flex: 0 0 8.33333333%;
   max-width: 8.33333333%;
 }
 
-.col-1 {
+.z-col-1 {
   flex: 0 0 4.16666667%;
   max-width: 4.16666667%;
 }
