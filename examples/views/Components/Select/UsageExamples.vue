@@ -9,7 +9,7 @@
           :return-object="false"
           :rules="[{ required: true, message: '居住城市为必选项.' }]"
           :options="cityOptions"
-          :defaultValue="1"
+          defaultValue="1"
           @blur="handleBlur"
           @change="handleChange"
         ></z-select>
@@ -41,7 +41,7 @@
       return {
         code,
         cityOptions: [
-          { label: '广州', value: 1 },
+          { label: '广州', value: '1' },
           { label: '深圳', value: 2 },
           { label: '珠海', value: 3 },
           { label: '佛山', value: 4 }

@@ -1,112 +1,120 @@
-const rules = [
-  {
-    name: 'getType(value)',
-    intr: '返回值的数据类型，返回 boolean / NaN / number / string / array / function / object / null / undefined / symbol.',
-    params: [
-      { text: '任意值.' }
-    ]
-  },
+const getTypeCode = 
+`/**
+ * @description 返回值的数据类型(boolean / NaN / number / string / array / function / object / null / undefined / symbol)
+ * @param value(Any)
+ */ 
+tools.getType(value)
+`
 
-  {
-    name: 'getScrollOffset()',
-    intr: '返回滚动条滚动距离，返回 { x: "横向滚动距离", y: "纵向滚动距离" }.',
-    params: [
-      { text: '无.' }
-    ]
-  },
+const getScrollOffsetCode = 
+`/**
+ * @description 返回滚动条滚动距离({ x: "横向滚动距离", y: "纵向滚动距离" })
+ */
+tools.getScrollOffset()
+`
 
-  {
-    name: 'getViewportSize()',
-    intr: '返回视口尺寸，返回 { width: "适口的宽", height: "适口的高" }.',
-    params: [
-      { text: '无.' }
-    ]
-  },
+const getViewportSizeCode = 
+`/**
+ * @description 返回视口尺寸({ width: "适口的宽", height: "适口的高" })
+ */
+tools.getViewportSize()
+`
 
-  {
-    name: 'isObject(value)',
-    intr: '判断值是否为对象，返回 true 或 false.',
-    params: [
-      { text: '任意值.' }
-    ]
-  },
+const isObjectCode = 
+`/**
+ * @description 判断值是否为对象(true / false)
+ * @param value(Any)
+ */ 
+tools.isObject(value)
+`
 
-  {
-    name: 'isArray(value)',
-    intr: '判断值是否为数组，返回 true 或 false.',
-    params: [
-      { text: '任意值.' }
-    ]
-  },
+const isArrayCode = 
+`/**
+ * @description 判断值是否为数组(true / false)
+ * @param value(Any)
+ */ 
+tools.isArray(value)
+`
 
-  {
-    name: 'isEqual(value, other)',
-    intr: '判断两个值是否绝对相等，数组/对象只比较其属性值是否绝对相等，返回 true 或 false.',
-    params: [
-      { text: 'value (*): 用来比较的值.' },
-      { text: 'other (*): 另一个用来比较的值.' }
-    ]
-  },
+const isEqualCode = 
+`/**
+ * @description 判断两个值是否绝对相等，数组/对象只比较其属性值是否绝对相等(true / false)
+ * @param value(Any) 用来比较的值
+ * @param other(Any) 另一个用来比较的值
+ */ 
+tools.isEqual(value, other)
+`
 
-  {
-    name: 'isYummy(value)',
-    intr: '判断值是否合法，值为 undefined | null | "" | false | [] | {} 不合法返回 false，其余值(包含数字 0)均合法返回 true.',
-    params: [
-      { text: '任意值.' }
-    ]
-  },
+const isYummyCode = 
+`/**
+ * @description 判断值是否合法，值为 undefined | null | "" | false | [] | {} 不合法返回 false，其余值(包含数字 0)均合法返回 true
+ * @param value(Any)
+ */ 
+tools.isYummy(value)
+`
 
-  {
-    name: 'isLousy(value)',
-    intr: '判断值是否不合法，值为 undefined | null | "" | false | [] | {} 不合法返回 true，其余值(包含数字 0)均合法返回 false.',
-    params: [
-      { text: '任意值.' }
-    ]
-  },
+const isLousyCode = 
+`/**
+ * @description 判断值是否不合法，值为 undefined | null | "" | false | [] | {} 不合法返回 true，其余值(包含数字 0)均合法返回 false
+ * @param value(Any)
+ */ 
+tools.isLousy(value)
+`
 
-  {
-    name: 'find(collection, predicate)',
-    intr: '遍历 collection 集合，返回与 predicate 匹配的第一个元素，否则返回 undefined.',
-    params: [
-      { text: 'collection (Object[]): 一个用来迭代的集合' },
-      { text: 'predicate (Any): 匹配的条件' }
-    ]
-  },
+const findCode = 
+`/**
+ * @description 返回 collection 中与 predicate 匹配的第一个元素，否则返回 undefined
+ * @param collection(Object[]) 一个用来迭代的集合
+ * @param predicate(Any) 匹配的条件
+ */ 
+tools.find(collection, predicate)
+`
 
-  {
-    name: 'findIndex(collection, predicate)',
-    intr: '遍历 collection 集合，返回与 predicate 匹配的第一个元素，否则返回 -1.',
-    params: [
-      { text: 'collection (Object[]): 一个用来迭代的集合' },
-      { text: 'predicate (Any): 匹配的条件' }
-    ]
-  },
+const findIndexCode = 
+`/**
+ * @description 返回 collection 中与 predicate 匹配的第一个元素，否则返回 -1
+ * @param collection(Array) 一个用来迭代的集合
+ * @param predicate(Any) 匹配的条件
+ */ 
+tools.findIndex(collection, predicate)
+`
 
-  {
-    name: 'deepClone(value)',
-    intr: '深拷贝，若value不为对象或数组，返回value.',
-    params: [
-      { text: '任意值' }
-    ]
-  },
+const deepCloneCode = 
+`/**
+ * @description 深拷贝，若 value 不为对象或数组，返回 value
+ * @param value(Any)
+ */ 
+tools.deepClone(value)
+`
 
-  {
-    name: 'removeDuplicate(value)',
-    intr: '数组去重，若value不为数组，返回value.',
-    params: [
-      { text: '任意值' }
-    ]
-  },
+const removeDuplicateCode = 
+`/**
+ * @description 数组去重，若 value 不为数组，返回 value
+ * @param value(Any)
+ */ 
+tools.removeDuplicate(value)
+`
 
-  {
-    name: 'flatArray(value)',
-    intr: '数组拍平，若value不为数组，返回value.',
-    params: [
-      { text: '任意值' }
-    ]
-  },
-]
+const flatArrayCode = 
+`/**
+ * @description 数组拍平，若 value 不为数组，返回 value
+ * @param value(Any)
+ */ 
+tools.flatArray(value)
+`
 
 export default {
-  rules
+  getTypeCode,
+  getScrollOffsetCode,
+  getViewportSizeCode,
+  isObjectCode,
+  isArrayCode,
+  isEqualCode,
+  isYummyCode,
+  isLousyCode,
+  findCode,
+  findIndexCode,
+  deepCloneCode,
+  removeDuplicateCode,
+  flatArrayCode
 }
