@@ -3,33 +3,6 @@
   "total": 18,
   "data": [
     {
-      "name": "formId",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "输入框所在表单的 id"
-    },
-
-    {
-      "name": "formKey",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "输入框的 key 值"
-    },
-
-    {
-      "name": "defaultValue",
-      "required": "否",
-      "type": "Number[ ] | String[ ]",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "输入框的默认值"
-    },
-
-    {
       "name": "accept",
       "required": "否",
       "type": "String",
@@ -111,6 +84,15 @@
     },
 
     {
+      "name": "defaultValue",
+      "required": "否",
+      "type": "Number[ ] | String[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "输入框的默认值"
+    },
+
+    {
       "name": "deleteIcon",
       "required": "否",
       "type": "Boolean",
@@ -153,6 +135,24 @@
       "acceptedValues": "—",
       "default": "[]",
       "description": "已上传文件地址列表"
+    },
+
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "输入框所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "输入框的 key 值"
     },
 
     {

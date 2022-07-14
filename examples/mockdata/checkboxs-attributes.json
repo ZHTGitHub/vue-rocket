@@ -3,24 +3,6 @@
   "total": 10,
   "data": [
     {
-      "name": "formId",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "多选框所在表单的 id"
-    },
-
-    {
-      "name": "formKey",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "多选框的 key 值"
-    },
-
-    {
       "name": "column",
       "required": "否",
       "type": "Boolean",
@@ -45,6 +27,24 @@
       "acceptedValues": "—",
       "default": "false",
       "description": "是否禁用状态"
+    },
+
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "多选框所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "多选框的 key 值"
     },
 
     {

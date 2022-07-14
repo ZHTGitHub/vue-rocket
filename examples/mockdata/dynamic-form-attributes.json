@@ -3,6 +3,15 @@
   "total": 9,
   "data": [
     {
+      "name": "config",
+      "required": "否",
+      "type": "Object",
+      "acceptedValues": "—",
+      "default": "{}",
+      "description": "配置项"
+    },
+
+    {
       "name": "detail",
       "required": "否",
       "type": "Object",

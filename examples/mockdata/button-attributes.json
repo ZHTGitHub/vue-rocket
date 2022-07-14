@@ -3,15 +3,6 @@
   "total": 27,
   "data": [
     {
-      "name": "formId",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "按钮所在表单的 id"
-    },
-
-    {
       "name": "absolute",
       "required": "否",
       "type": "Boolean",
@@ -99,6 +90,15 @@
       "acceptedValues": "—",
       "default": false,
       "description": "按钮 position: fixed"
+    },
+
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "按钮所在表单的 id"
     },
 
     {

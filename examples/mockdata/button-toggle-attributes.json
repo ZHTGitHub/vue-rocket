@@ -3,24 +3,6 @@
   "total": 12,
   "data": [
     {
-      "name": "formId",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "按钮组所在表单的 id"
-    },
-
-    {
-      "name": "formKey",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "按钮组的 key 值"
-    },
-
-    {
       "name": "borderless",
       "required": "否",
       "type": "Boolean",
@@ -54,6 +36,24 @@
       "acceptedValues": "—",
       "default": false,
       "description": "翻转"
+    },
+
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "按钮组所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "按钮组的 key 值"
     },
 
     {

@@ -3,33 +3,6 @@
   "total": 19,
   "data": [
     {
-      "name": "formId",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "选择器所在表单的 id"
-    },
-
-    {
-      "name": "formKey",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "选择器的 key 值"
-    },
-
-    {
-      "name": "defaultValue",
-      "required": "否",
-      "type": "Number[ ] | String[ ]",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "选择器的默认值"
-    },
-
-    {
       "name": "append-icon",
       "required": "否",
       "type": "String",
@@ -84,6 +57,15 @@
     },
 
     {
+      "name": "defaultValue",
+      "required": "否",
+      "type": "Number[ ] | String[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "选择器的默认值"
+    },
+
+    {
       "name": "disabled",
       "required": "否",
       "type": "Boolean",
@@ -108,6 +90,24 @@
       "acceptedValues": "—",
       "default": false,
       "description": "应用替代填充输入样式"
+    },
+
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "选择器所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "选择器的 key 值"
     },
 
     {

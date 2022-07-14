@@ -39,6 +39,24 @@
     },
 
     {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "选择器所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "选择器的 key 值"
+    },
+
+    {
       "name": "headers",
       "required": "否",
       "type": "Object",

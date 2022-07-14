@@ -3,6 +3,33 @@
   "total": 11,
   "data": [
     {
+      "name": "autofocus",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "启用自动聚焦"
+    },
+
+    {
+      "name": "defaultValue",
+      "required": "否",
+      "type": "Number[ ] | String[ ]",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "日期选择器的默认值"
+    },
+
+    {
+      "name": "firstDayOfWeek",
+      "required": "否",
+      "type": "Number[ ] | String[ ]",
+      "acceptedValues": "—",
+      "default": 0,
+      "description": "设置一周的第一天，从周日的 0 开始"
+    },
+
+    {
       "name": "formId",
       "required": "是",
       "type": "String",
@@ -18,33 +45,6 @@
       "acceptedValues": "—",
       "default": "—",
       "description": "日期选择器的 key 值"
-    },
-
-    {
-      "name": "defaultValue",
-      "required": "否",
-      "type": "Number[ ] | String[ ]",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "日期选择器的默认值"
-    },
-
-    {
-      "name": "autofocus",
-      "required": "否",
-      "type": "Boolean",
-      "acceptedValues": "—",
-      "default": false,
-      "description": "启用自动聚焦"
-    },
-
-    {
-      "name": "firstDayOfWeek",
-      "required": "否",
-      "type": "Number[ ] | String[ ]",
-      "acceptedValues": "—",
-      "default": 0,
-      "description": "设置一周的第一天，从周日的 0 开始"
     },
 
     {

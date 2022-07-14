@@ -417,7 +417,7 @@
             :class="cancelProps.class"
             :color="cancelProps.color"
             depressed
-            @click="_onCancel"
+            @click="onCancel"
           >{{ cancelProps.text }}</z-btn>
 
           <z-btn
@@ -426,7 +426,7 @@
             :class="confirmProps.class"
             :color="confirmProps.color"
             depressed
-            @click="_onConfirm"
+            @click="onConfirm"
           >{{ confirmProps.text }}</z-btn>
         </v-card-actions>
         <!-- Foot END -->
@@ -527,12 +527,12 @@
     },
 
     methods: {
-      _onCancel() {
+      onCancel() {
         this.$emit('cancel', this.effect, tools.deepClone(this.forms[this.formId]))
         this.close()
       },
 
-      _onConfirm() {
+      onConfirm() {
         this.$emit('confirm', this.effect, tools.deepClone(this.forms[this.formId]))
       },
       
@@ -609,7 +609,8 @@
 
           if(dialog) {
             this.detailInfo = tools.deepClone(this.detail)
-          }else {
+          }
+          else {
             rocket.emit('ZHT_RESET_FORM', this.formId)
           }
         },

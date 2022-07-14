@@ -3,24 +3,6 @@
   "total": 19,
   "data": [
     {
-      "name": "formId",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "输入框所在表单的 id"
-    },
-
-    {
-      "name": "formKey",
-      "required": "是",
-      "type": "String",
-      "acceptedValues": "—",
-      "default": "—",
-      "description": "输入框的 key 值"
-    },
-
-    {
       "name": "column",
       "required": "否",
       "type": "Boolean",
@@ -54,6 +36,24 @@
       "acceptedValues": "—",
       "default": false,
       "description": "将单选框设置为手动错误状态"
+    },
+
+    {
+      "name": "formId",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "输入框所在表单的 id"
+    },
+
+    {
+      "name": "formKey",
+      "required": "是",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "输入框的 key 值"
     },
 
     {
