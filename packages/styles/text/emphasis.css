@@ -1,0 +1,28 @@
+/* 字体强调 */
+.text-bolder {
+  font-weight: 900 !important;
+}
+
+.text-bold {
+  font-weight: 700 !important;
+}
+
+.text-medium {
+  font-weight: 500 !important;
+}
+
+.text-regular {
+  font-weight: 400 !important;
+}
+
+.text-light {
+  font-weight: 300 !important;
+}
+
+.text-thin {
+  font-weight: 100 !important;
+}
+
+.text-italic {
+  font-style: italic !important;
+}

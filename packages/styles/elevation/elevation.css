@@ -98,36 +98,3 @@
 .elevation-24 {
   box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12) !important;
 }
-
-/* 翘边海拔 */
-.elevation-wrap {
-  position: relative;
- 
-}
-
-.elevation-wrap.elevation-1 {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
-}
-
-.elevation-wrap:before, 
-.elevation-wrap:after {
-  position: absolute;
-  content: "";
-  top: 20px;
-  bottom: 30px;
-  left: 20px;
-  width: 50%;
-  transform: rotate(-3deg);
-  z-index: -1;
-}
-
-.elevation-wrap:after {
-  right: 20px;
-  left: auto;
-  transform: rotate(3deg);
-}
-
-.elevation-wrap.elevation-1:before, 
-.elevation-wrap.elevation-1:after {
-  box-shadow: 0 30px 20px rgba(0, 0, 0, .2) !important;
-}

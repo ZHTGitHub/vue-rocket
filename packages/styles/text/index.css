@@ -1,1 +1,9 @@
-@import './text.css';
+@import "./title.css";
+@import "./subtitle.css";
+@import "./size.css";
+@import "./emphasis.css";
+@import "./alignment.css";
+@import "./decoration.css";
+@import "./opacity.css";
+@import "./transform.css";
+@import "./shadow.css";

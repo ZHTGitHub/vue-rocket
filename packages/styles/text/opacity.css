@@ -1,0 +1,12 @@
+/* 不透明度 */
+.text-primary {
+  color: rgba(0, 0, 0, .87) !important;
+}
+
+.text-secondary {
+  color: rgba(0, 0, 0, .6) !important;
+}
+
+.text-disabled {
+  color: rgba(0, 0, 0, .38) !important;
+}

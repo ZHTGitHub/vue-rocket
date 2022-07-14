@@ -1,0 +1,19 @@
+/* 文本翻转 */
+.text-rtl {
+  direction: rtl !important;
+}
+
+.text-ltr {
+  direction: ltr !important;
+}
+
+/* 文本换行和溢出 */
+.text-no-wrap {
+  white-space: nowrap !important;
+}
+
+.text-truncate {
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}

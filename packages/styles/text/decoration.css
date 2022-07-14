@@ -1,0 +1,16 @@
+/* 装饰线 */
+.text-none {
+  text-decoration: none !important;
+}
+
+.text-line-through {
+  text-decoration: line-through !important;
+}
+
+.text-overline {
+  text-decoration: overline !important;
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}

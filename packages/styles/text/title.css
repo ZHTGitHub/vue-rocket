@@ -1,0 +1,36 @@
+/* 标题大小 */
+.text-h1 {
+  font-size: 6rem !important;
+  line-height: 6rem;
+  letter-spacing: -.015625em !important;
+}
+
+.text-h2 {
+  font-size: 3.75rem !important;
+  line-height: 3.75rem;
+  letter-spacing: -.0083333333em !important;
+}
+
+.text-h3 {
+  font-size: 3rem !important;
+  line-height: 3.125rem;
+  letter-spacing: normal !important;
+}
+
+.text-h4 {
+  font-size: 2.125rem !important;
+  line-height: 2.5rem;
+  letter-spacing: .0073529412em !important;
+}
+
+.text-h5 {
+  font-size: 1.5rem !important;
+  font-weight: 400;
+  letter-spacing: normal !important;
+}
+
+.text-h6 {
+  font-size: 1.25rem !important;
+  font-weight: 500;
+  letter-spacing: .0125em !important;
+}

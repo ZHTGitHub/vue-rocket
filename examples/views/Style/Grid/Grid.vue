@@ -15,6 +15,7 @@
         <div class="z-col-12">
           <div class="text-center bg-cyan box">z-col-12</div>
         </div>
+
         <div class="z-col-12">
           <div class="text-center bg-blue box">z-col-12</div>
         </div>

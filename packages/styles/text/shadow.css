@@ -1,0 +1,76 @@
+/* 文字阴影 */
+
+/* 嫣红 */
+.text-shadow[class*="-red"] {
+	text-shadow: 6px 6px 8px rgba(204, 69, 59, 0.2) !important;
+}
+
+/* 橘橙 */
+.text-shadow[class*="-orange"] {
+	text-shadow: 6px 6px 8px rgba(217, 109, 26, 0.2) !important;
+}
+
+/* 明黄 */
+.text-shadow[class*="-yellow"] {
+	text-shadow: 6px 6px 8px rgba(224, 170, 7, 0.2) !important;
+}
+
+/* 橄榄 */
+.text-shadow[class*="-olive"] {
+	text-shadow: 6px 6px 8px rgba(124, 173, 55, 0.2) !important;
+}
+
+/* 森绿 */
+.text-shadow[class*="-green"] {
+	text-shadow: 6px 6px 8px rgba(48, 156, 63, 0.2) !important;
+}
+
+/* 天青 */
+.text-shadow[class*="-cyan"] {
+	text-shadow: 6px 6px 8px rgba(28, 187, 180, 0.2) !important;
+}
+
+/* 海蓝 */
+.text-shadow[class*="-blue"] {
+	text-shadow: 6px 6px 8px rgba(0, 102, 204, 0.2) !important;
+}
+
+/* 姹紫 */
+.text-shadow[class*="-purple"] {
+	text-shadow: 6px 6px 8px rgba(88, 48, 156, 0.2) !important;
+}
+
+/* 木槿 */
+.text-shadow[class*="-mauve"] {
+	text-shadow: 6px 6px 8px rgba(133, 33, 150, 0.2) !important;
+}
+
+/* 桃粉 */
+.text-shadow[class*="-pink"] {
+	text-shadow: 6px 6px 8px rgba(199, 50, 134, 0.2) !important;
+}
+
+/* 棕褐 */
+.text-shadow[class*="-brown"] {
+	text-shadow: 6px 6px 8px rgba(140, 88, 53, 0.2) !important;
+}
+
+/*  玄灰 */
+.text-shadow[class*="-grey"] {
+	text-shadow: 6px 6px 8px rgba(114, 130, 138, 0.2) !important;
+}
+
+/* 草灰 */
+.text-shadow[class*="-gray"] {
+	text-shadow: 6px 6px 8px rgba(114, 130, 138, 0.2) !important;
+}
+
+/* 墨黑 */
+.text-shadow[class*="-black"] {
+	text-shadow: 6px 6px 8px rgba(26, 26, 26, 0.2) !important;
+}
+
+/* 雅白 */
+.text-shadow[class*="-white"] {
+	text-shadow: 6px 6px 8px rgba(255, 255, 255, 0.2) !important;
+}

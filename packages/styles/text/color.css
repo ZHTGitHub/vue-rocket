@@ -1,0 +1,76 @@
+/* 文字颜色 */
+
+/* 嫣红 */
+.text-red {
+	color: #e54d42 !important;
+}
+
+/* 橘橙 */
+.text-orange {
+	color: #f37b1d !important;
+}
+
+/* 明黄 */
+.text-yellow {
+	color: #fbbd08 !important;
+}
+
+/* 橄榄 */
+.text-olive {
+	color: #8dc63f !important;
+}
+
+/* 森绿 */
+.text-green {
+	color: #39b54a !important;
+}
+
+/* 天青 */
+.text-cyan {
+	color: #1cbbb4 !important;
+}
+
+/* 海蓝 */
+.text-blue {
+	color: #0081ff !important;
+}
+
+/* 姹紫 */
+.text-purple {
+	color: #6739b6 !important;
+}
+
+/* 木槿 */
+.text-mauve {
+	color: #9c26b0 !important;
+}
+
+/* 桃粉 */
+.text-pink {
+	color: #e03997 !important;
+}
+
+/* 棕褐 */
+.text-brown {
+	color: #a5673f !important;
+}
+
+/* 玄灰 */
+.text-grey {
+	color: #8799a3 !important;
+}
+
+/* 草灰 */
+.text-gray {
+	color: #aaa !important;
+}
+
+/* 墨黑 */
+.text-black {
+	color: #333 !important;
+}
+
+/* 雅白 */
+.text-white {
+	color: #fff !important;
+}

@@ -25,3 +25,23 @@
 .rounded-circle {
   border-radius: 50% !important;
 }
+
+.solid {
+  border: thin solid rgba(0,0,0,.12);
+}
+
+.solid-top {
+  border-top: thin solid rgba(0,0,0,.12);
+}
+
+.solid-right {
+  border-right: thin solid rgba(0,0,0,.12);
+}
+
+.solid-bottom {
+  border-bottom: thin solid rgba(0,0,0,.12);
+}
+
+.solid-left {
+  border-left: thin solid rgba(0,0,0,.12);
+}
