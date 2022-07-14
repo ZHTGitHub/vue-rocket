@@ -403,6 +403,8 @@
               <!-- ZSwitch END -->
               </v-col>
             </template>
+
+            <slot></slot>
           </v-row>
         </v-card-text>
         <!-- Body END -->

@@ -45,14 +45,14 @@
             {
               formKey: 'phone',
               always: false,
-              includes: ['ZHT'],
+              includes: ['Leslie'],
               excludes: []
             },
 
             {
               formKey: 'country',
               always: false,
-              includes: ['ZHT'],
+              includes: ['zenghaitao'],
               excludes: []
             }
           ]
@@ -96,7 +96,13 @@
       }"
       @cancel="handleCancel"
       @confirm="handleConfirm"
-    ></z-dynamic-form>
+    >
+      <z-upload 
+        formId="test"
+        formKey="upload"
+        action=""
+      ></z-upload>
+    </z-dynamic-form>
   </div>
 </template>
 

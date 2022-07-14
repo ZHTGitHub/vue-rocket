@@ -23,7 +23,9 @@
 
 <script>
   const style = {
-    'box-shadow': '0 2px 8px #f0f1f2 !important'
+    'box-shadow': '0 2px 8px #f0f1f2 !important',
+    'backdrop-filter': 'blur(20px)',
+    'background-color': 'rgba(255, 255, 255, .7)'
   }
 
   export default {
