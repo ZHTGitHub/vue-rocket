@@ -11,7 +11,7 @@
     </div>
 
     <div class="mb-8">
-      <div class="z-row">
+      <div class="z-row gutter-x4">
         <div class="z-col-12">
           <div class="text-center bg-cyan box">z-col-12</div>
         </div>
@@ -23,13 +23,27 @@
     </div>
 
     <div class="mb-8">
-      <div class="z-row">
+      <div class="z-row gutter-y8 gutter-x8">
         <div class="z-col-8">
           <div class="text-center bg-cyan box">z-col-8</div>
         </div>
+
         <div class="z-col-8">
           <div class="text-center bg-blue box">z-col-8</div>
         </div>
+
+        <div class="z-col-8">
+          <div class="text-center bg-cyan box">z-col-8</div>
+        </div>
+
+        <div class="z-col-8">
+          <div class="text-center bg-cyan box">z-col-8</div>
+        </div>
+
+        <div class="z-col-8">
+          <div class="text-center bg-blue box">z-col-8</div>
+        </div>
+        
         <div class="z-col-8">
           <div class="text-center bg-cyan box">z-col-8</div>
         </div>

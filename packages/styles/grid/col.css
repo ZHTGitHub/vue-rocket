@@ -1,14 +1,3 @@
-.z-row {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1 1 auto;
-}
-
-.z-row [class*="z-col-"] {
-  display: block;
-  padding: 0;
-}
-
 .z-col-24 {
   flex: 0 0 100%;
   max-width: 100%;
