@@ -1,5 +1,17 @@
 const fields = [
   {
+    inputType: 'upload',
+    formKey: 'avatar',
+    action: '',
+    label: '头像',
+    prepend: '*',
+    prependClass: 'error--text',
+    validation: [
+      { rule: 'required', message: '请上传头像.' }
+    ]
+  },
+
+  {
     inputType: 'text',
     formKey: 'name',
     label: '姓名',
@@ -140,6 +152,80 @@ const fields = [
   // }
 ]
 
+const dynamicFormCode =
+` <z-dynamic-form
+    ref="dynamic" 
+    formId="dynamic"
+    title="动态表单"
+    :fieldList="cells.fields"
+    :detail="{ name: 'ZHT', sexual: 2, }"
+    :config="{
+      name: {
+        mutex: [
+          {
+            formKey: 'phone',
+            always: false,
+            includes: ['Leslie'],
+            excludes: []
+          },
+
+          {
+            formKey: 'country',
+            always: false,
+            includes: ['zenghaitao'],
+            excludes: []
+          }
+        ]
+      },
+
+      country: {
+        mutex: [
+          {
+            formKey: 'area',
+            always: false,
+            includes: [],
+            excludes: [2]
+          }
+        ],
+        items: countryItems
+      },
+
+      area: {
+        mutex: [
+          {
+            formKey: 'country',
+            always: true,
+            includes: [],
+            excludes: []
+          }
+        ],
+        items: areaItems
+      },
+
+      gender: {
+        items: genderItems
+      },
+
+      hobby: {
+        items: hobbyItems
+      },
+
+      vision: {
+        items: visionItems
+      }
+    }"
+    @cancel="handleCancel"
+    @confirm="handleConfirm"
+  >
+  <z-upload 
+    formId="test"
+    formKey="upload"
+    action=""
+  ></z-upload>
+</z-dynamic-form>
+`
+
 export default {
-  fields
+  fields,
+  dynamicFormCode
 }

@@ -1,9 +1,11 @@
 <template>
   <div class="z-upload z-input">
+    <slot name="prepend"></slot>
+
     <div class="z-flex z-upload-wrapper">
       <div class="z-flex z-upload-list" :class="flip ? 'flex-row-reverse' : 'flex-row'">
         <div 
-          v-for="(image, index) of images"
+          v-for="(image, index) of values"
           :key="index"
           class="z-upload-list-image-container"
         >
@@ -35,7 +37,7 @@
         </div>
 
         <div 
-          v-show="!images || images.length < limit"
+          v-if="!limit || values.length < limit"
           class="z-upload-select"
           :style="hoverStyle"
           @mouseenter="onMouseenter"
@@ -56,6 +58,7 @@
             <div class="slot">
               <slot>
                 <v-icon>mdi-plus</v-icon>
+                <div class="text-medium">Upload</div>
               </slot>
             </div>
           </span>
@@ -138,7 +141,6 @@
       return {
         targetFile: null,
         targetFileInfo: targetFileInfo,
-        images: [],
         targetImage: {},
 
         hoverStyle: {}
@@ -175,13 +177,13 @@
               url: result
             }
 
-            // if(!tools.isArray(this.images)) {
-            //   this.images = []
+            // if(!tools.isArray(this.values)) {
+            //   this.values = []
             // }
 
-            // this.images.unshift(this.targetFileInfo)
+            // this.values.unshift(this.targetFileInfo)
 
-            // this.value = this.images
+            // this.value = this.values
 
             this.$emit('change', this.targetFileInfo)
           }
@@ -197,7 +199,7 @@
       // 删除
       onDelete(index, item) {
         this.targetImage = item
-        this.images.splice(index, 1)
+        this.values.splice(index, 1)
       },
 
       // 上传
@@ -245,16 +247,16 @@
 
     watch: {
       defaultValue: {
-        handler(value) {
-          this.images = value
+        handler(defaultValue) {
+          this.values = defaultValue
         },
         immediate: true
       },
 
-      images: {
-        handler(images) {
-          if(tools.isYummy(images)) {
-            this.value = images
+      values: {
+        handler(values) {
+          if(tools.isYummy(values)) {
+            this.value = values
           }
           else {
             this.value = undefined
@@ -267,10 +269,11 @@
 
       value: {
         handler(value) {
+				  console.log('ZUpload', value)
           if(value) {
-            this.images = value
+            this.values = value
           }else {
-            this.images = []
+            this.values = []
           }
         },
         immediate: true

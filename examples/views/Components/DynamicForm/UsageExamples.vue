@@ -1,44 +1,26 @@
 <template>
   <div class="usage-examples">
-    <div class="z-flex justify-end filters">
-      <z-btn
-        class="mb-8"
-        color="primary"
-        outlined
-        small
-        :lockedTime="0"
-        @click="onOpen"
-      >
-        open
-      </z-btn>
-
-      <z-btn
-        class="mb-8"
-        color="primary"
-        outlined
-        small
-        :lockedTime="0"
-        @click="onOpen1"
-      >
-        open1
-      </z-btn>
-    </div>
+    <usage-demo :code="cells.dynamicFormCode">
+      <div slot="demo">
+        <z-btn
+          class="mb-8"
+          color="primary"
+          outlined
+          small
+          :lockedTime="0"
+          @click="onOpen"
+        >
+          open
+        </z-btn>
+      </div>
+    </usage-demo>
 
     <z-dynamic-form
       ref="dynamic" 
+      formId="dynamic"
       title="动态表单"
       :fieldList="cells.fields"
-      :detail="{ name: 'Leslie', sexual: 1, country: 1 }"
-      @cancel="handleCancel"
-      @confirm="handleConfirm"
-    ></z-dynamic-form>
-
-    <z-dynamic-form
-      ref="dynamic1" 
-      formId="dynamic1"
-      title="动态表单"
-      :fieldList="cells.fields"
-      :detail="{ name: 'ZHT', sexual: 2, }"
+      :detail="{ name: 'ZHT', sexual: 2 }"
       :config="{
         name: {
           mutex: [
@@ -97,16 +79,13 @@
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >
-      <z-upload 
-        formId="test"
-        formKey="upload"
-        action=""
-      ></z-upload>
     </z-dynamic-form>
   </div>
 </template>
 
 <script>
+  import Prism from 'prismjs'
+  import 'prismjs/themes/prism-okaidia.css'
   import cells from './cells'
 
   export default {
@@ -115,6 +94,7 @@
     data() {
       return {
         cells,
+        code: '',
         countryItems: [
           { label: '中国', value: 1 },
           { label: '美国', value: 2 },
@@ -146,13 +126,13 @@
       }
     },
 
+    mounted() {
+      Prism.highlightAll()
+    },
+
     methods: {
       onOpen() {
         this.$refs.dynamic.open({ status: -1 })
-      },
-
-      onOpen1() {
-        this.$refs.dynamic1.open({ status: -1 })
       },
 
       handleCancel(effect, form) {

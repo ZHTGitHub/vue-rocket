@@ -83,7 +83,6 @@
 
     data() {
       return {
-        values: [],
         sweets: [],
         items: [],
         selectAll: false
@@ -136,8 +135,8 @@
 
     watch: {
       defaultValue: {
-        handler(value) {
-          this.values = value
+        handler(defaultValue) {
+          this.values = defaultValue
         },
         immediate: true
       },

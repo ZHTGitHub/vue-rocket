@@ -18,10 +18,12 @@
           @response="handleResponse"
         >
           <v-icon>mdi-plus</v-icon>
-          <div class="z-upload-text">Upload</div>
+          <div class="z-upload-text">上传</div>
         </z-upload>
 
         <z-btn
+          :formId="formId"
+          btnType="validate"
           class="mt-2"
           color="primary"
           @click="submit"
@@ -60,7 +62,7 @@
         code,
 
         headers: {
-          token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImV4cCI6MTY1MTM3NjAzMiwidXNlcklkIjoiMzQ5NDQ0YWYzOTkwNDU1ZmI1ZDczNWRlZjA4YTE0ZDEifQ.Fd29jS6ywd3gZvZwecsdXOYONKRYQlU4vBqIv7PzcXI'
+          token: ''
         }
       }
     },

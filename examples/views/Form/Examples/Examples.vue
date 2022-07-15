@@ -7,6 +7,19 @@
         <div class="z-row justify-start">
           <div class="z-col-10 pa-4 rounded-md elevation-2">
             <div class="fields">
+              <z-upload
+                :formId="formId"
+                formKey="avatar"
+                action="https://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
+                :headers="headers"
+                :validation="[
+                  { rule: 'required', message: '头像不能为空.' }
+                ]"
+                :defaultValue="[{
+                  url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+                }]"
+              ></z-upload>
+
               <z-text-field
                 :formId="formId"
                 formKey="username"
@@ -85,7 +98,10 @@
       return {
         formId: 'Examples',
         searchFormId: 'ExamplesSearch',
-        cells
+        cells,
+        headers: {
+          token: ''
+        }
       }
     },
 

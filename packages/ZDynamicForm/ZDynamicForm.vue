@@ -34,6 +34,10 @@
 
         <!-- Body BEGIN -->
         <v-card-text class="z-card-text">
+          <!-- 顶部插槽 BEGIN -->
+          <slot name="top"></slot>
+          <!-- 顶部插槽 END -->
+
           <v-row>
             <template v-for="item in fieldList">
               <v-col 
@@ -388,7 +392,7 @@
               <!-- ZButtonToggle END -->
 
               <!-- ZSwitch BEGIN -->
-              <template v-else>
+              <template v-else-if="item.inputType === 'switch'">
                 <z-switch
                   v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
@@ -397,17 +401,44 @@
                   :hide-details="item.hideDetails"
                   :label="item.label"
                   :readonly="item.readonly"
+                  :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
                 ></z-switch>
               </template> 
               <!-- ZSwitch END -->
+
+              <!-- ZUpload BEGIN -->
+              <template v-else>
+                <z-upload
+                  v-if="mutexForm[item.formKey] !== false"
+                  :formId="formId"
+                  :formKey="item.formKey"
+                  :action="item.action"
+                  :color="item.color"
+                  :disabled="item.disabled"
+                  :flip="item.flip"
+                  :headers="item.headers"
+                  :limit="item.limit"
+                  :method="item.method"
+                  :name="item.name"
+                  :validation="item.validation"
+                  :defaultValue="detailInfo[item.formKey]"
+                >
+                  <span 
+                    v-if="item.prepend"
+                    :class="item.prependClass" 
+                    slot="prepend"
+                  >{{ item.prepend }}</span>
+                </z-upload>
+              </template>
+              <!-- ZUpload END -->
               </v-col>
             </template>
           </v-row>
           
-          <!-- 默认插槽 BEGIN -->
-          <slot></slot>
-          <!-- 默认插槽 END -->
+          <!-- 底部插槽 BEGIN -->
+          <slot name="bottom"></slot>
+          <!-- 底部插槽 END -->
         </v-card-text>
         <!-- Body END -->
 

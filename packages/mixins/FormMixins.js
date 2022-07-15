@@ -1,5 +1,7 @@
 import { mapState } from 'vuex'
 
+const value_is_an_array = ['ZCheckboxs', 'ZUpload']
+
 export default {
 	props: {
 		formId: {
@@ -190,6 +192,7 @@ export default {
 
 	data() {
 		return {
+			values: [],
 			incorrect: false,
 			errorMessage: ''
 		}
@@ -214,15 +217,12 @@ export default {
 				this.$store.commit('SET_FORM_VALUE_BY_KEY', {
 					formId: this.formId,
 					formKey: this.formKey,
-					value: value
+					value
 				})
 			},
 
 			get() {
-				if(this.forms[this.formId]) {
-					return this.forms[this.formId][this.formKey]
-				}
-				return undefined
+				return this.forms[this.formId]?.[this.formKey]
 			}
 		},
 
@@ -238,18 +238,33 @@ export default {
 	},
 
 	watch: {
-		value: {
-			handler(value) {
-				if(value == null) {
-					this.value = undefined
+		defaultValue: {
+			handler(defaultValue) {
+				if(value_is_an_array.includes(this.$options.name)) {
+					this.values = defaultValue
+					return
 				}
+
+				this.value = defaultValue
 			},
 			immediate: true
 		},
 
-		defaultValue: {
+		value: {
 			handler(value) {
-				this.value = value
+				if(value_is_an_array.includes(this.$options.name)) {
+					if(value) {
+						this.values = value
+					}
+					else {
+						this.values = []
+					}
+					return
+				}
+
+				if(value == null) {
+					this.value = undefined
+				}
 			},
 			immediate: true
 		}
