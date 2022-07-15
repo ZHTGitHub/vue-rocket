@@ -246,38 +246,37 @@
     },
 
     watch: {
-      defaultValue: {
-        handler(defaultValue) {
-          this.values = defaultValue
-        },
-        immediate: true
-      },
+      // defaultValue: {
+      //   handler(defaultValue) {
+      //     this.values = defaultValue
+      //   },
+      //   immediate: true
+      // },
 
-      values: {
-        handler(values) {
-          if(tools.isYummy(values)) {
-            this.value = values
-          }
-          else {
-            this.value = undefined
-          }
+      // values: {
+      //   handler(values) {
+      //     if(tools.isYummy(values)) {
+      //       this.value = values
+      //     }
+      //     else {
+      //       this.value = undefined
+      //     }
 
-          this.verifyField()
-        },
-        immediate: true
-      },
+      //     this.verifyField()
+      //   },
+      //   immediate: true
+      // },
 
-      value: {
-        handler(value) {
-				  console.log('ZUpload', value)
-          if(value) {
-            this.values = value
-          }else {
-            this.values = []
-          }
-        },
-        immediate: true
-      }
+      // value: {
+      //   handler(value) {
+      //     if(value) {
+      //       this.values = value
+      //     }else {
+      //       this.values = []
+      //     }
+      //   },
+      //   immediate: true
+      // }
     },
 
     components: {
