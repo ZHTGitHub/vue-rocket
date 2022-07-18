@@ -15,9 +15,7 @@
                 :validation="[
                   { rule: 'required', message: '头像不能为空.' }
                 ]"
-                :defaultValue="[{
-                  url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-                }]"
+                
               ></z-upload>
 
               <z-text-field

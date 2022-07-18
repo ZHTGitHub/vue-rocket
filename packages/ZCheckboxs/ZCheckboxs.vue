@@ -12,7 +12,6 @@
       </div>
 
       <div class="z-input--checkboxs-group">
-        
         <div 
           class="z-flex flex-wrap flex-row z-input__slot" 
           :class="[column ? 'flex-column' : '', row ? 'flex-row' : '']"
@@ -45,7 +44,7 @@
           </div>
         </div>
 
-        <div class="error--text z-messages" >{{ errorMessage }}</div>
+        <div class="error--text z-messages">{{ errorMessage }}</div>
       </div>
     </div>
   </div>
@@ -134,38 +133,38 @@
     },
 
     watch: {
-      defaultValue: {
-        handler(defaultValue) {
-          this.values = defaultValue
-        },
-        immediate: true
-      },
+      // defaultValue: {
+      //   handler(defaultValue) {
+      //     this.values = defaultValue
+      //   },
+      //   immediate: true
+      // },
 
-      values: {
-        handler(values) {
-          if(tools.isYummy(values)) {
-            this.value = values
-          }else {
-            this.value = undefined
-          }
-        },
-        immediate: true
-      },
+      // values: {
+      //   handler(values) {
+      //     if(tools.isYummy(values)) {
+      //       this.value = values
+      //     }else {
+      //       this.value = undefined
+      //     }
+      //   },
+      //   immediate: true
+      // },
 
-      value: {
-        handler(value) {
-          if(value) {
-            if(Array.isArray(value)) {
-              this.values = value
-            }else {
-              this.values = [value]
-            }
-          }else {
-            this.values = []
-          }
-        },
-        immediate: true
-      },
+      // value: {
+      //   handler(value) {
+      //     if(value) {
+      //       if(Array.isArray(value)) {
+      //         this.values = value
+      //       }else {
+      //         this.values = [value]
+      //       }
+      //     }else {
+      //       this.values = []
+      //     }
+      //   },
+      //   immediate: true
+      // },
 
       options: {
         handler() {

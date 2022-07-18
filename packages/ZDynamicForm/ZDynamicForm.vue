@@ -408,7 +408,7 @@
               <!-- ZSwitch END -->
 
               <!-- ZUpload BEGIN -->
-              <template v-else>
+              <template v-else-if="item.inputType === 'upload'">
                 <z-upload
                   v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
