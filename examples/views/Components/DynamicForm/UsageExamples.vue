@@ -20,13 +20,7 @@
       formId="dynamic"
       title="动态表单"
       :fieldList="cells.fields"
-      :detail="{ 
-        avatar: [
-          { url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' }
-        ],
-        name: 'ZHT', 
-        sexual: 2 
-      }"
+      :detail="detail"
       :config="{
         name: {
           mutex: [
@@ -129,7 +123,16 @@
           { label: '正常', value: 1 },
           { label: '近视', value: 2 },
           { label: '远视', value: 3 }
-        ]
+        ],
+
+        detail: {
+          // avatar: [
+          //   { url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' }
+          // ],
+          name: 'ZHT', 
+          phone: '123456',
+          sexual: 2 
+        }
       }
     },
 
@@ -142,8 +145,8 @@
         this.$refs.dynamic.open({ status: -1 })
       },
 
-      handleUploadChange(info) {
-        console.log(info)
+      handleUploadChange({ loadEvent }) {
+        this.detail = { ...this.detail, avatar: [{ url: loadEvent.target.result}] }
       },
 
       handleCancel(effect, form) {

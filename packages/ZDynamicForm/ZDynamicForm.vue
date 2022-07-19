@@ -280,14 +280,23 @@
                   :counter="item.counter"
                   :disabled="item.disabled"
                   :filled="item.filled"
+                  :first-day-of-week="item.firstDayOfWeek"
                   :hide-details="item.hideDetails"
                   :hint="item.hint"
+                  :immediate="item.immediate"
                   :label="item.label"
+                  :locale="item.locale"
+                  :max="item.max"
+                  :min="item.min"
                   :mode="item.mode"
+                  :no-title="item.noTitle"
                   :outlined="item.outlined"
+                  :picker-readonly="item.pickerReadonly"
+                  :picker-type="item.pickerType"
                   :placeholder="item.placeholder"
                   :prepend-icon="item.prependOuterIcon"
                   :prepend-inner-icon="item.prependIcon"
+                  :range="item.range"
                   :readonly="item.readonly"
                   :reverse="item.reverse"
                   :solo="item.solo"
@@ -296,6 +305,7 @@
                   :time-use-seconds="item.timeUseSeconds"
                   :type="item.type"
                   :validation="item.validation"
+                  :z-index="item.zIndex"
                   :defaultValue="detailInfo[item.formKey]"
                 >
                   <span 
@@ -629,6 +639,14 @@
         immediate: true
       },
 
+      detail: {
+        handler(detail) {
+          this.detailInfo = tools.deepClone(detail)
+        },
+        deep: true,
+        immediate: true
+      },
+
       forms: {
         handler(forms) {
           const form = forms[this.formId]
@@ -649,12 +667,14 @@
         handler(dialog) {
           this.$emit('dialog', dialog)
 
-          if(dialog) {
-            this.detailInfo = tools.deepClone(this.detail)
-          }
-          else {
-            rocket.emit('ZHT_RESET_FORM', this.formId)
-          }
+          !dialog && rocket.emit('ZHT_RESET_FORM', this.formId)
+
+          // if(dialog) {
+          //   this.detailInfo = tools.deepClone(this.detail)
+          // }
+          // else {
+          //   rocket.emit('ZHT_RESET_FORM', this.formId)
+          // }
         },
         immediate: true
       }

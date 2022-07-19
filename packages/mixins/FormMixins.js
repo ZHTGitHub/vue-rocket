@@ -6,12 +6,12 @@ export default {
 	props: {
 		formId: {
 			type: String,
-			required: true
+			default: 'form'
 		},
 
 		formKey: {
 			type: String,
-			required: true
+			default: 'text'
 		},
 
 		appendIcon: {

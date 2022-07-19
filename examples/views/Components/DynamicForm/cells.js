@@ -2,8 +2,10 @@ const fields = [
   {
     inputType: 'upload',
     formKey: 'avatar',
+    autoUpload: false,
     action: '',
     label: '头像',
+    limit: 1,
     prepend: '*',
     prependClass: 'error--text',
     validation: [

@@ -4,10 +4,10 @@
   "data": [
     {
       "name": "action",
-      "required": "是",
+      "required": "否",
       "type": "String",
       "acceptedValues": "—",
-      "default": "—",
+      "default": false,
       "description": "上传地址"
     },
 

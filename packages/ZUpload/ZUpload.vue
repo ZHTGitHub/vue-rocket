@@ -41,7 +41,7 @@
             </div>
 
             <div 
-              v-if="!limit || values.length < limit"
+              v-if="!limit || (values && values.length < limit)"
               class="z-upload-select"
               :style="hoverStyle"
               @mouseenter="onMouseenter"
@@ -94,7 +94,7 @@
     props: {
       action: {
         type: String,
-        required: true
+        required: false
       },
 
       autoUpload: {
