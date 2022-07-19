@@ -134,7 +134,7 @@
       "type": "String",
       "acceptedValues": "—",
       "default": "date",
-      "description": "确定选择器的日期类型 - 年月日(date)，年月(month)"
+      "description": "确定日期选择器的类型 - 年月日(date)，年月(month)"
     },
 
     {
