@@ -423,6 +423,8 @@
                   :name="item.name"
                   :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
+                  @change="onUploadChange"
+                  @response="onUploadResponse"
                 >
                   <span 
                     v-if="item.prepend"
@@ -598,6 +600,14 @@
           this.$set(this.mutexForm, formKey, excludes.includes(value) ? true : false)
           return
         }
+      },
+
+      onUploadChange(targetFileInfo) {
+        this.$emit('change:upload', targetFileInfo)
+      },
+
+      onUploadResponse(result) {
+        this.$emit('response:upload', result)
       }
     },
 

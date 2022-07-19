@@ -20,7 +20,13 @@
       formId="dynamic"
       title="动态表单"
       :fieldList="cells.fields"
-      :detail="{ name: 'ZHT', sexual: 2 }"
+      :detail="{ 
+        avatar: [
+          { url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' }
+        ],
+        name: 'ZHT', 
+        sexual: 2 
+      }"
       :config="{
         name: {
           mutex: [
@@ -76,6 +82,7 @@
           items: visionItems
         }
       }"
+      @change:upload="handleUploadChange"
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >
@@ -133,6 +140,10 @@
     methods: {
       onOpen() {
         this.$refs.dynamic.open({ status: -1 })
+      },
+
+      handleUploadChange(info) {
+        console.log(info)
       },
 
       handleCancel(effect, form) {

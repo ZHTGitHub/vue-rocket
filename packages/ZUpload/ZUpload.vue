@@ -1,72 +1,78 @@
 <template>
   <div class="z-upload z-input">
-    <slot name="prepend"></slot>
+    <div class="z-flex pt-3">
+      <div v-if="$slots.prepend" class="prepend">
+        <slot name="prepend"></slot>
+      </div>
 
-    <div class="z-flex z-upload-wrapper">
-      <div class="z-flex z-upload-list" :class="flip ? 'flex-row-reverse' : 'flex-row'">
-        <div 
-          v-for="(image, index) of values"
-          :key="index"
-          class="z-upload-list-image-container"
-        >
-          <div class="z-upload-list-item">
-              <div class="z-upload-list-item-info">
-                <span>
-                  <img 
-                    class="z-upload-list-item-img"
-                    :src="image.url" 
-                  >
-                </span>
+      <div>
+        <div class="z-flex z-upload-wrapper">
+          <div class="z-flex z-upload-list" :class="flip ? 'flex-row-reverse' : 'flex-row'">
+            <div 
+              v-for="(image, index) of values"
+              :key="index"
+              class="z-upload-list-image-container"
+            >
+              <div class="z-upload-list-item">
+                  <div class="z-upload-list-item-info">
+                    <span>
+                      <img 
+                        class="z-upload-list-item-img"
+                        :src="image.url" 
+                      >
+                    </span>
+                  </div>
+
+                  <span class="z-upload-list-item-actions">
+                    <v-icon 
+                      class="mr-2" 
+                      color="#ffffffd9" 
+                      small
+                      @click="onPreview(image)"
+                    >mdi-eye-outline</v-icon>
+
+                    <v-icon 
+                      color="#ffffffd9" 
+                      small
+                      @click="onDelete(index, image)"
+                    >mdi-trash-can-outline</v-icon>
+                  </span>
               </div>
+            </div>
 
-              <span class="z-upload-list-item-actions">
-                <v-icon 
-                  class="mr-2" 
-                  color="#ffffffd9" 
-                  small
-                  @click="onPreview(image)"
-                >mdi-eye-outline</v-icon>
+            <div 
+              v-if="!limit || values.length < limit"
+              class="z-upload-select"
+              :style="hoverStyle"
+              @mouseenter="onMouseenter"
+              @mouseleave="onMouseleave"
+            >
+              <span 
+                class="z-upload" 
+                @click="onChoice"
+              >
+                <input 
+                  ref="input"
+                  type="file" 
+                  accept="image/*" 
+                  :disabled="disabled"
+                  @change="handleReadImage"
+                >
 
-                <v-icon 
-                  color="#ffffffd9" 
-                  small
-                  @click="onDelete(index, image)"
-                >mdi-trash-can-outline</v-icon>
+                <div class="slot">
+                  <slot>
+                    <v-icon>mdi-plus</v-icon>
+                    <div class="text-medium">Upload</div>
+                  </slot>
+                </div>
               </span>
+            </div>
           </div>
         </div>
 
-        <div 
-          v-if="!limit || values.length < limit"
-          class="z-upload-select"
-          :style="hoverStyle"
-          @mouseenter="onMouseenter"
-          @mouseleave="onMouseleave"
-        >
-          <span 
-            class="z-upload" 
-            @click="onChoice"
-          >
-            <input 
-              ref="input"
-              type="file" 
-              accept="image/*" 
-              :disabled="disabled"
-              @change="handleReadImage"
-            >
-
-            <div class="slot">
-              <slot>
-                <v-icon>mdi-plus</v-icon>
-                <div class="text-medium">Upload</div>
-              </slot>
-            </div>
-          </span>
-        </div>
+        <div class="error--text z-messages">{{ errorMessage }}</div>
       </div>
     </div>
-
-    <div class="error--text z-messages">{{ errorMessage }}</div>
 
     <preview-dialog 
       ref="previewDialog"
@@ -245,7 +251,7 @@
       }
     },
 
-    watch: {
+    // watch: {
       // defaultValue: {
       //   handler(defaultValue) {
       //     this.values = defaultValue
@@ -277,7 +283,7 @@
       //   },
       //   immediate: true
       // }
-    },
+    // },
 
     components: {
       previewDialog
@@ -287,10 +293,16 @@
 
 <style lang="scss">
   .z-upload {
+    .prepend {
+      display: inline-flex;
+      margin: 4px 9px 4px 0;
+      font-size: 16px;
+      line-height: 1;
+    }
+
     .z-upload-wrapper {
       display: inline-block;
       width: 100%;
-      padding-top: 12px;
       margin-bottom: 8px;
 
       .z-upload-list {
@@ -320,7 +332,6 @@
             width: 104px;
             height: 104px;
             padding: 8px;
-            /* margin: 0 8px 8px 0; */
             border: 1px solid #d9d9d9;
             border-radius: 4px;
 
@@ -403,11 +414,6 @@
             display: none;
             cursor: pointer;
           }
-
-          /* .z-upload-text {
-            color: #333;
-            font-size: 14px;
-          } */
         }
       }
     }
