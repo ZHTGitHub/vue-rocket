@@ -15,7 +15,7 @@
                 :validation="[
                   { rule: 'required', message: '头像不能为空.' }
                 ]"
-                
+                @change="onUploadImage"
               ></z-upload>
 
               <z-text-field
@@ -105,6 +105,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      onUploadImage(event) {
+        console.log(event)
+      }
     },
 
     computed: {

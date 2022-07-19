@@ -414,6 +414,7 @@
                   :formId="formId"
                   :formKey="item.formKey"
                   :action="item.action"
+                  :auto-upload="item.autoUpload"
                   :color="item.color"
                   :disabled="item.disabled"
                   :flip="item.flip"
@@ -423,8 +424,8 @@
                   :name="item.name"
                   :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
-                  @change="onUploadChange"
-                  @response="onUploadResponse"
+                  @change="onUploadChange($event, item.formKey)"
+                  @response="onUploadResponse($event, item.formKey)"
                 >
                   <span 
                     v-if="item.prepend"
@@ -573,7 +574,7 @@
         this.dialog = false
       },
 
-      open(effect) {
+      open(effect = {}) {
         this.effect = tools.deepClone(effect)
         this.dialog = true
       },
@@ -602,12 +603,12 @@
         }
       },
 
-      onUploadChange(targetFileInfo) {
-        this.$emit('change:upload', targetFileInfo)
+      onUploadChange(event, formKey) {
+        this.$emit(`change:${ formKey }`, event)
       },
 
-      onUploadResponse(result) {
-        this.$emit('response:upload', result)
+      onUploadResponse(result, formKey) {
+        this.$emit(`response:${ formKey }`, result)
       }
     },
 

@@ -82,7 +82,7 @@
           items: visionItems
         }
       }"
-      @change:upload="handleUploadChange"
+      @change:avatar="handleUploadChange"
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >

@@ -56,7 +56,7 @@
                   type="file" 
                   accept="image/*" 
                   :disabled="disabled"
-                  @change="handleReadImage"
+                  @change="onReadImage"
                 >
 
                 <div class="slot">
@@ -87,14 +87,6 @@
   import { tools } from '../scripts/utils'
   import previewDialog from './previewDialog'
 
-  const targetFileInfo = {
-    lastModified: undefined,
-    name: '',
-    size: 0,
-    type: '',
-    url: ''
-  }
-
   export default {
     name: 'ZUpload',
     mixins: [FormMixins, FormValidationMixins],
@@ -103,6 +95,11 @@
       action: {
         type: String,
         required: true
+      },
+
+      autoUpload: {
+        type: Boolean,
+        default: true
       },
 
       color: {
@@ -145,8 +142,7 @@
     
     data() {
       return {
-        targetFile: null,
-        targetFileInfo: targetFileInfo,
+        file: null,
         targetImage: {},
 
         hoverStyle: {}
@@ -159,39 +155,18 @@
       },
 
       // 读取
-      handleReadImage(event) {
-        this.targetFile = event.target.files[0]
+      onReadImage(changeEvent) {
+        this.file = changeEvent.target.files[0]
 
         const fileReader = new FileReader()
 
-        fileReader.readAsDataURL(this.targetFile)
+        fileReader.readAsDataURL(this.file)
 
-        fileReader.addEventListener('load', (event) => {
-          const { error, result } = event.target
-
-          if(error == null) {
-
-            this.uploadFile()
-
-            const { lastModified, name, size, type } = this.targetFile
-
-            this.targetFileInfo = {
-              lastModified,
-              name,
-              size,
-              type,
-              url: result
-            }
-
-            // if(!tools.isArray(this.values)) {
-            //   this.values = []
-            // }
-
-            // this.values.unshift(this.targetFileInfo)
-
-            // this.value = this.values
-
-            this.$emit('change', this.targetFileInfo)
+        fileReader.addEventListener('load', (loadEvent) => { 
+          if(loadEvent.target?.error == null) {
+            this.autoUpload && this.uploadFile()
+            
+            this.$emit('change', { changeEvent, loadEvent })
           }
         })
       },
@@ -212,8 +187,6 @@
       async uploadFile() {
         const result = await this.request()
 
-        this.targetFileInfo.response = result
-
         this.$refs.input.value = null
 
         this.$emit('response', result)
@@ -222,7 +195,7 @@
       // 请求
       request() {
         const formData = new FormData()
-        formData.append(this.name, this.targetFile)
+        formData.append(this.name, this.file)
 
         return new Promise((resolve) => {
           fetch(this.action, {
