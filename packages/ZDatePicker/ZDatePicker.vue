@@ -192,7 +192,7 @@
 
       mode: {
         validator(value) {
-          return ~['date', 'month', 'time'].indexOf(value)
+          return ~['date', 'time'].indexOf(value)
         },
         default: 'date'
       },

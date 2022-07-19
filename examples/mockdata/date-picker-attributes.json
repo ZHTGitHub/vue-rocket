@@ -12,6 +12,15 @@
     },
 
     {
+      "name": "clearable",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "添加清除已选择日期/月份/时间"
+    },
+
+    {
       "name": "defaultValue",
       "required": "否",
       "type": "Number[ ] | String[ ]",
@@ -75,6 +84,33 @@
     },
 
     {
+      "name": "max",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "允许的最大 日期/月份/时间"
+    },
+
+    {
+      "name": "min",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "允许的最小 日期/月份/时间"
+    },
+
+    {
+      "name": "mode",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "date | time",
+      "default": "date",
+      "description": "设置选择器为 日期选择器 或 时间选择器"
+    },
+
+    {
       "name": "no-title",
       "required": "否",
       "type": "Boolean",
@@ -98,7 +134,7 @@
       "type": "String",
       "acceptedValues": "—",
       "default": "date",
-      "description": "确定选择器的类型 - 日期选择器的 date ，月选择器的 month"
+      "description": "确定选择器的日期类型 - 年月日(date)，年月(month)"
     },
 
     {
@@ -117,6 +153,33 @@
       "acceptedValues": "—",
       "default": true,
       "description": "使输入框变为只读状态"
+    },
+
+    {
+      "name": "time-format",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "ampm | 24hr",
+      "default": "ampm",
+      "description": "定义在选择器中显示的时间格式"
+    },
+
+    {
+      "name": "time-use-seconds",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "切换选择器中秒的使用"
+    },
+
+    {
+      "name": "z-index",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "堆叠顺序"
     }
   ]
 }
