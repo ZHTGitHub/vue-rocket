@@ -3,6 +3,15 @@
   "total": 7,
   "data": [
     {
+      "name": "color",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))"
+    },
+
+    {
       "name": "defaultValue",
       "required": "否",
       "type": "Number[ ] | String[ ]",
@@ -18,6 +27,15 @@
       "acceptedValues": "—",
       "default": "false",
       "description": "是否禁用状态"
+    },
+
+    {
+      "name": "false-value",
+      "required": "否",
+      "type": "Number | String | Boolean | Symbol | Object | Array",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设置假值"
     },
 
     {
@@ -39,12 +57,66 @@
     },
 
     {
+      "name": "indeterminate",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "为复选框设置不确定状态"
+    },
+
+    {
+      "name": "indeterminate-icon",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "处于不确定状态时使用的图标"
+    },
+
+    {
       "name": "label",
       "required": "否",
       "type": "String",
       "acceptedValues": "—",
       "default": "—",
       "description": "多选框关联的 label 文字"
+    },
+
+    {
+      "name": "off-icon",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "不活动时使用的图标"
+    },
+
+    {
+      "name": "on-icon",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "激活时使用的图标"
+    },
+
+    {
+      "name": "persistent-hint",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "强制提示总是可见的"
+    },
+
+    {
+      "name": "prepend-icon",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": "false",
+      "description": "在组件前添加一个图标，使用与 v-icon 相同的语法"
     },
 
     {
@@ -63,6 +135,15 @@
       "acceptedValues": "—",
       "default": "false",
       "description": "是否必填"
+    },
+
+    {
+      "name": "true-value",
+      "required": "否",
+      "type": "Number | String | Boolean | Symbol | Object | Array",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "设置真值"
     }
   ]
 }

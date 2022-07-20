@@ -1,14 +1,7 @@
 <template>
   <div class="usage-examples">
-    <usage-demo :code="code">
+    <usage-demo :code="cells.checkboxCode">
       <div slot="demo">
-        <z-btn
-          depressed
-          color="primary"
-          lockedTime="0"
-          @click="onConfirm"
-        >确认</z-btn>
-
         <div class="z-flex align-center">
           <z-checkbox
             :formId="formId"
@@ -38,19 +31,16 @@
 <script>
   import Prism from 'prismjs'
   import 'prismjs/themes/prism-okaidia.css'
-
   import { mapState } from 'vuex'
-
-  const code = ``
+  import cells from './cells'
 
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        code,
         formId: 'color',
-
+        cells,
         indeterminate: false,
         defaultValue: false
       }
@@ -58,14 +48,6 @@
 
     mounted() {
       Prism.highlightAll()
-    },
-
-    methods: {
-      onConfirm() {
-        this.defaultValue = !this.defaultValue
-        this.indeterminate = !this.defaultValue
-        console.log(this.forms[this.formId])
-      }
     },
 
     computed: {

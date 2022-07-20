@@ -48,7 +48,7 @@
 
       falseValue: {
         type: TYPES,
-        default: undefined
+        required: false
       },
 
       indeterminate: {
