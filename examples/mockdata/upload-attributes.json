@@ -111,6 +111,15 @@
     },
 
     {
+      "name": "show-only",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "是否仅用于显示图片"
+    },
+
+    {
       "name": "show-preview-icon",
       "required": "否",
       "type": "Boolean",

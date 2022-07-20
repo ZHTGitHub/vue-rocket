@@ -1,0 +1,23 @@
+{
+  "status": true,
+  "total": 2,
+  "data": [
+    {
+      "name": "click:clear",
+      "parameters": "(event: Event)",
+      "description": "单击可清除图标时发出"
+    },
+
+    {
+      "name": "confirm",
+      "parameters": "(value: String | Number)",
+      "description": "确认选择日期"
+    },
+
+    {
+      "name": "input",
+      "parameters": "(value: String | Number)",
+      "description": "日期发生改变时触发"
+    }
+  ]
+}

@@ -33,7 +33,7 @@
                   >mdi-eye-outline</v-icon>
 
                   <v-icon 
-                    v-if="showDeleteIcon"
+                    v-if="!showOnly && showDeleteIcon"
                     color="#ffffffd9" 
                     small
                     @click="onDelete(index, image)"
@@ -43,7 +43,7 @@
             </div>
 
             <div 
-              v-if="!limit || (values && values.length < limit)"
+              v-if="!showOnly && (!limit || (values && values.length < limit))"
               class="z-upload-select"
               :style="hoverStyle"
               @mouseenter="onMouseenter"
@@ -144,6 +144,11 @@
       showDeleteIcon: {
         type: Boolean,
         default: true
+      },
+
+      showOnly: {
+        type: Boolean,
+        default: false
       },
 
       showPreviewIcon: {

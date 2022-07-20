@@ -8,15 +8,15 @@
           action="https://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
           color="#f00"
           :headers="headers"
-          limit="1"
           :validation="[
             { rule: 'required', message: '头像不能为空.' }
           ]"
           :defaultValue="[{
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
           }]"
+          disabled
           :showPreviewIcon="true"
-          :showDeleteIcon="false"
+          :showDeleteIcon="true"
           @response="handleResponse"
         >
           <v-icon>mdi-plus</v-icon>
