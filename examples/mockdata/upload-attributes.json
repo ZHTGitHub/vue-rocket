@@ -99,6 +99,24 @@
       "acceptedValues": "—",
       "default": "file",
       "description": "发到后台的文件参数名"
+    },
+
+    {
+      "name": "show-delete-icon",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否显示删除图标"
+    },
+
+    {
+      "name": "show-preview-icon",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否显示预览图标"
     }
   ]
 }
