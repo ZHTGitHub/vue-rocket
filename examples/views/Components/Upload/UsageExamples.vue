@@ -15,6 +15,8 @@
           :defaultValue="[{
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
           }]"
+          :showPreviewIcon="true"
+          :showDeleteIcon="false"
           @response="handleResponse"
         >
           <v-icon>mdi-plus</v-icon>

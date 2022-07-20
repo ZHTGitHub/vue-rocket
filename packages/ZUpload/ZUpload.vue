@@ -13,30 +13,32 @@
               :key="index"
               class="z-upload-list-image-container"
             >
-              <div class="z-upload-list-item">
-                  <div class="z-upload-list-item-info">
-                    <span>
-                      <img 
-                        class="z-upload-list-item-img"
-                        :src="image.url" 
-                      >
-                    </span>
-                  </div>
-
-                  <span class="z-upload-list-item-actions">
-                    <v-icon 
-                      class="mr-2" 
-                      color="#ffffffd9" 
-                      small
-                      @click="onPreview(image)"
-                    >mdi-eye-outline</v-icon>
-
-                    <v-icon 
-                      color="#ffffffd9" 
-                      small
-                      @click="onDelete(index, image)"
-                    >mdi-trash-can-outline</v-icon>
+              <div :class="['z-upload-list-item', { hovered: !disabled && (showPreviewIcon || showDeleteIcon) }]">
+                <div class="z-upload-list-item-info">
+                  <span>
+                    <img class="z-upload-list-item-img" :src="image.url" />
                   </span>
+                </div>
+
+                <span 
+                  v-if="!disabled && (showPreviewIcon || showDeleteIcon)"
+                  class="z-upload-list-item-actions"
+                >
+                  <v-icon 
+                    v-if="showPreviewIcon"
+                    class="mr-2" 
+                    color="#ffffffd9" 
+                    small
+                    @click="onPreview(image)"
+                  >mdi-eye-outline</v-icon>
+
+                  <v-icon 
+                    v-if="showDeleteIcon"
+                    color="#ffffffd9" 
+                    small
+                    @click="onDelete(index, image)"
+                  >mdi-trash-can-outline</v-icon>
+                </span>
               </div>
             </div>
 
@@ -137,6 +139,16 @@
       name: {
         type: String,
         default: 'file'
+      },
+
+      showDeleteIcon: {
+        type: Boolean,
+        default: true
+      },
+
+      showPreviewIcon: {
+        type: Boolean,
+        default: true
       }
     },
     
@@ -308,11 +320,11 @@
             border: 1px solid #d9d9d9;
             border-radius: 4px;
 
-            &:hover .z-upload-list-item-info:before {
+            &.hovered:hover .z-upload-list-item-info:before {
               opacity: 1;
             }
 
-            &:hover .z-upload-list-item-info+.z-upload-list-item-actions {
+            &.hovered:hover .z-upload-list-item-info+.z-upload-list-item-actions {
               opacity: 1;
             }
 
@@ -328,14 +340,14 @@
               }
 
               &:before {
+                content: " ";
                 position: absolute;
-                z-index: 1;
                 width: 100%;
                 height: 100%;
                 background-color: rgba(0, 0, 0, .5);
                 opacity: 0;
                 transition: all .3s;
-                content: " ";
+                z-index: 1;
               }
 
               img.z-upload-list-item-img {
