@@ -6,9 +6,10 @@
           formId="files"
           formKey="file"
           accept="image/*, .xlsx"
+          :auto-upload="false"
           chips
           clearable
-          prependIcon="mdi-file-excel-outline"
+          prepend-icon="mdi-file-excel-outline"
           action="http://113.106.108.93:1620/task/uploadImage"
           :effectData="{ 
             path: 'B0118/download/2021/12-09/682021060032022/',
@@ -26,9 +27,11 @@
           parcel
           :multiple="true"
           :deleteIcon="false"
+          @change="onChange"
           @response="onResponse"
           @delete="onRemove"
         >
+          <span class="error--text" slot="prepend-outer">*</span>
         </z-file-input>
       </div>
     </usage-demo>
@@ -82,6 +85,10 @@
     },
 
     methods: {
+      onChange(file) {
+        console.log(file)
+      },
+
       onResponse(result) {
         console.log(result)
       },

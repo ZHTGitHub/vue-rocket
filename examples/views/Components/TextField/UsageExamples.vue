@@ -9,6 +9,7 @@
           defaultValue="Leslie"
           @change="onChange"
         >
+          <span class="error--text" slot="prepend-outer">*</span>
         </z-text-field>
       </div>
     </usage-demo>

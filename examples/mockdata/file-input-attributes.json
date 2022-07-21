@@ -48,6 +48,15 @@
     },
 
     {
+      "name": "auto-upload",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否在选取文件后立即进行上传"
+    },
+
+    {
       "name": "chips",
       "required": "否",
       "type": "Boolean",

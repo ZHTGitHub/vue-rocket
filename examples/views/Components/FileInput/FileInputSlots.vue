@@ -36,7 +36,7 @@
     data() {
       return {
         formId: 'FileInputSlots',
-        getHandler: 'GET_INPUT_SLOTS'
+        getHandler: 'GET_FILE_INPUT_SLOTS'
       }
     }
   }

@@ -42,6 +42,18 @@
               >
                 <span class="error--text" slot="prepend-outer">*</span>
               </z-text-field>
+
+              <z-file-input
+                :formId="formId"
+                formKey="file"
+                label="文件"
+                prependIcon="mdi-file-excel-outline"
+                :validation="[
+                  { rule: 'required', message: '文件不能为空.' }
+                ]"
+              >
+                <span class="error--text" slot="prepend-outer">*</span>
+              </z-file-input>
             </div>
 
             <div class="z-flex justify-end actions">

@@ -74,6 +74,10 @@
                   :type="item.type"
                   :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
+                  @blur="onBlur($event, item.formKey)"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
+                  @focus="onFocus($event, item.formKey)"
                 >
                   <span 
                     v-if="item.append"
@@ -128,6 +132,10 @@
                   :type="item.type"
                   :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
+                  @blur="onBlur($event, item.formKey)"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
+                  @focus="onFocus($event, item.formKey)"
                 >
                   <span 
                     v-if="item.append"
@@ -182,6 +190,10 @@
                   :validation="item.validation"
                   :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
+                  @blur="onBlur($event, item.formKey)"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
+                  @focus="onFocus($event, item.formKey)"
                 >
                   <span 
                     v-if="item.append"
@@ -240,6 +252,10 @@
                   :validation="item.validation"
                   :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
+                  @blur="onBlur($event, item.formKey)"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
+                  @focus="onFocus($event, item.formKey)"
                 >
                   <span 
                     v-if="item.append"
@@ -347,6 +363,8 @@
                   :validation="item.validation"
                   :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
                 >
                   <span 
                     v-if="item.prepend"
@@ -367,6 +385,8 @@
                   :validation="item.validation"
                   :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
                 >
                   <span 
                     v-if="item.prepend"
@@ -395,6 +415,8 @@
                   :validation="item.validation"
                   :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
                   :defaultValue="detailInfo[item.formKey]"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
                 >
                   <span class="error--text" slot="prepend">*</span>
                 </z-btn-toggle>
@@ -413,9 +435,66 @@
                   :readonly="item.readonly"
                   :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
                 ></z-switch>
               </template> 
               <!-- ZSwitch END -->
+
+              <!-- ZFileInput BEGIN -->
+              <template v-else-if="item.inputType === 'fileInput'">
+                <z-file-input
+                  v-if="mutexForm[item.formKey] !== false"
+                  :formId="formId"
+                  :formKey="item.formKey"
+                  :accept="item.accept"
+                  :action="item.action"
+                  :auto-upload="item.autoUpload"
+                  :chips="item.chips"
+                  :delete-icon="item.deleteIcon"
+                  :disabled="item.disabled"
+                  :effect-data="item.effectData"
+                  :file-list="item.fileList"
+                  :headers="item.headers"
+                  :hide-details="item.hideDetails"
+                  :label="item.label"
+                  :method="item.method"
+                  :multiple="item.multiple"
+                  :name="item.name"
+                  :parcel="item.parcel"
+                  :prepend-outer-icon="item.prependOuterIcon"
+                  :readonly="item.readonly"
+                  :truncate-length="item.truncateLength"
+                  :validation="item.validation"
+                  :defaultValue="detailInfo[item.formKey]"
+                  @blur="onBlur($event, item.formKey)"
+                  @change="onChange($event, item.formKey)"
+                  @click="onClick($event, item.formKey)"
+                  @focus="onFocus($event, item.formKey)"
+                >
+                  <span 
+                    v-if="item.append"
+                    :class="item.appendClass" 
+                    slot="prepend-outer"
+                  >{{ item.append }}</span>
+                  <span 
+                    v-if="item.appendOuter"
+                    :class="item.appendOuterClass" 
+                    slot="prepend-outer"
+                  >{{ item.appendOuter }}</span>
+                  <span 
+                    v-if="item.prepend"
+                    :class="item.prependClass" 
+                    slot="prepend-outer"
+                  >{{ item.prepend }}</span>
+                  <span 
+                    v-if="item.prependOuter"
+                    :class="item.prependOuterClass" 
+                    slot="prepend-outer"
+                  >{{ item.prependOuter }}</span>
+                </z-file-input>
+              </template> 
+              <!-- ZFileInput END -->
 
               <!-- ZUpload BEGIN -->
               <template v-else-if="item.inputType === 'upload'">
@@ -434,8 +513,8 @@
                   :name="item.name"
                   :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
-                  @change="onUploadChange($event, item.formKey)"
-                  @response="onUploadResponse($event, item.formKey)"
+                  @change="onChange($event, item.formKey)"
+                  @response="onResponse($event, item.formKey)"
                 >
                   <span 
                     v-if="item.prepend"
@@ -613,11 +692,23 @@
         }
       },
 
-      onUploadChange(event, formKey) {
+      onBlur(event, formKey) {
+        this.$emit(`blur:${ formKey }`, event)
+      },
+
+      onChange(event, formKey) {
         this.$emit(`change:${ formKey }`, event)
       },
 
-      onUploadResponse(result, formKey) {
+      onClick(event, formKey) {
+        this.$emit(`click:${ formKey }`, event)
+      },
+
+      onFocus(event, formKey) {
+        this.$emit(`focus:${ formKey }`, event)
+      },
+
+      onResponse(result, formKey) {
         this.$emit(`response:${ formKey }`, result)
       }
     },

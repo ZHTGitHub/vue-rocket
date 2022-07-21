@@ -97,7 +97,7 @@
           <span 
             v-if="deleteIcon"
             class="icon del-icon" 
-            @click="onDel($event, item)"
+            @click="onDelete($event, item)"
           >
             <v-icon size="18">mdi-trash-can-outline</v-icon>
           </span>
@@ -123,7 +123,12 @@
 
       action: {
         type: String,
-        required: true
+        required: false
+      },
+
+      autoUpload: {
+        type: Boolean,
+        default: true
       },
 
       chips: {
@@ -200,35 +205,37 @@
       onChange(file) {
         this.$emit('change', file)
 
-        this.formData = new FormData()
+        if(this.autoUpload) {
+          this.formData = new FormData()
 
-        // 多选
-        if(this.multiple) {
-          // 所有文件一起上传
-          if(this.parcel) {
-            for(let item of file) {
-              this.formData.append(this.name, item)
-            }
-            this.uploadFile()
-          }
-          // 单个文件单个文件上传
-          else {
-            for(let item of file) {
-              this.formData.append(this.name, item)
+          // 多选
+          if(this.multiple) {
+            // 所有文件一起上传
+            if(this.parcel) {
+              for(let item of file) {
+                this.formData.append(this.name, item)
+              }
               this.uploadFile()
             }
+            // 单个文件单个文件上传
+            else {
+              for(let item of file) {
+                this.formData.append(this.name, item)
+                this.uploadFile()
+              }
+            }
+
+            // 记录当前上传的文件
+            this.files = file
           }
+          // 单选
+          else {
+            this.formData.append(this.name, file)
+            this.uploadFile()
 
-          // 记录当前上传的文件
-          this.files = file
-        }
-        // 单选
-        else {
-          this.formData.append(this.name, file)
-          this.uploadFile()
-
-          // 记录当前上传的文件
-          this.files = [file]
+            // 记录当前上传的文件
+            this.files = [file]
+          }
         }
       },
 
@@ -272,7 +279,7 @@
         this.$emit('keyup', this.setCustomValue(event))
       },
 
-      onDel(event, item) {
+      onDelete(event, item) {
         event.customValue = item
         this.$emit('delete', event)
       },
