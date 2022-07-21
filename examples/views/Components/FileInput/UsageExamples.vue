@@ -24,9 +24,8 @@
           :headers="{ 'x-name': 'Leslie' }"
           name="file"
           label="文件上传"
-          parcel
-          :multiple="true"
           :deleteIcon="false"
+          :defaultValue="defaultValue"
           @change="onChange"
           @response="onResponse"
           @delete="onRemove"
@@ -76,7 +75,8 @@
 
     data() {
       return {
-        code
+        code,
+        defaultValue: [{}]
       }
     },
 
@@ -87,6 +87,7 @@
     methods: {
       onChange(file) {
         console.log(file)
+        this.defaultValue = [file]
       },
 
       onResponse(result) {

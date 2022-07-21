@@ -14,6 +14,17 @@ const fields = [
   },
 
   {
+    inputType: 'fileInput',
+    formKey: 'file',
+    label: '文件',
+    prependOuter: '*',
+    prependOuterClass: 'error--text',
+    validation: [
+      { rule: 'required', message: '请上传文件.' },
+    ]
+  },
+
+  {
     inputType: 'text',
     formKey: 'name',
     label: '姓名',

@@ -268,6 +268,7 @@ export default {
 
 		value: {
 			handler(value) {
+				console.log(value)
 				if(value_is_an_array.includes(this.$options.name)) {
 					if(value) {
 						this.values = value
