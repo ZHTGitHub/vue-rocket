@@ -8,12 +8,12 @@ export default {
 	props: {
 		formId: {
 			type: String,
-			default: 'form'
+			required: false
 		},
 
 		formKey: {
 			type: String,
-			default: 'text'
+			required: false
 		},
 
 		appendIcon: {

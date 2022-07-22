@@ -12,9 +12,11 @@ const getters = {
 const mutations = {
   // 给表单的每个[key]设置[value]
   SET_FORM_VALUE_BY_KEY(state, data) {
-    const updatedForm = { ...state.forms }
-    tools.set(updatedForm, data.formId + '.' + data.formKey, data.value)
-    Vue.set(state, 'forms', updatedForm) 
+    if(data.formId && data.formKey) {
+      const updatedForm = { ...state.forms }
+      tools.set(updatedForm, data.formId + '.' + data.formKey, data.value)
+      Vue.set(state, 'forms', updatedForm) 
+    }
   },
 
   // 清空表单
