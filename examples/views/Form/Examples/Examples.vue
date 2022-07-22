@@ -51,6 +51,7 @@
                 :validation="[
                   { rule: 'required', message: '文件不能为空.' }
                 ]"
+                
               >
                 <span class="error--text" slot="prepend-outer">*</span>
               </z-file-input>

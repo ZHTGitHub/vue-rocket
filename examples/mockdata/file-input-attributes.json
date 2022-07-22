@@ -138,15 +138,6 @@
     },
 
     {
-      "name": "fileList",
-      "required": "否",
-      "type": "Array",
-      "acceptedValues": "—",
-      "default": "[]",
-      "description": "已上传文件地址列表"
-    },
-
-    {
       "name": "formId",
       "required": "是",
       "type": "String",

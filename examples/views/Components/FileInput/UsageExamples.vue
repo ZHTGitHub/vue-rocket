@@ -2,6 +2,8 @@
   <div class="usage-examples">
     <usage-demo :code="code">
       <div slot="demo">
+        <z-btn @click="getForm">GET FORM</z-btn>
+
         <z-file-input
           formId="files"
           formKey="file"
@@ -15,17 +17,16 @@
             path: 'B0118/download/2021/12-09/682021060032022/',
             name: 'leslie.png'
           }"
-          :fileList="[
+          :defaultValue="[
             {
               url: '',
-              name: 'demo.png'
+              label: 'demo.png'
             }
           ]"
           :headers="{ 'x-name': 'Leslie' }"
           name="file"
           label="文件上传"
           :deleteIcon="false"
-          :defaultValue="defaultValue"
           @change="onChange"
           @response="onResponse"
           @delete="onRemove"
@@ -40,6 +41,7 @@
 <script>
   import Prism from 'prismjs'
   import 'prismjs/themes/prism-okaidia.css'
+  import { mapState } from 'vuex'
 
   const code = 
 `
@@ -53,10 +55,10 @@
     sysProTempId: '900709761157169152',
     proCode: 2
   }"
-  :fileList="[
+  :defaultValue="[
     {
       url: '',
-      name: 'demo.png'
+      label: 'demo.png'
     }
   ]"
   name="tempImages"
@@ -96,7 +98,15 @@
 
       onRemove(event) {
         console.log(event)
+      },
+
+      getForm() {
+        console.log(this.forms['files'])
       }
+    },
+
+    computed: {
+      ...mapState(['forms'])
     }
   }
 </script>

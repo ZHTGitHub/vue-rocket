@@ -8,7 +8,6 @@
   >
     <div>
       <v-file-input
-        v-model="value"
         :accept="accept"
         :append-icon="appendIcon"
         :append-outer-icon="appendOuterIcon"
@@ -83,8 +82,8 @@
     
     <div class="z-upload-list">
       <div 
-        v-for="(item, index) of fileList"
-        :key="`${ index }-${ item.name }`"
+        v-for="(item, index) of value"
+        :key="`${ index }-${ item.label }`"
         class="z-upload-list-item"
       >
         <div class="z-upload-list-item-info">
@@ -92,7 +91,7 @@
             <v-icon>mdi-link</v-icon>
           </span>
 
-          <a class="link" target="__blank" :href="item.url">{{ item.name }}</a>
+          <a class="link" target="__blank" :href="item.url">{{ item.label }}</a>
 
           <span 
             v-if="deleteIcon"
@@ -144,11 +143,6 @@
       effectData: {
         type: Object,
         required: false
-      },
-
-      fileList: {
-        type: Array,
-        default: () => []
       },
 
       headers: {
@@ -326,15 +320,7 @@
           return event
         }
       }
-    },
-
-    defaultValue: {
-			handler(value) {
-				this.value = value
-			},
-      deep: true,
-			immediate: true
-		}
+    }
   }
 </script>
 
@@ -348,6 +334,7 @@
 
       .z-upload-list-item-info {
         display: flex;
+        align-items: center;
         transition: background-color .3s;
 
         &:hover {
@@ -372,8 +359,7 @@
         }
 
         span.del-icon {
-          position: absolute;
-          right: 0;
+          
         }
       }
     }

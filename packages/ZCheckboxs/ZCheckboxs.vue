@@ -30,7 +30,7 @@
             :key="`z_checkbox_${ index }`"
           >
             <v-checkbox
-              v-model="values"
+              v-model="value"
 			        :color="color"
               :error="incorrect"
               :hide-details="true"
@@ -91,12 +91,12 @@
     methods: {
       onChange(values) {
         this.value = values
-        this.$emit('change', values)
+        this.$emit('change', this.value)
         this.verifyField()
       },
 
       onClick(event) {
-        event.customValue = this.values
+        event.customValue = this.value
         this.$emit('click', event)
       },
 
@@ -112,8 +112,8 @@
           values = this.sweets
         }
 
-        this.values = values
-        this.$emit('change', values)
+        this.value = values
+        this.$emit('change', this.value)
       },
 
       _setOptions() {

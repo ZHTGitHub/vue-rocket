@@ -90,14 +90,13 @@ const fields = [
 
   {
     inputType: 'date',
-    formKey: 'date',
+    formKey: 'birthday',
     label: '生日',
     prependOuter: '*',
     prependOuterClass: 'error--text',
     validation: [
       { rule: 'required', message: '生日为必选项.' }
-    ],
-    defaultValue: '2021-09-20'
+    ]
   },
 
   {

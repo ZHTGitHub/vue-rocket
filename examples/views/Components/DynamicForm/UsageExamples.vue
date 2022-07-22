@@ -126,11 +126,22 @@
         ],
 
         detail: {
-          // avatar: [
-          //   { url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' }
-          // ],
-          name: 'ZHT', 
-          phone: '123456',
+          avatar: [
+            { url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' }
+          ],
+          file: [
+            { 
+              url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 
+              label: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' 
+            }
+          ],
+          name: 'Leslie', 
+          phone: '17520256802',
+          country: 1,
+          birthday: '2021-09-20',
+          area: 2,
+          gender: 1,
+          hobby: [1],
           sexual: 2 
         }
       }

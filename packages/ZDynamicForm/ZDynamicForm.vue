@@ -454,7 +454,6 @@
                   :delete-icon="item.deleteIcon"
                   :disabled="item.disabled"
                   :effect-data="item.effectData"
-                  :file-list="(conf[item.formKey] && conf[item.formKey].fileList) ? conf[item.formKey].fileList : item.fileList"
                   :headers="item.headers"
                   :hide-details="item.hideDetails"
                   :label="item.label"

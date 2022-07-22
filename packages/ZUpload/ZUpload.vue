@@ -9,7 +9,7 @@
         <div class="z-flex z-upload-wrapper">
           <div class="z-flex z-upload-list" :class="flip ? 'flex-row-reverse' : 'flex-row'">
             <div 
-              v-for="(image, index) of values"
+              v-for="(image, index) of value"
               :key="index"
               class="z-upload-list-image-container"
             >
@@ -43,7 +43,7 @@
             </div>
 
             <div 
-              v-if="!showOnly && (!limit || (values && values.length < limit))"
+              v-if="!showOnly && (!limit || (value && value.length < limit))"
               class="z-upload-select"
               :style="hoverStyle"
               @mouseenter="onMouseenter"
@@ -197,7 +197,7 @@
       // 删除
       onDelete(index, item) {
         this.targetImage = item
-        this.values.splice(index, 1)
+        this.value.splice(index, 1)
       },
 
       // 上传
