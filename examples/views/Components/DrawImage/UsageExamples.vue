@@ -38,10 +38,10 @@
             <ul>
               <li 
                 v-for="image in images" 
-                :key="image"
+                :key="image.url"
                 @click="switchImage(image)"
               >
-                <img width="100" :src="image" />
+                <img width="100" :src="image.url" />
               </li>
             </ul>
           </v-col>
@@ -52,7 +52,8 @@
               ref="drawImage"
               fileName="file.png"
               download
-              imageWidth="800"
+              :imageWidth="imageWidth"
+              :imageHeight="imageHeight"
               :src="src"
               @drew="handleDrew"
               @init="handleInit"
@@ -73,9 +74,20 @@
   import cells from './cells'
 
   const images = [
-    require('../../../../public/images/global/1.jpg'),
-    require('../../../../public/images/global/2.jpg'),
-    require('../../../../public/images/global/3.jpg')
+    {
+      url: require('../../../../public/images/global/1.jpg'),
+      width: 860
+    },
+
+    {
+      url: require('../../../../public/images/global/2.jpg'),
+      width: 600
+    },
+
+    {
+      url: require('../../../../public/images/global/3.jpg'),
+      height: 560
+    } 
   ]
 
   const code = 
@@ -102,11 +114,14 @@
         options: cells.options,
         dataURL: '',
 
+        imageWidth: 800,
+        imageHeight: 560,
+
         isScreenshot: true,
 
         num: -1,
 
-        src: images[0]
+        src: images[0].url
       }
     },
 
@@ -121,7 +136,9 @@
       },
 
       switchImage(image) {
-        this.src = image
+        this.src = image.url
+        this.imageWidth = image.width
+        this.imageHeight = image.height
         // console.log(this.src)
       },
 

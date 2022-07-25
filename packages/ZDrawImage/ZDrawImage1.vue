@@ -60,14 +60,9 @@
         default: 'file'
       },
 
-      imageHeight: {
-        type: [Number, String],
-        default: null
-      },
-
       imageWidth: {
         type: [Number, String],
-        default: null
+        required: false
       },
 
       imageType: {
@@ -98,8 +93,8 @@
         image: new Image(),
         ratio: 1,
         width: 'auto',
-        height: 'auto',
 
+        dynamicHeight: 0,
         dynamicSize: 0,
 
         // 记录旋转次数、角度及旋转后宽高
@@ -159,29 +154,26 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          if(+this.imageWidth > +this.imageHeight) {
+          if(this.imageWidth) {
             this.width = this.imageWidth
-
-            this.ratio = this.image.width / this.width
-            this.height = this.image.height / this.ratio
           }
           else {
-            this.height = this.imageHeight
-
-            this.ratio = this.image.height / this.height
-            this.width = this.image.width / this.ratio
+            this.width = this.image.width
           }
 
-          this.rotatedWidth = this.width
-          this.rotatedHeight = this.height
+          this.ratio = this.image.width / this.width
+          this.dynamicHeight = this.image.height / this.ratio
 
-          this.dynamicSize = Math.max(this.width, this.height)
+          this.rotatedWidth = this.width
+          this.rotatedHeight = this.dynamicHeight
+
+          this.dynamicSize = Math.max(this.width, this.dynamicHeight)
 
           // drawing
           this.drawingCanvas = this.$refs.drawingCanvas
 
           this.drawingCanvas.width = this.width
-          this.drawingCanvas.height = this.height
+          this.drawingCanvas.height = this.dynamicHeight
           this.drawingCanvas.style.top = 0
           this.drawingCanvas.style.transform = 'rotate(0)'
 
@@ -191,14 +183,14 @@
           this.drewCanvas = this.$refs.drewCanvas
 
           this.drewCanvas.width = this.width
-          this.drewCanvas.height = this.height
+          this.drewCanvas.height = this.dynamicHeight
           this.drewCanvas.style.top = 0
           this.drewCanvas.style.transform = 'rotate(0)'
 
           this.drewCtx = this.drewCanvas.getContext('2d')
 
           // 初始化图片
-          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
 
           this.getWrapperInfo()
 
@@ -242,8 +234,8 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          this.drawingCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
-          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
+          this.drawingCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
         }
       },
 
@@ -257,14 +249,14 @@
        * @param overlay 遮罩
        */
       fillRectangle({ startX, startY, rectW, rectH, ctx, overlay }) {
-        ctx.clearRect(0, 0, this.width, this.height)
+        ctx.clearRect(0, 0, this.width, this.dynamicHeight)
 
         ctx.beginPath()
 
         // 遮罩
         if(overlay) {
           ctx.globalCompositeOperation = 'source-over'
-          ctx.fillRect(0, 0, this.width,this.height)
+          ctx.fillRect(0, 0, this.width,this.dynamicHeight)
         }
 
         // 边框
@@ -328,7 +320,7 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          // this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
+          // this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.dynamicHeight)
           this.writeText(this.textArea.startX, this.textArea.startY, 250, this.inputValue, this.drewCtx)
           this.inputValue = ''
 
@@ -338,8 +330,8 @@
           // canvas
           const canvas = document.createElement('canvas')
           canvas.width = this.width
-          canvas.height = this.height
-          const data = this.drewCtx.getImageData(0, 0, this.width, this.height)
+          canvas.height = this.dynamicHeight
+          const data = this.drewCtx.getImageData(0, 0, this.width, this.dynamicHeight)
 
           const context = canvas.getContext('2d')
           context.putImageData(data, 0, 0)

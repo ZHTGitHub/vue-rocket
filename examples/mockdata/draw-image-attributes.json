@@ -21,11 +21,20 @@
     },
 
     {
+      "name": "imageHeight",
+      "required": "否",
+      "type": "Number ｜ String",
+      "acceptedValues": "-",
+      "default": "null",
+      "description": "设置画布及图像的高"
+    },
+
+    {
       "name": "imageWidth",
       "required": "否",
       "type": "Number ｜ String",
       "acceptedValues": "-",
-      "default": "auto",
+      "default": "null",
       "description": "设置画布及图像的宽"
     },
 
