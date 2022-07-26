@@ -143,7 +143,7 @@
 
     methods: {
       // 初始化
-      initialize({ screenshotArea = {} }) {
+      initialize({ self = false, screenshotArea = {} }) {
         this.rotateCount = 0
         this.rotateDegrees = 0
 
@@ -163,29 +163,48 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          if(this.imgWidth > this.imgHeight) {
-            this.width = this.imgWidth
-
-            this.ratio = this.image.width / this.width
-            this.height = this.image.height / this.ratio
-
-            // 缩放的宽高
-            this.zoomWidth = this.imageWidth / this.blocks
-            const fixedRatio = this.image.width / this.imageWidth
-            const fixedHeight = this.image.height / fixedRatio
-            this.zoomHeight = fixedHeight / this.blocks
+          // 切换图片
+          {
+            if(!self) {
+              if(this.imgWidth > this.imgHeight) {
+                const ratio = this.image.width / this.imgWidth
+                this.imgHeight = this.image.height / ratio
+              }
+              else {
+                const ratio = this.image.height / this.imgHeight
+                this.imgWidth = this.image.width / ratio
+              }
+            }
           }
-          else {
-            this.height = this.imgHeight
 
-            this.ratio = this.image.height / this.height
-            this.width = this.image.width / this.ratio
+          // 横屏图片/竖屏图片
+          {
+            if(this.imgWidth > this.imgHeight) {
+              this.width = this.imgWidth
 
-            // 缩放的宽高
-            const fixedRatio = this.image.height / this.imageHeight
-            const fixedWidth = this.image.width / fixedRatio
-            this.zoomWidth = fixedWidth / this.blocks
-            this.zoomHeight = this.imageHeight / this.blocks
+              this.ratio = this.image.width / this.width
+              this.height = this.image.height / this.ratio
+
+              // 缩放的宽高
+              this.zoomWidth = this.imageWidth / this.blocks
+              
+              const fixedRatio = this.image.width / this.imageWidth
+              const fixedHeight = this.image.height / fixedRatio
+              this.zoomHeight = fixedHeight / this.blocks
+            }
+            else {
+              this.height = this.imgHeight
+
+              this.ratio = this.image.height / this.height
+              this.width = this.image.width / this.ratio
+
+              // 缩放的宽高
+              const fixedRatio = this.image.height / this.imageHeight
+              const fixedWidth = this.image.width / fixedRatio
+              this.zoomWidth = fixedWidth / this.blocks
+
+              this.zoomHeight = this.imageHeight / this.blocks
+            }
           }
 
           // rotate
@@ -460,8 +479,9 @@
     watch: {
       src: {
         handler() {
-          // this.zoomWidth = 0
-          // this.zoomHeight = 0
+          this.imgWidth = this.imageWidth ? +this.imageWidth : 0
+          this.imgHeight = this.imageHeight ? +this.imageHeight : 0
+
           this.initialize({ screenshotArea: this.defaultScreenshotArea })
         },
         immediate: true

@@ -42,7 +42,7 @@ export default {
           }
 
           if(this.imgWidth <= maxWidth) {
-            this.initialize({})
+            this.initialize({ self: true })
           }
           break;
 
@@ -60,7 +60,7 @@ export default {
           }
 
           if(this.imgWidth >= minWidth) {
-            this.initialize({})
+            this.initialize({ self: true })
           }
           break;
 
@@ -68,25 +68,9 @@ export default {
         case 'origin': 
           this.imgWidth = this.zoomWidth * this.blocks
           this.imgHeight = this.zoomHeight * this.blocks
-          this.initialize({})
+          this.initialize({ self: true })
           break;
       }
-    }
-  },
-
-  watch: {
-    imageWidth: {
-      handler(imageWidth) {
-        this.imgWidth = imageWidth ? +imageWidth : 0
-      },
-      immediate: true
-    },
-
-    imageHeight: {
-      handler(imageHeight) {
-        this.imgHeight = imageHeight ? +imageHeight : 0
-      },
-      immediate: true
     }
   }
 }

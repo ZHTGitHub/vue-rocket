@@ -82,18 +82,23 @@
   const images = [
     {
       url: require('../../../../public/images/global/1.jpg'),
-      width: 860
+      width: 700
     },
 
     {
       url: require('../../../../public/images/global/2.jpg'),
-      width: 600
+      width: 700
     },
 
     {
       url: require('../../../../public/images/global/3.jpg'),
       height: 560
-    } 
+    },
+
+    {
+      url: require('../../../../public/images/global/4.jpg'),
+      height: 560
+    }  
   ]
 
   const code = 
