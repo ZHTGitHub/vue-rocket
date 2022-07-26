@@ -2,8 +2,6 @@ export default {
   methods: {
     // 框图
     drawRectangle() {
-      const that = this
-
       this._clearEventListener()
 
       this.drawingCtx.lineWidth = 3
@@ -11,27 +9,27 @@ export default {
 
       let startXY = null
 
-      this.drawingCanvas.onmousedown = function(event) {
+      this.drawingCanvas.onmousedown = (event) => {
         startXY = {
           x: event.offsetX,
           y: event.offsetY
         }
       }
 
-      this.drawingCanvas.onmousemove = function(event) {
+      this.drawingCanvas.onmousemove = (event) => {
         if(startXY) {
           const { x: startX, y: startY } = startXY
           const rectW = event.offsetX - startX
           const rectH = event.offsetY - startY
 
-          that.fillRectangle({ startX, startY, rectW, rectH, ctx: that.drawingCtx })
+          this.fillRectangle({ startX, startY, rectW, rectH, ctx: this.drawingCtx })
         }
       }
 
-      document.addEventListener('mouseup', function() {
+      document.addEventListener('mouseup', () => {
         if(startXY) {
           startXY = null
-          that.createDrewFile()
+          this.createDrewFile()
         }
       })
     }

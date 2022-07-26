@@ -1,7 +1,16 @@
 {
   "status": true,
-  "total": 7,
+  "total": 12,
   "data": [
+    {
+      "name": "defaultScreenshotArea",
+      "required": "否",
+      "type": "Object",
+      "acceptedValues": "-",
+      "default": "{}",
+      "description": "默认截图区域"
+    },
+
     {
       "name": "direction",
       "required": "否",
@@ -9,6 +18,24 @@
       "acceptedValues": "top | right | bottom | left",
       "default": "top",
       "description": "图像默认方向"
+    },
+
+    {
+      "name": "blocks",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "5",
+      "description": "等比例分割图片宽高，用于设置每次放大缩小图片的宽高."
+    },
+
+    {
+      "name": "download",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "-",
+      "default": false,
+      "description": "保存的时候是否下载图像"
     },
 
     {
@@ -48,12 +75,21 @@
     },
 
     {
-      "name": "download",
+      "name": "max-times",
       "required": "否",
-      "type": "Boolean",
-      "acceptedValues": "-",
-      "default": false,
-      "description": "保存的时候是否下载图像"
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "2",
+      "description": "图片最大放大倍数."
+    },
+
+    {
+      "name": "min-times",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "0.25",
+      "description": "图片最小缩小倍数."
     },
 
     {

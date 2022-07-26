@@ -55,6 +55,11 @@
         default: 'top'
       },
 
+      download: {
+        type: Boolean,
+        default: false
+      },
+
       fileName: {
         type: String,
         default: 'file'
@@ -77,11 +82,6 @@
         default: 'image/png'
       },
 
-      download: {
-        type: Boolean,
-        default: false
-      },
-
       rectColor: {
         type: String,
         default: '#ff1e10'
@@ -97,6 +97,10 @@
       return {
         image: new Image(),
         ratio: 1,
+
+        imgWidth: 0,
+        imgHeight: 0,
+
         width: 'auto',
         height: 'auto',
 
@@ -139,7 +143,7 @@
 
     methods: {
       // 初始化
-      initialize() {
+      initialize({ screenshotArea = {} }) {
         this.rotateCount = 0
         this.rotateDegrees = 0
 
@@ -159,24 +163,37 @@
         this.image.setAttribute('crossOrigin', '')
 
         this.image.onload = () => {
-          if(+this.imageWidth > +this.imageHeight) {
-            this.width = this.imageWidth
+          if(this.imgWidth > this.imgHeight) {
+            this.width = this.imgWidth
 
             this.ratio = this.image.width / this.width
             this.height = this.image.height / this.ratio
+
+            // 缩放的宽高
+            this.zoomWidth = this.imageWidth / this.blocks
+            const fixedRatio = this.image.width / this.imageWidth
+            const fixedHeight = this.image.height / fixedRatio
+            this.zoomHeight = fixedHeight / this.blocks
           }
           else {
-            this.height = this.imageHeight
+            this.height = this.imgHeight
 
             this.ratio = this.image.height / this.height
             this.width = this.image.width / this.ratio
+
+            // 缩放的宽高
+            const fixedRatio = this.image.height / this.imageHeight
+            const fixedWidth = this.image.width / fixedRatio
+            this.zoomWidth = fixedWidth / this.blocks
+            this.zoomHeight = this.imageHeight / this.blocks
           }
 
+          // rotate
           this.rotatedWidth = this.width
           this.rotatedHeight = this.height
 
           this.dynamicSize = Math.max(this.width, this.height)
-
+          
           // drawing
           this.drawingCanvas = this.$refs.drawingCanvas
 
@@ -203,6 +220,8 @@
           this.getWrapperInfo()
 
           this.setImageDirection()
+
+          this.setDefaultScreenshotArea(screenshotArea)
 
           this.$emit('initialized')
         }
@@ -231,6 +250,8 @@
 
         this.drewArea = {}
         this.textArea = {}
+
+        this.screenshotArea = {}
   
         const drawTextInput = document.getElementById('drawTextInput')
 
@@ -439,7 +460,9 @@
     watch: {
       src: {
         handler() {
-          this.initialize()
+          // this.zoomWidth = 0
+          // this.zoomHeight = 0
+          this.initialize({ screenshotArea: this.defaultScreenshotArea })
         },
         immediate: true
       }

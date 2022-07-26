@@ -50,8 +50,14 @@
           <v-col :cols="10" class="box">
             <z-draw-image 
               ref="drawImage"
-              fileName="file.png"
+              :defaultScreenshotArea="{
+                startX: 100,
+                startY: 100,
+                rectW: 150,
+                rectH: 50
+              }"
               download
+              fileName="file.png"
               :imageWidth="imageWidth"
               :imageHeight="imageHeight"
               :src="src"
@@ -176,11 +182,11 @@
             break;
 
           case 'grow':
-            this.$refs.drawImage.zoomIn()
+            this.$refs.drawImage.zoom('grow')
             break;
 
           case 'shrink':
-            this.$refs.drawImage.zoomOut()
+            this.$refs.drawImage.zoom('shrink')
             break;
           
           case 'clear':

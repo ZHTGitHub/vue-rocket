@@ -2,8 +2,6 @@ import { mapState } from 'vuex'
 
 const value_is_an_array = ['ZCheckboxs', 'ZFileInput', 'ZUpload']
 
-
-
 export default {
 	props: {
 		formId: {
