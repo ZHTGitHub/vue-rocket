@@ -47,6 +47,27 @@ export const base64ToBlob = ({ b64data = '', contentType = '', name = 'image.png
   })
 }
 
+export const urlToBase64 = (url) => {
+  return new Promise(resolve => {
+    const image = new Image()
+    image.crossOrigin = 'anonymous'
+
+    image.addEventListener('load', function() {
+      const canvas = document.createElement('canvas')
+
+      canvas.width = image.width
+      canvas.height = image.height
+
+      const context = canvas.getContext('2d')
+      context.drawImage(image, 0, 0, image.width, image.height)
+
+      resolve(canvas.toDataURL('image/png')) 
+    }, false)
+
+    image.src = url + '?' + Date.now()
+  })
+}
+
 export const rotatedDirectionMap = new Map([
   [0, 'top'],
   [1, 'right'],

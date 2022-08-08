@@ -39,6 +39,15 @@
     },
 
     {
+      "name": "effectData",
+      "required": "否",
+      "type": "Object",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "其它要上传的数据"
+    },
+
+    {
       "name": "flip",
       "required": "否",
       "type": "Boolean",

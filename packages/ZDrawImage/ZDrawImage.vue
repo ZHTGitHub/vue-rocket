@@ -32,7 +32,7 @@
   import ScrollMixins from './ScrollMixins'
   import ZoomMixins from './ZoomMixins'
 
-  import { base64ToFile, base64ToBlob, rotatedDirectionMap } from './tools'
+  import { base64ToFile, base64ToBlob, rotatedDirectionMap, urlToBase64 } from './tools'
 
   const defaultStartXY = { x: null, y: null }
 
@@ -67,12 +67,12 @@
 
       imageHeight: {
         type: [Number, String],
-        default: null
+        required: true
       },
 
       imageWidth: {
         type: [Number, String],
-        default: null
+        required: true
       },
 
       imageType: {
@@ -96,13 +96,10 @@
     data() {
       return {
         image: new Image(),
-        ratio: 1,
+        base64: null,
 
         imgWidth: 0,
         imgHeight: 0,
-
-        width: 'auto',
-        height: 'auto',
 
         dynamicSize: 0,
 
@@ -143,7 +140,7 @@
 
     methods: {
       // 初始化
-      initialize({ self = false, screenshotArea = {} }) {
+      async initialize({ screenshotArea = {} }) {
         this.rotateCount = 0
         this.rotateDegrees = 0
 
@@ -158,88 +155,42 @@
         this.inputValue = ''
         this.textArea = {}
 
-        this.image = new Image()
-        this.image.src = `${ this.src }?${ Date.now() }`
-        this.image.setAttribute('crossOrigin', '')
-
         this.image.onload = () => {
-          // 切换图片
-          {
-            if(!self) {
-              if(this.imgWidth > this.imgHeight) {
-                const ratio = this.image.width / this.imgWidth
-                this.imgHeight = this.image.height / ratio
-              }
-              else {
-                const ratio = this.image.height / this.imgHeight
-                this.imgWidth = this.image.width / ratio
-              }
-            }
-          }
-
-          // 横屏图片/竖屏图片
-          {
-            if(this.imgWidth > this.imgHeight) {
-              this.width = this.imgWidth
-
-              this.ratio = this.image.width / this.width
-              this.height = this.image.height / this.ratio
-
-              // 缩放的宽高
-              this.zoomWidth = this.imageWidth / this.blocks
-              
-              const fixedRatio = this.image.width / this.imageWidth
-              const fixedHeight = this.image.height / fixedRatio
-              this.zoomHeight = fixedHeight / this.blocks
-            }
-            else {
-              this.height = this.imgHeight
-
-              this.ratio = this.image.height / this.height
-              this.width = this.image.width / this.ratio
-
-              // 缩放的宽高
-              const fixedRatio = this.image.height / this.imageHeight
-              const fixedWidth = this.image.width / fixedRatio
-              this.zoomWidth = fixedWidth / this.blocks
-
-              this.zoomHeight = this.imageHeight / this.blocks
-            }
-          }
-
           // rotate
-          this.rotatedWidth = this.width
-          this.rotatedHeight = this.height
+          this.rotatedWidth = this.imgWidth
+          this.rotatedHeight = this.imgHeight
 
-          this.dynamicSize = Math.max(this.width, this.height)
+          this.dynamicSize = Math.max(this.imgWidth, this.imgHeight)
           
           // drawing
-          this.drawingCanvas = this.$refs.drawingCanvas
+          {
+            this.drawingCanvas = this.$refs.drawingCanvas
 
-          this.drawingCanvas.width = this.width
-          this.drawingCanvas.height = this.height
-          this.drawingCanvas.style.top = 0
-          this.drawingCanvas.style.transform = 'rotate(0)'
+            this.drawingCanvas.width = this.imgWidth
+            this.drawingCanvas.height = this.imgHeight
+            this.drawingCanvas.style.top = 0
+            this.drawingCanvas.style.transform = 'rotate(0)'
 
-          this.drawingCtx = this.drawingCanvas.getContext('2d')
+            this.drawingCtx = this.drawingCanvas.getContext('2d')
+          }
 
           // drew
-          this.drewCanvas = this.$refs.drewCanvas
+          {
+            this.drewCanvas = this.$refs.drewCanvas
 
-          this.drewCanvas.width = this.width
-          this.drewCanvas.height = this.height
-          this.drewCanvas.style.top = 0
-          this.drewCanvas.style.transform = 'rotate(0)'
+            this.drewCanvas.width = this.imgWidth
+            this.drewCanvas.height = this.imgHeight
+            this.drewCanvas.style.top = 0
+            this.drewCanvas.style.transform = 'rotate(0)'
 
-          this.drewCtx = this.drewCanvas.getContext('2d')
+            this.drewCtx = this.drewCanvas.getContext('2d')
+          }
 
           // 初始化图片
-          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.imgWidth, this.imgHeight)
 
           this.getWrapperInfo()
-
           this.setImageDirection()
-
           this.setDefaultScreenshotArea(screenshotArea)
 
           this.$emit('initialized')
@@ -278,12 +229,11 @@
           drawTextInput.parentNode.removeChild(drawTextInput)
         }
 
-        this.image.src = `${ this.src }?${ Date.now() }`
-        this.image.setAttribute('crossOrigin', '')
+        this.image.src = this.base64
 
         this.image.onload = () => {
-          this.drawingCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
-          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
+          this.drawingCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.imgWidth, this.imgHeight)
+          this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.imgWidth, this.imgHeight)
         }
       },
 
@@ -297,14 +247,14 @@
        * @param overlay 遮罩
        */
       fillRectangle({ startX, startY, rectW, rectH, ctx, overlay }) {
-        ctx.clearRect(0, 0, this.width, this.height)
+        ctx.clearRect(0, 0, this.imgWidth, this.imgHeight)
 
         ctx.beginPath()
 
         // 遮罩
         if(overlay) {
           ctx.globalCompositeOperation = 'source-over'
-          ctx.fillRect(0, 0, this.width,this.height)
+          ctx.fillRect(0, 0, this.imgWidth,this.imgHeight)
         }
 
         // 边框
@@ -352,23 +302,25 @@
         this.screenshotDataURL = dataURL
         this.drewArea = {}
 
-        this.$emit('drew', {
-          dataURL: this.screenshotDataURL,
-          file: this.file
-        })
+        if(rectW || rectH) {
+          this.$emit('drew', {
+            dataURL: this.screenshotDataURL,
+            file: this.file,
+            area: { startX, startY, rectW, rectH }
+          })
+        }
       },
 
       // 生成已绘制(框图/文字)文件
-      createDrewFile() { 
+      createDrewFile() {
         const { startX, startY, rectW, rectH } = this.drewArea
-        
+
         this.drewCtx = this.drewCanvas.getContext('2d')
 
-        this.image.src = this.drewImageDataURL || `${ this.src }?${ Date.now() }`
-        this.image.setAttribute('crossOrigin', '')
+        this.image.src = this.drewImageDataURL || this.base64
 
         this.image.onload = () => {
-          // this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height)
+          // this.drewCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.imgWidth, this.imgHeight)
           this.writeText(this.textArea.startX, this.textArea.startY, 250, this.inputValue, this.drewCtx)
           this.inputValue = ''
 
@@ -377,9 +329,10 @@
 
           // canvas
           const canvas = document.createElement('canvas')
-          canvas.width = this.width
-          canvas.height = this.height
-          const data = this.drewCtx.getImageData(0, 0, this.width, this.height)
+          canvas.width = this.imgWidth
+          canvas.height = this.imgHeight
+
+          const data = this.drewCtx.getImageData(0, 0, this.imgWidth, this.imgHeight)
 
           const context = canvas.getContext('2d')
           context.putImageData(data, 0, 0)
@@ -389,10 +342,13 @@
           this.file = base64ToFile(dataURL, this.fileName)
           this.drewImageDataURL = dataURL
 
-          this.$emit('drew', {
-            dataURL: this.drewImageDataURL,
-            file: this.file
-          })
+          if(rectW || rectH) {
+            this.$emit('drew', {
+              dataURL: this.drewImageDataURL,
+              file: this.file,
+              area: { startX, startY, rectW, rectH }
+            })
+          }
         }
       },
 
@@ -476,14 +432,60 @@
       }
     },
 
-    watch: {
-      src: {
-        handler() {
-          this.imgWidth = this.imageWidth ? +this.imageWidth : 0
-          this.imgHeight = this.imageHeight ? +this.imageHeight : 0
+    computed: {
+      baseInfo() {
+        const { imageWidth, imageHeight, src } = this
+        return { imageWidth, imageHeight, src }
+      }
+    },
 
-          this.initialize({ screenshotArea: this.defaultScreenshotArea })
+    watch: {
+      // src: {
+      //   handler(src) {
+      //     if(!src) {
+      //       return
+      //     }
+
+      //     this.$nextTick(async () => {
+      //       this.imgWidth = +this.imageWidth
+      //       this.imgHeight = +this.imageHeight
+
+      //       // 缩放的宽高
+      //       this.zoomWidth = this.imageWidth / this.blocks
+      //       this.zoomHeight = this.imageHeight / this.blocks
+
+      //       this.base64 = await urlToBase64(src)
+
+      //       this.image = new Image()
+      //       this.image.src = this.base64
+
+      //       this.initialize({ screenshotArea: this.defaultScreenshotArea })
+      //     })
+      //   },
+      //   immediate: true
+      // },
+
+      baseInfo: {
+        handler({ imageWidth, imageHeight, src }) {
+          if(imageWidth && imageHeight && src) {
+            this.$nextTick(async () => {
+              this.imgWidth = +this.imageWidth
+              this.imgHeight = +this.imageHeight
+
+              // 缩放的宽高
+              this.zoomWidth = this.imageWidth / this.blocks
+              this.zoomHeight = this.imageHeight / this.blocks
+
+              this.base64 = await urlToBase64(src)
+
+              this.image = new Image()
+              this.image.src = this.base64
+
+              this.initialize({ screenshotArea: this.defaultScreenshotArea })
+            })
+          }
         },
+        deep: true,
         immediate: true
       }
     }
@@ -506,7 +508,7 @@
 
     .drawing {
       position: relative;
-      background: #fafafa;
+      /* background: #fafafa; */
 
       .rotate {
         position: relative;

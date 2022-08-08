@@ -141,7 +141,7 @@
           birthday: '2021-09-20',
           area: 2,
           gender: 1,
-          hobby: [1],
+          hobby: null,
           sexual: 2 
         }
       }

@@ -47,15 +47,9 @@
           </v-col>
 
           <!-- 截图 BEGIN -->
-          <v-col :cols="10" class="box">
+          <v-col v-if="imageWidth && imageHeight" :cols="10" class="box">
             <z-draw-image 
               ref="drawImage"
-              :defaultScreenshotArea="{
-                startX: 100,
-                startY: 100,
-                rectW: 150,
-                rectH: 50
-              }"
               download
               fileName="file.png"
               :imageWidth="imageWidth"
@@ -81,23 +75,35 @@
 
   const images = [
     {
-      url: require('../../../../public/images/global/1.jpg'),
-      width: 700
+      // url: require('../../../../public/images/global/1.jpg'),
+      url: 'http://113.106.108.93:13001/api/files/B0118/download/2022/07-21/322022030009545/322022030009545-030101-274133619-1.png',
+      width: 300,
+      height: 560
     },
 
     {
-      url: require('../../../../public/images/global/2.jpg'),
-      width: 700
+      // url: require('../../../../public/images/global/2.jpg'),
+      url: 'http://113.106.108.93:13001/api/files/B0118/download/2022/07-21/522022070030511/522022070030511-030105-280854129-2.png',
+      width: 400,
+      height: 500
     },
 
     {
       url: require('../../../../public/images/global/3.jpg'),
+      width: 300,
       height: 560
     },
 
     {
       url: require('../../../../public/images/global/4.jpg'),
+      width: 300,
       height: 560
+    },
+
+    {
+      url: require('../../../../public/images/global/5.png'),
+      width: 600,
+      height: 300
     }  
   ]
 
@@ -125,7 +131,7 @@
         options: cells.options,
         dataURL: '',
 
-        imageWidth: 800,
+        imageWidth: 300,
         imageHeight: 560,
 
         isScreenshot: true,
@@ -153,14 +159,15 @@
         // console.log(this.src)
       },
 
-      handleDrew({ dataURL, file }) {
+      handleDrew({ dataURL, file, area }) {
         this.dataURL = dataURL
-        // console.log(file)
+        console.log(area)
       },
 
-      handleSave({ dataURL, file }) {
-        console.log(dataURL)
-        console.log(file)
+      handleSave({ dataURL, file, area }) {
+        // console.log(dataURL)
+        // console.log(file)
+        console.log(area)
       },
 
       // 某项操作

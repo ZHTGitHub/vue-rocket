@@ -23,20 +23,20 @@ export default {
 
       this.setDefaultStyle()
 
-      let startXY = null
+      let [startXY, rectW, rectH] = [null, 0, 0]
 
       this.drawingCanvas.onmousedown = (event) => {
         startXY = {
-          x: event.offsetX,
-          y: event.offsetY
+          startX: event.offsetX,
+          startY: event.offsetY
         }
       }
 
       this.drawingCanvas.onmousemove = (event) => {
         if(startXY) {
-          const { x: startX, y: startY } = startXY
-          const rectW = event.offsetX - startX
-          const rectH = event.offsetY - startY
+          const { startX, startY } = startXY
+          rectW = event.offsetX - startX
+          rectH = event.offsetY - startY
 
           this.fillRectangle({ startX, startY, rectW, rectH, ctx: this.drawingCtx, overlay: true })
         }

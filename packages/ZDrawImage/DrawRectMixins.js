@@ -1,7 +1,7 @@
 export default {
   methods: {
     // 框图
-    drawRectangle() {
+    drawRectangle() { 
       this._clearEventListener()
 
       this.drawingCtx.lineWidth = 3

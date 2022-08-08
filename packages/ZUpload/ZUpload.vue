@@ -56,7 +56,7 @@
                 <input 
                   ref="input"
                   type="file" 
-                  accept="image/*" 
+                  :accept="accept" 
                   :disabled="disabled"
                   @change="onReadImage"
                 >
@@ -86,7 +86,6 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
-  import { tools } from '../scripts/utils'
   import previewDialog from './previewDialog'
 
   export default {
@@ -94,6 +93,11 @@
     mixins: [FormMixins, FormValidationMixins],
 
     props: {
+      accept: {
+        type: String,
+        default: 'image/*'
+      },
+
       action: {
         type: String,
         required: false
@@ -112,6 +116,11 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+
+      effectData: {
+        type: Object,
+        required: false
       },
 
       flip: {
@@ -162,7 +171,9 @@
         file: null,
         targetImage: {},
 
-        hoverStyle: {}
+        hoverStyle: {},
+
+        formData: null
       }
     },
 
@@ -211,14 +222,20 @@
 
       // 请求
       request() {
-        const formData = new FormData()
-        formData.append(this.name, this.file)
+        this.formData = new FormData()
+        this.formData.append(this.name, this.file)
+
+        if(this.effectData) {
+          for(let key in this.effectData) {
+            this.formData.append(key, this.effectData[key])
+          }
+        }
 
         return new Promise((resolve) => {
           fetch(this.action, {
             headers: this.headers,
             method: this.method,
-            body: formData
+            body: this.formData
           })
           .then((result) => result.json())
           .then((result) => resolve(result))

@@ -14,7 +14,9 @@
           :defaultValue="[{
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
           }]"
-          disabled
+          :effectData="{
+            xxx: 'jjj'
+          }"
           :showPreviewIcon="true"
           :showDeleteIcon="true"
           @response="handleResponse"

@@ -240,9 +240,16 @@ export default {
 	watch: {
 		defaultValue: {
 			handler(defaultValue) {
-				// console.log({ [this.formKey]: defaultValue })
+				console.log({ [this.formKey]: defaultValue })
+
 				this.value = defaultValue
+
+				if(value_is_an_array.includes(this.$options.name)) {
+					if(!defaultValue)
+						this.value = []
+				}
 			},
+			deep: true,
 			immediate: true 
 		},
 

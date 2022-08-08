@@ -27,8 +27,8 @@ export default {
       const even = (this.rotateDegrees / 90) % 2 === 0 ? true : false
 
       if(even) {
-        this.rotatedWidth = this.width
-        this.rotatedHeight = this.height
+        this.rotatedWidth = this.imgWidth
+        this.rotatedHeight = this.imgHeight
 
         this.drewCanvas.style.top = 0
         this.drawingCanvas.style.top = 0
@@ -37,11 +37,11 @@ export default {
         this.drawingCanvas.style.left = 0
       }
       else {
-        this.rotatedWidth = this.height
-        this.rotatedHeight = this.width
+        this.rotatedWidth = this.imgHeight
+        this.rotatedHeight = this.imgWidth
 
-        const fromTop = (this.width / 2) - (this.height / 2)
-        const fromLeft = (this.height / 2) - (this.width / 2)
+        const fromTop = (this.imgWidth / 2) - (this.imgHeight / 2)
+        const fromLeft = (this.imgHeight / 2) - (this.imgWidth / 2)
 
         this.drewCanvas.style.top = `${ fromTop }px`
         this.drawingCanvas.style.top = `${ fromTop }px`

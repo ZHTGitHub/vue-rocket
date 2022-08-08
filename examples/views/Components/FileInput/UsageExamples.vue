@@ -1,6 +1,6 @@
 <template>
   <div class="usage-examples">
-    <usage-demo :code="code">
+    <usage-demo :code="cells.fileInputCode">
       <div slot="demo">
         <z-btn @click="getForm">GET FORM</z-btn>
 
@@ -11,6 +11,7 @@
           :auto-upload="false"
           chips
           clearable
+          multiple
           prepend-icon="mdi-file-excel-outline"
           action="http://113.106.108.93:1620/task/uploadImage"
           :effectData="{ 
@@ -42,42 +43,14 @@
   import Prism from 'prismjs'
   import 'prismjs/themes/prism-okaidia.css'
   import { mapState } from 'vuex'
-
-  const code = 
-`
-<z-file-input
-  formId="files"
-  formKey="file"
-  accept="image/*"
-  prependIcon="mdi-file-excel-outline"
-  action="http://zenghaitao/update-images"
-  :effectData="{ 
-    sysProTempId: '900709761157169152',
-    proCode: 2
-  }"
-  :defaultValue="[
-    {
-      url: '',
-      label: 'demo.png'
-    }
-  ]"
-  name="tempImages"
-  label="文件上传"
-  parcel
-  :multiple="false"
-  :deleteIcon="false"
-  @response="onResponse"
-  @delete="onRemove"
->
-</z-file-input>
-`
+  import cells from './cells'
 
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
-        code,
+        cells,
         defaultValue: [{}]
       }
     },

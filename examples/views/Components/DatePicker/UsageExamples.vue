@@ -42,8 +42,9 @@
               prepend-icon="mdi-alarm"
               time-use-seconds
               time-format="24hr"
-              defaultValue=""
+              :defaultValue="['23:23:23']"
               @confirm="confirmDate"
+              @click:clear="clear"
             ></z-date-picker>
           </v-col>
         </v-row>
@@ -79,6 +80,10 @@
 
       handleInput(value) {
         console.log(value)
+      },
+
+      clear(event) {
+        console.log(event)
       }
     },
 

@@ -22,9 +22,6 @@ export default {
         drawingH = drawing.offsetHeight
         drawingW = drawing.offsetWidth
 
-        // console.log({ drawImageH, drawImageW })
-        // console.log({ drawingH, drawingW })
-
         this.setCanvasLeft()
       })
     },

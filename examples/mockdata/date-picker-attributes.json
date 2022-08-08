@@ -23,7 +23,7 @@
     {
       "name": "defaultValue",
       "required": "否",
-      "type": "Number[ ] | String[ ]",
+      "type": "String | String[ ]",
       "acceptedValues": "—",
       "default": "—",
       "description": "日期选择器的默认值"
