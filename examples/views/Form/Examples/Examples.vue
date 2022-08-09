@@ -10,12 +10,14 @@
               <z-upload
                 :formId="formId"
                 formKey="avatar"
-                action="https://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
+                action="http://localhost:7000/api/topics/upload"
                 :headers="headers"
                 :validation="[
                   { rule: 'required', message: '头像不能为空.' }
                 ]"
-                @change="onUploadImage"
+                :defaultValue="defaultUploadValue"
+                @change="onUploadChange"
+                @response="onUploadResponse"
               ></z-upload>
 
               <z-text-field
@@ -44,14 +46,19 @@
               </z-text-field>
 
               <z-file-input
+                action="http://localhost:7000/api/topics/upload"
+                clearable 
                 :formId="formId"
                 formKey="file"
                 label="文件"
                 prependIcon="mdi-file-excel-outline"
+                :show-upload-list="false"
                 :validation="[
                   { rule: 'required', message: '文件不能为空.' }
                 ]"
-                
+                :defaultValue="defaultFileValue"
+                @change="onFileChange"
+                @response="onFileResponse"
               >
                 <span class="error--text" slot="prepend-outer">*</span>
               </z-file-input>
@@ -112,7 +119,9 @@
         cells,
         headers: {
           token: ''
-        }
+        },
+        defaultUploadValue: [],
+        defaultFileValue: []
       }
     },
 
@@ -121,8 +130,36 @@
     },
 
     methods: {
-      onUploadImage(event) {
-        console.log(event)
+      onUploadChange(file) {
+        console.log(file)
+      },
+
+      onUploadResponse(result) {
+        console.log(result)
+        this.defaultUploadValue = [
+          {
+            url: `http://localhost:7000/${ result.url }`
+          }
+        ]
+      },
+
+      onFileChange(file) {
+        console.log(file)
+      },
+
+      onFileResponse(result) {
+        console.log(result)
+
+        if(!result.url) {
+          return
+        }
+
+        this.defaultFileValue = [
+          {
+            label: result.files[0].name,
+            url: `http://localhost:7000/${ result.url }`
+          }
+        ]
       }
     },
 

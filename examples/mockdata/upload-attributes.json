@@ -84,7 +84,7 @@
     },
 
     {
-      "name": "limit",
+      "name": "maxCount",
       "required": "否",
       "type": "Number | String",
       "acceptedValues": "—",

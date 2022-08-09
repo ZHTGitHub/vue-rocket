@@ -138,6 +138,15 @@
     },
 
     {
+      "name": "filled",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "应用替代填充输入样式"
+    },
+
+    {
       "name": "formId",
       "required": "是",
       "type": "String",
@@ -165,15 +174,6 @@
     },
 
     {
-      "name": "filled",
-      "required": "否",
-      "type": "Boolean",
-      "acceptedValues": "—",
-      "default": false,
-      "description": "应用替代填充输入样式"
-    },
-
-    {
       "name": "hide-details",
       "required": "否",
       "type": "Boolean",
@@ -198,6 +198,15 @@
       "acceptedValues": "—",
       "default": "—",
       "description": "设置输入标签"
+    },
+
+    {
+      "name": "maxCount",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "最大允许上传个数"
     },
 
     {
@@ -333,6 +342,15 @@
       "acceptedValues": "—",
       "default": false,
       "description": "将输入设置为手动成功状态"
+    },
+
+    {
+      "name": "showUploadList",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "显示上传列表"
     },
 
     {

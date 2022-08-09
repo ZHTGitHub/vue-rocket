@@ -8,6 +8,7 @@
   >
     <div>
       <v-file-input
+        ref="zFileInput"
         :accept="accept"
         :append-icon="appendIcon"
         :append-outer-icon="appendOuterIcon"
@@ -80,7 +81,7 @@
       </v-file-input>
     </div>
     
-    <div class="z-upload-list">
+    <div v-if="showUploadList" class="z-upload-list">
       <div 
         v-for="(item, index) of value"
         :key="`${ index }-${ item.label }`"
@@ -109,6 +110,7 @@
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
+  import request from './request'
 
   export default {
     name: 'ZFileInput',
@@ -150,6 +152,11 @@
         default: () => {}
       },
 
+      maxCount: {
+        type: [Number, String],
+        required: false
+      },
+
       method: {
         validator(value) {
           return ~['GET', 'POST'].indexOf(value)
@@ -175,6 +182,11 @@
       prependOuterIcon: {
         type: String,
         default: ''
+      },
+
+      showUploadList: {
+        type: Boolean,
+        default: true
       },
       
       truncateLength: {
@@ -207,14 +219,14 @@
             // 所有文件一起上传
             if(this.parcel) {
               for(let item of file) {
-                this.formData.append(this.name, item)
+                file && this.formData.append(this.name, item)
               }
               this.uploadFile()
             }
             // 单个文件单个文件上传
             else {
               for(let item of file) {
-                this.formData.append(this.name, item)
+                file && this.formData.append(this.name, item)
                 this.uploadFile()
               }
             }
@@ -224,7 +236,7 @@
           }
           // 单选
           else {
-            this.formData.append(this.name, file)
+            file && this.formData.append(this.name, file)
             this.uploadFile()
 
             // 记录当前上传的文件
@@ -246,6 +258,9 @@
       },
 
       onClickClear(event) {
+        this.value = []
+        this.files = []
+
         this.$emit('click:clear', this.setCustomValue(event))
       },
 
@@ -274,6 +289,8 @@
       },
 
       onDelete(event, item) {
+        this.value = []
+
         event.customValue = item
         this.$emit('delete', event)
       },
@@ -282,32 +299,32 @@
        * @description 文件上传
        * @param {object | array} file
        */ 
-      uploadFile() {
+      async uploadFile() {
         if(this.effectData) {
           for(let key in this.effectData) {
             this.formData.append(key, this.effectData[key])
           }
         }
 
-        fetch(this.action, {
-          headers: this.headers,
+        const files = this.formData.get(this.name)
+
+        if(!files) {
+          return
+        }
+
+        const result = await request({ 
+          action: this.action,
+          headers: this.headers, 
           method: this.method,
           body: this.formData
         })
-        .then((response) => {
-          return response.json()
-        })
-        .then((response) => {
-          this.$emit('response', {
-            ...response,
-            files: this.files
-          })
-        })
-        .catch((error) => {
-          this.$emit('response', {
-            ...error,
-            files: this.files
-          })
+
+        this.errorMessage = ''
+        this.incorrect = false
+
+        this.$emit('response', {
+          ...result,
+          files: this.files
         })
       },
 
@@ -328,7 +345,7 @@
   .z-upload-list {
     .z-upload-list-item {
       position: relative;
-      margin-bottom: 4px;
+      margin-bottom: 24px;
       height: 22px;
       font-size: 14px;
 
@@ -346,6 +363,7 @@
         }
 
         a.link {
+          flex-grow: 1;
           display: inline-block;
           color: #1976d2;
           overflow: hidden;

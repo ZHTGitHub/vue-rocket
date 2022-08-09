@@ -240,7 +240,7 @@ export default {
 	watch: {
 		defaultValue: {
 			handler(defaultValue) {
-				console.log({ [this.formKey]: defaultValue })
+				// console.log({ [this.formKey]: defaultValue })
 
 				this.value = defaultValue
 

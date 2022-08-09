@@ -43,7 +43,7 @@
             </div>
 
             <div 
-              v-if="!showOnly && (!limit || (value && value.length < limit))"
+              v-if="!showOnly && (!maxCount || (value && value.length < maxCount))"
               class="z-upload-select"
               :style="hoverStyle"
               @mouseenter="onMouseenter"
@@ -87,6 +87,7 @@
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import previewDialog from './previewDialog'
+  import request from './request'
 
   export default {
     name: 'ZUpload',
@@ -133,7 +134,7 @@
         required: false
       },
 
-      limit: {
+      maxCount: {
         type: [Number, String],
         required: false
       },
@@ -213,15 +214,6 @@
 
       // 上传
       async uploadFile() {
-        const result = await this.request()
-
-        this.$refs.input.value = null
-
-        this.$emit('response', result)
-      },
-
-      // 请求
-      request() {
         this.formData = new FormData()
         this.formData.append(this.name, this.file)
 
@@ -231,16 +223,18 @@
           }
         }
 
-        return new Promise((resolve) => {
-          fetch(this.action, {
-            headers: this.headers,
-            method: this.method,
-            body: this.formData
-          })
-          .then((result) => result.json())
-          .then((result) => resolve(result))
-          .catch((error) => resolve(error))
+        const result = await request({
+          action: this.action,
+          headers: this.headers,
+          method: this.method,
+          body: this.formData
         })
+
+        this.errorMessage = ''
+
+        this.$refs.input.value = null
+
+        this.$emit('response', result)
       },
 
       onMouseenter() {
@@ -310,7 +304,7 @@
     .z-upload-wrapper {
       display: inline-block;
       width: 100%;
-      margin-bottom: 8px;
+      /* margin-bottom: 8px; */
 
       .z-upload-list {
         box-sizing: border-box;
@@ -423,6 +417,10 @@
           }
         }
       }
+    }
+
+    .z-messages {
+      margin-top: 8px;
     }
   }
 </style>
