@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './router'
 
 import vuetify from './plugins/vuetify'
-import './plugins/vue-toastification'
+import './plugins/vue-toasted'
 import './plugins/highlight'
 
 import 'animate.css'

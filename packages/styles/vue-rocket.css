@@ -10,3 +10,7 @@
   min-width: 1px;
   font-size: 12px;
 }
+
+.toasted-warning {
+  background-color: #ff7043 !important;
+}

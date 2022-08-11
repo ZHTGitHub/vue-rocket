@@ -9,27 +9,11 @@ const code =
     [500, 'error']
   ])
 
-  // 默认值
-  const defaultOptions = {
-    closeButton: 'button',
-    closeOnClick: true,
-    draggable: true,
-    draggablePercent: 0.6,
-    hideProgressBar: true,
-    icon: true,
-    pauseOnFocusLoss: true,
-    pauseOnHover: true,
-    position: 'top-right',
-    rtl: false,
-    showCloseButtonOnHover: false,
-    timeout: 5000
-  }
+  // 与 vue-toasted 的 options 保持一致
+  const customOptions = {}
 
   // 可直接 const toasted = new Toasted()
-  const toasted = new Toasted(customTypes, defaultOptions)
-
-  // 与 vue-toastification 的 options 保持一致
-  const customOptions = {}
+  const toasted = new Toasted(customTypes, customOptions)
 `
 
 export default {

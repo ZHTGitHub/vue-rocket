@@ -13,7 +13,7 @@ class Toasted {
    */ 
   success(message, options) {
     const assignOptions = Object.assign(this.customOptions, options)
-    Vue.$toast.success(message, assignOptions)
+    Vue.toasted.success(message, assignOptions)
   }
 
   /**
@@ -23,7 +23,7 @@ class Toasted {
    */ 
   info(message, options) {
     const assignOptions = Object.assign(this.customOptions, options)
-    Vue.$toast.info(message, assignOptions)
+    Vue.toasted.info(message, assignOptions)
   }
 
   /**
@@ -33,7 +33,7 @@ class Toasted {
    */ 
   warning(message, options) {
     const assignOptions = Object.assign(this.customOptions, options)
-    Vue.$toast.warning(message, assignOptions)
+    Vue.toasted.show(message, { className: 'toasted-warning', ...assignOptions })
   }
 
   /**
@@ -43,7 +43,7 @@ class Toasted {
    */ 
   error(message, options) {
     const assignOptions = Object.assign(this.customOptions, options)
-    Vue.$toast.error(message, assignOptions)
+    Vue.toasted.error(message, assignOptions)
   }
 
   /**
