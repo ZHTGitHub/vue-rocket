@@ -104,7 +104,7 @@
         let values = []
         this.selectAll = !this.selectAll
 
-        if(this.values.length !== this.options.length) {
+        if(this.value.length !== this.options.length) {
           this.selectAll = true
         }
 
@@ -113,10 +113,11 @@
         }
 
         this.value = values
+
         this.$emit('change', this.value)
       },
 
-      _setOptions() {
+      setOptions() {
         [this.sweets, this.items] = [[], []]
 
         if(tools.isArray(this.options) && tools.isYummy(this.options)) {
@@ -133,42 +134,9 @@
     },
 
     watch: {
-      // defaultValue: {
-      //   handler(defaultValue) {
-      //     this.values = defaultValue
-      //   },
-      //   immediate: true
-      // },
-
-      // values: {
-      //   handler(values) {
-      //     if(tools.isYummy(values)) {
-      //       this.value = values
-      //     }else {
-      //       this.value = undefined
-      //     }
-      //   },
-      //   immediate: true
-      // },
-
-      // value: {
-      //   handler(value) {
-      //     if(value) {
-      //       if(Array.isArray(value)) {
-      //         this.values = value
-      //       }else {
-      //         this.values = [value]
-      //       }
-      //     }else {
-      //       this.values = []
-      //     }
-      //   },
-      //   immediate: true
-      // },
-
       options: {
         handler() {
-          this._setOptions()
+          this.setOptions()
         },
         immediate: true
       }

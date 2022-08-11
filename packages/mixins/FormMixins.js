@@ -240,8 +240,6 @@ export default {
 	watch: {
 		defaultValue: {
 			handler(defaultValue) {
-				// console.log({ [this.formKey]: defaultValue })
-
 				this.value = defaultValue
 
 				if(value_is_an_array.includes(this.$options.name)) {
@@ -252,41 +250,5 @@ export default {
 			deep: true,
 			immediate: true 
 		},
-
-		// values: {
-		// 	handler(values) {
-		// 		if(value_is_an_array.includes(this.$options.name)) {
-		// 			if(values?.length) {
-		// 				this.value = values
-		// 			}
-		// 			else {
-		// 				this.value = undefined
-		// 			}
-	
-		// 			this.verifyField()
-		// 		}
-		// 	},
-		// 	immediate: true
-		// },
-
-		// value: {
-		// 	handler(value) {
-		// 		console.log({ [this.formKey]: value })
-		// 		if(value_is_an_array.includes(this.$options.name)) {
-		// 			if(value) {
-		// 				this.values = value
-		// 			}
-		// 			else {
-		// 				this.values = []
-		// 			}
-		// 			return
-		// 		}
-
-		// 		if(value == null) {
-		// 			this.value = undefined
-		// 		}
-		// 	},
-		// 	immediate: true
-		// }
 	}
 }
