@@ -1,7 +1,8 @@
 import { deepClone, find, findIndex, flatArray, removeDuplicate } from './arrayObject'
 import { getScrollOffset, getViewportSize, queryToObject } from './browser'
 import { get, set } from './lodash'
-import { getType, isArray, isObject, isEqual, isYummy, isLousy } from './messy'
+import { isEqual, isYummy, isLousy } from './messy'
+import { getType, isBoolean, isNumber, isArray, isFunction, isObject, isNull, isUndefined, isSymbol } from './types'
 
 export default {
   deepClone, 
@@ -17,10 +18,17 @@ export default {
   get, 
   set,
   
-  getType, 
-  isArray, 
-  isObject, 
   isEqual, 
   isYummy, 
-  isLousy
+  isLousy,
+
+  getType, 
+  isBoolean,
+  isNumber,
+  isArray,
+  isFunction,
+  isObject,
+  isNull,
+  isUndefined,
+  isSymbol
 }

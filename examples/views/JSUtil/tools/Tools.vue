@@ -116,6 +116,10 @@
       }
     },
 
+    created() {
+      console.log(tools.isNull(undefined))
+    },
+
     mounted() {
       Prism.highlightAll()
     }

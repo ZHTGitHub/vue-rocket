@@ -1,4 +1,4 @@
-import { isArray, isObject, isEqual } from './messy'
+import { isArray, isObject } from './types'
 
 // 值类型
 const valueType = ['undefined', 'number', 'string', 'boolean', 'symbol'];
