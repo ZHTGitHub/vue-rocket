@@ -70,7 +70,9 @@
           <z-image 
             ref="image" 
             :src="imageUrl" 
+            returnImageInfo
             width="700"
+            @response="handleResponse"
           ></z-image>
         </div>
       </div>
@@ -106,6 +108,12 @@
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      handleResponse(info) {
+        console.log(info)
+      }
     }
   }
 </script>

@@ -29,6 +29,15 @@
     },
 
     {
+      "name": "return-image-info",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "是否返回图片信息."
+    },
+
+    {
       "name": "scroll-range",
       "required": "否",
       "type": "Number | String",

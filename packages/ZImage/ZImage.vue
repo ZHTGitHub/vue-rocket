@@ -45,6 +45,11 @@
         default: .25
       },
 
+      returnImageInfo: {
+        type: Boolean,
+        default: false
+      },
+
       scrollRange: {
         type: [Number, String],
         default: 50
@@ -75,14 +80,17 @@
         dynamicHeight: 0,
 
         zoomWidth: 0,
-        zoomHeight: 0
+        zoomHeight: 0,
+
+        startTime: 0
       }
     },
 
     methods: {
-      getImageInfo() {
+      initImage() {
+        this.startTime = Date.now()
+
         const image = new Image()
-        image.src = this.src
 
         this.zImageRef = this.$refs.zImageRef
         this.imgRef = this.$refs.imgRef
@@ -98,6 +106,10 @@
 
           this.setDynamicSize()
         }
+
+        image.src = this.src
+
+        this.returnImageInfo && this.getImageInfo(this.src)
       },
 
       setDynamicSize() {
@@ -120,13 +132,30 @@
           this.imgRef.style.left = `${ hiddenX }px`
           this.imgRef.style.top = `${ hiddenY }px`
         }
+      },
+
+      getImageInfo(src) {
+        fetch(src)
+        .then(result => result.blob())
+        .then(result => {
+          const data = {
+            type: result.type,
+            size: result.size,
+            time: Date.now() - this.startTime
+          }
+
+          this.$emit('response', data)
+        })
+        .catch(error => {
+          this.$emit('response', error)
+        })
       }
     },
 
     watch: {
       src: {
         handler() {
-          this.$nextTick(this.getImageInfo) 
+          this.$nextTick(this.initImage) 
         },
         immediate: true
       }

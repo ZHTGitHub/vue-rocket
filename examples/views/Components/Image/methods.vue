@@ -36,7 +36,7 @@
     data() {
       return {
         formId: 'ImageMethods',
-        getHandler: 'GET_IMAGE_METHODS'
+        dispatchList: 'GET_IMAGE_METHODS'
       }
     }
   }

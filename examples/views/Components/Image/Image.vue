@@ -6,9 +6,9 @@
 
     <image-attributes></image-attributes>
 
-    <!-- <image-methods></image-methods>
+   <image-methods></image-methods>
 
-    <image-slots></image-slots> -->
+   <!-- <image-slots></image-slots> -->
   </div>
 </template>
 
@@ -18,9 +18,9 @@
 
     components: {
       'usage-examples': () => import('./UsageExamples'),
-      'image-attributes': () => import('./ImageAttributes'),
-      'image-methods': () => import('./ImageMethods'),
-      'image-slots': () => import('./ImageSlots.vue')
+      'image-attributes': () => import('./attributes'),
+      'image-methods': () => import('./methods'),
+      'image-slots': () => import('./slots.vue')
     }
   }
 </script>

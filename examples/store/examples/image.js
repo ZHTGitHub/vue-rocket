@@ -9,11 +9,12 @@ const actions = {
     return result
   },
 
-  GET_IMAGE_METHODS() {
-    return {
-      code: 200,
-      items: []
-    }
+  async GET_IMAGE_METHODS() {
+    const result = await request({
+      url: 'api/image/methods.json'
+    })
+
+    return result
   },
 
   GET_IMAGE_SLOTS() {

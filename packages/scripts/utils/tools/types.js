@@ -54,6 +54,14 @@ export const isNumber = function(value) {
 };
 
 /**
+ * @description 判读是否为字符串
+ * @param {Any} value
+ */ 
+ export const isString = function(value) {
+  return getType(value) === 'string'
+};
+
+/**
  * @description 判断是否为数组
  * @param {Any} value
  */ 
