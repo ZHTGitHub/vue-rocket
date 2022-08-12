@@ -102,7 +102,8 @@
     data() {
       return {
         code,
-        imageUrl: require('../../../../public/images/global/1.jpg')
+        imageUrl: require('../../../../public/images/global/1.jpg'),
+        // imageUrl: 'http://113.106.108.93:13000/api/files/B0118/download/2022/08-11/392022070033192/392022070033192-030105-282985736-1.png'
       }
     },
 
@@ -112,6 +113,8 @@
 
     methods: {
       handleResponse(info) {
+        console.log(info?.size)
+        console.log(info?.time)
         console.log(info)
       }
     }

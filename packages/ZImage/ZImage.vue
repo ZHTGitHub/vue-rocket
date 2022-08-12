@@ -35,6 +35,11 @@
         default: 5
       },
 
+      headers: {
+        type: Object,
+        default: () => ({})
+      },
+
       maxTimes: {
         type: [Number, String],
         default: 2
@@ -135,7 +140,10 @@
       },
 
       getImageInfo(src) {
-        fetch(src)
+        fetch(src, {
+          headers: this.headers,
+          mode: 'no-cors'
+        })
         .then(result => result.blob())
         .then(result => {
           const data = {
