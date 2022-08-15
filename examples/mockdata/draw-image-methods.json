@@ -3,6 +3,12 @@
   "total": 2,
   "data": [
     {
+      "name": "direction",
+      "parameters": "direction: top | right | bottom | left",
+      "description": "旋转后触发"
+    },
+
+    {
       "name": "drew",
       "parameters": "{ dataURL, file }",
       "description": "生成已绘制框图/文字/切图文件时触发"

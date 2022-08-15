@@ -1,17 +1,27 @@
-  const DEG = 90
+const DEG = 90
+
+const directionMap = new Map([
+  [0, 'top'],
+  [90, 'right'],
+  [-270, 'right'],
+  [180, 'bottom'],
+  [-180, 'bottom'],
+  [270, 'left'],
+  [-90, 'left'],
+])
 
 export default {
   methods: {
     // 旋转
-    rotateImage(direction) { 
-      if(direction === 'left') {
+    rotateImage(leftOrRight) { 
+      if(leftOrRight === 'left') {
         --this.rotateCount
 
         if(this.rotateCount <= -4) {
           this.rotateCount = 0
         }
       }
-      else if(direction === 'right') {
+      else if(leftOrRight === 'right') {
         ++this.rotateCount
 
         if(this.rotateCount >= 4) {
@@ -20,6 +30,8 @@ export default {
       }
 
       this.rotateDegrees = this.rotateCount * DEG
+
+      this.$emit('direction', directionMap.get(this.rotateDegrees))
 
       this.drewCanvas.style.transform = `rotate(${ this.rotateDegrees }deg)`
       this.drawingCanvas.style.transform = `rotate(${ this.rotateDegrees }deg)`

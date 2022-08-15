@@ -50,6 +50,7 @@
           <v-col v-if="imageWidth && imageHeight" :cols="10" class="box">
             <z-draw-image 
               ref="drawImage"
+              :direction="direction"
               download
               fileName="file.png"
               :imageWidth="imageWidth"
@@ -58,6 +59,7 @@
               @drew="handleDrew"
               @init="handleInit"
               @save="handleSave"
+              @direction="handleDirection"
             ></z-draw-image>
           </v-col>
           <!-- 截图 END -->
@@ -138,7 +140,9 @@
 
         num: -1,
 
-        src: images[0].url
+        src: images[0].url,
+
+        direction: 'top'
       }
     },
 
@@ -168,6 +172,11 @@
         // console.log(dataURL)
         // console.log(file)
         console.log(area)
+      },
+
+      handleDirection(direction) {
+        console.log(direction)
+        this.direction = direction
       },
 
       // 某项操作

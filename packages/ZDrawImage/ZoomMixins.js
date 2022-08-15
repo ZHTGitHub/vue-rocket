@@ -42,8 +42,12 @@ export default {
           }
 
           if(this.imgWidth <= maxWidth) {
-            this.initialize({ self: true })
+            this.initialize({ 
+              rotateCount: this.rotateCount,
+              rotateDegrees: this.rotateDegrees 
+            })
           }
+          
           break;
 
         // 缩小
@@ -60,7 +64,10 @@ export default {
           }
 
           if(this.imgWidth >= minWidth) {
-            this.initialize({ self: true })
+            this.initialize({ 
+              rotateCount: this.rotateCount,
+              rotateDegrees: this.rotateDegrees 
+            })
           }
           break;
 
@@ -68,8 +75,10 @@ export default {
         case 'origin': 
           this.imgWidth = this.zoomWidth * this.blocks
           this.imgHeight = this.zoomHeight * this.blocks
-          this.initialize({ self: true })
+          this.initialize()
           break;
+
+        
       }
     }
   }

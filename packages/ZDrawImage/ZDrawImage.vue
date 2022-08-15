@@ -140,9 +140,9 @@
 
     methods: {
       // 初始化
-      async initialize({ screenshotArea = {} }) {
-        this.rotateCount = 0
-        this.rotateDegrees = 0
+      async initialize({ rotateCount = 0, rotateDegrees = 0, screenshotArea = {} }) {
+        this.rotateCount = rotateCount
+        this.rotateDegrees = rotateDegrees
 
         this.startXY = { ...defaultStartXY }
 
