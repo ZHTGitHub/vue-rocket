@@ -61,8 +61,14 @@ export const urlToBase64 = (url) => {
       const context = canvas.getContext('2d')
       context.drawImage(image, 0, 0, image.width, image.height)
 
-      resolve(canvas.toDataURL('image/png')) 
+      resolve({
+        data: canvas.toDataURL('image/png')
+      }) 
     }, false)
+
+    image.addEventListener('error', function(error) {
+      resolve(error)
+    })
 
     image.src = url + '?' + Date.now()
   })

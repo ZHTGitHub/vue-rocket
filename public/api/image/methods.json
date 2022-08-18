@@ -1,11 +1,7 @@
 {
   "code": 200,
   "items": [
-    {
-      "name": "response",
-      "parameters": "(event: Object)",
-      "description": "返回图片信息."
-    }
+    
   ],
   "message": "获取成功!",
   "total": 0

@@ -47,7 +47,7 @@
           </v-col>
 
           <!-- 截图 BEGIN -->
-          <v-col v-if="imageWidth && imageHeight" :cols="10" class="box">
+          <v-col :cols="10" class="box">
             <z-draw-image 
               ref="drawImage"
               :direction="direction"
@@ -76,6 +76,12 @@
   import cells from './cells'
 
   const images = [
+    {
+      url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/08-05/572022080034192/572022080034192-030101-282776965-1.png',
+      width: 0,
+      height: 0
+    },
+
     {
       // url: require('../../../../public/images/global/1.jpg'),
       url: 'http://113.106.108.93:13001/api/files/B0118/download/2022/07-21/322022030009545/322022030009545-030101-274133619-1.png',

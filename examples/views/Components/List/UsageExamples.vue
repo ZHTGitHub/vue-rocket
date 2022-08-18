@@ -21,7 +21,8 @@
               :dataSource="list"
               :elevation="1"  
               :defaultValue="value"
-              @input="handleInput"
+              @select="handleSelect"
+              @hover="handleHover"
             >
               <template v-slot:default="{ item }">
                 <div class="py-1 px-2 item">
@@ -114,9 +115,14 @@
         console.log('change')
       },
 
-      handleInput({ item: value }) {
+      handleSelect({ item: value }) {
+        console.log(value)
         this.value = value
         this.show = false
+      },
+
+      handleHover({ item: value }) {
+        console.log(value)
       }
     }
   }

@@ -1,6 +1,7 @@
 <template>
   <div ref="drawImage" class="z-draw-image">
     <div 
+      v-if="base64"
       ref="drawing"
       class="drawing"
       :style="{ 
@@ -21,16 +22,36 @@
         <canvas ref="drawingCanvas" class="drawingCanvas"></canvas>
       </div>
     </div>
+
+    <div 
+      v-else 
+      class="load-failed"
+    >
+      未加载到图片
+    </div>
+
+    <v-overlay 
+      :absolute="true" 
+      :opacity=".8"
+      :value="overlay"
+    >
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
 <script>
   import DrawRectMixins from './DrawRectMixins'
   import DrawTextMixins from './DrawTextMixins'
+  import OverlayMixins from './OverlayMixins'
   import RotateMixins from './RotateMixins'
   import ScreenshotMixins from './ScreenshotMixins'
   import ScrollMixins from './ScrollMixins'
   import ZoomMixins from './ZoomMixins'
+  // import { tools } from '../scripts/utils'
 
   import { base64ToFile, base64ToBlob, rotatedDirectionMap, urlToBase64 } from './tools'
 
@@ -41,6 +62,7 @@
     mixins: [
       DrawRectMixins,
       DrawTextMixins,
+      OverlayMixins,
       RotateMixins,
       ScreenshotMixins,
       ScrollMixins,
@@ -134,7 +156,11 @@
         inputValue: '',
 
         // 记录文字开始坐标，及最大宽度
-        textArea: {}
+        textArea: {},
+
+        // 计算图片加载时间
+        startTime: 0,
+        endTime: 0
       }
     },
 
@@ -193,7 +219,13 @@
           this.setImageDirection()
           this.setDefaultScreenshotArea(screenshotArea)
 
-          this.$emit('initialized')
+          this.overlay = false
+          this.endTime = Date.now()
+
+          this.$emit('initialized', {
+            startTime: this.startTime,
+            endTime: this.endTime
+          })
         }
       },      
 
@@ -440,34 +472,12 @@
     },
 
     watch: {
-      // src: {
-      //   handler(src) {
-      //     if(!src) {
-      //       return
-      //     }
-
-      //     this.$nextTick(async () => {
-      //       this.imgWidth = +this.imageWidth
-      //       this.imgHeight = +this.imageHeight
-
-      //       // 缩放的宽高
-      //       this.zoomWidth = this.imageWidth / this.blocks
-      //       this.zoomHeight = this.imageHeight / this.blocks
-
-      //       this.base64 = await urlToBase64(src)
-
-      //       this.image = new Image()
-      //       this.image.src = this.base64
-
-      //       this.initialize({ screenshotArea: this.defaultScreenshotArea })
-      //     })
-      //   },
-      //   immediate: true
-      // },
-
       baseInfo: {
         handler({ imageWidth, imageHeight, src }) {
           if(imageWidth && imageHeight && src) {
+            this.startTime = Date.now()
+            this.overlay = true
+
             this.$nextTick(async () => {
               this.imgWidth = +this.imageWidth
               this.imgHeight = +this.imageHeight
@@ -476,13 +486,30 @@
               this.zoomWidth = this.imageWidth / this.blocks
               this.zoomHeight = this.imageHeight / this.blocks
 
-              this.base64 = await urlToBase64(src)
+              const result = await urlToBase64(src)
 
-              this.image = new Image()
-              this.image.src = this.base64
+              if(result.type !== 'error') {
+                this.base64 = result.data
 
-              this.initialize({ screenshotArea: this.defaultScreenshotArea })
+                this.image = new Image()
+                this.image.src = this.base64
+
+                this.initialize({ screenshotArea: this.defaultScreenshotArea })
+              }
+              else {
+                this.base64 = void 0
+                this.overlay = false
+                this.endTime = Date.now()
+
+                this.$emit('initialized', {
+                  startTime: this.startTime,
+                  endTime: this.endTime
+                })
+              }
             })
+          }
+          else {
+            this.base64 = void 0
           }
         },
         deep: true,
@@ -517,6 +544,13 @@
           position: absolute;
         }
       }
+    }
+
+    .load-failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: inherit;
     }
   }
 </style>

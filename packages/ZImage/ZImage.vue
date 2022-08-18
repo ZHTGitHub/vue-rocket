@@ -16,6 +16,17 @@
         }"
       />
     </div>
+
+    <v-overlay 
+      :absolute="true" 
+      :opacity=".8"
+      :value="overlay"
+    >
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -87,7 +98,11 @@
         zoomWidth: 0,
         zoomHeight: 0,
 
-        startTime: 0
+        startTime: 0,
+
+        overlay: false,
+        startTime: 0,
+        endTime: 0
       }
     },
 
@@ -110,11 +125,18 @@
           this.zoomHeight = this.imageHeight / this.blocks
 
           this.setDynamicSize()
+          this.overlay = false
+          this.endTime = Date.now()
         }
 
-        image.src = this.src
+        image.onerror = () => {
+          this.overlay = false
+          this.endTime = Date.now()
+        }
 
-        this.returnImageInfo && this.getImageInfo(this.src)
+        this.startTime = Date.now()
+        this.overlay = true
+        image.src = this.src
       },
 
       setDynamicSize() {
@@ -137,26 +159,6 @@
           this.imgRef.style.left = `${ hiddenX }px`
           this.imgRef.style.top = `${ hiddenY }px`
         }
-      },
-
-      getImageInfo(src) {
-        fetch(src, {
-          headers: this.headers,
-          mode: 'no-cors'
-        })
-        .then(result => result.blob())
-        .then(result => {
-          const data = {
-            type: result.type,
-            size: result.size,
-            time: Date.now() - this.startTime
-          }
-
-          this.$emit('response', data)
-        })
-        .catch(error => {
-          this.$emit('response', error)
-        })
       }
     },
 

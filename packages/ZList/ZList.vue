@@ -107,7 +107,7 @@
       onSelectItem(index) {
         this.activedIndex = index
 
-        this.$emit('input', {
+        this.$emit('select', {
           item: this.dataSource[this.activedIndex],
           index: this.activedIndex
         })
@@ -128,6 +128,11 @@
         if(target.offsetTop - this.scrollTop <= 0) {
           this.$refs.zList.scrollTop = target.offsetTop - target.offsetHeight
         }
+
+        this.$emit('hover', {
+          item: this.dataSource[this.activedIndex],
+          index: this.activedIndex
+        })
       },
 
       // 向下
@@ -144,6 +149,11 @@
         if(target.offsetTop - this.scrollTop >= this.viewportHeight) {
           this.$refs.zList.scrollTop = target.offsetTop - this.viewportHeight + target.offsetHeight
         }
+
+        this.$emit('hover', {
+          item: this.dataSource[this.activedIndex],
+          index: this.activedIndex
+        })
       },
 
       todo(event) {
@@ -154,7 +164,7 @@
 
           switch (keyCode) {
             case 13: 
-              this.$emit('input', {
+              this.$emit('select', {
                 item: this.dataSource[this.activedIndex],
                 index: this.activedIndex
               })

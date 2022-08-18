@@ -16,7 +16,7 @@
 
     {
       "name": "initialized",
-      "parameters": "-",
+      "parameters": "{ startTime, endTime }",
       "description": "已生成绘图"
     },
 
