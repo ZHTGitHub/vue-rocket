@@ -77,26 +77,6 @@
 
   const images = [
     {
-      url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/08-05/572022080034192/572022080034192-030101-282776965-1.png',
-      width: 0,
-      height: 0
-    },
-
-    {
-      // url: require('../../../../public/images/global/1.jpg'),
-      url: 'http://113.106.108.93:13001/api/files/B0118/download/2022/07-21/322022030009545/322022030009545-030101-274133619-1.png',
-      width: 300,
-      height: 560
-    },
-
-    {
-      // url: require('../../../../public/images/global/2.jpg'),
-      url: 'http://113.106.108.93:13001/api/files/B0118/download/2022/07-21/522022070030511/522022070030511-030105-280854129-2.png',
-      width: 400,
-      height: 500
-    },
-
-    {
       url: require('../../../../public/images/global/3.jpg'),
       width: 300,
       height: 560
@@ -104,7 +84,7 @@
 
     {
       url: require('../../../../public/images/global/4.jpg'),
-      width: 300,
+      width: 280,
       height: 560
     },
 

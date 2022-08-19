@@ -102,8 +102,8 @@
     data() {
       return {
         code,
-        // imageUrl: require('../../../../public/images/global/1.jpg'),
-        imageUrl: 'http://ipfsgw01.stariverpan.com:9095/ipfs/bafybeif3g7m3rqm2nnm4u3qvo3xlag3s4cfmveblw57zizmi3jhiavfkku'
+        imageUrl: require('../../../../public/images/global/1.jpg'),
+        // imageUrl: 'http://ipfsgw01.stariverpan.com:9095/ipfs/bafybeif3g7m3rqm2nnm4u3qvo3xlag3s4cfmveblw57zizmi3jhiavfkku'
       }
     },
 
