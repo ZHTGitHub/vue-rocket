@@ -10,6 +10,8 @@ const files = require.context('./examples', false, /\.js$/)
 const modules = {}
 
 files.keys().map(key => {
+  console.log(key)
+  console.log(files(key))
   modules[key.replace(/(\.\/|\.js)/g, '')] = files(key).default
 })
 

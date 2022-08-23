@@ -466,6 +466,7 @@
                   :hint="item.hint"
                   :label="item.label"
                   :maxCount="item.maxCount"
+                  :maxSize="item.maxSize"
                   :method="item.method"
                   :multiple="item.multiple"
                   :name="item.name"
@@ -527,6 +528,7 @@
                   :flip="item.flip"
                   :headers="item.headers"
                   :maxCount="item.maxCount"
+                  :maxSize="item.maxSize"
                   :method="item.method"
                   :name="item.name"
                   :validation="item.validation"
@@ -679,11 +681,13 @@
       
       close() {
         this.dialog = false
+        this.$emit('close')
       },
 
       open(effect = {}) {
         this.effect = tools.deepClone(effect)
         this.dialog = true
+        this.$emit('open')
       },
 
       toggle() {

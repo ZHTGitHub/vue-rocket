@@ -77,6 +77,7 @@
         }
       }"
       @change:avatar="handleUploadChange"
+      @change:file="handleFileChange"
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >
@@ -132,7 +133,7 @@
           file: [
             { 
               url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 
-              label: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' 
+              label: '文件链接' 
             }
           ],
           name: 'Leslie', 
@@ -158,6 +159,19 @@
 
       handleUploadChange({ loadEvent }) {
         this.detail = { ...this.detail, avatar: [{ url: loadEvent.target.result}] }
+      },
+
+      handleFileChange(file) {
+        console.log(file)
+        // this.detail = {
+        //   ...this.detail,
+        //   file: [
+        //     {
+        //       url: file,
+        //       label: file.name
+        //     }
+        //   ]
+        // }
       },
 
       handleCancel(effect, form) {

@@ -12,9 +12,6 @@
                 formKey="avatar"
                 action="http://localhost:7000/api/topics/upload"
                 :headers="headers"
-                :validation="[
-                  { rule: 'required', message: '头像不能为空.' }
-                ]"
                 :defaultValue="defaultUploadValue"
                 @change="onUploadChange"
                 @response="onUploadResponse"
@@ -23,6 +20,7 @@
               <z-text-field
                 :formId="formId"
                 formKey="username"
+                clearable 
                 label="用户名"
                 :validation="[
                   { rule: 'required', message: '用户名为必填项.' },
@@ -36,6 +34,7 @@
               <z-text-field
                 :formId="formId"
                 formKey="password"
+                clearable 
                 label="密码"
                 :validation="[
                   { rule: 'required', message: '密码为必填项.' },
@@ -70,6 +69,7 @@
                 btnType="validate"
                 color="primary"
                 lockedTime="0"
+                @click="handleSubmit"
               >
               <v-icon>mdi-send</v-icon>
               提交</z-btn>
@@ -114,8 +114,7 @@
 
     data() {
       return {
-        formId: 'Examples',
-        searchFormId: 'ExamplesSearch',
+        formId: 'FormExamples',
         cells,
         headers: {
           token: ''
@@ -130,6 +129,10 @@
     },
 
     methods: {
+      handleSubmit() {
+        console.log(this.forms[this.formId])
+      },
+
       onUploadChange(file) {
         console.log(file)
       },

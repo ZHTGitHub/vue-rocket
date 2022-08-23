@@ -8,6 +8,7 @@
       <div>
         <div class="z-flex z-upload-wrapper">
           <div class="z-flex z-upload-list" :class="flip ? 'flex-row-reverse' : 'flex-row'">
+            <!-- 缩略图 BEGIN -->
             <div 
               v-for="(image, index) of value"
               :key="index"
@@ -41,7 +42,9 @@
                 </span>
               </div>
             </div>
+            <!-- 缩略图 END -->
 
+            <!-- 上传 BEGIN -->
             <div 
               v-if="!showOnly && (!maxCount || (value && value.length < maxCount))"
               class="z-upload-select"
@@ -69,6 +72,7 @@
                 </div>
               </span>
             </div>
+            <!-- 上传 END -->
           </div>
         </div>
 
@@ -139,6 +143,11 @@
         required: false
       },
 
+      maxSize: {
+        type: [Number, String],
+        required: false
+      },
+
       method: {
         validator(value) {
           return ~['get', 'post'].indexOf(value)
@@ -195,7 +204,7 @@
           if(loadEvent.target?.error == null) {
             this.autoUpload && this.uploadFile()
             
-            this.$emit('change', { changeEvent, loadEvent })
+            this.$emit('change', { changeEvent, loadEvent, files: [this.file] })
           }
         })
       },
@@ -216,6 +225,14 @@
       async uploadFile() {
         this.formData = new FormData()
         this.formData.append(this.name, this.file)
+
+        const size = this.file.size / 1024
+        const maxSize = +this.maxSize
+
+        if(maxSize && size > maxSize) {
+          this.$emit('response', { maxSize, file: this.file })
+          return
+        }
 
         if(this.effectData) {
           for(let key in this.effectData) {

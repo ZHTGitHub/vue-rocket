@@ -210,6 +210,15 @@
     },
 
     {
+      "name": "maxSize",
+      "required": "否",
+      "type": "Number | String",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "最大允许上传大小"
+    },
+
+    {
       "name": "method",
       "required": "否",
       "type": "String",

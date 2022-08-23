@@ -25,7 +25,7 @@ const rules = {
     const values = rule.split(',')
     const min_value = +values[0]
     const max_value = +values[1]
-    const length = value.length
+    const length = value?.length
 
     if(length >= min_value && length <= max_value) {
       return true
@@ -58,7 +58,7 @@ const rules = {
    */ 
   excluded: (value, rules) => {
     for(let rule of rules.split('|')) {
-      if(~value.indexOf(rule)) {
+      if(~value?.indexOf(rule)) {
         return false
       }else {
         return true
@@ -72,7 +72,7 @@ const rules = {
    * @param {Array} rule
    */ 
   included: (value, rule) => {
-    return ~value.indexOf(rule)
+    return ~value?.indexOf(rule)
   },
 
   /**
@@ -110,7 +110,7 @@ const rules = {
   length: (value, rule) => {
     value = '' + value
     rule = +rule
-    return value.length === rule
+    return value?.length === rule
   },
 
   /**
@@ -121,7 +121,7 @@ const rules = {
   min: (value, rule) => {
 		value = '' + value
     rule = +rule
-		return value.length >= rule
+		return value?.length >= rule
 	},
 
   /**
@@ -132,7 +132,7 @@ const rules = {
   max: (value, rule) => {
 		value = '' + value
     rule = +rule
-		return value.length <= rule
+		return value?.length <= rule
 	},
 
   /**
@@ -186,6 +186,10 @@ const rules = {
    * @param {String} value
    */ 
   required: (value) => {
+    if(value === undefined || value == null) {
+      return false
+    }
+
     const reg = /[\S]+/
     return reg.test(value)
   },

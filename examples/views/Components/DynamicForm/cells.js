@@ -16,6 +16,7 @@ const fields = [
   {
     inputType: 'fileInput',
     formKey: 'file',
+    autoUpload: false,
     label: '文件',
     prependOuter: '*',
     prependOuterClass: 'error--text',

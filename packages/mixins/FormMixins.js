@@ -1,7 +1,5 @@
 import { mapState } from 'vuex'
 
-const value_is_an_array = ['ZCheckboxs', 'ZFileInput', 'ZUpload']
-
 export default {
 	props: {
 		formId: {
@@ -242,10 +240,15 @@ export default {
 			handler(defaultValue) {
 				this.value = defaultValue
 
-				if(value_is_an_array.includes(this.$options.name)) {
+				if(['ZCheckboxs', 'ZUpload'].includes(this.$options.name)) {
 					if(!defaultValue)
 						this.value = []
+					return
 				}
+
+				// if(this.$options.name === 'ZFileInput') {
+				// 	this.value = []
+				// }
 			},
 			deep: true,
 			immediate: true 

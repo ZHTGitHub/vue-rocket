@@ -9,6 +9,7 @@
     <div>
       <v-file-input
         ref="zFileInput"
+        v-model="value"
         :accept="accept"
         :append-icon="appendIcon"
         :append-outer-icon="appendOuterIcon"
@@ -83,7 +84,7 @@
     
     <div v-if="showUploadList" class="z-upload-list">
       <div 
-        v-for="(item, index) of value"
+        v-for="(item, index) of fileValue"
         :key="`${ index }-${ item.label }`"
         class="z-upload-list-item"
       >
@@ -111,6 +112,7 @@
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import request from './request'
+  import { tools } from '../scripts/utils'
 
   export default {
     name: 'ZFileInput',
@@ -157,6 +159,11 @@
         required: false
       },
 
+      maxSize: {
+        type: [Number, String],
+        required: false
+      },
+
       method: {
         validator(value) {
           return ~['GET', 'POST'].indexOf(value)
@@ -198,7 +205,8 @@
     data() {
       return {
         files: [],
-        formData: null
+        formData: null,
+        fileValue: null
       }
     },
 
@@ -261,6 +269,12 @@
         this.value = []
         this.files = []
 
+        // this.$store.commit('DELETE_FORM_KEY', { formId: this.formId, formKey: this.formKey })
+
+        // console.log(this.formId, this.fomrKey)
+        // console.log(this.$store.state.forms[this.formId])
+        // console.log(this.$store.state.forms[this.formId][this.fomrKey])
+
         this.$emit('click:clear', this.setCustomValue(event))
       },
 
@@ -300,6 +314,18 @@
        * @param {object | array} file
        */ 
       async uploadFile() {
+        const allFiles = this.formData.getAll(this.name)
+        const maxSize = +this.maxSize
+
+        for(let file of allFiles) {
+          const size = file.size / 1024
+
+          if(maxSize && size > maxSize) {
+            this.$emit('response', { maxSize, file })
+            return
+          }
+        }
+
         if(this.effectData) {
           for(let key in this.effectData) {
             this.formData.append(key, this.effectData[key])
@@ -337,7 +363,22 @@
           return event
         }
       }
-    }
+    },
+
+    // watch: {
+    //   defaultValue: {
+    //     handler(defaultValue) {
+    //       if(tools.isYummy(defaultValue)) {
+    //         this.fileValue = defaultValue
+    //         return
+    //       }
+
+    //       this.fileValue = []
+    //     },
+    //     deep: true,
+    //     immediate: true
+    //   }
+    // }
   }
 </script>
 
