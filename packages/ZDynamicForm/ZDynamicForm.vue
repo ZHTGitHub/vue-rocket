@@ -58,7 +58,7 @@
                   :clear-icon="item.clearIcon"
                   :clearable="item.clearable"
                   :counter="item.counter"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :filled="item.filled"
                   :hide-details="item.hideDetails"
                   :hint="item.hint"
@@ -67,7 +67,7 @@
                   :placeholder="item.placeholder"
                   :prepend-icon="item.prependOuterIcon"
                   :prepend-inner-icon="item.prependIcon"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :reverse="item.reverse"
                   :solo="item.solo"
                   :suffix="item.suffix"
@@ -117,7 +117,7 @@
                   :clear-icon="item.clearIcon"
                   :clearable="item.clearable"
                   :counter="item.counter"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :filled="item.filled"
                   :hide-details="item.hideDetails"
                   :hint="item.hint"
@@ -126,7 +126,7 @@
                   :placeholder="item.placeholder"
                   :prepend-icon="item.prependOuterIcon"
                   :prepend-inner-icon="item.prependIcon"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :reverse="item.reverse"
                   :solo="item.solo"
                   :suffix="item.suffix"
@@ -175,7 +175,7 @@
                   :clear-icon="item.clearIcon"
                   :clearable="item.clearable"
                   :counter="item.counter"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :filled="item.filled"
                   :hide-details="item.hideDetails"
                   :hint="item.hint"
@@ -184,13 +184,13 @@
                   :placeholder="item.placeholder"
                   :prepend-inner-icon="item.prependIcon"
                   :prepend-icon="item.prependOuterIcon"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :return-object="item.returnObject"
                   :reverse="item.reverse"
                   :solo="item.solo"
                   :suffix="item.suffix"
                   :validation="item.validation"
-                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
+                  :options="returnItems({ formKey: item.formKey, options: item.options })"
                   :defaultValue="detailInfo[item.formKey]"
                   @blur="onBlur($event, item.formKey)"
                   @change="onChange($event, item.formKey)"
@@ -236,7 +236,7 @@
                   :clearable="item.clearable"
                   :counter="item.counter"
                   :dense="item.dense"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :filled="item.filled"
                   :hide-details="item.hideDetails"
                   :hint="item.hint"
@@ -248,12 +248,12 @@
                   :placeholder="item.placeholder"
                   :prepend-inner-icon="item.prependIcon"
                   :prepend-icon="item.prependOuterIcon"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :reverse="item.reverse"
                   :solo="item.solo"
                   :suffix="item.suffix"
                   :validation="item.validation"
-                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
+                  :options="returnItems({ formKey: item.formKey, options: item.options })"
                   :defaultValue="detailInfo[item.formKey]"
                   @blur="onBlur($event, item.formKey)"
                   @change="onChange($event, item.formKey)"
@@ -298,7 +298,7 @@
                   :clear-icon="item.clearIcon"
                   :clearable="item.clearable"
                   :counter="item.counter"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :filled="item.filled"
                   :first-day-of-week="item.firstDayOfWeek"
                   :hide-details="item.hideDetails"
@@ -317,7 +317,7 @@
                   :prepend-icon="item.prependOuterIcon"
                   :prepend-inner-icon="item.prependIcon"
                   :range="item.range"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :reverse="item.reverse"
                   :solo="item.solo"
                   :suffix="item.suffix"
@@ -359,13 +359,13 @@
                   :formId="formId"
                   :formKey="item.formKey"
                   :column="item.column"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :hide-details="item.hideDetails"
                   :label="item.label"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :row="item.row"
                   :validation="item.validation"
-                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
+                  :options="returnItems({ formKey: item.formKey, options: item.options })"
                   :defaultValue="detailInfo[item.formKey]"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
@@ -387,7 +387,7 @@
                   :formKey="item.formKey"
                   :label="item.label"
                   :validation="item.validation"
-                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
+                  :options="returnItems({ formKey: item.formKey, options: item.options })"
                   :defaultValue="detailInfo[item.formKey]"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
@@ -417,7 +417,7 @@
                   :rounded="item.rounded"
                   :tile="item.tile"
                   :validation="item.validation"
-                  :options="(conf[item.formKey] && conf[item.formKey].items) ? conf[item.formKey].items : item.options"
+                  :options="returnItems({ formKey: item.formKey, options: item.options })"
                   :defaultValue="detailInfo[item.formKey]"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
@@ -433,10 +433,10 @@
                   v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"
                   :formKey="item.formKey"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :hide-details="item.hideDetails"
                   :label="item.label"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :validation="item.validation"
                   :defaultValue="detailInfo[item.formKey]"
                   @change="onChange($event, item.formKey)"
@@ -460,7 +460,7 @@
                   :clearable="item.clearable"
                   :counter="item.counter"
                   :delete-icon="item.deleteIcon"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :effect-data="item.effectData"
                   :error="item.error"
                   :filled="item.filled"
@@ -481,7 +481,7 @@
                   :placeholder="item.placeholder"
                   :prepend-icon="item.prependIcon"
                   :prepend-outer-icon="item.prependOuterIcon"
-                  :readonly="item.readonly"
+                  :readonly="returnReadonly({ formKey: item.formKey, readonly: item.readonly })"
                   :reverse="item.reverse"
                   :solo="item.solo"
                   :suffix="item.suffix"
@@ -529,7 +529,7 @@
                   :action="item.action"
                   :auto-upload="item.autoUpload"
                   :color="item.color"
-                  :disabled="item.disabled"
+                  :disabled="returnDisabled({ formKey: item.formKey, disabled: item.disabled })"
                   :flip="item.flip"
                   :headers="item.headers"
                   :maxCount="item.maxCount"
@@ -720,32 +720,56 @@
       },
 
       onBlur(event, formKey) {
+        this.$emit('blur', { formKey, event })
         this.$emit(`blur:${ formKey }`, event)
       },
 
       onChange(event, formKey) {
+        this.$emit('change', { formKey, event })
         this.$emit(`change:${ formKey }`, event)
       },
 
       onClick(event, formKey) {
+        this.$emit('click', { formKey, event })
         this.$emit(`click:${ formKey }`, event)
       },
 
       onEnter(event, formKey) {
+        this.$emit('enter', { formKey, event })
         this.$emit(`enter:${ formKey }`, event)
       },
 
       onFocus(event, formKey) {
+        this.$emit('focus', { formKey, event })
         this.$emit(`focus:${ formKey }`, event)
       },
 
       onResponse(result, formKey) {
+        this.$emit('response', { formKey, result })
         this.$emit(`response:${ formKey }`, result)
       }
     },
 
     computed: {
-      ...mapGetters(['forms'])
+      ...mapGetters(['forms']),
+
+      returnDisabled() {
+        return ({ formKey, disabled }) => {
+          return this.conf?.[formKey]?.disabled || disabled
+        }
+      },
+
+      returnItems() {
+        return ({ formKey, options }) => {
+          return this.conf?.[formKey]?.items || options
+        }
+      },
+
+      returnReadonly() {
+        return ({ formKey, readonly }) => {
+          return this.conf?.[formKey]?.readonly || readonly
+        }
+      }
     },
 
     watch: {

@@ -1,6 +1,6 @@
 {
   "name": "vue-rocket",
-  "version": "0.34.20",
+  "version": "0.34.21",
   "description": "基于 Vue+Vuetify 的后台管理系统框架",
   "author": "zenghaitao",
   "private": false,
@@ -30,6 +30,7 @@
     "vuex": ">=3.6.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.18.9",
     "@mdi/font": "^5.9.55",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",

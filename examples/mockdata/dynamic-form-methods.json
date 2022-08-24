@@ -1,7 +1,13 @@
 {
   "status": true,
-  "total": 11,
+  "total": 17,
   "data": [
+    {
+      "name": "blur",
+      "parameters": "{ formKey: String, event: Event }",
+      "description": "当输入框失去焦点时触发"
+    },
+
     {
       "name": "blur:[formKey]",
       "parameters": "(event: Event)",
@@ -15,9 +21,21 @@
     },
 
     {
+      "name": "change",
+      "parameters": "{ formKey: String, value: String | Number }",
+      "description": "当用户交互更改输入时触发"
+    },
+
+    {
       "name": "change:[formKey]",
       "parameters": "(value: String | Number)",
       "description": "当用户交互更改输入时触发"
+    },
+
+    {
+      "name": "click",
+      "parameters": "{ formKey: String, event: Event }",
+      "description": "单击输入框时触发"
     },
 
     {
@@ -45,9 +63,21 @@
     },
 
     {
+      "name": "enter",
+      "parameters": "{ formKey: String, event: Event }",
+      "description": "当输入框回车时触发"
+    },
+
+    {
       "name": "enter:[formKey]",
       "parameters": "(event: Event)",
       "description": "当输入框回车时触发"
+    },
+
+    {
+      "name": "focus",
+      "parameters": "{ formKey: String, event: Event }",
+      "description": "当输入框得到焦点时触发"
     },
 
     {
@@ -63,8 +93,14 @@
     },
 
     {
+      "name": "response",
+      "parameters": "{ formKey: String, result: Any }",
+      "description": "文件上传成功/失败时触发"
+    },
+
+    {
       "name": "response:[formKey]",
-      "parameters": "Any",
+      "parameters": "(result: Any)",
       "description": "文件上传成功/失败时触发"
     }
   ]
