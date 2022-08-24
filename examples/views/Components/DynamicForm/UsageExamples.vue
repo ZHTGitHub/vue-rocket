@@ -49,7 +49,7 @@
               excludes: [2]
             }
           ],
-          items: countryItems
+          items: cells.countryItems
         },
 
         area: {
@@ -61,25 +61,26 @@
               excludes: []
             }
           ],
-          items: areaItems
+          items: cells.areaItems
         },
 
         gender: {
-          items: genderItems
+          items: cells.genderItems
         },
 
         hobby: {
-          items: hobbyItems
+          items: cells.hobbyItems
         },
 
         vision: {
-          items: visionItems
+          items: cells.visionItems
         }
       }"
       @change:avatar="handleUploadChange"
       @change:file="handleFileChange"
       @cancel="handleCancel"
       @confirm="handleConfirm"
+      @enter:name="handleNameEnter"
     >
     </z-dynamic-form>
   </div>
@@ -97,35 +98,6 @@
       return {
         cells,
         code: '',
-        countryItems: [
-          { label: '中国', value: 1 },
-          { label: '美国', value: 2 },
-          { label: '日本', value: 3 }
-        ],
-
-        areaItems: [
-          { label: '广州', value: 1 },
-          { label: '深圳', value: 2 },
-          { label: '珠海', value: 3 }
-        ],
-
-        genderItems: [
-          { label: '男性', value: 1 },
-          { label: '女性', value: 2 }
-        ],
-
-        hobbyItems: [
-          { label: '游泳', value: 1 },
-          { label: '乒乓球', value: 2 },
-          { label: '羽毛球', value: 3 }
-        ],
-
-        visionItems: [
-          { label: '正常', value: 1 },
-          { label: '近视', value: 2 },
-          { label: '远视', value: 3 }
-        ],
-
         detail: {
           avatar: [
             { url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' }
@@ -172,6 +144,10 @@
         //     }
         //   ]
         // }
+      },
+
+      handleNameEnter(event) {
+        console.log(event)
       },
 
       handleCancel(effect, form) {

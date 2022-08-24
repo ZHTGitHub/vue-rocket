@@ -77,6 +77,7 @@
                   @blur="onBlur($event, item.formKey)"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
+                  @enter="onEnter($event, item.formKey)"
                   @focus="onFocus($event, item.formKey)"
                 >
                   <span 
@@ -135,6 +136,7 @@
                   @blur="onBlur($event, item.formKey)"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
+                  @enter="onEnter($event, item.formKey)"
                   @focus="onFocus($event, item.formKey)"
                 >
                   <span 
@@ -193,6 +195,7 @@
                   @blur="onBlur($event, item.formKey)"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
+                  @enter="onEnter($event, item.formKey)"
                   @focus="onFocus($event, item.formKey)"
                 >
                   <span 
@@ -255,6 +258,7 @@
                   @blur="onBlur($event, item.formKey)"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
+                  @enter="onEnter($event, item.formKey)"
                   @focus="onFocus($event, item.formKey)"
                 >
                   <span 
@@ -489,6 +493,7 @@
                   @blur="onBlur($event, item.formKey)"
                   @change="onChange($event, item.formKey)"
                   @click="onClick($event, item.formKey)"
+                  @enter="onEnter($event, item.formKey)"
                   @focus="onFocus($event, item.formKey)"
                 >
                   <span 
@@ -724,6 +729,10 @@
 
       onClick(event, formKey) {
         this.$emit(`click:${ formKey }`, event)
+      },
+
+      onEnter(event, formKey) {
+        this.$emit(`enter:${ formKey }`, event)
       },
 
       onFocus(event, formKey) {

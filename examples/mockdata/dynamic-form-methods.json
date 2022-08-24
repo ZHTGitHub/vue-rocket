@@ -1,35 +1,71 @@
 {
   "status": true,
-  "total": 5,
+  "total": 11,
   "data": [
     {
+      "name": "blur:[formKey]",
+      "parameters": "(event: Event)",
+      "description": "当输入框失去焦点时触发"
+    },
+
+    {
       "name": "cancel",
-      "parameters": "(value: Boolean)",
+      "parameters": "(effect: Object, form: Object)",
       "description": "单击取消按钮时触发"
+    },
+
+    {
+      "name": "change:[formKey]",
+      "parameters": "(value: String | Number)",
+      "description": "当用户交互更改输入时触发"
+    },
+
+    {
+      "name": "click:[formKey]",
+      "parameters": "(event: Event)",
+      "description": "单击输入框时触发"
     },
 
     {
       "name": "close",
       "parameters": "-",
-      "description": "关闭弹框时触发"
+      "description": "关闭弹窗时触发"
     },
 
     {
       "name": "confirm",
-      "parameters": "(value: Boolean)",
+      "parameters": "(effect: Object, form: Object)",
       "description": "单击确认按钮时触发"
     },
 
     {
       "name": "dialog",
       "parameters": "(value: Boolean)",
-      "description": "被绑定模型的更新"
+      "description": "当前弹窗打开/关闭"
+    },
+
+    {
+      "name": "enter:[formKey]",
+      "parameters": "(event: Event)",
+      "description": "当输入框回车时触发"
+    },
+
+    {
+      "name": "focus:[formKey]",
+      "parameters": "(event: Event)",
+      "description": "当输入框得到焦点时触发"
     },
 
     {
       "name": "open",
       "parameters": "-",
-      "description": "打开弹框时触发"
+      "description": "打开弹窗时触发"
+    },
+
+    {
+      "name": "response:[formKey]",
+      "parameters": "Any",
+      "description": "文件上传成功/失败时触发"
     }
   ]
 }
