@@ -12,7 +12,6 @@
           chips
           clearable
           maxSize="17"
-          multiple
           prepend-icon="mdi-file-excel-outline"
           action="http://113.106.108.93:1620/task/uploadImage"
           :effectData="{ 

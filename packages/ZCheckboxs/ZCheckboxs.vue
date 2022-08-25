@@ -102,11 +102,11 @@
 
       onSelectAll() {
         let values = []
-        this.selectAll = !this.selectAll
 
-        if(this.value.length !== this.options.length) {
-          this.selectAll = true
-        }
+        const vLength = this.value.length
+        const oLength = this.options.length
+
+        this.selectAll = !(vLength === oLength)
 
         if(this.selectAll) {
           values = this.sweets

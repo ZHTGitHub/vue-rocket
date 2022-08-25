@@ -1,6 +1,6 @@
 {
   "status": true,
-  "total": 17,
+  "total": 15,
   "data": [
     {
       "name": "blur",
@@ -45,12 +45,6 @@
     },
 
     {
-      "name": "close",
-      "parameters": "-",
-      "description": "关闭弹窗时触发"
-    },
-
-    {
       "name": "confirm",
       "parameters": "(effect: Object, form: Object)",
       "description": "单击确认按钮时触发"
@@ -84,12 +78,6 @@
       "name": "focus:[formKey]",
       "parameters": "(event: Event)",
       "description": "当输入框得到焦点时触发"
-    },
-
-    {
-      "name": "open",
-      "parameters": "-",
-      "description": "打开弹窗时触发"
     },
 
     {

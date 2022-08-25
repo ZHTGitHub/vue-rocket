@@ -5,10 +5,9 @@
         <z-upload 
           :formId="formId"
           formKey="upload"
-          action="https://112.91.145.58:38080/cloud/user/uploadEnterpriseCorporation"
+          action="http://zenghaitao.com/api/topics/upload"
           color="#f00"
           :headers="headers"
-          maxSize="10"
           :validation="[
             { rule: 'required', message: '头像不能为空.' }
           ]"
@@ -16,6 +15,7 @@
           :effectData="{
             xxx: 'jjj'
           }"
+          multiple
           :showPreviewIcon="true"
           :showDeleteIcon="true"
           @change="handleChagne"
@@ -66,6 +66,8 @@
 ></z-upload>
 `
 
+  const Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZGNmNzBhZDZlNGVmZmZkY2Y2ZWZjOSIsImFjY291bnQiOiJjaGF0MTk1QDE2My5jb20iLCJpYXQiOjE2NjE0MTg5NzYsImV4cCI6MTY2NDAxMDk3Nn0.XJWTZpYEHgz8dkhmJKAifPGH68JGjdWOhn2FyIbxPY8'
+
   export default {
     name: 'UsageExamples',
 
@@ -75,7 +77,7 @@
         code,
 
         headers: {
-          token: ''
+          Authorization
         },
 
         defaultValue: [
@@ -104,7 +106,9 @@
       },
 
       handleResponse(response) {
-        console.log(response)
+        this.defaultValue = [
+          { url: `http://zenghaitao.com/${ response.url }` }
+        ]
       }
     },
 

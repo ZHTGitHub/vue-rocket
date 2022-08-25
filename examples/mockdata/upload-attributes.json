@@ -1,6 +1,6 @@
 {
   "status": true,
-  "total": 6,
+  "total": 17,
   "data": [
     {
       "name": "action",
@@ -108,6 +108,15 @@
       "acceptedValues": "post | get",
       "default": "post",
       "description": "上传请求的 http method"
+    },
+
+    {
+      "name": "multiple",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "是否支持多选文件"
     },
 
     {

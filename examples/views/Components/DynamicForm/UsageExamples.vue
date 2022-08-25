@@ -80,6 +80,7 @@
       @change:file="handleFileChange"
       @cancel="handleCancel"
       @confirm="handleConfirm"
+      @close="handleClose"
       @enter:name="handleNameEnter"
     >
     </z-dynamic-form>
@@ -159,6 +160,10 @@
         console.log(effect)
         console.log(form)
         this.$refs.dynamic.close()
+      },
+
+      handleClose() {
+        alert()
       }
     }
   }

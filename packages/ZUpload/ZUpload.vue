@@ -61,6 +61,7 @@
                   type="file" 
                   :accept="accept" 
                   :disabled="disabled"
+                  :multiple="multiple"
                   @change="onReadImage"
                 >
 
@@ -155,6 +156,11 @@
         default: 'post'
       },
 
+      multiple: {
+        type: Boolean,
+        default: false
+      },
+
       name: {
         type: String,
         default: 'file'
@@ -194,6 +200,11 @@
 
       // 读取
       onReadImage(changeEvent) {
+        console.log(changeEvent.target.files)
+        // for(let file of changeEvent.target.files) {
+        //   console.log(file)
+        // }
+
         this.file = changeEvent.target.files[0]
 
         const fileReader = new FileReader()
@@ -268,40 +279,6 @@
         }
       }
     },
-
-    // watch: {
-      // defaultValue: {
-      //   handler(defaultValue) {
-      //     this.values = defaultValue
-      //   },
-      //   immediate: true
-      // },
-
-      // values: {
-      //   handler(values) {
-      //     if(tools.isYummy(values)) {
-      //       this.value = values
-      //     }
-      //     else {
-      //       this.value = undefined
-      //     }
-
-      //     this.verifyField()
-      //   },
-      //   immediate: true
-      // },
-
-      // value: {
-      //   handler(value) {
-      //     if(value) {
-      //       this.values = value
-      //     }else {
-      //       this.values = []
-      //     }
-      //   },
-      //   immediate: true
-      // }
-    // },
 
     components: {
       previewDialog

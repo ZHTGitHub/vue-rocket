@@ -686,13 +686,13 @@
       
       close() {
         this.dialog = false
-        this.$emit('close')
+        // this.$emit('close')
       },
 
       open(effect = {}) {
         this.effect = tools.deepClone(effect)
         this.dialog = true
-        this.$emit('open')
+        // this.$emit('open')
       },
 
       toggle() {
@@ -812,15 +812,7 @@
       dialog: {
         handler(dialog) {
           this.$emit('dialog', dialog)
-
           !dialog && rocket.emit('ZHT_RESET_FORM', this.formId)
-
-          // if(dialog) {
-          //   this.detailInfo = tools.deepClone(this.detail)
-          // }
-          // else {
-          //   rocket.emit('ZHT_RESET_FORM', this.formId)
-          // }
         },
         immediate: true
       }

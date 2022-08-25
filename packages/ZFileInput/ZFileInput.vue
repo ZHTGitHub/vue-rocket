@@ -216,8 +216,8 @@
         this.$emit('blur', event)
       },
 
-      onChange(file) {
-        this.$emit('change', file)
+      onChange(files) {
+        this.$emit('change', files)
 
         if(this.autoUpload) {
           this.formData = new FormData()
@@ -226,25 +226,27 @@
           if(this.multiple) {
             // 所有文件一起上传
             if(this.parcel) {
-              for(let item of file) {
-                file && this.formData.append(this.name, item)
+              for(let item of files) {
+                this.formData.append(this.name, item)
               }
               this.uploadFile()
             }
             // 单个文件单个文件上传
             else {
-              for(let item of file) {
-                file && this.formData.append(this.name, item)
+              for(let item of files) {
+                this.formData.append(this.name, item)
                 this.uploadFile()
               }
             }
 
             // 记录当前上传的文件
-            this.files = file
+            this.files = files
           }
           // 单选
           else {
-            file && this.formData.append(this.name, file)
+            const file = files
+            this.formData.append(this.name, file)
+
             this.uploadFile()
 
             // 记录当前上传的文件
@@ -268,12 +270,6 @@
       onClickClear(event) {
         this.value = []
         this.files = []
-
-        // this.$store.commit('DELETE_FORM_KEY', { formId: this.formId, formKey: this.formKey })
-
-        // console.log(this.formId, this.fomrKey)
-        // console.log(this.$store.state.forms[this.formId])
-        // console.log(this.$store.state.forms[this.formId][this.fomrKey])
 
         this.$emit('click:clear', this.setCustomValue(event))
       },
