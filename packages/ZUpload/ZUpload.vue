@@ -93,6 +93,7 @@
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import previewDialog from './previewDialog'
   import request from './request'
+  import loadImage from './loadImage'
 
   export default {
     name: 'ZUpload',
@@ -166,6 +167,11 @@
         default: 'file'
       },
 
+      parcel: {
+        type: Boolean,
+        default: false
+      },
+
       showDeleteIcon: {
         type: Boolean,
         default: true
@@ -184,6 +190,7 @@
     
     data() {
       return {
+        files: [],
         file: null,
         targetImage: {},
 
@@ -199,25 +206,49 @@
       },
 
       // 读取
-      onReadImage(changeEvent) {
-        console.log(changeEvent.target.files)
-        // for(let file of changeEvent.target.files) {
-        //   console.log(file)
-        // }
+      async onReadImage(event) {
+        const files = []
 
-        this.file = changeEvent.target.files[0]
+        for(let file of event.target.files) {
+          files.push(file)
+        }
 
-        const fileReader = new FileReader()
+        this.$emit('change', files)
 
-        fileReader.readAsDataURL(this.file)
+        if(this.autoUpload) {
+          this.formData = new FormData()
+          
+          // 多选
+          if(this.multiple) {
+            // 所有文件一起上传
+            if(this.parcel) {
+              for(let item of files) {
+                this.formData.append(this.name, item)
+              }
+              this.uploadFile()
+            }
+            // 单个文件单个文件上传
+            else {
+              for(let item of files) {
+                this.formData.set(this.name, item)
+                await this.uploadFile()
+              }
+            }
 
-        fileReader.addEventListener('load', (loadEvent) => { 
-          if(loadEvent.target?.error == null) {
-            this.autoUpload && this.uploadFile()
-            
-            this.$emit('change', { changeEvent, loadEvent, files: [this.file] })
+            // 记录当前上传的文件
+            this.files = files
           }
-        })
+          // 单选
+          else {
+            const file = files[0]
+            this.formData.append(this.name, file)
+
+            this.uploadFile()
+
+            // 记录当前上传的文件
+            this.files = [file]
+          }
+        }
       },
 
       // 预览
@@ -234,21 +265,28 @@
 
       // 上传
       async uploadFile() {
-        this.formData = new FormData()
-        this.formData.append(this.name, this.file)
-
-        const size = this.file.size / 1024
+        const allFiles = this.formData.getAll(this.name)
         const maxSize = +this.maxSize
 
-        if(maxSize && size > maxSize) {
-          this.$emit('response', { maxSize, file: this.file })
-          return
+        for(let file of allFiles) {
+          const size = file.size / 1024
+
+          if(maxSize && size > maxSize) {
+            this.$emit('response', { maxSize, file })
+            return
+          }
         }
 
         if(this.effectData) {
           for(let key in this.effectData) {
-            this.formData.append(key, this.effectData[key])
+            this.formData.set(key, this.effectData[key])
           }
+        }
+
+        const files = this.formData.get(this.name)
+
+        if(!files) {
+          return
         }
 
         const result = await request({
@@ -259,10 +297,13 @@
         })
 
         this.errorMessage = ''
-
+        this.incorrect = false
         this.$refs.input.value = null
 
-        this.$emit('response', result)
+        this.$emit('response', {
+          result,
+          files: this.files
+        })
       },
 
       onMouseenter() {

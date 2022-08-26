@@ -129,6 +129,15 @@
     },
 
     {
+      "name": "parcel",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "多文件合并上传"
+    },
+
+    {
       "name": "show-delete-icon",
       "required": "否",
       "type": "Boolean",

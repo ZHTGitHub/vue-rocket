@@ -216,7 +216,7 @@
         this.$emit('blur', event)
       },
 
-      onChange(files) {
+      async onChange(files) {
         this.$emit('change', files)
 
         if(this.autoUpload) {
@@ -234,8 +234,8 @@
             // 单个文件单个文件上传
             else {
               for(let item of files) {
-                this.formData.append(this.name, item)
-                this.uploadFile()
+                this.formData.set(this.name, item)
+                await this.uploadFile()
               }
             }
 
@@ -324,7 +324,7 @@
 
         if(this.effectData) {
           for(let key in this.effectData) {
-            this.formData.append(key, this.effectData[key])
+            this.formData.set(key, this.effectData[key])
           }
         }
 
@@ -359,22 +359,7 @@
           return event
         }
       }
-    },
-
-    // watch: {
-    //   defaultValue: {
-    //     handler(defaultValue) {
-    //       if(tools.isYummy(defaultValue)) {
-    //         this.fileValue = defaultValue
-    //         return
-    //       }
-
-    //       this.fileValue = []
-    //     },
-    //     deep: true,
-    //     immediate: true
-    //   }
-    // }
+    }
   }
 </script>
 

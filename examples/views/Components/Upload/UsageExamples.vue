@@ -16,6 +16,7 @@
             xxx: 'jjj'
           }"
           multiple
+          parcel
           :showPreviewIcon="true"
           :showDeleteIcon="true"
           @change="handleChagne"
@@ -106,8 +107,11 @@
       },
 
       handleResponse(response) {
+        console.log(response)
+
         this.defaultValue = [
-          { url: `http://zenghaitao.com/${ response.url }` }
+          ...this.defaultValue,
+          { url: `http://zenghaitao.com/${ response.result.url }` }
         ]
       }
     },

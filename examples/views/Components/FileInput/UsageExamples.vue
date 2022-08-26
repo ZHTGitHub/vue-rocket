@@ -8,12 +8,11 @@
           formId="files"
           formKey="file"
           accept="image/*, .xlsx"
-          :auto-upload="true"
           chips
           clearable
-          maxSize="17"
+          multiple
           prepend-icon="mdi-file-excel-outline"
-          action="http://113.106.108.93:1620/task/uploadImage"
+          action="http://zenghaitao.com/api/topics/upload"
           :effectData="{ 
             path: 'B0118/download/2021/12-09/682021060032022/',
             name: 'leslie.png'
@@ -24,9 +23,10 @@
               label: 'demo.png'
             }
           ]"
-          :headers="{ 'x-name': 'Leslie' }"
+          :headers="headers"
           name="file"
           label="文件上传"
+          parcel
           :deleteIcon="false"
           @change="onChange"
           @response="onResponse"
@@ -45,12 +45,17 @@
   import { mapState } from 'vuex'
   import cells from './cells'
 
+  const Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZGNmNzBhZDZlNGVmZmZkY2Y2ZWZjOSIsImFjY291bnQiOiJjaGF0MTk1QDE2My5jb20iLCJpYXQiOjE2NjE0MTg5NzYsImV4cCI6MTY2NDAxMDk3Nn0.XJWTZpYEHgz8dkhmJKAifPGH68JGjdWOhn2FyIbxPY8'
+
   export default {
     name: 'UsageExamples',
 
     data() {
       return {
         cells,
+        headers: {
+          Authorization
+        },
         defaultValue: [{}]
       }
     },
