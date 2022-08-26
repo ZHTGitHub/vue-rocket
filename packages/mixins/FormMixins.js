@@ -241,14 +241,24 @@ export default {
 				this.value = defaultValue
 
 				if(['ZCheckboxs', 'ZUpload'].includes(this.$options.name)) {
-					if(!defaultValue)
+					if(!defaultValue) {
 						this.value = []
+					}
 					return
 				}
 
-				// if(this.$options.name === 'ZFileInput') {
-				// 	this.value = []
-				// }
+				if(['ZAutocomplete'].includes(this.$options.name)) {
+					if(this.multiple) {
+						if(!defaultValue) {
+							this.value = []
+							return
+						}
+
+						if(!Array.isArray(defaultValue)) {
+							this.value = [defaultValue]
+						}
+					}
+				}
 			},
 			deep: true,
 			immediate: true 

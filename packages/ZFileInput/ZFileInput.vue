@@ -345,7 +345,7 @@
         this.incorrect = false
 
         this.$emit('response', {
-          ...result,
+          result,
           files: this.files
         })
       },

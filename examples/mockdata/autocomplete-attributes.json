@@ -30,6 +30,15 @@
     },
 
     {
+      "name": "chips",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": false,
+      "description": "改变一个已选择项为小纸片（chips）的显示方式"
+    },
+
+    {
       "name": "clear-icon",
       "required": "否",
       "type": "Boolean",

@@ -12,6 +12,7 @@
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
       :autofocus="autofocus"
+      :chips="chips"
       :clear-icon="clearIcon"
       :clearable="clearable"
 			:color="color"
@@ -90,6 +91,11 @@
       allowOverflow: {
         type: Boolean,
         default: true
+      },
+
+      chips: {
+        type: Boolean,
+        default: false
       },
 
       dense: {

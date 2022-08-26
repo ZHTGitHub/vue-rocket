@@ -56,6 +56,7 @@ const fields = [
     formKey: 'country',
     label: '国家',
     clearable: true,
+    multiple: true,
     prependOuter: '*',
     prependOuterClass: 'error--text',
     options: [

@@ -93,7 +93,6 @@
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import previewDialog from './previewDialog'
   import request from './request'
-  import loadImage from './loadImage'
 
   export default {
     name: 'ZUpload',

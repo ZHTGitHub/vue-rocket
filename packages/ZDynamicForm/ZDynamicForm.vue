@@ -232,6 +232,7 @@
                   :append-icon="item.appendIcon"
                   :append-outer-icon="item.appendOuterIcon"
                   :autofocus="item.autofocus"
+                  :chips="item.chips"
                   :clear-icon="item.clearIcon"
                   :clearable="item.clearable"
                   :counter="item.counter"

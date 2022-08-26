@@ -4,13 +4,18 @@
       <div slot="demo">
         <div class="z-flex">
           <z-autocomplete
-            formId="auto"
-            formKey="auto"
+            :formId="formId"
+            formKey="area"
+            chips
+            multiple
             :options="cityOptions"
+            :defaultValue="1"
             @change="handleChange"
             @enter="handleEnter"
             @search="handleSearch"
           ></z-autocomplete>
+
+          <v-btn @click="getValue">获取</v-btn>
         </div>
       </div>
     </usage-demo>
@@ -20,6 +25,8 @@
 <script>
   import Prism from 'prismjs'
   import 'prismjs/themes/prism-okaidia.css'
+
+  import { mapState } from 'vuex'
 
   const code = 
 `
@@ -36,6 +43,7 @@
 
     data() {
       return {
+        formId: 'AutocompleteExample',
         code,
         cityOptions: [
           { label: '广州', value: 1 },
@@ -62,7 +70,15 @@
 
       handleSearch(value) {
         // console.log(value)
+      },
+
+      getValue() {
+        console.log(this.forms[this.formId])
       }
+    },
+
+    computed: {
+      ...mapState(['forms'])
     },
 
     watch: {
