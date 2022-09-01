@@ -4,6 +4,8 @@ import { get, set } from './lodash'
 import { isEqual, isYummy, isLousy } from './messy'
 import { getType, isBoolean, isNumber, isString, isArray, isFunction, isObject, isNull, isUndefined, isSymbol } from './types'
 
+import fileToBase64 from './fileToBase64'
+
 export default {
   deepClone, 
   find, 
@@ -31,5 +33,7 @@ export default {
   isObject,
   isNull,
   isUndefined,
-  isSymbol
+  isSymbol,
+
+  fileToBase64
 }

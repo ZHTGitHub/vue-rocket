@@ -6,6 +6,7 @@
           :formId="formId"
           formKey="upload"
           action="http://zenghaitao.com/api/topics/upload"
+          :auto-upload="false"
           color="#f00"
           :headers="headers"
           :validation="[
@@ -54,6 +55,7 @@
   import 'prismjs/themes/prism-okaidia.css'
 
   import { mapState } from 'vuex'
+  import tools from '../../../../packages/scripts/utils/tools'
 
   const code = 
 `
@@ -102,8 +104,13 @@
         console.log(this.forms[this.formId])
       },
 
-      handleChagne(event) {
-        console.log(event)
+      async handleChagne(files) {
+        const url = await tools.fileToBase64(files[0])
+
+        this.defaultValue = [
+          ...this.defaultValue,
+          { url }
+        ]
       },
 
       handleResponse(response) {

@@ -60,6 +60,7 @@
               @init="handleInit"
               @save="handleSave"
               @direction="handleDirection"
+              @zoom="handleZoom"
             ></z-draw-image>
           </v-col>
           <!-- 截图 END -->
@@ -163,6 +164,10 @@
       handleDirection(direction) {
         console.log(direction)
         this.direction = direction
+      },
+
+      handleZoom(zoom) {
+        console.log(zoom)
       },
 
       // 某项操作

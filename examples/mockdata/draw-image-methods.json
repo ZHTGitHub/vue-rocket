@@ -24,6 +24,12 @@
       "name": "save",
       "parameters": "{ dataURL, file }",
       "description": "保存时触发"
+    },
+
+    {
+      "name": "zoom",
+      "parameters": "{ height, width, zoom, }",
+      "description": "图片缩放信息"
     }
   ]
 }

@@ -47,7 +47,6 @@ export default {
               rotateDegrees: this.rotateDegrees 
             })
           }
-          
           break;
 
         // 缩小
@@ -77,9 +76,9 @@ export default {
           this.imgHeight = this.zoomHeight * this.blocks
           this.initialize()
           break;
-
-        
       }
+
+      this.$emit('zoom', { height: this.imgHeight, width: this.imgWidth, zoom })
     }
   }
 }
