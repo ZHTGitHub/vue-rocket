@@ -84,6 +84,20 @@
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import { tools } from '../scripts/utils'
 
+  const debounce = (() => {
+    let timer = null
+
+    return (fn, delay = 300) => {
+      if(timer) {
+        clearTimeout(timer)
+      }
+
+      timer = setTimeout(() => {
+        fn.apply(this, arguments)
+      }, delay)
+    }
+  })()
+
   export default {
     name: 'ZAutocomplete',
     mixins: [FormMixins, FormValidationMixins],
@@ -208,7 +222,9 @@
 
     watch: {
       search(value) {
-        this.$emit('search', value)
+        debounce(() => {
+          this.$emit('search', value)
+        })
       },
 
       options: {

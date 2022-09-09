@@ -61,15 +61,15 @@
 
     methods: {
       handleChange(value) {
-        // console.log(value)
+        console.log(value)
       },
 
       handleEnter(event) {
-        // console.log(event)
+        console.log(event)
       },
 
       handleSearch(value) {
-        // console.log(value)
+        console.log(value)
       },
 
       getValue() {
