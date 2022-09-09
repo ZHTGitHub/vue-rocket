@@ -82,6 +82,7 @@
       @confirm="handleConfirm"
       @close="handleClose"
       @enter:name="handleNameEnter"
+      @search:country="handleCountrySearch"
     >
     </z-dynamic-form>
   </div>
@@ -149,6 +150,10 @@
 
       handleNameEnter(event) {
         console.log(event)
+      },
+
+      handleCountrySearch(value) {
+        console.log(value)
       },
 
       handleCancel(effect, form) {

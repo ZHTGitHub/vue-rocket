@@ -261,6 +261,7 @@
                   @click="onClick($event, item.formKey)"
                   @enter="onEnter($event, item.formKey)"
                   @focus="onFocus($event, item.formKey)"
+                  @search="onSearch($event, item.formKey)"
                 >
                   <span 
                     v-if="item.append"
@@ -748,6 +749,11 @@
       onResponse(result, formKey) {
         this.$emit('response', { formKey, result })
         this.$emit(`response:${ formKey }`, result)
+      },
+
+      onSearch(event, formKey) {
+        this.$emit('search', { formKey, event })
+        this.$emit(`search:${ formKey }`, event)
       }
     },
 
