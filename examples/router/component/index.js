@@ -85,6 +85,18 @@ const ComponentRoutes = {
     },
 
     {
+      path: 'drawingBoard',
+      name: 'ZDemoDrawingBoard',
+      meta: {
+        key: 'drawingBoard',
+        pKey: 'components',
+        realm: 'drawingBoard',
+        title: 'Drawing board 画板',
+      },
+      component: () => import('../../views/Components/DrawingBoard')
+    },
+
+    {
       path: 'drawImage',
       name: 'ZDemoDrawImage',
       meta: {

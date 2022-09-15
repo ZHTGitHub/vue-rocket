@@ -31,6 +31,7 @@ import ZList from './ZList'
 import ZVirtualScroll from './ZVirtualScroll'
 
 // 其它
+import ZDrawingBoard from './ZDrawingBoard'
 import ZDrawImage from './ZDrawImage'
 
 import rocket from './scripts/rocket'
@@ -65,6 +66,7 @@ const components = [
 	ZList,
 	ZVirtualScroll,
 
+	ZDrawingBoard,
 	ZDrawImage
 ]
 
@@ -115,5 +117,6 @@ export default {
 	ZList,
 	ZVirtualScroll,
 
+	ZDrawingBoard,
 	ZDrawImage
 }
