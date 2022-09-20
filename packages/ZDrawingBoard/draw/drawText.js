@@ -15,10 +15,8 @@ const pasteText = (imageCanvas, color, text, textX, textY, params) => {
 
   console.log(params)
 
-  const diffX = (params.imageWidth * scale - params.imageWidth) / 2
-  const diffY = (params.imageHeight * scale - params.imageHeight) / 2
-
-  // console.log({ imageWidth: params.imageWidth, scaleImageWidth: params.imageWidth * scale, diffX })
+  // const diffX = (params.imageWidth * scale - params.imageWidth) / 2
+  // const diffY = (params.imageHeight * scale - params.imageHeight) / 2
 
   const x = (textX - params.imageXOffset) / imageScale
   const y = (textY - params.imageYOffset) / imageScale

@@ -5,17 +5,8 @@
     <div class="view" id="view" ref="view">
       <canvas 
         class="canvas" 
-        id="imageCanvas" 
-        ref="imageCanvas"
-      >
-        The browser does not support canvas
-      </canvas>
-
-      <canvas 
-        class="canvas" 
         id="canvas" 
         ref="canvas"
-        @mousedown="canvasMousedown"
       >
         The browser does not support canvas
       </canvas>
@@ -24,9 +15,9 @@
 </template>
 
 <script>
+  import { fabric } from 'fabric'
   import tools from './libs/tools'
   import imageEvent from './libs/imageEvents'
-  import drawText from './draw/drawText'
   import { TopBar } from './components'
 
   export default {
@@ -41,167 +32,215 @@
 
     data() {
       return {
-        canvas: null,
-        imageCanvas: null,
-
-        canvasCtx: null,
-        imageCtx: null,
-
-        imageWidth: void 0,
-        imageHeight: void 0,
-        imgRealWidth: void 0,
-        imgRealHeight: void 0,
-
+        // view
         view: null,
+        viewWidth: 0,
+        viewHeight: 0,
 
-        viewWidth: void 0,
-        viewHeight: void 0,
+        // image
+        image: null,
+        imageRealWidth: 0,
+        imageRealHeight: 0,
+        imageScale: 1,
 
-        imageScale: 0,
-        scale: 1,
-        imageXOffset: 0,
-        imageYOffset: 0,
+        // canvas
+        canvas: null,
+        canvasWidth: 0,
+        canvasHeight: 0,
+
+        // img canvas
+        imgCanvas: null,
+
+        // 
         degree: 0,
+        scale: 1,
 
-        mouseStartPoint: null,
-        mouseEndPoint: null,
-
-        throttleFn: null,
-
-        move: false,
-        eventName: void 0
+        // text
+        textboxCount: 0,
+        textboxList: [],  
+        textboxActiveIndex: -1,
+        textboxIsActive: true
       }
+    },
+
+    mounted() {
+      this.init()
+
+      this.canvas = new fabric.Canvas('canvas')
+
+      this.canvas.on('mouse:down', this.handleMousedown)
+
+      new fabric.Image.fromURL(this.src, (img) => {
+        this.imgCanvas = img
+
+        console.log(this.imgCanvas)
+
+        this.setCanvas()
+
+        // this.setImage({ width: this.imgCanvas.width, height: this.imgCanvas.height })
+
+        this.setImgCanvas()
+
+        this.canvas.add(this.imgCanvas)
+
+        this.canvas.item(0)['hasControls'] = false
+        this.canvas.item(0)['selectable'] = false
+        this.canvas.item(0)['evented'] = false
+      }, { crossOrigin: 'anonymous' })
     },
 
     computed: {
       params() {
         return {
           viewWidth: this.viewWidth,
-          viewHeight: this.viewHeight,  
-          imageWidth: this.imageWidth,
-          imageHeight: this.imageHeight,
-          imgRealWidth: this.imgRealWidth,
-          imgRealHeight: this.imgRealHeight,
-          imageXOffset: this.imageXOffset,
-          imageYOffset: this.imageYOffset,
+          viewHeight: this.viewHeight,
+          imageRealWidth: this.imageRealWidth,
+          imageRealHeight: this.imageRealHeight,
           imageScale: this.imageScale,
-          scale: this.scale,
-          degree: this.degree
+          degree: this.degree,
+          scale: this.scale
         }
       }
     },
 
-    created() {
-      this.handleThrottle()
-    },
-
-    mounted() {
-      this.init()
+    watch: {
+      src: {
+        handler(src) {
+          tools.loadImage(src, this.setImage)
+        },
+        immediate: true
+      }
     },
 
     methods: {
       init() {
-        this.canvas = this.$refs.canvas
-        this.imageCanvas = this.$refs.imageCanvas
-
-        this.canvasCtx = this.canvas.getContext('2d')
-        this.imageCtx = this.imageCanvas.getContext('2d')
-
         // view
         this.view = this.$refs.view
         this.viewWidth = this.view.offsetWidth
         this.viewHeight = this.view.offsetHeight
-
-        this.src && this.loadImage(this.src)
-      },
-
-      loadImage(src) {
-        if(this.imageCanvas) {
-          tools.generateImage(src, this.imageCanvas, this.getImageInfo)
-          return
-        }
-
-        this.$nextTick(() => {
-          tools.generateImage(src, this.imageCanvas, this.getImageInfo)
-        })
-      },
-
-      getImageInfo({ imgRealWidth, imgRealHeight }) {
-        this.imgRealWidth = imgRealWidth
-        this.imgRealHeight = imgRealHeight
-
-        const scaleWidth = this.viewWidth / this.imgRealWidth
-        const scaleHeight = this.viewHeight / this.imgRealHeight
-
-        this.imageScale = Math.min(scaleWidth, scaleHeight)
-
-        this.setCanvas()
       },
 
       setCanvas() {
-        this.canvas.setAttribute('width', this.viewWidth)
-        this.canvas.setAttribute('height', this.viewHeight)
+        // this.canvas = this.$refs.canvas
+        // this.canvas.setAttribute('width', this.viewWidth)
+        // this.canvas.setAttribute('height', this.viewHeight)
+      },
 
-        this.canvas.style.cursor = 'crosshair'
+      // 设置图片信息
+      setImage(width, height) {
+        this.imageRealWidth = width
+        this.imageRealHeight = height
 
-        this.imageCanvas.setAttribute('width', this.imgRealWidth)
-        this.imageCanvas.setAttribute('height', this.imgRealHeight)
+        const scaleWidth = this.viewWidth / this.imageRealWidth
+        const scaleHeight = this.viewHeight / this.imageRealHeight
 
-        this.imageWidth = this.imgRealWidth * this.imageScale
-        this.imageHeight = this.imgRealHeight * this.imageScale
+        this.imageScale = Math.min(scaleWidth, scaleHeight)
+      },
 
-        this.imageCanvas.style.width = this.imageWidth + 'px'
-        this.imageCanvas.style.height = this.imageHeight + 'px'
+      setImgCanvas() {
+        this.imgCanvas.scaleToWidth(this.imgCanvas.width * this.imageScale * this.scale)
+        this.imgCanvas.left = this.viewWidth / 2 - this.imgCanvas.width * this.imageScale * this.scale / 2
+      },
 
-        this.imageXOffset = (this.viewWidth / 2) - (this.imgRealWidth * this.imageScale / 2)
-        this.imageYOffset = (this.viewHeight / 2) - (this.imgRealHeight * this.imageScale / 2)
+      handleMousedown({ pointer }) {
+        console.log(this.textboxActiveIndex)
 
-        console.log({ imageXOffset: this.imageXOffset, imageYOffset: this.imageYOffset })
+        if(this.textboxActiveIndex === -1) {
+          this.addTextbox(pointer.x, pointer.y)
+          return
+        }
 
-        this.updateImage()
+        const activeObject = this.canvas.getActiveObject()
+
+        if(!activeObject) {
+          this.textboxActiveIndex = -1
+        }
+
+        console.log(activeObject)
+      },
+
+      addTextbox(x, y) {
+        // if(!this.textboxIsActive) return
+
+        const textbox = new fabric.Textbox('', {
+          width: 80,
+          top: y,
+          left: x,
+          padding: 4,
+          borderColor: '#f00',
+          editingBorderColor: '#f00',
+          fill: '#f00',
+          fontSize: 20,
+          hasControls: false
+        })
+
+        textbox.id = this.textboxCount
+
+        textbox.on('selected', () => {
+          this.textboxActiveIndex = textbox.id
+          // this.textboxIsActive = false
+        })
+
+        this.canvas.add(textbox).setActiveObject(textbox)
+        textbox.enterEditing()
+
+        this.textboxList[this.textboxCount] = textbox
+        ++this.textboxCount
+      },
+
+      save() {
+        const url = this.canvas.toDataURL()
+        const blob = tools.dataURLtoBlob(url)
+        const file = tools.blobToFile(blob, 'screenshot.png')
+
+        const anchor = document.createElement('a')
+
+        anchor.download = 'screenshot.png'
+        anchor.style.display = 'none'
+        anchor.href = URL.createObjectURL(blob)
+        document.body.appendChild(anchor)
+        anchor.click()
+        document.body.removeChild(anchor)
       },
       
       topBarEvent(eventName) {
         this.eventName = eventName
-        this.canvas.style.cursor = 'auto'
 
         switch (eventName) {
           case 'cut':
-            this.canvas.style.cursor = 'crosshair'
             
             break;
 
           case 'rect':
-            this.canvas.style.cursor = 'crosshair'
             
             break;
 
           case 'text':
-
+            // this.canvas.remove(this.textbox)
             break;
 
           case 'move':
-            this.canvas.style.cursor = 'move'
+            
             break;
 
           case 'zoomOut':
             this.scale = imageEvent.zoomOut(this.params)
-            this.updateImage()
+            this.setImgCanvas()
             break;
 
           case 'zoomIn':
             this.scale = imageEvent.zoomIn(this.params)
-            this.updateImage()
+            this.setImgCanvas()
             break;
 
           case 'rotateRight':
             this.degree = imageEvent.rotateRight(this.params)
-            this.updateImage()
+            this.imgCanvas.rotate(this.degree)
             break;
 
           case 'rotateLeft':
             this.degree = imageEvent.rotateLeft(this.params)
-            this.updateImage()
+            this.imgCanvas.rotate(this.degree)
             break;
 
           case 'clear':
@@ -209,59 +248,11 @@
             break;
 
           case 'done':
-            
+            this.save()
             break;
         }
-      },
 
-      updateImage() {
-        this.imageCanvas.style.transform = `translate(${ this.imageXOffset }px, ${ this.imageYOffset }px) scale(${ this.scale }) rotateZ(${ this.degree }deg)`
-      },
-
-      // 鼠标按下
-      canvasMousedown(event) {
-        this.mouseStartPoint = tools.getCoordinatesOnCanvas(this.canvas, event.clientX, event.clientY)
-
-        if(this.eventName === 'text')
-          drawText({
-            canvas: this.canvas,
-            imageCanvas: this.imageCanvas,
-            coordinates: this.mouseStartPoint,
-            color: '#ff1e10',
-            params: this.params
-          })
-
-        this.canvas.addEventListener('mousemove', this.throttleFn, false)
-        this.canvas.addEventListener('mouseup', this.canvasMouseup, false)
-      },
-
-      // 鼠标移动
-      canvasMouseMove(event) {
-        this.mouseEndPoint = tools.getCoordinatesOnCanvas(this.canvas, event.clientX, event.clientY)
-
-        // 拖拽
-        if(this.eventName === 'move') {
-          const { imageXOffset, imageYOffset } = tools.getImageTranslate(this.imageXOffset, this.imageYOffset, this.mouseStartPoint, this.mouseEndPoint)
-
-          this.imageCanvas.style.transform = `translate(${ imageXOffset }px, ${ imageYOffset }px) scale(${ this.scale }) rotateZ(${ this.degree }deg)`
-        }
-      },
-
-      // 鼠标抬起
-      canvasMouseup() {
-        if(this.eventName === 'move') {
-          const { imageXOffset, imageYOffset } = tools.getImageTranslate(this.imageXOffset, this.imageYOffset, this.mouseStartPoint, this.mouseEndPoint)
-
-          this.imageXOffset = imageXOffset
-          this.imageYOffset = imageYOffset
-        }
-        
-        this.canvas.removeEventListener('mousemove', this.throttleFn, false)
-        this.canvas.removeEventListener('mouseup', this.canvasMouseup, false)
-      },
-
-      handleThrottle() {
-       this.throttleFn = tools.throttle(this.canvasMouseMove)
+        this.canvas.requestRenderAll()
       }
     },
 
@@ -286,15 +277,6 @@
       .canvas {
         position: absolute;
         transition: transform 160ms linear;
-      }
-
-      ::v-deep #field {
-        position: absolute;
-        padding: 4px 8px;
-        min-width: 100px;
-        font-size: 18px;
-        font-weight: 550;
-        outline: none;
       }
     }
   }

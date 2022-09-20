@@ -70,7 +70,8 @@ export const urlToBase64 = (url) => {
       resolve(error)
     })
 
-    image.src = url + '?' + Date.now()
+    // image.src = url + '?' + Date.now()
+    image.src = url
   })
 }
 

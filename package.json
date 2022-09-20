@@ -1,6 +1,6 @@
 {
   "name": "vue-rocket",
-  "version": "0.34.31",
+  "version": "0.34.32",
   "description": "基于 Vue+Vuetify 的后台管理系统框架",
   "author": "zenghaitao",
   "private": false,
@@ -81,5 +81,8 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "fabric": "^5.2.4"
   }
 }
