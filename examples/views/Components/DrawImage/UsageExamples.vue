@@ -37,9 +37,9 @@
           <v-col :cols="2">
             <ul>
               <li 
-                v-for="image in images" 
+                v-for="(image, index) in images" 
                 :key="image.url"
-                @click="switchImage(image)"
+                @click="switchImage(image, index)"
               >
                 <img width="100" :src="image.url" />
               </li>
@@ -58,6 +58,7 @@
               :src="src"
               @drew="handleDrew"
               @init="handleInit"
+              @initialized="handleInitialized"
               @save="handleSave"
               @direction="handleDirection"
               @zoom="handleZoom"
@@ -90,10 +91,16 @@
     },
 
     {
+      url: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/001576799668903904001.png',
+      width: 300,
+      height: 600
+    },
+
+    {
       url: require('../../../../public/images/global/5.png'),
       width: 600,
       height: 300
-    }  
+    }
   ]
 
   const code = 
@@ -129,7 +136,10 @@
 
         src: images[0].url,
 
-        direction: 'top'
+        direction: 'top',
+
+        activeIndex: 0,
+        imageList: []
       }
     },
 
@@ -143,11 +153,35 @@
         this.$refs.drawImage.drawScreenshot()
       },
 
-      switchImage(image) {
-        this.src = image.url
+      handleInitialized({ canvas }) {
+        console.log(canvas)
+
+        // const dataURL = canvas.toDataURL('image/png')
+
+        // console.log(dataURL)
+
+        if(canvas) {
+          this.imageList[this.activeIndex] = canvas
+        }
+
+        const dataURL = this.imageList[this.activeIndex].toDataURL('image/png')
+
+        // console.log(dataURL)
+      },
+
+      switchImage(image, index) {
+        this.activeIndex = index
+
+        const canvas = this.imageList[this.activeIndex]
+        let dataURL = null
+
+        if(canvas) {
+          dataURL = canvas.toDataURL('image/png')
+        }
+
+        this.src = dataURL || image.url
         this.imageWidth = image.width
         this.imageHeight = image.height
-        // console.log(this.src)
       },
 
       handleDrew({ dataURL, file, area }) {

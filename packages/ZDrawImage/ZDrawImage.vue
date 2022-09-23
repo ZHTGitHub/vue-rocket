@@ -53,7 +53,7 @@
   import ZoomMixins from './ZoomMixins'
   // import { tools } from '../scripts/utils'
 
-  import { base64ToFile, base64ToBlob, rotatedDirectionMap, urlToBase64 } from './tools'
+  import { base64ToFile, base64ToBlob, imageToCanvas, rotatedDirectionMap, urlToBase64 } from './tools'
 
   const defaultStartXY = { x: null, y: null }
 
@@ -222,7 +222,11 @@
           this.overlay = false
           this.endTime = Date.now()
 
+          // 前端生成图片临时路径，用于缓存
+          const canvas = imageToCanvas(this.image)
+
           this.$emit('initialized', {
+            canvas,
             startTime: this.startTime,
             endTime: this.endTime
           })
@@ -336,6 +340,7 @@
 
         if(rectW || rectH) {
           this.$emit('drew', {
+            type: 'screenshot',
             dataURL: this.screenshotDataURL,
             file: this.file,
             area: { startX, startY, rectW, rectH }
@@ -445,7 +450,7 @@
           if(this.download) {
             const anchor = document.createElement('a')
             const base64 = dataURL.split(',')[1]
-
+            
             base64ToBlob({ b64data: base64, contentType: 'image/png' }).then(res => {
               const blobUrl = window.URL.createObjectURL(res)
 

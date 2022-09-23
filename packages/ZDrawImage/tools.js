@@ -47,6 +47,15 @@ export const base64ToBlob = ({ b64data = '', contentType = '', name = 'image.png
   })
 }
 
+export const imageToCanvas = (image) => {
+  const canvas = document.createElement('canvas')
+  canvas.width = image.width
+  canvas.height = image.height
+  const ctx = canvas.getContext('2d')
+  ctx.drawImage(image, 0, 0)
+  return canvas
+}
+
 export const urlToBase64 = (url) => {
   return new Promise(resolve => {
     const image = new Image()
@@ -70,8 +79,8 @@ export const urlToBase64 = (url) => {
       resolve(error)
     })
 
-    // image.src = url + '?' + Date.now()
-    image.src = url
+    image.src = url + '?' + Date.now()
+    // image.src = url + '?' + '123456'
   })
 }
 

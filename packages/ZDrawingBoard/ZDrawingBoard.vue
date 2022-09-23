@@ -63,32 +63,6 @@
       }
     },
 
-    mounted() {
-      this.init()
-
-      this.canvas = new fabric.Canvas('canvas')
-
-      this.canvas.on('mouse:down', this.handleMousedown)
-
-      new fabric.Image.fromURL(this.src, (img) => {
-        this.imgCanvas = img
-
-        console.log(this.imgCanvas)
-
-        this.setCanvas()
-
-        // this.setImage({ width: this.imgCanvas.width, height: this.imgCanvas.height })
-
-        this.setImgCanvas()
-
-        this.canvas.add(this.imgCanvas)
-
-        this.canvas.item(0)['hasControls'] = false
-        this.canvas.item(0)['selectable'] = false
-        this.canvas.item(0)['evented'] = false
-      }, { crossOrigin: 'anonymous' })
-    },
-
     computed: {
       params() {
         return {
@@ -113,21 +87,10 @@
     },
 
     methods: {
-      init() {
-        // view
-        this.view = this.$refs.view
-        this.viewWidth = this.view.offsetWidth
-        this.viewHeight = this.view.offsetHeight
-      },
-
-      setCanvas() {
-        // this.canvas = this.$refs.canvas
-        // this.canvas.setAttribute('width', this.viewWidth)
-        // this.canvas.setAttribute('height', this.viewHeight)
-      },
-
       // 设置图片信息
       setImage(width, height) {
+        this.getView()
+
         this.imageRealWidth = width
         this.imageRealHeight = height
 
@@ -135,16 +98,68 @@
         const scaleHeight = this.viewHeight / this.imageRealHeight
 
         this.imageScale = Math.min(scaleWidth, scaleHeight)
+
+        this.setCanvas()
+
+        this.fabricCanvas()
+      },
+
+      // 获取画布视图的宽高
+      getView() {
+        this.view = this.$refs.view
+        this.viewWidth = this.view.offsetWidth
+        this.viewHeight = this.view.offsetHeight
+      },
+
+      // 设置画布的真实宽高
+      setCanvas() {
+        // this.canvas = this.$refs.canvas
+
+        // this.canvas.setAttribute('width', this.imageRealWidth)
+        // this.canvas.setAttribute('height', this.imageRealHeight)
+
+        // this.canvas.style.transform = `scale(${ this.imageScale })`
+        // this.canvas.style.width = this.imageRealWidth * this.imageScale
+        // this.canvas.style.height = this.imageRealHeight * this.imageScale
       },
 
       setImgCanvas() {
-        this.imgCanvas.scaleToWidth(this.imgCanvas.width * this.imageScale * this.scale)
-        this.imgCanvas.left = this.viewWidth / 2 - this.imgCanvas.width * this.imageScale * this.scale / 2
+        this.imgCanvas.scale(this.imageScale)
+
+        // this.canvas.setDimensions({
+        //   width: this.imageRealWidth * this.imageScale,
+        //   height: this.imageRealHeight * this.imageScale
+        // })
+
+        // this.canvas.setZoom(this.imageScale)
       },
 
-      handleMousedown({ pointer }) {
-        console.log(this.textboxActiveIndex)
+      fabricCanvas() {
+        const options = {
+          enableRetinaScaling: true, 
+          width: this.imageRealWidth * this.imageScale, 
+          height: this.imageRealHeight * this.imageScale
+        }
 
+        this.canvas = new fabric.Canvas('canvas', options)
+
+        this.canvas.on('mouse:down', this.handleMousedown)
+
+        new fabric.Image.fromURL(this.src, (img) => {
+          this.imgCanvas = img
+
+          this.setImgCanvas()
+
+          this.canvas.add(this.imgCanvas)
+
+          this.canvas.item(0)['hasControls'] = false
+          this.canvas.item(0)['selectable'] = false
+          this.canvas.item(0)['evented'] = false
+        }, { crossOrigin: 'anonymous' })
+      },
+
+      // 鼠标按下
+      handleMousedown({ pointer }) {
         if(this.textboxActiveIndex === -1) {
           this.addTextbox(pointer.x, pointer.y)
           return
@@ -159,6 +174,7 @@
         console.log(activeObject)
       },
 
+      // 添加文本输入框
       addTextbox(x, y) {
         // if(!this.textboxIsActive) return
 
@@ -167,6 +183,7 @@
           top: y,
           left: x,
           padding: 4,
+          // borderScaleFactor: 1,
           borderColor: '#f00',
           editingBorderColor: '#f00',
           fill: '#f00',
@@ -188,6 +205,7 @@
         ++this.textboxCount
       },
 
+      // 保存编辑后的图片
       save() {
         const url = this.canvas.toDataURL()
         const blob = tools.dataURLtoBlob(url)
@@ -216,11 +234,9 @@
             break;
 
           case 'text':
-            // this.canvas.remove(this.textbox)
             break;
 
           case 'move':
-            
             break;
 
           case 'zoomOut':
@@ -244,7 +260,9 @@
             break;
 
           case 'clear':
-
+            for(let textbox of this.textboxList) {
+              this.canvas.remove(textbox)
+            }
             break;
 
           case 'done':
