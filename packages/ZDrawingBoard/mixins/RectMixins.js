@@ -25,9 +25,11 @@ export default {
         strokeWidth: 3 / this.imageScale,
 
         hasRotatingPoint: false,
+        hasBorders: false,
         lockRotation: true,
         cornerStyle: 'circle',
-        cornerColor: '#f00',
+        cornerStrokeColor: '#f00',
+        cornerColor: '#fff',
         cornerSize: 6 / this.imageScale,
         transparentCorners: false
       })

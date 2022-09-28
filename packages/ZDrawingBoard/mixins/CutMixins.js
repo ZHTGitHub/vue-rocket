@@ -15,36 +15,25 @@ export default {
       let width = Math.abs(this.downPoint.x - pointer.x)
       let height = Math.abs(this.downPoint.y - pointer.y)
 
-      const coverRect = new fabric.Rect({
-        top: 0,
-        left: 0,
-        width: this.imageRealWidth,
-        height: this.imageRealHeight,
-        fill: 'rgba(0, 0, 0, .5)'
-      })
-
       const rect = new fabric.Rect({
         top,
         left,
         width,
         height,
-        fill: 'transparent',
+        fill: 'rgba(255, 255, 255, .5)',
         stroke: '#4caf50',
         strokeWidth: 1.5 / this.imageScale,
 
         hasRotatingPoint: false,
+        hasBorders: false,
         lockRotation: true,
         cornerColor: '#4caf50',
         cornerSize: 6 / this.imageScale,
-        transparentCorners: false,
-        
-        // fillRule: 'nonzero',
-        globalCompositeOperation: 'source-over',
+        transparentCorners: false
       })
 
       rect.setControlsVisibility({ mtr: false })
 
-      this.canvas.add(coverRect)
       this.canvas.add(rect).setActiveObject(rect)
 
       this.downPoint = null
