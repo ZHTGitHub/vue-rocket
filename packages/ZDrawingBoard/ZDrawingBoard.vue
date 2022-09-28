@@ -16,12 +16,33 @@
 
 <script>
   import { fabric } from 'fabric'
+  import MoveMixins from './mixins/MoveMixins'
+  import RectMixins from './mixins/RectMixins'
+  import CutMixins from './mixins/CutMixins'
   import tools from './libs/tools'
-  import imageEvent from './libs/imageEvents'
+  import containerEvent from './libs/containerEvent'
   import { TopBar } from './components'
+  
+  const moveSpace = 50
+
+  const debounce = (() => {
+    let timer = null
+
+    return (fn, delay = 300) => {
+      if(timer) {
+        return
+      }
+
+      timer = setTimeout(() => {
+        fn()
+        timer = null
+      }, delay)
+    }
+  })()
 
   export default {
     name: 'ZDrawingBoard',
+    mixins: [MoveMixins, RectMixins, CutMixins],
 
     props: {
       src: {
@@ -43,23 +64,38 @@
         imageRealHeight: 0,
         imageScale: 1,
 
+        // container
+        container: null,
+
         // canvas
         canvas: null,
         canvasWidth: 0,
         canvasHeight: 0,
 
+        // retina
+        retinaWidth: 0,
+        retinaHeight: 0,
+
         // img canvas
         imgCanvas: null,
 
         // 
-        degree: 0,
+        isCut: false,
+        isRect: false,
+        isText: false,
+        angle: 0,
         scale: 1,
+        moveSpace,
+        moveX: 0,
+        moveY: 0,
 
         // text
         textboxCount: 0,
         textboxList: [],  
         textboxActiveIndex: -1,
-        textboxIsActive: true
+        textboxIsActive: true,
+
+        downPoint: null
       }
     },
 
@@ -71,8 +107,13 @@
           imageRealWidth: this.imageRealWidth,
           imageRealHeight: this.imageRealHeight,
           imageScale: this.imageScale,
-          degree: this.degree,
-          scale: this.scale
+          isRect: this.isRect,
+          isText: this.isText,
+          angle: this.angle,
+          scale: this.scale,
+          moveSpace: this.moveSpace,
+          moveX: this.moveX,
+          moveY: this.moveY
         }
       }
     },
@@ -99,9 +140,10 @@
 
         this.imageScale = Math.min(scaleWidth, scaleHeight)
 
-        this.setCanvas()
+        this.retinaWidth = this.imageRealWidth * this.imageScale
+        this.retinaHeight = this.imageRealHeight * this.imageScale
 
-        this.fabricCanvas()
+        this.createCanvas()
       },
 
       // 获取画布视图的宽高
@@ -111,67 +153,94 @@
         this.viewHeight = this.view.offsetHeight
       },
 
-      // 设置画布的真实宽高
-      setCanvas() {
-        // this.canvas = this.$refs.canvas
-
-        // this.canvas.setAttribute('width', this.imageRealWidth)
-        // this.canvas.setAttribute('height', this.imageRealHeight)
-
-        // this.canvas.style.transform = `scale(${ this.imageScale })`
-        // this.canvas.style.width = this.imageRealWidth * this.imageScale
-        // this.canvas.style.height = this.imageRealHeight * this.imageScale
+      getContainer() {
+        this.container = document.querySelector('#view .canvas-container')
       },
 
-      setImgCanvas() {
-        this.imgCanvas.scale(this.imageScale)
-
-        // this.canvas.setDimensions({
-        //   width: this.imageRealWidth * this.imageScale,
-        //   height: this.imageRealHeight * this.imageScale
-        // })
-
-        // this.canvas.setZoom(this.imageScale)
+      transformContainer() {
+        this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
       },
 
-      fabricCanvas() {
+      createCanvas() {
         const options = {
           enableRetinaScaling: true, 
-          width: this.imageRealWidth * this.imageScale, 
-          height: this.imageRealHeight * this.imageScale
+          width: this.imageRealWidth, 
+          height: this.imageRealHeight,
+          backgroundColor: 'rgb(0, 0, 0)'
+        }
+
+        const dimensions = {
+          width: this.retinaWidth + 'px',
+          height: this.retinaHeight + 'px'
         }
 
         this.canvas = new fabric.Canvas('canvas', options)
+        this.canvas.setDimensions(dimensions, { cssOnly: true })
 
-        this.canvas.on('mouse:down', this.handleMousedown)
+        this.canvas.on('mouse:down', this.canvasMouseDown)
+        this.canvas.on('mouse:move', this.canvasMouseMove)
+        this.canvas.on('mouse:up', this.canvasMouseUp)
+
+        this.getContainer()
 
         new fabric.Image.fromURL(this.src, (img) => {
           this.imgCanvas = img
 
-          this.setImgCanvas()
-
           this.canvas.add(this.imgCanvas)
 
-          this.canvas.item(0)['hasControls'] = false
+          this.canvas.item(0)['hasControls'] = true
           this.canvas.item(0)['selectable'] = false
           this.canvas.item(0)['evented'] = false
         }, { crossOrigin: 'anonymous' })
+
+        // console.log(this.canvas)
       },
 
       // 鼠标按下
-      handleMousedown({ pointer }) {
-        if(this.textboxActiveIndex === -1) {
-          this.addTextbox(pointer.x, pointer.y)
+      canvasMouseDown(event) {
+        const { absolutePointer, pointer } = event
+
+        this.downPoint = absolutePointer
+
+        console.log(event)
+
+        if(this.isText) {
+          if(this.textboxActiveIndex === -1) {
+            this.addTextbox(pointer.x, pointer.y)
+            return
+          }
+
+          const activeObject = this.canvas.getActiveObject()
+
+          if(!activeObject) {
+            this.textboxActiveIndex = -1
+          }
+
+          console.log(activeObject)
+
           return
         }
 
-        const activeObject = this.canvas.getActiveObject()
+        
+      },
 
-        if(!activeObject) {
-          this.textboxActiveIndex = -1
+      canvasMouseMove(event) {
+        debounce(() => {
+          console.log(event)
+        })
+      },
+
+      // 鼠标抬起
+      canvasMouseUp(event) {
+        if(this.isCut) {
+          this.createCutRect(event.absolutePointer)
+          return
         }
 
-        console.log(activeObject)
+        if(this.isRect) {
+          this.createRect(event.absolutePointer)
+          return
+        }
       },
 
       // 添加文本输入框
@@ -179,15 +248,15 @@
         // if(!this.textboxIsActive) return
 
         const textbox = new fabric.Textbox('', {
-          width: 80,
+          width: 80 / this.imageScale,
           top: y,
           left: x,
-          padding: 4,
-          // borderScaleFactor: 1,
+          padding: 4 / this.imageScale,
+          borderScaleFactor: 1 / this.imageScale,
           borderColor: '#f00',
           editingBorderColor: '#f00',
           fill: '#f00',
-          fontSize: 20,
+          fontSize: 20 / this.imageScale,
           hasControls: false
         })
 
@@ -207,18 +276,36 @@
 
       // 保存编辑后的图片
       save() {
-        const url = this.canvas.toDataURL()
-        const blob = tools.dataURLtoBlob(url)
-        const file = tools.blobToFile(blob, 'screenshot.png')
+        this.downloadCanvas()
+      },
 
-        const anchor = document.createElement('a')
+      downloadCanvas() {
+        const image = new Image()
+        image.src = this.canvas.toDataURL('image/png')
 
-        anchor.download = 'screenshot.png'
-        anchor.style.display = 'none'
-        anchor.href = URL.createObjectURL(blob)
-        document.body.appendChild(anchor)
-        anchor.click()
-        document.body.removeChild(anchor)
+        image.onload = async () => {
+          const canvas = document.createElement('canvas')
+          canvas.width = image.height
+          canvas.height = image.width
+
+          const ctx = canvas.getContext('2d')
+
+          ctx.translate(image.height, 0)
+          ctx.rotate(90 * Math.PI / 180)
+
+          ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
+        
+          const dataURL = canvas.toDataURL('image/png')
+          
+          const anchor = document.createElement('a')
+
+          anchor.style.display = 'none'
+          anchor.href = dataURL
+          anchor.download = 'screenshot.png'
+          document.body.appendChild(anchor)
+          anchor.click()
+          document.body.removeChild(anchor)
+        }
       },
       
       topBarEvent(eventName) {
@@ -226,37 +313,44 @@
 
         switch (eventName) {
           case 'cut':
-            
+            this.isRect = false
+            this.isText = false
+            this.isCut = !this.isCut
             break;
 
           case 'rect':
-            
+            this.isCut = false
+            this.isText = false
+            this.isRect = !this.isRect
             break;
 
           case 'text':
+            this.isCut = false
+            this.isRect = false
+            this.isText = !this.isText
             break;
 
           case 'move':
             break;
 
           case 'zoomOut':
-            this.scale = imageEvent.zoomOut(this.params)
-            this.setImgCanvas()
+            this.scale = containerEvent.zoomOut(this.params)
+            this.transformContainer()
             break;
 
           case 'zoomIn':
-            this.scale = imageEvent.zoomIn(this.params)
-            this.setImgCanvas()
+            this.scale = containerEvent.zoomIn(this.params)
+            this.transformContainer()
             break;
 
           case 'rotateRight':
-            this.degree = imageEvent.rotateRight(this.params)
-            this.imgCanvas.rotate(this.degree)
+            this.angle = containerEvent.rotateRight(this.params)
+            this.transformContainer()
             break;
 
           case 'rotateLeft':
-            this.degree = imageEvent.rotateLeft(this.params)
-            this.imgCanvas.rotate(this.degree)
+            this.angle = containerEvent.rotateLeft(this.params)
+            this.transformContainer()
             break;
 
           case 'clear':
@@ -288,14 +382,16 @@
 
     .view {
       flex-grow: 1;
+      display: flex;
+      justify-content: center;
       position: relative;
       background-color: #4c4c4c;
       overflow: hidden;
 
-      .canvas {
+      /* .canvas {
         position: absolute;
         transition: transform 160ms linear;
-      }
+      } */
     }
   }
 </style>

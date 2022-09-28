@@ -80,7 +80,6 @@ export const urlToBase64 = (url) => {
     })
 
     image.src = url + '?' + Date.now()
-    // image.src = url + '?' + '123456'
   })
 }
 

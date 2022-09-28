@@ -153,20 +153,8 @@
         this.$refs.drawImage.drawScreenshot()
       },
 
-      handleInitialized({ canvas }) {
-        console.log(canvas)
-
-        // const dataURL = canvas.toDataURL('image/png')
-
-        // console.log(dataURL)
-
-        if(canvas) {
-          this.imageList[this.activeIndex] = canvas
-        }
-
-        const dataURL = this.imageList[this.activeIndex].toDataURL('image/png')
-
-        // console.log(dataURL)
+      handleInitialized({ startTime, endTime }) {
+        console.log({ startTime, endTime })
       },
 
       switchImage(image, index) {

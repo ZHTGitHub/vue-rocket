@@ -222,11 +222,7 @@
           this.overlay = false
           this.endTime = Date.now()
 
-          // 前端生成图片临时路径，用于缓存
-          const canvas = imageToCanvas(this.image)
-
           this.$emit('initialized', {
-            canvas,
             startTime: this.startTime,
             endTime: this.endTime
           })
@@ -450,9 +446,11 @@
           if(this.download) {
             const anchor = document.createElement('a')
             const base64 = dataURL.split(',')[1]
-            
+
             base64ToBlob({ b64data: base64, contentType: 'image/png' }).then(res => {
               const blobUrl = window.URL.createObjectURL(res)
+
+              console.log(blobUrl)
 
               anchor.href = blobUrl
               anchor.download = this.fileName

@@ -1,6 +1,6 @@
 <template>
   <div class="z-demo-drawing-board">
-    <z-drawing-board :src="src"></z-drawing-board>
+    <z-drawing-board ref="board" :src="src"></z-drawing-board>
   </div>
 </template>
 
@@ -10,8 +10,32 @@
 
     data() {
       return {
-        src: 'http://localhost:8899/img/3.99be759c.jpg'
+        src: require('../../../../public/images/global/1.jpg')
       }
+    },
+
+    mounted() {
+      document.addEventListener('keyup', (event) => {
+        console.log(event.key)
+
+        switch (event.key) {
+          case 'ArrowUp':
+            this.$refs.board.moveTop()
+            break;
+
+          case 'ArrowRight':
+            this.$refs.board.moveRight()
+            break;
+
+          case 'ArrowDown':
+            this.$refs.board.moveBottom()
+            break;
+
+          case 'ArrowLeft':
+            this.$refs.board.moveLeft()
+            break;
+        }
+      })
     },
 
     methods: {
