@@ -10,7 +10,8 @@
 
     data() {
       return {
-        src: require('../../../../public/images/global/1.jpg')
+        src: require('../../../../public/images/global/6.png')
+        // src: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/001576799668903904001.png'
       }
     },
 
@@ -33,6 +34,11 @@
 
           case 'ArrowLeft':
             this.$refs.board.moveLeft()
+            break;
+
+          case 'Backspace':
+          case 'Delete':
+            this.$refs.board.deleteActivatedCtx()
             break;
         }
       })

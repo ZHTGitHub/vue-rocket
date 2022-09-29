@@ -15,12 +15,12 @@ export default {
       let width = Math.abs(this.downPoint.x - pointer.x)
       let height = Math.abs(this.downPoint.y - pointer.y)
 
-      const rect = new fabric.Rect({
+      const cutRect = new fabric.Rect({
         top,
         left,
         width,
         height,
-        fill: 'rgba(255, 255, 255, .5)',
+        fill: 'rgba(0, 0, 0, .3)',
         stroke: '#4caf50',
         strokeWidth: 1.5 / this.imageScale,
 
@@ -32,9 +32,28 @@ export default {
         transparentCorners: false
       })
 
-      rect.setControlsVisibility({ mtr: false })
+      cutRect.type = 'cut'
+      cutRect.index = this.count
 
-      this.canvas.add(rect).setActiveObject(rect)
+      cutRect.on('selected', () => {
+        this.activeIndex = cutRect.index
+      })
+      
+      cutRect.bringToFront()
+      cutRect.setControlsVisibility({ mtr: false })
+
+      this.canvas.add(cutRect).setActiveObject(cutRect)
+
+      this.ctxList[this.count] = cutRect
+
+      ++this.count
+
+      this.cutArea = {
+        x: this.downPoint.x,
+        y: this.downPoint.y,
+        width,
+        height
+      }
 
       this.downPoint = null
     }

@@ -3,8 +3,7 @@ const tools = {}
 // 加载图片
 tools.loadImage = function(src, fn) {
   const image = new Image()
-  image.src = src
-  image.setAttribute('crossOrigin', 'Anonymous')
+  image.setAttribute('crossOrigin', 'anonymous')
 
   image.onload = function() {
     fn(image.width, image.height)
@@ -13,6 +12,8 @@ tools.loadImage = function(src, fn) {
   image.onerror = function() {
     console.log('image load failed!')
   }
+
+  image.src = src + '?' + Date.now()
 }
 
 // 将base64转换为blob

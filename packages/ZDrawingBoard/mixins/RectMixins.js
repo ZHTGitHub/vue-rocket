@@ -34,11 +34,22 @@ export default {
         transparentCorners: false
       })
 
+      rect.type = 'rect'
+      rect.index = this.count
+
+      rect.on('selected', () => {
+        this.activeIndex = rect.index
+      })
+
       rect.setControlsVisibility({ mtr: false })
 
       this.canvas.add(rect).setActiveObject(rect)
 
+      this.ctxList[this.count] = rect
+
+      ++this.count
+
       this.downPoint = null
     }
-  },
+  }
 }

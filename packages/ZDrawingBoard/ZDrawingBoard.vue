@@ -17,8 +17,9 @@
 <script>
   import { fabric } from 'fabric'
   import MoveMixins from './mixins/MoveMixins'
-  import RectMixins from './mixins/RectMixins'
   import CutMixins from './mixins/CutMixins'
+  import RectMixins from './mixins/RectMixins'
+  import TextboxMixins from './mixins/TextboxMixins'
   import tools from './libs/tools'
   import containerEvent from './libs/containerEvent'
   import { TopBar } from './components'
@@ -42,9 +43,14 @@
 
   export default {
     name: 'ZDrawingBoard',
-    mixins: [MoveMixins, RectMixins, CutMixins],
+    mixins: [MoveMixins, TextboxMixins, CutMixins, RectMixins],
 
     props: {
+      shotArea: {
+        type: Object,
+        required: false
+      },
+
       src: {
         type: String,
         required: true
@@ -94,6 +100,12 @@
         textboxList: [],  
         textboxActiveIndex: -1,
         textboxIsActive: true,
+
+        count: 0,
+        ctxList: [],
+        activeIndex: -1,
+
+        cutArea: {},
 
         downPoint: null
       }
@@ -202,99 +214,136 @@
 
         this.downPoint = absolutePointer
 
-        console.log(event)
+        const ctx = this.getActivatedCtx()
+
+        if(ctx) {
+          this.activeIndex = ctx.index
+        }
 
         if(this.isText) {
-          if(this.textboxActiveIndex === -1) {
-            this.addTextbox(pointer.x, pointer.y)
+          if(this.activeIndex === -1) {
+            this.createTextbox(pointer.x, pointer.y)
             return
           }
 
           const activeObject = this.canvas.getActiveObject()
 
           if(!activeObject) {
-            this.textboxActiveIndex = -1
+            this.activeIndex = -1
           }
 
           console.log(activeObject)
 
           return
         }
-
-        
       },
 
+      // 鼠标移动
       canvasMouseMove(event) {
-        debounce(() => {
-          console.log(event)
-        })
+        // debounce(() => {
+        //   console.log(event)
+        // })
       },
 
       // 鼠标抬起
       canvasMouseUp(event) {
+        const ctx = this.getActivatedCtx() 
+
+        // 计算截图区域
+        if(ctx?.type === 'cut') {
+          const { left, top, width, height } = ctx
+
+          this.cutArea = {
+            x: left,
+            y: top,
+            width,
+            height
+          }
+        }
+
         if(this.isCut) {
+          // 只允许创建一次切图框
+          const ctx = this.ctxList.find(c => c?.type === 'cut')
+          if(ctx) return
+
           this.createCutRect(event.absolutePointer)
-          return
+          // return
         }
 
         if(this.isRect) {
           this.createRect(event.absolutePointer)
-          return
+          // return
         }
       },
 
-      // 添加文本输入框
-      addTextbox(x, y) {
-        // if(!this.textboxIsActive) return
+      getActivatedCtx() {
+        return this.canvas.getActiveObject()
+      },
 
-        const textbox = new fabric.Textbox('', {
-          width: 80 / this.imageScale,
-          top: y,
-          left: x,
-          padding: 4 / this.imageScale,
-          borderScaleFactor: 1 / this.imageScale,
-          borderColor: '#f00',
-          editingBorderColor: '#f00',
-          fill: '#f00',
-          fontSize: 20 / this.imageScale,
-          hasControls: false
-        })
+      deleteActivatedCtx() {
+        const ctx = this.getActivatedCtx()
+        this.ctxList.splice(this.activeIndex, 1)
+        this.canvas.remove(ctx)
+      },
+      
+      deleteCutCtx() {
+        const cutCtx = this.ctxList.find(c => c?.type === 'cut')
 
-        textbox.id = this.textboxCount
+        if(cutCtx) {
+          const index = this.ctxList.findIndex(c => c?.type === 'cut')
+          this.ctxList.splice(index, 1)
+          this.canvas.remove(cutCtx)
+        }
 
-        textbox.on('selected', () => {
-          this.textboxActiveIndex = textbox.id
-          // this.textboxIsActive = false
-        })
+        return cutCtx
+      },
 
-        this.canvas.add(textbox).setActiveObject(textbox)
-        textbox.enterEditing()
+      unselectableExcludeCutCtx() {
+        const len = this.ctxList.length
 
-        this.textboxList[this.textboxCount] = textbox
-        ++this.textboxCount
+        for(let i = 0; i <= len; i++) {
+          const ctx = this.ctxList[i]
+
+          if(ctx?.type === 'cut') continue
+
+          if(!this.canvas.item(i)) continue
+
+          this.canvas.item(i)['selectable'] = false
+          this.canvas.item(i)['evented'] = false
+        }
       },
 
       // 保存编辑后的图片
       save() {
+        
         this.downloadCanvas()
       },
 
+      // 下载
       downloadCanvas() {
         const image = new Image()
+
+        const cutCtx = this.deleteCutCtx()
+
         image.src = this.canvas.toDataURL('image/png')
 
         image.onload = async () => {
           const canvas = document.createElement('canvas')
-          canvas.width = image.height
-          canvas.height = image.width
+          canvas.width = image.width
+          canvas.height = image.height
 
           const ctx = canvas.getContext('2d')
 
-          ctx.translate(image.height, 0)
-          ctx.rotate(90 * Math.PI / 180)
+          // ctx.translate(image.height, 0)
+          // ctx.rotate(90 * Math.PI / 180)
 
-          ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
-        
+          if(cutCtx) {
+            ctx.drawImage(image, this.cutArea.x, this.cutArea.y, this.cutArea.width, this.cutArea.height, 0, 0, this.cutArea.width, this.cutArea.height)
+          }
+          else {
+            ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
+          }
+
           const dataURL = canvas.toDataURL('image/png')
           
           const anchor = document.createElement('a')
@@ -313,6 +362,8 @@
 
         switch (eventName) {
           case 'cut':
+            this.unselectableExcludeCutCtx()
+
             this.isRect = false
             this.isText = false
             this.isCut = !this.isCut
@@ -325,6 +376,8 @@
             break;
 
           case 'text':
+            this.activeIndex = -1
+
             this.isCut = false
             this.isRect = false
             this.isText = !this.isText
@@ -345,17 +398,19 @@
 
           case 'rotateRight':
             this.angle = containerEvent.rotateRight(this.params)
+            this.unselectableExcludeCutCtx()
             this.transformContainer()
             break;
 
           case 'rotateLeft':
             this.angle = containerEvent.rotateLeft(this.params)
+            this.unselectableExcludeCutCtx()
             this.transformContainer()
             break;
 
           case 'clear':
-            for(let textbox of this.textboxList) {
-              this.canvas.remove(textbox)
+            for(let ctx of this.ctxList) {
+              this.canvas.remove(ctx)
             }
             break;
 
