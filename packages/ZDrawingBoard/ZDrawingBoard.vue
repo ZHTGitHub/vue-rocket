@@ -171,6 +171,7 @@
 
       transformContainer() {
         this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
+        this.container.style.transition = 'all 160ms linear'
       },
 
       createCanvas() {
@@ -442,11 +443,6 @@
       position: relative;
       background-color: #4c4c4c;
       overflow: hidden;
-
-      /* .canvas {
-        position: absolute;
-        transition: transform 160ms linear;
-      } */
     }
   }
 </style>
