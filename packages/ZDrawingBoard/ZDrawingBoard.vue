@@ -16,6 +16,7 @@
 
 <script>
   import { fabric } from 'fabric'
+  import CanvasMixins from './mixins/CanvasMixins'
   import MoveMixins from './mixins/MoveMixins'
   import CutMixins from './mixins/CutMixins'
   import RectMixins from './mixins/RectMixins'
@@ -43,14 +44,30 @@
 
   export default {
     name: 'ZDrawingBoard',
-    mixins: [MoveMixins, TextboxMixins, CutMixins, RectMixins],
+    mixins: [CanvasMixins, MoveMixins, TextboxMixins, CutMixins, RectMixins],
 
     props: {
+      // 图像默认方向
+      direction: {
+        validator(value) {
+          return !!~['top', 'right', 'bottom', 'left'].indexOf(value)
+        },
+        default: 'top'
+      },
+
+      // 图像名
+      name: {
+        type: String,
+        default: 'screenshot'
+      },
+
+      // 默认截图区域
       shotArea: {
         type: Object,
         required: false
       },
 
+      // 图像源路径
       src: {
         type: String,
         required: true
@@ -82,28 +99,24 @@
         retinaWidth: 0,
         retinaHeight: 0,
 
-        // 
+        // 记录当前操作对象的状态
         isCut: false,
         isRect: false,
         isText: false,
-        angle: 0,
         scale: 1,
         moveSpace,
         moveX: 0,
         moveY: 0,
 
-        // text
-        textboxCount: 0,
-        textboxList: [],  
-        textboxActiveIndex: -1,
-        textboxIsActive: true,
-
+        // 
         count: 0,
         ctxList: [],
         activeIndex: -1,
 
+        // 截图区域
         cutArea: {},
 
+        // 鼠标按下的坐标
         downPoint: null
       }
     },
@@ -118,7 +131,6 @@
           imageScale: this.imageScale,
           isRect: this.isRect,
           isText: this.isText,
-          angle: this.angle,
           scale: this.scale,
           moveSpace: this.moveSpace,
           moveX: this.moveX,
@@ -167,14 +179,12 @@
       },
 
       transformContainer() {
-        this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
+        this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) scale(${ this.scale })`
         this.container.style.transition = 'transform .16s ease-out'
       },
 
       // 创建画布
       createCanvas(source) {
-        this.canvas?.dispose()
-
         const options = {
           enableRetinaScaling: true, 
           width: this.imageRealWidth, 
@@ -204,6 +214,8 @@
           this.canvas.item(0)['hasControls'] = false
           this.canvas.item(0)['selectable'] = false
           this.canvas.item(0)['evented'] = false
+          
+          this.setDefaultCutArea()
         }, { crossOrigin: 'anonymous' })
       },
 
@@ -320,18 +332,19 @@
           }
         }
 
+        // 切图
         if(this.isCut) {
           // 只允许创建一次切图框
           const ctx = this.ctxList.find(c => c?.type === 'cut')
           if(ctx) return
 
-          this.createCutRect(event.absolutePointer)
-          // return
+          this.createCutRect(event.pointer)
+          return
         }
 
+        // 画框
         if(this.isRect) {
-          this.createRect(event.absolutePointer)
-          // return
+          this.createRect(event.pointer)
         }
       },
 

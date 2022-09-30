@@ -1,6 +1,15 @@
 <template>
   <div class="z-demo-drawing-board">
-    <z-drawing-board ref="board" :src="src"></z-drawing-board>
+    <z-drawing-board 
+      ref="board" 
+      :src="src"
+      :shotArea="{
+        x: 100,
+        y: 100,
+        width: 300,
+        height: 300
+      }"
+    ></z-drawing-board>
   </div>
 </template>
 
@@ -36,7 +45,7 @@
             this.$refs.board.moveLeft()
             break;
 
-          case 'Backspace':
+          // case 'Backspace':
           case 'Delete':
             this.$refs.board.clearActivatedCtx()
             break;
