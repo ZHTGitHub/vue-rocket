@@ -4,7 +4,7 @@
       <span class="icon icon-cut" @click="handleEvent('cut')"></span>
       <span class="icon icon-rect" @click="handleEvent('rect')"></span>
       <span class="icon icon-text" @click="handleEvent('text')"></span>
-      <span class="icon icon-move" @click="handleEvent('move')"></span>
+      <!-- <span class="icon icon-move" @click="handleEvent('move')"></span> -->
       <span class="icon icon-zoom-out" @click="handleEvent('zoomOut')"></span>
       <span class="icon icon-zoom-in" @click="handleEvent('zoomIn')"></span>
       <span class="icon icon-rotate-right" @click="handleEvent('rotateRight')"></span>

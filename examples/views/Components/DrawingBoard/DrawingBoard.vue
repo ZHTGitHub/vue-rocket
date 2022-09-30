@@ -38,7 +38,7 @@
 
           case 'Backspace':
           case 'Delete':
-            this.$refs.board.deleteActivatedCtx()
+            this.$refs.board.clearActivatedCtx()
             break;
         }
       })

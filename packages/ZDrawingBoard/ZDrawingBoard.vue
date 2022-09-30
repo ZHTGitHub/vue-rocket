@@ -82,9 +82,6 @@
         retinaWidth: 0,
         retinaHeight: 0,
 
-        // img canvas
-        imgCanvas: null,
-
         // 
         isCut: false,
         isRect: false,
@@ -155,7 +152,7 @@
         this.retinaWidth = this.imageRealWidth * this.imageScale
         this.retinaHeight = this.imageRealHeight * this.imageScale
 
-        this.createCanvas()
+        this.createCanvas(this.src)
       },
 
       // 获取画布视图的宽高
@@ -171,10 +168,13 @@
 
       transformContainer() {
         this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
-        this.container.style.transition = 'all 160ms linear'
+        this.container.style.transition = 'transform .16s ease-out'
       },
 
-      createCanvas() {
+      // 创建画布
+      createCanvas(source) {
+        this.canvas?.dispose()
+
         const options = {
           enableRetinaScaling: true, 
           width: this.imageRealWidth, 
@@ -189,31 +189,89 @@
 
         this.canvas = new fabric.Canvas('canvas', options)
         this.canvas.setDimensions(dimensions, { cssOnly: true })
-
+        
         this.canvas.on('mouse:down', this.canvasMouseDown)
         this.canvas.on('mouse:move', this.canvasMouseMove)
         this.canvas.on('mouse:up', this.canvasMouseUp)
 
         this.getContainer()
 
-        new fabric.Image.fromURL(this.src, (img) => {
-          this.imgCanvas = img
+        new fabric.Image.fromURL(source, (img) => {
+          img.type = 'image'
 
-          this.canvas.add(this.imgCanvas)
+          this.canvas.add(img)
 
-          this.canvas.item(0)['hasControls'] = true
+          this.canvas.item(0)['hasControls'] = false
           this.canvas.item(0)['selectable'] = false
           this.canvas.item(0)['evented'] = false
         }, { crossOrigin: 'anonymous' })
+      },
 
-        // console.log(this.canvas)
+      // 更新画布
+      updateCanvas() {
+        this.clearCutCtx()
+        this.setContextsSelectable(false)
+
+        const [imageRealWidth, imageRealHeight] = [this.imageRealWidth, this.imageRealHeight]
+        const [retinaWidth, retinaHeight] = [this.retinaWidth, this.retinaHeight]
+
+        const image = new Image()
+        image.src = this.canvas.toDataURL('image/png')
+
+        image.onload = () => {
+          // 旋转后交换画布的宽高
+          {
+            this.imageRealWidth = imageRealHeight
+            this.imageRealHeight = imageRealWidth
+
+            this.retinaWidth = retinaHeight
+            this.retinaHeight = retinaWidth
+          }
+
+          // 生成旋转后的图片
+          const canvas = document.createElement('canvas')
+
+          {
+            canvas.width = this.imageRealWidth
+            canvas.height = this.imageRealHeight
+
+            const ctx = canvas.getContext('2d')
+
+            ctx.translate(this.imageRealWidth, 0)
+            ctx.rotate(90 * Math.PI / 180)
+
+            ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
+          }
+
+          const dataURL = canvas.toDataURL('image/png')
+
+          this.clearCanvas()
+
+          // 旋转后重新设置画布的宽高，重新绘制图片
+          {
+            this.canvas.setWidth(this.imageRealWidth)
+            this.canvas.setHeight(this.imageRealHeight)
+
+            const dimensions = {
+              width: this.retinaWidth + 'px',
+              height: this.retinaHeight + 'px'
+            }
+
+            this.canvas.setDimensions(dimensions, { cssOnly: true })
+
+            const imgCtx = this.canvas.getObjects()[0]
+            imgCtx.setSrc(dataURL, () => {
+              this.canvas.renderAll()
+            })
+          }
+        }
       },
 
       // 鼠标按下
       canvasMouseDown(event) {
-        const { absolutePointer, pointer } = event
+        const { pointer } = event
 
-        this.downPoint = absolutePointer
+        this.downPoint = pointer
 
         const ctx = this.getActivatedCtx()
 
@@ -280,14 +338,32 @@
       getActivatedCtx() {
         return this.canvas.getActiveObject()
       },
+      
+      // 设置所有对象均不可操作/可操作(截图对象保留当前状态)
+      setContextsSelectable(selectable = true) {
+        const len = this.ctxList.length
 
-      deleteActivatedCtx() {
+        for(let i = 1; i <= len; i++) {
+          const ctx = this.ctxList[i]
+
+          if(ctx?.type === 'cut') continue
+
+          if(!this.canvas.item(i)) continue
+
+          this.canvas.item(i)['selectable'] = selectable
+          this.canvas.item(i)['evented'] = selectable
+        }
+      },
+
+      // 清空画布上当前操作对象
+      clearActivatedCtx() {
         const ctx = this.getActivatedCtx()
         this.ctxList.splice(this.activeIndex, 1)
         this.canvas.remove(ctx)
       },
-      
-      deleteCutCtx() {
+
+      // 清空画布上的切图操作痕迹
+      clearCutCtx() {
         const cutCtx = this.ctxList.find(c => c?.type === 'cut')
 
         if(cutCtx) {
@@ -299,63 +375,41 @@
         return cutCtx
       },
 
-      unselectableExcludeCutCtx() {
-        const len = this.ctxList.length
-
-        for(let i = 0; i <= len; i++) {
-          const ctx = this.ctxList[i]
-
-          if(ctx?.type === 'cut') continue
-
-          if(!this.canvas.item(i)) continue
-
-          this.canvas.item(i)['selectable'] = false
-          this.canvas.item(i)['evented'] = false
+      // 清空画布上的操作痕迹
+      clearCanvas() {
+        for(let ctx of this.ctxList) {
+          this.canvas.remove(ctx)
         }
       },
 
       // 保存编辑后的图片
       save() {
-        
         this.downloadCanvas()
       },
 
       // 下载
       downloadCanvas() {
-        const image = new Image()
+        const cutCtx = this.clearCutCtx()
+        const dataURL = this.canvas.toDataURL('image/png')
 
-        const cutCtx = this.deleteCutCtx()
+        let args = {}
 
-        image.src = this.canvas.toDataURL('image/png')
-
-        image.onload = async () => {
-          const canvas = document.createElement('canvas')
-          canvas.width = image.width
-          canvas.height = image.height
-
-          const ctx = canvas.getContext('2d')
-
-          // ctx.translate(image.height, 0)
-          // ctx.rotate(90 * Math.PI / 180)
-
-          if(cutCtx) {
-            ctx.drawImage(image, this.cutArea.x, this.cutArea.y, this.cutArea.width, this.cutArea.height, 0, 0, this.cutArea.width, this.cutArea.height)
+        if(cutCtx) {
+          args = {
+            sx: this.cutArea.x, 
+            sy: this.cutArea.y, 
+            sw: this.cutArea.width, 
+            sh: this.cutArea.height, 
+            dx: 0, 
+            dy: 0, 
+            dw: this.cutArea.width, 
+            dh: this.cutArea.height
           }
-          else {
-            ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
-          }
-
-          const dataURL = canvas.toDataURL('image/png')
-          
-          const anchor = document.createElement('a')
-
-          anchor.style.display = 'none'
-          anchor.href = dataURL
-          anchor.download = 'screenshot.png'
-          document.body.appendChild(anchor)
-          anchor.click()
-          document.body.removeChild(anchor)
         }
+
+        tools.generateImage(dataURL, args, (dataURL) => {
+          tools.downloadImage(dataURL)
+        })
       },
       
       topBarEvent(eventName) {
@@ -363,7 +417,7 @@
 
         switch (eventName) {
           case 'cut':
-            this.unselectableExcludeCutCtx()
+            this.setContextsSelectable(false)
 
             this.isRect = false
             this.isText = false
@@ -371,12 +425,18 @@
             break;
 
           case 'rect':
+            this.clearCutCtx()
+            this.setContextsSelectable()
+
             this.isCut = false
             this.isText = false
             this.isRect = !this.isRect
             break;
 
           case 'text':
+            this.clearCutCtx()
+            this.setContextsSelectable()
+
             this.activeIndex = -1
 
             this.isCut = false
@@ -398,21 +458,15 @@
             break;
 
           case 'rotateRight':
-            this.angle = containerEvent.rotateRight(this.params)
-            this.unselectableExcludeCutCtx()
-            this.transformContainer()
+            this.updateCanvas()
             break;
 
           case 'rotateLeft':
-            this.angle = containerEvent.rotateLeft(this.params)
-            this.unselectableExcludeCutCtx()
-            this.transformContainer()
+            this.updateCanvas()
             break;
 
           case 'clear':
-            for(let ctx of this.ctxList) {
-              this.canvas.remove(ctx)
-            }
+            this.clearCanvas()
             break;
 
           case 'done':
@@ -440,6 +494,7 @@
       flex-grow: 1;
       display: flex;
       justify-content: center;
+      align-items: center;
       position: relative;
       background-color: #4c4c4c;
       overflow: hidden;

@@ -1,63 +1,63 @@
 const tools = {}
 
 // 加载图片
-tools.loadImage = function(src, fn) {
+tools.loadImage = function(source, func) {
   const image = new Image()
   image.setAttribute('crossOrigin', 'anonymous')
 
   image.onload = function() {
-    fn(image.width, image.height)
+    func(image.width, image.height)
   }
   
   image.onerror = function() {
     console.log('image load failed!')
   }
 
-  image.src = src + '?' + Date.now()
+  image.src = source + '?' + Date.now()
 }
 
-// 将base64转换为blob
-tools.base64ToBlob = function ({ 
-  b64data = '', 
-  contentType = '', 
-  name = 'image.png', 
-  sliceSize = 512 
-} = {}) {
-  return new Promise(resolve => {
-    // 使用 atob() 方法将数据解码
-    let byteCharacters = atob(b64data)
-    let byteArrays = []
+// 下载图片
+tools.downloadImage = function(dataURL, name = 'screenshot.png') {
+  const anchor = document.createElement('a')
 
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      let slice = byteCharacters.slice(offset, offset + sliceSize)
-      let byteNumbers = []
-
-      for (let i = 0; i < slice.length; i++) {
-          byteNumbers.push(slice.charCodeAt(i))
-      }
-      // 8 位无符号整数值的类型化数组。内容将初始化为 0。
-      // 如果无法分配请求数目的字节，则将引发异常。
-      byteArrays.push(new Uint8Array(byteNumbers))
-    }
-
-    let result = new Blob(byteArrays, {
-      type: contentType
-    })
-
-    result = Object.assign(result, {
-      // 这里一定要处理一下 URL.createObjectURL
-      preview: URL.createObjectURL(result),
-      name
-    })
-
-    resolve(result)
-  })
+  anchor.style.display = 'none'
+  anchor.href = dataURL
+  anchor.download = name
+  document.body.appendChild(anchor)
+  anchor.click()
+  document.body.removeChild(anchor)
 }
-// 将blob转换为file
-tools.blobToFile = function (theBlob, fileName) {
-  theBlob.lastModifiedDate = new Date()
-  theBlob.name = fileName
-  return theBlob
+
+// 生成图片
+tools.generateImage = function(source, { imageWidth, imageHeight, sx, sy, sw, sh, dx, dy, dw, dh } = {}, func) {
+  const canvas = document.createElement('canvas')
+
+  const image = new Image()
+  image.src = source
+
+  image.onload = function() {
+    const { width, height } = image
+
+    canvas.width = imageWidth || width
+    canvas.height = imageHeight || height
+
+    const ctx = canvas.getContext('2d')
+
+    sx = sx || 0
+    sy = sy || 0
+    sw = sw || width
+    sh = sh || height
+    dx = dx || 0
+    dy = dy || 0
+    dw = dw || width
+    dh = dh || height
+
+    ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
+
+    const dataURL = canvas.toDataURL('image/png')
+
+    func(dataURL)
+  }
 }
 
 export default tools
