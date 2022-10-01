@@ -24,24 +24,8 @@
   import tools from './libs/tools'
   import containerEvent from './libs/containerEvent'
   import { TopBar } from './components'
-  
-  const moveSpace = 50
-
-  const debounce = (() => {
-    let timer = null
-
-    return (fn, delay = 300) => {
-      if(timer) {
-        return
-      }
-
-      timer = setTimeout(() => {
-        fn()
-        timer = null
-      }, delay)
-    }
-  })()
-
+  import { moveSpace, cutRectStrokeWidth } from './libs/constants'
+   
   export default {
     name: 'ZDrawingBoard',
     mixins: [CanvasMixins, MoveMixins, TextboxMixins, CutMixins, RectMixins],
@@ -174,10 +158,12 @@
         this.viewHeight = this.view.offsetHeight
       },
 
+      // 获取画布容器的实例
       getContainer() {
         this.container = document.querySelector('#view .canvas-container')
       },
 
+      // 设置画布移动、旋转动画
       transformContainer() {
         this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) scale(${ this.scale })`
         this.container.style.transition = 'transform .16s ease-out'
@@ -204,6 +190,8 @@
         this.canvas.on('mouse:move', this.canvasMouseMove)
         this.canvas.on('mouse:up', this.canvasMouseUp)
 
+        this.canvas.on('mouse:wheel', this.canvasWheel)
+
         this.getContainer()
 
         new fabric.Image.fromURL(source, (img) => {
@@ -215,12 +203,18 @@
           this.canvas.item(0)['selectable'] = false
           this.canvas.item(0)['evented'] = false
           
-          this.setDefaultCutArea()
+          // 设置画布默认方向
+          this.setDefaultDirection(() => {
+            // 设置默认截图区域
+            this.setDefaultCutArea()
+          })
         }, { crossOrigin: 'anonymous' })
       },
 
-      // 更新画布
-      updateCanvas() {
+      // 旋转画布
+      rotateCanvas(direction, func) {
+        if(!direction) return
+
         this.clearCutCtx()
         this.setContextsSelectable(false)
 
@@ -248,9 +242,18 @@
             canvas.height = this.imageRealHeight
 
             const ctx = canvas.getContext('2d')
-
-            ctx.translate(this.imageRealWidth, 0)
-            ctx.rotate(90 * Math.PI / 180)
+            
+            switch (direction) {
+              case 'RIGHT':
+                ctx.translate(this.imageRealWidth, 0)
+                ctx.rotate(90 * Math.PI / 180)
+                break;
+            
+              case 'LEFT': 
+                ctx.translate(0, this.imageRealHeight)
+                ctx.rotate(-90 * Math.PI / 180)
+                break;
+            }
 
             ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
           }
@@ -274,6 +277,8 @@
             const imgCtx = this.canvas.getObjects()[0]
             imgCtx.setSrc(dataURL, () => {
               this.canvas.renderAll()
+
+              func && func()
             })
           }
         }
@@ -348,8 +353,22 @@
         }
       },
 
+      // 滚轮滚动
+      canvasWheel(event) {
+        tools.throttle(() => {
+          this.scale = event.e.wheelDelta > 0 ? containerEvent.zoomOut(this.params) : containerEvent.zoomIn(this.params)
+          this.transformContainer()
+        }, 10)
+      },
+
+      // 获取当前操作对象
       getActivatedCtx() {
         return this.canvas.getActiveObject()
+      },
+
+      // 获取画布上的切图对象
+      getCutCtx() {
+        return this.ctxList.find(c => c?.type === 'cut')
       },
       
       // 设置所有对象均不可操作/可操作(截图对象保留当前状态)
@@ -377,7 +396,7 @@
 
       // 清空画布上的切图操作痕迹
       clearCutCtx() {
-        const cutCtx = this.ctxList.find(c => c?.type === 'cut')
+        const cutCtx = this.getCutCtx()
 
         if(cutCtx) {
           const index = this.ctxList.findIndex(c => c?.type === 'cut')
@@ -402,21 +421,23 @@
 
       // 下载
       downloadCanvas() {
-        const cutCtx = this.clearCutCtx()
+        const cutCtx = this.getCutCtx()
         const dataURL = this.canvas.toDataURL('image/png')
 
         let args = {}
 
         if(cutCtx) {
+          const realStrokeWidth = cutRectStrokeWidth / this.imageScale
+
           args = {
-            sx: this.cutArea.x, 
-            sy: this.cutArea.y, 
-            sw: this.cutArea.width, 
-            sh: this.cutArea.height, 
+            sx: this.cutArea.x + realStrokeWidth, 
+            sy: this.cutArea.y + realStrokeWidth, 
+            sw: this.cutArea.width - realStrokeWidth, 
+            sh: this.cutArea.height - realStrokeWidth, 
             dx: 0, 
             dy: 0, 
-            dw: this.cutArea.width, 
-            dh: this.cutArea.height
+            dw: this.cutArea.width - realStrokeWidth, 
+            dh: this.cutArea.height - realStrokeWidth
           }
         }
 
@@ -471,11 +492,11 @@
             break;
 
           case 'rotateRight':
-            this.updateCanvas()
+            this.rotateCanvas('RIGHT')
             break;
 
           case 'rotateLeft':
-            this.updateCanvas()
+            this.rotateCanvas('LEFT')
             break;
 
           case 'clear':

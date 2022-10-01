@@ -2,6 +2,7 @@
   <div class="z-demo-drawing-board">
     <z-drawing-board 
       ref="board" 
+      direction="top"
       :src="src"
       :shotArea="{
         x: 100,
@@ -19,8 +20,8 @@
 
     data() {
       return {
-        // src: require('../../../../public/images/global/6.png')
-        src: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/001576799668903904001.png'
+        src: require('../../../../public/images/global/6.png')
+        // src: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/001576799668903904001.png'
       }
     },
 

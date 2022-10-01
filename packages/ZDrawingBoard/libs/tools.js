@@ -60,4 +60,20 @@ tools.generateImage = function(source, { imageWidth, imageHeight, sx, sy, sw, sh
   }
 }
 
+// 节流
+tools.throttle = (() => {
+  let timer = null
+
+  return (fn, delay = 100) => {
+    if(timer) {
+      return
+    }
+
+    timer = setTimeout(() => {
+      fn()
+      timer = null
+    }, delay)
+  }
+})()
+
 export default tools

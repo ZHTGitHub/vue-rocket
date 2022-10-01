@@ -1,8 +1,32 @@
 export default {
   methods: {
-    // 设置图像默认方向
-    setDefaultDirection() {
+    // 设置画布默认方向
+    setDefaultDirection(func) {
+      switch (this.direction) {
+        case 'top': 
+          func && func()
+          break;
       
+        case 'right': 
+          this.rotateCanvas('RIGHT', () => {
+            func && func()
+          })
+          break;
+
+        case 'bottom': 
+          this.rotateCanvas('RIGHT', () => {
+            this.rotateCanvas('RIGHT', () => {
+              func && func()
+            })
+          })
+          break;
+
+        case 'left': 
+          this.rotateCanvas('LEFT', () => {
+            func && func()
+          })
+          break;
+      }
     },
 
     // 设置默认截图区域

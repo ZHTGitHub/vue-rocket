@@ -1,3 +1,5 @@
+import { cutRectStrokeWidth, cornerSize } from '../libs/constants'
+
 export default {
   methods: {
     // 创建剪裁方框
@@ -22,13 +24,13 @@ export default {
         height,
         fill: 'rgba(0, 0, 0, .3)',
         stroke: '#4caf50',
-        strokeWidth: 1.5 / this.imageScale,
+        strokeWidth: cutRectStrokeWidth / this.imageScale,
 
         hasRotatingPoint: false,
         hasBorders: false,
         lockRotation: true,
         cornerColor: '#4caf50',
-        cornerSize: 6 / this.imageScale,
+        cornerSize: cornerSize / this.imageScale,
         transparentCorners: false
       })
 

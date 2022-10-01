@@ -1,3 +1,5 @@
+import { rectStrokeWidth, cornerSize } from '../libs/constants'
+
 export default {
   methods: {
     // 创建方框
@@ -22,7 +24,7 @@ export default {
         height,
         fill: 'transparent',
         stroke: '#f00',
-        strokeWidth: 3 / this.imageScale,
+        strokeWidth: rectStrokeWidth / this.imageScale,
 
         hasRotatingPoint: false,
         hasBorders: false,
@@ -30,7 +32,7 @@ export default {
         cornerStyle: 'circle',
         cornerStrokeColor: '#f00',
         cornerColor: '#fff',
-        cornerSize: 6 / this.imageScale,
+        cornerSize: cornerSize / this.imageScale,
         transparentCorners: false
       })
 
