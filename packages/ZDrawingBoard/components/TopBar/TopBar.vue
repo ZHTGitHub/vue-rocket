@@ -40,7 +40,7 @@
   .top-bar {
     background-color: #282828;
     border-bottom: 1px solid #171717;
-    overflow: hidden;
+    /* overflow: hidden; */
 
     .bar {
       display: flex;
