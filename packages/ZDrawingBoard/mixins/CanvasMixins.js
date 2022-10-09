@@ -1,4 +1,6 @@
-export default {
+  import { moveSpace } from '../libs/constants'
+
+  export default {
   methods: {
     // 设置画布默认方向
     setDefaultDirection(func) {
@@ -43,6 +45,81 @@ export default {
       }
 
       this.createCutRect(pointer)
+    },
+
+    resetValues() {
+      // image
+      this.imageRealWidth = 0
+      this.imageRealHeight = 0
+      this.imageScale = 1
+
+      // canvas
+      this.canvas = null
+      this.canvasWidth = 0
+      this.canvasHeight = 0
+
+      // retina
+      this.retinaWidth = 0
+      this.retinaHeight = 0
+
+      // 记录当前操作对象的状态
+      this.isCut = false
+      this.isRect = false
+      this.isText = false
+      this.scale = 1
+      this.moveSpace = moveSpace
+      this.moveX = 0
+      this.moveY = 0
+
+      this.count = 0
+      this.ctxList = []
+      this.activeIndex = -1
+
+      // 鼠标按下的坐标
+      this.downPoint = null
+    },
+
+    // 暂未使用
+    setDefaultValues() {
+      this.view = null
+      this.viewWidth = 0
+      this.viewHeight = 0
+
+      // image
+      this.imageRealWidth = 0
+      this.imageRealHeight = 0
+      this.imageScale = 1
+
+      // container
+      this.container = null
+
+      // canvas
+      this.canvas = null
+      this.canvasWidth = 0
+      this.canvasHeight = 0
+
+      // retina
+      this.retinaWidth = 0
+      this.retinaHeight = 0
+
+      // 记录当前操作对象的状态
+      this.isCut = false
+      this.isRect = false
+      this.isText = false
+      this.scale = 1
+      this.moveSpace = moveSpace
+      this.moveX = 0
+      this.moveY = 0
+
+      this.count = 0
+      this.ctxList = []
+      this.activeIndex = -1
+
+      // 截图区域
+      this.cutArea = {}
+
+      // 鼠标按下的坐标
+      this.downPoint = null
     }
   }
 }

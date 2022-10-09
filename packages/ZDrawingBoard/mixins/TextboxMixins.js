@@ -1,3 +1,5 @@
+import { fabric } from 'fabric'
+
 export default {
   methods: {
     // 创建输入框

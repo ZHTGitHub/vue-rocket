@@ -33,7 +33,7 @@ tools.generateImage = function(source, { imageWidth, imageHeight, sx, sy, sw, sh
   const canvas = document.createElement('canvas')
 
   const image = new Image()
-  image.src = source
+  image.setAttribute('crossOrigin', 'anonymous')
 
   image.onload = function() {
     const { width, height } = image
@@ -58,7 +58,60 @@ tools.generateImage = function(source, { imageWidth, imageHeight, sx, sy, sw, sh
 
     func(dataURL)
   }
+
+  image.src = source
 }
+
+// Base64 转 File
+tools.base64ToFile = (base64, filename) => {
+  let 
+    arr = base64.split(','),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n)
+
+  while(n--) {
+    u8arr[n] = bstr.charCodeAt(n)
+  }
+
+  return new File([u8arr], filename, { type: mime })
+}
+
+// 画布旋转方向
+tools.setDirection = (count) => {
+  switch (count) {
+    case 0:
+      return 'TOP';
+
+    case 1:
+    case -3:
+      return 'RIGHT';
+
+    case 2:
+    case -2:
+      return 'BOTTOM';
+
+    case 3:
+    case -1:
+      return 'LEFT';
+  }
+}
+
+// 防抖
+tools.debounce = (() => {
+  let timer = null
+
+  return (fn, delay = 300) => {
+    if(timer) {
+      clearTimeout(timer)
+    }
+
+    timer = setTimeout(() => {
+      fn()
+    }, delay)
+  }
+})()
 
 // 节流
 tools.throttle = (() => {

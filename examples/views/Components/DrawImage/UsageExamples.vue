@@ -134,7 +134,7 @@
 
         num: -1,
 
-        src: images[0].url,
+        src: images[2].url,
 
         direction: 'top',
 

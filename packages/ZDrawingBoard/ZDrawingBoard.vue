@@ -2,6 +2,8 @@
   <div class="z-drawing-board">
     <top-bar @topBarEvent="topBarEvent"></top-bar>
 
+    <img :src="blobSrc" width="100">
+
     <div class="view" id="view" ref="view">
       <canvas 
         class="canvas" 
@@ -17,10 +19,10 @@
 <script>
   import { fabric } from 'fabric'
   import CanvasMixins from './mixins/CanvasMixins'
-  import MoveMixins from './mixins/MoveMixins'
   import CutMixins from './mixins/CutMixins'
   import RectMixins from './mixins/RectMixins'
   import TextboxMixins from './mixins/TextboxMixins'
+  import EventMixins from './mixins/EventMixins'
   import tools from './libs/tools'
   import containerEvent from './libs/containerEvent'
   import { TopBar } from './components'
@@ -28,7 +30,7 @@
    
   export default {
     name: 'ZDrawingBoard',
-    mixins: [CanvasMixins, MoveMixins, TextboxMixins, CutMixins, RectMixins],
+    mixins: [CanvasMixins, TextboxMixins, CutMixins, RectMixins, EventMixins],
 
     props: {
       // 图像默认方向
@@ -37,6 +39,12 @@
           return !!~['top', 'right', 'bottom', 'left'].indexOf(value)
         },
         default: 'top'
+      },
+
+      // 下载
+      download: {
+        type: Boolean,
+        default: false
       },
 
       // 图像名
@@ -55,6 +63,12 @@
       src: {
         type: String,
         required: true
+      },
+      
+      // 缩放
+      zoom: {
+        type: Number,
+        default: 1
       }
     },
 
@@ -66,7 +80,6 @@
         viewHeight: 0,
 
         // image
-        image: null,
         imageRealWidth: 0,
         imageRealHeight: 0,
         imageScale: 1,
@@ -79,7 +92,7 @@
         canvasWidth: 0,
         canvasHeight: 0,
 
-        // retina
+        // 视网膜
         retinaWidth: 0,
         retinaHeight: 0,
 
@@ -92,7 +105,7 @@
         moveX: 0,
         moveY: 0,
 
-        // 
+        // 记录画布操作状态
         count: 0,
         ctxList: [],
         activeIndex: -1,
@@ -101,7 +114,12 @@
         cutArea: {},
 
         // 鼠标按下的坐标
-        downPoint: null
+        downPoint: null,
+
+        // 记录旋转状态
+        directionCount: 0,
+
+        blobSrc: ''
       }
     },
 
@@ -126,6 +144,11 @@
     watch: {
       src: {
         handler(src) {
+          if(this.canvas) {
+            this.canvas?.dispose()
+            this.resetValues()
+          }
+
           tools.loadImage(src, this.setImage)
         },
         immediate: true
@@ -175,7 +198,8 @@
           enableRetinaScaling: true, 
           width: this.imageRealWidth, 
           height: this.imageRealHeight,
-          backgroundColor: 'rgb(0, 0, 0)'
+          backgroundColor: 'rgb(0, 0, 0)',
+          crossOrigin: 'anonymous'
         }
 
         const dimensions = {
@@ -194,25 +218,37 @@
 
         this.getContainer()
 
-        new fabric.Image.fromURL(source, (img) => {
+        fabric.Image.fromURL(source + '?' + Date.now(), img => {
           img.type = 'image'
+          // img.crossOrigin = 'anonymous'
 
           this.canvas.add(img)
 
           this.canvas.item(0)['hasControls'] = false
           this.canvas.item(0)['selectable'] = false
           this.canvas.item(0)['evented'] = false
-          
+
           // 设置画布默认方向
           this.setDefaultDirection(() => {
             // 设置默认截图区域
             this.setDefaultCutArea()
+
+            // 设置默认缩放
+            if(this.zoom !== 1) {
+              this.scale = this.zoom
+              this.transformContainer()
+            }
+
+            // 画布完成初始化
+            this.$emit('load')
           })
         }, { crossOrigin: 'anonymous' })
-      },
+      },  
 
       // 旋转画布
       rotateCanvas(direction, func) {
+        this.setDirection(direction)
+
         if(!direction) return
 
         this.clearCutCtx()
@@ -222,7 +258,7 @@
         const [retinaWidth, retinaHeight] = [this.retinaWidth, this.retinaHeight]
 
         const image = new Image()
-        image.src = this.canvas.toDataURL('image/png')
+        image.setAttribute('crossOrigin', 'anonymous')
 
         image.onload = () => {
           // 旋转后交换画布的宽高
@@ -279,9 +315,11 @@
               this.canvas.renderAll()
 
               func && func()
-            })
+            }, { crossOrigin: 'anonymous' })
           }
         }
+
+        image.src = this.canvas.toDataURL('image/png')
       },
 
       // 鼠标按下
@@ -296,6 +334,7 @@
           this.activeIndex = ctx.index
         }
 
+        // 文字
         if(this.isText) {
           if(this.activeIndex === -1) {
             this.createTextbox(pointer.x, pointer.y)
@@ -308,9 +347,9 @@
             this.activeIndex = -1
           }
 
-          console.log(activeObject)
-
-          return
+          if(!activeObject) {
+            this.clearEmptyTextbox()
+          }
         }
       },
 
@@ -335,6 +374,8 @@
             width,
             height
           }
+
+          this.$emit('cut', this.cutArea)
         }
 
         // 切图
@@ -387,11 +428,49 @@
         }
       },
 
+      // 设置画布方向
+      setDirection(direction) {
+        switch (direction) {
+          case 'RIGHT':
+            ++this.directionCount
+
+            if(this.directionCount > 3) {
+              this.directionCount = 0
+            }
+            break;
+        
+          case 'LEFT':
+            --this.directionCount
+
+            if(this.directionCount < -3) {
+              this.directionCount = 0
+            }
+            break;
+        }
+
+        this.$emit('direction', tools.setDirection(this.directionCount))
+      },
+
       // 清空画布上当前操作对象
       clearActivatedCtx() {
         const ctx = this.getActivatedCtx()
         this.ctxList.splice(this.activeIndex, 1)
         this.canvas.remove(ctx)
+      },
+
+      // 清空未输入文字的文本框
+      clearEmptyTextbox() {
+        const len = this.ctxList.length
+
+        for(let i = 0; i < len; i++) {
+          const ctx = this.ctxList[i]
+
+          if(ctx?.type === 'textbox' && !ctx.text) {
+            this.ctxList.splice(i, 1)
+            this.canvas.remove(ctx)
+            break
+          }
+        }
       },
 
       // 清空画布上的切图操作痕迹
@@ -441,74 +520,14 @@
           }
         }
 
-        tools.generateImage(dataURL, args, (dataURL) => {
-          tools.downloadImage(dataURL)
+        tools.generateImage(dataURL, args, (_dataURL) => {
+          if(this.download) {
+            tools.downloadImage(_dataURL)
+          }
+
+          const file = tools.base64ToFile(_dataURL, this.name)
+          this.$emit('done', file)
         })
-      },
-      
-      topBarEvent(eventName) {
-        this.eventName = eventName
-
-        switch (eventName) {
-          case 'cut':
-            this.setContextsSelectable(false)
-
-            this.isRect = false
-            this.isText = false
-            this.isCut = !this.isCut
-            break;
-
-          case 'rect':
-            this.clearCutCtx()
-            this.setContextsSelectable()
-
-            this.isCut = false
-            this.isText = false
-            this.isRect = !this.isRect
-            break;
-
-          case 'text':
-            this.clearCutCtx()
-            this.setContextsSelectable()
-
-            this.activeIndex = -1
-
-            this.isCut = false
-            this.isRect = false
-            this.isText = !this.isText
-            break;
-
-          case 'move':
-            break;
-
-          case 'zoomOut':
-            this.scale = containerEvent.zoomOut(this.params)
-            this.transformContainer()
-            break;
-
-          case 'zoomIn':
-            this.scale = containerEvent.zoomIn(this.params)
-            this.transformContainer()
-            break;
-
-          case 'rotateRight':
-            this.rotateCanvas('RIGHT')
-            break;
-
-          case 'rotateLeft':
-            this.rotateCanvas('LEFT')
-            break;
-
-          case 'clear':
-            this.clearCanvas()
-            break;
-
-          case 'done':
-            this.save()
-            break;
-        }
-
-        this.canvas.requestRenderAll()
       }
     },
 

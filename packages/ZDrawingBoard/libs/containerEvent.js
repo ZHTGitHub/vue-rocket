@@ -4,7 +4,7 @@ const containerEvent = {}
  * @description 放大
  * @param { Object } params
  */ 
-containerEvent.zoomOut = (params) => {
+ containerEvent.zoomIn = (params) => {
   let scale = params.scale * 1.1
   params.scale = scale
 
@@ -15,8 +15,19 @@ containerEvent.zoomOut = (params) => {
  * @description 缩小
  * @param { Object } params
  */ 
-containerEvent.zoomIn = (params) => {
+containerEvent.zoomOut = (params) => {
   let scale = params.scale * 0.9
+  params.scale = scale
+
+  return scale
+}
+
+/**
+ * @description 还原
+ * @param { Object } params
+ */ 
+ containerEvent.zoomOrigin = (params) => {
+  let scale = 1
   params.scale = scale
 
   return scale

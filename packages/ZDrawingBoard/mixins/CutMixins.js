@@ -57,6 +57,8 @@ export default {
         height
       }
 
+      this.$emit('cut', this.cutArea)
+
       this.downPoint = null
     }
   }

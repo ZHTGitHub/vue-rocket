@@ -5,8 +5,8 @@
       <span class="icon icon-rect" @click="handleEvent('rect')"></span>
       <span class="icon icon-text" @click="handleEvent('text')"></span>
       <!-- <span class="icon icon-move" @click="handleEvent('move')"></span> -->
-      <span class="icon icon-zoom-out" @click="handleEvent('zoomOut')"></span>
-      <span class="icon icon-zoom-in" @click="handleEvent('zoomIn')"></span>
+      <span class="icon icon-zoom-out" @click="handleEvent('zoomIn')"></span>
+      <span class="icon icon-zoom-in" @click="handleEvent('zoomOut')"></span>
       <span class="icon icon-rotate-right" @click="handleEvent('rotateRight')"></span>
       <span class="icon icon-rotate-left" @click="handleEvent('rotateLeft')"></span>
 
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+  import tools from '../../libs/tools'
+
   export default {
     name: 'TopBar',
 
@@ -28,7 +30,9 @@
 
     methods: {
       handleEvent(eventName) {
-        this.$emit('topBarEvent', eventName)
+        tools.debounce(() => {
+          this.$emit('topBarEvent', eventName)
+        }, 150)
       }
     }
   }
