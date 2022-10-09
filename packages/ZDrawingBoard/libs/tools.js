@@ -10,6 +10,7 @@ tools.loadImage = function(source, func) {
   }
   
   image.onerror = function() {
+    func(void 0, void 0)
     console.log('image load failed!')
   }
 

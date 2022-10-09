@@ -2,8 +2,6 @@
   <div class="z-drawing-board">
     <top-bar @topBarEvent="topBarEvent"></top-bar>
 
-    <img :src="blobSrc" width="100">
-
     <div class="view" id="view" ref="view">
       <canvas 
         class="canvas" 
@@ -13,6 +11,17 @@
         The browser does not support canvas
       </canvas>
     </div>
+
+    <v-overlay 
+      :absolute="true" 
+      :opacity=".8"
+      :value="overlay"
+    >
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -36,9 +45,9 @@
       // 图像默认方向
       direction: {
         validator(value) {
-          return !!~['top', 'right', 'bottom', 'left'].indexOf(value)
+          return !!~['TOP', 'RIGHT', 'BOTTOM', 'LEFT'].indexOf(value)
         },
-        default: 'top'
+        default: 'TOP'
       },
 
       // 下载
@@ -119,7 +128,7 @@
         // 记录旋转状态
         directionCount: 0,
 
-        blobSrc: ''
+        overlay: false
       }
     },
 
@@ -144,6 +153,8 @@
     watch: {
       src: {
         handler(src) {
+          this.overlay = true
+
           if(this.canvas) {
             this.canvas?.dispose()
             this.resetValues()
@@ -158,6 +169,12 @@
     methods: {
       // 设置图片信息
       setImage(width, height) {
+        // 图片不存在
+        if(!width || !height) {
+          this.overlay = false
+          return
+        }
+        
         this.getView()
 
         this.imageRealWidth = width
@@ -220,7 +237,6 @@
 
         fabric.Image.fromURL(source + '?' + Date.now(), img => {
           img.type = 'image'
-          // img.crossOrigin = 'anonymous'
 
           this.canvas.add(img)
 
@@ -238,6 +254,8 @@
               this.scale = this.zoom
               this.transformContainer()
             }
+
+            this.overlay = false
 
             // 画布完成初始化
             this.$emit('load')
@@ -495,11 +513,6 @@
 
       // 保存编辑后的图片
       save() {
-        this.downloadCanvas()
-      },
-
-      // 下载
-      downloadCanvas() {
         const cutCtx = this.getCutCtx()
         const dataURL = this.canvas.toDataURL('image/png')
 
@@ -508,7 +521,12 @@
         if(cutCtx) {
           const realStrokeWidth = cutRectStrokeWidth / this.imageScale
 
+          const imageWidth = this.cutArea.width - realStrokeWidth * 2
+          const imageHeight = this.cutArea.height - realStrokeWidth * 2
+
           args = {
+            imageWidth,
+            imageHeight,
             sx: this.cutArea.x + realStrokeWidth, 
             sy: this.cutArea.y + realStrokeWidth, 
             sw: this.cutArea.width - realStrokeWidth, 
@@ -521,6 +539,7 @@
         }
 
         tools.generateImage(dataURL, args, (_dataURL) => {
+          // 下载
           if(this.download) {
             tools.downloadImage(_dataURL)
           }
@@ -541,6 +560,7 @@
   .z-drawing-board {
     display: flex;
     flex-direction: column;
+    position: relative;
     height: inherit;
 
     .view {

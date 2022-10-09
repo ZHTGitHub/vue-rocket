@@ -28,6 +28,10 @@
             func && func()
           })
           break;
+
+        default:
+          func && func()
+          break;
       }
     },
 

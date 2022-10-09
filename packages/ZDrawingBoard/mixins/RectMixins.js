@@ -33,7 +33,8 @@ export default {
         cornerStrokeColor: '#f00',
         cornerColor: '#fff',
         cornerSize: cornerSize / this.imageScale,
-        transparentCorners: false
+        transparentCorners: false,
+        strokeUniform: true
       })
 
       rect.type = 'rect'

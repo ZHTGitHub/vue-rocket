@@ -1,8 +1,9 @@
 <template>
   <div class="z-demo-drawing-board">
-    <z-drawing-board 
+    <!-- <z-drawing-board 
       ref="board" 
-      direction="top"
+      direction="TOP"
+      download
       name="leslie"
       :src="src"
       :zoom="1"
@@ -11,13 +12,85 @@
       @direction="handleDirection"
       @zoom="handleZoom"
       @done="handleDone"
-    ></z-drawing-board>
+    ></z-drawing-board> -->
+
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Open Dialog
+        </v-btn>
+      </template>
+      <v-card>
+        <v-toolbar
+          dark
+          color="primary"
+        >
+          <v-btn
+            icon
+            dark
+            @click="dialog = false"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+
+          <v-toolbar-title>Settings</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <v-toolbar-items>
+            <!-- <v-btn
+              dark
+              text
+              @click="dialog = false"
+            >
+              Save
+            </v-btn> -->
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <div style="height: 800px">
+          <z-drawing-board 
+            ref="board" 
+            direction="TOP"
+            download
+            name="leslie"
+            :src="src"
+            :zoom="1"
+            @load="handleLoad"
+            @cut="handleCut"
+            @direction="handleDirection"
+            @zoom="handleZoom"
+            @done="handleDone"
+          ></z-drawing-board>
+        </div>
+      </v-card>
+    </v-dialog>
 
     <ul class="z-flex">
       <li v-for="(image, index) in images" :key="index" @click="handleClick(image)">
         <img :src="image.url" :width="image.width">
       </li>
     </ul>
+
+    <v-text-field></v-text-field>
+
+    <v-btn
+      icon
+      color="primary"
+      @click="dialog = false"
+    >
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -53,6 +126,7 @@
 
     data() {
       return {
+        dialog: false,
         images,
         // src: require('../../../../public/images/global/6.png')
         src: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/001576799668903904001.png'

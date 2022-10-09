@@ -31,7 +31,8 @@ export default {
         lockRotation: true,
         cornerColor: '#4caf50',
         cornerSize: cornerSize / this.imageScale,
-        transparentCorners: false
+        transparentCorners: false,
+        strokeUniform: true
       })
 
       cutRect.type = 'cut'
