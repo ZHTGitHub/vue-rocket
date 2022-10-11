@@ -13,7 +13,7 @@
       <span class="icon icon-clear" @click="handleEvent('clear')"></span>
       <span class="icon icon-done" @click="handleEvent('done')"></span>
 
-      <p class="mb-0 text-grey">Tip: 滚动滚轮可缩放图片，Ctrl+按下鼠标左键可拖拽图片！</p>
+      <p class="mb-0 text-grey">Tip: 滚动滚轮可缩放图片，Ctrl+鼠标左键可拖拽图片！</p>
     </div>
   </div>
 </template>
