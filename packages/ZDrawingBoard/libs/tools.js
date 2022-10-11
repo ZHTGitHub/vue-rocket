@@ -1,3 +1,5 @@
+// import { imageSuffix, imageEncode } from './constants'
+
 const tools = {}
 
 // 加载图片
@@ -30,7 +32,14 @@ tools.downloadImage = function(dataURL, name = 'screenshot.png') {
 }
 
 // 生成图片
-tools.generateImage = function(source, { imageWidth, imageHeight, sx, sy, sw, sh, dx, dy, dw, dh } = {}, func) {
+tools.generateImage = function(
+  source, 
+  { 
+    imageWidth, imageHeight, imageSuffix, imageEncode, 
+    sx, sy, sw, sh, dx, dy, dw, dh 
+  } = {}, 
+  func
+) {
   const canvas = document.createElement('canvas')
 
   const image = new Image()
@@ -55,7 +64,7 @@ tools.generateImage = function(source, { imageWidth, imageHeight, sx, sy, sw, sh
 
     ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
 
-    const dataURL = canvas.toDataURL('image/png')
+    const dataURL = canvas.toDataURL(imageSuffix, imageEncode)
 
     func(dataURL)
   }
@@ -64,7 +73,7 @@ tools.generateImage = function(source, { imageWidth, imageHeight, sx, sy, sw, sh
 }
 
 // Base64 转 File
-tools.base64ToFile = (base64, filename) => {
+tools.base64ToFile = (base64, name) => {
   let 
     arr = base64.split(','),
     mime = arr[0].match(/:(.*?);/)[1],
@@ -76,7 +85,7 @@ tools.base64ToFile = (base64, filename) => {
     u8arr[n] = bstr.charCodeAt(n)
   }
 
-  return new File([u8arr], filename, { type: mime })
+  return new File([u8arr], name, { type: mime })
 }
 
 // 画布旋转方向

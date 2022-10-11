@@ -35,8 +35,8 @@
   import tools from './libs/tools'
   import containerEvent from './libs/containerEvent'
   import { TopBar } from './components'
-  import { moveSpace, cutRectStrokeWidth } from './libs/constants'
-   
+  import { moveSpace, cutRectStrokeWidth, imageSuffix, imageEncode } from './libs/constants'
+
   export default {
     name: 'ZDrawingBoard',
     mixins: [CanvasMixins, TextboxMixins, CutMixins, RectMixins, EventMixins],
@@ -312,7 +312,7 @@
             ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
           }
 
-          const dataURL = canvas.toDataURL('image/png')
+          const dataURL = canvas.toDataURL(imageSuffix, imageEncode)
 
           this.clearCanvas()
 
@@ -337,7 +337,7 @@
           }
         }
 
-        image.src = this.canvas.toDataURL('image/png')
+        image.src = this.canvas.toDataURL(imageSuffix, imageEncode)
       },
 
       // 鼠标按下
@@ -372,7 +372,7 @@
       },
 
       // 鼠标移动
-      canvasMouseMove(event) {
+      canvasMouseMove() {
         // debounce(() => {
         //   console.log(event)
         // })
@@ -514,9 +514,12 @@
       // 保存编辑后的图片
       save() {
         const cutCtx = this.getCutCtx()
-        const dataURL = this.canvas.toDataURL('image/png')
+        const dataURL = this.canvas.toDataURL(imageSuffix, imageEncode)
 
-        let args = {}
+        let args = {
+          imageSuffix,
+          imageEncode
+        }
 
         if(cutCtx) {
           const realStrokeWidth = cutRectStrokeWidth / this.imageScale
@@ -525,6 +528,7 @@
           const imageHeight = this.cutArea.height - realStrokeWidth * 2
 
           args = {
+            ...args,
             imageWidth,
             imageHeight,
             sx: this.cutArea.x + realStrokeWidth, 
@@ -541,7 +545,7 @@
         tools.generateImage(dataURL, args, (_dataURL) => {
           // 下载
           if(this.download) {
-            tools.downloadImage(_dataURL)
+            tools.downloadImage(_dataURL, this.name)
           }
 
           const file = tools.base64ToFile(_dataURL, this.name)

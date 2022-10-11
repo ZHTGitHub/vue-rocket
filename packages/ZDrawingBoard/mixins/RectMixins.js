@@ -1,3 +1,4 @@
+import { fabric } from 'fabric'
 import { rectStrokeWidth, cornerSize } from '../libs/constants'
 
 export default {

@@ -51,6 +51,7 @@
       this.createCutRect(pointer)
     },
 
+    // 切换图像后初始化部分值
     resetValues() {
       // image
       this.imageRealWidth = 0

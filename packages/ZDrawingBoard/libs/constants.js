@@ -9,3 +9,9 @@ export const rectStrokeWidth = 3
 
 // 截图方框的边框大小
 export const cutRectStrokeWidth = 1.5
+
+// 图片后缀名
+export const imageSuffix = 'image/jpeg'
+
+// 图片压缩质量
+export const imageEncode = .6
