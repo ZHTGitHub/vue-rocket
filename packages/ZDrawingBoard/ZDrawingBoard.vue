@@ -166,6 +166,15 @@
       }
     },
 
+    beforeDestroy() {
+      document.onkeydown = null
+      document.onkeyup = null
+
+      this.view.onmousedown = null
+      this.view.onmousemove = null
+      this.view.onmouseup = null
+    },
+
     methods: {
       // 设置图片信息
       setImage(width, height) {
@@ -196,6 +205,8 @@
         this.view = this.$refs.view
         this.viewWidth = this.view.offsetWidth
         this.viewHeight = this.view.offsetHeight
+
+        this.moveCanvasWithMouse()
       },
 
       // 获取画布容器的实例
@@ -207,6 +218,55 @@
       transformContainer() {
         this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) scale(${ this.scale })`
         this.container.style.transition = 'transform .16s ease-out'
+      },
+
+      // 通过鼠标移动画布
+      moveCanvasWithMouse() {
+        document.onkeydown = ({ ctrlKey }) => {
+          if(ctrlKey) {
+            this.view.classList.add('drag')
+          }
+        } 
+
+        document.onkeyup = ({ ctrlKey }) => {
+          if(!ctrlKey) {
+            this.view.classList.remove('drag')
+          }
+        }
+
+        let [initX, initY] = [0, 0]
+        let [downX, downY] = [void 0, void 0]
+
+        // 按下鼠标
+        this.view.onmousedown = (e) => {
+          const { ctrlKey, x, y } = e
+
+          if(ctrlKey) {
+            downX = x
+            downY = y
+          }
+
+          // 移动鼠标
+          this.view.onmousemove = (event) => {
+            tools.throttle(() => {
+              const { ctrlKey, x, y } = event
+
+              if(ctrlKey) {
+                this.moveX = x - downX + initX
+                this.moveY = y - downY + initY
+
+                this.transformContainer()
+              }
+            })
+          }
+        }
+
+        // 抬起鼠标
+        this.view.onmouseup = () => {
+          initX = this.moveX
+          initY = this.moveY
+          this.view.onmousemove = null
+        }
       },
 
       // 创建画布
@@ -575,6 +635,19 @@
       position: relative;
       background-color: #4c4c4c;
       overflow: hidden;
+
+      &::after {
+        content: ' ';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: move;
+        z-index: -1;
+      }
+
+      &.drag::after {
+        z-index: 0;
+      }
     }
   }
 </style>

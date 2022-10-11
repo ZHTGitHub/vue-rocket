@@ -1,9 +1,11 @@
-@import "./title.css";
-@import "./subtitle.css";
-@import "./size.css";
-@import "./emphasis.css";
 @import "./alignment.css";
+@import "./color.css";
 @import "./decoration.css";
+@import "./emphasis.css";
 @import "./opacity.css";
-@import "./transform.css";
 @import "./shadow.css";
+@import "./size.css";
+@import "./subtitle.css";
+@import "./title.css";
+@import "./transform.css";
+@import "./wrappingAndOverflow.css";

@@ -133,7 +133,7 @@ tools.throttle = (() => {
     }
 
     timer = setTimeout(() => {
-      fn()
+      fn.apply(this, arguments)
       timer = null
     }, delay)
   }
