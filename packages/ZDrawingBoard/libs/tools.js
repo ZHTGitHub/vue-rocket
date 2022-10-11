@@ -1,5 +1,3 @@
-// import { imageSuffix, imageEncode } from './constants'
-
 const tools = {}
 
 // 加载图片
@@ -35,7 +33,7 @@ tools.downloadImage = function(dataURL, name = 'screenshot.png') {
 tools.generateImage = function(
   source, 
   { 
-    imageWidth, imageHeight, imageSuffix, imageEncode, 
+    imageWidth, imageHeight, imageExtension, imageCompress, 
     sx, sy, sw, sh, dx, dy, dw, dh 
   } = {}, 
   func
@@ -64,7 +62,7 @@ tools.generateImage = function(
 
     ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
 
-    const dataURL = canvas.toDataURL(imageSuffix, imageEncode)
+    const dataURL = canvas.toDataURL(imageExtension, imageCompress)
 
     func(dataURL)
   }

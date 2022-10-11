@@ -35,7 +35,7 @@
   import tools from './libs/tools'
   import containerEvent from './libs/containerEvent'
   import { TopBar } from './components'
-  import { moveSpace, cutRectStrokeWidth, imageSuffix, imageEncode } from './libs/constants'
+  import { moveSpace, cutRectStrokeWidth } from './libs/constants'
 
   export default {
     name: 'ZDrawingBoard',
@@ -54,6 +54,18 @@
       download: {
         type: Boolean,
         default: false
+      },
+
+      // 图片扩展名
+      imageExtension: {
+        type: String,
+        default: 'image/jpeg'
+      },
+
+      // 图片压缩质量
+      imageCompress: {
+        type: Number,
+        default: .2
       },
 
       // 图像名
@@ -372,7 +384,7 @@
             ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
           }
 
-          const dataURL = canvas.toDataURL(imageSuffix, imageEncode)
+          const dataURL = canvas.toDataURL(this.imageExtension, this.imageCompress)
 
           this.clearCanvas()
 
@@ -397,7 +409,7 @@
           }
         }
 
-        image.src = this.canvas.toDataURL(imageSuffix, imageEncode)
+        image.src = this.canvas.toDataURL(this.imageExtension, this.imageCompress)
       },
 
       // 鼠标按下
@@ -574,11 +586,11 @@
       // 保存编辑后的图片
       save() {
         const cutCtx = this.getCutCtx()
-        const dataURL = this.canvas.toDataURL(imageSuffix, imageEncode)
+        const dataURL = this.canvas.toDataURL(this.imageExtension, this.imageCompress)
 
         let args = {
-          imageSuffix,
-          imageEncode
+          imageExtension: this.imageExtension,
+          imageCompress: this.imageCompress
         }
 
         if(cutCtx) {
@@ -641,7 +653,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        cursor: move;
+        cursor: grab;
         z-index: -1;
       }
 

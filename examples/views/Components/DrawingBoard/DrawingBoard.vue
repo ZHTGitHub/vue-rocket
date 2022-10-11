@@ -31,7 +31,7 @@
     },
 
     {
-      url: require('../../../../public/images/global/4.jpg'),
+      url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-20/522022090042294/522022090042294-030105-286570811-1.png',
       width: 100,
       height: 560
     },
@@ -43,7 +43,7 @@
     },
 
     {
-      url: require('../../../../public/images/global/5.png'),
+      url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-20/522022090042294/522022090042294-030105-286570814-4.png',
       width: 100,
       height: 300
     }
