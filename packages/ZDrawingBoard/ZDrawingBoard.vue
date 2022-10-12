@@ -140,6 +140,9 @@
         // 记录旋转状态
         directionCount: 0,
 
+        initX: 0, 
+        initY: 0,
+
         overlay: false
       }
     },
@@ -246,7 +249,6 @@
           }
         }
 
-        let [initX, initY] = [0, 0]
         let [downX, downY] = [void 0, void 0]
 
         // 按下鼠标
@@ -264,8 +266,8 @@
               const { ctrlKey, x, y } = event
 
               if(ctrlKey) {
-                this.moveX = x - downX + initX
-                this.moveY = y - downY + initY
+                this.moveX = x - downX + this.initX
+                this.moveY = y - downY + this.initY
 
                 this.transformContainer()
               }
@@ -275,8 +277,8 @@
 
         // 抬起鼠标
         this.view.onmouseup = () => {
-          initX = this.moveX
-          initY = this.moveY
+          this.initX = this.moveX
+          this.initY = this.moveY
           this.view.onmousemove = null
         }
       },
@@ -581,6 +583,8 @@
         for(let ctx of this.ctxList) {
           this.canvas.remove(ctx)
         }
+
+        this.ctxList = []
       },
 
       // 保存编辑后的图片

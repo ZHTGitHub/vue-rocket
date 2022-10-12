@@ -1,17 +1,22 @@
 <template>
   <div class="top-bar">
     <div class="bar">
-      <span class="icon icon-cut" @click="handleEvent('cut')"></span>
-      <span class="icon icon-rect" @click="handleEvent('rect')"></span>
-      <span class="icon icon-text" @click="handleEvent('text')"></span>
-      <!-- <span class="icon icon-move" @click="handleEvent('move')"></span> -->
-      <span class="icon icon-zoom-out" @click="handleEvent('zoomIn')"></span>
-      <span class="icon icon-zoom-in" @click="handleEvent('zoomOut')"></span>
-      <span class="icon icon-rotate-right" @click="handleEvent('rotateRight')"></span>
-      <span class="icon icon-rotate-left" @click="handleEvent('rotateLeft')"></span>
+      <v-tooltip 
+        v-for="item in topBarList"
+        :key="item.value"
+        bottom
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <span 
+            :class="['icon', item.icon]" 
+            v-bind="attrs"
+            v-on="on"
+            @click="handleEvent(item.value)"
+          ></span>
+        </template>
 
-      <span class="icon icon-clear" @click="handleEvent('clear')"></span>
-      <span class="icon icon-done" @click="handleEvent('done')"></span>
+        <span>{{ item.text }}</span>
+      </v-tooltip>
 
       <p class="mb-0 text-grey">Tip: 滚动滚轮可缩放图片，Ctrl+鼠标左键可拖拽图片！</p>
     </div>
@@ -20,13 +25,14 @@
 
 <script>
   import tools from '../../libs/tools'
+  import { topBarList } from './cells'
 
   export default {
     name: 'TopBar',
 
     data() {
       return {
-
+        topBarList
       }
     },
 
