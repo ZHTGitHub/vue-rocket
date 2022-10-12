@@ -1,12 +1,7 @@
 import containerEvent from '../libs/containerEvent'
+import tools from '../libs/tools'
 
 export default {
-  data() {
-    return {
-      
-    }
-  },
-
   methods: {
     topBarEvent(eventName) {
       this.eventName = eventName
@@ -122,16 +117,18 @@ export default {
 
     // 右旋转
     eventRotateRight() {
-      this.rotateCanvas('RIGHT')
-
-      this.canvas.requestRenderAll()
+      tools.throttle(() => {
+        this.rotateCanvas('RIGHT')
+        this.canvas.requestRenderAll()
+      })
     },
 
     // 左旋转
     eventRotateLeft() {
-      this.rotateCanvas('LEFT')
-
-      this.canvas.requestRenderAll()
+      tools.throttle(() => {
+        this.rotateCanvas('LEFT')
+        this.canvas.requestRenderAll()
+      })
     },
 
     // 清空画布
