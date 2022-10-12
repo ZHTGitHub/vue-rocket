@@ -82,6 +82,9 @@
 
       // 鼠标按下的坐标
       this.downPoint = null
+
+      this.initX = 0
+      this.initY = 0
     },
 
     // 暂未使用

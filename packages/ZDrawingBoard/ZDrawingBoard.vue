@@ -289,7 +289,7 @@
           enableRetinaScaling: true, 
           width: this.imageRealWidth, 
           height: this.imageRealHeight,
-          backgroundColor: 'rgb(0, 0, 0)',
+          backgroundColor: 'rgb(255, 255, 255)',
           crossOrigin: 'anonymous'
         }
 
@@ -637,6 +637,8 @@
 </script>
 
 <style scoped lang="scss">
+  $color: #4c4c4c;
+
   .z-drawing-board {
     display: flex;
     flex-direction: column;
@@ -649,7 +651,10 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      background-color: #4c4c4c;
+      background-color: $color;
+      border-left: 1px solid $color;
+      border-right: 1px solid $color;
+      border-bottom: 1px solid $color;
       overflow: hidden;
 
       &::after {
