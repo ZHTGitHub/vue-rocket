@@ -74,6 +74,18 @@
         default: 'screenshot'
       },
 
+      // 默认使用框图
+      rect: {
+        type: Boolean,
+        default: false
+      },
+
+      // 默认使用截图
+      shot: {
+        type: Boolean,
+        default: false
+      },
+
       // 默认截图区域
       shotArea: {
         type: Object,
@@ -84,6 +96,12 @@
       src: {
         type: String,
         required: true
+      },
+      
+      // 默认使用文字输入框
+      text: {
+        type: Boolean,
+        default: false
       },
       
       // 缩放
@@ -225,7 +243,7 @@
       },
 
       // 获取画布容器的实例
-      getContainer() {
+      getContainerInstance() {
         this.container = document.querySelector('#view .canvas-container')
       },
 
@@ -237,14 +255,14 @@
 
       // 通过鼠标移动画布
       moveCanvasWithMouse() {
-        document.onkeydown = ({ ctrlKey }) => {
-          if(ctrlKey) {
+        document.onkeydown = ({ altKey }) => {
+          if(altKey) {
             this.view.classList.add('drag')
           }
         } 
 
-        document.onkeyup = ({ ctrlKey }) => {
-          if(!ctrlKey) {
+        document.onkeyup = ({ altKey }) => {
+          if(!altKey) {
             this.view.classList.remove('drag')
           }
         }
@@ -252,20 +270,20 @@
         let [downX, downY] = [void 0, void 0]
 
         // 按下鼠标
-        this.view.onmousedown = (e) => {
-          const { ctrlKey, x, y } = e
+        this.view.onmousedown = (downEvent) => {
+          const { altKey, x, y } = downEvent
 
-          if(ctrlKey) {
+          if(altKey) {
             downX = x
             downY = y
           }
 
           // 移动鼠标
-          this.view.onmousemove = (event) => {
+          this.view.onmousemove = (moveEvent) => {
             tools.throttle(() => {
-              const { ctrlKey, x, y } = event
+              const { altKey, x, y } = moveEvent
 
-              if(ctrlKey) {
+              if(altKey) {
                 this.moveX = x - downX + this.initX
                 this.moveY = y - downY + this.initY
 
@@ -307,7 +325,7 @@
 
         this.canvas.on('mouse:wheel', this.canvasWheel)
 
-        this.getContainer()
+        this.getContainerInstance()
 
         fabric.Image.fromURL(source + '?' + Date.now(), img => {
           img.type = 'image'
@@ -330,6 +348,8 @@
             }
 
             this.overlay = false
+
+            this.setDefaultOption()
 
             // 画布完成初始化
             this.$emit('load')
@@ -386,7 +406,7 @@
             ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height)
           }
 
-          const dataURL = canvas.toDataURL(this.imageExtension, this.imageCompress)
+          const dataURL = canvas.toDataURL()
 
           this.clearCanvas()
 
@@ -411,13 +431,14 @@
           }
         }
 
-        image.src = this.canvas.toDataURL(this.imageExtension, this.imageCompress)
+        image.src = this.canvas.toDataURL()
       },
 
       // 鼠标按下
       canvasMouseDown(event) {
         const { pointer } = event
 
+        this.activeIndex = -1
         this.downPoint = pointer
 
         const ctx = this.getActivatedCtx()
@@ -425,6 +446,8 @@
         if(ctx) {
           this.activeIndex = ctx.index
         }
+
+        console.log(this.activeIndex)
 
         // 文字
         if(this.isText) {
@@ -454,9 +477,12 @@
 
       // 鼠标抬起
       canvasMouseUp(event) {
+        const diffX = event.pointer.x - this.downPoint.x
+        const diffY = event.pointer.y - this.downPoint.y
+
         const ctx = this.getActivatedCtx() 
 
-        // 计算截图区域
+        // 计算切图区域
         if(ctx?.type === 'cut') {
           const { left, top, width, height } = ctx
 
@@ -472,11 +498,23 @@
 
         // 切图
         if(this.isCut) {
-          // 只允许创建一次切图框
           const ctx = this.ctxList.find(c => c?.type === 'cut')
-          if(ctx) return
 
-          this.createCutRect(event.pointer)
+          // 只允存在一个切图框
+          if(ctx && this.activeIndex === -1) {
+            const ctxIndex = this.ctxList.findIndex(c => c?.type === 'cut')
+
+            // 鼠标按下抬起误差大于1则删除切图框
+            if(diffX > 1 && diffY > 1) {
+              this.ctxList.splice(ctxIndex, 1)
+              this.canvas.remove(ctx)
+            }
+          }
+
+          // 创建切图区域
+          if(!ctx || this.activeIndex === -1) {
+            this.createCutRect(event.pointer)
+          }
           return
         }
 
@@ -489,7 +527,18 @@
       // 滚轮滚动
       canvasWheel(event) {
         tools.throttle(() => {
-          this.scale = event.e.wheelDelta > 0 ? containerEvent.zoomOut(this.params) : containerEvent.zoomIn(this.params)
+          // this.scale = event.e.wheelDelta > 0 ? containerEvent.zoomIn(this.params) : containerEvent.zoomOut(this.params)
+          
+          if(event.e.wheelDelta > 0) {
+            this.scale = containerEvent.zoomIn(this.params)
+          }
+          else {
+            this.scale = containerEvent.zoomOut(this.params)
+            if(this.scale <= 1) {
+              this.scale = 1
+            }
+          }
+          
           this.transformContainer()
         }, 10)
       },
@@ -540,7 +589,7 @@
             break;
         }
 
-        this.$emit('direction', tools.setDirection(this.directionCount))
+        // this.$emit('direction', tools.setDirection(this.directionCount))
       },
 
       // 清空画布上当前操作对象
@@ -590,7 +639,7 @@
       // 保存编辑后的图片
       save() {
         const cutCtx = this.getCutCtx()
-        const dataURL = this.canvas.toDataURL(this.imageExtension, this.imageCompress)
+        const dataURL = this.canvas.toDataURL()
 
         let args = {
           imageExtension: this.imageExtension,
@@ -618,13 +667,13 @@
           }
         }
 
-        tools.generateImage(dataURL, args, (_dataURL) => {
+        tools.generateImage(dataURL, args, ({ base64 }) => {
           // 下载
           if(this.download) {
-            tools.downloadImage(_dataURL, this.name)
+            tools.downloadImage(base64, this.name)
           }
 
-          const file = tools.base64ToFile(_dataURL, this.name)
+          const file = tools.base64ToFile(base64, this.name)
           this.$emit('done', file)
         })
       }
@@ -667,7 +716,7 @@
       }
 
       &.drag::after {
-        z-index: 0;
+        z-index: 1;
       }
     }
   }

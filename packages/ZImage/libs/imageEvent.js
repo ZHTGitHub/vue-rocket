@@ -1,10 +1,10 @@
-const containerEvent = {}
+const imageEvent = {}
 
 /**
  * @description 放大
  * @param { Object } params
  */ 
- containerEvent.zoomIn = (params) => {
+imageEvent.zoomIn = (params) => {
   let scale = params.scale * 1.1
   params.scale = scale
 
@@ -15,7 +15,7 @@ const containerEvent = {}
  * @description 缩小
  * @param { Object } params
  */ 
-containerEvent.zoomOut = (params) => {
+imageEvent.zoomOut = (params) => {
   let scale = params.scale * 0.9
   params.scale = scale
 
@@ -26,7 +26,7 @@ containerEvent.zoomOut = (params) => {
  * @description 还原
  * @param { Object } params
  */ 
-containerEvent.zoomOrigin = (params) => {
+imageEvent.zoomOrigin = (params) => {
   let scale = 1
   params.scale = scale
 
@@ -37,7 +37,7 @@ containerEvent.zoomOrigin = (params) => {
  * @description 向上移动
  * @param { Object } params
  */ 
-containerEvent.moveTop = (params) => {
+imageEvent.moveTop = (params) => {
   let moveY = params.moveY - params.moveSpace
   params.moveY = moveY
 
@@ -48,7 +48,7 @@ containerEvent.moveTop = (params) => {
  * @description 向右移动
  * @param { Object } params
  */ 
- containerEvent.moveRight = (params) => {
+imageEvent.moveRight = (params) => {
   let moveX = params.moveX + params.moveSpace
   params.moveX = moveX
 
@@ -59,7 +59,7 @@ containerEvent.moveTop = (params) => {
  * @description 向下移动
  * @param { Object } params
  */ 
- containerEvent.moveBottom = (params) => {
+imageEvent.moveBottom = (params) => {
   let moveY = params.moveY + params.moveSpace
   params.moveY = moveY
 
@@ -70,11 +70,11 @@ containerEvent.moveTop = (params) => {
  * @description 向左移动
  * @param { Object } params
  */ 
- containerEvent.moveLeft = (params) => {
+imageEvent.moveLeft = (params) => {
   let moveX = params.moveX - params.moveSpace
   params.moveX = moveX
 
   return moveX
 }
 
-export default containerEvent
+export default imageEvent

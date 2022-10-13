@@ -5,6 +5,8 @@
       direction="TOP"
       download
       name="leslie"
+      shot
+      :imageCompress=".2"
       :src="src"
       :zoom="1"
       @load="handleLoad"
@@ -24,6 +26,11 @@
 
 <script>
   const images = [
+    {
+      url: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
+      width: 100
+    },
+
     {
       url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-30/352022070028655/352022070028655-030101-279923601-1.png',
       width: 100

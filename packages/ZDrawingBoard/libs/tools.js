@@ -6,6 +6,17 @@ tools.loadImage = function(source, func) {
   image.setAttribute('crossOrigin', 'anonymous')
 
   image.onload = function() {
+    // const canvas = document.createElement('canvas')
+    // const ctx = canvas.getContext('2d')
+    // canvas.width = image.width
+    // canvas.height = image.height
+    // ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
+    // const base64 = canvas.toDataURL('image/jpeg')
+
+    // console.log(tools.getBase64Size(base64))
+
+    console.log(performance.getEntriesByName(source))
+
     func(image.width, image.height)
   }
   
@@ -62,9 +73,11 @@ tools.generateImage = function(
 
     ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
 
-    const dataURL = canvas.toDataURL(imageExtension, imageCompress)
+    const base64 = canvas.toDataURL()
 
-    func(dataURL)
+    const size = tools.getBase64Size(base64)
+
+    func({ base64, size })
   }
 
   image.src = source
@@ -84,6 +97,16 @@ tools.base64ToFile = (base64, name) => {
   }
 
   return new File([u8arr], name, { type: mime })
+}
+
+// 获取base64文件的大小
+tools.getBase64Size = (base64) => {
+  const str = base64.split(',')[1].split('=')[0]
+
+  const length = str.length
+  const fileLength = length - (length / 8) * 2
+
+  return Math.floor(fileLength)
 }
 
 // 画布旋转方向

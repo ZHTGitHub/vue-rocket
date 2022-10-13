@@ -123,7 +123,6 @@
 
 <style scoped lang="scss">
   .image-box {
-    width: 700px;
     height: 500px;
   }
 </style>

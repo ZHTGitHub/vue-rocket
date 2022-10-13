@@ -5,17 +5,17 @@
     // 设置画布默认方向
     setDefaultDirection(func) {
       switch (this.direction) {
-        case 'top': 
+        case 'TOP': 
           func && func()
           break;
       
-        case 'right': 
+        case 'RIGHT': 
           this.rotateCanvas('RIGHT', () => {
             func && func()
           })
           break;
 
-        case 'bottom': 
+        case 'BOTTOM': 
           this.rotateCanvas('RIGHT', () => {
             this.rotateCanvas('RIGHT', () => {
               func && func()
@@ -23,7 +23,7 @@
           })
           break;
 
-        case 'left': 
+        case 'LEFT': 
           this.rotateCanvas('LEFT', () => {
             func && func()
           })
@@ -49,6 +49,23 @@
       }
 
       this.createCutRect(pointer)
+    },
+
+    // 设置默认操作
+    setDefaultOption() {
+      if(this.shot) {
+        this.eventCut()
+        return
+      }
+
+      if(this.rect) {
+        this.eventRect()
+        return
+      }
+
+      if(this.text) {
+        this.eventText()
+      }
     },
 
     // 切换图像后初始化部分值

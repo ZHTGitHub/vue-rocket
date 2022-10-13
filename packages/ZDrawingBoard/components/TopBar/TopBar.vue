@@ -17,8 +17,6 @@
 
         <span>{{ item.text }}</span>
       </v-tooltip>
-
-      <p class="mb-0 text-grey">Tip: 滚动滚轮可缩放图片，Ctrl+鼠标左键可拖拽图片！</p>
     </div>
   </div>
 </template>
