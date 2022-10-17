@@ -18,12 +18,14 @@
 </template>
 
 <script>
+  import EventMixins from './mixins/EventMixins'
   import tools from './tools'
   import imageEvent from './libs/imageEvent'
   import { moveSpace } from './libs/constants'
 
   export default {
     name: 'ZImage',
+    mixins: [EventMixins],
 
     props: {
       // 图像源路径
@@ -53,9 +55,14 @@
 
         // 记录图片当前状态
         scale: 1,
+        angle: 0,
         moveSpace,
         moveX: 0,
         moveY: 0,
+
+        // 图片移动距离
+        memoX: 0, 
+        memoY: 0,
 
         overlay: false
       }
@@ -70,6 +77,7 @@
           imageRealHeight: this.imageRealHeight,
           imageScale: this.imageScale,
           scale: this.scale,
+          angle: this.angle,
           moveSpace: this.moveSpace,
           moveX: this.moveX,
           moveY: this.moveY
@@ -85,6 +93,10 @@
         },
         immediate: true
       }
+    },
+
+    beforeDestroy() {
+      this.view.onmousewheel = null
     },
 
     methods: {
@@ -120,6 +132,9 @@
         this.view = this.$refs.view
         this.viewWidth = this.view.offsetWidth
         this.viewHeight = this.view.offsetHeight
+
+        this.mouseWheel()
+        this.moveImageWithMouse()
       },
 
       // 获取图像实例
@@ -133,17 +148,65 @@
 
       // 设置图像移动、旋转动画
       transformImage() {
-        this.image.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) scale(${ this.scale })`
+        this.image.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
         this.image.style.transition = 'transform .16s ease-out'
       },
 
-      // 滚轮滚动
-      mouseWheel(event) {
-        tools.throttle(() => {
-          this.scale = event.e.wheelDelta > 0 ? imageEvent.zoomOut(this.params) : imageEvent.zoomIn(this.params)
-          this.transformContainer()
-        }, 10)
+      // 通过鼠标移动图像
+      moveImageWithMouse() {
+        let [downX, downY] = [void 0, void 0]
+
+        // 按下鼠标
+        this.view.onmousedown = (downEvent) => {
+          const { x, y } = downEvent
+
+          downX = x
+          downY = y
+
+          // 移动鼠标
+          this.view.onmousemove = (moveEvent) => {
+            tools.throttle(() => {
+              const { x, y } = moveEvent
+
+              this.moveX = x - downX + this.memoX
+              this.moveY = y - downY + this.memoY
+
+              this.transformImage()
+            })
+          }
+        }
+
+        // 抬起鼠标
+        this.view.onmouseup = () => {
+          this.memoX = this.moveX
+          this.memoY = this.moveY
+          this.view.onmousemove = null
+        }
       },
+
+      // 滚轮滚动
+      mouseWheel() {
+        this.view.onmousewheel = (event) => {
+          tools.throttle(() => {
+            if(event.wheelDelta > 0) {
+              this.scale = imageEvent.zoomIn(this.params)
+            }
+            else {
+              this.scale = imageEvent.zoomOut(this.params)
+              this.limitZoomOut()
+            }
+            
+            this.transformImage()
+          }, 10)
+        }
+      },
+
+      // 限制缩小
+      limitZoomOut() {
+        if(this.scale <= 1) {
+          this.scale = 1
+        }
+      }
     }
   }
 </script>
@@ -168,6 +231,12 @@
       border-right: 1px solid $color;
       border-bottom: 1px solid $color;
       overflow: hidden;
+
+      .image {
+        cursor: grab;
+        user-select: none;
+        pointer-events: none;
+      }
     }
   }
 </style>

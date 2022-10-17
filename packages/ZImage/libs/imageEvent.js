@@ -34,6 +34,28 @@ imageEvent.zoomOrigin = (params) => {
 }
 
 /**
+ * @description 右旋转
+ * @param { Object } params
+ */ 
+imageEvent.rotateRight = (params) => {
+  let angle = params.angle + 90
+  params.angle = angle
+
+  return angle
+}
+
+/**
+ * @description 左旋转
+ * @param { Object } params
+ */ 
+imageEvent.rotateLeft = (params) => {
+  let angle = params.angle - 90
+  params.angle = angle
+
+  return angle
+}
+
+/**
  * @description 向上移动
  * @param { Object } params
  */ 

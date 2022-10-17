@@ -18,18 +18,16 @@ export default {
       })
 
       textbox.type = 'textbox'
-      textbox.index = this.count
+      textbox.unique = Date.now()
 
       textbox.on('selected', () => {
-        this.activeIndex = textbox.index
+        this.activeIndex = textbox.unique
       })
 
       this.canvas.add(textbox).setActiveObject(textbox)
       textbox.enterEditing()
 
-      this.ctxList[this.count] = textbox
-
-      ++this.count
+      this.ctxList.push(textbox)
     }
   }
 }

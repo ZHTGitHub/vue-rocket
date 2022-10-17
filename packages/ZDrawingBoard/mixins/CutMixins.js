@@ -37,10 +37,10 @@ export default {
       })
 
       cutRect.type = 'cut'
-      cutRect.index = this.count
+      cutRect.unique = Date.now()
 
       cutRect.on('selected', () => {
-        this.activeIndex = cutRect.index
+        this.activeIndex = cutRect.unique
       })
       
       cutRect.bringToFront()
@@ -48,9 +48,7 @@ export default {
 
       this.canvas.add(cutRect).setActiveObject(cutRect)
 
-      this.ctxList[this.count] = cutRect
-
-      ++this.count
+      this.ctxList.push(cutRect)
 
       this.cutArea = {
         x: this.downPoint.x,

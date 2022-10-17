@@ -145,7 +145,6 @@
         moveY: 0,
 
         // 记录画布操作状态
-        count: 0,
         ctxList: [],
         activeIndex: -1,
 
@@ -320,7 +319,6 @@
         this.canvas.setDimensions(dimensions, { cssOnly: true })
         
         this.canvas.on('mouse:down', this.canvasMouseDown)
-        this.canvas.on('mouse:move', this.canvasMouseMove)
         this.canvas.on('mouse:up', this.canvasMouseUp)
 
         this.canvas.on('mouse:wheel', this.canvasWheel)
@@ -349,6 +347,7 @@
 
             this.overlay = false
 
+            // 设置默认操作
             this.setDefaultOption()
 
             // 画布完成初始化
@@ -358,8 +357,8 @@
       },  
 
       // 旋转画布
-      rotateCanvas(direction, func) {
-        this.setDirection(direction)
+      rotateCanvas(direction, func, manual) {
+        this.setDirection(direction, manual)
 
         if(!direction) return
 
@@ -438,89 +437,92 @@
       canvasMouseDown(event) {
         const { pointer } = event
 
-        this.activeIndex = -1
+        // this.activeIndex = -1
         this.downPoint = pointer
 
-        const ctx = this.getActivatedCtx()
+        const { klass } = this.getSelectedKlass()
 
-        if(ctx) {
-          this.activeIndex = ctx.index
+        if(klass) {
+          this.activeIndex = klass.unique
         }
-
-        console.log(this.activeIndex)
 
         // 文字
         if(this.isText) {
-          if(this.activeIndex === -1) {
-            this.createTextbox(pointer.x, pointer.y)
-            return
-          }
-
-          const activeObject = this.canvas.getActiveObject()
-
-          if(!activeObject) {
-            this.activeIndex = -1
-          }
-
-          if(!activeObject) {
-            this.clearEmptyTextbox()
-          }
+          this.generateTextbox(event)
         }
-      },
-
-      // 鼠标移动
-      canvasMouseMove() {
-        // debounce(() => {
-        //   console.log(event)
-        // })
       },
 
       // 鼠标抬起
       canvasMouseUp(event) {
-        const diffX = event.pointer.x - this.downPoint.x
-        const diffY = event.pointer.y - this.downPoint.y
-
-        const ctx = this.getActivatedCtx() 
-
-        // 计算切图区域
-        if(ctx?.type === 'cut') {
-          const { left, top, width, height } = ctx
-
-          this.cutArea = {
-            x: left,
-            y: top,
-            width,
-            height
-          }
-
-          this.$emit('cut', this.cutArea)
-        }
-
         // 切图
         if(this.isCut) {
-          const ctx = this.ctxList.find(c => c?.type === 'cut')
-
-          // 只允存在一个切图框
-          if(ctx && this.activeIndex === -1) {
-            const ctxIndex = this.ctxList.findIndex(c => c?.type === 'cut')
-
-            // 鼠标按下抬起误差大于1则删除切图框
-            if(diffX > 1 && diffY > 1) {
-              this.ctxList.splice(ctxIndex, 1)
-              this.canvas.remove(ctx)
-            }
-          }
-
-          // 创建切图区域
-          if(!ctx || this.activeIndex === -1) {
-            this.createCutRect(event.pointer)
-          }
+          this.generateCutRect(event)
           return
         }
 
         // 画框
         if(this.isRect) {
-          this.createRect(event.pointer)
+          this.createRect(event)
+        }
+      },
+
+      // 生成切图方框
+      generateCutRect({ pointer }) {
+        const existKlass = this.ctxList.find(k => k?.type === 'cut')
+
+        // 只允存在一个切图框
+        if(existKlass && this.activeIndex === -1) {
+          const diffX = pointer.x - this.downPoint.x
+          const diffY = pointer.y - this.downPoint.y
+          const index = this.ctxList.findIndex(c => c?.type === 'cut')
+
+          // 鼠标按下抬起误差大于1则删除切图框
+          if(diffX > 1 && diffY > 1) {
+            this.ctxList.splice(index, 1)
+            this.canvas.remove(existKlass)
+          }
+        }
+
+        // 创建切图区域
+        if(!existKlass || this.activeIndex === -1) {
+          this.createCutRect(pointer)
+        }
+
+        // 返回最终切图区域
+        {
+          const { klass } = this.getSelectedKlass() 
+
+          // 计算切图区域
+          if(klass?.type === 'cut') {
+            const { left, top, width, height } = klass
+
+            this.cutArea = {
+              x: left,
+              y: top,
+              width,
+              height
+            }
+
+            this.$emit('cut', this.cutArea)
+          }
+        }
+      },
+
+      // 生成输入框
+      generateTextbox({ pointer }) {
+        if(this.activeIndex === -1) {
+          this.createTextbox(pointer.x, pointer.y)
+          return
+        }
+
+        const activeObject = this.canvas.getActiveObject()
+
+        if(!activeObject) {
+          this.activeIndex = -1
+        }
+
+        if(!activeObject) {
+          this.clearEmptyTextbox()
         }
       },
 
@@ -534,18 +536,24 @@
           }
           else {
             this.scale = containerEvent.zoomOut(this.params)
-            if(this.scale <= 1) {
-              this.scale = 1
-            }
+            this.limitZoomOut()
           }
           
           this.transformContainer()
         }, 10)
       },
 
-      // 获取当前操作对象
-      getActivatedCtx() {
-        return this.canvas.getActiveObject()
+      // 获取当前选中对象
+      getSelectedKlass() {
+        let [index, unique] = [-1, -1]
+        const klass = this.canvas.getActiveObject()
+
+        if(klass) {
+          unique = klass.unique
+          index = this.ctxList.findIndex(k => k.unique === unique)
+        }
+
+        return { index, klass, unique }
       },
 
       // 获取画布上的切图对象
@@ -570,7 +578,7 @@
       },
 
       // 设置画布方向
-      setDirection(direction) {
+      setDirection(direction, manual) {
         switch (direction) {
           case 'RIGHT':
             ++this.directionCount
@@ -589,14 +597,14 @@
             break;
         }
 
-        // this.$emit('direction', tools.setDirection(this.directionCount))
+        this.$emit('direction', tools.setDirection(this.directionCount), manual)
       },
 
       // 清空画布上当前操作对象
       clearActivatedCtx() {
-        const ctx = this.getActivatedCtx()
-        this.ctxList.splice(this.activeIndex, 1)
-        this.canvas.remove(ctx)
+        const { index, klass } = this.getSelectedKlass()
+        this.ctxList.splice(index, 1)
+        this.canvas.remove(klass)
       },
 
       // 清空未输入文字的文本框
@@ -634,6 +642,13 @@
         }
 
         this.ctxList = []
+      },
+
+      // 限制缩小
+      limitZoomOut() {
+        if(this.scale <= 1) {
+          this.scale = 1
+        }
       },
 
       // 保存编辑后的图片

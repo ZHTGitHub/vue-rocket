@@ -97,6 +97,8 @@ export default {
     eventZoomOut() {
       this.scale = containerEvent.zoomOut(this.params)
 
+      this.limitZoomOut()
+
       this.$emit('zoom', this.scale)
 
       this.transformContainer()
@@ -118,7 +120,7 @@ export default {
     // 右旋转
     eventRotateRight() {
       tools.throttle(() => {
-        this.rotateCanvas('RIGHT')
+        this.rotateCanvas('RIGHT', void 0, true)
         this.canvas.requestRenderAll()
       })
     },
@@ -126,7 +128,7 @@ export default {
     // 左旋转
     eventRotateLeft() {
       tools.throttle(() => {
-        this.rotateCanvas('LEFT')
+        this.rotateCanvas('LEFT', void 0, true)
         this.canvas.requestRenderAll()
       })
     },

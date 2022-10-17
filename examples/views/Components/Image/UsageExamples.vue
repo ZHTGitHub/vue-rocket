@@ -6,63 +6,54 @@
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.zoom('grow')"
+            @click="$refs.image.eventZoomIn()"
           >放大</z-btn>
 
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.zoom('shrink')"
+            @click="$refs.image.eventZoomOut()"
           >缩小</z-btn>
 
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.zoom('origin')"
+            @click="$refs.image.eventZoomOrigin()"
           >还原</z-btn>
 
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.rotate('left')"
+            @click="$refs.image.eventRotateLeft()"
           >左旋转</z-btn>
 
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.rotate('right')"
+            @click="$refs.image.eventRotateRight()"
           >右旋转</z-btn>
 
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.scroll('left')"
+            @click="$refs.image.eventMoveLeft()"
           >向左滚动</z-btn>
 
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.scroll('right')"
+            @click="$refs.image.eventMoveRight()"
           >向右滚动</z-btn>
 
           <z-btn 
             class="mr-4"
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.scroll('up')"
+            @click="$refs.image.eventMoveTop()"
           >向上滚动</z-btn>
 
           <z-btn 
             color="primary" 
-            :unlocked="false"
-            @click="$refs.image.scroll('down')"
+            @click="$refs.image.eventMoveBottom()"
           >向下滚动</z-btn>
         </div>
 
@@ -70,7 +61,6 @@
           <z-image 
             ref="image" 
             :src="imageUrl" 
-            returnImageInfo
             width="700"
             @response="handleResponse"
           ></z-image>
@@ -102,8 +92,8 @@
     data() {
       return {
         code,
-        imageUrl: require('../../../../public/images/global/1.jpg'),
-        // imageUrl: 'http://ipfsgw01.stariverpan.com:9095/ipfs/bafybeif3g7m3rqm2nnm4u3qvo3xlag3s4cfmveblw57zizmi3jhiavfkku'
+        // imageUrl: require('../../../../public/images/global/1.jpg'),
+        imageUrl: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-29/322022090041996/322022090041996-030105-286540258-1.png'
       }
     },
 

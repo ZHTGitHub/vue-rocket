@@ -4,7 +4,7 @@ import { rectStrokeWidth, cornerSize } from '../libs/constants'
 export default {
   methods: {
     // 创建方框
-    createRect(pointer) {
+    createRect({ pointer }) {
       if(JSON.stringify(this.downPoint) === JSON.stringify(pointer)) return
 
       const activeObject = this.canvas.getActiveObject()
@@ -39,19 +39,17 @@ export default {
       })
 
       rect.type = 'rect'
-      rect.index = this.count
+      rect.unique = Date.now()
 
       rect.on('selected', () => {
-        this.activeIndex = rect.index
+        this.activeIndex = rect.unique
       })
 
       rect.setControlsVisibility({ mtr: false })
 
       this.canvas.add(rect).setActiveObject(rect)
 
-      this.ctxList[this.count] = rect
-
-      ++this.count
+      this.ctxList.push(rect)
 
       this.downPoint = null
     }

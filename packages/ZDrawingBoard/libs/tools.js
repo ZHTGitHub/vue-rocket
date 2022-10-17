@@ -15,7 +15,7 @@ tools.loadImage = function(source, func) {
 
     // console.log(tools.getBase64Size(base64))
 
-    console.log(performance.getEntriesByName(source))
+    // console.log(performance.getEntriesByName(source))
 
     func(image.width, image.height)
   }

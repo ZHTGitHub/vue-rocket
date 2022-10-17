@@ -2,7 +2,6 @@
   <div class="z-demo-drawing-board">
     <z-drawing-board 
       ref="board" 
-      direction="TOP"
       download
       name="leslie"
       shot
@@ -111,8 +110,8 @@
         console.log(area)
       },
 
-      handleDirection(direction) {
-        console.log(direction)
+      handleDirection(direction, manual) {
+        console.log({ manual, direction })
       },
 
       handleZoom(scale) {
