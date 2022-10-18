@@ -529,15 +529,17 @@
       // 滚轮滚动
       canvasWheel(event) {
         tools.throttle(() => {
-          // this.scale = event.e.wheelDelta > 0 ? containerEvent.zoomIn(this.params) : containerEvent.zoomOut(this.params)
-          
+          // 放大
           if(event.e.wheelDelta > 0) {
             this.scale = containerEvent.zoomIn(this.params)
           }
+          // 缩小
           else {
             this.scale = containerEvent.zoomOut(this.params)
             this.limitZoomOut()
           }
+
+          this.$emit('zoom', this.scale)
           
           this.transformContainer()
         }, 10)
