@@ -30,6 +30,13 @@
     mixins: [EventMixins],
 
     props: {
+      // 图像缩小的最小倍数
+      minZoomOut: {
+        type: Number,
+        default: 1
+      },
+
+      // 图像每次平移距离
       moveSpace: {
         type: Number,
         default: 50
@@ -209,8 +216,8 @@
 
       // 限制缩小
       limitZoomOut() {
-        if(this.scale <= 1) {
-          this.scale = 1
+        if(this.scale <= this.minZoomOut) {
+          this.scale = this.minZoomOut
         }
       }
     },

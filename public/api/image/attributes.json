@@ -2,9 +2,18 @@
   "code": 200,
   "items": [
     {
+      "name": "min-zoom-out",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "—",
+      "default": "50",
+      "description": "图像缩小的最小倍数."
+    },
+
+    {
       "name": "move-space",
       "required": "否",
-      "type": "Number | String",
+      "type": "Number",
       "acceptedValues": "—",
       "default": "50",
       "description": "图像每次平移距离."
@@ -20,5 +29,5 @@
     }
   ],
   "message": "获取成功!",
-  "total": 2
+  "total": 3
 }

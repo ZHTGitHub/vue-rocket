@@ -5,6 +5,7 @@
         <div class="image-box">
           <z-image 
             ref="image" 
+            :min-zoom-out=".5"
             :src="imageUrl" 
           ></z-image>
         </div>
