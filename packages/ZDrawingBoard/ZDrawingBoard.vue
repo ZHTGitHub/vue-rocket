@@ -73,6 +73,11 @@
         default: .2
       },
 
+      minZoomOut: {
+        type: Number,
+        default: 1
+      },
+
       // 图像名
       name: {
         type: String,
@@ -657,8 +662,8 @@
 
       // 限制缩小
       limitZoomOut() {
-        if(this.scale <= 1) {
-          this.scale = 1
+        if(this.scale <= this.minZoomOut) {
+          this.scale = this.minZoomOut
         }
       },
 

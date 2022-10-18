@@ -6,6 +6,7 @@
       name="leslie"
       shot
       direction="TOP"
+      :min-zoom-out="0.5"
       :shotArea="{
         x: 100,
         y: 100,
