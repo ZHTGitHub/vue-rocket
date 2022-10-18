@@ -28,6 +28,23 @@
   export default {
     name: 'TopBar',
 
+    props: {
+      isCut: {
+        type: Boolean,
+        default: false
+      },
+
+      isRect: {
+        type: Boolean,
+        default: false
+      },
+
+      isText: {
+        type: Boolean,
+        default: false
+      }
+    },
+
     data() {
       return {
         topBarList
@@ -50,7 +67,6 @@
   .top-bar {
     background-color: #282828;
     border-bottom: 1px solid #171717;
-    /* overflow: hidden; */
 
     .bar {
       display: flex;

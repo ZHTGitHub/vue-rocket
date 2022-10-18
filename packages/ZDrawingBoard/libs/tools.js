@@ -6,17 +6,6 @@ tools.loadImage = function(source, func) {
   image.setAttribute('crossOrigin', 'anonymous')
 
   image.onload = function() {
-    // const canvas = document.createElement('canvas')
-    // const ctx = canvas.getContext('2d')
-    // canvas.width = image.width
-    // canvas.height = image.height
-    // ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
-    // const base64 = canvas.toDataURL('image/jpeg')
-
-    // console.log(tools.getBase64Size(base64))
-
-    // console.log(performance.getEntriesByName(source))
-
     func(image.width, image.height)
   }
   

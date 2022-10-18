@@ -99,6 +99,9 @@ export default {
       // 鼠标按下的坐标
       this.downPoint = null
 
+      // 记录旋转状态
+      this.directionCount = 0
+
       this.initX = 0
       this.initY = 0
     },

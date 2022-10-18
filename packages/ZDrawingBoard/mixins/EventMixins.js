@@ -58,7 +58,7 @@ export default {
 
     // 方框
     eventRect() {
-      this.clearCutCtx()
+      this.clearCutKlass()
       this.setContextsSelectable()
 
       this.isCut = false
@@ -70,7 +70,7 @@ export default {
     
     // 文字
     eventText() {
-      this.clearCutCtx()
+      this.clearCutKlass()
       this.setContextsSelectable()
 
       this.activeIndex = -1

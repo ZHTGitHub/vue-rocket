@@ -272,6 +272,8 @@
         this.view.onmousedown = (downEvent) => {
           const { altKey, x, y } = downEvent
 
+          
+
           if(altKey) {
             downX = x
             downY = y
@@ -362,7 +364,7 @@
 
         if(!direction) return
 
-        this.clearCutCtx()
+        this.clearCutKlass()
         this.setContextsSelectable(false)
 
         const [imageRealWidth, imageRealHeight] = [this.imageRealWidth, this.imageRealHeight]
@@ -437,7 +439,6 @@
       canvasMouseDown(event) {
         const { pointer } = event
 
-        // this.activeIndex = -1
         this.downPoint = pointer
 
         const { klass } = this.getSelectedKlass()
@@ -456,6 +457,13 @@
       canvasMouseUp(event) {
         // 切图
         if(this.isCut) {
+          const { klass } = this.getSelectedKlass()
+          const isBear = this.isBear(event.pointer)
+
+          if(!klass && !isBear) {
+            this.clearCutKlass()
+          }
+
           this.generateCutRect(event)
           return
         }
@@ -472,12 +480,11 @@
 
         // 只允存在一个切图框
         if(existKlass && this.activeIndex === -1) {
-          const diffX = pointer.x - this.downPoint.x
-          const diffY = pointer.y - this.downPoint.y
+          const isBear = this.isBear(pointer)
           const index = this.ctxList.findIndex(c => c?.type === 'cut')
 
-          // 鼠标按下抬起误差大于1则删除切图框
-          if(diffX > 1 && diffY > 1) {
+          // 鼠标按下抬起大于误差范围则删除切图框
+          if(!isBear) {
             this.ctxList.splice(index, 1)
             this.canvas.remove(existKlass)
           }
@@ -559,24 +566,18 @@
       },
 
       // 获取画布上的切图对象
-      getCutCtx() {
+      getCutKlass() {
         return this.ctxList.find(c => c?.type === 'cut')
       },
       
       // 设置所有对象均不可操作/可操作(截图对象保留当前状态)
       setContextsSelectable(selectable = true) {
-        const len = this.ctxList.length
-
-        for(let i = 1; i <= len; i++) {
-          const ctx = this.ctxList[i]
-
-          if(ctx?.type === 'cut') continue
-
-          if(!this.canvas.item(i)) continue
-
-          this.canvas.item(i)['selectable'] = selectable
-          this.canvas.item(i)['evented'] = selectable
-        }
+        this.ctxList.map((klass, index) => {
+          if(klass?.type !== 'cut' || this.canvas.item(index)) {
+            this.canvas.item(index)['selectable'] = selectable
+            this.canvas.item(index)['evented'] = selectable
+          }
+        })
       },
 
       // 设置画布方向
@@ -625,16 +626,16 @@
       },
 
       // 清空画布上的切图操作痕迹
-      clearCutCtx() {
-        const cutCtx = this.getCutCtx()
+      clearCutKlass() {
+        const klass = this.getCutKlass()
 
-        if(cutCtx) {
+        if(klass) {
           const index = this.ctxList.findIndex(c => c?.type === 'cut')
           this.ctxList.splice(index, 1)
-          this.canvas.remove(cutCtx)
+          this.canvas.remove(klass)
         }
 
-        return cutCtx
+        return klass
       },
 
       // 清空画布上的操作痕迹
@@ -653,9 +654,21 @@
         }
       },
 
+      // 允许误差
+      isBear({ x, y }) {
+        const diffX = x - this.downPoint.x
+        const diffY = y - this.downPoint.y
+
+        if(diffX > 1 && diffY > 1) {
+          return false
+        }
+
+        return true
+      },
+
       // 保存编辑后的图片
       save() {
-        const cutCtx = this.getCutCtx()
+        const cutCtx = this.getCutKlass()
         const dataURL = this.canvas.toDataURL()
 
         let args = {
