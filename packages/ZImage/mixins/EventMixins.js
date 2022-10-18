@@ -2,6 +2,28 @@ import imageEvent from '../libs/imageEvent'
 
 export default {
   methods: {
+    topBarEvent(eventName) {
+      this.eventName = eventName
+
+      switch (eventName) {
+        case 'zoomOut':
+          this.eventZoomOut()
+          break;
+
+        case 'zoomIn':
+          this.eventZoomIn()
+          break;
+
+        case 'rotateRight':
+          this.eventRotateRight()
+          break;
+
+        case 'rotateLeft':
+          this.eventRotateLeft()
+          break;
+      }
+    },
+
     // 放大
     eventZoomIn() {
       this.scale = imageEvent.zoomIn(this.params)

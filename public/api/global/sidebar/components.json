@@ -141,12 +141,6 @@
           "value": "drawingBoard",
           "label": ["DrawingBoard", "画板"],
           "link": "/components/drawingBoard"
-        },
-
-        {
-          "value": "drawImage",
-          "label": ["DrawImage", "绘图"],
-          "link": "/components/drawImage"
         }
       ]
     }

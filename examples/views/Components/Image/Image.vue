@@ -6,7 +6,7 @@
 
     <image-attributes></image-attributes>
 
-   <image-methods></image-methods>
+   <!-- <image-methods></image-methods> -->
 
    <!-- <image-slots></image-slots> -->
   </div>

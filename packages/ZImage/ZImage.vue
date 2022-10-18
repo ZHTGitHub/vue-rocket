@@ -1,5 +1,7 @@
 <template>
   <div class="z-image">
+    <top-bar @topBarEvent="topBarEvent"></top-bar>
+
     <div class="view" id="view" ref="view">
       <img class="image" :src="src" />
     </div>
@@ -19,15 +21,20 @@
 
 <script>
   import EventMixins from './mixins/EventMixins'
-  import tools from './tools'
+  import { TopBar } from './components'
+  import tools from './libs/tools'
   import imageEvent from './libs/imageEvent'
-  import { moveSpace } from './libs/constants'
 
   export default {
     name: 'ZImage',
     mixins: [EventMixins],
 
     props: {
+      moveSpace: {
+        type: Number,
+        default: 50
+      },
+
       // 图像源路径
       src: {
         type: String,
@@ -56,7 +63,6 @@
         // 记录图片当前状态
         scale: 1,
         angle: 0,
-        moveSpace,
         moveX: 0,
         moveY: 0,
 
@@ -207,6 +213,10 @@
           this.scale = 1
         }
       }
+    },
+
+    components: {
+      TopBar
     }
   }
 </script>
