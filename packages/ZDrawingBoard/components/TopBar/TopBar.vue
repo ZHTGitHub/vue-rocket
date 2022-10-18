@@ -8,7 +8,13 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <span 
-            :class="['icon', item.icon]" 
+            :class="[
+              'icon', 
+              item.icon, 
+              item.value === 'cut' ? (isCut && 'active') : void 0,
+              item.value === 'rect' ? (isRect && 'active') : void 0,
+              item.value === 'text' ? (isText && 'active') : void 0
+            ]" 
             v-bind="attrs"
             v-on="on"
             @click="handleEvent(item.value)"
@@ -81,6 +87,10 @@
     color: #fff;
     font-size: 18px;
     opacity: .8;
+  }
+
+  .icon.active {
+    color: #39b54a;
   }
 
   .icon.icon-clear {

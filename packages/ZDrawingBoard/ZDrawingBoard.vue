@@ -1,6 +1,11 @@
 <template>
   <div class="z-drawing-board">
-    <top-bar @topBarEvent="topBarEvent"></top-bar>
+    <top-bar 
+      :isCut="isCut"
+      :isRect="isRect"
+      :isText="isText"
+      @topBarEvent="topBarEvent"
+    ></top-bar>
 
     <div class="view" id="view" ref="view">
       <canvas 
@@ -644,6 +649,9 @@
           this.canvas.remove(ctx)
         }
 
+        this.isCut = false
+        this.isRect = false
+        this.isText = false
         this.ctxList = []
       },
 
