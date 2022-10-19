@@ -562,23 +562,25 @@
         <!-- Body END -->
 
         <!-- Foot BEGIN -->
-        <v-card-actions class="justify-end">
-          <z-btn
-            :class="returnCancelProps.class"
-            :color="returnCancelProps.color"
-            depressed
-            @click="onCancel"
-          >{{ returnCancelProps.text }}</z-btn>
+        <slot name="foot">
+          <v-card-actions class="justify-end">
+            <z-btn
+              :class="returnCancelProps.class"
+              :color="returnCancelProps.color"
+              depressed
+              @click="onCancel"
+            >{{ returnCancelProps.text }}</z-btn>
 
-          <z-btn
-            :formId="formId"
-            btnType="validate"
-            :class="returnConfirmProps.class"
-            :color="returnConfirmProps.color"
-            depressed
-            @click="onConfirm"
-          >{{ returnConfirmProps.text }}</z-btn>
-        </v-card-actions>
+            <z-btn
+              :formId="formId"
+              btnType="validate"
+              :class="returnConfirmProps.class"
+              :color="returnConfirmProps.color"
+              depressed
+              @click="onConfirm"
+            >{{ returnConfirmProps.text }}</z-btn>
+          </v-card-actions>
+        </slot>
         <!-- Foot END -->
       </v-card>
     </v-dialog>
