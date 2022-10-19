@@ -32,6 +32,7 @@
 
 <script>
   import { fabric } from 'fabric'
+  import { compress } from 'squoosh-compress'
   import CanvasMixins from './mixins/CanvasMixins'
   import CutMixins from './mixins/CutMixins'
   import RectMixins from './mixins/RectMixins'
@@ -70,7 +71,7 @@
       // 图片压缩质量
       imageCompress: {
         type: Number,
-        default: .2
+        default: 0.75
       },
 
       minZoomOut: {
@@ -699,6 +700,8 @@
             ...args,
             imageWidth,
             imageHeight,
+            imageExtension: this.imageExtension, 
+            imageCompress: this.imageCompress,
             sx: this.cutArea.x + realStrokeWidth, 
             sy: this.cutArea.y + realStrokeWidth, 
             sw: this.cutArea.width - realStrokeWidth, 
@@ -710,13 +713,28 @@
           }
         }
 
-        tools.generateImage(dataURL, args, ({ base64 }) => {
+        tools.generateImage(dataURL, args, async ({ base64 }) => {
+
           // 下载
           if(this.download) {
-            tools.downloadImage(base64, this.name)
+            // tools.downloadImage(base64, this.name)
           }
 
           const file = tools.base64ToFile(base64, this.name)
+
+          const data = await compress(file, {
+            type: 'browser-jpeg',
+            options: {
+              quality: 0.75
+            },
+          }, 'leslie')
+
+          // tools.downloadImage(data, this.name)
+
+          // console.log(base64)
+          console.log('==============================')
+          console.log(data)
+
           this.$emit('done', file)
         })
       }

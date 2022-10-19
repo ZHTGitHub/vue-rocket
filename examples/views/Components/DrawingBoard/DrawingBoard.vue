@@ -6,14 +6,8 @@
       name="leslie"
       shot
       direction="TOP"
+      :imageCompress="0.2"
       :min-zoom-out="0.5"
-      :shotArea="{
-        x: 100,
-        y: 100,
-        width: 300,
-        height: 300
-      }"
-      :imageCompress=".2"
       :src="src"
       :zoom="1"
       @load="handleLoad"
