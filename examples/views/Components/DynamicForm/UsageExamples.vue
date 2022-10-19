@@ -76,6 +76,9 @@
           items: cells.visionItems
         }
       }"
+      :confirmProps="{
+        visible: false
+      }"
       @change:avatar="handleUploadChange"
       @change:file="handleFileChange"
       @cancel="handleCancel"

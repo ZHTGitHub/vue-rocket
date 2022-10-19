@@ -565,6 +565,7 @@
         <slot name="foot">
           <v-card-actions class="justify-end">
             <z-btn
+              v-if="returnCancelProps.visible"
               :class="returnCancelProps.class"
               :color="returnCancelProps.color"
               depressed
@@ -572,6 +573,7 @@
             >{{ returnCancelProps.text }}</z-btn>
 
             <z-btn
+              v-if="returnConfirmProps.visible"
               :formId="formId"
               btnType="validate"
               :class="returnConfirmProps.class"
@@ -595,13 +597,15 @@
   const defaultCancelProps = {
     class: 'mr-3',
     color: 'normal',
-    text: '取消'
+    text: '取消',
+    visible: true
   }
 
   const defaultConfirmProps = {
     class: '',
     color: 'primary',
-    text: '确认'
+    text: '确认',
+    visible: true
   }
 
   export default {
@@ -610,11 +614,7 @@
     props: {
       cancelProps: {
         type: Object,
-        default: () => ({
-          class: 'mr-3',
-          color: 'normal',
-          text: '取消'
-        })
+        default: () => ({})
       },
 
       config: {
@@ -624,11 +624,7 @@
 
       confirmProps: {
         type: Object,
-        default: () => ({
-          class: '',
-          color: 'primary',
-          text: '确认'
-        })
+        default: () => ({})
       },
 
       detail: {
