@@ -564,20 +564,20 @@
         <!-- Foot BEGIN -->
         <v-card-actions class="justify-end">
           <z-btn
-            :class="cancelProps.class"
-            :color="cancelProps.color"
+            :class="returnCancelProps.class"
+            :color="returnCancelProps.color"
             depressed
             @click="onCancel"
-          >{{ cancelProps.text }}</z-btn>
+          >{{ returnCancelProps.text }}</z-btn>
 
           <z-btn
             :formId="formId"
             btnType="validate"
-            :class="confirmProps.class"
-            :color="confirmProps.color"
+            :class="returnConfirmProps.class"
+            :color="returnConfirmProps.color"
             depressed
             @click="onConfirm"
-          >{{ confirmProps.text }}</z-btn>
+          >{{ returnConfirmProps.text }}</z-btn>
         </v-card-actions>
         <!-- Foot END -->
       </v-card>
@@ -589,6 +589,18 @@
   import { mapGetters } from 'vuex'
   import rocket from '../scripts/rocket'
   import { tools } from '../scripts/utils'
+
+  const defaultCancelProps = {
+    class: 'mr-3',
+    color: 'normal',
+    text: '取消'
+  }
+
+  const defaultConfirmProps = {
+    class: '',
+    color: 'primary',
+    text: '确认'
+  }
 
   export default {
     name: 'ZDynamicForm',
@@ -676,6 +688,82 @@
       }
     },
 
+    computed: {
+      ...mapGetters(['forms']),
+
+      returnDisabled() {
+        return ({ formKey, disabled }) => {
+          return this.conf?.[formKey]?.disabled || disabled
+        }
+      },
+
+      returnItems() {
+        return ({ formKey, options }) => {
+          return this.conf?.[formKey]?.items || options
+        }
+      },
+
+      returnReadonly() {
+        return ({ formKey, readonly }) => {
+          return this.conf?.[formKey]?.readonly || readonly
+        }
+      },
+
+      returnCancelProps() {
+        return { ...defaultCancelProps, ...this.cancelProps }
+      },
+
+      returnConfirmProps() {
+        return { ...defaultConfirmProps, ...this.confirmProps }
+      }
+    },
+
+    watch: {
+      config: {
+        handler(config) {
+          this.conf = {}
+
+          if(tools.isYummy(config)) {
+            this.conf = tools.deepClone(config)
+          }
+        },
+        deep: true,
+        immediate: true
+      },
+
+      detail: {
+        handler(detail) {
+          this.detailInfo = tools.deepClone(detail)
+        },
+        deep: true,
+        immediate: true
+      },
+
+      forms: {
+        handler(forms) {
+          const form = forms[this.formId]
+
+          if(tools.isYummy(form)) {
+            for(let formKey in form) {
+              this.conf[formKey]?.mutex?.map(item => {
+                this.setMutex(form[formKey], item)
+              })
+            }
+          }
+        },
+        deep: true,
+        immediate: true
+      },
+
+      dialog: {
+        handler(dialog) {
+          this.$emit('dialog', dialog)
+          !dialog && rocket.emit('ZHT_RESET_FORM', this.formId)
+        },
+        immediate: true
+      }
+    },
+
     methods: {
       onCancel() {
         this.$emit('cancel', this.effect, tools.deepClone(this.forms[this.formId]))
@@ -754,74 +842,6 @@
       onSearch(event, formKey) {
         this.$emit('search', { formKey, event })
         this.$emit(`search:${ formKey }`, event)
-      }
-    },
-
-    computed: {
-      ...mapGetters(['forms']),
-
-      returnDisabled() {
-        return ({ formKey, disabled }) => {
-          return this.conf?.[formKey]?.disabled || disabled
-        }
-      },
-
-      returnItems() {
-        return ({ formKey, options }) => {
-          return this.conf?.[formKey]?.items || options
-        }
-      },
-
-      returnReadonly() {
-        return ({ formKey, readonly }) => {
-          return this.conf?.[formKey]?.readonly || readonly
-        }
-      }
-    },
-
-    watch: {
-      config: {
-        handler(config) {
-          this.conf = {}
-
-          if(tools.isYummy(config)) {
-            this.conf = tools.deepClone(config)
-          }
-        },
-        deep: true,
-        immediate: true
-      },
-
-      detail: {
-        handler(detail) {
-          this.detailInfo = tools.deepClone(detail)
-        },
-        deep: true,
-        immediate: true
-      },
-
-      forms: {
-        handler(forms) {
-          const form = forms[this.formId]
-
-          if(tools.isYummy(form)) {
-            for(let formKey in form) {
-              this.conf[formKey]?.mutex?.map(item => {
-                this.setMutex(form[formKey], item)
-              })
-            }
-          }
-        },
-        deep: true,
-        immediate: true
-      },
-
-      dialog: {
-        handler(dialog) {
-          this.$emit('dialog', dialog)
-          !dialog && rocket.emit('ZHT_RESET_FORM', this.formId)
-        },
-        immediate: true
       }
     }
   }
