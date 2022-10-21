@@ -283,8 +283,6 @@
         this.view.onmousedown = (downEvent) => {
           const { altKey, x, y } = downEvent
 
-          
-
           if(altKey) {
             downX = x
             downY = y
@@ -512,13 +510,16 @@
 
           // 计算切图区域
           if(klass?.type === 'cut') {
-            const { left, top, width, height } = klass
+            const { left, top, width, height, scaleX, scaleY } = klass
+
+            const finalWidth = width * scaleX
+            const finalHeight = height * scaleY
 
             this.cutArea = {
               x: left,
               y: top,
-              width,
-              height
+              width: finalWidth,
+              height: finalHeight
             }
 
             this.$emit('cut', this.cutArea)
@@ -717,23 +718,10 @@
 
           // 下载
           if(this.download) {
-            // tools.downloadImage(base64, this.name)
+            tools.downloadImage(base64, this.name)
           }
 
           const file = tools.base64ToFile(base64, this.name)
-
-          const data = await compress(file, {
-            type: 'browser-jpeg',
-            options: {
-              quality: 0.75
-            },
-          }, 'leslie')
-
-          // tools.downloadImage(data, this.name)
-
-          // console.log(base64)
-          console.log('==============================')
-          console.log(data)
 
           this.$emit('done', file)
         })
