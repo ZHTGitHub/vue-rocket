@@ -212,9 +212,11 @@
       document.onkeydown = null
       document.onkeyup = null
 
-      this.view?.onmousedown = null
-      this.view?.onmousemove = null
-      this.view?.onmouseup = null
+      if(this.view) {
+        this.view.onmousedown = null
+        this.view.onmousemove = null
+        this.view.onmouseup = null
+      }
     },
 
     methods: {
