@@ -32,7 +32,6 @@
 
 <script>
   import { fabric } from 'fabric'
-  import { compress } from 'squoosh-compress'
   import CanvasMixins from './mixins/CanvasMixins'
   import CutMixins from './mixins/CutMixins'
   import RectMixins from './mixins/RectMixins'
@@ -213,9 +212,9 @@
       document.onkeydown = null
       document.onkeyup = null
 
-      this.view.onmousedown = null
-      this.view.onmousemove = null
-      this.view.onmouseup = null
+      this.view?.onmousedown = null
+      this.view?.onmousemove = null
+      this.view?.onmouseup = null
     },
 
     methods: {

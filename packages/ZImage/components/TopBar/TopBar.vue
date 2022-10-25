@@ -51,7 +51,7 @@
     position: absolute;
     width: 100%;
     background-color: rgba(0, 0, 0, .1);
-    z-index: 1;
+    z-index: 2;
 
     .bar {
       display: flex;

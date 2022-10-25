@@ -3,6 +3,7 @@
     <top-bar @topBarEvent="topBarEvent"></top-bar>
 
     <div class="view" id="view" ref="view">
+      <div class="cover"></div>
       <img class="image" :src="src" />
     </div>
 
@@ -248,6 +249,15 @@
       border-right: 1px solid $color;
       border-bottom: 1px solid $color;
       overflow: hidden;
+
+      .cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
 
       .image {
         cursor: grab;
