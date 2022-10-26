@@ -165,6 +165,7 @@
         downPoint: null,
 
         // 记录旋转状态
+        rotated: false,
         directionCount: 0,
 
         initX: 0, 
@@ -595,6 +596,8 @@
 
       // 设置画布方向
       setDirection(direction, manual) {
+        this.rotated = true
+
         switch (direction) {
           case 'RIGHT':
             ++this.directionCount
@@ -724,7 +727,12 @@
 
           const file = tools.base64ToFile(base64, this.name)
 
-          this.$emit('done', file)
+          const modified = !!this.ctxList.length || this.rotated
+
+          this.$emit('done', {
+            file,
+            modified
+          })
         })
       }
     },

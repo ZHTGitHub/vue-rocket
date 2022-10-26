@@ -166,17 +166,12 @@
         const imageScaleWidth = this.imageRealWidth * this.imageScale
         const imageScalseHeight = this.imageRealHeight * this.imageScale
 
-        if(this.proportion) {
-          if(imageScaleWidth < imageScalseHeight) {
-            this.retinaWidth =  this.viewWidth * this.proportion
-            const magnification = this.retinaWidth / imageScaleWidth
-            this.retinaHeight = imageScalseHeight * magnification
-          }
-          else {
-            this.retinaHeight = this.viewHeight * this.proportion
-            const magnification = this.retinaHeight / imageScalseHeight
-            this.retinaWidth = imageScalseHeight * magnification
-          }
+        if(imageScaleWidth < imageScalseHeight) {
+          if(!this.proportion) return
+
+          this.retinaWidth =  this.viewWidth * this.proportion
+          const magnification = this.retinaWidth / imageScaleWidth
+          this.retinaHeight = imageScalseHeight * magnification
         }
         else {
           this.retinaWidth = imageScaleWidth

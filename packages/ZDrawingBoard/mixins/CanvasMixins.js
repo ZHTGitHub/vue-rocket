@@ -100,6 +100,7 @@ export default {
       this.downPoint = null
 
       // 记录旋转状态
+      this.rotated = false
       this.directionCount = 0
 
       this.initX = 0

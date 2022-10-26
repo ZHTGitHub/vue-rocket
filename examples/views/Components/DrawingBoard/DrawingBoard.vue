@@ -2,7 +2,6 @@
   <div class="z-demo-drawing-board">
     <z-drawing-board 
       ref="board" 
-      download
       name="leslie"
       shot
       direction="TOP"
@@ -66,7 +65,7 @@
         dialog: false,
         images,
         // src: require('../../../../public/images/global/6.png')
-        src: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/0015767996689039040011.png'
+        src: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png'
       }
     },
 
@@ -120,8 +119,8 @@
         console.log(scale)
       },
 
-      handleDone(file) {
-        console.log(file)
+      handleDone({ file, modified }) {
+        console.log({ file, modified })
       }
     }
   }

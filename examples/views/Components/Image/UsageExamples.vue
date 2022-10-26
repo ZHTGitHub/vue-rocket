@@ -39,7 +39,7 @@
     data() {
       return {
         code,
-        imageUrl: require('../../../../public/images/global/6.png')
+        imageUrl: require('../../../../public/images/global/1.jpg')
       }
     },
 
