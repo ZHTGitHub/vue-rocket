@@ -2,7 +2,15 @@
   <div class="z-image">
     <top-bar @topBarEvent="topBarEvent"></top-bar>
 
-    <div class="view" id="view" ref="view">
+    <div 
+      class="view" 
+      id="view" 
+      ref="view"
+      :style="{
+        'justify-content': rowAlign,
+        'align-items': colAlign
+      }"
+    >
       <div class="cover"></div>
       <img class="image" :src="src" />
     </div>
@@ -31,6 +39,14 @@
     mixins: [EventMixins],
 
     props: {
+      // 图像垂直方向对齐方式
+      colAlign: {
+        validator(value) {
+          return ['start', 'center', 'end'].includes(value)
+        },
+        default: 'center'
+      },
+
       // 图像缩小的最小倍数
       minZoomOut: {
         type: Number,
@@ -41,6 +57,20 @@
       moveSpace: {
         type: Number,
         default: 50
+      },
+
+      // 图像较短一边占视图的比例
+      proportion: {
+        type: Number,
+        required: false
+      },
+
+      // 图像水平方向对齐方式
+      rowAlign: {
+        validator(value) {
+          return ['left', 'center', 'right'].includes(value)
+        },
+        default: 'center'
       },
 
       // 图像源路径
@@ -133,8 +163,25 @@
 
         this.imageScale = Math.min(scaleWidth, scaleHeight)
 
-        this.retinaWidth = this.imageRealWidth * this.imageScale
-        this.retinaHeight = this.imageRealHeight * this.imageScale
+        const imageScaleWidth = this.imageRealWidth * this.imageScale
+        const imageScalseHeight = this.imageRealHeight * this.imageScale
+
+        if(this.proportion) {
+          if(imageScaleWidth < imageScalseHeight) {
+            this.retinaWidth =  this.viewWidth * this.proportion
+            const magnification = this.retinaWidth / imageScaleWidth
+            this.retinaHeight = imageScalseHeight * magnification
+          }
+          else {
+            this.retinaHeight = this.viewHeight * this.proportion
+            const magnification = this.retinaHeight / imageScalseHeight
+            this.retinaWidth = imageScalseHeight * magnification
+          }
+        }
+        else {
+          this.retinaWidth = imageScaleWidth
+          this.retinaHeight = imageScalseHeight
+        }
 
         this.setImageAttr()
 
@@ -241,8 +288,8 @@
     .view {
       flex-grow: 1;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      /* justify-content: center;
+      align-items: center; */
       position: relative;
       background-color: $color;
       border-left: 1px solid $color;

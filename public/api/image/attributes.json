@@ -2,11 +2,20 @@
   "code": 200,
   "items": [
     {
+      "name": "col-align",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "start | center | end",
+      "default": "center",
+      "description": "图像垂直方向对齐方式."
+    },
+
+    {
       "name": "min-zoom-out",
       "required": "否",
       "type": "Number",
       "acceptedValues": "—",
-      "default": "50",
+      "default": "0.5",
       "description": "图像缩小的最小倍数."
     },
 
@@ -20,12 +29,30 @@
     },
 
     {
+      "name": "proportion",
+      "required": "否",
+      "type": "Number",
+      "acceptedValues": "—",
+      "default": "—",
+      "description": "图像较短一边占视图的比例."
+    },
+
+    {
+      "name": "row-align",
+      "required": "否",
+      "type": "String",
+      "acceptedValues": "left | center | right",
+      "default": "center",
+      "description": "图像水平方向对齐方式."
+    },
+
+    {
       "name": "src",
       "required": "是",
       "type": "String",
       "acceptedValues": "—",
       "default": "—",
-      "description": "图片地址."
+      "description": "图像地址."
     }
   ],
   "message": "获取成功!",

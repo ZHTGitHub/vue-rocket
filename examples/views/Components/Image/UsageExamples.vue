@@ -7,6 +7,9 @@
             ref="image" 
             :min-zoom-out=".5"
             :src="imageUrl" 
+            :proportion="0.75"
+            col-align="start"
+            row-align="center"
           ></z-image>
         </div>
       </div>
@@ -36,7 +39,7 @@
     data() {
       return {
         code,
-        imageUrl: require('../../../../public/images/global/1.jpg')
+        imageUrl: require('../../../../public/images/global/6.png')
       }
     },
 
