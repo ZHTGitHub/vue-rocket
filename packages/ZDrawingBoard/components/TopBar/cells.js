@@ -7,5 +7,6 @@ export const topBarList = [
   { icon: 'icon-rotate-right', value: 'rotateRight', text: '右旋转(Ctrl+R)' },
   { icon: 'icon-rotate-left', value: 'rotateLeft', text: '左旋转(Ctrl+L)' },
   { icon: 'icon-clear', value: 'clear', text: '清除(Ctrl+Z)' },
-  { icon: 'icon-done', value: 'done', text: '保存(F4)' }
+  { icon: 'icon-done', value: 'done', text: '保存(F4)' },
+  { icon: 'icon-link', value: 'link', text: '点击查看原图' },
 ]

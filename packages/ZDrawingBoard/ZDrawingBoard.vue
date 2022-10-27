@@ -4,6 +4,7 @@
       :isCut="isCut"
       :isRect="isRect"
       :isText="isText"
+      :src="src"
       @topBarEvent="topBarEvent"
     ></top-bar>
 
@@ -719,7 +720,6 @@
         }
 
         tools.generateImage(dataURL, args, async ({ base64 }) => {
-
           // 下载
           if(this.download) {
             tools.downloadImage(base64, this.name)

@@ -13,6 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-link:before {
+  content: "\e6f7";
+}
+
+.icon-restore:before {
+  content: "\ec15";
+}
+
 .icon-move:before {
   content: "\e616";
 }
