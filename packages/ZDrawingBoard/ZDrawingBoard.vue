@@ -16,6 +16,8 @@
       >
         The browser does not support canvas
       </canvas>
+
+      <span v-show="size" class="size">{{ computedSize }}</span>
     </div>
 
     <v-overlay 
@@ -100,6 +102,11 @@
       // 默认截图区域
       shotArea: {
         type: Object,
+        required: false
+      },
+
+      size: {
+        type: Number,
         required: false
       },
 
@@ -191,6 +198,11 @@
           moveX: this.moveX,
           moveY: this.moveY
         }
+      },
+
+      computedSize() {
+        const size = (this.size / 1024).toFixed(2)
+        return `${ size }M`
       }
     },
 
@@ -763,6 +775,15 @@
       border-right: 1px solid $color;
       border-bottom: 1px solid $color;
       overflow: hidden;
+
+      .size {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 0 0 4px 8px;
+        color: #fff;
+        font-size: 13px;
+      }
 
       &::after {
         content: ' ';

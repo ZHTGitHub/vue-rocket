@@ -7,6 +7,7 @@
       direction="TOP"
       :imageCompress="0.2"
       :min-zoom-out="0.5"
+      :size="size"
       :src="src"
       :zoom="1"
       @load="handleLoad"
@@ -28,32 +29,38 @@
   const images = [
     {
       url: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
-      width: 100
+      width: 100,
+      size: 1024
     },
 
     {
       url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-30/352022070028655/352022070028655-030101-279923601-1.png',
-      width: 100
+      width: 100,
+      size: 2000
     },
 
     {
       url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-29/322022090041996/322022090041996-030105-286540258-1.png',
-      width: 100
+      width: 100,
+      size: 900
     },
 
     {
       url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-20/522022090042294/522022090042294-030105-286570811-1.png',
-      width: 100
+      width: 100,
+      size: 500
     },
 
     {
       url: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/001576799668903904001.png',
-      width: 100
+      width: 100,
+      size: 466
     },
 
     {
       url: 'http://113.106.108.93:36200/api/files/B0118/download/2022/09-20/522022090042294/522022090042294-030105-286570814-4.png',
-      width: 100
+      width: 100,
+      size: 1566
     }
   ]
 
@@ -64,6 +71,7 @@
       return {
         dialog: false,
         images,
+        size: 0,
         // src: require('../../../../public/images/global/6.png')
         src: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png'
       }
@@ -100,6 +108,7 @@
 
     methods: {
       handleClick(image) {
+        this.size = image.size
         this.src = image.url
       },
 
