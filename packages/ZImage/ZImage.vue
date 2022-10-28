@@ -140,7 +140,8 @@
     },
 
     beforeDestroy() {
-      this.view.onmousewheel = null
+      if(this.view)
+        this.view.onmousewheel = null
     },
 
     methods: {
@@ -242,6 +243,8 @@
 
       // 滚轮滚动
       mouseWheel() {
+        if(!this.view) return
+
         this.view.onmousewheel = (event) => {
           tools.throttle(() => {
             if(event.wheelDelta > 0) {

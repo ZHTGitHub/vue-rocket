@@ -201,8 +201,11 @@
       },
 
       computedSize() {
-        const size = (this.size / 1024).toFixed(2)
-        return `${ size }M`
+        if(this.size < 1024) {
+          return `${ this.size }KB`
+        }
+
+        return `${ (this.size / 1024).toFixed(2) }M`
       }
     },
 
