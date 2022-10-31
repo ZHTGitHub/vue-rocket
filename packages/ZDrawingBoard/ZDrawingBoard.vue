@@ -243,6 +243,7 @@
       setImage(width, height) {
         // 图片不存在
         if(!width || !height) {
+          this.$emit('load', { status: -1 })
           this.overlay = false
           return
         }
