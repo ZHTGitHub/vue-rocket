@@ -5,6 +5,7 @@
       name="leslie"
       shot
       direction="TOP"
+      download
       :imageCompress="0.2"
       :min-zoom-out="0.5"
       :size="size"
@@ -112,8 +113,8 @@
         this.src = image.url
       },
 
-      handleLoad() {
-        console.log('load')
+      handleLoad({ status }) {
+        console.log(status)
       },
 
       handleCut(area) {

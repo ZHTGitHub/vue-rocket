@@ -212,6 +212,8 @@
     watch: {
       src: {
         handler(src) {
+          this.$emit('load', { status: 0 })
+
           this.overlay = true
 
           if(this.canvas) {
@@ -380,7 +382,7 @@
             this.setDefaultOption()
 
             // 画布完成初始化
-            this.$emit('load')
+            this.$emit('load', { status: 1 })
           })
         }, { crossOrigin: 'anonymous' })
       },  
@@ -613,6 +615,7 @@
       // 设置画布方向
       setDirection(direction, manual) {
         this.rotated = true
+        this.cutArea = {}
 
         switch (direction) {
           case 'RIGHT':
@@ -704,6 +707,10 @@
       // 保存编辑后的图片
       save() {
         const cutCtx = this.getCutKlass()
+        {
+          const klass = this.getCutKlass()
+          this.canvas.remove(klass)
+        }
         const dataURL = this.canvas.toDataURL()
 
         let args = {

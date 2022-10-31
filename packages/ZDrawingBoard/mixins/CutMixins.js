@@ -57,8 +57,6 @@ export default {
         height
       }
 
-      console.log({ cutArea: this.cutArea })
-
       this.$emit('cut', this.cutArea)
 
       this.downPoint = null
