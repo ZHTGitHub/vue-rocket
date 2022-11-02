@@ -27,6 +27,8 @@ export default {
     // 放大
     eventZoomIn() {
       this.scale = imageEvent.zoomIn(this.params)
+      this.scaling = true
+      this.angling = false
 
       this.$emit('zoom', this.scale)
 
@@ -36,6 +38,8 @@ export default {
     // 缩小
     eventZoomOut() {
       this.scale = imageEvent.zoomOut(this.params)
+      this.scaling = true
+      this.angling = false
 
       this.limitZoomOut()
 
@@ -47,6 +51,8 @@ export default {
     // 还原
     eventZoomOrigin() {
       this.scale = imageEvent.zoomOrigin(this.params)
+      this.scaling = true
+      this.angling = false
 
       this.$emit('zoom', this.scale)
 
@@ -56,6 +62,8 @@ export default {
     // 右旋转
     eventRotateRight() {
       this.angle = imageEvent.rotateRight(this.params)
+      this.angling = true
+      this.scaling = false
 
       this.$emit('rotate', this.angle)
 
@@ -65,6 +73,8 @@ export default {
     // 左旋转
     eventRotateLeft() {
       this.angle = imageEvent.rotateLeft(this.params)
+      this.angling = true
+      this.scaling = false
 
       this.$emit('rotate', this.angle)
       

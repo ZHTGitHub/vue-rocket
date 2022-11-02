@@ -118,7 +118,7 @@
           // country: 1,
           birthday: '2021-09-20',
           area: 2,
-          gender: 1,
+          gender: true,
           hobby: null,
           sexual: 2 
         }

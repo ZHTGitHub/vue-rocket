@@ -93,7 +93,6 @@
         imageRealHeight: 0,
         imageScale: 1,
 
-
         // 视网膜
         retinaWidth: 0,
         retinaHeight: 0,
@@ -103,6 +102,8 @@
         angle: 0,
         moveX: 0,
         moveY: 0,
+        scaling: false,
+        angling: false,
 
         // 图片移动距离
         memoX: 0, 
@@ -205,6 +206,17 @@
 
       // 设置图像移动、旋转动画
       transformImage() {
+        if(this.scaling) {
+          switch (this.colAlign) {
+            case 'start':
+              this.image.style['transform-origin'] = '50% 0%'
+              break;
+          }
+        }
+        else {
+          this.image.style['transform-origin'] = '50% 50% 0'
+        }
+
         this.image.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
         this.image.style.transition = 'transform .16s ease-out'
       },

@@ -85,6 +85,8 @@ export default {
     // 放大
     eventZoomIn() {
       this.scale = containerEvent.zoomIn(this.params)
+      this.scaling = true
+      this.angling = false
 
       this.$emit('zoom', this.scale)
 
@@ -96,6 +98,8 @@ export default {
     // 缩小
     eventZoomOut() {
       this.scale = containerEvent.zoomOut(this.params)
+      this.scaling = true
+      this.angling = false
 
       this.limitZoomOut()
 
@@ -109,6 +113,8 @@ export default {
     // 还原
     eventZoomOrigin() {
       this.scale = containerEvent.zoomOrigin(this.params)
+      this.scaling = true
+      this.angling = false
 
       this.$emit('zoom', this.scale)
 
@@ -119,6 +125,9 @@ export default {
 
     // 右旋转
     eventRotateRight() {
+      this.angling = true
+      this.scaling = false
+
       tools.throttle(() => {
         this.rotateCanvas('RIGHT', void 0, true)
         this.canvas.requestRenderAll()
@@ -127,6 +136,9 @@ export default {
 
     // 左旋转
     eventRotateLeft() {
+      this.angling = true
+      this.scaling = false
+      
       tools.throttle(() => {
         this.rotateCanvas('LEFT', void 0, true)
         this.canvas.requestRenderAll()

@@ -2,12 +2,15 @@
   <div class="z-demo-drawing-board">
     <z-drawing-board 
       ref="board" 
+      col-align="start"
       name="leslie"
       shot
       direction="TOP"
       download
       :imageCompress="0.2"
       :min-zoom-out="0.5"
+      :proportion=".75"
+      row-align="center"
       :size="size"
       :src="src"
       :zoom="1"

@@ -8,7 +8,7 @@
           label="性别"
           :rules="[{ required: true, message: '请选择性别.' }]"
           :options="genderOptions"
-          :defaultValue="1"
+          :defaultValue="false"
         >
         </z-radios>
       </div>
@@ -40,8 +40,8 @@
       return {
         code,
         genderOptions: [
-          { label: '男性', value: 1 },
-          { label: '女性', value: 2 }
+          { label: '男性', value: true },
+          { label: '女性', value: false }
         ]
       }
     },

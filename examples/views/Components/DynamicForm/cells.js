@@ -106,8 +106,8 @@ const fields = [
     formKey: 'gender',
     label: '性别',
     options: [
-      { label: '男性', value: 1 },
-      { label: '女性', value: 2 }
+      { label: '男性', value: true },
+      { label: '女性', value: false }
     ],
     prepend: '*',
     prependClass: 'error--text',
@@ -179,8 +179,8 @@ const areaItems = [
 ]
 
 const genderItems = [
-  { label: '男性', value: 1 },
-  { label: '女性', value: 2 }
+  { label: '男性', value: true },
+  { label: '女性', value: false }
 ]
 
 const hobbyItems = [

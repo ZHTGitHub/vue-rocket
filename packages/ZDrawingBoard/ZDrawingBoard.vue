@@ -8,7 +8,15 @@
       @topBarEvent="topBarEvent"
     ></top-bar>
 
-    <div class="view" id="view" ref="view">
+    <div 
+      class="view" 
+      id="view" 
+      ref="view"
+      :style="{
+        'justify-content': rowAlign,
+        'align-items': colAlign
+      }"
+    >
       <canvas 
         class="canvas" 
         id="canvas" 
@@ -45,11 +53,33 @@
   import { TopBar } from './components'
   import { moveSpace, cutRectStrokeWidth } from './libs/constants'
 
+  const debounce = (() => {
+    let timer = null
+
+    return (fn, delay = 300) => {
+      if(timer) {
+        clearTimeout(timer)
+      }
+
+      timer = setTimeout(() => {
+        fn()
+      }, delay)
+    }
+  })()
+
   export default {
     name: 'ZDrawingBoard',
     mixins: [CanvasMixins, TextboxMixins, CutMixins, RectMixins, EventMixins],
 
     props: {
+      // 图像垂直方向对齐方式
+      colAlign: {
+        validator(value) {
+          return ['start', 'center', 'end'].includes(value)
+        },
+        default: 'center'
+      },
+
       // 图像默认方向
       direction: {
         validator(value) {
@@ -87,10 +117,24 @@
         default: 'screenshot'
       },
 
+      // 图像较短一边占视图的比例
+      proportion: {
+        type: Number,
+        required: false
+      },
+
       // 默认使用框图
       rect: {
         type: Boolean,
         default: false
+      },
+
+      // 图像水平方向对齐方式
+      rowAlign: {
+        validator(value) {
+          return ['left', 'center', 'right'].includes(value)
+        },
+        default: 'center'
       },
 
       // 默认使用截图
@@ -161,6 +205,8 @@
         moveSpace,
         moveX: 0,
         moveY: 0,
+        scaling: false,
+        angling: false,
 
         // 记录画布操作状态
         ctxList: [],
@@ -178,6 +224,8 @@
 
         initX: 0, 
         initY: 0,
+
+        status: -1,
 
         overlay: false
       }
@@ -212,16 +260,21 @@
     watch: {
       src: {
         handler(src) {
-          this.$emit('load', { status: 0 })
+          debounce(() => {
+            if(this.status === 0) return
 
-          this.overlay = true
+            this.status = 0
+            this.$emit('load', { status: this.status })
 
-          if(this.canvas) {
-            this.canvas?.dispose()
-            this.resetValues()
-          }
+            this.overlay = true
 
-          tools.loadImage(src, this.setImage)
+            if(this.canvas) {
+              this.canvas?.dispose()
+              this.resetValues()
+            }
+
+            tools.loadImage(src, this.setImage)
+          })
         },
         immediate: true
       }
@@ -243,7 +296,9 @@
       setImage(width, height) {
         // 图片不存在
         if(!width || !height) {
-          this.$emit('load', { status: -1 })
+          this.status = -1
+          this.$emit('load', { status: this.status })
+
           this.overlay = false
           return
         }
@@ -258,17 +313,31 @@
 
         this.imageScale = Math.min(scaleWidth, scaleHeight)
 
-        this.retinaWidth = this.imageRealWidth * this.imageScale
-        this.retinaHeight = this.imageRealHeight * this.imageScale
+        const imageScaleWidth = this.imageRealWidth * this.imageScale
+        const imageScalseHeight = this.imageRealHeight * this.imageScale
+
+        if(imageScaleWidth < imageScalseHeight) {
+          if(!this.proportion) return
+
+          this.retinaWidth =  this.viewWidth * this.proportion
+          const magnification = this.retinaWidth / imageScaleWidth
+          this.retinaHeight = imageScalseHeight * magnification
+        }
+        else {
+          this.retinaWidth = imageScaleWidth
+          this.retinaHeight = imageScalseHeight
+        }
 
         this.createCanvas(this.src)
       },
 
       // 获取画布视图的宽高
       getView() {
-        this.view = this.$refs.view
-        this.viewWidth = this.view.offsetWidth
-        this.viewHeight = this.view.offsetHeight
+        if(!this.view) {
+          this.view = this.$refs.view
+          this.viewWidth = this.view.offsetWidth
+          this.viewHeight = this.view.offsetHeight
+        }
 
         this.moveCanvasWithMouse()
       },
@@ -280,6 +349,18 @@
 
       // 设置画布移动、旋转动画
       transformContainer() {
+        console.log(this.scaling)
+        if(this.scaling) {
+          switch (this.colAlign) {
+            case 'start':
+              this.container.style['transform-origin'] = '50% 0%'
+              break;
+          }
+        }
+        else {
+          this.container.style['transform-origin'] = '50% 50% 0'
+        }
+
         this.container.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) scale(${ this.scale })`
         this.container.style.transition = 'transform .16s ease-out'
       },
@@ -360,6 +441,8 @@
         fabric.Image.fromURL(source + '?' + Date.now(), img => {
           img.type = 'image'
 
+          if(!this.canvas) return
+
           this.canvas.add(img)
 
           this.canvas.item(0)['hasControls'] = false
@@ -383,7 +466,8 @@
             this.setDefaultOption()
 
             // 画布完成初始化
-            this.$emit('load', { status: 1 })
+            this.status = 1
+            this.$emit('load', { status: this.status })
           })
         }, { crossOrigin: 'anonymous' })
       },  
@@ -568,6 +652,9 @@
 
       // 滚轮滚动
       canvasWheel(event) {
+        this.scaling = true
+        this.angling = false
+
         tools.throttle(() => {
           // 放大
           if(event.e.wheelDelta > 0) {
@@ -778,8 +865,8 @@
     .view {
       flex-grow: 1;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      /* justify-content: center;
+      align-items: center; */
       position: relative;
       background-color: $color;
       border-left: 1px solid $color;
