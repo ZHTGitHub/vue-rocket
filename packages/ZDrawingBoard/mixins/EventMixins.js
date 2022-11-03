@@ -88,6 +88,8 @@ export default {
       this.scaling = true
       this.angling = false
 
+      this.limitZoomIn()
+
       this.$emit('zoom', this.scale)
 
       this.transformContainer()

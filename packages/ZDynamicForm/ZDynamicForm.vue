@@ -355,7 +355,7 @@
               <!-- ZDatePicker END -->
 
               <!-- ZRadios BEGIN -->
-              <template v-else-if="item.inputType === 'radios'">
+              <template v-else-if="item.inputType === 'radios' && dialog">
                 <z-radios
                   v-if="mutexForm[item.formKey] !== false"
                   :formId="formId"

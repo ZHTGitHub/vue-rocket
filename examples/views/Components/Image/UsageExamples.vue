@@ -7,7 +7,7 @@
             ref="image" 
             :min-zoom-out=".5"
             :src="imageUrl" 
-            :proportion="0.75"
+            :proportion="0.9"
             col-align="start"
             row-align="center"
           ></z-image>
@@ -39,7 +39,8 @@
     data() {
       return {
         code,
-        imageUrl: require('../../../../public/images/global/1.jpg')
+        // imageUrl: require('../../../../public/images/global/1.jpg'),
+        imageUrl: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png'
       }
     },
 

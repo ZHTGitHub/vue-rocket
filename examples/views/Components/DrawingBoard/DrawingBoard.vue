@@ -8,7 +8,7 @@
       direction="TOP"
       download
       :imageCompress="0.2"
-      :min-zoom-out="0.5"
+      :min-zoom-out=".5"
       :proportion=".75"
       row-align="center"
       :size="size"

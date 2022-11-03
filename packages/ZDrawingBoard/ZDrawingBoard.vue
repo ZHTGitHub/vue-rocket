@@ -106,6 +106,13 @@
         default: 0.75
       },
 
+      // 最大放大倍数
+      maxZoomIn: {
+        type: Number,
+        required: false
+      },
+
+      // 最小缩小倍数
       minZoomOut: {
         type: Number,
         default: 1
@@ -316,9 +323,7 @@
         const imageScaleWidth = this.imageRealWidth * this.imageScale
         const imageScalseHeight = this.imageRealHeight * this.imageScale
 
-        if(imageScaleWidth < imageScalseHeight) {
-          if(!this.proportion) return
-
+        if(this.proportion && imageScaleWidth < imageScalseHeight) {
           this.retinaWidth =  this.viewWidth * this.proportion
           const magnification = this.retinaWidth / imageScaleWidth
           this.retinaHeight = imageScalseHeight * magnification
@@ -349,7 +354,6 @@
 
       // 设置画布移动、旋转动画
       transformContainer() {
-        console.log(this.scaling)
         if(this.scaling) {
           switch (this.colAlign) {
             case 'start':
@@ -659,6 +663,7 @@
           // 放大
           if(event.e.wheelDelta > 0) {
             this.scale = containerEvent.zoomIn(this.params)
+            this.limitZoomIn()
           }
           // 缩小
           else {
@@ -771,6 +776,13 @@
         this.isRect = false
         this.isText = false
         this.ctxList = []
+      },
+
+      // 限制放大
+      limitZoomIn() {
+        if(this.maxZoomIn && this.scale >= this.maxZoomIn) {
+          this.scale = this.maxZoomIn
+        }
       },
 
       // 限制缩小

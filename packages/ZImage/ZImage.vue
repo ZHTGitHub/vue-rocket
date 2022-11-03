@@ -168,9 +168,7 @@
         const imageScaleWidth = this.imageRealWidth * this.imageScale
         const imageScalseHeight = this.imageRealHeight * this.imageScale
 
-        if(imageScaleWidth < imageScalseHeight) {
-          if(!this.proportion) return
-
+        if(this.proportion && imageScaleWidth < imageScalseHeight) {
           this.retinaWidth =  this.viewWidth * this.proportion
           const magnification = this.retinaWidth / imageScaleWidth
           this.retinaHeight = imageScalseHeight * magnification
@@ -256,6 +254,9 @@
       // 滚轮滚动
       mouseWheel() {
         if(!this.view) return
+
+        this.scaling = true
+        this.angling = false
 
         this.view.onmousewheel = (event) => {
           tools.throttle(() => {
