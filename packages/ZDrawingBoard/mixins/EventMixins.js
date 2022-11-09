@@ -35,6 +35,18 @@ export default {
           this.eventRotateLeft()
           break;
 
+        case 'rotateMinRight':
+          this.eventRotateMinRight()
+          break;
+
+        case 'rotateMinLeft':
+          this.eventRotateMinLeft()
+          break;
+
+        case 'restore':
+          this.$emit('restore')
+          break;
+
         case 'clear':
           this.eventClear()
           break;
@@ -145,6 +157,16 @@ export default {
         this.rotateCanvas('LEFT', void 0, true)
         this.canvas.requestRenderAll()
       })
+    },
+
+    // 微右旋转 
+    eventRotateMinRight() {
+      this.container.style.transform = `rotate(5deg)`
+    },
+
+    // 微左旋转
+    eventRotateMinLeft() {
+      this.container.style.transform = `rotate(-5deg)`
     },
 
     // 清空画布

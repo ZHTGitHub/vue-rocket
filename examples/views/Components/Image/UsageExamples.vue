@@ -7,7 +7,6 @@
             ref="image" 
             :min-zoom-out=".5"
             :src="imageUrl" 
-            :proportion="0.9"
             col-align="start"
             row-align="center"
           ></z-image>

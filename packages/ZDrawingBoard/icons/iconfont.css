@@ -13,6 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-rotate-min-right:before {
+  content: "\e720";
+}
+
+.icon-rotate-min-left:before {
+  content: "\e722";
+}
+
 .icon-link:before {
   content: "\e6f7";
 }

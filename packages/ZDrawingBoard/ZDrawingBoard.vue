@@ -232,6 +232,7 @@
         initX: 0, 
         initY: 0,
 
+        // 记录画布的加载状态
         status: -1,
 
         overlay: false
@@ -271,6 +272,7 @@
             if(this.status === 0) return
 
             this.status = 0
+            this.$emit('imageLoad', { status: this.status })
             this.$emit('load', { status: this.status })
 
             this.overlay = true
@@ -304,6 +306,7 @@
         // 图片不存在
         if(!width || !height) {
           this.status = -1
+          this.$emit('imageLoad', { status: this.status })
           this.$emit('load', { status: this.status })
 
           this.overlay = false
@@ -314,6 +317,9 @@
 
         this.imageRealWidth = width
         this.imageRealHeight = height
+
+        // 图片加载成功
+        this.$emit('imageLoad', { status: 1, width, height })
 
         const scaleWidth = this.viewWidth / this.imageRealWidth
         const scaleHeight = this.viewHeight / this.imageRealHeight
@@ -471,7 +477,11 @@
 
             // 画布完成初始化
             this.status = 1
-            this.$emit('load', { status: this.status })
+            this.$emit('load', { 
+              status: this.status,
+              width: this.imageRealWidth,
+              height: this.imageRealHeight
+            })
           })
         }, { crossOrigin: 'anonymous' })
       },  
@@ -772,10 +782,12 @@
           this.canvas.remove(ctx)
         }
 
-        this.isCut = false
-        this.isRect = false
-        this.isText = false
+        this.isCut = this.isCut
+        this.isRect = this.isRect
+        this.isText = this.isText
         this.ctxList = []
+
+        this.$emit('clear')
       },
 
       // 限制放大
@@ -851,9 +863,23 @@
 
           const modified = !!this.ctxList.length || this.rotated
 
+          let cutArea = {}
+
+          if(cutCtx) {
+            cutArea = {
+              sx: args.sx,
+              sy: args.sy,
+              sw: args.sw,
+              sh: args.sh
+            }
+          }
+
           this.$emit('done', {
             file,
-            modified
+            modified,
+            width: this.imageRealWidth,
+            height: this.imageRealHeight,
+            ...cutArea
           })
         })
       }

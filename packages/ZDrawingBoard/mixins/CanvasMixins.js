@@ -37,9 +37,12 @@ export default {
 
     // 设置默认截图区域
     setDefaultCutArea() {
-      if(!this.shotArea) return
+      const { x = 0, y = 0, width = 0, height = 0 } = this.shotArea || {}
 
-      const { x, y, width, height } = this.shotArea
+      if(!width || !height) {
+        this.clearCutKlass()
+        return
+      }
 
       this.downPoint = { x, y }
 

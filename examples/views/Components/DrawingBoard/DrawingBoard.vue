@@ -11,14 +11,17 @@
       :min-zoom-out=".5"
       :proportion=".75"
       row-align="center"
+      :shotArea="shotArea"
       :size="size"
       :src="src"
       :zoom="1"
+      @imageLoad="handleImageLoad"
       @load="handleLoad"
       @cut="handleCut"
       @direction="handleDirection"
       @zoom="handleZoom"
       @done="handleDone"
+      @restore="handleRestore"
     ></z-drawing-board>
 
     <ul class="z-flex">
@@ -34,7 +37,20 @@
     {
       url: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
       width: 100,
-      size: 1024
+      size: 1024,
+      shotArea: {
+        x: 100,
+        y: 100,
+        width: 100,
+        height: 100
+      }
+    },
+
+    {
+      url: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png?123',
+      width: 100,
+      size: 1024,
+      shotArea: null
     },
 
     {
@@ -77,7 +93,8 @@
         images,
         size: 0,
         // src: require('../../../../public/images/global/6.png')
-        src: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png'
+        src: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
+        shotArea: {}
       }
     },
 
@@ -112,12 +129,35 @@
 
     methods: {
       handleClick(image) {
+        console.log(image)
         this.size = image.size
         this.src = image.url
+        this.shotArea = image.shotArea
       },
 
-      handleLoad({ status }) {
-        console.log(status)
+      handleImageLoad({ status, width, height }) {
+        console.log('image load')
+        if(status === 1) {
+          // this.shotArea = {
+          //   x: 100,
+          //   y: 100,
+          //   height: 100,
+          //   width: 100
+          // }
+        }
+      },
+
+      handleLoad({ status, width, height }) {
+        console.log({ status, width, height })
+
+        // if(status === 1) {
+        //   this.shotArea = {
+        //     x: 100,
+        //     y: 100,
+        //     height: 1000,
+        //     width: 1000
+        //   }
+        // }
       },
 
       handleCut(area) {
@@ -132,8 +172,14 @@
         console.log(scale)
       },
 
-      handleDone({ file, modified }) {
+      handleDone({ file, modified, width, height, sx, sy, sw, sh }) {
         console.log({ file, modified })
+        console.log({ width, height })
+        console.log({ sx, sy, sw, sh })
+      },
+
+      handleRestore() {
+        console.log('restore')
       }
     }
   }
