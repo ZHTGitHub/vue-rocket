@@ -72,6 +72,11 @@
     mixins: [CanvasMixins, TextboxMixins, CutMixins, RectMixins, EventMixins],
 
     props: {
+      angle: {
+        type: [Number, String],
+        default: 5
+      },
+
       // 图像垂直方向对齐方式
       colAlign: {
         validator(value) {
@@ -227,6 +232,7 @@
 
         // 记录旋转状态
         rotated: false,
+        rotate: 0,
         directionCount: 0,
 
         initX: 0, 

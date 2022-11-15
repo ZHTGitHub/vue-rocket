@@ -13,6 +13,12 @@
         </div>
       </div>
     </usage-demo>
+
+    <ul class="z-flex">
+      <li v-for="(image, index) in images" :key="index" @click="handleClick(image)">
+        <img :src="image.url" :width="image.width">
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -32,6 +38,18 @@
   <z-btn @click="$refs.image.eventMoveTop()">向上滚动</z-btn>
   <z-btn @click="$refs.image.eventMoveBottom()">向下滚动</z-btn>`
 
+  const images = [
+    {
+      url: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
+      width: 100
+    },
+
+    {
+      url: 'http://113.106.108.93:38800/api/files/B0108/download/2022/09-20/00083000202209140900162/001576799668903/001576799668903904001.png',
+      width: 100
+    }
+  ]
+
   export default {
     name: 'UsageExamples',
 
@@ -39,12 +57,19 @@
       return {
         code,
         // imageUrl: require('../../../../public/images/global/1.jpg'),
-        imageUrl: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png'
+        imageUrl: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
+        images
       }
     },
 
     mounted() {
       Prism.highlightAll()
+    },
+
+    methods: {
+      handleClick(image) {
+        this.imageUrl = image.url
+      }
     }
   }
 </script>

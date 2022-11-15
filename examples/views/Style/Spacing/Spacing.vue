@@ -4,7 +4,7 @@
 
     <div class="box">
       <div class="px-4 mb-1 row">
-        <div class="z-flex col-12">
+        <div class="z-flex col-6">
           <z-select
             :formId="formId"
             formKey="paddingDirection"
@@ -32,7 +32,7 @@
           </z-select>
         </div>  
 
-        <div class="z-flex col-12">
+        <div class="z-flex col-6">
           <z-select
             :formId="formId"
             formKey="marginDirection"

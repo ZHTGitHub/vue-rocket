@@ -133,6 +133,7 @@
     watch: {
       src: {
         handler(src) {
+          this.resetValues()
           this.overlay = true
           tools.loadImage(src, this.setImage)
         },
@@ -278,6 +279,37 @@
         if(this.scale <= this.minZoomOut) {
           this.scale = this.minZoomOut
         }
+      },
+
+      resetValues() {
+        // view
+        this.view = null
+        this.viewWidth = 0
+        this.viewHeight = 0
+
+        // image
+        this.image = null
+        this.imageRealWidth = 0
+        this.imageRealHeight = 0
+        this.imageScale = 1
+
+        // 视网膜
+        this.retinaWidth = 0
+        this.retinaHeight = 0
+
+        // 记录图片当前状态
+        this.scale = 1
+        this.angle = 0
+        this.moveX = 0
+        this.moveY = 0
+        this.scaling = false
+        this.angling = false
+
+        // 图片移动距离
+        this.memoX = 0,
+        this.memoY = 0
+
+        this.overlay = false
       }
     },
 

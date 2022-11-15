@@ -161,12 +161,18 @@ export default {
 
     // 微右旋转 
     eventRotateMinRight() {
-      this.container.style.transform = `rotate(5deg)`
+      this.rotate += this.angle
+      this.container.style['transform-origin'] = '50% 50% 0'
+      this.container.style.transform = `rotate(${ this.rotate }deg)`
+      this.container.style.transition = 'transform .16s ease-out'
     },
 
     // 微左旋转
     eventRotateMinLeft() {
-      this.container.style.transform = `rotate(-5deg)`
+      this.rotate -= this.angle
+      this.container.style['transform-origin'] = '50% 50% 0'
+      this.container.style.transform = `rotate(${ this.rotate }deg)`
+      this.container.style.transition = 'transform .06s ease-out'
     },
 
     // 清空画布

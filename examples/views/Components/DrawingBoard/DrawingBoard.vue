@@ -9,7 +9,6 @@
       download
       :imageCompress="0.2"
       :min-zoom-out=".5"
-      :proportion=".75"
       row-align="center"
       :shotArea="shotArea"
       :size="size"
