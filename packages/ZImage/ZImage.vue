@@ -47,6 +47,11 @@
         default: 'center'
       },
 
+      drag: {
+        type: Boolean,
+        default: true
+      },
+
       // 图像缩小的最小倍数
       minZoomOut: {
         type: Number,
@@ -222,6 +227,8 @@
 
       // 通过鼠标移动图像
       moveImageWithMouse() {
+        if(!this.drag) return
+
         let [downX, downY] = [void 0, void 0]
 
         // 按下鼠标
