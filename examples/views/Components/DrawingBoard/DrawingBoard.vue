@@ -23,11 +23,11 @@
       @restore="handleRestore"
     ></z-drawing-board>
 
-    <ul class="z-flex">
+    <!-- <ul class="z-flex">
       <li v-for="(image, index) in images" :key="index" @click="handleClick(image)">
         <img :src="image.url" :width="image.width">
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -91,8 +91,8 @@
         dialog: false,
         images,
         size: 0,
-        // src: require('../../../../public/images/global/6.png')
-        src: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
+        src: require('../../../../public/images/global/1.jpg'),
+        // src: 'http://www.i-confluence.com:13001/api/files/B0118/download/2022/09-30/372022080038223/372022080038223-030105-286014698-5.png',
         shotArea: {}
       }
     },
