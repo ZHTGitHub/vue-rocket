@@ -2,7 +2,7 @@
   <div class="demo-padding">
     <typing-title :title="$route.meta.title"></typing-title>
 
-    <div class="box">
+    <div class="wrap">
       <div class="px-4 mb-1 row">
         <div class="z-flex col-6">
           <z-select
@@ -61,7 +61,7 @@
         </div>  
       </div>
 
-      <div class="bg-orange light m-box">
+      <div class="bg-orange light solid">
         <div :class="`m${ marginDirection }-${ marginSize }`">
           <div :class="['bg-green light text-black elevation-4 p-box', `p${ paddingDirection }-${ paddingSize }`]">
             <div class="pa-6 bg-white text-center">
@@ -170,14 +170,10 @@
 </script>
 
 <style scoped lang="scss">
-  .box {
+  .wrap {
     width: 960px;
     padding: 16px;
     margin: 0 auto;
     border: thin solid rgba(0, 0, 0, .12);
-
-    .m-box {
-      border: 1px solid #fff;
-    }
   }
 </style>  

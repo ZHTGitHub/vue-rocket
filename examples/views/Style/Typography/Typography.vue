@@ -194,6 +194,11 @@
       字体颜色
     </v-alert>
 
+    <div class="mb-4">
+      <span class="text-capitalize">usage：</span>
+      &lt;span class="text-red"&gt;嫣红&lt;/span&gt;
+    </div>
+
     <div class="z-flex flex-wrap mb-16 colors">
       <span 
         v-for="(item, index) in colorList"
