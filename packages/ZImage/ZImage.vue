@@ -48,15 +48,10 @@
         default: 'center'
       },
 
-      drag: {
-        type: Boolean,
-        default: true
-      },
-
       // 图像缩小的最小倍数
       minZoomOut: {
         type: Number,
-        default: 1
+        default: .5
       },
 
       // 图像每次平移距离
