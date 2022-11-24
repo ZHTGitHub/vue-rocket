@@ -5,7 +5,6 @@
         <div class="image-box">
           <z-image 
             ref="image" 
-            :drag="false"
             :min-zoom-out=".5"
             :src="imageUrl" 
             col-align="start"

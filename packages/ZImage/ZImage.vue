@@ -11,8 +11,9 @@
         'align-items': colAlign
       }"
     >
-      <div class="cover"></div>
-      <img class="image" :src="src" />
+      <div class="image-wrap">
+        <img class="image" :src="src" />
+      </div>
     </div>
 
     <v-overlay 
@@ -201,11 +202,11 @@
 
       // 获取图像实例
       getImage() {
-        this.image = document.querySelector('#view .image')
+        this.imageWrap = document.querySelector('#view .image-wrap')
       },
 
       setImageAttr() {
-        this.image.setAttribute('style', `width: ${ this.retinaWidth }px; height: ${ this.retinaHeight }px;`)
+        this.imageWrap.setAttribute('style', `width: ${ this.retinaWidth }px; height: ${ this.retinaHeight }px;`)
       },
 
       // 设置图像移动、旋转动画
@@ -213,49 +214,71 @@
         if(this.scaling) {
           switch (this.colAlign) {
             case 'start':
-              this.image.style['transform-origin'] = '50% 0%'
+              this.imageWrap.style['transform-origin'] = '50% 0%'
               break;
           }
         }
         else {
-          this.image.style['transform-origin'] = '50% 50% 0'
+          this.imageWrap.style['transform-origin'] = '50% 50% 0'
         }
 
-        this.image.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
-        this.image.style.transition = 'transform .16s ease-out'
+        this.imageWrap.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
+        this.imageWrap.style.transition = 'transform .16s ease-out'
       },
 
       // 通过鼠标移动图像
       moveImageWithMouse() {
-        if(!this.drag) return
+        draggable({
+          el: document.querySelector('.image-wrap')
+        })
 
-        let [downX, downY] = [void 0, void 0]
+        function draggable(options) {
+          const el = options.el
+          const beforeTransition = el.style.transition
 
-        // 按下鼠标
-        this.view.onmousedown = (downEvent) => {
-          const { x, y } = downEvent
-
-          downX = x
-          downY = y
-
-          // 移动鼠标
-          this.view.onmousemove = (moveEvent) => {
-            tools.throttle(() => {
-              const { x, y } = moveEvent
-
-              this.moveX = x - downX + this.memoX
-              this.moveY = y - downY + this.memoY
-
-              this.transformImage()
-            })
+          const coordinate = {
+            x: 0,
+            y: 0,
+            top: 0,
+            left: 0,
           }
-        }
 
-        // 抬起鼠标
-        this.view.onmouseup = () => {
-          this.memoX = this.moveX
-          this.memoY = this.moveY
-          this.view.onmousemove = null
+          let start = false
+          el.style.cursor = 'move'
+
+          // 鼠标移动
+          function mouseMove(event) {
+            if(!start) return
+
+            if(el.style.margin != '0px') {
+              el.style.margin = '0px'
+            }
+
+            el.style.left = coordinate.left + (event.pageX - coordinate.x) + 'px'
+            el.style.top = coordinate.top + (event.pageY - coordinate.y) + 'px'
+          }
+
+          // 鼠标抬起
+          function mouseUp() {
+            document.removeEventListener('mousemove', mouseMove)
+            document.removeEventListener('mouseup', mouseUp)
+            el.style.transition = beforeTransition
+            start = false
+          }
+
+          // 鼠标按下
+          el.addEventListener('mousedown', function(event) {
+            el.style.transition = 'all 0s'
+
+            coordinate.x = event.pageX
+            coordinate.y = event.pageY
+            coordinate.left = el.offsetLeft
+            coordinate.top = el.offsetTop
+
+            start = true
+            document.addEventListener('mousemove', mouseMove)
+            document.addEventListener('mouseup', mouseUp)
+          })
         }
       },
 
@@ -347,20 +370,20 @@
       border-bottom: 1px solid $color;
       overflow: hidden;
 
-      .cover {
+      .image-wrap {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
+        cursor: move;
+
+        .image {
+          width: 100%;
+          height: 100%;
+          cursor: grab;
+          user-select: none;
+          pointer-events: none;
+        }
       }
 
-      .image {
-        cursor: grab;
-        user-select: none;
-        pointer-events: none;
-      }
+      
     }
   }
 </style>
