@@ -5,8 +5,8 @@
         <z-upload 
           :formId="formId"
           formKey="upload"
-          action="http://zenghaitao.com/api/topics/upload"
-          :auto-upload="false"
+          action="http://localhost:6003/orders/upload"
+          :auto-upload="true"
           :chink="false"
           color="#f00"
           :headers="headers"

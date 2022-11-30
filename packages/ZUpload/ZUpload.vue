@@ -281,6 +281,8 @@
 
       // 上传
       async uploadFile() {
+        this.$emit('response', { progress: 0 })
+
         const allFiles = this.formData.getAll(this.name)
         const maxSize = +this.maxSize
 
@@ -288,7 +290,7 @@
           const size = file.size / 1024
 
           if(maxSize && size > maxSize) {
-            this.$emit('response', { maxSize, file })
+            this.$emit('response', { progress: 0, maxSize, file })
             return
           }
         }
@@ -317,6 +319,7 @@
         this.$refs.input.value = null
 
         this.$emit('response', {
+          progress: 1,
           result,
           files: this.files
         })
