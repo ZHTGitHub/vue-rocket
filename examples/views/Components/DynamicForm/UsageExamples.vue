@@ -77,7 +77,7 @@
         }
       }"
       :confirmProps="{
-        visible: false
+        visible: true
       }"
       @change:avatar="handleUploadChange"
       @change:file="handleFileChange"

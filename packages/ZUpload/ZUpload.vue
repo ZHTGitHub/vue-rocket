@@ -14,7 +14,11 @@
               :key="index"
               class="z-upload-list-image-container"
             >
-              <div :class="['z-upload-list-item', { hovered: !disabled && (showPreviewIcon || showDeleteIcon) }]">
+              <div :class="[
+                'z-upload-list-item', 
+                chink && 'chink',
+                { hovered: !disabled && (showPreviewIcon || showDeleteIcon) }
+              ]">
                 <div class="z-upload-list-item-info">
                   <span>
                     <img class="z-upload-list-item-img" :src="image.url" />
@@ -40,6 +44,13 @@
                     @click="onDelete(index, image)"
                   >mdi-trash-can-outline</v-icon>
                 </span>
+
+                <div 
+                  class="preview-delete"
+                  @click="onDelete(index, image)"
+                >
+                  <v-icon color="#fff" size="12">mdi-close</v-icon>
+                </div>
               </div>
             </div>
             <!-- 缩略图 END -->
@@ -110,6 +121,11 @@
       },
 
       autoUpload: {
+        type: Boolean,
+        default: true
+      },
+
+      chink: {
         type: Boolean,
         default: true
       },
@@ -259,7 +275,8 @@
       // 删除
       onDelete(index, item) {
         this.targetImage = item
-        this.value.splice(index, 1)
+        // this.value.splice(index, 1)
+        this.$emit('delete', item, index)
       },
 
       // 上传
@@ -342,6 +359,7 @@
 
       .z-upload-list {
         box-sizing: border-box;
+        flex-wrap: wrap;
 
         /* 翻转前 */
         &.flex-row {
@@ -366,9 +384,12 @@
             position: relative;
             width: 104px;
             height: 104px;
-            padding: 8px;
             border: 1px solid #d9d9d9;
             border-radius: 4px;
+
+            &.chink {
+              padding: 8px;
+            }
 
             &.hovered:hover .z-upload-list-item-info:before {
               opacity: 1;
@@ -376,6 +397,20 @@
 
             &.hovered:hover .z-upload-list-item-info+.z-upload-list-item-actions {
               opacity: 1;
+            }
+
+            .preview-delete {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: absolute;
+              top: 0;
+              right: 0;
+              width: 14px;
+              height: 14px;
+              border-radius: 0 0 0 12px;
+              background-color: rgba(0, 0, 0, 0.7);
+              z-index: 1;
             }
 
             .z-upload-list-item-info {

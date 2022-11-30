@@ -8,12 +8,11 @@
     }"
   >
     <div class="z-flex">
-      <div class="z-btn-toggle-prepend">
+      <div v-if="$slots.prepend" class="z-btn-toggle-prepend">
         <slot name="prepend"></slot>
       </div>
 
       <div class="z-input--btn-toggle-group">
-
         <div 
           class="z-flex flex-wrap flex-row z-input__slot" 
           :class="[column ? 'flex-column' : '', row ? 'flex-row' : '']"
@@ -180,7 +179,7 @@
 <style scoped lang="scss">
   .z-btn-toggle {
     .z-btn-toggle-prepend {
-      padding: 22px 4px 4px 0;
+      padding: 0 4px 4px 0;
       margin-top: 16px;
       height: auto;
       font-size: 14px;
@@ -188,11 +187,11 @@
     }
 
     .z-input--btn-toggle-group {
-      padding-top: 4px;
-      margin-top: 16px;
+      /* padding-top: 4px;
+      margin-top: 16px; */
 
       .z-input__slot {
-        margin-bottom: 4px;
+        /* margin-bottom: 4px; */
 
         legend.v-label {
           padding: 22px 10px 8px 0;

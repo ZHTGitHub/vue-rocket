@@ -7,6 +7,7 @@
           formKey="upload"
           action="http://zenghaitao.com/api/topics/upload"
           :auto-upload="false"
+          :chink="false"
           color="#f00"
           :headers="headers"
           :validation="[
@@ -18,8 +19,9 @@
           }"
           multiple
           parcel
-          :showPreviewIcon="true"
-          :showDeleteIcon="true"
+          :showPreviewIcon="false"
+          :showDeleteIcon="false"
+          @delete="handleDelete"
           @change="handleChagne"
           @response="handleResponse"
         >
@@ -102,6 +104,10 @@
 
       handleSubmit() {
         console.log(this.forms[this.formId])
+      },
+
+      handleDelete(event) {
+        console.log(event)
       },
 
       async handleChagne(files) {

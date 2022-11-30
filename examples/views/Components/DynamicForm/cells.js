@@ -136,7 +136,7 @@ const fields = [
     inputType: 'btnToggle',
     formKey: 'vision',
     label: '视力',
-    mandatory: true,
+    // mandatory: true,
     options: [
       { label: '正常', value: 1 },
       { label: '近视', value: 2 },
