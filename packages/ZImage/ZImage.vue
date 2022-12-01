@@ -206,16 +206,16 @@
 
       // 设置图像移动、旋转动画
       transformImage() {
-        if(this.scaling) {
-          switch (this.colAlign) {
-            case 'start':
-              this.imageWrap.style['transform-origin'] = '50% 0%'
-              break;
-          }
-        }
-        else {
-          this.imageWrap.style['transform-origin'] = '50% 50% 0'
-        }
+        // if(this.scaling) {
+        //   switch (this.colAlign) {
+        //     case 'start':
+        //       this.imageWrap.style['transform-origin'] = '50% 0%'
+        //       break;
+        //   }
+        // }
+        // else {
+        //   this.imageWrap.style['transform-origin'] = '50% 50% 0'
+        // }
 
         this.imageWrap.style.transform = `translate(${ this.moveX }px, ${ this.moveY }px) rotate(${ this.angle }deg) scale(${ this.scale })`
         this.imageWrap.style.transition = 'transform .16s ease-out'
