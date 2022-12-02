@@ -106,8 +106,9 @@
         console.log(this.forms[this.formId])
       },
 
-      handleDelete(event) {
-        console.log(event)
+      handleDelete({ thumb, thumbIndex }) {
+        console.log(thumb)
+        console.log(thumbIndex)
       },
 
       async handleChagne(files) {

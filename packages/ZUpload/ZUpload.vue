@@ -276,7 +276,7 @@
       onDelete(index, item) {
         this.targetImage = item
         // this.value.splice(index, 1)
-        this.$emit('delete', item, index)
+        this.$emit('delete', { thumb: item, thumbIndex: index })
       },
 
       // 上传
