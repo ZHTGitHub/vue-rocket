@@ -85,6 +85,12 @@
         default: 'center'
       },
 
+      // 图像默认坐标
+      coord: {
+        type: Object,
+        required: false
+      },  
+
       // 图像默认方向
       direction: {
         validator(value) {
@@ -471,9 +477,12 @@
           this.canvas.item(0)['selectable'] = false
           this.canvas.item(0)['evented'] = false
 
-          // 设置画布默认方向
+          // 设置图像默认方向
           this.setDefaultDirection(() => {
-            // 设置默认截图区域
+            // 设置图像默认坐标
+            this.setDefaultCoord()
+
+            // 设置图像默认截图区域
             this.setDefaultCutArea()
 
             // 设置默认缩放

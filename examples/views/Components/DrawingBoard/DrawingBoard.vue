@@ -3,13 +3,14 @@
     <z-drawing-board 
       ref="board" 
       col-align="start"
-      name="leslie"
-      shot
+      :coord="{ x: 0, y: 0 }"
       direction="TOP"
       download
       :imageCompress="0.2"
       :min-zoom-out=".5"
+      name="leslie"
       row-align="center"
+      shot
       :shotArea="shotArea"
       :size="size"
       :src="src"

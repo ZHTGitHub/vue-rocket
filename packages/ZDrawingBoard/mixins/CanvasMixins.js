@@ -2,7 +2,17 @@ import { moveSpace } from '../libs/constants'
 
 export default {
   methods: {
-    // 设置画布默认方向
+    // 设置图像默认坐标
+    setDefaultCoord() {
+      if(!this.coord) return
+
+      this.moveX = this.coord.x
+      this.moveY = this.coord.y
+
+      this.transformContainer('move')
+    },
+
+    // 设置图像默认方向
     setDefaultDirection(func) {
       switch (this.direction) {
         case 'TOP': 
@@ -35,7 +45,7 @@ export default {
       }
     },
 
-    // 设置默认截图区域
+    // 设置图像默认截图区域
     setDefaultCutArea() {
       const { x = 0, y = 0, width = 0, height = 0 } = this.shotArea || {}
 
