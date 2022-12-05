@@ -364,8 +364,15 @@
         this.container = document.querySelector('#view .canvas-container')
       },
 
-      // 设置画布移动、旋转动画
-      transformContainer() {
+      /**
+       * @description 设置画布移动、旋转动画
+       * @param action zoom、move
+       */ 
+      transformContainer(action) {
+        if(action === 'move') {
+          this.$emit('move', { x: this.moveX, y: this.moveY })
+        }
+
         if(this.scaling) {
           switch (this.colAlign) {
             case 'start':
@@ -414,8 +421,7 @@
               if(altKey) {
                 this.moveX = x - downX + this.initX
                 this.moveY = y - downY + this.initY
-
-                this.transformContainer()
+                this.transformContainer('move')
               }
             })
           }

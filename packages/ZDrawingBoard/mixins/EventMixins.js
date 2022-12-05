@@ -196,28 +196,28 @@ export default {
     eventMoveTop() {
       this.moveY = containerEvent.moveTop(this.params)
       this.initY = this.moveY
-      this.transformContainer()
+      this.transformContainer('move')
     },
 
     // 向右平移
     eventMoveRight() {
       this.moveX = containerEvent.moveRight(this.params)
       this.initX = this.moveX
-      this.transformContainer()
+      this.transformContainer('move')
     },
 
     // 向下平移
     eventMoveBottom() {
       this.moveY = containerEvent.moveBottom(this.params)
       this.initY = this.moveY
-      this.transformContainer()
+      this.transformContainer('move')
     },
 
     // 向左平移
     eventMoveLeft() {
       this.moveX = containerEvent.moveLeft(this.params)
       this.initX = this.moveX
-      this.transformContainer()
+      this.transformContainer('move')
     }
   }
 }
