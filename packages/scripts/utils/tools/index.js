@@ -1,5 +1,6 @@
 import { deepClone, find, findIndex, flatArray, removeDuplicate } from './arrayObject'
 import { getScrollOffset, getViewportSize, queryToObject } from './browser'
+import compressImage from './compressImage'
 import { get, set } from './lodash'
 import { isEqual, isYummy, isLousy } from './messy'
 import { getType, isBoolean, isNumber, isString, isArray, isFunction, isObject, isNull, isUndefined, isSymbol } from './types'
@@ -16,6 +17,8 @@ export default {
   getScrollOffset, 
   getViewportSize, 
   queryToObject,
+
+  compressImage,
 
   get, 
   set,

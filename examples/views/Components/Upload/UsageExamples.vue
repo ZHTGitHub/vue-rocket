@@ -111,7 +111,9 @@
         console.log(thumbIndex)
       },
 
-      async handleChagne(files) {
+      async handleChagne({ files }) {
+        console.log(files)
+
         const url = await tools.fileToBase64(files[0])
 
         this.defaultValue = [
