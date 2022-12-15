@@ -104,6 +104,7 @@
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import previewDialog from './previewDialog'
   import request from './request'
+  import compressImage from '../scripts/utils/tools/compressImage'
 
   export default {
     name: 'ZUpload',
