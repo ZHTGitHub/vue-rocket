@@ -223,13 +223,14 @@
 
       // 读取
       async onReadImage(event) {
+        const maxSize = +this.maxSize
         const files = []
 
         for(let file of event.target.files) {
           files.push(file)
         }
 
-        this.$emit('change', files)
+        this.$emit('change', { files, maxSize })
 
         if(this.autoUpload) {
           this.formData = new FormData()
@@ -282,16 +283,16 @@
 
       // 上传
       async uploadFile() {
-        this.$emit('response', { progress: 0 })
+        const maxSize = +this.maxSize
+        this.$emit('response', { maxSize, progress: 0 })
 
         const allFiles = this.formData.getAll(this.name)
-        const maxSize = +this.maxSize
 
         for(let file of allFiles) {
           const size = file.size / 1024
 
           if(maxSize && size > maxSize) {
-            this.$emit('response', { progress: 0, maxSize, file })
+            this.$emit('response', { file, maxSize, progress: 0 })
             return
           }
         }
@@ -320,9 +321,10 @@
         this.$refs.input.value = null
 
         this.$emit('response', {
+          files: this.files,
+          maxSize,
           progress: 1,
-          result,
-          files: this.files
+          result
         })
       },
 
