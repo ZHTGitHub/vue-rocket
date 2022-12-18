@@ -25,8 +25,6 @@ const mutations = {
     const form = this.validator[data.formId]
     const values = Object.values(form)
     const total = values.length
-
-    
   }
 }
 

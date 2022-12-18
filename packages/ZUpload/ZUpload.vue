@@ -12,38 +12,12 @@
             <div 
               v-for="(image, index) of value"
               :key="index"
-              class="z-upload-list-image-container"
+              class="thumb-list"
             >
-              <div :class="[
-                'z-upload-list-item', 
-                chink && 'chink',
-                { hovered: !disabled && (showPreviewIcon || showDeleteIcon) }
-              ]">
-                <div class="z-upload-list-item-info">
-                  <span>
-                    <img class="z-upload-list-item-img" :src="image.url" />
-                  </span>
+              <div :class="[chink && 'chink', 'thumb']">
+                <div class="image-box">
+                    <img :src="image.url" />
                 </div>
-
-                <span 
-                  v-if="!disabled && (showPreviewIcon || showDeleteIcon)"
-                  class="z-upload-list-item-actions"
-                >
-                  <v-icon 
-                    v-if="showPreviewIcon"
-                    class="mr-2" 
-                    color="#ffffffd9" 
-                    small
-                    @click="onPreview(image)"
-                  >mdi-eye-outline</v-icon>
-
-                  <v-icon 
-                    v-if="!showOnly && showDeleteIcon"
-                    color="#ffffffd9" 
-                    small
-                    @click="onDelete(index, image)"
-                  >mdi-trash-can-outline</v-icon>
-                </span>
 
                 <div 
                   class="preview-delete"
@@ -58,13 +32,10 @@
             <!-- 上传 BEGIN -->
             <div 
               v-if="!showOnly && (!maxCount || (value && value.length < maxCount))"
-              class="z-upload-select"
-              :style="hoverStyle"
-              @mouseenter="onMouseenter"
-              @mouseleave="onMouseleave"
+              class="select-box"
             >
               <span 
-                class="z-upload" 
+                class="input-box" 
                 @click="onChoice"
               >
                 <input 
@@ -91,20 +62,13 @@
         <div class="error--text z-messages">{{ errorMessage }}</div>
       </div>
     </div>
-
-    <preview-dialog 
-      ref="previewDialog"
-      :targetImage="targetImage"
-    ></preview-dialog>
   </div>
 </template>
 
 <script>
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
-  import previewDialog from './previewDialog'
   import request from './request'
-  import compressImage from '../scripts/utils/tools/compressImage'
 
   export default {
     name: 'ZUpload',
@@ -188,30 +152,14 @@
         default: false
       },
 
-      showDeleteIcon: {
-        type: Boolean,
-        default: true
-      },
-
       showOnly: {
         type: Boolean,
         default: false
-      },
-
-      showPreviewIcon: {
-        type: Boolean,
-        default: true
       }
     },
     
     data() {
       return {
-        files: [],
-        file: null,
-        targetImage: {},
-
-        hoverStyle: {},
-
         formData: null
       }
     },
@@ -242,46 +190,35 @@
               for(let item of files) {
                 this.formData.append(this.name, item)
               }
-              this.uploadFile()
+              await this.uploadFile()
             }
-            // 单个文件单个文件上传
+            // 单个文件依次上传
             else {
               for(let item of files) {
                 this.formData.set(this.name, item)
                 await this.uploadFile()
               }
             }
-
-            // 记录当前上传的文件
-            this.files = files
           }
           // 单选
           else {
             const file = files[0]
             this.formData.append(this.name, file)
 
-            this.uploadFile()
-
-            // 记录当前上传的文件
-            this.files = [file]
+            await this.uploadFile()
           }
         }
-      },
 
-      // 预览
-      onPreview(item) {
-        this.targetImage = item
-        this.$refs.previewDialog.toggle()
+        this.$refs.input.value = ''
       },
 
       // 删除
       onDelete(index, item) {
-        this.targetImage = item
         // this.value.splice(index, 1)
         this.$emit('delete', { thumb: item, thumbIndex: index })
       },
 
-      // 上传
+      // 上传文件
       async uploadFile() {
         const maxSize = +this.maxSize
         this.$emit('response', { maxSize, progress: 0 })
@@ -318,33 +255,14 @@
 
         this.errorMessage = ''
         this.incorrect = false
-        this.$refs.input.value = null
+        // this.$refs.input.value = ''
 
         this.$emit('response', {
-          files: this.files,
           maxSize,
           progress: 1,
           result
         })
-      },
-
-      onMouseenter() {
-        if(!this.disabled) {
-          this.hoverStyle = {
-            border: `1px dashed ${ this.color }`
-          }
-        }
-      },
-
-      onMouseleave() {
-        this.hoverStyle = {
-          border: `1px dashed #d9d9d9`
-        }
       }
-    },
-
-    components: {
-      previewDialog
     }
   }
 </script>
@@ -369,24 +287,24 @@
 
         /* 翻转前 */
         &.flex-row {
-          .z-upload-list-image-container {
+          .thumb-list {
             margin: 0 8px 8px 0;
           }
         }
 
         /* 翻转后 */
         &.flex-row-reverse {
-          .z-upload-list-image-container {
+          .thumb-list {
             margin: 0 0 8px 8px;
           }
         }
 
-        .z-upload-list-image-container {
+        .thumb-list {
           float: left;
           width: 104px;
           height: 104px;
 
-          .z-upload-list-item {
+          .thumb {
             position: relative;
             width: 104px;
             height: 104px;
@@ -395,14 +313,6 @@
 
             &.chink {
               padding: 8px;
-            }
-
-            &.hovered:hover .z-upload-list-item-info:before {
-              opacity: 1;
-            }
-
-            &.hovered:hover .z-upload-list-item-info+.z-upload-list-item-actions {
-              opacity: 1;
             }
 
             .preview-delete {
@@ -419,29 +329,12 @@
               z-index: 1;
             }
 
-            .z-upload-list-item-info {
+            .image-box {
               position: relative;
               height: 100%;
               overflow: hidden;
 
-              &>span {
-                display: block;
-                width: 100%;
-                height: 100%;
-              }
-
-              &:before {
-                content: " ";
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, .5);
-                opacity: 0;
-                transition: all .3s;
-                z-index: 1;
-              }
-
-              img.z-upload-list-item-img {
+              img {
                 position: static;
                 display: block;
                 width: 100%;
@@ -449,22 +342,11 @@
                 object-fit: cover;
               }
             }
-
-            .z-upload-list-item-actions {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              z-index: 10;
-              white-space: nowrap;
-              transform: translate(-50%, -50%);
-              opacity: 0;
-              transition: all .3s;
-            }
           }
         }
       }
 
-      .z-upload-select {
+      .select-box {
         display: table;
         width: 104px;
         height: 104px;
@@ -478,7 +360,7 @@
           border: 1px dashed #1976d2;
         }
 
-        span.z-upload {
+        .input-box {
           display: table-cell;
           width: 100%;
           height: 100%;
