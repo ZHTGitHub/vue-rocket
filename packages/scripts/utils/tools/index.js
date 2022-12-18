@@ -4,7 +4,8 @@ import { get, set } from './lodash'
 import { isEqual, isYummy, isLousy } from './messy'
 import { getType, isBoolean, isNumber, isString, isArray, isFunction, isObject, isNull, isUndefined, isSymbol } from './types'
 
-import image from './image'
+import date from './date'
+import fileEvents from './fileEvents'
 
 export default {
   deepClone, 
@@ -35,5 +36,6 @@ export default {
   isUndefined,
   isSymbol,
 
-  image
+  date,
+  fileEvents
 }

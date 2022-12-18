@@ -1,7 +1,7 @@
-const image = {}
+const fileEvents = {}
 
 // 将File对象转化为Blob对象
-image.fileToBlob = (file) => {
+fileEvents.fileToBlob = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -23,7 +23,7 @@ image.fileToBlob = (file) => {
 }
 
 // File对象转Base64编码
-image.fileToBase64 = (file) => {
+fileEvents.fileToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -40,7 +40,7 @@ image.fileToBase64 = (file) => {
 }
 
 // Base64编码转File对象
-image.base64ToFile = (base64, name) => {
+fileEvents.base64ToFile = (base64, name) => {
   let arr = base64.split(',')
   let mime = arr[0].match(/:(.*?);/)[1]
   let bstr = atob(arr[1])
@@ -55,7 +55,7 @@ image.base64ToFile = (base64, name) => {
 }
 
 // 压缩文件
-image.compressFile = (file, quality = 0.2) => {
+fileEvents.compressFile = (file, quality = 0.2) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader() 
 
@@ -74,7 +74,7 @@ image.compressFile = (file, quality = 0.2) => {
 
         const canvasURL = canvas.toDataURL('image/jpeg', quality)
 
-        resolve(image.base64ToFile(canvasURL, file.name))
+        resolve(fileEvents.base64ToFile(canvasURL, file.name))
       }
 
       image.src = src
@@ -88,4 +88,4 @@ image.compressFile = (file, quality = 0.2) => {
   })
 }
 
-export default image
+export default fileEvents

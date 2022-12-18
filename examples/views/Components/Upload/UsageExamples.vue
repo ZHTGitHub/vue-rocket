@@ -113,11 +113,11 @@
       async handleChagne({ files, maxSize }) {
         console.log(files, maxSize)
 
-        const blob = await tools.image.fileToBlob(files[0])
-        const base64 = await tools.image.fileToBase64(files[0])
+        const blob = await tools.fileEvents.fileToBlob(files[0])
+        const base64 = await tools.fileEvents.fileToBase64(files[0])
 
         console.log(blob)
-        // console.log(base64)
+        // console.log(base64)  
 
         this.defaultValue = [
           ...this.defaultValue,
