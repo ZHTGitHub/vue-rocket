@@ -91,6 +91,7 @@
     },
 
     mounted() {
+      console.log(tools.date())
       Prism.highlightAll()
     },
 

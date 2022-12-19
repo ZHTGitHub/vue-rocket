@@ -11,8 +11,10 @@ const date = (value) => {
 	const time = currentDate.getTime()
 
   const normalMonth = month + 1
-	const normalDay = day + 1
-	
+
+  const am00Time = new Date(currentDate.setHours(0, 0, 0, 0)).getTime()
+  const pm24Time = new Date(currentDate.setHours(0, 0, 0, 0) + 24 * 60 * 60 * 1000 - 1).getTime()
+
 	return {
 		year,
 		month,
@@ -25,7 +27,9 @@ const date = (value) => {
 		time,
 
     normalMonth,
-		normalDay
+
+    am00Time,
+    pm24Time
 	}
 }
 
