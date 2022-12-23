@@ -14,9 +14,16 @@
               :key="index"
               class="thumb-list"
             >
-              <div :class="[chink && 'chink', 'thumb']">
+              <div 
+                :class="[
+                  chink && 'chink', 
+                  image.upload === false && 'upload-failed',
+                  image.upload && 'uploaded',
+                  'thumb'
+                ]"
+              >
                 <div class="image-box">
-                    <img :src="image.url" />
+                  <img :src="image.url" />
                 </div>
 
                 <div 
@@ -313,6 +320,24 @@
 
             &.chink {
               padding: 8px;
+            }
+
+            /* 上载失败 */
+            &.upload-failed {
+              border-color: #ff5252;
+
+              .preview-delete {
+                background-color: #ff5252;
+              }
+            }
+
+            /* 已上载 */
+            &.uploaded {
+              border-color: #4caf50;
+
+              .preview-delete {
+                background-color: #4caf50;
+              }
             }
 
             .preview-delete {

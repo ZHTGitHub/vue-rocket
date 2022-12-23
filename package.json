@@ -1,6 +1,6 @@
 {
   "name": "vue-rocket",
-  "version": "0.39.2",
+  "version": "0.39.3",
   "description": "基于 Vue+Vuetify 的后台管理系统框架",
   "author": "zenghaitao",
   "private": false,
@@ -47,6 +47,7 @@
     "moment": "^2.29.1",
     "node-sass": "^6.0.1",
     "prismjs": "^1.24.1",
+    "rocket-nifty.js": "^1.0.0",
     "sass": "^1.39.0",
     "sass-loader": "^8.0.0",
     "squoosh-compress": "^1.0.1",

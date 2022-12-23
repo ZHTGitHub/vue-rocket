@@ -85,13 +85,15 @@
         },
 
         defaultValue: [
-          { url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' }
+          { 
+            upload: false,
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' 
+          }
         ]
       }
     },
 
     mounted() {
-      console.log(tools.date())
       Prism.highlightAll()
     },
 

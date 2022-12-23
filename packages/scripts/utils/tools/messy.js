@@ -12,20 +12,20 @@ export const isEqual = function(val1, val2) {
   }
 
   if(val1 === val2) {
-      return true
+    return true
   }
 
   const val1Keys = Object.keys(val1)
   const val2Keys = Object.keys(val2)
   if(val1Keys.length !== val2Keys.length) {
-      return false
+    return false
   }
 
   for(let key in val1) {
-      const result = this.isEqual(val1[key], val2[key])
-      if(!result) {
-        return false
-      }
+    const result = this.isEqual(val1[key], val2[key])
+    if(!result) {
+      return false
+    }
   }
   
   return true
