@@ -27,6 +27,7 @@
                 </div>
 
                 <div 
+                  v-if="!showOnly && showRemoveIcon"
                   class="preview-delete"
                   @click="onDelete(index, image)"
                 >
@@ -66,7 +67,9 @@
           </div>
         </div>
 
-        <div class="error--text z-messages">{{ errorMessage }}</div>
+        <div v-if="!hideDetails" class="error--text z-messages">{{ errorMessage }}</div>
+        
+        <div v-if="!errorMessage && hint" class="hint" v-html="hint"></div>
       </div>
     </div>
   </div>
@@ -162,6 +165,11 @@
       showOnly: {
         type: Boolean,
         default: false
+      },
+
+      showRemoveIcon: {
+        type: Boolean,
+        default: true
       }
     },
     

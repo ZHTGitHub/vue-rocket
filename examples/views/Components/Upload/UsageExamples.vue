@@ -10,6 +10,8 @@
           :chink="false"
           color="#f00"
           :headers="headers"
+          hideDetails
+          :maxCount="1"
           :maxSize="1024 * 5"
           :validation="[
             { rule: 'required', message: '头像不能为空.' }

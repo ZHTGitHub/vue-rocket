@@ -162,6 +162,15 @@
       "acceptedValues": "—",
       "default": false,
       "description": "是否仅显示缩略图"
+    },
+
+    {
+      "name": "show-remove-icon",
+      "required": "否",
+      "type": "Boolean",
+      "acceptedValues": "—",
+      "default": true,
+      "description": "是否显示删除图标"
     }
   ]
 }

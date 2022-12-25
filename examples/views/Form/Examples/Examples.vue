@@ -35,6 +35,7 @@
                 :formId="formId"
                 formKey="password"
                 clearable 
+                hint="xxxx"
                 label="密码"
                 :validation="[
                   { rule: 'required', message: '密码为必填项.' },
