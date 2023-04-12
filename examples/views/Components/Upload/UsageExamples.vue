@@ -11,7 +11,6 @@
           color="#f00"
           :headers="headers"
           hideDetails
-          :maxCount="1"
           :maxSize="1024 * 5"
           :validation="[
             { rule: 'required', message: '头像不能为空.' }
@@ -22,8 +21,9 @@
           }"
           multiple
           parcel
-          :showPreviewIcon="false"
-          :showDeleteIcon="false"
+          :show-delete-icon="false"
+          :show-preview-icon="false"
+          :show-upload-button="showUploadButton"
           @delete="handleDelete"
           @change="handleChagne"
           @response="handleResponse"
@@ -91,7 +91,9 @@
             upload: false,
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' 
           }
-        ]
+        ],
+
+        showUploadButton: true
       }
     },
 
@@ -101,9 +103,7 @@
 
     methods: {
       handleUpdateImage() {
-        this.defaultValue = [
-          { url: 'http://113.106.108.93:31111/api/files/字段规则/B0118/清单大类属性.png' }
-        ]
+        
       },
 
       handleSubmit() {

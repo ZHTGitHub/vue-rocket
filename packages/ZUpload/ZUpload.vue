@@ -23,7 +23,7 @@
                 ]"
               >
                 <div class="image-box">
-                  <img :src="image.url" />
+                  <img :src="image.url" @error="onError" />
                 </div>
 
                 <div 
@@ -39,7 +39,7 @@
 
             <!-- 上传 BEGIN -->
             <div 
-              v-if="!showOnly && (!maxCount || (value && value.length < maxCount))"
+              v-if="showUploadButton && !showOnly && (!maxCount || (value && value.length < maxCount))"
               class="select-box"
             >
               <span 
@@ -170,7 +170,12 @@
       showRemoveIcon: {
         type: Boolean,
         default: true
-      }
+      },
+
+      showUploadButton: {
+        type: Boolean,
+        default: true
+      },
     },
     
     data() {
@@ -225,6 +230,10 @@
         }
 
         this.$refs.input.value = ''
+      },
+
+      onError(event) {
+        console.log(event)
       },
 
       // 删除
