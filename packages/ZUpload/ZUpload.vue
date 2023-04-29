@@ -79,6 +79,7 @@
   import FormMixins from '../mixins/FormMixins'
   import FormValidationMixins from '../mixins/FormValidationMixins'
   import request from './request'
+  import { isHEIC, heic2 } from './heic'
 
   export default {
     name: 'ZUpload',
@@ -195,6 +196,9 @@
         const files = []
 
         for(let file of event.target.files) {
+          if(await isHEIC(file)) {
+            file = await heic2(file)
+          }
           files.push(file)
         }
 
